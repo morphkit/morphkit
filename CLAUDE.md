@@ -6,9 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **morph-ui** is an internal component library monorepo, similar in spirit to shadcn/ui. The primary focus is building a **React Native component library** with shared tooling and configurations.
 
-**IMPORTANT**: The current repository contains default Turborepo scaffolding that will be overwritten. The apps (`web`, `docs`) and existing `packages/ui` are placeholder files from the initial `create-turbo` setup.
+The repository has been configured with a minimal React Native app using Expo Router and full Turborepo integration through shared ESLint and TypeScript configurations.
 
 ### Tech Stack
+
 - **Package Manager**: Bun (v1.2.2)
 - **Build Tool**: Turborepo (v2.7.2)
 - **Node Version**: >=18
@@ -18,26 +19,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Monorepo Structure
 
 The repository uses Turborepo workspaces defined in root `package.json`:
-- `apps/*` - Demo/example applications
+
+- `apps/*` - Applications
 - `packages/*` - Shared tooling and configurations
 - `react-native/*` - **Primary workspace for React Native component library**
 
-### Planned Structure
+### Current Structure
 
-**`react-native/*`** - React Native Component Library (Primary Focus)
-- This is where the main component library will be built
-- Components should follow shadcn/ui philosophy: customizable, copy-paste friendly
-- Currently an empty directory, ready for initial setup
+**`apps/react-native-ui/`** - Minimal Expo App with Router
+
+- Single-screen "Hello World" app using Expo Router
+- Fully integrated with monorepo shared configs
+- Uses `@repo/eslint-config/react-native` and `@repo/typescript-config/react-native`
+- File-based routing in `app/` directory
+- Entry point: `expo-router/entry`
 
 **`packages/*`** - Shared Tooling
-- **@repo/eslint-config**: Shared ESLint configurations (currently has base, next.js, react-internal)
-- **@repo/typescript-config**: Shared TypeScript configurations (currently has base, nextjs, react-library)
-- Additional packages can be added for shared utilities, testing configs, etc.
 
-**`apps/*`** - Demo Applications (Optional)
-- Placeholder apps from Turborepo scaffolding (web, docs)
-- Can be repurposed for component documentation or demo apps
-- May be removed or replaced with React Native example apps
+- **@repo/eslint-config**: Shared ESLint configurations
+  - `base.js` - Core ESLint config
+  - `next.js` - Next.js specific config
+  - `react-internal.js` - React library config
+  - `react-native.js` - React Native config (includes `__DEV__` global, style-prop-object rule disabled)
+- **@repo/typescript-config**: Shared TypeScript configurations
+  - `base.json` - Core strict TypeScript settings
+  - `nextjs.json` - Next.js specific config
+  - `react-library.json` - React library config
+  - `react-native.json` - React Native config (jsx: "react-native", module: "ESNext")
+
+**`react-native/*`** - React Native Component Library (Future)
+
+- Reserved for the main component library packages
+- Components will follow shadcn/ui philosophy: customizable, copy-paste friendly
 
 ## Development Commands
 
@@ -68,24 +81,18 @@ bun run format
 Use Turbo filters to target specific packages:
 
 ```bash
-# Work with React Native component library (once created)
-turbo dev --filter=<react-native-package-name>
-turbo build --filter=<react-native-package-name>
-turbo lint --filter=<react-native-package-name>
-
-# Work with placeholder apps
-turbo dev --filter=web
-turbo dev --filter=docs
+# Work with React Native UI app
+turbo dev --filter=react-native-ui
+turbo build --filter=react-native-ui
+turbo lint --filter=react-native-ui
+turbo check-types --filter=react-native-ui
 ```
-
-Note: Replace `<react-native-package-name>` with the actual package name once the React Native library is set up.
 
 ## Turborepo Task Configuration
 
 Tasks are defined in `turbo.json`:
 
-- **build**: Has dependency graph (`^build`), includes `.env*` files, outputs to `.next/**`
-  - Will need to be updated for React Native build outputs
+- **build**: Has dependency graph (`^build`), includes `.env*` files, outputs: `[]` (no build artifacts cached)
 - **lint**: Has dependency graph (`^lint`)
 - **check-types**: Has dependency graph (`^check-types`)
   - Uses `tsc --noEmit` for type checking
@@ -101,15 +108,124 @@ As a shadcn/ui-inspired library for React Native:
 - **Composable**: Small, focused components that work together
 - **Accessible**: Follow React Native accessibility best practices
 
+## Development Workflow Rules
+
+These rules are **non-negotiable** and must be followed strictly:
+
+### 1. Static Analysis Requirements
+
+**Before marking any task as complete, ALL static analysis checks must pass:**
+
+- ✅ `bun run lint` - Zero ESLint warnings/errors
+- ✅ `bun run check-types` - Zero TypeScript errors
+- ✅ `bun run format` - Code must be formatted with Prettier
+- ✅ All tests must pass (when tests are added to the project)
+
+**Never say something is "done" or "complete" until all checks pass.**
+
+### 2. Zero Tolerance for Comments
+
+**Absolutely no code comments are allowed.** Code must be self-documenting through:
+
+- Clear, descriptive variable and function names
+- Small, focused functions with single responsibilities
+- Proper type annotations that serve as documentation
+- Extract complex logic into well-named utility functions
+
+❌ **Never write:**
+
+```typescript
+// Calculate the total price
+const total = price * quantity;
+```
+
+✅ **Instead write:**
+
+```typescript
+const calculateTotalPrice = (price: number, quantity: number): number => {
+  return price * quantity;
+};
+```
+
+### 3. Zero Tolerance for `any` Type
+
+**The `any` type is completely banned.** Always use proper TypeScript types:
+
+- Use specific types, interfaces, or type aliases
+- Use `unknown` instead of `any` when the type is truly unknown
+- Use generic type parameters for reusable components
+- Use type guards to narrow `unknown` types
+- Use utility types (`Partial`, `Pick`, `Omit`, etc.) when appropriate
+
+❌ **Never write:**
+
+```typescript
+const processData = (data: any) => { ... }
+```
+
+✅ **Instead write:**
+
+```typescript
+interface UserData {
+  id: string;
+  name: string;
+}
+
+const processUserData = (data: UserData): ProcessedData => { ... }
+```
+
+### 4. Conventional Commits
+
+**All commit messages must follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:**
+
+Format: `<type>[optional scope]: <description>`
+
+**Types:**
+
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, missing semicolons, etc.)
+- `refactor`: Code refactoring without changing functionality
+- `perf`: Performance improvements
+- `test`: Adding or updating tests
+- `chore`: Build process, tooling, or dependency updates
+- `ci`: CI/CD configuration changes
+
+**Examples:**
+
+```bash
+feat(components): add button component with accessibility support
+fix(routing): resolve navigation state persistence issue
+docs(readme): update installation instructions
+refactor(utils): extract validation logic into separate module
+chore(deps): upgrade expo to v54.0.30
+```
+
+**Breaking Changes:**
+Add `!` after type/scope and include `BREAKING CHANGE:` in commit body:
+
+```bash
+feat(api)!: change response format to support pagination
+
+BREAKING CHANGE: API responses now return paginated data structure
+```
+
 ## Architecture Notes
 
 ### ESLint Configuration
+
 The monorepo uses ESLint v9 with flat config format:
+
 - All configs enforce zero warnings: `--max-warnings 0`
-- Shared configs available in `@repo/eslint-config`
-- React Native packages will need appropriate ESLint config (may need new config file)
+- Shared configs available in `@repo/eslint-config`:
+  - `base.js` - Core config with TypeScript ESLint
+  - `next.js` - Next.js specific rules
+  - `react-internal.js` - React library rules
+  - `react-native.js` - React Native rules (includes `__DEV__` global, disables `react/style-prop-object`)
 
 ### TypeScript Setup
+
 - Shared configs in `@repo/typescript-config` provide base settings
 - Each package has its own `tsconfig.json` extending the shared configs
 - Type checking runs with `tsc --noEmit`
@@ -117,14 +233,18 @@ The monorepo uses ESLint v9 with flat config format:
 ## Important Patterns
 
 ### Adding New Dependencies
+
 When adding dependencies to the monorepo:
+
 1. Use `bun add` instead of npm/yarn/pnpm
 2. Add to the appropriate workspace (app or package)
 3. For React Native, be mindful of platform compatibility
 4. Shared dependencies should go in `packages/*` when reused across workspaces
 
 ### React Native Component Development
+
 When building the component library in `react-native/*`:
+
 - Components should be framework-agnostic where possible
 - Export components as named exports for tree-shaking
 - Include comprehensive TypeScript prop interfaces
@@ -133,7 +253,9 @@ When building the component library in `react-native/*`:
 - Provide examples/documentation for each component
 
 ### Component Export Strategy
+
 Similar to shadcn/ui, consider:
+
 - Individual component files that can be copied
 - Minimal dependencies between components
 - Clear, documented component APIs
