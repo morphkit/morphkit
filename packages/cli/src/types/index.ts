@@ -7,7 +7,6 @@ export interface ComponentVariables {
 export const ComponentMetaSchema = z.object({
   type: z.enum(["react-native", "react"]),
   name: z.string(),
-  componentName: z.string(),
   description: z.string().optional(),
   dependencies: z.array(z.string()).optional(),
   variables: z.record(z.union([z.string(), z.number()])).optional(),

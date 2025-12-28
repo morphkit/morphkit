@@ -1,7 +1,6 @@
 {
   "type": "react-native",
   "name": "typography",
-  "componentName": "Typography",
   "description": "Text component with custom styling",
   "dependencies": [],
   "variables": {

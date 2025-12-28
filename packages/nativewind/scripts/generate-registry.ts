@@ -9,7 +9,6 @@ const __dirname = dirname(__filename);
 interface ComponentMeta {
   type: "react-native" | "react";
   name: string;
-  componentName: string;
   description?: string;
   dependencies?: string[];
   variables?: Record<string, string | number>;
@@ -40,7 +39,7 @@ async function generateRegistry() {
         const meta = JSON.parse(metaContent) as ComponentMeta;
 
         // Validate required fields
-        if (!meta.type || !meta.name || !meta.componentName) {
+        if (!meta.type || !meta.name) {
           console.warn(
             `⚠️  Skipping ${entry.name}: missing required fields in meta.json`,
           );
@@ -48,7 +47,7 @@ async function generateRegistry() {
         }
 
         components.push(meta);
-        let logMessage = `✓ Added ${meta.componentName} (${meta.type})`;
+        let logMessage = `✓ Added ${meta.name} (${meta.type})`;
         if (meta.variables) {
           const varCount = Object.keys(meta.variables).length;
           logMessage += ` - ${varCount} variable${varCount === 1 ? "" : "s"}`;

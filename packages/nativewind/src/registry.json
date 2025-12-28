@@ -1,11 +1,10 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2025-12-28T20:25:06.901Z",
+  "generatedAt": "2025-12-28T20:33:11.123Z",
   "components": [
     {
       "type": "react-native",
       "name": "typography",
-      "componentName": "Typography",
       "description": "Text component with custom styling",
       "dependencies": [],
       "variables": {

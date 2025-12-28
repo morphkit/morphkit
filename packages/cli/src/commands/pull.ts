@@ -99,7 +99,7 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
       message: "Select components to pull",
       options: filtered.map((c) => ({
         value: c.name,
-        label: `${c.componentName}${c.description ? ` - ${c.description}` : ""}`,
+        label: `${c.name}${c.description ? ` - ${c.description}` : ""}`,
       })),
       required: true,
     });
