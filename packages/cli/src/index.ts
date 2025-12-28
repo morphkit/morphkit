@@ -10,10 +10,11 @@ export {
   ConfigNotFoundError,
   ConfigExistsError,
   ComponentNotFoundError,
-  RepositoryAccessError,
   ComponentTypeMismatchError,
   InvalidPathError
 } from './utils/errors.js';
+
+export { GitHubAuthError } from './utils/github-auth.js';
 
 // Export utilities (for testing)
 export { configExists, readConfig, writeConfig } from './utils/config.js';

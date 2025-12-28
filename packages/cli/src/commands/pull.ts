@@ -39,7 +39,7 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
 
       // Show multiselect
       const selected = await multiselect({
-        message: 'Select components to install',
+        message: 'Select components to pull',
         options: filtered.map(c => ({
           value: c.name,
           label: `${c.componentName}${c.description ? ` - ${c.description}` : ''}`
@@ -59,8 +59,8 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
     }
   }
 
-  // Install components
-  let installed = 0;
+  // Pull components
+  let pulled = 0;
   let skipped = 0;
 
   for (const name of selectedComponents) {
@@ -85,20 +85,20 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
     }
 
     const s = spinner();
-    s.start(`Installing ${name}...`);
+    s.start(`Pulling ${name}...`);
 
     try {
       await copyComponent(name, config.paths.ui, config.type, config.lib);
-      s.stop(pc.green(`Installed ${name}`));
-      installed++;
+      s.stop(pc.green(`Pulled ${name}`));
+      pulled++;
     } catch (error) {
-      s.stop(pc.red(`Failed to install ${name}`));
+      s.stop(pc.red(`Failed to pull ${name}`));
       throw error;
     }
   }
 
-  if (installed > 0) {
-    outro(pc.green(`Successfully installed ${installed} component${installed > 1 ? 's' : ''}`));
+  if (pulled > 0) {
+    outro(pc.green(`Successfully pulled ${pulled} component${pulled > 1 ? 's' : ''}`));
   } else if (skipped > 0) {
     outro(pc.yellow(`Skipped ${skipped} component${skipped > 1 ? 's' : ''}`));
   }

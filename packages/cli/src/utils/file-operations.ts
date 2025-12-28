@@ -1,7 +1,10 @@
-import { access, mkdir } from 'fs/promises';
+import { access, mkdir, rm, rename } from 'fs/promises';
 import { join, resolve } from 'path';
-import degit from 'degit';
-import { RepositoryAccessError } from './errors.js';
+import { tmpdir } from 'os';
+import { createWriteStream } from 'fs';
+import { pipeline } from 'stream/promises';
+import tar from 'tar';
+import { getGitHubToken, GitHubAuthError } from './github-auth.js';
 
 export async function componentExists(basePath: string, name: string): Promise<boolean> {
   try {
@@ -33,22 +36,82 @@ export async function copyComponent(
   _type: string,
   _lib: string
 ): Promise<void> {
-  const repoPath = `warp-ui/warp-ui/packages/react-native/src/${name}`;
+  // Get GitHub token for authentication
+  const token = getGitHubToken();
+  if (!token) {
+    throw new GitHubAuthError();
+  }
 
   // Resolve relative paths to absolute based on current working directory
   const absoluteDestPath = resolve(process.cwd(), destPath);
 
-  const emitter = degit(repoPath, {
-    cache: false,
-    force: true,
-    mode: 'tar'
-  });
+  // GitHub API endpoint to get tarball
+  const apiUrl = `https://api.github.com/repos/warp-ui/warp-ui/tarball/main`;
+
+  const headers: HeadersInit = {
+    'Authorization': `token ${token}`,
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': '@warp-ui/cli'
+  };
 
   try {
-    await emitter.clone(join(absoluteDestPath, name));
+    // Download tarball
+    const response = await fetch(apiUrl, { headers });
+
+    if (response.status === 401 || response.status === 403) {
+      throw new GitHubAuthError();
+    }
+
+    if (!response.ok) {
+      throw new Error(`Failed to download: ${response.status} ${response.statusText}`);
+    }
+
+    if (!response.body) {
+      throw new Error('Response body is null');
+    }
+
+    // Create temp directory for extraction
+    const tempDir = join(tmpdir(), `warp-ui-${Date.now()}`);
+    await mkdir(tempDir, { recursive: true });
+
+    // Save tarball to temp file
+    const tarballPath = join(tempDir, 'repo.tar.gz');
+    const fileStream = createWriteStream(tarballPath);
+
+    // @ts-expect-error - Node.js stream types compatibility
+    await pipeline(response.body, fileStream);
+
+    // Extract only the component directory
+    await tar.extract({
+      file: tarballPath,
+      cwd: tempDir,
+      filter: (path) => {
+        // GitHub tarballs have format: owner-repo-commit/path/to/file
+        // We want: packages/react-native/src/${name}/
+        return path.includes(`packages/react-native/src/${name}/`);
+      },
+      strip: 4 // Strip owner-repo-commit/packages/react-native/src/
+    });
+
+    // Move extracted component to destination
+    const extractedPath = join(tempDir, name);
+    const finalPath = join(absoluteDestPath, name);
+
+    // Ensure destination exists
+    await mkdir(absoluteDestPath, { recursive: true });
+
+    // Move component
+    await rename(extractedPath, finalPath);
+
+    // Clean up temp directory
+    await rm(tempDir, { recursive: true, force: true });
+
   } catch (error) {
-    if (error instanceof Error && (error.message.includes('404') || error.message.includes('403'))) {
-      throw new RepositoryAccessError();
+    if (error instanceof GitHubAuthError) {
+      throw error;
+    }
+    if (error instanceof Error) {
+      throw new Error(`Failed to pull component: ${error.message}`);
     }
     throw error;
   }

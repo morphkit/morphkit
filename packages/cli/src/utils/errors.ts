@@ -39,16 +39,6 @@ export class ComponentNotFoundError extends WarpUIError {
   }
 }
 
-export class RepositoryAccessError extends WarpUIError {
-  constructor() {
-    super(
-      'Access denied to warp-ui repository. Ensure you have GitHub access.\n\nPlease ensure:\n1. You are logged in to GitHub: gh auth login\n2. You have access to the warp-ui organization\n3. Your GitHub token has the necessary permissions',
-      'REPO_ACCESS_DENIED',
-      1
-    );
-  }
-}
-
 export class ComponentTypeMismatchError extends WarpUIError {
   constructor(expected: string, actual: string) {
     super(

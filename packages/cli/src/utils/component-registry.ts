@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentMetaSchema, Config } from '../types/index.js';
 import { z } from 'zod';
+import { getGitHubToken, GitHubAuthError } from './github-auth.js';
 
 const RegistrySchema = z.object({
   version: z.string(),
@@ -8,11 +9,26 @@ const RegistrySchema = z.object({
 });
 
 export async function fetchComponents(): Promise<ComponentMeta[]> {
+  // Get GitHub token for authentication
+  const token = getGitHubToken();
+  if (!token) {
+    throw new GitHubAuthError();
+  }
+
   // Fetch registry from GitHub raw URL
   const registryUrl = 'https://raw.githubusercontent.com/warp-ui/warp-ui/main/packages/react-native/src/registry.json';
 
+  const headers: HeadersInit = {
+    'Authorization': `token ${token}`,
+    'Accept': 'application/vnd.github.v3.raw'
+  };
+
   try {
-    const response = await fetch(registryUrl);
+    const response = await fetch(registryUrl, { headers });
+
+    if (response.status === 401 || response.status === 403) {
+      throw new GitHubAuthError();
+    }
 
     if (!response.ok) {
       throw new Error(`Failed to fetch registry: ${response.status} ${response.statusText}`);
@@ -23,6 +39,9 @@ export async function fetchComponents(): Promise<ComponentMeta[]> {
 
     return registry.components;
   } catch (error) {
+    if (error instanceof GitHubAuthError) {
+      throw error;
+    }
     if (error instanceof Error) {
       throw new Error(`Failed to fetch component registry: ${error.message}`);
     }
