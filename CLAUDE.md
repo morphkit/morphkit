@@ -211,6 +211,30 @@ feat(api)!: change response format to support pagination
 BREAKING CHANGE: API responses now return paginated data structure
 ```
 
+### 5. Git Commit and Push Policy
+
+**NEVER commit or push code without explicit user approval:**
+
+- Always wait for the user to explicitly ask to commit changes
+- Never proactively create commits, even after completing tasks
+- Never push to remote repositories unless explicitly requested
+- When asked to commit, follow the Conventional Commits specification
+- Include detailed commit messages that explain what was changed and why
+
+**The only time to commit is when the user explicitly says:**
+
+- "commit the changes"
+- "create a commit"
+- "commit this"
+- Or similar direct instructions
+
+**Never commit just because:**
+
+- A task is complete
+- All checks are passing
+- Code has been written
+- The user seems satisfied
+
 ## Architecture Notes
 
 ### ESLint Configuration

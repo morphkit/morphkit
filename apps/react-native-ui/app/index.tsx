@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import { Typography } from "@react-native/typography";
+import { Typography } from "@warp-ui/react-native";
 
 export default function HomeScreen() {
   return (
