@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/warp-ui/warp-ui.git",
+    "url": "git+https://github.com/warp-ui/warp-ui.git",
     "directory": "packages/react-native"
   },
   "publishConfig": {
