@@ -1,6 +1,6 @@
 {
   "name": "@warp-ui/react-native",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Internal React Native component library",
   "private": false,
   "main": "./src/index.ts",
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaksm/warp-ui.git",
+    "url": "https://github.com/warp-ui/warp-ui.git",
     "directory": "packages/react-native"
   },
   "publishConfig": {
