@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Typography } from "@warp-ui/react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,12 +10,9 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   title: {
-    fontSize: 28,
-    fontWeight: "bold",
     marginBottom: 16,
   },
   description: {
-    fontSize: 16,
     color: "#666666",
     textAlign: "center",
   },
@@ -23,10 +21,12 @@ const styles = StyleSheet.create({
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Warp UI Components</Text>
-      <Text style={styles.description}>
+      <Typography variant="title-1" style={styles.title}>
+        Warp UI Components
+      </Typography>
+      <Typography variant="body" style={styles.description}>
         Select a component from the sidebar
-      </Text>
+      </Typography>
     </View>
   );
 }

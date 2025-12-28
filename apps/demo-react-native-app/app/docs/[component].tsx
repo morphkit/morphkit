@@ -1,5 +1,6 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
+import { Typography } from "@warp-ui/react-native";
 import registry from "@warp-ui/react-native/src/registry.json";
 import { docsRegistry } from "@warp-ui/react-native/src/docs-registry";
 
@@ -11,7 +12,6 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   notFoundText: {
-    fontSize: 20,
     color: "#6b7280",
   },
   scrollView: {
@@ -31,9 +31,9 @@ export default function ComponentDocPage() {
   if (!componentMeta) {
     return (
       <View style={styles.notFoundContainer}>
-        <Text style={styles.notFoundText}>
+        <Typography variant="heading" style={styles.notFoundText}>
           Component &ldquo;{component}&rdquo; not found
-        </Text>
+        </Typography>
       </View>
     );
   }
@@ -43,9 +43,9 @@ export default function ComponentDocPage() {
   if (!ComponentDocs) {
     return (
       <View style={styles.notFoundContainer}>
-        <Text style={styles.notFoundText}>
+        <Typography variant="heading" style={styles.notFoundText}>
           Documentation not available for &ldquo;{component}&rdquo;
-        </Text>
+        </Typography>
       </View>
     );
   }

@@ -1,6 +1,7 @@
-import { View, Text, Pressable, ScrollView, StyleSheet } from "react-native";
+import { View, Pressable, ScrollView, StyleSheet } from "react-native";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useRouter, usePathname } from "expo-router";
+import { Typography } from "@warp-ui/react-native";
 import registry from "@warp-ui/react-native/src/registry.json";
 
 const styles = StyleSheet.create({
@@ -11,8 +12,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   title: {
-    fontSize: 22,
-    fontWeight: "bold",
     marginBottom: 24,
   },
   itemActive: {
@@ -30,18 +29,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9fafb",
   },
   itemTextActive: {
-    fontSize: 16,
     textTransform: "capitalize",
     fontWeight: "bold",
     color: "#2563eb",
   },
   itemTextInactive: {
-    fontSize: 16,
     textTransform: "capitalize",
     color: "#1f2937",
   },
   description: {
-    fontSize: 14,
     color: "#6b7280",
     marginTop: 4,
   },
@@ -58,7 +54,9 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Components</Text>
+      <Typography variant="title-2" style={styles.title}>
+        Components
+      </Typography>
       <ScrollView>
         {registry.components.map((component) => {
           const isActive = pathname === `/docs/${component.name}`;
@@ -69,13 +67,16 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
               onPress={() => handleComponentPress(component.name)}
               style={isActive ? styles.itemActive : styles.itemInactive}
             >
-              <Text style={isActive ? styles.itemTextActive : styles.itemTextInactive}>
+              <Typography
+                variant="callout"
+                style={isActive ? styles.itemTextActive : styles.itemTextInactive}
+              >
                 {component.name}
-              </Text>
+              </Typography>
               {component.description && (
-                <Text style={styles.description}>
+                <Typography variant="footnote" style={styles.description}>
                   {component.description}
-                </Text>
+                </Typography>
               )}
             </Pressable>
           );
