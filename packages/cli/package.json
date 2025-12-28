@@ -1,6 +1,6 @@
 {
   "name": "@warp-ui/cli",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "CLI for warp-ui component library",
   "type": "module",
   "bin": {
