@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "typography",
+  "description": "Text component with 11 iOS-inspired typography variants using StyleSheet",
+  "dependencies": []
+}

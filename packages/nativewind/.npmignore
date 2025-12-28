@@ -1,7 +1,0 @@
-*.test.tsx
-*.test.ts
-.turbo/
-coverage/
-jest.config.js
-babel.config.cjs
-eslint.config.js

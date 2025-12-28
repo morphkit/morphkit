@@ -1,7 +1,51 @@
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { View, Text, Pressable, ScrollView, StyleSheet } from "react-native";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useRouter, usePathname } from "expo-router";
-import registry from "@warp-ui/nativewind/src/registry.json";
+import registry from "@warp-ui/react-native/src/registry.json";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+    paddingTop: 48,
+    paddingHorizontal: 16,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 24,
+  },
+  itemActive: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginBottom: 8,
+    borderRadius: 8,
+    backgroundColor: "#dbeafe",
+  },
+  itemInactive: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginBottom: 8,
+    borderRadius: 8,
+    backgroundColor: "#f9fafb",
+  },
+  itemTextActive: {
+    fontSize: 16,
+    textTransform: "capitalize",
+    fontWeight: "bold",
+    color: "#2563eb",
+  },
+  itemTextInactive: {
+    fontSize: 16,
+    textTransform: "capitalize",
+    color: "#1f2937",
+  },
+  description: {
+    fontSize: 14,
+    color: "#6b7280",
+    marginTop: 4,
+  },
+});
 
 export const ComponentSidebar = (props: DrawerContentComponentProps) => {
   const router = useRouter();
@@ -13,8 +57,8 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
   };
 
   return (
-    <View className="flex-1 bg-white pt-12 px-4">
-      <Text className="text-2xl font-bold mb-6">Components</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Components</Text>
       <ScrollView>
         {registry.components.map((component) => {
           const isActive = pathname === `/docs/${component.name}`;
@@ -23,19 +67,13 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
             <Pressable
               key={component.name}
               onPress={() => handleComponentPress(component.name)}
-              className={`py-3 px-4 mb-2 rounded-lg ${
-                isActive ? "bg-blue-100" : "bg-gray-50"
-              }`}
+              style={isActive ? styles.itemActive : styles.itemInactive}
             >
-              <Text
-                className={`text-base capitalize ${
-                  isActive ? "font-bold text-blue-600" : "text-gray-800"
-                }`}
-              >
+              <Text style={isActive ? styles.itemTextActive : styles.itemTextInactive}>
                 {component.name}
               </Text>
               {component.description && (
-                <Text className="text-sm text-gray-600 mt-1">
+                <Text style={styles.description}>
                   {component.description}
                 </Text>
               )}

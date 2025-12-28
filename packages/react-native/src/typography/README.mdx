@@ -1,0 +1,205 @@
+import { Typography } from './Typography'
+import { View } from 'react-native'
+
+# Typography Component
+
+A comprehensive text component with 11 iOS-inspired typography variants using React Native's StyleSheet API.
+
+## Features
+
+- 11 semantic text variants following iOS Human Interface Guidelines
+- Built with React Native StyleSheet for optimal performance
+- Type-safe variant API with autocomplete
+- Style prop support for custom styling
+- Accessible by default with React Native Text props
+
+## Basic Usage
+
+The Typography component defaults to the "body" variant:
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography>This is body text with default styling</Typography>
+</View>
+
+## Typography Scale
+
+All 11 variants from largest to smallest:
+
+### Display & Titles
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography variant="large-title">Large Title (34pt)</Typography>
+  <Typography variant="title-1" style={{ marginTop: 16 }}>Title 1 (28pt)</Typography>
+  <Typography variant="title-2" style={{ marginTop: 12 }}>Title 2 (22pt)</Typography>
+  <Typography variant="title-3" style={{ marginTop: 12 }}>Title 3 (20pt)</Typography>
+</View>
+
+### Content & Body
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography variant="heading">Heading (17pt, semibold)</Typography>
+  <Typography variant="body" style={{ marginTop: 12 }}>
+    Body text is used for standard content. It provides excellent readability
+    with comfortable line height and spacing.
+  </Typography>
+  <Typography variant="callout" style={{ marginTop: 12 }}>
+    Callout text (16pt) for emphasized content
+  </Typography>
+  <Typography variant="subhead" style={{ marginTop: 12 }}>
+    Subhead text (15pt) for secondary headings
+  </Typography>
+</View>
+
+### Small Text
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography variant="footnote">Footnote (13pt) for less important details</Typography>
+  <Typography variant="caption-1" style={{ marginTop: 8 }}>Caption 1 (12pt)</Typography>
+  <Typography variant="caption-2" style={{ marginTop: 8 }}>Caption 2 (11pt)</Typography>
+</View>
+
+## Variant Overview
+
+| Variant | Size | Weight | Use Case |
+|---------|------|--------|----------|
+| large-title | 34pt | Regular | Top-level navigation, splash screens |
+| title-1 | 28pt | Regular | Primary page titles |
+| title-2 | 22pt | Regular | Section headers |
+| title-3 | 20pt | Regular | Subsection headers |
+| heading | 17pt | Semibold | Emphasized headings |
+| body | 17pt | Regular | Main content, paragraphs |
+| callout | 16pt | Regular | Highlighted information |
+| subhead | 15pt | Regular | List headings, secondary content |
+| footnote | 13pt | Regular | Explanatory notes, metadata |
+| caption-1 | 12pt | Regular | Image captions, labels |
+| caption-2 | 11pt | Regular | Tertiary information |
+
+## Custom Styling
+
+Combine variants with style prop:
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography variant="title-1" style={{ color: '#3b82f6' }}>
+    Colored Title
+  </Typography>
+  <Typography variant="body" style={{ color: '#6b7280', fontStyle: 'italic', marginTop: 8 }}>
+    Italic gray body text
+  </Typography>
+  <Typography variant="caption-1" style={{ color: '#ef4444', textTransform: 'uppercase', marginTop: 8 }}>
+    Uppercase caption
+  </Typography>
+</View>
+
+## Accessibility
+
+All variants include proper accessibility support:
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography
+    variant="title-1"
+    accessibilityRole="header"
+    accessibilityLabel="Main page heading"
+  >
+    Accessible Heading
+  </Typography>
+  <Typography
+    variant="body"
+    accessibilityHint="Tap to read more details"
+    style={{ marginTop: 8 }}
+  >
+    This content has accessibility hints for screen readers
+  </Typography>
+</View>
+
+## Real-World Examples
+
+### Article Header
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography variant="caption-1" style={{ color: '#6b7280', textTransform: 'uppercase' }}>
+    Technology
+  </Typography>
+  <Typography variant="title-1" style={{ marginTop: 8 }}>
+    Building Modern Mobile Apps
+  </Typography>
+  <Typography variant="subhead" style={{ color: '#6b7280', marginTop: 4 }}>
+    A comprehensive guide to React Native development
+  </Typography>
+  <Typography variant="footnote" style={{ color: '#6b7280', marginTop: 12 }}>
+    Published on December 28, 2025
+  </Typography>
+</View>
+
+### List Item
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography variant="heading">Product Name</Typography>
+  <Typography variant="body" style={{ color: '#374151', marginTop: 4 }}>
+    Product description goes here with detailed information
+  </Typography>
+  <Typography variant="caption-1" style={{ color: '#6b7280', marginTop: 8 }}>
+    SKU: PRD-12345
+  </Typography>
+</View>
+
+### Settings Section
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography variant="subhead" style={{ color: '#6b7280', textTransform: 'uppercase', marginBottom: 12 }}>
+    Account Settings
+  </Typography>
+  <Typography variant="body" style={{ marginBottom: 4 }}>Email Notifications</Typography>
+  <Typography variant="footnote" style={{ color: '#6b7280' }}>
+    Receive updates about your account activity
+  </Typography>
+</View>
+
+## Props
+
+| Prop | Type | Description | Default |
+|------|------|-------------|------------|
+| variant | TypographyVariant | Text style variant | "body" |
+| children | ReactNode | Content to render | - |
+| style | `StyleProp<TextStyle>` | Custom styles to apply | - |
+| ...props | TextProps | All React Native Text props | - |
+
+### TypographyVariant
+
+```typescript
+type TypographyVariant =
+  | "large-title"
+  | "title-1"
+  | "title-2"
+  | "title-3"
+  | "heading"
+  | "body"
+  | "callout"
+  | "subhead"
+  | "footnote"
+  | "caption-1"
+  | "caption-2";
+```
+
+## Best Practices
+
+1. **Use semantic variants**: Choose variants based on content hierarchy, not just visual appearance
+2. **Maintain consistency**: Use the same variants for similar content types across your app
+3. **Respect accessibility**: Always provide appropriate `accessibilityRole` and `accessibilityLabel` props
+4. **Test across platforms**: Verify typography works well on both iOS and Android
+5. **Style prop for customization**: Use the style prop to override specific properties when needed
+
+## All Variants Example
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography variant="large-title">Large Title</Typography>
+  <Typography variant="title-1">Title 1</Typography>
+  <Typography variant="title-2">Title 2</Typography>
+  <Typography variant="title-3">Title 3</Typography>
+  <Typography variant="heading">Heading</Typography>
+  <Typography variant="body">Body</Typography>
+  <Typography variant="callout">Callout</Typography>
+  <Typography variant="subhead">Subhead</Typography>
+  <Typography variant="footnote">Footnote</Typography>
+  <Typography variant="caption-1">Caption 1</Typography>
+  <Typography variant="caption-2">Caption 2</Typography>
+</View>

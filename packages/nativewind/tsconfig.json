@@ -1,8 +1,0 @@
-{
-  "extends": "@repo/typescript-config/react-native.json",
-  "compilerOptions": {
-    "strict": true
-  },
-  "include": ["src/**/*", "nativewind-env.d.ts"],
-  "exclude": ["node_modules", "**/*.test.tsx"]
-}

@@ -1,32 +1,32 @@
-import { View, Text, Pressable } from "react-native";
-import { useRouter } from "expo-router";
-import registry from "@warp-ui/nativewind/src/registry.json";
+import { View, Text, StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 24,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
+  description: {
+    fontSize: 16,
+    color: "#666666",
+    textAlign: "center",
+  },
+});
 
 export default function HomeScreen() {
-  const router = useRouter();
-
-  const handleNavigateToFirst = () => {
-    if (registry.components.length > 0 && registry.components[0]) {
-      router.push(`/docs/${registry.components[0].name}`);
-    }
-  };
-
   return (
-    <View className="flex-1 bg-white items-center justify-center p-6">
-      <Text className="text-2xl font-bold mb-4">Warp UI Components</Text>
-      <Text className="text-base text-gray-600 text-center mb-6">
-        Open the drawer to browse components
+    <View style={styles.container}>
+      <Text style={styles.title}>Warp UI Components</Text>
+      <Text style={styles.description}>
+        Select a component from the sidebar
       </Text>
-      {registry.components.length > 0 && registry.components[0] && (
-        <Pressable
-          onPress={handleNavigateToFirst}
-          className="bg-blue-500 px-6 py-3 rounded-lg"
-        >
-          <Text className="text-white font-semibold">
-            View {registry.components[0].name}
-          </Text>
-        </Pressable>
-      )}
     </View>
   );
 }
