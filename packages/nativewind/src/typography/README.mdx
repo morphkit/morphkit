@@ -1,0 +1,121 @@
+import { Typography } from './Typography'
+import { View } from 'react-native'
+
+# Typography Component
+
+A flexible text component with customizable styling using CSS variables and NativeWind integration.
+
+## Basic Usage
+
+The Typography component extends React Native's Text component with theme-aware styling through CSS variables.
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography>Hello World</Typography>
+</View>
+
+## Custom Styling
+
+Use NativeWind className for additional styling:
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography className="text-blue-500">Styled with blue color</Typography>
+</View>
+
+## Different Text Sizes
+
+Combine with Tailwind CSS size classes:
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography className="text-sm">Small text</Typography>
+  <Typography className="text-base mt-2">Base text</Typography>
+  <Typography className="text-lg mt-2">Large text</Typography>
+  <Typography className="text-xl mt-2">Extra large text</Typography>
+</View>
+
+## Font Weights
+
+Apply different font weights:
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography className="font-light">Light weight</Typography>
+  <Typography className="font-normal mt-2">Normal weight</Typography>
+  <Typography className="font-medium mt-2">Medium weight</Typography>
+  <Typography className="font-bold mt-2">Bold weight</Typography>
+</View>
+
+## Multiline Text
+
+The Typography component supports multiline text naturally:
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography className="leading-relaxed">
+    This is a longer text that demonstrates multiline rendering.
+    The component handles wrapping and line height beautifully,
+    making it perfect for paragraphs and longer content blocks.
+  </Typography>
+</View>
+
+## Props
+
+The Typography component accepts all React Native Text props plus:
+
+| Prop | Type | Description | Default |
+|------|------|-------------|---------|
+| children | ReactNode | Content to render | - |
+| className | string | Additional NativeWind/Tailwind CSS classes | - |
+| ...props | TextProps | All standard React Native Text props | - |
+
+## CSS Variables
+
+The component uses CSS variables for theming. Override these in your `warpui.config.mjs`:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| --typography-primary-color | Text color | #ef4444 |
+| --typography-large-size | Font size | 1.5rem |
+| --typography-bold-weight | Font weight | 700 |
+
+## Accessibility
+
+The Typography component inherits React Native Text's accessibility features:
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography
+    accessibilityRole="header"
+    accessibilityLabel="Welcome message"
+    className="text-xl font-bold"
+  >
+    Welcome to Warp UI
+  </Typography>
+</View>
+
+Use the `accessibilityRole` prop to provide semantic meaning and `accessibilityLabel` for screen readers.
+
+## Examples
+
+### Heading Styles
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography className="text-3xl font-bold mb-4">Heading 1</Typography>
+  <Typography className="text-2xl font-bold mb-3">Heading 2</Typography>
+  <Typography className="text-xl font-bold mb-2">Heading 3</Typography>
+  <Typography className="text-lg font-semibold mb-2">Heading 4</Typography>
+</View>
+
+### Text Alignment
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography className="text-left mb-2">Left aligned text</Typography>
+  <Typography className="text-center mb-2">Center aligned text</Typography>
+  <Typography className="text-right">Right aligned text</Typography>
+</View>
+
+### Color Variants
+
+<View style={{ padding: 16, backgroundColor: '#f9fafb', borderRadius: 8, marginVertical: 12 }}>
+  <Typography className="text-gray-900 mb-2">Gray text</Typography>
+  <Typography className="text-red-500 mb-2">Red text</Typography>
+  <Typography className="text-blue-500 mb-2">Blue text</Typography>
+  <Typography className="text-green-500 mb-2">Green text</Typography>
+  <Typography className="text-purple-500">Purple text</Typography>
+</View>

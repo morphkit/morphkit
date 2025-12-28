@@ -33,6 +33,7 @@ async function generateRegistry() {
   for (const entry of entries) {
     if (entry.isDirectory()) {
       const metaPath = join(srcDir, entry.name, "meta.json");
+      const readmePath = join(srcDir, entry.name, "README.mdx");
 
       try {
         const metaContent = await readFile(metaPath, "utf-8");
@@ -46,6 +47,17 @@ async function generateRegistry() {
           continue;
         }
 
+        // BREAKING CHANGE: Require README.mdx to exist
+        try {
+          await readFile(readmePath, "utf-8");
+        } catch {
+          console.warn(
+            `⚠️  Skipping ${entry.name}: README.mdx is required but not found`,
+          );
+          continue;
+        }
+
+        // Component is valid, add to registry
         components.push(meta);
         let logMessage = `✓ Added ${meta.name} (${meta.type})`;
         if (meta.variables) {
@@ -54,8 +66,8 @@ async function generateRegistry() {
         }
         console.log(logMessage);
       } catch (error) {
-        // Skip directories without valid meta.json
-        console.log(`⊘ Skipped ${entry.name}: no valid meta.json`);
+        // Skip directories without valid component structure
+        console.log(`⊘ Skipped ${entry.name}: invalid component structure`);
       }
     }
   }

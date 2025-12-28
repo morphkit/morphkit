@@ -5,6 +5,12 @@
   "private": false,
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./src/registry.json": "./src/registry.json",
+    "./src/docs-registry": "./src/docs-registry.ts",
+    "./src/*": "./src/*"
+  },
   "files": [
     "src",
     "README.md"
@@ -13,7 +19,8 @@
     "test": "jest",
     "lint": "eslint --max-warnings 0 src",
     "check-types": "tsc --noEmit",
-    "generate-registry": "tsx scripts/generate-registry.ts"
+    "generate-registry": "tsx scripts/generate-registry.ts && tsx scripts/generate-docs-registry.ts",
+    "generate-theme": "tsx scripts/generate-theme.ts"
   },
   "peerDependencies": {
     "react": "^19.0.0",
