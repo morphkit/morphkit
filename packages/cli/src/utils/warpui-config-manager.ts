@@ -3,7 +3,7 @@ import { join } from "path";
 import { pathToFileURL } from "url";
 import type { ComponentVariables } from "../types/index.js";
 
-const WARPUI_CONFIG_FILENAME = "warpui.config.js";
+const WARPUI_CONFIG_FILENAME = "warpui.config.mjs";
 
 export async function readWarpuiConfig(
   projectRoot: string,

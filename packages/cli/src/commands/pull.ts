@@ -168,7 +168,7 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
 
   if (pulled > 0) {
     const s = spinner();
-    s.start("Adding component variables to warpui.config.js...");
+    s.start("Adding component variables to warpui.config.mjs...");
 
     try {
       const componentVariables = new Map<string, ComponentVariables>();
@@ -193,11 +193,11 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
         s.stop(pc.dim("No variables to add"));
       }
     } catch (error) {
-      s.stop(pc.yellow("Could not update warpui.config.js"));
+      s.stop(pc.yellow("Could not update warpui.config.mjs"));
       if (error instanceof Error) {
         console.log(pc.dim(`Note: ${error.message}`));
         console.log(
-          pc.dim("You can manually add variables to warpui.config.js"),
+          pc.dim("You can manually add variables to warpui.config.mjs"),
         );
       }
     }

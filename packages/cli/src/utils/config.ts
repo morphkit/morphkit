@@ -4,7 +4,7 @@ import { pathToFileURL } from "url";
 import { Config, ConfigSchema } from "../types/index.js";
 import { createInitialConfigContent } from "./warpui-config-manager.js";
 
-const CONFIG_FILE = "warpui.config.js";
+const CONFIG_FILE = "warpui.config.mjs";
 
 export async function configExists(): Promise<boolean> {
   try {
