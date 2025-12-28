@@ -12,7 +12,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint --max-warnings 0 src",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "generate-registry": "tsx scripts/generate-registry.ts"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -27,6 +28,7 @@
     "eslint": "^9.25.0",
     "jest": "^29.7.0",
     "jest-expo": "~54.0.5",
+    "tsx": "^4.19.2",
     "typescript": "~5.9.2"
   },
   "repository": {
