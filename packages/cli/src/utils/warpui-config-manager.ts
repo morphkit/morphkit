@@ -72,8 +72,8 @@ function addVariableToThemes(
     typeof varValue === "string" ? `'${varValue}'` : varValue;
   const variableLine = `    '${varName}': ${formattedValue},`;
 
-  const lightVarsRegex = /light:\s*vars\(\{([^}]*)\}\)/s;
-  const darkVarsRegex = /dark:\s*vars\(\{([^}]*)\}\)/s;
+  const lightVarsRegex = /light:\s*\{([^}]*)\}/s;
+  const darkVarsRegex = /dark:\s*\{([^}]*)\}/s;
 
   let updatedContent = content;
 
@@ -86,12 +86,12 @@ function addVariableToThemes(
       const updatedLightVars = `${lightVars.trimEnd()}\n${variableLine}\n  `;
       updatedContent = updatedContent.replace(
         lightVarsRegex,
-        `light: vars({${updatedLightVars}})`,
+        `light: {${updatedLightVars}}`,
       );
     } else {
       updatedContent = updatedContent.replace(
         lightVarsRegex,
-        `light: vars({\n${variableLine}\n  })`,
+        `light: {\n${variableLine}\n  }`,
       );
     }
   }
@@ -111,12 +111,12 @@ function addVariableToThemes(
       const updatedDarkVars = `${darkVars.trimEnd()}\n${darkVariableLine}\n  `;
       updatedContent = updatedContent.replace(
         darkVarsRegex,
-        `dark: vars({${updatedDarkVars}})`,
+        `dark: {${updatedDarkVars}}`,
       );
     } else {
       updatedContent = updatedContent.replace(
         darkVarsRegex,
-        `dark: vars({\n${darkVariableLine}\n  })`,
+        `dark: {\n${darkVariableLine}\n  }`,
       );
     }
   }
@@ -148,15 +148,13 @@ export function createInitialConfigContent(
   type: "react-native" | "react",
   uiPath: string,
 ): string {
-  return `import { vars } from 'nativewind'
-
-export default {
-  light: vars({
+  return `export const theme = {
+  light: {
     // Component variables will be added here
-  }),
-  dark: vars({
+  },
+  dark: {
     // Component variables will be added here
-  })
+  }
 }
 
 export const config = {
