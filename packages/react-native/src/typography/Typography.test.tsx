@@ -19,7 +19,7 @@ describe("<Typography />", () => {
 
   test("applies large-title variant style", () => {
     const { getByText } = render(
-      <Typography variant="large-title">Large Title</Typography>
+      <Typography variant="large-title">Large Title</Typography>,
     );
     const element = getByText("Large Title");
     expect(element.props.style).toMatchObject({
@@ -31,7 +31,7 @@ describe("<Typography />", () => {
 
   test("applies caption-2 variant style", () => {
     const { getByText } = render(
-      <Typography variant="caption-2">Caption</Typography>
+      <Typography variant="caption-2">Caption</Typography>,
     );
     const element = getByText("Caption");
     expect(element.props.style).toMatchObject({
@@ -45,7 +45,7 @@ describe("<Typography />", () => {
     const { getByText } = render(
       <Typography variant="heading" style={{ color: "blue" }}>
         Custom Heading
-      </Typography>
+      </Typography>,
     );
     const element = getByText("Custom Heading");
     expect(element.props.style).toMatchObject({
@@ -57,7 +57,7 @@ describe("<Typography />", () => {
     const { getByText } = render(
       <Typography variant="body" numberOfLines={1}>
         Long text
-      </Typography>
+      </Typography>,
     );
     const element = getByText("Long text");
     expect(element.props.numberOfLines).toBe(1);
@@ -71,7 +71,7 @@ describe("<Typography />", () => {
         accessibilityLabel="Main heading"
       >
         Welcome
-      </Typography>
+      </Typography>,
     );
     const element = getByText("Welcome");
     expect(element.props.accessibilityRole).toBe("header");

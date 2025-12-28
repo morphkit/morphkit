@@ -69,7 +69,9 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
             >
               <Typography
                 variant="callout"
-                style={isActive ? styles.itemTextActive : styles.itemTextInactive}
+                style={
+                  isActive ? styles.itemTextActive : styles.itemTextInactive
+                }
               >
                 {component.name}
               </Typography>

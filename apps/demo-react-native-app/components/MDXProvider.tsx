@@ -65,20 +65,36 @@ export const MDXProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <MDXComponents
       components={{
-        h1: (props) => <Typography {...props} variant="title-1" style={styles.h1} />,
-        h2: (props) => <Typography {...props} variant="title-2" style={styles.h2} />,
-        h3: (props) => <Typography {...props} variant="title-3" style={styles.h3} />,
+        h1: (props) => (
+          <Typography {...props} variant="title-1" style={styles.h1} />
+        ),
+        h2: (props) => (
+          <Typography {...props} variant="title-2" style={styles.h2} />
+        ),
+        h3: (props) => (
+          <Typography {...props} variant="title-3" style={styles.h3} />
+        ),
         p: (props) => <Typography {...props} variant="body" style={styles.p} />,
-        code: (props) => <Typography {...props} variant="body" style={styles.code} />,
+        code: (props) => (
+          <Typography {...props} variant="body" style={styles.code} />
+        ),
         pre: (props) => <View {...props} style={styles.pre} />,
-        strong: (props) => <Typography {...props} variant="body" style={styles.strong} />,
-        em: (props) => <Typography {...props} variant="body" style={styles.em} />,
+        strong: (props) => (
+          <Typography {...props} variant="body" style={styles.strong} />
+        ),
+        em: (props) => (
+          <Typography {...props} variant="body" style={styles.em} />
+        ),
         table: (props) => <View {...props} style={styles.table} />,
         thead: (props) => <View {...props} style={styles.thead} />,
         tbody: (props) => <View {...props} />,
         tr: (props) => <View {...props} style={styles.tr} />,
-        th: (props) => <Typography {...props} variant="footnote" style={styles.th} />,
-        td: (props) => <Typography {...props} variant="footnote" style={styles.td} />,
+        th: (props) => (
+          <Typography {...props} variant="footnote" style={styles.th} />
+        ),
+        td: (props) => (
+          <Typography {...props} variant="footnote" style={styles.td} />
+        ),
         Typography,
       }}
     >
