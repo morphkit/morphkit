@@ -1,10 +1,4 @@
-// Export types
-export type {
-  Config,
-  ComponentMeta,
-  ProjectType,
-  StylingLib,
-} from "./types/index.js";
+export type { Config, ComponentMeta, ProjectType } from "./types/index.js";
 
 // Export schemas
 export { ConfigSchema, ComponentMetaSchema } from "./types/index.js";

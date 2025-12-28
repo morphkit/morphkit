@@ -7,13 +7,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 interface ComponentMeta {
-  type: "expo" | "react-native-cli";
-  lib: "stylesheet" | "nativewind" | "tailwind";
+  type: "react-native" | "react";
   name: string;
   componentName: string;
   description?: string;
   dependencies?: string[];
-  version?: string;
+  variables?: Record<string, string | number>;
 }
 
 interface Registry {
@@ -41,7 +40,7 @@ async function generateRegistry() {
         const meta = JSON.parse(metaContent) as ComponentMeta;
 
         // Validate required fields
-        if (!meta.type || !meta.lib || !meta.name || !meta.componentName) {
+        if (!meta.type || !meta.name || !meta.componentName) {
           console.warn(
             `⚠️  Skipping ${entry.name}: missing required fields in meta.json`,
           );
@@ -49,7 +48,12 @@ async function generateRegistry() {
         }
 
         components.push(meta);
-        console.log(`✓ Added ${meta.componentName} (${meta.type}/${meta.lib})`);
+        let logMessage = `✓ Added ${meta.componentName} (${meta.type})`;
+        if (meta.variables) {
+          const varCount = Object.keys(meta.variables).length;
+          logMessage += ` - ${varCount} variable${varCount === 1 ? "" : "s"}`;
+        }
+        console.log(logMessage);
       } catch (error) {
         // Skip directories without valid meta.json
         console.log(`⊘ Skipped ${entry.name}: no valid meta.json`);

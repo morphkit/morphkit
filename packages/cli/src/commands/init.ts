@@ -4,22 +4,7 @@ import { configExists, writeConfig } from "../utils/config.js";
 import { createDirectory } from "../utils/file-operations.js";
 import { validatePath } from "../utils/validation.js";
 import { ConfigExistsError } from "../utils/errors.js";
-import type { ProjectType, StylingLib, Config } from "../types/index.js";
-
-function getStylingOptions(_projectType: ProjectType) {
-  // For now, all project types can use any styling library
-  return [
-    {
-      value: "stylesheet" as const,
-      label: "StyleSheet (React Native default)",
-    },
-    {
-      value: "nativewind" as const,
-      label: "NativeWind (Tailwind for React Native)",
-    },
-    { value: "tailwind" as const, label: "Tailwind CSS (Web only)" },
-  ];
-}
+import type { ProjectType, Config } from "../types/index.js";
 
 export async function initCommand(): Promise<void> {
   intro(pc.cyan("Initialize warp-ui in your project"));
@@ -33,23 +18,12 @@ export async function initCommand(): Promise<void> {
   const projectType = await select({
     message: "Select your project type",
     options: [
-      { value: "expo" as const, label: "Expo" },
-      { value: "react-native-cli" as const, label: "React Native CLI" },
+      { value: "react-native" as const, label: "React Native" },
+      { value: "react" as const, label: "React (Web)" },
     ],
   });
 
   if (isCancel(projectType)) {
-    outro(pc.red("Operation cancelled"));
-    process.exit(0);
-  }
-
-  // Styling library selection
-  const lib = await select({
-    message: "Select your styling library",
-    options: getStylingOptions(projectType as ProjectType),
-  });
-
-  if (isCancel(lib)) {
     outro(pc.red("Operation cancelled"));
     process.exit(0);
   }
@@ -96,7 +70,6 @@ export async function initCommand(): Promise<void> {
   // Create config file
   const config: Config = {
     type: projectType as ProjectType,
-    lib: lib as StylingLib,
     paths: {
       ui: componentPath as string,
     },

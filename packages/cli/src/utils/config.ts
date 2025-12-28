@@ -1,8 +1,10 @@
-import { readFile, writeFile, access } from "fs/promises";
+import { writeFile, access } from "fs/promises";
 import { join } from "path";
+import { pathToFileURL } from "url";
 import { Config, ConfigSchema } from "../types/index.js";
+import { createInitialConfigContent } from "./warpui-config-manager.js";
 
-const CONFIG_FILE = "warp-ui.json";
+const CONFIG_FILE = "warpui.config.js";
 
 export async function configExists(): Promise<boolean> {
   try {
@@ -16,9 +18,10 @@ export async function configExists(): Promise<boolean> {
 export async function readConfig(): Promise<Config | null> {
   try {
     const configPath = join(process.cwd(), CONFIG_FILE);
-    const content = await readFile(configPath, "utf-8");
-    const data = JSON.parse(content);
-    return ConfigSchema.parse(data);
+    const fileUrl = pathToFileURL(configPath).href;
+    const module = await import(fileUrl);
+    const configData = module.config;
+    return ConfigSchema.parse(configData);
   } catch (error) {
     if (error instanceof Error && "code" in error && error.code === "ENOENT") {
       return null;
@@ -29,6 +32,6 @@ export async function readConfig(): Promise<Config | null> {
 
 export async function writeConfig(config: Config): Promise<void> {
   const configPath = join(process.cwd(), CONFIG_FILE);
-  const content = JSON.stringify(config, null, 2);
+  const content = createInitialConfigContent(config.type, config.paths.ui);
   await writeFile(configPath, content, "utf-8");
 }

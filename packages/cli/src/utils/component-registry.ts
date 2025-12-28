@@ -55,9 +55,8 @@ export async function fetchComponents(): Promise<ComponentMeta[]> {
 export function filterComponents(
   components: ComponentMeta[],
   type: Config["type"],
-  lib: Config["lib"],
 ): ComponentMeta[] {
   return components
-    .filter((c) => c.type === type && c.lib === lib)
+    .filter((c) => c.type === type)
     .sort((a, b) => a.name.localeCompare(b.name));
 }

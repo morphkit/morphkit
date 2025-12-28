@@ -6,6 +6,8 @@ import {
   confirm,
   isCancel,
 } from "@clack/prompts";
+import { readFileSync } from "fs";
+import { join } from "path";
 import pc from "picocolors";
 import { readConfig } from "../utils/config.js";
 import {
@@ -15,6 +17,34 @@ import {
 import { copyComponent, componentExists } from "../utils/file-operations.js";
 import { ConfigNotFoundError } from "../utils/errors.js";
 import { validateComponentName } from "../utils/validation.js";
+import { addComponentVariablesToConfig } from "../utils/warpui-config-manager.js";
+import type { ComponentMeta, ComponentVariables } from "../types/index.js";
+
+function resolveComponentDependencies(
+  componentNames: string[],
+  allComponents: ComponentMeta[],
+): string[] {
+  const resolved = new Set<string>();
+  const toProcess = [...componentNames];
+
+  while (toProcess.length > 0) {
+    const name = toProcess.pop()!;
+    if (resolved.has(name)) continue;
+
+    resolved.add(name);
+
+    const component = allComponents.find((c) => c.name === name);
+    if (component?.dependencies) {
+      for (const dep of component.dependencies) {
+        if (!resolved.has(dep)) {
+          toProcess.push(dep);
+        }
+      }
+    }
+  }
+
+  return Array.from(resolved);
+}
 
 export async function pullCommand(componentNames?: string[]): Promise<void> {
   intro(pc.cyan("Pull warp-ui components"));
@@ -27,49 +57,74 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
 
   let selectedComponents: string[];
 
+  const s = spinner();
+  s.start("Fetching available components...");
+
+  let allComponents: ComponentMeta[];
+  try {
+    allComponents = await fetchComponents();
+    s.stop("Components loaded");
+  } catch (error) {
+    s.stop("Failed to fetch components");
+    throw error;
+  }
+
   if (componentNames && componentNames.length > 0) {
-    // Validate component names
     componentNames.forEach(validateComponentName);
-    selectedComponents = componentNames;
+    selectedComponents = resolveComponentDependencies(
+      componentNames,
+      allComponents,
+    );
+
+    const hasDependencies = selectedComponents.length > componentNames.length;
+    if (hasDependencies) {
+      const dependencies = selectedComponents.filter(
+        (name) => !componentNames.includes(name),
+      );
+      console.log(
+        pc.cyan(
+          `Resolved ${dependencies.length} ${dependencies.length === 1 ? "dependency" : "dependencies"}: ${dependencies.join(", ")}`,
+        ),
+      );
+    }
   } else {
-    // Fetch available components
-    const s = spinner();
-    s.start("Fetching available components...");
+    const filtered = filterComponents(allComponents, config.type);
 
-    try {
-      const allComponents = await fetchComponents();
-      const filtered = filterComponents(allComponents, config.type, config.lib);
+    if (filtered.length === 0) {
+      outro(pc.yellow(`No components available for ${config.type}`));
+      return;
+    }
 
-      s.stop("Components loaded");
+    const selected = await multiselect({
+      message: "Select components to pull",
+      options: filtered.map((c) => ({
+        value: c.name,
+        label: `${c.componentName}${c.description ? ` - ${c.description}` : ""}`,
+      })),
+      required: true,
+    });
 
-      if (filtered.length === 0) {
-        outro(
-          pc.yellow(
-            `No components available for ${config.type} with ${config.lib}`,
-          ),
-        );
-        return;
-      }
+    if (isCancel(selected)) {
+      outro(pc.red("Operation cancelled"));
+      process.exit(0);
+    }
 
-      // Show multiselect
-      const selected = await multiselect({
-        message: "Select components to pull",
-        options: filtered.map((c) => ({
-          value: c.name,
-          label: `${c.componentName}${c.description ? ` - ${c.description}` : ""}`,
-        })),
-        required: true,
-      });
+    selectedComponents = resolveComponentDependencies(
+      selected as string[],
+      allComponents,
+    );
 
-      if (isCancel(selected)) {
-        outro(pc.red("Operation cancelled"));
-        process.exit(0);
-      }
-
-      selectedComponents = selected as string[];
-    } catch (error) {
-      s.stop("Failed to fetch components");
-      throw error;
+    const hasDependencies =
+      selectedComponents.length > (selected as string[]).length;
+    if (hasDependencies) {
+      const dependencies = selectedComponents.filter(
+        (name) => !(selected as string[]).includes(name),
+      );
+      console.log(
+        pc.cyan(
+          `Resolved ${dependencies.length} ${dependencies.length === 1 ? "dependency" : "dependencies"}: ${dependencies.join(", ")}`,
+        ),
+      );
     }
   }
 
@@ -102,7 +157,7 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
     s.start(`Pulling ${name}...`);
 
     try {
-      await copyComponent(name, config.paths.ui, config.type, config.lib);
+      await copyComponent(name, config.paths.ui, config.type);
       s.stop(pc.green(`Pulled ${name}`));
       pulled++;
     } catch (error) {
@@ -112,6 +167,41 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
   }
 
   if (pulled > 0) {
+    const s = spinner();
+    s.start("Adding component variables to warpui.config.js...");
+
+    try {
+      const componentVariables = new Map<string, ComponentVariables>();
+
+      for (const name of selectedComponents) {
+        const metaPath = join(config.paths.ui, name, "meta.json");
+        try {
+          const metaContent = readFileSync(metaPath, "utf-8");
+          const meta = JSON.parse(metaContent) as ComponentMeta;
+          if (meta.variables) {
+            componentVariables.set(name, meta.variables);
+          }
+        } catch {
+          continue;
+        }
+      }
+
+      if (componentVariables.size > 0) {
+        await addComponentVariablesToConfig(process.cwd(), componentVariables);
+        s.stop(pc.green("Component variables added"));
+      } else {
+        s.stop(pc.dim("No variables to add"));
+      }
+    } catch (error) {
+      s.stop(pc.yellow("Could not update warpui.config.js"));
+      if (error instanceof Error) {
+        console.log(pc.dim(`Note: ${error.message}`));
+        console.log(
+          pc.dim("You can manually add variables to warpui.config.js"),
+        );
+      }
+    }
+
     outro(
       pc.green(
         `Successfully pulled ${pulled} component${pulled > 1 ? "s" : ""}`,

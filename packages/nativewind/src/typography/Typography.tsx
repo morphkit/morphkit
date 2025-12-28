@@ -12,7 +12,7 @@ export const Typography = ({
 }: TypographyProps) => {
   return (
     <Text
-      className={`text-2xl font-bold text-red-500 ${className || ""}`}
+      className={`text-[var(--typography-primary-color)] text-[length:var(--typography-large-size)] font-[var(--typography-bold-weight)] ${className || ""}`}
       {...props}
     >
       {children}

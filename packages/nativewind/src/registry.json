@@ -1,20 +1,18 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2025-12-28T18:41:05.046Z",
+  "generatedAt": "2025-12-28T20:25:06.901Z",
   "components": [
     {
-      "type": "expo",
-      "lib": "nativewind",
+      "type": "react-native",
       "name": "typography",
       "componentName": "Typography",
       "description": "Text component with custom styling",
-      "dependencies": {
-        "react": "^19.0.0",
-        "react-native": "^0.81.0",
-        "nativewind": "^4.1.27",
-        "tailwindcss": "^3.4.17"
-      },
-      "version": "0.1.0"
+      "dependencies": [],
+      "variables": {
+        "--typography-primary-color": "#ef4444",
+        "--typography-large-size": "1.5rem",
+        "--typography-bold-weight": "700"
+      }
     }
   ]
 }

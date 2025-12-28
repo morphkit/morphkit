@@ -58,3 +58,13 @@ export class InvalidPathError extends WarpUIError {
     );
   }
 }
+
+export class TokenMergeError extends WarpUIError {
+  constructor(configPath: string, reason: string) {
+    super(
+      `Failed to merge tokens into ${configPath}: ${reason}. Update manually or contact support.`,
+      "TOKEN_MERGE_FAILED",
+      0,
+    );
+  }
+}

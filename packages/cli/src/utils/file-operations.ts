@@ -37,7 +37,6 @@ export async function copyComponent(
   name: string,
   destPath: string,
   _type: string,
-  _lib: string,
 ): Promise<void> {
   // Get GitHub token for authentication
   const token = getGitHubToken();
