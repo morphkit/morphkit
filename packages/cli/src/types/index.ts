@@ -7,7 +7,7 @@ export const ComponentMetaSchema = z.object({
   name: z.string(),
   componentName: z.string(),
   description: z.string().optional(),
-  dependencies: z.array(z.string()).optional(),
+  dependencies: z.record(z.string()).optional(),
   version: z.string().optional()
 });
 

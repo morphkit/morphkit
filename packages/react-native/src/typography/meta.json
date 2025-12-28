@@ -1,9 +1,0 @@
-{
-  "type": "expo",
-  "lib": "stylesheet",
-  "name": "typography",
-  "componentName": "Typography",
-  "description": "Text component with custom styling",
-  "dependencies": ["react-native"],
-  "version": "0.1.0"
-}

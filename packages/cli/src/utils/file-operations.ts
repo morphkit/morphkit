@@ -87,10 +87,10 @@ export async function copyComponent(
       cwd: tempDir,
       filter: (path) => {
         // GitHub tarballs have format: owner-repo-commit/path/to/file
-        // We want: packages/react-native/src/${name}/
-        return path.includes(`packages/react-native/src/${name}/`);
+        // We want: packages/nativewind/src/${name}/
+        return path.includes(`packages/nativewind/src/${name}/`);
       },
-      strip: 4 // Strip owner-repo-commit/packages/react-native/src/
+      strip: 4 // Strip owner-repo-commit/packages/nativewind/src/
     });
 
     // Move extracted component to destination

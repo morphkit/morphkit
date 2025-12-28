@@ -1,0 +1,14 @@
+{
+  "type": "expo",
+  "lib": "nativewind",
+  "name": "typography",
+  "componentName": "Typography",
+  "description": "Text component with custom styling",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-native": "^0.81.0",
+    "nativewind": "^4.1.27",
+    "tailwindcss": "^3.4.17"
+  },
+  "version": "0.1.0"
+}

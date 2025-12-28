@@ -16,7 +16,7 @@ export async function fetchComponents(): Promise<ComponentMeta[]> {
   }
 
   // Fetch registry from GitHub raw URL
-  const registryUrl = 'https://raw.githubusercontent.com/warp-ui/warp-ui/main/packages/react-native/src/registry.json';
+  const registryUrl = 'https://raw.githubusercontent.com/warp-ui/warp-ui/main/packages/nativewind/src/registry.json';
 
   const headers: HeadersInit = {
     'Authorization': `token ${token}`,
