@@ -13,6 +13,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@react-native/typography": "*",
     "expo": "~54.0.30",
     "expo-constants": "~18.0.12",
     "expo-linking": "~8.0.11",

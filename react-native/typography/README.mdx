@@ -1,0 +1,80 @@
+# Typography
+
+A simple text component that renders text in red color.
+
+## Installation
+
+```bash
+bun add @react-native/typography
+```
+
+## Usage
+
+### Basic Usage
+
+```tsx
+import { Typography } from "@react-native/typography";
+
+export default function App() {
+  return <Typography>Hello, Red World!</Typography>;
+}
+```
+
+### With Custom Styles
+
+```tsx
+import { Typography } from "@react-native/typography";
+
+export default function App() {
+  return (
+    <Typography style={{ fontSize: 24, fontWeight: "bold" }}>
+      Large Bold Red Text
+    </Typography>
+  );
+}
+```
+
+### With TextProps
+
+All React Native `TextProps` are supported:
+
+```tsx
+import { Typography } from "@react-native/typography";
+
+export default function App() {
+  return (
+    <Typography numberOfLines={2} ellipsizeMode="tail">
+      This is a very long text that will be truncated to two lines with an
+      ellipsis at the end.
+    </Typography>
+  );
+}
+```
+
+## Props
+
+| Prop       | Type        | Required | Description                |
+| ---------- | ----------- | -------- | -------------------------- |
+| `children` | `ReactNode` | Yes      | The text content to display |
+| `style`    | `StyleProp` | No       | Additional styles (merged) |
+| `...props` | `TextProps` | No       | All React Native Text props |
+
+## Examples
+
+### Accessibility
+
+```tsx
+<Typography accessibilityLabel="Welcome message" accessibilityRole="header">
+  Welcome!
+</Typography>
+```
+
+### Event Handlers
+
+```tsx
+<Typography onPress={() => console.log("Pressed!")}>Tap me!</Typography>
+```
+
+## API Reference
+
+See [React Native Text](https://reactnative.dev/docs/text) for all available props.
