@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "react-native-ui",
-    "slug": "react-native-ui",
+    "name": "Demo React Native App",
+    "slug": "demo-react-native-app",
     "version": "1.0.0",
-    "scheme": "reactnativeui",
+    "scheme": "demoreactnativeapp",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -16,7 +16,8 @@
       }
     },
     "web": {
-      "output": "static"
+      "output": "static",
+      "bundler": "metro"
     },
     "plugins": [
       "expo-router"

@@ -5,9 +5,16 @@ export interface TypographyProps extends TextProps {
   className?: string;
 }
 
-export const Typography = ({ children, className, ...props }: TypographyProps) => {
+export const Typography = ({
+  children,
+  className,
+  ...props
+}: TypographyProps) => {
   return (
-    <Text className={`text-red-500 ${className || ""}`} {...props}>
+    <Text
+      className={`text-2xl font-bold text-red-500 ${className || ""}`}
+      {...props}
+    >
       {children}
     </Text>
   );

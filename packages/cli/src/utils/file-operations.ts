@@ -1,12 +1,15 @@
-import { access, mkdir, rm, rename } from 'fs/promises';
-import { join, resolve } from 'path';
-import { tmpdir } from 'os';
-import { createWriteStream } from 'fs';
-import { pipeline } from 'stream/promises';
-import tar from 'tar';
-import { getGitHubToken, GitHubAuthError } from './github-auth.js';
+import { access, mkdir, rm, rename } from "fs/promises";
+import { join, resolve } from "path";
+import { tmpdir } from "os";
+import { createWriteStream } from "fs";
+import { pipeline } from "stream/promises";
+import * as tar from "tar";
+import { getGitHubToken, GitHubAuthError } from "./github-auth.js";
 
-export async function componentExists(basePath: string, name: string): Promise<boolean> {
+export async function componentExists(
+  basePath: string,
+  name: string,
+): Promise<boolean> {
   try {
     // Resolve relative paths to absolute based on current working directory
     const absoluteBasePath = resolve(process.cwd(), basePath);
@@ -24,7 +27,7 @@ export async function createDirectory(path: string): Promise<void> {
   try {
     await mkdir(absolutePath, { recursive: true });
   } catch (error) {
-    if (error instanceof Error && 'code' in error && error.code !== 'EEXIST') {
+    if (error instanceof Error && "code" in error && error.code !== "EEXIST") {
       throw error;
     }
   }
@@ -34,7 +37,7 @@ export async function copyComponent(
   name: string,
   destPath: string,
   _type: string,
-  _lib: string
+  _lib: string,
 ): Promise<void> {
   // Get GitHub token for authentication
   const token = getGitHubToken();
@@ -49,9 +52,9 @@ export async function copyComponent(
   const apiUrl = `https://api.github.com/repos/warp-ui/warp-ui/tarball/main`;
 
   const headers: HeadersInit = {
-    'Authorization': `token ${token}`,
-    'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': '@warp-ui/cli'
+    Authorization: `token ${token}`,
+    Accept: "application/vnd.github.v3+json",
+    "User-Agent": "@warp-ui/cli",
   };
 
   try {
@@ -63,11 +66,13 @@ export async function copyComponent(
     }
 
     if (!response.ok) {
-      throw new Error(`Failed to download: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to download: ${response.status} ${response.statusText}`,
+      );
     }
 
     if (!response.body) {
-      throw new Error('Response body is null');
+      throw new Error("Response body is null");
     }
 
     // Create temp directory for extraction
@@ -75,7 +80,7 @@ export async function copyComponent(
     await mkdir(tempDir, { recursive: true });
 
     // Save tarball to temp file
-    const tarballPath = join(tempDir, 'repo.tar.gz');
+    const tarballPath = join(tempDir, "repo.tar.gz");
     const fileStream = createWriteStream(tarballPath);
 
     // @ts-expect-error - Node.js stream types compatibility
@@ -85,12 +90,12 @@ export async function copyComponent(
     await tar.extract({
       file: tarballPath,
       cwd: tempDir,
-      filter: (path) => {
+      filter: (path: string) => {
         // GitHub tarballs have format: owner-repo-commit/path/to/file
         // We want: packages/nativewind/src/${name}/
         return path.includes(`packages/nativewind/src/${name}/`);
       },
-      strip: 4 // Strip owner-repo-commit/packages/nativewind/src/
+      strip: 4, // Strip owner-repo-commit/packages/nativewind/src/
     });
 
     // Move extracted component to destination
@@ -105,7 +110,6 @@ export async function copyComponent(
 
     // Clean up temp directory
     await rm(tempDir, { recursive: true, force: true });
-
   } catch (error) {
     if (error instanceof GitHubAuthError) {
       throw error;

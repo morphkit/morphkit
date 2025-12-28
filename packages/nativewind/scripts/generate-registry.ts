@@ -1,14 +1,14 @@
-import { readdir, readFile, writeFile } from 'fs/promises';
-import { join } from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { readdir, readFile, writeFile } from "fs/promises";
+import { join } from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 interface ComponentMeta {
-  type: 'expo' | 'react-native-cli';
-  lib: 'stylesheet' | 'nativewind' | 'tailwind';
+  type: "expo" | "react-native-cli";
+  lib: "stylesheet" | "nativewind" | "tailwind";
   name: string;
   componentName: string;
   description?: string;
@@ -23,10 +23,10 @@ interface Registry {
 }
 
 async function generateRegistry() {
-  const srcDir = join(__dirname, '..', 'src');
-  const registryPath = join(srcDir, 'registry.json');
+  const srcDir = join(__dirname, "..", "src");
+  const registryPath = join(srcDir, "registry.json");
 
-  console.log('🔍 Scanning components in:', srcDir);
+  console.log("🔍 Scanning components in:", srcDir);
 
   // Read all directories in src
   const entries = await readdir(srcDir, { withFileTypes: true });
@@ -34,15 +34,17 @@ async function generateRegistry() {
 
   for (const entry of entries) {
     if (entry.isDirectory()) {
-      const metaPath = join(srcDir, entry.name, 'meta.json');
+      const metaPath = join(srcDir, entry.name, "meta.json");
 
       try {
-        const metaContent = await readFile(metaPath, 'utf-8');
+        const metaContent = await readFile(metaPath, "utf-8");
         const meta = JSON.parse(metaContent) as ComponentMeta;
 
         // Validate required fields
         if (!meta.type || !meta.lib || !meta.name || !meta.componentName) {
-          console.warn(`⚠️  Skipping ${entry.name}: missing required fields in meta.json`);
+          console.warn(
+            `⚠️  Skipping ${entry.name}: missing required fields in meta.json`,
+          );
           continue;
         }
 
@@ -60,19 +62,19 @@ async function generateRegistry() {
 
   // Create registry object
   const registry: Registry = {
-    version: '1.0.0',
+    version: "1.0.0",
     generatedAt: new Date().toISOString(),
-    components
+    components,
   };
 
   // Write registry file
-  await writeFile(registryPath, JSON.stringify(registry, null, 2), 'utf-8');
+  await writeFile(registryPath, JSON.stringify(registry, null, 2), "utf-8");
 
   console.log(`\n✅ Registry generated with ${components.length} components`);
   console.log(`📝 Written to: ${registryPath}`);
 }
 
 generateRegistry().catch((error) => {
-  console.error('❌ Failed to generate registry:', error);
+  console.error("❌ Failed to generate registry:", error);
   process.exit(1);
 });

@@ -1,13 +1,23 @@
-import { intro, outro, multiselect, spinner, confirm, isCancel } from '@clack/prompts';
-import pc from 'picocolors';
-import { readConfig } from '../utils/config.js';
-import { fetchComponents, filterComponents } from '../utils/component-registry.js';
-import { copyComponent, componentExists } from '../utils/file-operations.js';
-import { ConfigNotFoundError } from '../utils/errors.js';
-import { validateComponentName } from '../utils/validation.js';
+import {
+  intro,
+  outro,
+  multiselect,
+  spinner,
+  confirm,
+  isCancel,
+} from "@clack/prompts";
+import pc from "picocolors";
+import { readConfig } from "../utils/config.js";
+import {
+  fetchComponents,
+  filterComponents,
+} from "../utils/component-registry.js";
+import { copyComponent, componentExists } from "../utils/file-operations.js";
+import { ConfigNotFoundError } from "../utils/errors.js";
+import { validateComponentName } from "../utils/validation.js";
 
 export async function pullCommand(componentNames?: string[]): Promise<void> {
-  intro(pc.cyan('Pull warp-ui components'));
+  intro(pc.cyan("Pull warp-ui components"));
 
   // Read config
   const config = await readConfig();
@@ -24,37 +34,41 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
   } else {
     // Fetch available components
     const s = spinner();
-    s.start('Fetching available components...');
+    s.start("Fetching available components...");
 
     try {
       const allComponents = await fetchComponents();
       const filtered = filterComponents(allComponents, config.type, config.lib);
 
-      s.stop('Components loaded');
+      s.stop("Components loaded");
 
       if (filtered.length === 0) {
-        outro(pc.yellow(`No components available for ${config.type} with ${config.lib}`));
+        outro(
+          pc.yellow(
+            `No components available for ${config.type} with ${config.lib}`,
+          ),
+        );
         return;
       }
 
       // Show multiselect
       const selected = await multiselect({
-        message: 'Select components to pull',
-        options: filtered.map(c => ({
+        message: "Select components to pull",
+        options: filtered.map((c) => ({
           value: c.name,
-          label: `${c.componentName}${c.description ? ` - ${c.description}` : ''}`
+          label: `${c.componentName}${c.description ? ` - ${c.description}` : ""}`,
         })),
-        required: true
+        required: true,
       });
 
       if (isCancel(selected)) {
-        outro(pc.red('Operation cancelled'));
+        outro(pc.red("Operation cancelled"));
         process.exit(0);
       }
 
       selectedComponents = selected as string[];
     } catch (error) {
-      s.stop('Failed to fetch components');
+      s.stop("Failed to fetch components");
       throw error;
     }
   }
@@ -69,11 +83,11 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
     if (exists) {
       const shouldOverwrite = await confirm({
         message: `${name} already exists. Overwrite?`,
-        initialValue: false
+        initialValue: false,
       });
 
       if (isCancel(shouldOverwrite)) {
-        outro(pc.red('Operation cancelled'));
+        outro(pc.red("Operation cancelled"));
         process.exit(0);
       }
 
@@ -98,8 +112,12 @@ export async function pullCommand(componentNames?: string[]): Promise<void> {
   }
 
   if (pulled > 0) {
-    outro(pc.green(`Successfully pulled ${pulled} component${pulled > 1 ? 's' : ''}`));
+    outro(
+      pc.green(
+        `Successfully pulled ${pulled} component${pulled > 1 ? "s" : ""}`,
+      ),
+    );
   } else if (skipped > 0) {
-    outro(pc.yellow(`Skipped ${skipped} component${skipped > 1 ? 's' : ''}`));
+    outro(pc.yellow(`Skipped ${skipped} component${skipped > 1 ? "s" : ""}`));
   }
 }

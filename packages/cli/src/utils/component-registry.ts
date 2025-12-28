@@ -1,11 +1,11 @@
-import { ComponentMeta, ComponentMetaSchema, Config } from '../types/index.js';
-import { z } from 'zod';
-import { getGitHubToken, GitHubAuthError } from './github-auth.js';
+import { ComponentMeta, ComponentMetaSchema, Config } from "../types/index.js";
+import { z } from "zod";
+import { getGitHubToken, GitHubAuthError } from "./github-auth.js";
 
 const RegistrySchema = z.object({
   version: z.string(),
   generatedAt: z.string(),
-  components: z.array(ComponentMetaSchema)
+  components: z.array(ComponentMetaSchema),
 });
 
 export async function fetchComponents(): Promise<ComponentMeta[]> {
@@ -16,11 +16,12 @@ export async function fetchComponents(): Promise<ComponentMeta[]> {
   }
 
   // Fetch registry from GitHub raw URL
-  const registryUrl = 'https://raw.githubusercontent.com/warp-ui/warp-ui/main/packages/nativewind/src/registry.json';
+  const registryUrl =
+    "https://raw.githubusercontent.com/warp-ui/warp-ui/main/packages/nativewind/src/registry.json";
 
   const headers: HeadersInit = {
-    'Authorization': `token ${token}`,
-    'Accept': 'application/vnd.github.v3.raw'
+    Authorization: `token ${token}`,
+    Accept: "application/vnd.github.v3.raw",
   };
 
   try {
@@ -31,7 +32,9 @@ export async function fetchComponents(): Promise<ComponentMeta[]> {
     }
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch registry: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch registry: ${response.status} ${response.statusText}`,
+      );
     }
 
     const data = await response.json();
@@ -51,10 +54,10 @@ export async function fetchComponents(): Promise<ComponentMeta[]> {
 
 export function filterComponents(
   components: ComponentMeta[],
-  type: Config['type'],
-  lib: Config['lib']
+  type: Config["type"],
+  lib: Config["lib"],
 ): ComponentMeta[] {
   return components
-    .filter(c => c.type === type && c.lib === lib)
+    .filter((c) => c.type === type && c.lib === lib)
     .sort((a, b) => a.name.localeCompare(b.name));
 }

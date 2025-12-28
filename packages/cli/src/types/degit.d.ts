@@ -1,9 +1,9 @@
-declare module 'degit' {
+declare module "degit" {
   interface DegitOptions {
     cache?: boolean;
     force?: boolean;
     verbose?: boolean;
-    mode?: 'tar' | 'git';
+    mode?: "tar" | "git";
   }
 
   interface DegitEmitter {
