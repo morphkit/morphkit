@@ -21,5 +21,8 @@
     "apps/*",
     "packages/*",
     "react-native/*"
-  ]
+  ],
+  "resolutions": {
+    "react": "19.1.0"
+  }
 }
