@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "input",
+  "description": "Single-line text input field with label, error state, and prefix/suffix icon support",
+  "dependencies": []
+}

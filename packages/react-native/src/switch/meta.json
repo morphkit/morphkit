@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "switch",
+  "description": "Toggle switch for binary on/off states with animated transitions",
+  "dependencies": []
+}

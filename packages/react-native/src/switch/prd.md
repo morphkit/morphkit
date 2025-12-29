@@ -1,44 +1,52 @@
 # Switch
 
 ## Overview
+
 Toggle switch for binary on/off states with iOS and Android platform-specific styling. Provides familiar toggle interaction for boolean settings with clear visual indication of current state.
 
 ## Component Behavior
+
 Switch displays a pill-shaped track with circular thumb. Tapping toggles state, thumb animates from one side to other. On state shows primary color track with thumb on right. Off state shows gray track with thumb on left. Animated transition provides satisfying feedback. Label text optionally renders beside switch.
 
 ## Props
 
 ### Required Props
-| Prop | Type | Description |
-|------|------|-------------|
-| checked | `boolean` | Current on/off state (controlled) |
+
+| Prop            | Type                         | Description                       |
+| --------------- | ---------------------------- | --------------------------------- |
+| checked         | `boolean`                    | Current on/off state (controlled) |
 | onCheckedChange | `(checked: boolean) => void` | Callback when user toggles switch |
 
 ### Optional Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| label | `string` | `undefined` | Text label displayed next to switch |
-| disabled | `boolean` | `false` | Disables switch interaction |
-| size | `"sm" \| "md" \| "lg"` | `"md"` | Size of switch track and thumb |
-| color | `string` | theme primary | Color of track when checked |
-| style | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for wrapper |
+
+| Prop     | Type                   | Default       | Description                          |
+| -------- | ---------------------- | ------------- | ------------------------------------ |
+| label    | `string`               | `undefined`   | Text label displayed next to switch  |
+| disabled | `boolean`              | `false`       | Disables switch interaction          |
+| size     | `"sm" \| "md" \| "lg"` | `"md"`        | Size of switch track and thumb       |
+| color    | `string`               | theme primary | Color of track when checked          |
+| style    | `StyleProp<ViewStyle>` | `undefined`   | Additional custom styles for wrapper |
 
 ### Extends
+
 `ViewProps` - All standard React Native View props
 
 ## Variants
 
 ### Sizes
+
 - **sm**: 32x20 track, 16x16 thumb (iOS style)
 - **md**: 40x24 track, 20x20 thumb
 - **lg**: 48x28 track, 24x24 thumb
 
 ## States
+
 - **off**: Gray track, white thumb positioned on left side
 - **on**: Primary color track, white thumb positioned on right side
 - **disabled**: Reduced opacity (0.5), no interaction, maintains on/off appearance
 
 ## Theme Support
+
 - Light mode:
   - Off: gray track (#D1D5DB), white thumb
   - On: primary blue track (#4A90E2), white thumb
@@ -51,6 +59,7 @@ Switch displays a pill-shaped track with circular thumb. Tapping toggles state, 
 - Custom color: color prop overrides on-state track color
 
 ## Accessibility Requirements
+
 - role="switch"
 - accessibilityState: { checked }
 - accessibilityLabel from label prop or custom accessibilityLabel
@@ -62,6 +71,7 @@ Switch displays a pill-shaped track with circular thumb. Tapping toggles state, 
 ## Usage Examples
 
 ### Basic Usage
+
 ```tsx
 <Switch
   checked={notificationsEnabled}
@@ -71,6 +81,7 @@ Switch displays a pill-shaped track with circular thumb. Tapping toggles state, 
 ```
 
 ### Advanced Usage
+
 ```tsx
 <Switch
   checked={isDarkMode}
@@ -83,6 +94,7 @@ Switch displays a pill-shaped track with circular thumb. Tapping toggles state, 
 ```
 
 ## Edge Cases
+
 - **No label**: Switch renders alone, ensure accessibilityLabel provided
 - **Very long label**: Label wraps to multiple lines, switch aligns to first line
 - **Rapid toggling**: State updates should be debounced if triggering expensive operations
@@ -90,12 +102,14 @@ Switch displays a pill-shaped track with circular thumb. Tapping toggles state, 
 - **Animation interrupted**: New state overrides current animation smoothly
 
 ## Dependencies
+
 - React Native Animated API for thumb slide animation
 - Optional: Haptic feedback on state change (Expo Haptics)
 
 ## Design Considerations
 
 ### Styling Approach
+
 - Track: Pill-shaped View with borderRadius = height/2
 - Thumb: Circular View positioned absolutely within track
 - Thumb position animated between left and right using Animated.Value
@@ -104,6 +118,7 @@ Switch displays a pill-shaped track with circular thumb. Tapping toggles state, 
 - Disabled uses opacity transform on entire switch
 
 ### Layout Strategy
+
 - Horizontal layout: Switch | Label (gap: 8px) or Label | Switch depending on design
 - Switch wrapper: Pressable for entire touchable area
 - Track: relative positioned container
@@ -111,12 +126,14 @@ Switch displays a pill-shaped track with circular thumb. Tapping toggles state, 
 - Animation: translateX for thumb position, backgroundColor interpolation for track
 
 ### Performance Considerations
+
 - Use native driver for thumb animation (smooth 60fps)
 - Memoize onCheckedChange callback
 - Avoid expensive operations in immediate toggle handler
 - backgroundColor animation uses interpolation for smooth color transition
 
 ### Customization Points
+
 - Size presets for common use cases
 - color prop for brand customization
 - Label positioning (left vs right of switch)

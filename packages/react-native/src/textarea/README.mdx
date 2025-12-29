@@ -1,0 +1,299 @@
+---
+title: Textarea
+description: Multi-line text input field with auto-resize capability and character count display for longer text entry.
+---
+
+import { Textarea } from "./Textarea";
+import { View } from "react-native";
+import { Stack } from "../stack";
+
+# Textarea
+
+Multi-line text input field with auto-resize capability and character count display for longer text entry. Provides expanded input area for paragraphs, descriptions, comments, and other lengthy text content.
+
+## Import
+
+```tsx
+import { Textarea } from "@repo/react-native";
+```
+
+## Usage
+
+### Basic
+
+<View style={{ padding: 20 }}>
+  <Textarea
+    label="Description"
+    value=""
+    onChangeText={() => {}}
+    placeholder="Enter a detailed description..."
+  />
+</View>
+
+```tsx
+<Textarea
+  label="Description"
+  value={description}
+  onChangeText={setDescription}
+  placeholder="Enter a detailed description..."
+  rows={6}
+/>
+```
+
+### With Character Count
+
+Display current character count or progress toward maximum length.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Textarea
+      label="Bio"
+      value=""
+      onChangeText={() => {}}
+      showCount
+      rows={4}
+    />
+    <Textarea
+      label="Comment"
+      value=""
+      onChangeText={() => {}}
+      maxLength={500}
+      showCount
+      rows={4}
+    />
+  </Stack>
+</View>
+
+```tsx
+<Textarea
+  label="Bio"
+  value={bio}
+  onChangeText={setBio}
+  showCount
+/>
+
+<Textarea
+  label="Comment"
+  value={comment}
+  onChangeText={setComment}
+  maxLength={500}
+  showCount
+/>
+```
+
+### Auto Resize
+
+Automatically expand height as content grows.
+
+<View style={{ padding: 20 }}>
+  <Textarea
+    label="Notes"
+    value=""
+    onChangeText={() => {}}
+    placeholder="Start typing..."
+    autoResize
+    rows={3}
+  />
+</View>
+
+```tsx
+<Textarea
+  label="Notes"
+  value={notes}
+  onChangeText={setNotes}
+  autoResize
+  rows={3}
+/>
+```
+
+### Rows
+
+Control the initial visible height with the `rows` prop.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Textarea
+      label="Short note (2 rows)"
+      value=""
+      onChangeText={() => {}}
+      rows={2}
+    />
+    <Textarea
+      label="Medium note (4 rows, default)"
+      value=""
+      onChangeText={() => {}}
+      rows={4}
+    />
+    <Textarea
+      label="Long note (8 rows)"
+      value=""
+      onChangeText={() => {}}
+      rows={8}
+    />
+  </Stack>
+</View>
+
+```tsx
+<Textarea label="Short" value={value} onChangeText={setValue} rows={2} />
+<Textarea label="Medium" value={value} onChangeText={setValue} rows={4} />
+<Textarea label="Long" value={value} onChangeText={setValue} rows={8} />
+```
+
+### Sizes
+
+Available in three sizes: `sm`, `md` (default), and `lg`.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Textarea
+      label="Small textarea"
+      value=""
+      onChangeText={() => {}}
+      size="sm"
+      rows={3}
+    />
+    <Textarea
+      label="Medium textarea (default)"
+      value=""
+      onChangeText={() => {}}
+      size="md"
+      rows={3}
+    />
+    <Textarea
+      label="Large textarea"
+      value=""
+      onChangeText={() => {}}
+      size="lg"
+      rows={3}
+    />
+  </Stack>
+</View>
+
+```tsx
+<Textarea label="Compact" value={value} onChangeText={setValue} size="sm" />
+<Textarea label="Standard" value={value} onChangeText={setValue} size="md" />
+<Textarea label="Prominent" value={value} onChangeText={setValue} size="lg" />
+```
+
+### Error State
+
+Display validation errors below the textarea.
+
+<View style={{ padding: 20 }}>
+  <Textarea
+    label="Message"
+    value="Hi"
+    onChangeText={() => {}}
+    error="Message must be at least 10 characters"
+    rows={4}
+  />
+</View>
+
+```tsx
+<Textarea
+  label="Message"
+  value={message}
+  onChangeText={setMessage}
+  error={messageError}
+/>
+```
+
+### Disabled State
+
+<View style={{ padding: 20 }}>
+  <Textarea
+    label="Read-only content"
+    value="This content cannot be edited"
+    onChangeText={() => {}}
+    disabled
+    rows={3}
+  />
+</View>
+
+```tsx
+<Textarea
+  label="Readonly Field"
+  value={value}
+  onChangeText={setValue}
+  disabled
+/>
+```
+
+### Combined Features
+
+<View style={{ padding: 20 }}>
+  <Textarea
+    label="Product Review"
+    value=""
+    onChangeText={() => {}}
+    placeholder="Share your thoughts about this product..."
+    maxLength={1000}
+    showCount
+    autoResize
+    rows={4}
+    size="lg"
+  />
+</View>
+
+```tsx
+<Textarea
+  label="Product Review"
+  value={review}
+  onChangeText={setReview}
+  placeholder="Share your thoughts..."
+  maxLength={1000}
+  showCount
+  autoResize
+  rows={4}
+  size="lg"
+/>
+```
+
+## Props
+
+### Textarea Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | Current text content (controlled) |
+| `onChangeText` | `(text: string) => void` | - | Callback when text changes |
+| `label` | `string` | `undefined` | Text label above textarea |
+| `placeholder` | `string` | `undefined` | Placeholder text when empty |
+| `error` | `string` | `undefined` | Error message shown below textarea |
+| `disabled` | `boolean` | `false` | Disables textarea interaction |
+| `rows` | `number` | `4` | Initial number of visible text rows |
+| `maxLength` | `number` | `undefined` | Maximum number of characters allowed |
+| `showCount` | `boolean` | `false` | Display character count below textarea |
+| `autoResize` | `boolean` | `false` | Automatically expand height to fit content |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset for fontSize and padding |
+| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for wrapper |
+
+The component also accepts all standard React Native `TextInputProps` (except `multiline` and `numberOfLines`).
+
+## Accessibility
+
+The Textarea component follows accessibility best practices:
+
+- Uses `accessibilityLabel` from the `label` prop
+- Sets `accessibilityInvalid` when an error is present
+- Error text has `accessibilityLiveRegion="polite"` for announcements
+- Supports keyboard navigation and focus management
+- Maintains sufficient color contrast (WCAG AA compliant)
+
+## Theme Support
+
+The component automatically adapts to light and dark modes:
+
+- **Light mode**: White background, gray border (#E5E7EB)
+- **Dark mode**: Dark background (#374151), lighter border (#4B5563)
+- **Focus**: Primary blue border (#4A90E2 light, #5AA2F5 dark)
+- **Error**: Red border and text (#EF4444 light, #F87171 dark)
+
+## Best Practices
+
+1. **Initial Height**: Use `rows` prop to set appropriate initial height
+2. **Character Limits**: Use `maxLength` with `showCount` for user guidance
+3. **Auto Resize**: Enable `autoResize` for dynamic content without scrolling
+4. **Placeholders**: Provide helpful examples in placeholder text
+5. **Validation**: Show errors only after user interaction or form submission
+6. **Long Content**: For very long text, consider fixed height with scrolling instead of autoResize

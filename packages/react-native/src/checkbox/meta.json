@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "checkbox",
+  "description": "Selectable checkbox control for boolean inputs with support for checked, unchecked, and indeterminate states",
+  "dependencies": []
+}

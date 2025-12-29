@@ -1,0 +1,341 @@
+---
+title: Input
+description: Single-line text input field with label, placeholder, error state, and prefix/suffix icon support for various data entry needs.
+---
+
+import { Input } from "./Input";
+import { View, Text } from "react-native";
+import { Stack } from "../stack";
+
+# Input
+
+Single-line text input field with label, placeholder, error state, and prefix/suffix icon support for various data entry needs. Provides clear visual states for focus, error, and disabled conditions with full accessibility support.
+
+## Import
+
+```tsx
+import { Input } from "@repo/react-native";
+```
+
+## Usage
+
+### Basic
+
+<View style={{ padding: 20 }}>
+  <Input
+    label="Email"
+    value=""
+    onChangeText={() => {}}
+    placeholder="you@example.com"
+  />
+</View>
+
+```tsx
+<Input
+  label="Email"
+  value={email}
+  onChangeText={setEmail}
+  placeholder="you@example.com"
+  type="email"
+/>
+```
+
+### Input Types
+
+Different keyboard types for various data inputs.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Input
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      placeholder="you@example.com"
+      type="email"
+    />
+    <Input
+      label="Password"
+      value=""
+      onChangeText={() => {}}
+      placeholder="Enter password"
+      type="password"
+    />
+    <Input
+      label="Phone Number"
+      value=""
+      onChangeText={() => {}}
+      placeholder="123-456-7890"
+      type="number"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Input label="Email" value={email} onChangeText={setEmail} type="email" />
+<Input label="Password" value={password} onChangeText={setPassword} type="password" />
+<Input label="Phone" value={phone} onChangeText={setPhone} type="number" />
+```
+
+### Variants
+
+Available in `outline` (default) and `filled` styles.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Input
+      label="Outline Variant (default)"
+      value=""
+      onChangeText={() => {}}
+      variant="outline"
+    />
+    <Input
+      label="Filled Variant"
+      value=""
+      onChangeText={() => {}}
+      variant="filled"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Input label="Email" value={email} onChangeText={setEmail} variant="outline" />
+<Input label="Search" value={search} onChangeText={setSearch} variant="filled" />
+```
+
+### Sizes
+
+Available in three sizes: `sm`, `md` (default), and `lg`.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Input
+      label="Small Input"
+      value=""
+      onChangeText={() => {}}
+      size="sm"
+    />
+    <Input
+      label="Medium Input (default)"
+      value=""
+      onChangeText={() => {}}
+      size="md"
+    />
+    <Input
+      label="Large Input"
+      value=""
+      onChangeText={() => {}}
+      size="lg"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Input label="Compact" value={value} onChangeText={setValue} size="sm" />
+<Input label="Standard" value={value} onChangeText={setValue} size="md" />
+<Input label="Prominent" value={value} onChangeText={setValue} size="lg" />
+```
+
+### Error State
+
+Display validation errors below the input.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Input
+      label="Email"
+      value="invalid"
+      onChangeText={() => {}}
+      error="Invalid email format"
+    />
+    <Input
+      label="Password"
+      value="123"
+      onChangeText={() => {}}
+      error="Password must be at least 8 characters"
+      type="password"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Input
+  label="Email"
+  value={email}
+  onChangeText={setEmail}
+  error={emailError}
+/>
+<Input
+  label="Password"
+  value={password}
+  onChangeText={setPassword}
+  error={passwordError}
+/>
+```
+
+### Disabled State
+
+<View style={{ padding: 20 }}>
+  <Input
+    label="Disabled Input"
+    value="Cannot edit"
+    onChangeText={() => {}}
+    disabled
+  />
+</View>
+
+```tsx
+<Input
+  label="Readonly Field"
+  value={value}
+  onChangeText={setValue}
+  disabled
+/>
+```
+
+### With Prefix Icon
+
+Add icons or text before the input value.
+
+<View style={{ padding: 20 }}>
+  <Input
+    label="Search"
+    value=""
+    onChangeText={() => {}}
+    placeholder="Search..."
+    prefixIcon={<Text style={{ fontSize: 16 }}>🔍</Text>}
+  />
+</View>
+
+```tsx
+<Input
+  label="Search"
+  value={search}
+  onChangeText={setSearch}
+  prefixIcon={<SearchIcon />}
+/>
+```
+
+### With Suffix Icon
+
+Add icons or text after the input value.
+
+<View style={{ padding: 20 }}>
+  <Input
+    label="Password"
+    value=""
+    onChangeText={() => {}}
+    placeholder="Enter password"
+    type="password"
+    suffixIcon={<Text style={{ fontSize: 16 }}>👁</Text>}
+  />
+</View>
+
+```tsx
+<Input
+  label="Password"
+  value={password}
+  onChangeText={setPassword}
+  type="password"
+  suffixIcon={<EyeIcon onPress={toggleVisibility} />}
+/>
+```
+
+### Combined Features
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Input
+      label="Email Address"
+      value=""
+      onChangeText={() => {}}
+      placeholder="you@example.com"
+      type="email"
+      size="lg"
+      variant="filled"
+      prefixIcon={<Text style={{ fontSize: 18 }}>📧</Text>}
+    />
+    <Input
+      label="Username"
+      value="john_doe"
+      onChangeText={() => {}}
+      size="md"
+      variant="outline"
+      suffixIcon={<Text style={{ fontSize: 14, color: "#10B981" }}>✓</Text>}
+    />
+  </Stack>
+</View>
+
+```tsx
+<Input
+  label="Email"
+  value={email}
+  onChangeText={setEmail}
+  placeholder="you@example.com"
+  type="email"
+  size="lg"
+  variant="filled"
+  prefixIcon={<EmailIcon />}
+/>
+
+<Input
+  label="Username"
+  value={username}
+  onChangeText={setUsername}
+  suffixIcon={<CheckIcon />}
+/>
+```
+
+## Props
+
+### Input Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | Current input value (controlled) |
+| `onChangeText` | `(text: string) => void` | - | Callback when text changes |
+| `label` | `string` | `undefined` | Text label above input |
+| `placeholder` | `string` | `undefined` | Placeholder text shown when empty |
+| `error` | `string` | `undefined` | Error message text shown below input |
+| `disabled` | `boolean` | `false` | Disables input interaction |
+| `prefixIcon` | `ReactNode` | `undefined` | Icon or element shown before text |
+| `suffixIcon` | `ReactNode` | `undefined` | Icon or element shown after text |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset for height, fontSize, padding |
+| `variant` | `"outline" \| "filled"` | `"outline"` | Visual style of input container |
+| `type` | `"text" \| "email" \| "password" \| "number"` | `"text"` | Input type affecting keyboard and behavior |
+| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for wrapper |
+
+The component also accepts all standard React Native `TextInputProps` (except `style`).
+
+## Accessibility
+
+The Input component follows accessibility best practices:
+
+- Uses `accessibilityLabel` from the `label` prop
+- Sets `accessibilityInvalid` when an error is present
+- Error text has `accessibilityLiveRegion="polite"` for announcements
+- Supports keyboard navigation and focus management
+- Maintains sufficient color contrast (WCAG AA compliant)
+
+## Theme Support
+
+The component automatically adapts to light and dark modes:
+
+### Outline Variant
+- **Light mode**: White background, gray border (#E5E7EB)
+- **Dark mode**: Dark background (#374151), lighter border (#4B5563)
+
+### Filled Variant
+- **Light mode**: Light gray background (#F3F4F6), no border
+- **Dark mode**: Lighter dark background (#4B5563), no border
+
+### Focus & Error States
+- **Focus**: Primary blue border (#4A90E2 light, #5AA2F5 dark)
+- **Error**: Red border and text (#EF4444 light, #F87171 dark)
+
+## Best Practices
+
+1. **Labels**: Always provide a `label` for better UX and accessibility
+2. **Placeholders**: Use placeholders as examples, not as labels
+3. **Error Messages**: Provide clear, actionable error messages
+4. **Input Types**: Use appropriate `type` prop for better keyboard experience
+5. **Validation**: Show errors only after user interaction or form submission

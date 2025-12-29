@@ -1,0 +1,163 @@
+---
+title: Label
+description: Form label component for describing input fields with optional required indicator and error message display.
+---
+
+import { Label } from "./Label";
+import { View } from "react-native";
+import { Stack } from "../stack";
+
+# Label
+
+Form label component for describing input fields with optional required indicator and error message display. Provides consistent typography and spacing for form field labels with semantic HTML association on web.
+
+## Import
+
+```tsx
+import { Label } from "@repo/react-native";
+```
+
+## Usage
+
+### Basic
+
+<View style={{ padding: 20 }}>
+  <Label>Email Address</Label>
+</View>
+
+```tsx
+<Label>Email Address</Label>
+<Input value={email} onChangeText={setEmail} />
+```
+
+### Required Indicator
+
+Show a red asterisk for required fields.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={12}>
+    <Label required>Full Name</Label>
+    <Label required>Email Address</Label>
+    <Label>Phone Number (optional)</Label>
+  </Stack>
+</View>
+
+```tsx
+<Label required>Full Name</Label>
+<Input value={name} onChangeText={setName} />
+
+<Label required>Email Address</Label>
+<Input value={email} onChangeText={setEmail} />
+
+<Label>Phone Number (optional)</Label>
+<Input value={phone} onChangeText={setPhone} />
+```
+
+### Error State
+
+Display labels in error color for invalid fields.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={12}>
+    <Label error>Invalid Email</Label>
+    <Label error required>Password (too short)</Label>
+  </Stack>
+</View>
+
+```tsx
+<Label error>Email Address</Label>
+<Input value={email} onChangeText={setEmail} error="Invalid format" />
+
+<Label error required>Password</Label>
+<Input value={password} onChangeText={setPassword} error="Too short" />
+```
+
+### Sizes
+
+Available in three sizes: `sm`, `md` (default), and `lg`.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={12}>
+    <Label size="sm">Small Label (12px)</Label>
+    <Label size="md">Medium Label (14px)</Label>
+    <Label size="lg">Large Label (16px)</Label>
+  </Stack>
+</View>
+
+```tsx
+<Label size="sm">Compact Form Label</Label>
+<Label size="md">Standard Form Label</Label>
+<Label size="lg">Prominent Form Label</Label>
+```
+
+### Web Accessibility
+
+Use `htmlFor` to associate labels with inputs on web.
+
+```tsx
+<Label htmlFor="email-input">Email Address</Label>
+<Input id="email-input" value={email} onChangeText={setEmail} />
+```
+
+### Combined States
+
+<View style={{ padding: 20 }}>
+  <Stack gap={12}>
+    <Label required size="lg">
+      Full Name
+    </Label>
+    <Label error required>
+      Email Address
+    </Label>
+    <Label error size="sm">
+      Password
+    </Label>
+  </Stack>
+</View>
+
+```tsx
+<Label required size="lg">Full Name</Label>
+<Label error required>Email Address</Label>
+<Label error size="sm">Password</Label>
+```
+
+## Props
+
+### Label Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | Label text content |
+| `htmlFor` | `string` | `undefined` | ID of associated input (web accessibility) |
+| `required` | `boolean` | `false` | Shows red asterisk indicator |
+| `error` | `boolean` | `false` | Changes text color to error red |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Font size preset |
+| `style` | `StyleProp<TextStyle>` | `undefined` | Additional custom text styles |
+
+The component also accepts all standard React Native `TextProps`.
+
+## Accessibility
+
+The Label component follows accessibility best practices:
+
+- Provides semantic meaning through text content
+- Associates with inputs via `htmlFor` on web platforms
+- Required fields indicated visually (asterisk) and for screen readers
+- Error state indicated through color change
+- Maintains sufficient color contrast (WCAG AA compliant)
+
+## Theme Support
+
+The component automatically adapts to light and dark modes:
+
+- **Light mode**: Default text (#374151), error text (#EF4444)
+- **Dark mode**: Default text (#D1D5DB), error text (#F87171)
+- Required asterisk uses error color in both themes
+
+## Best Practices
+
+1. **Required Fields**: Always use the `required` prop instead of manually adding asterisks
+2. **Error States**: Sync the `error` prop with your input's error state
+3. **Web Accessibility**: Use `htmlFor` matching the input's `id` on web platforms
+4. **Consistent Sizing**: Match label sizes with your input sizes for visual harmony
+5. **Clear Text**: Keep label text concise and descriptive

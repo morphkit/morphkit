@@ -1,0 +1,315 @@
+---
+title: Slider
+description: Range slider control for selecting numeric values with single or dual thumb support and step increments.
+---
+
+import { Slider } from "./Slider";
+import { View } from "react-native";
+import { Stack } from "../stack";
+
+# Slider
+
+Range slider control for selecting numeric values with single or dual thumb support and step increments. Provides visual and interactive way to select values from a continuous or discrete range.
+
+## Import
+
+```tsx
+import { Slider } from "@repo/react-native";
+```
+
+## Usage
+
+### Basic
+
+<View style={{ padding: 20 }}>
+  <Slider
+    value={50}
+    onValueChange={() => {}}
+    min={0}
+    max={100}
+  />
+</View>
+
+```tsx
+<Slider
+  value={volume}
+  onValueChange={setVolume}
+  min={0}
+  max={100}
+/>
+```
+
+### Range Slider
+
+Use an array value for selecting a range with two thumbs.
+
+<View style={{ padding: 20 }}>
+  <Slider
+    value={[25, 75]}
+    onValueChange={() => {}}
+    min={0}
+    max={100}
+  />
+</View>
+
+```tsx
+<Slider
+  value={priceRange}
+  onValueChange={setPriceRange}
+  min={0}
+  max={1000}
+/>
+```
+
+### With Step
+
+Control the value increment granularity.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={24}>
+    <Slider
+      value={50}
+      onValueChange={() => {}}
+      min={0}
+      max={100}
+      step={10}
+    />
+    <Slider
+      value={500}
+      onValueChange={() => {}}
+      min={0}
+      max={1000}
+      step={50}
+    />
+  </Stack>
+</View>
+
+```tsx
+<Slider value={value} onValueChange={setValue} min={0} max={100} step={10} />
+<Slider value={price} onValueChange={setPrice} min={0} max={1000} step={50} />
+```
+
+### Show Value
+
+Display the current value above the thumb.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={24}>
+    <Slider
+      value={75}
+      onValueChange={() => {}}
+      min={0}
+      max={100}
+      showValue
+    />
+    <Slider
+      value={[200, 800]}
+      onValueChange={() => {}}
+      min={0}
+      max={1000}
+      showValue
+    />
+  </Stack>
+</View>
+
+```tsx
+<Slider value={volume} onValueChange={setVolume} showValue />
+<Slider value={range} onValueChange={setRange} showValue />
+```
+
+### Sizes
+
+Available in three sizes: `sm`, `md` (default), and `lg`.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={24}>
+    <Slider
+      value={50}
+      onValueChange={() => {}}
+      size="sm"
+    />
+    <Slider
+      value={50}
+      onValueChange={() => {}}
+      size="md"
+    />
+    <Slider
+      value={50}
+      onValueChange={() => {}}
+      size="lg"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Slider value={value} onValueChange={setValue} size="sm" />
+<Slider value={value} onValueChange={setValue} size="md" />
+<Slider value={value} onValueChange={setValue} size="lg" />
+```
+
+### Custom Color
+
+<View style={{ padding: 20 }}>
+  <Stack gap={24}>
+    <Slider
+      value={60}
+      onValueChange={() => {}}
+      color="#9333EA"
+    />
+    <Slider
+      value={40}
+      onValueChange={() => {}}
+      color="#10B981"
+    />
+    <Slider
+      value={80}
+      onValueChange={() => {}}
+      color="#EF4444"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Slider value={value} onValueChange={setValue} color="#9333EA" />
+<Slider value={value} onValueChange={setValue} color="#10B981" />
+<Slider value={value} onValueChange={setValue} color="#EF4444" />
+```
+
+### Disabled State
+
+<View style={{ padding: 20 }}>
+  <Slider
+    value={50}
+    onValueChange={() => {}}
+    disabled
+  />
+</View>
+
+```tsx
+<Slider
+  value={value}
+  onValueChange={setValue}
+  disabled
+/>
+```
+
+### Continuous Values
+
+Set `step={0}` for continuous (non-discrete) values.
+
+<View style={{ padding: 20 }}>
+  <Slider
+    value={33.33}
+    onValueChange={() => {}}
+    min={0}
+    max={100}
+    step={0}
+    showValue
+  />
+</View>
+
+```tsx
+<Slider
+  value={opacity}
+  onValueChange={setOpacity}
+  min={0}
+  max={1}
+  step={0}
+/>
+```
+
+### Use Cases
+
+<View style={{ padding: 20 }}>
+  <Stack gap={32}>
+    <View>
+      <Slider
+        value={75}
+        onValueChange={() => {}}
+        min={0}
+        max={100}
+        showValue
+      />
+    </View>
+    <View>
+      <Slider
+        value={[100, 500]}
+        onValueChange={() => {}}
+        min={0}
+        max={1000}
+        step={50}
+        showValue
+      />
+    </View>
+    <View>
+      <Slider
+        value={5}
+        onValueChange={() => {}}
+        min={1}
+        max={10}
+        step={1}
+        size="lg"
+        showValue
+      />
+    </View>
+  </Stack>
+</View>
+
+```tsx
+<Slider value={volume} onValueChange={setVolume} min={0} max={100} showValue />
+<Slider value={priceRange} onValueChange={setPriceRange} min={0} max={1000} step={50} showValue />
+<Slider value={rating} onValueChange={setRating} min={1} max={10} step={1} showValue />
+```
+
+## Props
+
+### Slider Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `number \| [number, number]` | - | Current value(s). Number for single, array for range |
+| `onValueChange` | `(value: number \| [number, number]) => void` | - | Callback when value changes during drag |
+| `min` | `number` | `0` | Minimum value of slider range |
+| `max` | `number` | `100` | Maximum value of slider range |
+| `step` | `number` | `1` | Value increment step. Use 0 for continuous |
+| `disabled` | `boolean` | `false` | Disables slider interaction |
+| `showValue` | `boolean` | `false` | Display current value(s) above thumb(s) |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of track and thumb |
+| `color` | `string` | theme primary | Color of active track and thumb |
+| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles |
+
+The component also accepts all standard React Native `ViewProps`.
+
+## Accessibility
+
+The Slider component follows accessibility best practices:
+
+- Uses gesture handling for smooth dragging
+- Values are clamped to min/max range
+- Step increments ensure predictable value changes
+- Visual feedback through thumb position and active track
+- Disabled state prevents interaction
+
+## Theme Support
+
+The component automatically adapts to light and dark modes:
+
+- **Light mode**: Active track and thumb use primary blue (#4A90E2), inactive track is light gray (#E5E7EB)
+- **Dark mode**: Active track and thumb use lighter blue (#5AA2F5), inactive track is darker gray (#4B5563)
+- Override with the `color` prop for custom branding
+
+## Best Practices
+
+1. **Value Ranges**: Choose appropriate min/max values for your use case
+2. **Step Size**: Use step increments that make sense for your data (e.g., step={5} for 0-100 percentage)
+3. **Show Values**: Enable `showValue` for precision-critical sliders
+4. **Range Sliders**: Use array values for selecting ranges (price filters, date ranges, etc.)
+5. **Continuous Mode**: Set `step={0}` for smooth, non-discrete values like opacity or volume
+6. **Size Selection**: Use larger sizes for easier touch interaction on mobile devices
+
+## Technical Notes
+
+- Uses React Native's PanResponder for gesture handling
+- Values are normalized and clamped to min/max range
+- Step increments are applied during value changes
+- Range sliders automatically determine which thumb is being dragged based on proximity

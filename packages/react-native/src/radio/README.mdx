@@ -1,0 +1,291 @@
+---
+title: Radio
+description: Single-selection radio button control with group management for choosing one option from a set.
+---
+
+import { RadioGroup, RadioButton } from "./Radio";
+import { View } from "react-native";
+import { Stack } from "../stack";
+import { Typography } from "../typography";
+
+# Radio
+
+Single-selection radio button control with group management for choosing one option from a set. Ensures only one option can be selected at a time within a group with clear visual indication of selection state.
+
+## Import
+
+```tsx
+import { RadioGroup, RadioButton } from "@repo/react-native";
+```
+
+## Usage
+
+### Basic
+
+<View style={{ padding: 20 }}>
+  <RadioGroup value="option1" onValueChange={() => {}}>
+    <Stack gap={12}>
+      <RadioButton value="option1">
+        <Typography variant="body">Option 1</Typography>
+      </RadioButton>
+      <RadioButton value="option2">
+        <Typography variant="body">Option 2</Typography>
+      </RadioButton>
+      <RadioButton value="option3">
+        <Typography variant="body">Option 3</Typography>
+      </RadioButton>
+    </Stack>
+  </RadioGroup>
+</View>
+
+```tsx
+<RadioGroup value={selected} onValueChange={setSelected}>
+  <RadioButton value="option1">
+    <Typography variant="body">Option 1</Typography>
+  </RadioButton>
+  <RadioButton value="option2">
+    <Typography variant="body">Option 2</Typography>
+  </RadioButton>
+  <RadioButton value="option3">
+    <Typography variant="body">Option 3</Typography>
+  </RadioButton>
+</RadioGroup>
+```
+
+### Sizes
+
+Available in three sizes: `sm`, `md` (default), and `lg`.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <RadioGroup value="small" onValueChange={() => {}}>
+      <RadioButton value="small" size="sm">
+        <Typography variant="body">Small radio button</Typography>
+      </RadioButton>
+    </RadioGroup>
+    <RadioGroup value="medium" onValueChange={() => {}}>
+      <RadioButton value="medium" size="md">
+        <Typography variant="body">Medium radio button (default)</Typography>
+      </RadioButton>
+    </RadioGroup>
+    <RadioGroup value="large" onValueChange={() => {}}>
+      <RadioButton value="large" size="lg">
+        <Typography variant="body">Large radio button</Typography>
+      </RadioButton>
+    </RadioGroup>
+  </Stack>
+</View>
+
+```tsx
+<RadioGroup value={size} onValueChange={setSize}>
+  <RadioButton value="sm" size="sm">
+    <Typography variant="body">Small</Typography>
+  </RadioButton>
+  <RadioButton value="md" size="md">
+    <Typography variant="body">Medium</Typography>
+  </RadioButton>
+  <RadioButton value="lg" size="lg">
+    <Typography variant="body">Large</Typography>
+  </RadioButton>
+</RadioGroup>
+```
+
+### Disabled Group
+
+Disable all options in a group.
+
+<View style={{ padding: 20 }}>
+  <RadioGroup value="option1" onValueChange={() => {}} disabled>
+    <Stack gap={12}>
+      <RadioButton value="option1">
+        <Typography variant="body">Disabled Option 1</Typography>
+      </RadioButton>
+      <RadioButton value="option2">
+        <Typography variant="body">Disabled Option 2</Typography>
+      </RadioButton>
+      <RadioButton value="option3">
+        <Typography variant="body">Disabled Option 3</Typography>
+      </RadioButton>
+    </Stack>
+  </RadioGroup>
+</View>
+
+```tsx
+<RadioGroup value={selected} onValueChange={setSelected} disabled={isProcessing}>
+  <RadioButton value="option1">
+    <Typography variant="body">Option 1</Typography>
+  </RadioButton>
+  <RadioButton value="option2">
+    <Typography variant="body">Option 2</Typography>
+  </RadioButton>
+</RadioGroup>
+```
+
+### Individual Disabled Options
+
+Disable specific options while keeping others enabled.
+
+<View style={{ padding: 20 }}>
+  <RadioGroup value="card" onValueChange={() => {}}>
+    <Stack gap={12}>
+      <RadioButton value="card">
+        <Typography variant="body">Credit Card</Typography>
+      </RadioButton>
+      <RadioButton value="paypal">
+        <Typography variant="body">PayPal</Typography>
+      </RadioButton>
+      <RadioButton value="crypto" disabled>
+        <Typography variant="body">Cryptocurrency (unavailable)</Typography>
+      </RadioButton>
+    </Stack>
+  </RadioGroup>
+</View>
+
+```tsx
+<RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
+  <RadioButton value="card">
+    <Typography variant="body">Credit Card</Typography>
+  </RadioButton>
+  <RadioButton value="paypal">
+    <Typography variant="body">PayPal</Typography>
+  </RadioButton>
+  <RadioButton value="crypto" disabled>
+    <Typography variant="body">Cryptocurrency</Typography>
+  </RadioButton>
+</RadioGroup>
+```
+
+### Without Children
+
+Ensure you provide `accessibilityLabel` for screen readers when omitting children.
+
+<View style={{ padding: 20 }}>
+  <RadioGroup value="1" onValueChange={() => {}}>
+    <Stack gap={12} direction="horizontal">
+      <RadioButton value="1" accessibilityLabel="Rating 1" />
+      <RadioButton value="2" accessibilityLabel="Rating 2" />
+      <RadioButton value="3" accessibilityLabel="Rating 3" />
+      <RadioButton value="4" accessibilityLabel="Rating 4" />
+      <RadioButton value="5" accessibilityLabel="Rating 5" />
+    </Stack>
+  </RadioGroup>
+</View>
+
+```tsx
+<RadioGroup value={rating} onValueChange={setRating}>
+  <View style={{ flexDirection: "row" }}>
+    <RadioButton value="1" accessibilityLabel="1 star" />
+    <RadioButton value="2" accessibilityLabel="2 stars" />
+    <RadioButton value="3" accessibilityLabel="3 stars" />
+  </View>
+</RadioGroup>
+```
+
+### Use Cases
+
+<View style={{ padding: 20 }}>
+  <Stack gap={24}>
+    <View>
+      <RadioGroup value="male" onValueChange={() => {}}>
+        <Stack gap={12}>
+          <RadioButton value="male">
+            <Typography variant="body">Male</Typography>
+          </RadioButton>
+          <RadioButton value="female">
+            <Typography variant="body">Female</Typography>
+          </RadioButton>
+          <RadioButton value="other">
+            <Typography variant="body">Other</Typography>
+          </RadioButton>
+        </Stack>
+      </RadioGroup>
+    </View>
+    <View>
+      <RadioGroup value="delivery" onValueChange={() => {}}>
+        <Stack gap={12}>
+          <RadioButton value="delivery">
+            <Typography variant="body">Delivery ($5.00)</Typography>
+          </RadioButton>
+          <RadioButton value="pickup">
+            <Typography variant="body">Pickup (Free)</Typography>
+          </RadioButton>
+        </Stack>
+      </RadioGroup>
+    </View>
+  </Stack>
+</View>
+
+```tsx
+<RadioGroup value={gender} onValueChange={setGender}>
+  <RadioButton value="male">
+    <Typography variant="body">Male</Typography>
+  </RadioButton>
+  <RadioButton value="female">
+    <Typography variant="body">Female</Typography>
+  </RadioButton>
+  <RadioButton value="other">
+    <Typography variant="body">Other</Typography>
+  </RadioButton>
+</RadioGroup>
+
+<RadioGroup value={shipping} onValueChange={setShipping}>
+  <RadioButton value="delivery">
+    <Typography variant="body">Delivery ($5.00)</Typography>
+  </RadioButton>
+  <RadioButton value="pickup">
+    <Typography variant="body">Pickup (Free)</Typography>
+  </RadioButton>
+</RadioGroup>
+```
+
+## Props
+
+### RadioGroup Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | Currently selected RadioButton value (controlled) |
+| `onValueChange` | `(value: string) => void` | - | Callback when selection changes |
+| `children` | `ReactNode` | - | RadioButton components |
+| `disabled` | `boolean` | `false` | Disables all radio buttons in group |
+| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for group container |
+
+The component also accepts all standard React Native `ViewProps`.
+
+### RadioButton Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | Unique identifier for this radio button option |
+| `children` | `ReactNode` | `undefined` | Content displayed next to radio button (typically Typography) |
+| `disabled` | `boolean` | `false` | Disables this specific radio button |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of radio circle |
+| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for button wrapper |
+
+The component also accepts all standard React Native `ViewProps`.
+
+## Accessibility
+
+The Radio components follow accessibility best practices:
+
+- **RadioGroup**: Uses `accessibilityRole="radiogroup"` for proper grouping
+- **RadioButton**: Uses `accessibilityRole="radio"` for screen reader identification
+- Provides `accessibilityState` with `checked` and `disabled` states
+- Supports custom `accessibilityLabel` prop for screen readers
+- Maintains minimum 44x44 point touch target
+- Keyboard support on web (Arrow keys navigate, Space selects)
+
+## Theme Support
+
+The component automatically adapts to light and dark modes:
+
+- **Light mode**: Gray border (#9CA3AF) when unselected, primary blue (#4A90E2) when selected
+- **Dark mode**: Lighter gray border (#6B7280) when unselected, lighter blue (#5AA2F5) when selected
+
+## Best Practices
+
+1. **Single Selection**: Use radio buttons when only one option can be selected
+2. **Labels**: Always provide clear labels for better UX
+3. **Default Selection**: Consider setting a default selected value
+4. **Grouping**: Use Stack component for consistent spacing between options
+5. **Multiple Choice**: Use Checkbox component instead if multiple selections are allowed

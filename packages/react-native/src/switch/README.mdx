@@ -1,0 +1,254 @@
+---
+title: Switch
+description: Toggle switch for binary on/off states with iOS and Android platform-specific styling.
+---
+
+import { Switch } from "./Switch";
+import { View } from "react-native";
+import { Stack } from "../stack";
+
+# Switch
+
+Toggle switch for binary on/off states with iOS and Android platform-specific styling. Provides familiar toggle interaction for boolean settings with clear visual indication of current state.
+
+## Import
+
+```tsx
+import { Switch } from "@repo/react-native";
+```
+
+## Usage
+
+### Basic
+
+<View style={{ padding: 20 }}>
+  <Switch
+    checked={false}
+    onCheckedChange={() => {}}
+    label="Enable Notifications"
+  />
+</View>
+
+```tsx
+<Switch
+  checked={notificationsEnabled}
+  onCheckedChange={setNotificationsEnabled}
+  label="Enable Notifications"
+/>
+```
+
+### States
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Switch
+      checked={false}
+      onCheckedChange={() => {}}
+      label="Off State"
+    />
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="On State"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Switch checked={false} onCheckedChange={handleChange} label="Off" />
+<Switch checked={true} onCheckedChange={handleChange} label="On" />
+```
+
+### Sizes
+
+Available in three sizes: `sm`, `md` (default), and `lg`.
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Small switch"
+      size="sm"
+    />
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Medium switch (default)"
+      size="md"
+    />
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Large switch"
+      size="lg"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Switch checked={value} onCheckedChange={setValue} label="Small" size="sm" />
+<Switch checked={value} onCheckedChange={setValue} label="Medium" size="md" />
+<Switch checked={value} onCheckedChange={setValue} label="Large" size="lg" />
+```
+
+### Custom Color
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Purple switch"
+      color="#9333EA"
+    />
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Green switch"
+      color="#10B981"
+    />
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Red switch"
+      color="#EF4444"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Switch checked={value} onCheckedChange={setValue} label="Purple" color="#9333EA" />
+<Switch checked={value} onCheckedChange={setValue} label="Green" color="#10B981" />
+<Switch checked={value} onCheckedChange={setValue} label="Red" color="#EF4444" />
+```
+
+### Disabled State
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Switch
+      checked={false}
+      onCheckedChange={() => {}}
+      label="Disabled (off)"
+      disabled
+    />
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Disabled (on)"
+      disabled
+    />
+  </Stack>
+</View>
+
+```tsx
+<Switch checked={false} onCheckedChange={handleChange} label="Disabled Off" disabled />
+<Switch checked={true} onCheckedChange={handleChange} label="Disabled On" disabled />
+```
+
+### Without Label
+
+Ensure you provide an `accessibilityLabel` for screen readers when omitting the label.
+
+<View style={{ padding: 20 }}>
+  <Switch
+    checked={true}
+    onCheckedChange={() => {}}
+    accessibilityLabel="Toggle notifications"
+  />
+</View>
+
+```tsx
+<Switch
+  checked={value}
+  onCheckedChange={setValue}
+  accessibilityLabel="Toggle feature"
+/>
+```
+
+### Use Cases
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Dark Mode"
+    />
+    <Switch
+      checked={false}
+      onCheckedChange={() => {}}
+      label="Email Notifications"
+    />
+    <Switch
+      checked={true}
+      onCheckedChange={() => {}}
+      label="Auto-save"
+    />
+    <Switch
+      checked={false}
+      onCheckedChange={() => {}}
+      label="Location Services"
+    />
+  </Stack>
+</View>
+
+```tsx
+<Switch checked={isDarkMode} onCheckedChange={setIsDarkMode} label="Dark Mode" />
+<Switch checked={emailNotifs} onCheckedChange={setEmailNotifs} label="Email Notifications" />
+<Switch checked={autoSave} onCheckedChange={setAutoSave} label="Auto-save" />
+<Switch checked={location} onCheckedChange={setLocation} label="Location Services" />
+```
+
+## Props
+
+### Switch Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `checked` | `boolean` | - | Current on/off state (controlled) |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Callback when user toggles switch |
+| `label` | `string` | `undefined` | Text label displayed next to switch |
+| `disabled` | `boolean` | `false` | Disables switch interaction |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of switch track and thumb |
+| `color` | `string` | theme primary | Color of track when checked |
+| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for wrapper |
+
+The component also accepts all standard React Native `ViewProps`.
+
+## Accessibility
+
+The Switch component follows accessibility best practices:
+
+- Uses `accessibilityRole="switch"` for proper screen reader identification
+- Provides `accessibilityState` with `checked` status
+- Supports `accessibilityLabel` from the `label` prop or custom prop
+- Maintains minimum 44x44 point touch target
+- Keyboard support on web (Space to toggle)
+- Announces state changes to screen readers
+
+## Theme Support
+
+The component automatically adapts to light and dark modes:
+
+- **Light mode**: Gray track (#D1D5DB) when off, primary blue (#4A90E2) when on
+- **Dark mode**: Darker gray track (#6B7280) when off, lighter blue (#5AA2F5) when on
+- White thumb in both themes
+- Override with the `color` prop for custom branding
+
+## Animation
+
+The Switch component uses React Native's Animated API for smooth transitions:
+
+- Thumb slides smoothly between on and off positions
+- 200ms animation duration
+- Uses native driver for optimal performance (60fps)
+
+## Best Practices
+
+1. **Binary Choices**: Use switches for on/off states, not multiple options
+2. **Immediate Effect**: Switches should take effect immediately without requiring a save action
+3. **Labels**: Provide clear labels that describe what the switch controls
+4. **Settings**: Ideal for settings and preferences screens
+5. **State Clarity**: The label should make it clear what "on" means

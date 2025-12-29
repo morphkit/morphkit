@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "select",
+  "description": "Flexible inline selection component for choosing one or more options with custom styling",
+  "dependencies": []
+}
