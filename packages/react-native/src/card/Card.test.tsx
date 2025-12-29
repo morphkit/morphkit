@@ -7,7 +7,7 @@ describe("<Card />", () => {
     const { getByText } = render(
       <Card>
         <Text>Card content</Text>
-      </Card>
+      </Card>,
     );
     expect(getByText("Card content")).toBeTruthy();
   });
@@ -16,7 +16,7 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card>
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
@@ -25,7 +25,7 @@ describe("<Card />", () => {
           backgroundColor: "#FFFFFF",
           shadowColor: "#000000",
         }),
-      ])
+      ]),
     );
   });
 
@@ -33,7 +33,7 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card variant="outline">
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
@@ -43,7 +43,7 @@ describe("<Card />", () => {
           borderWidth: 1,
           borderColor: "#E5E7EB",
         }),
-      ])
+      ]),
     );
   });
 
@@ -51,7 +51,7 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card variant="ghost">
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
@@ -59,7 +59,7 @@ describe("<Card />", () => {
         expect.objectContaining({
           backgroundColor: "#F9FAFB",
         }),
-      ])
+      ]),
     );
   });
 
@@ -67,7 +67,7 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card variant="filled">
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
@@ -75,7 +75,7 @@ describe("<Card />", () => {
         expect.objectContaining({
           backgroundColor: "#F3F4F6",
         }),
-      ])
+      ]),
     );
   });
 
@@ -83,7 +83,7 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card>
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
@@ -92,7 +92,7 @@ describe("<Card />", () => {
           padding: 16,
           borderRadius: 12,
         }),
-      ])
+      ]),
     );
   });
 
@@ -100,7 +100,7 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card size="sm">
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
@@ -109,7 +109,7 @@ describe("<Card />", () => {
           padding: 12,
           borderRadius: 8,
         }),
-      ])
+      ]),
     );
   });
 
@@ -117,7 +117,7 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card size="lg">
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
@@ -126,7 +126,7 @@ describe("<Card />", () => {
           padding: 20,
           borderRadius: 16,
         }),
-      ])
+      ]),
     );
   });
 
@@ -135,7 +135,7 @@ describe("<Card />", () => {
     const { getByRole } = render(
       <Card onPress={onPress}>
         <Text>Pressable card</Text>
-      </Card>
+      </Card>,
     );
     const pressable = getByRole("button");
     expect(pressable).toBeTruthy();
@@ -146,7 +146,7 @@ describe("<Card />", () => {
     const { getByRole } = render(
       <Card onPress={onPress}>
         <Text>Pressable card</Text>
-      </Card>
+      </Card>,
     );
     const pressable = getByRole("button");
     fireEvent.press(pressable);
@@ -157,7 +157,7 @@ describe("<Card />", () => {
     const { queryByRole } = render(
       <Card>
         <Text>Static card</Text>
-      </Card>
+      </Card>,
     );
     const pressable = queryByRole("button");
     expect(pressable).toBeNull();
@@ -167,11 +167,11 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card style={{ marginTop: 20 }}>
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
-      expect.arrayContaining([{ marginTop: 20 }])
+      expect.arrayContaining([{ marginTop: 20 }]),
     );
   });
 
@@ -179,7 +179,7 @@ describe("<Card />", () => {
     const { UNSAFE_getByType } = render(
       <Card variant="outline" size="lg">
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     const card = UNSAFE_getByType(Card);
     expect(card.props.style).toEqual(
@@ -190,7 +190,7 @@ describe("<Card />", () => {
           borderWidth: 1,
           borderColor: "#E5E7EB",
         }),
-      ])
+      ]),
     );
   });
 
@@ -198,7 +198,7 @@ describe("<Card />", () => {
     const { getByTestId } = render(
       <Card testID="custom-card">
         <Text>Content</Text>
-      </Card>
+      </Card>,
     );
     expect(getByTestId("custom-card")).toBeTruthy();
   });

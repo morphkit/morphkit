@@ -1,66 +1,77 @@
 # Tabs
 
 ## Overview
+
 Tabbed navigation component for organizing content into switchable panels with horizontal or vertical layout and multiple visual variants.
 
 ## Component Behavior
+
 Tabs consist of four sub-components working together: TabsContainer (root), TabsList (tab buttons container), TabsTrigger (individual tab button), and TabsContent (panel content). Only one tab is active at a time. Clicking a trigger switches the active tab and displays corresponding content. Supports horizontal and vertical orientations with three visual variants: line (underline indicator), filled (background fill), and pills (rounded backgrounds).
 
 ## Props
 
 ### TabsContainer Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | `string` | required | Active tab value (controlled) |
-| onValueChange | `(value: string) => void` | required | Tab change callback |
-| children | `ReactNode` | required | TabsList and TabsContent children |
-| orientation | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
-| variant | `"line" \| "filled" \| "pills"` | `"line"` | Visual style variant |
-| style | `StyleProp<ViewStyle>` | `undefined` | Custom styles |
+
+| Prop          | Type                            | Default        | Description                       |
+| ------------- | ------------------------------- | -------------- | --------------------------------- |
+| value         | `string`                        | required       | Active tab value (controlled)     |
+| onValueChange | `(value: string) => void`       | required       | Tab change callback               |
+| children      | `ReactNode`                     | required       | TabsList and TabsContent children |
+| orientation   | `"horizontal" \| "vertical"`    | `"horizontal"` | Layout direction                  |
+| variant       | `"line" \| "filled" \| "pills"` | `"line"`       | Visual style variant              |
+| style         | `StyleProp<ViewStyle>`          | `undefined`    | Custom styles                     |
 
 ### TabsList Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `ReactNode` | required | TabsTrigger components |
-| style | `StyleProp<ViewStyle>` | `undefined` | Custom styles |
+
+| Prop     | Type                   | Default     | Description            |
+| -------- | ---------------------- | ----------- | ---------------------- |
+| children | `ReactNode`            | required    | TabsTrigger components |
+| style    | `StyleProp<ViewStyle>` | `undefined` | Custom styles          |
 
 ### TabsTrigger Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | `string` | required | Unique tab identifier |
-| label | `string` | required | Tab button text |
-| icon | `ReactNode` | `undefined` | Leading icon |
-| disabled | `boolean` | `false` | Disables tab interaction |
-| style | `StyleProp<ViewStyle>` | `undefined` | Custom styles |
+
+| Prop     | Type                   | Default     | Description              |
+| -------- | ---------------------- | ----------- | ------------------------ |
+| value    | `string`               | required    | Unique tab identifier    |
+| label    | `string`               | required    | Tab button text          |
+| icon     | `ReactNode`            | `undefined` | Leading icon             |
+| disabled | `boolean`              | `false`     | Disables tab interaction |
+| style    | `StyleProp<ViewStyle>` | `undefined` | Custom styles            |
 
 ### TabsContent Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | `string` | required | Tab identifier to show for |
-| children | `ReactNode` | required | Panel content |
-| style | `StyleProp<ViewStyle>` | `undefined` | Custom styles |
+
+| Prop     | Type                   | Default     | Description                |
+| -------- | ---------------------- | ----------- | -------------------------- |
+| value    | `string`               | required    | Tab identifier to show for |
+| children | `ReactNode`            | required    | Panel content              |
+| style    | `StyleProp<ViewStyle>` | `undefined` | Custom styles              |
 
 ### Extends
+
 All components extend `ViewProps`
 
 ## Variants
 
 ### Orientation
+
 - **horizontal**: Tabs arranged in row, content below
 - **vertical**: Tabs in column on left, content on right
 
 ### Visual Variants
+
 - **line**: Minimal style with colored underline/side-line for active tab
 - **filled**: Active tab has solid background fill
 - **pills**: Rounded pill-shaped backgrounds for each tab
 
 ## States
+
 - **default**: Inactive tab appearance
 - **active**: Current selected tab with variant-specific indicator
 - **hover/pressed**: Touch feedback on press
 - **disabled**: Reduced opacity, no interaction
 
 ## Theme Support
+
 - Light mode:
   - Inactive text: Gray (#6B7280)
   - Active text: Primary (#4A90E2)
@@ -73,6 +84,7 @@ All components extend `ViewProps`
   - Indicators/backgrounds: Adjusted for dark mode
 
 ## Accessibility Requirements
+
 - TabsList: `accessibilityRole="tablist"`
 - TabsTrigger: `accessibilityRole="tab"`, `accessibilityState={{ selected: boolean, disabled: boolean }}`
 - TabsContent: `accessibilityRole="tabpanel"`, `accessibilityLabelledBy` linked to trigger
@@ -85,6 +97,7 @@ All components extend `ViewProps`
 ## Usage Examples
 
 ### Basic Usage
+
 ```tsx
 <TabsContainer value={activeTab} onValueChange={setActiveTab}>
   <TabsList>
@@ -108,6 +121,7 @@ All components extend `ViewProps`
 ```
 
 ### Advanced Usage
+
 ```tsx
 <TabsContainer
   value={activeTab}
@@ -116,16 +130,8 @@ All components extend `ViewProps`
   variant="pills"
 >
   <TabsList>
-    <TabsTrigger
-      value="account"
-      label="Account"
-      icon={<UserIcon />}
-    />
-    <TabsTrigger
-      value="security"
-      label="Security"
-      icon={<LockIcon />}
-    />
+    <TabsTrigger value="account" label="Account" icon={<UserIcon />} />
+    <TabsTrigger value="security" label="Security" icon={<LockIcon />} />
     <TabsTrigger
       value="notifications"
       label="Notifications"
@@ -149,6 +155,7 @@ All components extend `ViewProps`
 ```
 
 ## Edge Cases
+
 - **No matching TabsContent**: Show empty state or first available content
 - **Value not in triggers**: Default to first tab or show warning
 - **Many tabs**: Horizontal orientation needs ScrollView wrapper
@@ -156,6 +163,7 @@ All components extend `ViewProps`
 - **Disabled active tab**: Allow but show disabled state, or auto-switch to next enabled tab
 
 ## Dependencies
+
 - Uses React Context to pass value/onValueChange from container to triggers
 - Typography component for label text
 - Optional icon components
@@ -163,6 +171,7 @@ All components extend `ViewProps`
 ## Design Considerations
 
 ### Styling Approach
+
 - Line variant:
   - Horizontal: 2-3px bottom border on active tab
   - Vertical: 2-3px left/right border on active tab
@@ -175,6 +184,7 @@ All components extend `ViewProps`
 - Tab spacing: 16-24px between tabs
 
 ### Layout Strategy
+
 - Horizontal orientation:
   - TabsList: flexDirection row, possibly ScrollView
   - TabsContent: Full width below
@@ -185,12 +195,14 @@ All components extend `ViewProps`
 - Active content only rendered (unmount inactive) or all rendered with display control
 
 ### Performance Considerations
+
 - Lazy load TabsContent or unmount inactive panels to reduce memory
 - Memoize trigger components to prevent unnecessary re-renders
 - Animated transition between content panels (optional, use Animated API)
 - ScrollView for TabsList when many tabs exceed viewport
 
 ### Customization Points
+
 - Orientation for different layout needs
 - Three variant styles for different UI patterns
 - Icon support for visual tab identification

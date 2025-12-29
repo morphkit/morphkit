@@ -1,45 +1,53 @@
 # IconButton
 
 ## Overview
+
 Circular button component optimized for icon-only actions with size variants and touch feedback for toolbars, headers, and inline actions.
 
 ## Component Behavior
+
 IconButton renders a circular or rounded square button containing only an icon. Designed for actions where an icon is self-explanatory or space is limited. Provides press feedback with opacity or background color change. Supports three visual variants: ghost (transparent), outline (bordered), and filled (solid background). Commonly used in toolbars, headers, cards, and as utility actions.
 
 ## Props
 
 ### Required Props
-| Prop | Type | Description |
-|------|------|-------------|
-| onPress | `() => void` | Action callback |
-| icon | `ReactNode` | Icon component to display |
-| accessibilityLabel | `string` | Required label for screen readers |
+
+| Prop               | Type         | Description                       |
+| ------------------ | ------------ | --------------------------------- |
+| onPress            | `() => void` | Action callback                   |
+| icon               | `ReactNode`  | Icon component to display         |
+| accessibilityLabel | `string`     | Required label for screen readers |
 
 ### Optional Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| size | `"sm" \| "md" \| "lg"` | `"md"` | Button size |
-| variant | `"ghost" \| "outline" \| "filled"` | `"ghost"` | Visual style variant |
-| color | `string` | theme primary | Icon and border/background color |
-| disabled | `boolean` | `false` | Disables interaction |
-| style | `StyleProp<ViewStyle>` | `undefined` | Custom styles |
+
+| Prop     | Type                               | Default       | Description                      |
+| -------- | ---------------------------------- | ------------- | -------------------------------- |
+| size     | `"sm" \| "md" \| "lg"`             | `"md"`        | Button size                      |
+| variant  | `"ghost" \| "outline" \| "filled"` | `"ghost"`     | Visual style variant             |
+| color    | `string`                           | theme primary | Icon and border/background color |
+| disabled | `boolean`                          | `false`       | Disables interaction             |
+| style    | `StyleProp<ViewStyle>`             | `undefined`   | Custom styles                    |
 
 ### Extends
+
 `PressableProps` - All standard Pressable props (hitSlop, delayLongPress, android_ripple, etc.)
 
 ## Variants
 
 ### Size
+
 - **sm**: 32x32 button, 16x16 icon
 - **md**: 40x40 button, 20x20 icon (default)
 - **lg**: 48x48 button, 24x24 icon
 
 ### Visual Variant
+
 - **ghost**: Transparent background, icon only, subtle background on press
 - **outline**: Border with transparent background, filled border color on press
 - **filled**: Solid background color, darker shade on press
 
 ## States
+
 - **default**: Standard variant appearance
 - **pressed**: Visual feedback based on variant:
   - Ghost: Light gray background (rgba opacity)
@@ -48,6 +56,7 @@ IconButton renders a circular or rounded square button containing only an icon. 
 - **disabled**: Reduced opacity (0.4), no press feedback
 
 ## Theme Support
+
 - Light mode:
   - Ghost pressed background: rgba(0, 0, 0, 0.05)
   - Outline border: #E5E7EB, icon: #6B7280
@@ -58,6 +67,7 @@ IconButton renders a circular or rounded square button containing only an icon. 
   - Filled background: Primary #5AA2F5, icon: white
 
 ## Accessibility Requirements
+
 - `accessibilityRole="button"`
 - `accessibilityLabel`: **Required prop** (describes action since no visible text)
 - `accessibilityHint`: Optional, provides additional context
@@ -68,6 +78,7 @@ IconButton renders a circular or rounded square button containing only an icon. 
 ## Usage Examples
 
 ### Basic Usage
+
 ```tsx
 <IconButton
   icon={<CloseIcon />}
@@ -77,6 +88,7 @@ IconButton renders a circular or rounded square button containing only an icon. 
 ```
 
 ### Advanced Usage
+
 ```tsx
 <IconButton
   icon={<SettingsIcon />}
@@ -91,6 +103,7 @@ IconButton renders a circular or rounded square button containing only an icon. 
 ```
 
 ## Edge Cases
+
 - **No accessibilityLabel**: Component should warn/error in development (required for accessibility)
 - **Very small size**: Ensure touch target meets 44x44 minimum (use hitSlop)
 - **Custom color**: Ensure sufficient contrast for icon visibility
@@ -98,12 +111,14 @@ IconButton renders a circular or rounded square button containing only an icon. 
 - **Loading state**: Consider showing spinner icon while action is processing
 
 ## Dependencies
+
 - Pressable from React Native
 - Icon components (user-provided)
 
 ## Design Considerations
 
 ### Styling Approach
+
 - Circular shape: width/height equal, borderRadius 50%
 - Alternative: Rounded square (borderRadius 8-12) for different design language
 - Ghost variant: No background, subtle hover/press state
@@ -112,18 +127,21 @@ IconButton renders a circular or rounded square button containing only an icon. 
 - Press feedback: Opacity change or background color transition
 
 ### Layout Strategy
+
 - Fixed dimensions based on size
 - Icon centered: justifyContent: "center", alignItems: "center"
 - Touch target padding via hitSlop when size < 44x44
 - Inline usage: Can be placed within flex layouts
 
 ### Performance Considerations
+
 - Lightweight component, minimal re-renders
 - Press state handled by Pressable
 - Use native driver for animations if custom transitions added
 - Memoize icon component to prevent unnecessary re-renders
 
 ### Customization Points
+
 - Size presets for different contexts (toolbar, header, inline)
 - Three variant styles for different visual needs
 - Custom color prop for theming

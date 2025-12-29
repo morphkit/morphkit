@@ -34,6 +34,12 @@
     },
     {
       "type": "react-native",
+      "name": "checkbox",
+      "description": "Selectable checkbox control for boolean inputs with support for checked, unchecked, and indeterminate states",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
       "name": "container",
       "description": "Centered max-width wrapper for page content with responsive width constraints",
       "dependencies": []
@@ -46,8 +52,56 @@
     },
     {
       "type": "react-native",
+      "name": "form",
+      "description": "Container component for grouping form inputs with validation support and error handling",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "input",
+      "description": "Single-line text input field with label, error state, and prefix/suffix icon support",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "label",
+      "description": "Form label component with optional required indicator and error state for describing input fields",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "radio",
+      "description": "Single-selection radio button control with group management for choosing one option from a set",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "select",
+      "description": "Dropdown picker component with search and multi-select support for selecting from a list of options",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "slider",
+      "description": "Range slider control for selecting numeric values with single or dual thumb support",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
       "name": "stack",
       "description": "Layout component for arranging children with consistent spacing and alignment",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "switch",
+      "description": "Toggle switch for binary on/off states with animated transitions",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "textarea",
+      "description": "Multi-line text input field with auto-resize capability and character count display",
       "dependencies": []
     },
     {

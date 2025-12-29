@@ -17,7 +17,7 @@ describe("<Divider />", () => {
           width: "100%",
           height: 1,
         }),
-      ])
+      ]),
     );
   });
 
@@ -30,7 +30,7 @@ describe("<Divider />", () => {
           width: 1,
           height: "100%",
         }),
-      ])
+      ]),
     );
   });
 
@@ -42,7 +42,7 @@ describe("<Divider />", () => {
         expect.objectContaining({
           height: 1,
         }),
-      ])
+      ]),
     );
   });
 
@@ -54,13 +54,13 @@ describe("<Divider />", () => {
         expect.objectContaining({
           height: 2,
         }),
-      ])
+      ]),
     );
   });
 
   test("applies custom thickness for vertical", () => {
     const { UNSAFE_getByType } = render(
-      <Divider orientation="vertical" thickness={3} />
+      <Divider orientation="vertical" thickness={3} />,
     );
     const divider = UNSAFE_getByType(Divider);
     expect(divider.props.style).toEqual(
@@ -68,7 +68,7 @@ describe("<Divider />", () => {
         expect.objectContaining({
           width: 3,
         }),
-      ])
+      ]),
     );
   });
 
@@ -80,7 +80,7 @@ describe("<Divider />", () => {
         expect.objectContaining({
           backgroundColor: "#E5E7EB",
         }),
-      ])
+      ]),
     );
   });
 
@@ -92,7 +92,7 @@ describe("<Divider />", () => {
         expect.objectContaining({
           backgroundColor: "#FF0000",
         }),
-      ])
+      ]),
     );
   });
 
@@ -104,7 +104,7 @@ describe("<Divider />", () => {
         expect.objectContaining({
           width: "100%",
         }),
-      ])
+      ]),
     );
   });
 
@@ -116,7 +116,7 @@ describe("<Divider />", () => {
         expect.objectContaining({
           width: "50%",
         }),
-      ])
+      ]),
     );
   });
 
@@ -128,13 +128,13 @@ describe("<Divider />", () => {
         expect.objectContaining({
           width: 200,
         }),
-      ])
+      ]),
     );
   });
 
   test("applies custom length as number for vertical", () => {
     const { UNSAFE_getByType } = render(
-      <Divider orientation="vertical" length={150} />
+      <Divider orientation="vertical" length={150} />,
     );
     const divider = UNSAFE_getByType(Divider);
     expect(divider.props.style).toEqual(
@@ -142,7 +142,7 @@ describe("<Divider />", () => {
         expect.objectContaining({
           height: 150,
         }),
-      ])
+      ]),
     );
   });
 
@@ -153,7 +153,7 @@ describe("<Divider />", () => {
         thickness={2}
         color="#4A90E2"
         length="80%"
-      />
+      />,
     );
     const divider = UNSAFE_getByType(Divider);
     expect(divider.props.style).toEqual(
@@ -163,7 +163,7 @@ describe("<Divider />", () => {
           width: "80%",
           height: 2,
         }),
-      ])
+      ]),
     );
   });
 
@@ -174,7 +174,7 @@ describe("<Divider />", () => {
         thickness={3}
         color="#10B981"
         length={250}
-      />
+      />,
     );
     const divider = UNSAFE_getByType(Divider);
     expect(divider.props.style).toEqual(
@@ -184,17 +184,17 @@ describe("<Divider />", () => {
           width: 3,
           height: 250,
         }),
-      ])
+      ]),
     );
   });
 
   test("merges custom style prop", () => {
     const { UNSAFE_getByType } = render(
-      <Divider style={{ marginVertical: 10 }} />
+      <Divider style={{ marginVertical: 10 }} />,
     );
     const divider = UNSAFE_getByType(Divider);
     expect(divider.props.style).toEqual(
-      expect.arrayContaining([{ marginVertical: 10 }])
+      expect.arrayContaining([{ marginVertical: 10 }]),
     );
   });
 

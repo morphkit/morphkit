@@ -8,7 +8,7 @@ describe("<Stack />", () => {
       <Stack>
         <Text>Child 1</Text>
         <Text>Child 2</Text>
-      </Stack>
+      </Stack>,
     );
     expect(getByText("Child 1")).toBeTruthy();
     expect(getByText("Child 2")).toBeTruthy();
@@ -18,7 +18,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack>
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -26,7 +26,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           flexDirection: "column",
         }),
-      ])
+      ]),
     );
   });
 
@@ -34,7 +34,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack direction="horizontal">
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -42,7 +42,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           flexDirection: "row",
         }),
-      ])
+      ]),
     );
   });
 
@@ -50,7 +50,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack>
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -58,7 +58,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           gap: 8,
         }),
-      ])
+      ]),
     );
   });
 
@@ -66,7 +66,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack gap={16}>
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -74,7 +74,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           gap: 16,
         }),
-      ])
+      ]),
     );
   });
 
@@ -82,7 +82,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack>
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -90,7 +90,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           alignItems: "stretch",
         }),
-      ])
+      ]),
     );
   });
 
@@ -98,7 +98,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack align="start">
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -106,7 +106,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           alignItems: "flex-start",
         }),
-      ])
+      ]),
     );
   });
 
@@ -114,7 +114,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack align="center">
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -122,7 +122,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           alignItems: "center",
         }),
-      ])
+      ]),
     );
   });
 
@@ -130,7 +130,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack align="end">
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -138,7 +138,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           alignItems: "flex-end",
         }),
-      ])
+      ]),
     );
   });
 
@@ -146,7 +146,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack>
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -154,7 +154,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           justifyContent: "flex-start",
         }),
-      ])
+      ]),
     );
   });
 
@@ -162,7 +162,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack justify="center">
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -170,7 +170,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           justifyContent: "center",
         }),
-      ])
+      ]),
     );
   });
 
@@ -178,7 +178,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack justify="end">
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -186,7 +186,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           justifyContent: "flex-end",
         }),
-      ])
+      ]),
     );
   });
 
@@ -194,7 +194,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack justify="space-between">
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -202,7 +202,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           justifyContent: "space-between",
         }),
-      ])
+      ]),
     );
   });
 
@@ -210,7 +210,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack>
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -218,7 +218,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           flexWrap: "nowrap",
         }),
-      ])
+      ]),
     );
   });
 
@@ -226,7 +226,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack wrap={true}>
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -234,7 +234,7 @@ describe("<Stack />", () => {
         expect.objectContaining({
           flexWrap: "wrap",
         }),
-      ])
+      ]),
     );
   });
 
@@ -248,7 +248,7 @@ describe("<Stack />", () => {
         wrap={true}
       >
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
@@ -260,7 +260,7 @@ describe("<Stack />", () => {
           justifyContent: "space-between",
           flexWrap: "wrap",
         }),
-      ])
+      ]),
     );
   });
 
@@ -268,11 +268,11 @@ describe("<Stack />", () => {
     const { UNSAFE_getByType } = render(
       <Stack style={{ padding: 16 }}>
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     const stack = UNSAFE_getByType(Stack);
     expect(stack.props.style).toEqual(
-      expect.arrayContaining([{ padding: 16 }])
+      expect.arrayContaining([{ padding: 16 }]),
     );
   });
 
@@ -280,7 +280,7 @@ describe("<Stack />", () => {
     const { getByTestId } = render(
       <Stack testID="custom-stack">
         <Text>Content</Text>
-      </Stack>
+      </Stack>,
     );
     expect(getByTestId("custom-stack")).toBeTruthy();
   });

@@ -1,42 +1,52 @@
 # Portal
 
 ## Overview
+
 Utility component for rendering children at the root level of the component tree, essential for modals, overlays, and tooltips to escape z-index stacking contexts.
 
 ## Component Behavior
+
 Portal teleports its children to a special container at the app root level, outside the normal React component hierarchy. This allows modals, tooltips, popovers, and other overlays to render above all other content regardless of parent z-index or overflow constraints. Uses React Context to provide portal targets throughout the app. Multiple portals can coexist with optional naming for different portal targets.
 
 ## Props
 
 ### Portal Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `ReactNode` | required | Content to render at root level |
-| name | `string` | `"default"` | Portal target identifier for multiple portals |
+
+| Prop     | Type        | Default     | Description                                   |
+| -------- | ----------- | ----------- | --------------------------------------------- |
+| children | `ReactNode` | required    | Content to render at root level               |
+| name     | `string`    | `"default"` | Portal target identifier for multiple portals |
 
 ### PortalProvider Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+
+| Prop     | Type        | Default  | Description |
+| -------- | ----------- | -------- | ----------- |
 | children | `ReactNode` | required | App content |
 
 ### PortalHost Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+
+| Prop | Type     | Default     | Description            |
+| ---- | -------- | ----------- | ---------------------- |
 | name | `string` | `"default"` | Portal host identifier |
 
 ### Extends
+
 No extended props (utility component)
 
 ## Variants
+
 No visual variants (utility component)
 
 ## States
+
 No internal states (pass-through component)
 
 ## Theme Support
+
 None (utility component, does not render visual elements)
 
 ## Accessibility Requirements
+
 - Portal is transparent to accessibility tree
 - Children maintain their accessibility properties
 - Screen readers treat portaled content as if in normal tree
@@ -45,6 +55,7 @@ None (utility component, does not render visual elements)
 ## Usage Examples
 
 ### Basic Usage
+
 ```tsx
 // App.tsx - Setup portal provider
 function App() {
@@ -71,6 +82,7 @@ function MyComponent() {
 ```
 
 ### Advanced Usage
+
 ```tsx
 // App.tsx - Multiple portal targets
 function App() {
@@ -100,6 +112,7 @@ function MyComponent() {
 ```
 
 ## Edge Cases
+
 - **Portal without provider**: Warn in development, render children in place as fallback
 - **PortalHost without provider**: Warn in development, render nothing
 - **Multiple PortalHosts with same name**: Last one wins, warn in development
@@ -108,6 +121,7 @@ function MyComponent() {
 - **Unmounting portal**: Clean up children from host immediately
 
 ## Dependencies
+
 - React Context for provider/consumer pattern
 - State management for tracking portal children
 - Optional: Use react-native-portalize or @gorhom/portal library
@@ -117,17 +131,20 @@ function MyComponent() {
 ### Implementation Approach
 
 #### Option 1: Custom Implementation
+
 - PortalProvider maintains a map of portal names to children arrays
 - Portal component registers children via context
 - PortalHost subscribes to portal changes and renders children
 - Use React.useState and useEffect for registration/cleanup
 
 #### Option 2: Library-Based
+
 - Use established library like @gorhom/portal or react-native-portalize
 - Provides tested implementation with edge case handling
 - May include additional features (animations, nesting)
 
 ### Architecture Strategy
+
 ```
 PortalProvider (Context.Provider)
   ├─ App Content
@@ -138,6 +155,7 @@ PortalProvider (Context.Provider)
 ```
 
 ### Performance Considerations
+
 - Portal registration should be lightweight (no heavy computation)
 - Avoid unnecessary re-renders of PortalHost
 - Use memoization for portal children if complex
@@ -145,12 +163,14 @@ PortalProvider (Context.Provider)
 - Batch updates if multiple portals register simultaneously
 
 ### Customization Points
+
 - Named portals for multiple render targets (modals, toasts, tooltips)
 - Custom portal hosts for different z-index layers
 - Optional portal mounting order (FIFO, LIFO)
 - Optional animation coordination between portal content
 
 ### Integration Notes
+
 - Modal, Popover, Toast, Drawer, AlertDialog, Actionsheet all use Portal internally
 - Portal should be set up once at app root
 - Ensure PortalHost is outside navigation structure to avoid unmounting

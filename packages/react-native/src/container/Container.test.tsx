@@ -7,7 +7,7 @@ describe("<Container />", () => {
     const { getByText } = render(
       <Container>
         <Text>Container content</Text>
-      </Container>
+      </Container>,
     );
     expect(getByText("Container content")).toBeTruthy();
   });
@@ -16,7 +16,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -24,7 +24,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           maxWidth: 1024,
         }),
-      ])
+      ]),
     );
   });
 
@@ -32,7 +32,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container maxWidth="sm">
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -40,7 +40,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           maxWidth: 640,
         }),
-      ])
+      ]),
     );
   });
 
@@ -48,7 +48,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container maxWidth="md">
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -56,7 +56,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           maxWidth: 768,
         }),
-      ])
+      ]),
     );
   });
 
@@ -64,7 +64,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container maxWidth="xl">
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -72,7 +72,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           maxWidth: 1280,
         }),
-      ])
+      ]),
     );
   });
 
@@ -80,7 +80,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container maxWidth={900}>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -88,7 +88,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           maxWidth: 900,
         }),
-      ])
+      ]),
     );
   });
 
@@ -96,7 +96,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -104,7 +104,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           paddingHorizontal: 16,
         }),
-      ])
+      ]),
     );
   });
 
@@ -112,7 +112,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container padding={24}>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -120,7 +120,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           paddingHorizontal: 24,
         }),
-      ])
+      ]),
     );
   });
 
@@ -128,7 +128,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -136,7 +136,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           alignSelf: "center",
         }),
-      ])
+      ]),
     );
   });
 
@@ -144,12 +144,12 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container centered={false}>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     const styles = container.props.style.flat();
     const hasCentered = styles.some(
-      (style: Record<string, unknown>) => style?.alignSelf === "center"
+      (style: Record<string, unknown>) => style?.alignSelf === "center",
     );
     expect(hasCentered).toBe(false);
   });
@@ -158,7 +158,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -166,7 +166,7 @@ describe("<Container />", () => {
         expect.objectContaining({
           width: "100%",
         }),
-      ])
+      ]),
     );
   });
 
@@ -174,11 +174,11 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container style={{ marginTop: 20 }}>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
-      expect.arrayContaining([{ marginTop: 20 }])
+      expect.arrayContaining([{ marginTop: 20 }]),
     );
   });
 
@@ -186,7 +186,7 @@ describe("<Container />", () => {
     const { UNSAFE_getByType } = render(
       <Container maxWidth="md" padding={32} centered={true}>
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     const container = UNSAFE_getByType(Container);
     expect(container.props.style).toEqual(
@@ -196,7 +196,7 @@ describe("<Container />", () => {
           paddingHorizontal: 32,
           alignSelf: "center",
         }),
-      ])
+      ]),
     );
   });
 
@@ -204,7 +204,7 @@ describe("<Container />", () => {
     const { getByTestId } = render(
       <Container testID="custom-container">
         <Text>Content</Text>
-      </Container>
+      </Container>,
     );
     expect(getByTestId("custom-container")).toBeTruthy();
   });

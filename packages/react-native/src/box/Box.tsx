@@ -1,9 +1,4 @@
-import {
-  View,
-  ViewProps,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
+import { View, ViewProps, StyleProp, ViewStyle } from "react-native";
 import { ReactNode } from "react";
 
 type SpacingValue =
@@ -55,7 +50,7 @@ export const Box = ({
 }: BoxProps) => {
   const getSpacingStyles = (
     spacing: SpacingValue | undefined,
-    prefix: "padding" | "margin"
+    prefix: "padding" | "margin",
   ): ViewStyle => {
     if (spacing === undefined) return {};
 
