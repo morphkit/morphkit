@@ -1,6 +1,5 @@
 import { Toast } from "./Toast";
-import { View, Button } from "react-native";
-import { useState } from "react";
+import { View } from "react-native";
 
 # Toast
 
@@ -8,31 +7,28 @@ A temporary notification component with slide animation and auto-dismiss.
 
 ## Basic Usage
 
-```tsx
-const [visible, setVisible] = useState(false);
-
-<Button title="Show Toast" onPress={() => setVisible(true)} />
-<Toast
-  visible={visible}
-  message="Changes saved successfully"
-  onDismiss={() => setVisible(false)}
-/>
-```
+<View style={{ padding: 16, position: "relative", height: 120 }}>
+  <Toast
+    visible={true}
+    message="Changes saved successfully"
+    duration={0}
+  />
+</View>
 
 ## Variants
 
-<View style={{ padding: 16, gap: 12 }}>
-  <Button title="Info Toast" onPress={() => {}} />
-  <Button title="Success Toast" onPress={() => {}} />
-  <Button title="Warning Toast" onPress={() => {}} />
-  <Button title="Error Toast" onPress={() => {}} />
+<View style={{ padding: 16, gap: 100, position: "relative", height: 400 }}>
+  <Toast visible={true} variant="info" message="New features are available" duration={0} />
+  <Toast visible={true} variant="success" message="Payment processed successfully" duration={0} />
+  <Toast visible={true} variant="warning" message="Your session will expire soon" duration={0} />
+  <Toast visible={true} variant="error" message="Failed to connect to server" duration={0} />
 </View>
 
 ## Positions
 
-<View style={{ padding: 16, gap: 12 }}>
-  <Button title="Top Toast" onPress={() => {}} />
-  <Button title="Bottom Toast" onPress={() => {}} />
+<View style={{ padding: 16, gap: 100, position: "relative", height: 200 }}>
+  <Toast visible={true} position="top" message="This toast appears at the top" duration={0} />
+  <Toast visible={true} position="bottom" message="This toast appears at the bottom" duration={0} />
 </View>
 
 ## Props
