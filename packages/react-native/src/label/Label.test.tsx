@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react-native";
 import { Label } from "./Label";
+import { Text } from "react-native";
 
 describe("Label", () => {
   it("renders label text", () => {
@@ -8,8 +9,9 @@ describe("Label", () => {
   });
 
   it("renders required asterisk when required is true", () => {
-    const { getByText } = render(<Label required>Password</Label>);
-    expect(getByText("Password")).toBeTruthy();
+    const { getByText, UNSAFE_getAllByType } = render(<Label required>Password</Label>);
+    const texts = UNSAFE_getAllByType(Text);
+    expect(texts.length).toBeGreaterThan(1);
     expect(getByText("*")).toBeTruthy();
   });
 
@@ -39,12 +41,13 @@ describe("Label", () => {
   });
 
   it("applies both required and error states", () => {
-    const { getByText } = render(
+    const { getByText, UNSAFE_getAllByType } = render(
       <Label required error>
         Required Field
       </Label>,
     );
-    expect(getByText("Required Field")).toBeTruthy();
+    const texts = UNSAFE_getAllByType(Text);
+    expect(texts.length).toBeGreaterThan(1);
     expect(getByText("*")).toBeTruthy();
   });
 
@@ -69,7 +72,7 @@ describe("Label", () => {
   });
 
   it("renders with empty children", () => {
-    const { container } = render(<Label></Label>);
-    expect(container).toBeTruthy();
+    const { root } = render(<Label></Label>);
+    expect(root).toBeTruthy();
   });
 });

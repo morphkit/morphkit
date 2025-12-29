@@ -1,0 +1,76 @@
+import { Alert } from "./Alert";
+import { View } from "react-native";
+
+# Alert
+
+An inline notification component for important messages.
+
+## Basic Usage
+
+<View style={{ padding: 16 }}>
+  <Alert title="Your changes have been saved" />
+</View>
+
+## Variants
+
+<View style={{ padding: 16, gap: 12 }}>
+  <Alert variant="info" title="New features are available" />
+  <Alert variant="success" title="Payment processed successfully" />
+  <Alert variant="warning" title="Your session will expire soon" />
+  <Alert variant="error" title="Failed to connect to server" />
+</View>
+
+## With Description
+
+<View style={{ padding: 16 }}>
+  <Alert
+    variant="success"
+    title="Account created successfully"
+    description="Welcome to our platform! You can now access all features."
+  />
+</View>
+
+## Dismissible
+
+<View style={{ padding: 16, gap: 12 }}>
+  <Alert
+    title="Cookie preferences updated"
+    dismissible
+    onDismiss={() => console.log("Dismissed")}
+  />
+  <Alert
+    variant="warning"
+    title="Storage almost full"
+    description="Consider deleting old files to free up space."
+    dismissible
+    onDismiss={() => {}}
+  />
+</View>
+
+## Props
+
+| Prop        | Type                                            | Default  | Description                |
+| ----------- | ----------------------------------------------- | -------- | -------------------------- |
+| title       | string                                          | -        | Alert heading              |
+| variant     | "info" \\| "success" \\| "warning" \\| "error"  | "info"   | Color theme                |
+| description | string                                          | -        | Additional description     |
+| dismissible | boolean                                         | false    | Show dismiss button        |
+| onDismiss   | () => void                                      | -        | Dismiss callback           |
+| icon        | ReactNode                                       | Variant  | Custom icon                |
+| style       | StyleProp\<ViewStyle\>                          | -        | Custom container styles    |
+
+## Usage Example
+
+\`\`\`tsx
+import { Alert } from "@warp-ui/react-native";
+
+function FormSuccess() {
+  return (
+    <Alert
+      variant="success"
+      title="Form submitted"
+      description="We'll get back to you within 24 hours."
+    />
+  );
+}
+\`\`\`

@@ -2,141 +2,143 @@
 
 ## Overview
 
-Inline notification component for displaying important messages with contextual variants (info, success, warning, error) and optional dismiss action. Provides prominent, color-coded feedback for user actions or system states.
+An inline notification component for displaying important messages to users. Supports four semantic variants (info, success, warning, error) with appropriate color coding and icons. Optional dismiss functionality allows users to close alerts.
 
 ## Component Behavior
 
-Alert renders a colored container with icon, title, description, and optional dismiss button. Variant determines color scheme and default icon. Title and description stack vertically or appear inline. Dismiss button triggers onDismiss callback and typically removes alert from view. Action button provides optional CTA within alert.
+Alert renders as a horizontally-laid-out notification with an icon on the left, title and optional description in the center, and an optional dismiss button (×) on the right. Non-dismissible alerts are static View components. Dismissible alerts include an interactive Pressable dismiss button that triggers the onDismiss callback.
 
 ## Props
 
 ### Required Props
 
-| Prop     | Type        | Description                                                |
-| -------- | ----------- | ---------------------------------------------------------- |
-| children | `ReactNode` | Alert message content (description text or custom content) |
+| Prop  | Type       | Description                     |
+| ----- | ---------- | ------------------------------- |
+| title | \`string\` | Bold heading text for the alert |
 
 ### Optional Props
 
-| Prop        | Type                                          | Default         | Description                                                 |
-| ----------- | --------------------------------------------- | --------------- | ----------------------------------------------------------- |
-| variant     | `"info" \| "success" \| "warning" \| "error"` | `"info"`        | Semantic type determining color scheme and default icon     |
-| title       | `string`                                      | `undefined`     | Bold heading text above description                         |
-| dismissible | `boolean`                                     | `false`         | Show dismiss X button in top-right                          |
-| onDismiss   | `() => void`                                  | `undefined`     | Callback when dismiss button pressed                        |
-| icon        | `ReactNode`                                   | variant default | Custom icon element (overrides variant default icon)        |
-| action      | `ReactNode`                                   | `undefined`     | Custom action button or element (e.g., "Learn More" button) |
-| style       | `StyleProp<ViewStyle>`                        | `undefined`     | Additional custom styles for container                      |
+| Prop        | Type                     | Default      | Description                                  |
+| ----------- | ------------------------ | ------------ | -------------------------------------------- | --------- | ---------- | -------------------- |
+| variant     | \`"info" \\              | "success" \\ | "warning" \\                                 | "error"\` | \`"info"\` | Semantic color theme |
+| description | \`string\`               | -            | Additional descriptive text below title      |
+| dismissible | \`boolean\`              | \`false\`    | Shows dismiss button when true               |
+| onDismiss   | \`() => void\`           | -            | Callback when dismiss button is pressed      |
+| icon        | \`ReactNode\`            | Variant      | Custom icon (overrides default variant icon) |
+| style       | \`StyleProp<ViewStyle>\` | -            | Custom container styles                      |
 
 ### Extends
 
-`ViewProps` - All standard React Native View props
+\`ViewProps\` - All standard React Native View props
 
 ## Variants
 
-### Semantic Types
+### Visual Styles
 
-- **info**: Blue color scheme with info (i) icon. For general information or tips
-- **success**: Green color scheme with checkmark icon. For successful operations or confirmations
-- **warning**: Yellow/orange color scheme with warning triangle icon. For cautionary messages or non-critical issues
-- **error**: Red color scheme with error/alert icon. For errors, failures, or critical issues
+- **info**: Blue theme - Informational messages, tips, general notifications (icon: ℹ)
+- **success**: Green theme - Success confirmations, completed actions (icon: ✓)
+- **warning**: Orange theme - Warnings, caution messages, attention needed (icon: ⚠)
+- **error**: Red theme - Error messages, failed operations, critical issues (icon: ✕)
 
 ## States
 
-- **default**: Alert visible and interactive
-- **dismissed**: Alert hidden after dismiss button pressed (managed by parent)
+- **Static**: Non-dismissible alert (View component)
+- **Dismissible**: Alert with close button that calls onDismiss
 
 ## Theme Support
 
-- Light mode:
-  - info: light blue background (#DBEAFE), dark blue text (#1E40AF), blue icon
-  - success: light green background (#D1FAE5), dark green text (#065F46), green icon
-  - warning: light yellow background (#FEF3C7), dark yellow text (#92400E), yellow icon
-  - error: light red background (#FEE2E2), dark red text (#991B1B), red icon
-- Dark mode:
-  - info: darker blue background (#1E3A8A), light blue text (#BFDBFE), lighter icon
-  - success: darker green background (#065F46), light green text (#A7F3D0), lighter icon
-  - warning: darker yellow background (#92400E), light yellow text (#FDE68A), lighter icon
-  - error: darker red background (#991B1B), light red text (#FECACA), lighter icon
-- Dynamic switching: useColorScheme() for theme detection
+### Light Mode Colors
+
+- **info**: #EFF6FF background, #DBEAFE border, #1E40AF text, #3B82F6 icon
+- **success**: #F0FDF4 background, #D1FAE5 border, #065F46 text, #10B981 icon
+- **warning**: #FFFBEB background, #FEF3C7 border, #92400E text, #F59E0B icon
+- **error**: #FEF2F2 background, #FEE2E2 border, #991B1B text, #EF4444 icon
+
+### Dark Mode Colors
+
+- **info**: #1E3A8A background, #1E40AF border, #DBEAFE text, #60A5FA icon
+- **success**: #064E3B background, #065F46 border, #D1FAE5 text, #34D399 icon
+- **warning**: #78350F background, #92400E border, #FEF3C7 text, #FBBF24 icon
+- **error**: #7F1D1D background, #991B1B border, #FEE2E2 text, #F87171 icon
 
 ## Accessibility Requirements
 
-- role="alert" for important/immediate messages
-- accessibilityLiveRegion="polite" for non-critical, "assertive" for critical errors
-- Title uses semantic heading (announce as heading)
-- Dismiss button:
-  - accessibilityLabel="Dismiss alert"
-  - accessibilityRole="button"
-- Sufficient color contrast for text on colored backgrounds (WCAG AA)
-- Icon decorative or has accessibilityLabel if conveying information
+- \`accessibilityRole="alert"\` - Announces important messages to screen readers
+- \`accessibilityRole="button"\` for dismiss button with \`accessibilityLabel="Dismiss alert"\`
+- \`hitSlop={8}\` on dismiss button for 44×44 minimum touch target
+- Color is not the only indicator (icons and text provide semantic meaning)
 
 ## Usage Examples
 
-### Basic Usage
+### Basic Alert
 
-```tsx
-<Alert variant="success">Your changes have been saved successfully.</Alert>
-```
+\`\`\`tsx
+<Alert title="Your changes have been saved" />
+\`\`\`
 
-### Advanced Usage
+### With Description
 
-```tsx
+\`\`\`tsx
 <Alert
-  variant="error"
-  title="Payment Failed"
-  dismissible
-  onDismiss={() => setShowAlert(false)}
-  action={<Button onPress={retry}>Retry</Button>}
->
-  Your payment could not be processed. Please check your card details and try
-  again.
-</Alert>
-```
+  title="Account created successfully"
+  description="Welcome to our platform! You can now access all features."
+/>
+\`\`\`
+
+### Variants
+
+\`\`\`tsx
+<Alert variant="info" title="New features are available" />
+<Alert variant="success" title="Payment processed successfully" />
+<Alert variant="warning" title="Your session will expire soon" />
+<Alert variant="error" title="Failed to connect to server" />
+\`\`\`
+
+### Dismissible
+
+\`\`\`tsx
+<Alert
+title="Cookie preferences updated"
+dismissible
+onDismiss={() => console.log('Alert dismissed')}
+/>
+\`\`\`
+
+### Custom Icon
+
+\`\`\`tsx
+<Alert
+title="Special offer"
+icon={<Text>🎉</Text>}
+/>
+\`\`\`
 
 ## Edge Cases
 
-- **dismissible without onDismiss**: Dismiss button appears but does nothing (should warn)
-- **Very long content**: Alert height grows naturally, consider max height with scroll
-- **No children**: Alert renders with just title (if provided) or empty
-- **Custom icon with variant**: Custom icon overrides variant default
-- **action with dismiss**: Both buttons coexist (action left, dismiss right in header)
-
-## Dependencies
-
-- Optional: Icon library (Ionicons, etc.) for variant icons and dismiss X
-- Typography component for consistent text styling
+- Long title/description: Text will wrap to multiple lines
+- No description: Component height adjusts, only title shown
+- Dismiss without onDismiss: Button renders but has no action
+- Custom icon type mismatch: Component handles both string and ReactNode
 
 ## Design Considerations
 
 ### Styling Approach
 
-- Container: Rounded rectangle with background color from variant
-- Layout: Icon | Content (Title + Description) | Actions (Dismiss/Action buttons)
-- Title: Bold text, larger fontSize
-- Description: Normal text (children content)
-- Icons: Size ~20px, colored to match variant theme
-- Padding: 12-16px all around
+Horizontal flexbox layout with gap spacing. Rounded corners (8px) and border (1px) for clear visual separation. Background colors are semantic and theme-aware.
 
 ### Layout Strategy
 
-- Horizontal row: Icon (flex: 0) | Content (flex: 1) | Buttons (flex: 0)
-- Content stack: Title | Children (vertical)
-- Title and description use variant text color
-- Action button (if provided) aligns to bottom of alert or inline with text
+Icon and dismiss button fixed width, content area (title + description) flexes to fill available space. Uses flexDirection: row with alignItems: flex-start for top alignment.
 
 ### Performance Considerations
 
-- Memoize variant color mapping
-- Icons can be lazy loaded or preloaded
-- Avoid re-renders when alert is dismissed (remove from tree, don't hide)
-- Animated entrance/exit optional but performant with native driver
+Static alerts use View component (no event listeners). Dismissible alerts add single Pressable only for dismiss button, not entire alert.
 
 ### Customization Points
 
-- Four semantic variants with color/icon presets
-- Custom icon override for brand icons
-- dismissible toggle for temporary vs persistent alerts
-- action prop for contextual CTAs
-- Can add animation on mount/unmount
-- Can stack multiple alerts with Alert stack component
+- 4 semantic variants with distinct colors
+- Optional description for additional context
+- Optional dismiss functionality
+- Custom icon override
+- Custom styling via style prop
+- Theme-aware colors for light/dark mode

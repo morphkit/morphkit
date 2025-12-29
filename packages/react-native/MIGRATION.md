@@ -12,19 +12,20 @@ All form input components have been refactored to follow a consistent API patter
 
 All components now use `onChange` instead of component-specific callback names.
 
-| Component | Old Callback | New Callback |
-|-----------|--------------|--------------|
-| Input | `onChangeText` | `onChange` |
-| Textarea | `onChangeText` | `onChange` |
-| Checkbox | `onCheckedChange` | `onChange` |
-| Switch | `onCheckedChange` | `onChange` |
-| RadioGroup | `onValueChange` | `onChange` |
-| Select | `onValueChange` | `onChange` |
-| Slider | `onValueChange` | `onChange` |
+| Component  | Old Callback      | New Callback |
+| ---------- | ----------------- | ------------ |
+| Input      | `onChangeText`    | `onChange`   |
+| Textarea   | `onChangeText`    | `onChange`   |
+| Checkbox   | `onCheckedChange` | `onChange`   |
+| Switch     | `onCheckedChange` | `onChange`   |
+| RadioGroup | `onValueChange`   | `onChange`   |
+| Select     | `onValueChange`   | `onChange`   |
+| Slider     | `onValueChange`   | `onChange`   |
 
 ### 2. New Props Added
 
 All form components now support:
+
 - `onBlur?: () => void` - Called when the input loses focus
 - `name?: string` - Field identifier for form libraries
 - Ref forwarding via `React.forwardRef`
@@ -38,63 +39,45 @@ The `Form` component and `useFormContext` hook have been removed. Use your prefe
 ### Input
 
 **Before:**
+
 ```tsx
-<Input
-  value={email}
-  onChangeText={setEmail}
-/>
+<Input value={email} onChangeText={setEmail} />
 ```
 
 **After:**
+
 ```tsx
-<Input
-  value={email}
-  onChange={setEmail}
-  onBlur={handleBlur}
-  name="email"
-/>
+<Input value={email} onChange={setEmail} onBlur={handleBlur} name="email" />
 ```
 
 ### Textarea
 
 **Before:**
+
 ```tsx
-<Textarea
-  value={bio}
-  onChangeText={setBio}
-/>
+<Textarea value={bio} onChangeText={setBio} />
 ```
 
 **After:**
+
 ```tsx
-<Textarea
-  value={bio}
-  onChange={setBio}
-  onBlur={handleBlur}
-  name="bio"
-/>
+<Textarea value={bio} onChange={setBio} onBlur={handleBlur} name="bio" />
 ```
 
 ### Checkbox
 
 **Before:**
+
 ```tsx
-<Checkbox
-  checked={agree}
-  onCheckedChange={setAgree}
->
+<Checkbox checked={agree} onCheckedChange={setAgree}>
   <Text>I agree to terms</Text>
 </Checkbox>
 ```
 
 **After:**
+
 ```tsx
-<Checkbox
-  checked={agree}
-  onChange={setAgree}
-  onBlur={handleBlur}
-  name="agree"
->
+<Checkbox checked={agree} onChange={setAgree} onBlur={handleBlur} name="agree">
   <Text>I agree to terms</Text>
 </Checkbox>
 ```
@@ -102,15 +85,13 @@ The `Form` component and `useFormContext` hook have been removed. Use your prefe
 ### Switch
 
 **Before:**
+
 ```tsx
-<Switch
-  checked={darkMode}
-  onCheckedChange={setDarkMode}
-  label="Dark Mode"
-/>
+<Switch checked={darkMode} onCheckedChange={setDarkMode} label="Dark Mode" />
 ```
 
 **After:**
+
 ```tsx
 <Switch
   checked={darkMode}
@@ -124,6 +105,7 @@ The `Form` component and `useFormContext` hook have been removed. Use your prefe
 ### RadioGroup
 
 **Before:**
+
 ```tsx
 <RadioGroup value={theme} onValueChange={setTheme}>
   <RadioButton value="light">
@@ -136,6 +118,7 @@ The `Form` component and `useFormContext` hook have been removed. Use your prefe
 ```
 
 **After:**
+
 ```tsx
 <RadioGroup value={theme} onChange={setTheme} onBlur={handleBlur} name="theme">
   <RadioButton value="light">
@@ -150,6 +133,7 @@ The `Form` component and `useFormContext` hook have been removed. Use your prefe
 ### Select
 
 **Before:**
+
 ```tsx
 <Select value={country} onValueChange={setCountry}>
   <SelectOption value="us">
@@ -162,8 +146,14 @@ The `Form` component and `useFormContext` hook have been removed. Use your prefe
 ```
 
 **After:**
+
 ```tsx
-<Select value={country} onChange={setCountry} onBlur={handleBlur} name="country">
+<Select
+  value={country}
+  onChange={setCountry}
+  onBlur={handleBlur}
+  name="country"
+>
   <SelectOption value="us">
     <Text>United States</Text>
   </SelectOption>
@@ -176,16 +166,13 @@ The `Form` component and `useFormContext` hook have been removed. Use your prefe
 ### Slider
 
 **Before:**
+
 ```tsx
-<Slider
-  value={volume}
-  onValueChange={setVolume}
-  min={0}
-  max={100}
-/>
+<Slider value={volume} onValueChange={setVolume} min={0} max={100} />
 ```
 
 **After:**
+
 ```tsx
 <Slider
   value={volume}
@@ -203,7 +190,12 @@ The `Form` component and `useFormContext` hook have been removed. Use your prefe
 
 ```tsx
 import { Controller, useForm } from "react-hook-form";
-import { Input, Checkbox, RadioGroup, RadioButton } from "@warp-ui/react-native";
+import {
+  Input,
+  Checkbox,
+  RadioGroup,
+  RadioButton,
+} from "@warp-ui/react-native";
 
 function MyForm() {
   const { control, handleSubmit } = useForm({
@@ -283,7 +275,12 @@ function MyForm() {
 
 ```tsx
 import { Formik } from "formik";
-import { Input, Checkbox, RadioGroup, RadioButton } from "@warp-ui/react-native";
+import {
+  Input,
+  Checkbox,
+  RadioGroup,
+  RadioButton,
+} from "@warp-ui/react-native";
 
 function MyForm() {
   return (
@@ -357,12 +354,7 @@ function MyComponent() {
   };
 
   return (
-    <Input
-      ref={inputRef}
-      value={email}
-      onChange={setEmail}
-      name="email"
-    />
+    <Input ref={inputRef} value={email} onChange={setEmail} name="email" />
   );
 }
 ```

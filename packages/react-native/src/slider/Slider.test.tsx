@@ -5,29 +5,27 @@ import { Slider } from "./Slider";
 
 describe("Slider", () => {
   it("renders with single value", () => {
-    const { container } = render(<Slider value={50} onChange={() => {}} />);
-    expect(container).toBeTruthy();
+    const { root } = render(<Slider value={50} onChange={() => {}} />);
+    expect(root).toBeTruthy();
   });
 
   it("renders with range value", () => {
-    const { container } = render(
-      <Slider value={[25, 75]} onChange={() => {}} />,
-    );
-    expect(container).toBeTruthy();
+    const { root } = render(<Slider value={[25, 75]} onChange={() => {}} />);
+    expect(root).toBeTruthy();
   });
 
   it("renders with custom min and max", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={500} onChange={() => {}} min={0} max={1000} />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("renders with custom step", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={50} onChange={() => {}} step={10} />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("renders with showValue enabled", () => {
@@ -46,44 +44,42 @@ describe("Slider", () => {
   });
 
   it("renders small size", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={50} onChange={() => {}} size="sm" />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("renders medium size (default)", () => {
-    const { container } = render(<Slider value={50} onChange={() => {}} />);
-    expect(container).toBeTruthy();
+    const { root } = render(<Slider value={50} onChange={() => {}} />);
+    expect(root).toBeTruthy();
   });
 
   it("renders large size", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={50} onChange={() => {}} size="lg" />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("applies custom color", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={50} onChange={() => {}} color="#FF6B6B" />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("applies disabled state", () => {
-    const { container } = render(
-      <Slider value={50} onChange={() => {}} disabled />,
-    );
-    expect(container).toBeTruthy();
+    const { root } = render(<Slider value={50} onChange={() => {}} disabled />);
+    expect(root).toBeTruthy();
   });
 
   it("applies custom styles", () => {
     const customStyle = { marginTop: 20 };
-    const { container } = render(
+    const { root } = render(
       <Slider value={50} onChange={() => {}} style={customStyle} />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("forwards ViewProps", () => {
@@ -94,24 +90,24 @@ describe("Slider", () => {
   });
 
   it("handles continuous values when step is 0", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={33.33} onChange={() => {}} step={0} />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("clamps value to min", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={-10} onChange={() => {}} min={0} max={100} />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("clamps value to max", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={150} onChange={() => {}} min={0} max={100} />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("forwards ref to View", () => {
@@ -122,16 +118,16 @@ describe("Slider", () => {
 
   it("accepts onBlur prop", () => {
     const handleBlur = jest.fn();
-    const { container } = render(
+    const { root } = render(
       <Slider value={50} onChange={() => {}} onBlur={handleBlur} />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 
   it("accepts name prop", () => {
-    const { container } = render(
+    const { root } = render(
       <Slider value={50} onChange={() => {}} name="volume" />,
     );
-    expect(container).toBeTruthy();
+    expect(root).toBeTruthy();
   });
 });

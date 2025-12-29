@@ -1,0 +1,76 @@
+import { Toast } from "./Toast";
+import { View, Button } from "react-native";
+import { useState } from "react";
+
+# Toast
+
+A temporary notification component with slide animation and auto-dismiss.
+
+## Basic Usage
+
+\`\`\`tsx
+const [visible, setVisible] = useState(false);
+
+<Button title="Show Toast" onPress={() => setVisible(true)} />
+<Toast
+  visible={visible}
+  message="Changes saved successfully"
+  onDismiss={() => setVisible(false)}
+/>
+\`\`\`
+
+## Variants
+
+<View style={{ padding: 16, gap: 12 }}>
+  <Button title="Info Toast" onPress={() => {}} />
+  <Button title="Success Toast" onPress={() => {}} />
+  <Button title="Warning Toast" onPress={() => {}} />
+  <Button title="Error Toast" onPress={() => {}} />
+</View>
+
+## Positions
+
+<View style={{ padding: 16, gap: 12 }}>
+  <Button title="Top Toast" onPress={() => {}} />
+  <Button title="Bottom Toast" onPress={() => {}} />
+</View>
+
+## Props
+
+| Prop      | Type                                          | Default    | Description                    |
+| --------- | --------------------------------------------- | ---------- | ------------------------------ |
+| visible   | boolean                                       | -          | Controls visibility            |
+| message   | string                                        | -          | Notification text              |
+| variant   | "info" \\| "success" \\| "warning" \\| "error" | "info"     | Color theme                    |
+| duration  | number                                        | 3000       | Auto-dismiss ms (0 = manual)   |
+| position  | "top" \\| "bottom"                            | "bottom"   | Screen position                |
+| onDismiss | () => void                                    | -          | Dismiss callback               |
+| style     | StyleProp\<ViewStyle\>                        | -          | Custom container styles        |
+
+## Usage Example
+
+\`\`\`tsx
+import { Toast } from "@warp-ui/react-native";
+import { useState } from "react";
+
+function SaveButton() {
+  const [toastVisible, setToastVisible] = useState(false);
+
+  const handleSave = async () => {
+    await saveData();
+    setToastVisible(true);
+  };
+
+  return (
+    <>
+      <Button title="Save" onPress={handleSave} />
+      <Toast
+        visible={toastVisible}
+        variant="success"
+        message="Data saved successfully"
+        onDismiss={() => setToastVisible(false)}
+      />
+    </>
+  );
+}
+\`\`\`

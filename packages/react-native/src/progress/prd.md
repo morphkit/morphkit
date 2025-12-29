@@ -2,28 +2,37 @@
 
 ## Overview
 
-Visual progress indicator with bar and circular variants for showing determinate or indeterminate loading states. Communicates task completion percentage or ongoing activity through animated visual feedback.
+A visual progress indicator component supporting both bar and circular displays. Shows determinate progress (0-100%) or indeterminate loading states. Used for file uploads, downloads, multi-step forms, and long-running operations.
 
 ## Component Behavior
 
-Progress displays completion as filled portion of bar or circular track. Determinate mode shows percentage based on value prop (0-100). Indeterminate mode shows animated loading state (no specific percentage). Bar variant fills horizontally. Circle variant fills clockwise around perimeter.
+Progress displays visual feedback for ongoing operations. In determinate mode (value provided), it shows exact completion percentage. In indeterminate mode (no value), it displays an animated loading state indicating work is in progress without specific completion percentage.
+
+### Bar Variant
+
+- Horizontal progress bar with fill from left to right
+- Determinate: Fill width corresponds to percentage
+- Indeterminate: Animated 30% width bar sliding left to right
+
+### Circle Variant
+
+- Circular progress indicator using border styling
+- Determinate: Borders fill clockwise from top
+- Indeterminate: Spinning animation (not implemented in current design)
+- Optional percentage text in center
 
 ## Props
 
-### Required Props
-
-None - All props optional with defaults
-
 ### Optional Props
 
-| Prop      | Type                   | Default       | Description                                                      |
-| --------- | ---------------------- | ------------- | ---------------------------------------------------------------- |
-| value     | `number`               | `undefined`   | Progress percentage (0-100). Undefined shows indeterminate state |
-| variant   | `"bar" \| "circle"`    | `"bar"`       | Visual style: horizontal bar or circular ring                    |
-| size      | `"sm" \| "md" \| "lg"` | `"md"`        | Size of progress indicator                                       |
-| color     | `string`               | theme primary | Color of progress fill                                           |
-| showValue | `boolean`              | `false`       | Display percentage text (e.g., "75%")                            |
-| style     | `StyleProp<ViewStyle>` | `undefined`   | Additional custom styles                                         |
+| Prop      | Type                   | Default | Description                                      |
+| --------- | ---------------------- | ------- | ------------------------------------------------ |
+| value     | `number`               | -       | Progress value 0-100 (undefined = indeterminate) |
+| variant   | `"bar" \| "circle"`    | `"bar"` | Display style (horizontal bar or circular)       |
+| size      | `"sm" \| "md" \| "lg"` | `"md"`  | Size preset                                      |
+| color     | `string`               | Theme   | Custom color for progress fill                   |
+| showValue | `boolean`              | `false` | Display percentage text (determinate mode only)  |
+| style     | `StyleProp<ViewStyle>` | -       | Custom container styles                          |
 
 ### Extends
 
@@ -31,102 +40,114 @@ None - All props optional with defaults
 
 ## Variants
 
-### Visual Styles
+### Bar Variant Sizes
 
-- **bar**: Horizontal progress bar (linear)
-- **circle**: Circular progress ring (radial)
+- **sm**: 4px height - Subtle progress indicators, inline states
+- **md**: 8px height - Standard progress bars (default)
+- **lg**: 12px height - Prominent progress indicators
 
-### Sizes (Bar)
+### Circle Variant Sizes
 
-- **sm**: height: 4, borderRadius: 2
-- **md**: height: 8, borderRadius: 4
-- **lg**: height: 12, borderRadius: 6
-
-### Sizes (Circle)
-
-- **sm**: diameter: 24, stroke: 2
-- **md**: diameter: 40, stroke: 3
-- **lg**: diameter: 60, stroke: 4
+- **sm**: 32px diameter - Compact circular indicators
+- **md**: 48px diameter - Standard circular progress (default)
+- **lg**: 64px diameter - Large circular indicators
 
 ## States
 
-- **determinate**: Shows specific completion percentage from value prop
-- **indeterminate**: Animated loading state (value undefined)
+- **Determinate**: Specific progress value (0-100%)
+- **Indeterminate**: Unknown completion time, animated loading state
 
 ## Theme Support
 
-- Light mode:
-  - Bar: gray background (#E5E7EB), primary blue fill (#4A90E2)
-  - Circle: gray track, primary blue progress stroke
-- Dark mode:
-  - Bar: dark gray background (#4B5563), lighter primary fill (#5AA2F5)
-  - Circle: dark gray track, lighter primary stroke
-- Custom color: color prop overrides theme primary
+- **Light mode**: #E5E7EB track, #4A90E2 progress, #374151 text
+- **Dark mode**: #4B5563 track, #5AA2F5 progress, #E5E7EB text
+- **Custom colors**: Override progress color with \`color\` prop
 
 ## Accessibility Requirements
 
-- role="progressbar"
-- accessibilityValue: { min: 0, max: 100, now: value } (determinate only)
-- accessibilityLabel describing what's loading (e.g., "Upload progress")
-- Indeterminate: announce "Loading..." or similar
-- Value changes announced to screen readers
+- \`accessibilityRole="progressbar"\` - Identifies as progress indicator
+- \`accessibilityValue\` with min/max/now for determinate progress
+- Screen readers announce current progress percentage
 
 ## Usage Examples
 
-### Basic Usage
+### Basic Bar (Indeterminate)
 
-```tsx
-<Progress value={75} />
-```
+\`\`\`tsx
+<Progress />
+\`\`\`
 
-### Advanced Usage
+### Determinate Bar with Value
 
-```tsx
-<Progress
-  variant="circle"
-  value={uploadProgress}
-  size="lg"
-  showValue
-  color="#10B981"
-/>
-```
+\`\`\`tsx
+<Progress value={60} />
+\`\`\`
+
+### With Percentage Display
+
+\`\`\`tsx
+<Progress value={75} showValue />
+\`\`\`
+
+### Circle Variant
+
+\`\`\`tsx
+<Progress value={50} variant="circle" />
+<Progress value={80} variant="circle" showValue />
+\`\`\`
+
+### Sizes
+
+\`\`\`tsx
+<Progress value={40} size="sm" />
+<Progress value={60} size="md" variant="circle" />
+<Progress value={80} size="lg" />
+\`\`\`
+
+### Custom Color
+
+\`\`\`tsx
+<Progress value={90} color="#10B981" />
+\`\`\`
 
 ## Edge Cases
 
-- **value > 100**: Clamp to 100
-- **value < 0**: Clamp to 0
-- **value = undefined**: Indeterminate animation
-- **showValue with indeterminate**: Shows "Loading..." or spinner instead of percentage
+- **Value < 0**: Clamped to 0
+- **Value > 100**: Clamped to 100
+- **showValue with indeterminate**: Value display hidden
+- **Circle with very small size**: Percentage text may be too small to read
 
-## Dependencies
+## Animation Details
 
-Optional: SVG library for circular progress (react-native-svg)
+### Indeterminate Bar
+
+- 30% width bar slides from 0% to 100% position
+- 1000ms slide right, 1000ms slide left
+- Ease easing for smooth motion
+- Infinite loop
 
 ## Design Considerations
 
 ### Styling Approach
 
-- Bar: Background View + Foreground View (width = value%)
-- Circle: SVG circle with stroke-dasharray animated
-- Indeterminate bar: Animated sliding fill
-- Indeterminate circle: Rotating spinner
+Bar uses nested Views with absolute positioning for fill overlay. Circle uses border styling with calculated circumference for progress arc (simplified implementation).
 
 ### Layout Strategy
 
-- Bar: Full width container, fill grows from left
-- Circle: Square container, SVG centered
-- Value text: Centered above or inside progress indicator
+Bar expands to fill container width. Circle has fixed dimensions based on size prop. Both use StyleSheet.create for optimized style definitions.
 
 ### Performance Considerations
 
-- Use native driver for indeterminate animations
-- Avoid re-renders on small value changes (debounce)
-- SVG performance optimized for circles
+- Indeterminate animation uses Animated.loop for continuous playback
+- Animated.timing for smooth transitions
+- Native driver disabled for width/layout animations (bar variant)
+- Minimal re-renders using controlled animations
 
 ### Customization Points
 
-- Variant for different use cases
-- Size presets
-- color for brand matching
-- showValue toggle
-- Can add labels (e.g., "25 of 100 items")
+- 2 visual variants (bar and circle)
+- 3 size presets
+- Determinate and indeterminate modes
+- Optional value display
+- Custom color override
+- Theme-aware default colors

@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "progress",
+  "description": "Visual progress indicator with bar and circle variants, determinate and indeterminate modes, and optional value display",
+  "dependencies": []
+}

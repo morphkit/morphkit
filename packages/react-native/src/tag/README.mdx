@@ -1,0 +1,68 @@
+import { Tag } from "./Tag";
+import { View } from "react-native";
+
+# Tag
+
+A small pill-shaped label for categorization and status indication.
+
+## Basic Usage
+
+<View style={{ padding: 16 }}>
+  <Tag>Default Tag</Tag>
+</View>
+
+## Variants
+
+<View style={{ padding: 16, flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
+  <Tag variant="default">Default</Tag>
+  <Tag variant="primary">Primary</Tag>
+  <Tag variant="success">Success</Tag>
+  <Tag variant="warning">Warning</Tag>
+  <Tag variant="error">Error</Tag>
+</View>
+
+## Sizes
+
+<View style={{ padding: 16, flexDirection: "row", gap: 8, alignItems: "center" }}>
+  <Tag size="sm">Small</Tag>
+  <Tag size="md">Medium</Tag>
+  <Tag size="lg">Large</Tag>
+</View>
+
+## Dismissible
+
+<View style={{ padding: 16, flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
+  <Tag dismissible onDismiss={() => console.log("Dismissed")}>
+    Dismissible Tag
+  </Tag>
+  <Tag variant="primary" dismissible onDismiss={() => {}}>
+    Primary Dismissible
+  </Tag>
+</View>
+
+## Props
+
+| Prop        | Type                                                        | Default     | Description                     |
+| ----------- | ----------------------------------------------------------- | ----------- | ------------------------------- |
+| children    | ReactNode                                                   | -           | Tag content                     |
+| variant     | "default" \\| "primary" \\| "success" \\| "warning" \\| "error" | "default"   | Color theme                     |
+| size        | "sm" \\| "md" \\| "lg"                                      | "md"        | Size preset                     |
+| dismissible | boolean                                                     | false       | Show dismiss button             |
+| onDismiss   | () => void                                                  | -           | Dismiss callback                |
+| style       | StyleProp\<ViewStyle\>                                      | -           | Custom container styles         |
+
+## Usage Example
+
+\`\`\`tsx
+import { Tag } from "@warp-ui/react-native";
+
+function ProductLabels() {
+  return (
+    <View style={{ flexDirection: "row", gap: 8 }}>
+      <Tag variant="success">In Stock</Tag>
+      <Tag variant="primary">New</Tag>
+      <Tag variant="warning">Low Stock</Tag>
+    </View>
+  );
+}
+\`\`\`

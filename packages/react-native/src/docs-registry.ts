@@ -1,5 +1,6 @@
 import React from "react";
 
+import AlertDocs from "./alert/README.mdx";
 import AvatarDocs from "./avatar/README.mdx";
 import BadgeDocs from "./badge/README.mdx";
 import BoxDocs from "./box/README.mdx";
@@ -10,15 +11,21 @@ import ContainerDocs from "./container/README.mdx";
 import DividerDocs from "./divider/README.mdx";
 import InputDocs from "./input/README.mdx";
 import LabelDocs from "./label/README.mdx";
+import ProgressDocs from "./progress/README.mdx";
 import RadioDocs from "./radio/README.mdx";
 import SelectDocs from "./select/README.mdx";
+import SkeletonDocs from "./skeleton/README.mdx";
 import SliderDocs from "./slider/README.mdx";
+import SpinnerDocs from "./spinner/README.mdx";
 import StackDocs from "./stack/README.mdx";
 import SwitchDocs from "./switch/README.mdx";
+import TagDocs from "./tag/README.mdx";
 import TextareaDocs from "./textarea/README.mdx";
+import ToastDocs from "./toast/README.mdx";
 import TypographyDocs from "./typography/README.mdx";
 
 export const docsRegistry: Record<string, React.FC> = {
+  alert: AlertDocs,
   avatar: AvatarDocs,
   badge: BadgeDocs,
   box: BoxDocs,
@@ -29,11 +36,16 @@ export const docsRegistry: Record<string, React.FC> = {
   divider: DividerDocs,
   input: InputDocs,
   label: LabelDocs,
+  progress: ProgressDocs,
   radio: RadioDocs,
   select: SelectDocs,
+  skeleton: SkeletonDocs,
   slider: SliderDocs,
+  spinner: SpinnerDocs,
   stack: StackDocs,
   switch: SwitchDocs,
+  tag: TagDocs,
   textarea: TextareaDocs,
+  toast: ToastDocs,
   typography: TypographyDocs,
 };

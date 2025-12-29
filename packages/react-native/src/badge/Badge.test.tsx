@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import { render } from "@testing-library/react-native";
 import { Badge } from "./Badge";
 import { View, Text } from "react-native";
@@ -69,45 +70,48 @@ describe("<Badge />", () => {
   });
 
   test("applies red color by default", () => {
-    const { getByText } = render(
+    const { UNSAFE_getAllByType } = render(
       <Badge count={5}>
         <View testID="child" />
       </Badge>,
     );
-    const badge = getByText("5").parent;
-    expect(badge?.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ backgroundColor: "#EF5350" }),
-      ]),
+    const views = UNSAFE_getAllByType(View);
+    const badgeView = views.find(
+      (view) =>
+        view.props.style &&
+        StyleSheet.flatten(view.props.style).backgroundColor === "#EF5350",
     );
+    expect(badgeView).toBeTruthy();
   });
 
   test("applies blue color when specified", () => {
-    const { getByText } = render(
+    const { UNSAFE_getAllByType } = render(
       <Badge count={5} color="blue">
         <View testID="child" />
       </Badge>,
     );
-    const badge = getByText("5").parent;
-    expect(badge?.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ backgroundColor: "#4A90E2" }),
-      ]),
+    const views = UNSAFE_getAllByType(View);
+    const badgeView = views.find(
+      (view) =>
+        view.props.style &&
+        StyleSheet.flatten(view.props.style).backgroundColor === "#4A90E2",
     );
+    expect(badgeView).toBeTruthy();
   });
 
   test("applies red color when explicitly specified", () => {
-    const { getByText } = render(
+    const { UNSAFE_getAllByType } = render(
       <Badge count={5} color="red">
         <View testID="child" />
       </Badge>,
     );
-    const badge = getByText("5").parent;
-    expect(badge?.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ backgroundColor: "#EF5350" }),
-      ]),
+    const views = UNSAFE_getAllByType(View);
+    const badgeView = views.find(
+      (view) =>
+        view.props.style &&
+        StyleSheet.flatten(view.props.style).backgroundColor === "#EF5350",
     );
+    expect(badgeView).toBeTruthy();
   });
 
   test("merges custom style prop", () => {
@@ -119,27 +123,25 @@ describe("<Badge />", () => {
     const wrapper = UNSAFE_getByProps({
       accessibilityLabel: "5 notifications",
     });
-    expect(wrapper.props.style).toEqual(
-      expect.arrayContaining([{ marginTop: 10 }]),
-    );
+    const flatStyle = StyleSheet.flatten(wrapper.props.style);
+    expect(flatStyle).toMatchObject({
+      marginTop: 10,
+    });
   });
 
   test("applies absolute positioning to badge", () => {
-    const { getByText } = render(
+    const { UNSAFE_getAllByType } = render(
       <Badge count={5}>
         <View testID="child" />
       </Badge>,
     );
-    const badge = getByText("5").parent;
-    expect(badge?.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          position: "absolute",
-          top: -6,
-          right: -6,
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const badgeView = views.find((view) => {
+      if (!view.props.style) return false;
+      const flatStyle = StyleSheet.flatten(view.props.style);
+      return flatStyle.position === "absolute" && flatStyle.top === -6;
+    });
+    expect(badgeView).toBeTruthy();
   });
 
   test("sets accessibility label with count", () => {

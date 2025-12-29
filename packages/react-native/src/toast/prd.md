@@ -2,123 +2,184 @@
 
 ## Overview
 
-Temporary notification popup that appears at screen edges with auto-dismiss, variants for different message types. Provides non-intrusive feedback for user actions or system events.
+A temporary notification component that appears at the top or bottom of the screen to provide brief feedback about an operation. Features slide-in animation and auto-dismiss capability. User manages visibility state (simple presentational component, not context-based).
 
 ## Component Behavior
 
-Toast slides in from top or bottom edge with animation. Displays message with icon and optional action button. Auto-dismisses after duration (default 3s). User can swipe to dismiss manually. Multiple toasts queue and show sequentially or stack.
+Toast slides in from top or bottom when visible, displays a message with an icon, and automatically dismisses after a specified duration (or remains until manually dismissed if duration is 0). Uses spring animation for natural entrance and fade-out animation for exit.
+
+The component is controlled by the visible prop - when true, it animates in; when false, it animates out and unmounts. Auto-dismiss is handled via setTimeout when duration > 0.
 
 ## Props
 
 ### Required Props
 
-| Prop    | Type     | Description        |
-| ------- | -------- | ------------------ |
-| message | `string` | Toast message text |
+| Prop    | Type        | Description                           |
+| ------- | ----------- | ------------------------------------- |
+| visible | \`boolean\` | Controls toast visibility (show/hide) |
+| message | \`string\`  | Notification message text             |
 
 ### Optional Props
 
-| Prop      | Type                                          | Default     | Description                                       |
-| --------- | --------------------------------------------- | ----------- | ------------------------------------------------- |
-| variant   | `"info" \| "success" \| "warning" \| "error"` | `"info"`    | Semantic type determining color and icon          |
-| duration  | `number`                                      | `3000`      | Auto-dismiss time in milliseconds. 0 = persistent |
-| position  | `"top" \| "bottom"`                           | `"bottom"`  | Screen edge where toast appears                   |
-| action    | `{ label: string; onPress: () => void }`      | `undefined` | Optional action button                            |
-| onDismiss | `() => void`                                  | `undefined` | Callback when toast dismissed                     |
-| style     | `StyleProp<ViewStyle>`                        | `undefined` | Additional custom styles                          |
+| Prop      | Type                     | Default      | Description                                           |
+| --------- | ------------------------ | ------------ | ----------------------------------------------------- | --------------- | ---------- | ------------------------------ |
+| variant   | \`"info" \\              | "success" \\ | "warning" \\                                          | "error"\`       | \`"info"\` | Semantic color theme with icon |
+| duration  | \`number\`               | \`3000\`     | Auto-dismiss duration in ms (0 = manual dismiss only) |
+| position  | \`"top" \\               | "bottom"\`   | \`"bottom"\`                                          | Screen position |
+| onDismiss | \`() => void\`           | -            | Callback for auto-dismiss or manual close             |
+| style     | \`StyleProp<ViewStyle>\` | -            | Custom container styles                               |
 
 ### Extends
 
-`ViewProps` - All standard React Native View props
+\`ViewProps\` - All standard React Native View props
 
 ## Variants
 
-Same as Alert: info (blue), success (green), warning (yellow), error (red)
+### Visual Styles
+
+- **info**: Blue theme - General notifications, information (icon: ℹ)
+- **success**: Green theme - Success confirmations (icon: ✓)
+- **warning**: Orange theme - Warnings, cautions (icon: ⚠)
+- **error**: Red theme - Error messages, failures (icon: ✕)
+
+## Positions
+
+- **top**: Slides down from top, positioned 48px from screen top
+- **bottom**: Slides up from bottom, positioned 48px from screen bottom (default)
 
 ## States
 
-- **entering**: Sliding in animation
-- **visible**: Displayed and readable
-- **exiting**: Sliding out animation
-- **dismissed**: Removed from screen
+- **Hidden**: Not rendered (returns null when invisible and animation complete)
+- **Animating In**: Spring animation sliding into position
+- **Visible**: Fully visible, auto-dismiss timer running (if duration > 0)
+- **Animating Out**: Fade and slide animation exiting
 
 ## Theme Support
 
-Similar to Alert with colored backgrounds and contrasting text
+### Light Mode Colors
+
+- **info**: #EFF6FF background, #DBEAFE border, #1E40AF text, #3B82F6 icon
+- **success**: #F0FDF4 background, #D1FAE5 border, #065F46 text, #10B981 icon
+- **warning**: #FFFBEB background, #FEF3C7 border, #92400E text, #F59E0B icon
+- **error**: #FEF2F2 background, #FEE2E2 border, #991B1B text, #EF4444 icon
+
+### Dark Mode Colors
+
+Same as Alert component (shared color palette).
 
 ## Accessibility Requirements
 
-- role="alert"
-- accessibilityLiveRegion="assertive" (interrupts user)
-- Auto-announce message when appears
-- Action button accessible
-- Ensure adequate time to read before auto-dismiss (3s minimum)
+- \`accessibilityRole="alert"\` - Screen reader announces immediately
+- \`accessibilityLiveRegion="polite"\` - Non-intrusive announcements
+- Sufficient contrast ratios for text on colored backgrounds
+- Visible for minimum 3 seconds (default) for readability
 
 ## Usage Examples
 
-### Basic Usage
+### Basic Toast
 
-```tsx
-showToast({
-  message: "File uploaded successfully",
-  variant: "success",
-});
-```
+\`\`\`tsx
+const [visible, setVisible] = useState(false);
 
-### Advanced Usage
+<Toast
+visible={visible}
+message="Changes saved successfully"
+onDismiss={() => setVisible(false)}
+/>
+\`\`\`
 
-```tsx
-showToast({
-  message: "Connection lost. Retrying...",
-  variant: "error",
-  duration: 0,
-  action: {
-    label: "Retry Now",
-    onPress: handleRetry,
-  },
-  position: "top",
-});
-```
+### Variants
+
+\`\`\`tsx
+<Toast visible variant="success" message="File uploaded" onDismiss={...} />
+<Toast visible variant="error" message="Connection failed" onDismiss={...} />
+<Toast visible variant="warning" message="Storage almost full" onDismiss={...} />
+\`\`\`
+
+### Top Position
+
+\`\`\`tsx
+<Toast
+  visible
+  position="top"
+  message="New message received"
+  onDismiss={...}
+/>
+\`\`\`
+
+### Manual Dismiss (No Auto-dismiss)
+
+\`\`\`tsx
+<Toast
+  visible
+  message="Action required"
+  duration={0}
+  onDismiss={handleManualDismiss}
+/>
+\`\`\`
+
+### Custom Duration
+
+\`\`\`tsx
+<Toast
+  visible
+  message="Quick notification"
+  duration={1500}
+  onDismiss={...}
+/>
+\`\`\`
 
 ## Edge Cases
 
-- **Multiple toasts**: Queue or stack (max 3 visible)
-- **duration = 0**: Requires manual dismiss (action or swipe)
-- **Very long message**: Wraps to multiple lines
-- **Rapid toast calls**: Debounce or queue to avoid spam
+- Multiple toasts: User must manage stacking/queuing in parent component
+- Very long messages: Text will wrap, toast height increases
+- Duration 0: Toast stays visible until user sets visible to false
+- Dismiss during animation: Animation completes before unmounting
 
-## Dependencies
+## Animation Details
 
-- Toast manager/provider for global control
-- Gesture handler for swipe-to-dismiss
-- Animated API for enter/exit animations
+### Entrance Animation
+
+- Spring animation (friction: 8, tension: 40)
+- Translates from off-screen to final position
+- Simultaneous opacity fade-in (0 → 1)
+- Native driver enabled for performance
+
+### Exit Animation
+
+- Timing animation (duration: 200ms)
+- Translates back off-screen
+- Simultaneous opacity fade-out (1 → 0)
+- Native driver enabled
+
+### Auto-dismiss Behavior
+
+- Timer starts when visible becomes true
+- Timer cleared on unmount or when visible becomes false
+- Calls onDismiss when timer expires
+- Parent must set visible to false in onDismiss to trigger exit animation
 
 ## Design Considerations
 
 ### Styling Approach
 
-- Container: Rounded rectangle with shadow
-- Color scheme from variant
-- Icon + Message + Action button layout
-- Positioned absolutely at screen edges
+Absolutely positioned with fixed left/right margins (16px). Shadow and elevation for depth perception. Rounded corners (8px) and border (1px) matching Alert component for consistency.
 
 ### Layout Strategy
 
-- Portal to app root for z-index control
-- Position: top (16px from top) or bottom (16px from bottom)
-- Horizontal margins: 16px from sides
-- Max width: constrained for readability
+Horizontal flex layout with icon and message. Message uses flex: 1 to expand and wrap text. Position calculated via top or bottom style with fixed offset.
 
 ### Performance Considerations
 
-- Native driver for animations
-- Limit simultaneous toasts (queue excess)
-- Remove from tree after exit animation
+- Uses Animated.spring for natural motion
+- Native driver for transform and opacity
+- Unmounts when not visible to reduce component tree
+- Single timer instance, cleaned up properly
 
 ### Customization Points
 
-- position for flexibility
-- duration for different urgency levels
-- action for CTAs
-- Variant for semantic styling
-- Can integrate with global toast provider
+- 4 semantic variants with icons
+- 2 position options (top/bottom)
+- Configurable auto-dismiss duration
+- Custom styling via style prop
+- User-controlled visibility state

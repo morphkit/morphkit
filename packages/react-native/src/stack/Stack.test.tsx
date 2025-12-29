@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react-native";
 import { Stack } from "./Stack";
-import { Text } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 describe("<Stack />", () => {
   test("renders children correctly", () => {
@@ -15,231 +15,203 @@ describe("<Stack />", () => {
   });
 
   test("applies vertical direction by default", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack>
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          flexDirection: "column",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      flexDirection: "column",
+    });
   });
 
   test("applies horizontal direction", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack direction="horizontal">
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          flexDirection: "row",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      flexDirection: "row",
+    });
   });
 
   test("applies default gap of 8", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack>
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          gap: 8,
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      gap: 8,
+    });
   });
 
   test("applies custom gap", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack gap={16}>
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          gap: 16,
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      gap: 16,
+    });
   });
 
   test("applies stretch alignment by default", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack>
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          alignItems: "stretch",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      alignItems: "stretch",
+    });
   });
 
   test("applies start alignment", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack align="start">
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          alignItems: "flex-start",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      alignItems: "flex-start",
+    });
   });
 
   test("applies center alignment", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack align="center">
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          alignItems: "center",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      alignItems: "center",
+    });
   });
 
   test("applies end alignment", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack align="end">
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          alignItems: "flex-end",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      alignItems: "flex-end",
+    });
   });
 
   test("applies start justification by default", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack>
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          justifyContent: "flex-start",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      justifyContent: "flex-start",
+    });
   });
 
   test("applies center justification", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack justify="center">
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          justifyContent: "center",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      justifyContent: "center",
+    });
   });
 
   test("applies end justification", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack justify="end">
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          justifyContent: "flex-end",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      justifyContent: "flex-end",
+    });
   });
 
   test("applies space-between justification", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack justify="space-between">
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          justifyContent: "space-between",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      justifyContent: "space-between",
+    });
   });
 
   test("applies nowrap by default", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack>
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          flexWrap: "nowrap",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      flexWrap: "nowrap",
+    });
   });
 
   test("applies wrap when specified", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack wrap={true}>
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          flexWrap: "wrap",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      flexWrap: "wrap",
+    });
   });
 
   test("combines all props", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack
         direction="horizontal"
         gap={12}
@@ -250,30 +222,28 @@ describe("<Stack />", () => {
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          flexDirection: "row",
-          gap: 12,
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-        }),
-      ]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({
+      flexDirection: "row",
+      gap: 12,
+      alignItems: "center",
+      justifyContent: "space-between",
+      flexWrap: "wrap",
+    });
   });
 
   test("merges custom style prop", () => {
-    const { UNSAFE_getByType } = render(
+    const { UNSAFE_getAllByType } = render(
       <Stack style={{ padding: 16 }}>
         <Text>Content</Text>
       </Stack>,
     );
-    const stack = UNSAFE_getByType(Stack);
-    expect(stack.props.style).toEqual(
-      expect.arrayContaining([{ padding: 16 }]),
-    );
+    const views = UNSAFE_getAllByType(View);
+    const stackView = views[0];
+    const flatStyle = StyleSheet.flatten(stackView.props.style);
+    expect(flatStyle).toMatchObject({ padding: 16 });
   });
 
   test("forwards additional ViewProps", () => {

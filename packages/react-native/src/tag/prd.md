@@ -2,31 +2,29 @@
 
 ## Overview
 
-Small label component for categorization, status display, or metadata with color variants and dismissible option. Provides compact, color-coded labels for filtering, tagging, and status indication.
+A small pill-shaped label component for categorization, status indication, and content classification. Supports multiple color variants, sizes, and optional dismiss functionality.
 
 ## Component Behavior
 
-Tag renders a compact pill-shaped label with text and optional icon. Dismissible tags show X button that triggers onDismiss callback. Variants control visual style (solid, outline, subtle). Color prop determines semantic color scheme.
+Tag renders as a compact, pill-shaped container with rounded corners. When dismissible, it includes a close button (×) that triggers the onDismiss callback. Non-dismissible tags are static View components, while dismissible tags include interactive Pressable dismiss buttons.
 
 ## Props
 
 ### Required Props
 
-| Prop     | Type        | Description      |
-| -------- | ----------- | ---------------- |
-| children | `ReactNode` | Tag text content |
+| Prop     | Type        | Description        |
+| -------- | ----------- | ------------------ |
+| children | `ReactNode` | Tag content (text) |
 
 ### Optional Props
 
-| Prop        | Type                                                       | Default     | Description                                       |
-| ----------- | ---------------------------------------------------------- | ----------- | ------------------------------------------------- |
-| variant     | `"solid" \| "outline" \| "subtle"`                         | `"solid"`   | Visual style determining fill vs border treatment |
-| color       | `"primary" \| "success" \| "warning" \| "error" \| "gray"` | `"gray"`    | Semantic color scheme                             |
-| size        | `"sm" \| "md" \| "lg"`                                     | `"md"`      | Size preset for padding and fontSize              |
-| dismissible | `boolean`                                                  | `false`     | Show dismiss X button                             |
-| onDismiss   | `() => void`                                               | `undefined` | Callback when dismiss button pressed              |
-| icon        | `ReactNode`                                                | `undefined` | Icon element before text                          |
-| style       | `StyleProp<ViewStyle>`                                     | `undefined` | Additional custom styles                          |
+| Prop        | Type                                                          | Default     | Description                             |
+| ----------- | ------------------------------------------------------------- | ----------- | --------------------------------------- |
+| variant     | `"default" \| "primary" \| "success" \| "warning" \| "error"` | `"default"` | Color theme variant                     |
+| size        | `"sm" \| "md" \| "lg"`                                        | `"md"`      | Size preset                             |
+| dismissible | `boolean`                                                     | `false`     | Shows dismiss button (×) when true      |
+| onDismiss   | `() => void`                                                  | -           | Callback when dismiss button is pressed |
+| style       | `StyleProp<ViewStyle>`                                        | -           | Custom container styles                 |
 
 ### Extends
 
@@ -36,107 +34,103 @@ Tag renders a compact pill-shaped label with text and optional icon. Dismissible
 
 ### Visual Styles
 
-- **solid**: Filled background with white text
-- **outline**: Border with transparent background, colored text
-- **subtle**: Light background with darker text (tinted background)
+- **default**: Gray background, neutral for general labels
+- **primary**: Blue background, primary actions or categories
+- **success**: Green background, positive states or success messages
+- **warning**: Orange background, caution or attention needed
+- **error**: Red background, errors or destructive states
 
-### Color Schemes
+## Sizes
 
-- **primary**: Blue tones
-- **success**: Green tones
-- **warning**: Yellow/orange tones
-- **error**: Red tones
-- **gray**: Neutral gray tones
-
-### Sizes
-
-- **sm**: padding: 2px 6px, fontSize: 11, borderRadius: 3
-- **md**: padding: 4px 8px, fontSize: 12, borderRadius: 4
-- **lg**: padding: 6px 10px, fontSize: 14, borderRadius: 6
+- **sm**: 6px padding, 11px font, 20px min height - Compact tags
+- **md**: 8px padding, 13px font, 24px min height - Standard tags (default)
+- **lg**: 10px padding, 15px font, 32px min height - Prominent tags
 
 ## States
 
-- **default**: Standard tag appearance
-- **dismissible**: Shows X button for removal
+- **Static**: Non-dismissible tag (View component)
+- **Dismissible**: Tag with close button (includes Pressable for dismiss)
 
 ## Theme Support
 
-Each color has light/dark variants:
+### Light Mode Colors
 
-- Light: vibrant colors, sufficient contrast
-- Dark: muted colors, softer appearance
-- Solid variant adjusts text color for readability
+- default: #E5E7EB background, #374151 text
+- primary: #DBEAFE background, #1E40AF text
+- success: #D1FAE5 background, #065F46 text
+- warning: #FEF3C7 background, #92400E text
+- error: #FEE2E2 background, #991B1B text
+
+### Dark Mode Colors
+
+- default: #374151 background, #E5E7EB text
+- primary: #1E3A8A background, #DBEAFE text
+- success: #064E3B background, #D1FAE5 text
+- warning: #78350F background, #FEF3C7 text
+- error: #7F1D1D background, #FEE2E2 text
 
 ## Accessibility Requirements
 
-- role="status" for informational tags
-- dismissible tags:
-  - Dismiss button role="button"
-  - accessibilityLabel="Dismiss {tag content}"
-- Sufficient contrast for text on backgrounds
-- Minimum touch target for dismiss button (44x44)
+- `accessibilityRole="text"` for static tags
+- `accessibilityRole="button"` for dismiss button with `accessibilityLabel="Dismiss"`
+- `hitSlop={8}` on dismiss button for easier tap target
 
 ## Usage Examples
 
 ### Basic Usage
 
 ```tsx
-<Tag>Design</Tag>
-<Tag color="primary">React Native</Tag>
-<Tag color="success">Completed</Tag>
+<Tag>Featured</Tag>
 ```
 
-### Advanced Usage
+### Variants
 
 ```tsx
-<Tag
-  variant="outline"
-  color="error"
-  dismissible
-  onDismiss={() => removeTag("urgent")}
-  icon={<Icon name="alert" />}
->
-  Urgent
+<Tag variant="primary">New</Tag>
+<Tag variant="success">Active</Tag>
+<Tag variant="warning">Pending</Tag>
+<Tag variant="error">Error</Tag>
+```
+
+### Sizes
+
+```tsx
+<Tag size="sm">Small</Tag>
+<Tag size="md">Medium</Tag>
+<Tag size="lg">Large</Tag>
+```
+
+### Dismissible
+
+```tsx
+<Tag dismissible onDismiss={() => console.log("Dismissed")}>
+  Dismissible Tag
 </Tag>
 ```
 
 ## Edge Cases
 
-- **dismissible without onDismiss**: Button shows but does nothing
-- **Very long text**: Tag expands horizontally, may wrap
-- **Empty children**: Renders minimal tag (just icon if provided)
-- **Icon with small size**: Icon may be cramped, adjust sizing
-
-## Dependencies
-
-Optional: Icon library for dismiss X and custom icons
+- Empty children: Tag will render but appear empty
+- Long text: Text will wrap or overflow based on container constraints
+- Dismiss without onDismiss: Dismiss button renders but has no action
 
 ## Design Considerations
 
 ### Styling Approach
 
-- Pill-shaped container (high borderRadius)
-- Variant determines background, border, text color
-- Color maps to theme color palette
-- Size controls padding, fontSize, borderRadius
+Pill-shaped with borderRadius: 999 for fully rounded ends. Uses flexDirection: row for horizontal layout with icon/text alignment.
 
 ### Layout Strategy
 
-- Horizontal row: Icon | Text | Dismiss Button
-- Inline-flex for natural sizing
-- Gap between elements: 4px
+Inline-flex layout allows tags to wrap naturally in flex containers. Min-height ensures consistent vertical alignment across different content.
 
 ### Performance Considerations
 
-- Memoize color/variant style mapping
-- Avoid inline style objects
-- Multiple tags render efficiently
+Static tags use View (no event listeners), dismissible tags use Pressable only for dismiss button to minimize unnecessary touch handling.
 
 ### Customization Points
 
-- Five color options
-- Three visual variants
-- Three size presets
-- dismissible toggle
-- Custom icon support
-- Can group tags in Tag cloud/list
+- 5 color variants with light/dark theme support
+- 3 size presets
+- Optional dismiss functionality
+- Custom styling via style prop

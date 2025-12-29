@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react-native";
+import { StyleSheet } from "react-native";
 import { Typography } from "./Typography";
 
 describe("<Typography />", () => {
@@ -10,10 +11,11 @@ describe("<Typography />", () => {
   test("applies default body variant style", () => {
     const { getByText } = render(<Typography>Body Text</Typography>);
     const element = getByText("Body Text");
-    expect(element.props.style).toMatchObject({
+    const flatStyle = StyleSheet.flatten(element.props.style);
+    expect(flatStyle).toMatchObject({
       fontSize: 17,
       fontWeight: "400",
-      color: "#000000",
+      color: "#000",
     });
   });
 
@@ -22,10 +24,11 @@ describe("<Typography />", () => {
       <Typography variant="large-title">Large Title</Typography>,
     );
     const element = getByText("Large Title");
-    expect(element.props.style).toMatchObject({
+    const flatStyle = StyleSheet.flatten(element.props.style);
+    expect(flatStyle).toMatchObject({
       fontSize: 34,
       fontWeight: "400",
-      color: "#000000",
+      color: "#000",
     });
   });
 
@@ -34,10 +37,11 @@ describe("<Typography />", () => {
       <Typography variant="caption-2">Caption</Typography>,
     );
     const element = getByText("Caption");
-    expect(element.props.style).toMatchObject({
+    const flatStyle = StyleSheet.flatten(element.props.style);
+    expect(flatStyle).toMatchObject({
       fontSize: 11,
       fontWeight: "400",
-      color: "#000000",
+      color: "#000",
     });
   });
 
@@ -48,7 +52,8 @@ describe("<Typography />", () => {
       </Typography>,
     );
     const element = getByText("Custom Heading");
-    expect(element.props.style).toMatchObject({
+    const flatStyle = StyleSheet.flatten(element.props.style);
+    expect(flatStyle).toMatchObject({
       color: "blue",
     });
   });

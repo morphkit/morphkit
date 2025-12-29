@@ -1,0 +1,64 @@
+import { Progress } from "./Progress";
+import { View } from "react-native";
+
+# Progress
+
+A visual progress indicator with bar and circular displays.
+
+## Basic Bar
+
+<View style={{ padding: 16, gap: 16 }}>
+  <Progress value={60} />
+  <Progress value={75} showValue />
+</View>
+
+## Indeterminate
+
+<View style={{ padding: 16 }}>
+  <Progress />
+</View>
+
+## Sizes (Bar)
+
+<View style={{ padding: 16, gap: 16 }}>
+  <Progress value={40} size="sm" />
+  <Progress value={60} size="md" />
+  <Progress value={80} size="lg" />
+</View>
+
+## Circle Variant
+
+<View style={{ padding: 16, flexDirection: "row", gap: 24, justifyContent: "center" }}>
+  <Progress value={50} variant="circle" size="sm" />
+  <Progress value={75} variant="circle" showValue />
+  <Progress value={90} variant="circle" size="lg" />
+</View>
+
+## Custom Color
+
+<View style={{ padding: 16, gap: 16 }}>
+  <Progress value={65} color="#10B981" />
+  <Progress value={45} color="#F59E0B" />
+  <Progress value={80} color="#EF4444" />
+</View>
+
+## Props
+
+| Prop      | Type                    | Default | Description                  |
+| --------- | ----------------------- | ------- | ---------------------------- |
+| value     | number                  | -       | Progress 0-100 (undefined = indeterminate) |
+| variant   | "bar" \\| "circle"      | "bar"   | Display style                |
+| size      | "sm" \\| "md" \\| "lg"  | "md"    | Size preset                  |
+| color     | string                  | Theme   | Progress color               |
+| showValue | boolean                 | false   | Display percentage           |
+| style     | StyleProp\<ViewStyle\>  | -       | Custom container styles      |
+
+## Usage Example
+
+\`\`\`tsx
+import { Progress } from "@warp-ui/react-native";
+
+function UploadProgress({ percent }: { percent: number }) {
+  return <Progress value={percent} showValue />;
+}
+\`\`\`

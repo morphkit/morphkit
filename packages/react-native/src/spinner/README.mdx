@@ -1,0 +1,47 @@
+import { Spinner } from "./Spinner";
+import { View } from "react-native";
+
+# Spinner
+
+An animated loading indicator with continuous 360° rotation.
+
+## Basic Usage
+
+<View style={{ padding: 16 }}>
+  <Spinner />
+</View>
+
+## Sizes
+
+<View style={{ padding: 16, flexDirection: "row", gap: 16, alignItems: "center" }}>
+  <Spinner size="sm" />
+  <Spinner size="md" />
+  <Spinner size="lg" />
+  <Spinner size={40} />
+</View>
+
+## Custom Color
+
+<View style={{ padding: 16, flexDirection: "row", gap: 16 }}>
+  <Spinner color="#FF6B6B" />
+  <Spinner color="#10B981" />
+  <Spinner color="#F59E0B" />
+</View>
+
+## Props
+
+| Prop  | Type                            | Default | Description                      |
+| ----- | ------------------------------- | ------- | -------------------------------- |
+| size  | "sm" \\| "md" \\| "lg" \\| number | "md"    | Size preset or custom pixel value |
+| color | string                          | Theme   | Spinner color                    |
+| style | StyleProp\<ViewStyle\>          | -       | Custom container styles          |
+
+## Usage Example
+
+\`\`\`tsx
+import { Spinner } from "@warp-ui/react-native";
+
+function LoadingScreen() {
+  return <Spinner size="lg" />;
+}
+\`\`\`
