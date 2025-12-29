@@ -1,0 +1,158 @@
+import { Button } from "./Button";
+import { View, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+# Button Component
+
+A versatile Pressable button component with 4 visual variants, 5 size options, icon support, and loading states. Built with React Native's StyleSheet API and full light/dark theme support. Follows iOS accessibility best practices and provides extensive customization through the style prop.
+
+## Variants
+
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#f9fafb",
+    borderRadius: 8,
+    marginVertical: 12,
+    gap: 12,
+  }}
+>
+  <Button variant="primary">Primary Button</Button>
+  <Button variant="secondary">Secondary Button</Button>
+  <Button variant="tonal">Tonal Button</Button>
+  <Button variant="plain">Plain Button</Button>
+</View>
+
+## Sizes
+
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#f9fafb",
+    borderRadius: 8,
+    marginVertical: 12,
+    gap: 12,
+  }}
+>
+  <Button size="sm">Small Button</Button>
+  <Button size="md">Medium Button</Button>
+  <Button size="lg">Large Button</Button>
+  <Button size="icon">
+    <Ionicons name="heart" size={20} color="#FFFFFF" />
+  </Button>
+</View>
+
+## With Icons
+
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#f9fafb",
+    borderRadius: 8,
+    marginVertical: 12,
+    gap: 12,
+  }}
+>
+  <Button iconLeft={<Ionicons name="play" size={16} color="#FFFFFF" />}>
+    Play Button
+  </Button>
+  <Button iconRight={<Ionicons name="arrow-forward" size={16} color="#FFFFFF" />}>
+    Next
+  </Button>
+  <Button
+    iconLeft={<Ionicons name="mail" size={16} color="#FFFFFF" />}
+    iconRight={<Ionicons name="checkmark" size={16} color="#FFFFFF" />}
+  >
+    Send Email
+  </Button>
+</View>
+
+## States
+
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#f9fafb",
+    borderRadius: 8,
+    marginVertical: 12,
+    gap: 12,
+  }}
+>
+  <Button disabled>Disabled Button</Button>
+  <Button loading>Loading...</Button>
+  <Button variant="secondary" disabled>
+    Disabled Secondary
+  </Button>
+</View>
+
+## Icon Buttons
+
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#f9fafb",
+    borderRadius: 8,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 12,
+  }}
+>
+  <Button size="icon" variant="primary">
+    <Ionicons name="heart" size={20} color="#FFFFFF" />
+  </Button>
+  <Button size="icon" variant="secondary">
+    <Ionicons name="star" size={20} color="#333333" />
+  </Button>
+  <Button size="icon" variant="tonal">
+    <Ionicons name="search" size={20} color="#1565C0" />
+  </Button>
+</View>
+
+## Props
+
+| Prop       | Type                                                                   | Default     |
+| ---------- | ---------------------------------------------------------------------- | ----------- |
+| variant    | `"primary"` \| `"secondary"` \| `"tonal"` \| `"plain"`                 | `"primary"` |
+| size       | `"none"` \| `"sm"` \| `"md"` \| `"lg"` \| `"icon"`                     | `"md"`      |
+| children   | `ReactNode`                                                            | -           |
+| iconLeft   | `ReactNode`                                                            | -           |
+| iconRight  | `ReactNode`                                                            | -           |
+| disabled   | `boolean`                                                              | `false`     |
+| loading    | `boolean`                                                              | `false`     |
+| onPress    | `() => void`                                                           | -           |
+| style      | `StyleProp<ViewStyle>`                                                 | -           |
+| ...props   | `PressableProps`                                                       | -           |
+
+## Usage Examples
+
+### Basic Button
+
+```tsx
+<Button onPress={() => console.log("Pressed")}>Click Me</Button>
+```
+
+### Icon Button
+
+```tsx
+import { Ionicons } from "@expo/vector-icons";
+
+<Button size="icon" variant="tonal" onPress={handleLike}>
+  <Ionicons name="heart" size={20} color="#1565C0" />
+</Button>
+```
+
+### Loading Button
+
+```tsx
+<Button loading={isSubmitting} variant="primary" onPress={handleSubmit}>
+  Submit Form
+</Button>
+```
+
+### Custom Styling
+
+```tsx
+<Button variant="secondary" style={{ borderRadius: 20, paddingHorizontal: 24 }}>
+  Custom Rounded
+</Button>
+```

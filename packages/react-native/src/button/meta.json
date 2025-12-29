@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "button",
+  "description": "Pressable button component with 4 variants, 5 sizes, icon support, and loading states",
+  "dependencies": []
+}

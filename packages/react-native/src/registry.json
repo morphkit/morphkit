@@ -1,7 +1,13 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2025-12-28T00:00:00.000Z",
+  "generatedAt": "2025-12-29T00:00:00.000Z",
   "components": [
+    {
+      "type": "react-native",
+      "name": "button",
+      "description": "Pressable button component with 4 variants, 5 sizes, icon support, and loading states",
+      "dependencies": []
+    },
     {
       "type": "react-native",
       "name": "typography",

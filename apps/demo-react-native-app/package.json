@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@bacons/mdx": "^0.4.5",
+    "@expo/vector-icons": "^15.0.3",
     "@warp-ui/react-native": "*",
     "expo": "~54.0.30",
     "expo-constants": "~18.0.12",
