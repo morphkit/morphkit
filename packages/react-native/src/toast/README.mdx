@@ -8,7 +8,7 @@ A temporary notification component with slide animation and auto-dismiss.
 
 ## Basic Usage
 
-\`\`\`tsx
+```tsx
 const [visible, setVisible] = useState(false);
 
 <Button title="Show Toast" onPress={() => setVisible(true)} />
@@ -17,7 +17,7 @@ const [visible, setVisible] = useState(false);
   message="Changes saved successfully"
   onDismiss={() => setVisible(false)}
 />
-\`\`\`
+```
 
 ## Variants
 
@@ -49,7 +49,7 @@ const [visible, setVisible] = useState(false);
 
 ## Usage Example
 
-\`\`\`tsx
+```tsx
 import { Toast } from "@warp-ui/react-native";
 import { useState } from "react";
 
@@ -73,4 +73,4 @@ function SaveButton() {
     </>
   );
 }
-\`\`\`
+```
