@@ -1,0 +1,96 @@
+import { Avatar } from "./Avatar";
+import { View } from "react-native";
+
+# Avatar Component
+
+A circular avatar component that displays user images or fallback text (typically initials). Always wrapped in Pressable for touch handling with full light/dark theme support.
+
+## Sizes
+
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#f9fafb",
+    borderRadius: 8,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 12,
+  }}
+>
+  <Avatar size="sm" fallback="AB" />
+  <Avatar size="md" fallback="CD" />
+  <Avatar size="lg" fallback="EF" />
+</View>
+
+## With Images
+
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#f9fafb",
+    borderRadius: 8,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 12,
+  }}
+>
+  <Avatar size="sm" source={{ uri: "https://i.pravatar.cc/32" }} />
+  <Avatar size="md" source={{ uri: "https://i.pravatar.cc/40" }} />
+  <Avatar size="lg" source={{ uri: "https://i.pravatar.cc/48" }} />
+</View>
+
+## Fallback Text
+
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#f9fafb",
+    borderRadius: 8,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 12,
+  }}
+>
+  <Avatar fallback="JD" />
+  <Avatar fallback="SM" />
+  <Avatar fallback="KL" />
+</View>
+
+## Props
+
+| Prop     | Type                       | Default |
+| -------- | -------------------------- | ------- |
+| source   | `ImageSourcePropType`      | -       |
+| fallback | `string`                   | `""`    |
+| size     | `"sm"` \| `"md"` \| `"lg"` | `"md"`  |
+| style    | `StyleProp<ViewStyle>`     | -       |
+| ...props | `PressableProps`           | -       |
+
+## Usage Examples
+
+### Basic Avatar with Image
+
+```tsx
+<Avatar source={{ uri: "https://example.com/avatar.jpg" }} />
+```
+
+### Fallback Text (Initials)
+
+```tsx
+<Avatar fallback="JD" />
+```
+
+### Custom Size
+
+```tsx
+<Avatar size="lg" source={{ uri: "https://example.com/avatar.jpg" }} />
+```
+
+### Pressable Avatar
+
+```tsx
+<Avatar
+  source={{ uri: "https://example.com/avatar.jpg" }}
+  onPress={() => console.log("Avatar pressed")}
+/>
+```
