@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "card",
+  "description": "Content container with elevation, borders, and padding for grouping information",
+  "dependencies": []
+}

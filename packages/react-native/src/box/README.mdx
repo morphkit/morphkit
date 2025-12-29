@@ -1,0 +1,226 @@
+import { Box } from "./Box";
+import { Text } from "react-native";
+
+# Box Component
+
+A flexible container component serving as the fundamental building block for layouts with comprehensive spacing, sizing, and styling props. Box provides a declarative API for common layout patterns without writing custom styles.
+
+## Basic Usage
+
+<Box padding={16} backgroundColor="#F3F4F6" borderRadius={8}>
+  <Text>Simple box with padding and background</Text>
+</Box>
+
+## Spacing
+
+### Padding
+
+<Box flexDirection="row" gap={16} padding={16}>
+  <Box padding={16} backgroundColor="#E0E7FF" borderRadius={4}>
+    <Text>padding: 16</Text>
+  </Box>
+  <Box
+    padding={{ top: 8, right: 16, bottom: 8, left: 16 }}
+    backgroundColor="#DBEAFE"
+    borderRadius={4}
+  >
+    <Text>Custom padding</Text>
+  </Box>
+</Box>
+
+### Margin
+
+<Box backgroundColor="#F9FAFB" padding={8}>
+  <Box margin={8} padding={12} backgroundColor="#FEF3C7" borderRadius={4}>
+    <Text>margin: 8</Text>
+  </Box>
+  <Box
+    margin={{ top: 16, bottom: 16 }}
+    padding={12}
+    backgroundColor="#FED7AA"
+    borderRadius={4}
+  >
+    <Text>Vertical margin</Text>
+  </Box>
+</Box>
+
+## Border Styles
+
+<Box flexDirection="row" gap={16} padding={16}>
+  <Box
+    padding={16}
+    borderWidth={1}
+    borderColor="#E5E7EB"
+    borderRadius={4}
+  >
+    <Text>With border</Text>
+  </Box>
+  <Box
+    padding={16}
+    borderWidth={2}
+    borderColor="#4A90E2"
+    borderRadius={8}
+  >
+    <Text>Thick border</Text>
+  </Box>
+  <Box
+    padding={16}
+    borderWidth={1}
+    borderColor="#10B981"
+    borderRadius={16}
+  >
+    <Text>Rounded</Text>
+  </Box>
+</Box>
+
+## Flexbox Layout
+
+### Horizontal Layout
+
+<Box
+  flexDirection="row"
+  justifyContent="space-between"
+  alignItems="center"
+  padding={16}
+  backgroundColor="#F3F4F6"
+  borderRadius={8}
+>
+  <Box padding={8} backgroundColor="#4A90E2" borderRadius={4}>
+    <Text style={{ color: "#FFFFFF" }}>Left</Text>
+  </Box>
+  <Box padding={8} backgroundColor="#10B981" borderRadius={4}>
+    <Text style={{ color: "#FFFFFF" }}>Center</Text>
+  </Box>
+  <Box padding={8} backgroundColor="#F59E0B" borderRadius={4}>
+    <Text style={{ color: "#FFFFFF" }}>Right</Text>
+  </Box>
+</Box>
+
+### Vertical Layout with Gap
+
+<Box gap={8} padding={16} backgroundColor="#F3F4F6" borderRadius={8}>
+  <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
+    <Text>Item 1</Text>
+  </Box>
+  <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
+    <Text>Item 2</Text>
+  </Box>
+  <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
+    <Text>Item 3</Text>
+  </Box>
+</Box>
+
+## Centered Content
+
+<Box
+  padding={32}
+  backgroundColor="#EEF2FF"
+  borderRadius={8}
+  justifyContent="center"
+  alignItems="center"
+>
+  <Text style={{ fontSize: 18, fontWeight: "600" }}>Centered Text</Text>
+</Box>
+
+## Complex Layout Example
+
+<Box padding={16} backgroundColor="#FFFFFF" borderRadius={12} borderWidth={1} borderColor="#E5E7EB">
+  <Box flexDirection="row" justifyContent="space-between" alignItems="center" marginBottom={12}>
+    <Text style={{ fontSize: 18, fontWeight: "600" }}>Card Title</Text>
+    <Box padding={4} backgroundColor="#EF4444" borderRadius={12}>
+      <Text style={{ color: "#FFFFFF", fontSize: 12 }}>New</Text>
+    </Box>
+  </Box>
+  <Box marginBottom={16}>
+    <Text style={{ color: "#6B7280" }}>This is a card built entirely with Box components using flexbox layout properties.</Text>
+  </Box>
+  <Box flexDirection="row" gap={8}>
+    <Box flex={1} padding={12} backgroundColor="#4A90E2" borderRadius={8} alignItems="center">
+      <Text style={{ color: "#FFFFFF", fontWeight: "600" }}>Action</Text>
+    </Box>
+    <Box flex={1} padding={12} backgroundColor="#F3F4F6" borderRadius={8} alignItems="center">
+      <Text style={{ fontWeight: "600" }}>Cancel</Text>
+    </Box>
+  </Box>
+</Box>
+
+## Props
+
+| Prop            | Type                                                                                            | Default     | Description                                   |
+| --------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------- |
+| children        | `ReactNode`                                                                                     | -           | Child elements to render                      |
+| padding         | `number \| { top?, right?, bottom?, left? }`                                                    | `undefined` | Padding around content                        |
+| margin          | `number \| { top?, right?, bottom?, left? }`                                                    | `undefined` | Margin around box                             |
+| borderRadius    | `number`                                                                                        | `undefined` | Border corner radius                          |
+| borderWidth     | `number`                                                                                        | `undefined` | Border thickness                              |
+| borderColor     | `string`                                                                                        | `undefined` | Border color                                  |
+| backgroundColor | `string`                                                                                        | `undefined` | Background color                              |
+| flex            | `number`                                                                                        | `undefined` | Flex grow/shrink value                        |
+| flexDirection   | `"row"` \| `"column"` \| `"row-reverse"` \| `"column-reverse"`                                  | `undefined` | Flex direction                                |
+| justifyContent  | `"flex-start"` \| `"flex-end"` \| `"center"` \| `"space-between"` \| `"space-around"` \| `"space-evenly"` | `undefined` | Main axis alignment                           |
+| alignItems      | `"flex-start"` \| `"flex-end"` \| `"center"` \| `"stretch"` \| `"baseline"`                    | `undefined` | Cross axis alignment                          |
+| gap             | `number`                                                                                        | `undefined` | Space between children (requires RN >= 0.71)  |
+| style           | `StyleProp<ViewStyle>`                                                                          | `undefined` | Custom styles                                 |
+| ...props        | `ViewProps`                                                                                     | -           | All other View props                          |
+
+## Usage Examples
+
+### Simple Container
+
+```tsx
+import { Box } from "@warpui/react-native";
+import { Text } from "react-native";
+
+<Box padding={16} backgroundColor="#F3F4F6">
+  <Text>Content here</Text>
+</Box>
+```
+
+### Horizontal Layout
+
+```tsx
+<Box flexDirection="row" gap={8} padding={16}>
+  <Box flex={1} padding={12} backgroundColor="#4A90E2">
+    <Text>Left</Text>
+  </Box>
+  <Box flex={1} padding={12} backgroundColor="#10B981">
+    <Text>Right</Text>
+  </Box>
+</Box>
+```
+
+### Card Layout
+
+```tsx
+<Box
+  padding={20}
+  margin={16}
+  backgroundColor="#FFFFFF"
+  borderRadius={12}
+  borderWidth={1}
+  borderColor="#E5E7EB"
+>
+  <Text>Card Content</Text>
+</Box>
+```
+
+### Centered Content
+
+```tsx
+<Box
+  flex={1}
+  justifyContent="center"
+  alignItems="center"
+>
+  <Text>Centered</Text>
+</Box>
+```
+
+## Behavior Notes
+
+- Box is a pure layout primitive with no default styling
+- All props are optional for maximum flexibility
+- Spacing can be specified as a single number or object with individual sides
+- The `gap` property requires React Native 0.71 or higher
+- Custom styles via the `style` prop are merged after all other props
+- Box extends View, so all View props are supported (testID, accessibilityLabel, etc.)

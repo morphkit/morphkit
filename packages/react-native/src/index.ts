@@ -1,4 +1,9 @@
 export { Avatar, type AvatarProps } from "./avatar";
 export { Badge, type BadgeProps } from "./badge";
+export { Box, type BoxProps } from "./box";
 export { Button, type ButtonProps } from "./button";
+export { Card, type CardProps } from "./card";
+export { Container, type ContainerProps } from "./container";
+export { Divider, type DividerProps } from "./divider";
+export { Stack, type StackProps } from "./stack";
 export { Typography, type TypographyProps } from "./typography";

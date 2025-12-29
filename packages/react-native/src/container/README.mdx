@@ -1,0 +1,229 @@
+import { Container } from "./Container";
+import { Text, View } from "react-native";
+
+# Container Component
+
+A centered, max-width wrapper for page content providing consistent horizontal margins and responsive width constraints. Perfect for creating readable, well-structured layouts on larger screens.
+
+## Basic Usage
+
+<Container>
+  <View style={{ backgroundColor: "#EEF2FF", padding: 16, borderRadius: 8 }}>
+    <Text style={{ fontSize: 16, fontWeight: "600" }}>
+      Container Content
+    </Text>
+    <Text style={{ color: "#6B7280", marginTop: 4 }}>
+      This content is constrained to a maximum width and centered
+    </Text>
+  </View>
+</Container>
+
+## Max Width Presets
+
+### Small (640px)
+
+<Container maxWidth="sm">
+  <View style={{ backgroundColor: "#DBEAFE", padding: 12, borderRadius: 6 }}>
+    <Text style={{ fontWeight: "600" }}>Small Container (640px max)</Text>
+    <Text style={{ fontSize: 14, color: "#6B7280" }}>
+      Ideal for forms and narrow content
+    </Text>
+  </View>
+</Container>
+
+### Medium (768px)
+
+<Container maxWidth="md">
+  <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 6 }}>
+    <Text style={{ fontWeight: "600" }}>Medium Container (768px max)</Text>
+    <Text style={{ fontSize: 14, color: "#6B7280" }}>
+      Good for articles and reading content
+    </Text>
+  </View>
+</Container>
+
+### Large (1024px) - Default
+
+<Container maxWidth="lg">
+  <View style={{ backgroundColor: "#D1FAE5", padding: 12, borderRadius: 6 }}>
+    <Text style={{ fontWeight: "600" }}>Large Container (1024px max)</Text>
+    <Text style={{ fontSize: 14, color: "#6B7280" }}>
+      Default size, suitable for most layouts
+    </Text>
+  </View>
+</Container>
+
+### Extra Large (1280px)
+
+<Container maxWidth="xl">
+  <View style={{ backgroundColor: "#FEF3C7", padding: 12, borderRadius: 6 }}>
+    <Text style={{ fontWeight: "600" }}>Extra Large Container (1280px max)</Text>
+    <Text style={{ fontSize: 14, color: "#6B7280" }}>
+      For wide dashboards and data displays
+    </Text>
+  </View>
+</Container>
+
+## Custom Max Width
+
+<Container maxWidth={500}>
+  <View style={{ backgroundColor: "#E0E7FF", padding: 12, borderRadius: 6 }}>
+    <Text style={{ fontWeight: "600" }}>Custom Width (500px)</Text>
+    <Text style={{ fontSize: 14, color: "#6B7280" }}>
+      Specify exact pixel width as needed
+    </Text>
+  </View>
+</Container>
+
+## Padding Customization
+
+<View style={{ gap: 16 }}>
+  <Container padding={8}>
+    <View style={{ backgroundColor: "#F3F4F6", padding: 12, borderRadius: 6 }}>
+      <Text>8px horizontal padding</Text>
+    </View>
+  </Container>
+
+  <Container padding={24}>
+    <View style={{ backgroundColor: "#F3F4F6", padding: 12, borderRadius: 6 }}>
+      <Text>24px horizontal padding</Text>
+    </View>
+  </Container>
+
+  <Container padding={40}>
+    <View style={{ backgroundColor: "#F3F4F6", padding: 12, borderRadius: 6 }}>
+      <Text>40px horizontal padding</Text>
+    </View>
+  </Container>
+</View>
+
+## Alignment
+
+### Centered (Default)
+
+<Container centered={true}>
+  <View style={{ backgroundColor: "#ECFDF5", padding: 12, borderRadius: 6 }}>
+    <Text style={{ fontWeight: "600" }}>Centered Container</Text>
+    <Text style={{ fontSize: 14, color: "#6B7280" }}>
+      Uses alignSelf: center
+    </Text>
+  </View>
+</Container>
+
+### Not Centered
+
+<Container centered={false}>
+  <View style={{ backgroundColor: "#FEF2F2", padding: 12, borderRadius: 6 }}>
+    <Text style={{ fontWeight: "600" }}>Left-Aligned Container</Text>
+    <Text style={{ fontSize: 14, color: "#6B7280" }}>
+      No horizontal centering applied
+    </Text>
+  </View>
+</Container>
+
+## Nested Containers
+
+<Container maxWidth="xl" padding={24}>
+  <View style={{ backgroundColor: "#F9FAFB", padding: 16, borderRadius: 8 }}>
+    <Text style={{ fontSize: 18, fontWeight: "700", marginBottom: 12 }}>
+      Outer Container (XL)
+    </Text>
+    <Container maxWidth="md" padding={0}>
+      <View style={{ backgroundColor: "#FFFFFF", padding: 12, borderRadius: 6, borderWidth: 1, borderColor: "#E5E7EB" }}>
+        <Text style={{ fontWeight: "600" }}>Inner Container (MD)</Text>
+        <Text style={{ fontSize: 14, color: "#6B7280" }}>
+          Nested containers for complex layouts
+        </Text>
+      </View>
+    </Container>
+  </View>
+</Container>
+
+## Full Page Layout Example
+
+<Container maxWidth="lg" padding={20}>
+  <View style={{ gap: 20 }}>
+    <View style={{ backgroundColor: "#4A90E2", padding: 20, borderRadius: 8 }}>
+      <Text style={{ color: "#FFFFFF", fontSize: 24, fontWeight: "700" }}>
+        Page Header
+      </Text>
+      <Text style={{ color: "#FFFFFF", marginTop: 4 }}>
+        Constrained to container width
+      </Text>
+    </View>
+
+    <View style={{ backgroundColor: "#FFFFFF", padding: 20, borderRadius: 8, borderWidth: 1, borderColor: "#E5E7EB" }}>
+      <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 8 }}>
+        Main Content Section
+      </Text>
+      <Text style={{ color: "#6B7280", lineHeight: 24 }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Container ensures this text doesn't stretch too wide on large screens, maintaining optimal readability.
+      </Text>
+    </View>
+
+    <View style={{ backgroundColor: "#F3F4F6", padding: 16, borderRadius: 8 }}>
+      <Text style={{ fontWeight: "600", marginBottom: 8 }}>Footer</Text>
+      <Text style={{ fontSize: 14, color: "#6B7280" }}>
+        © 2025 Your Company
+      </Text>
+    </View>
+  </View>
+</Container>
+
+## Props
+
+| Prop      | Type                                   | Default | Description                                 |
+| --------- | -------------------------------------- | ------- | ------------------------------------------- |
+| children  | `ReactNode`                            | -       | Container content                           |
+| maxWidth  | `number \| "sm" \| "md" \| "lg" \| "xl"` | `"lg"`  | Maximum width constraint (640/768/1024/1280) |
+| padding   | `number`                               | `16`    | Horizontal padding in pixels                |
+| centered  | `boolean`                              | `true`  | Center container horizontally               |
+| style     | `StyleProp<ViewStyle>`                 | -       | Custom styles                               |
+| ...props  | `ViewProps`                            | -       | All other View props                        |
+
+## Usage Examples
+
+### Basic Container
+
+```tsx
+import { Container } from "@warp-ui/react-native";
+import { Text } from "react-native";
+
+<Container>
+  <Text>Centered content with default settings</Text>
+</Container>
+```
+
+### Small Container for Forms
+
+```tsx
+<Container maxWidth="sm" padding={20}>
+  <FormComponent />
+</Container>
+```
+
+### Full Width Container
+
+```tsx
+<Container maxWidth="xl" centered={false}>
+  <DashboardComponent />
+</Container>
+```
+
+### Custom Width Container
+
+```tsx
+<Container maxWidth={850} padding={32}>
+  <ArticleContent />
+</Container>
+```
+
+## Behavior Notes
+
+- Container is 100% width up to the specified maxWidth
+- Default maxWidth is "lg" (1024px) for optimal content layout
+- Horizontal padding (default 16px) prevents content from touching screen edges
+- Centered by default using alignSelf: "center"
+- Setting centered={false} removes horizontal centering
+- Custom styles are merged last for full override capability
+- Ideal for wrapping page-level content to maintain readability on large screens

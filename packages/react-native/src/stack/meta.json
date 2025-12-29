@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "stack",
+  "description": "Layout component for arranging children with consistent spacing and alignment",
+  "dependencies": []
+}

@@ -1,0 +1,370 @@
+import { Stack } from "./Stack";
+import { View, Text } from "react-native";
+
+# Stack Component
+
+A layout component for arranging children with consistent spacing in horizontal or vertical direction with alignment control. Uses CSS gap property for automatic spacing between children.
+
+## Basic Usage
+
+<Stack>
+  <View style={{ backgroundColor: "#4A90E2", padding: 12, borderRadius: 6 }}>
+    <Text style={{ color: "#FFFFFF" }}>Item 1</Text>
+  </View>
+  <View style={{ backgroundColor: "#10B981", padding: 12, borderRadius: 6 }}>
+    <Text style={{ color: "#FFFFFF" }}>Item 2</Text>
+  </View>
+  <View style={{ backgroundColor: "#F59E0B", padding: 12, borderRadius: 6 }}>
+    <Text style={{ color: "#FFFFFF" }}>Item 3</Text>
+  </View>
+</Stack>
+
+## Direction
+
+### Vertical (Default)
+
+<Stack direction="vertical">
+  <View style={{ backgroundColor: "#EEF2FF", padding: 12, borderRadius: 6 }}>
+    <Text>Vertical Stack Item 1</Text>
+  </View>
+  <View style={{ backgroundColor: "#DBEAFE", padding: 12, borderRadius: 6 }}>
+    <Text>Vertical Stack Item 2</Text>
+  </View>
+  <View style={{ backgroundColor: "#BFDBFE", padding: 12, borderRadius: 6 }}>
+    <Text>Vertical Stack Item 3</Text>
+  </View>
+</Stack>
+
+### Horizontal
+
+<Stack direction="horizontal">
+  <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 6 }}>
+    <Text>Item 1</Text>
+  </View>
+  <View style={{ backgroundColor: "#FECACA", padding: 12, borderRadius: 6 }}>
+    <Text>Item 2</Text>
+  </View>
+  <View style={{ backgroundColor: "#FCA5A5", padding: 12, borderRadius: 6 }}>
+    <Text>Item 3</Text>
+  </View>
+</Stack>
+
+## Gap Spacing
+
+<View style={{ gap: 20 }}>
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Gap: 4px</Text>
+    <Stack direction="horizontal" gap={4}>
+      <View style={{ backgroundColor: "#D1FAE5", padding: 8, borderRadius: 4 }}>
+        <Text>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#D1FAE5", padding: 8, borderRadius: 4 }}>
+        <Text>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#D1FAE5", padding: 8, borderRadius: 4 }}>
+        <Text>C</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Gap: 8px (Default)</Text>
+    <Stack direction="horizontal">
+      <View style={{ backgroundColor: "#FEF3C7", padding: 8, borderRadius: 4 }}>
+        <Text>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#FEF3C7", padding: 8, borderRadius: 4 }}>
+        <Text>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#FEF3C7", padding: 8, borderRadius: 4 }}>
+        <Text>C</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Gap: 16px</Text>
+    <Stack direction="horizontal" gap={16}>
+      <View style={{ backgroundColor: "#E0E7FF", padding: 8, borderRadius: 4 }}>
+        <Text>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#E0E7FF", padding: 8, borderRadius: 4 }}>
+        <Text>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#E0E7FF", padding: 8, borderRadius: 4 }}>
+        <Text>C</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Gap: 24px</Text>
+    <Stack direction="horizontal" gap={24}>
+      <View style={{ backgroundColor: "#FCE7F3", padding: 8, borderRadius: 4 }}>
+        <Text>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#FCE7F3", padding: 8, borderRadius: 4 }}>
+        <Text>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#FCE7F3", padding: 8, borderRadius: 4 }}>
+        <Text>C</Text>
+      </View>
+    </Stack>
+  </View>
+</View>
+
+## Alignment (Cross Axis)
+
+<View style={{ gap: 16 }}>
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Align: Start</Text>
+    <Stack direction="horizontal" align="start" gap={8}>
+      <View style={{ backgroundColor: "#4A90E2", padding: 12, height: 60, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Tall</Text>
+      </View>
+      <View style={{ backgroundColor: "#10B981", padding: 12, height: 40, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Med</Text>
+      </View>
+      <View style={{ backgroundColor: "#F59E0B", padding: 12, height: 30, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Sm</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Align: Center</Text>
+    <Stack direction="horizontal" align="center" gap={8}>
+      <View style={{ backgroundColor: "#4A90E2", padding: 12, height: 60, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Tall</Text>
+      </View>
+      <View style={{ backgroundColor: "#10B981", padding: 12, height: 40, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Med</Text>
+      </View>
+      <View style={{ backgroundColor: "#F59E0B", padding: 12, height: 30, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Sm</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Align: End</Text>
+    <Stack direction="horizontal" align="end" gap={8}>
+      <View style={{ backgroundColor: "#4A90E2", padding: 12, height: 60, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Tall</Text>
+      </View>
+      <View style={{ backgroundColor: "#10B981", padding: 12, height: 40, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Med</Text>
+      </View>
+      <View style={{ backgroundColor: "#F59E0B", padding: 12, height: 30, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>Sm</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Align: Stretch (Default)</Text>
+    <Stack direction="horizontal" align="stretch" gap={8}>
+      <View style={{ backgroundColor: "#4A90E2", padding: 12, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#10B981", padding: 12, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#F59E0B", padding: 12, borderRadius: 4 }}>
+        <Text style={{ color: "#FFFFFF" }}>C</Text>
+      </View>
+    </Stack>
+  </View>
+</View>
+
+## Justification (Main Axis)
+
+<View style={{ gap: 16 }}>
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Justify: Start (Default)</Text>
+    <Stack direction="horizontal" justify="start" gap={8}>
+      <View style={{ backgroundColor: "#EEF2FF", padding: 12, borderRadius: 4 }}>
+        <Text>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#EEF2FF", padding: 12, borderRadius: 4 }}>
+        <Text>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#EEF2FF", padding: 12, borderRadius: 4 }}>
+        <Text>C</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Justify: Center</Text>
+    <Stack direction="horizontal" justify="center" gap={8}>
+      <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 4 }}>
+        <Text>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 4 }}>
+        <Text>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 4 }}>
+        <Text>C</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Justify: End</Text>
+    <Stack direction="horizontal" justify="end" gap={8}>
+      <View style={{ backgroundColor: "#D1FAE5", padding: 12, borderRadius: 4 }}>
+        <Text>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#D1FAE5", padding: 12, borderRadius: 4 }}>
+        <Text>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#D1FAE5", padding: 12, borderRadius: 4 }}>
+        <Text>C</Text>
+      </View>
+    </Stack>
+  </View>
+
+  <View>
+    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Justify: Space Between</Text>
+    <Stack direction="horizontal" justify="space-between" gap={0}>
+      <View style={{ backgroundColor: "#FEF3C7", padding: 12, borderRadius: 4 }}>
+        <Text>A</Text>
+      </View>
+      <View style={{ backgroundColor: "#FEF3C7", padding: 12, borderRadius: 4 }}>
+        <Text>B</Text>
+      </View>
+      <View style={{ backgroundColor: "#FEF3C7", padding: 12, borderRadius: 4 }}>
+        <Text>C</Text>
+      </View>
+    </Stack>
+  </View>
+</View>
+
+## Wrap
+
+<View>
+  <Text style={{ marginBottom: 8, fontWeight: "600" }}>Wrap: true</Text>
+  <Stack direction="horizontal" wrap={true} gap={8}>
+    <View style={{ backgroundColor: "#4A90E2", padding: 12, width: 100, borderRadius: 4 }}>
+      <Text style={{ color: "#FFFFFF" }}>Item 1</Text>
+    </View>
+    <View style={{ backgroundColor: "#10B981", padding: 12, width: 100, borderRadius: 4 }}>
+      <Text style={{ color: "#FFFFFF" }}>Item 2</Text>
+    </View>
+    <View style={{ backgroundColor: "#F59E0B", padding: 12, width: 100, borderRadius: 4 }}>
+      <Text style={{ color: "#FFFFFF" }}>Item 3</Text>
+    </View>
+    <View style={{ backgroundColor: "#EF4444", padding: 12, width: 100, borderRadius: 4 }}>
+      <Text style={{ color: "#FFFFFF" }}>Item 4</Text>
+    </View>
+    <View style={{ backgroundColor: "#8B5CF6", padding: 12, width: 100, borderRadius: 4 }}>
+      <Text style={{ color: "#FFFFFF" }}>Item 5</Text>
+    </View>
+  </Stack>
+</View>
+
+## Complex Layout Example
+
+<Stack gap={16} style={{ padding: 16, backgroundColor: "#F9FAFB", borderRadius: 8 }}>
+  <Text style={{ fontSize: 20, fontWeight: "700" }}>Profile Card</Text>
+
+  <Stack direction="horizontal" gap={12} align="center">
+    <View style={{ width: 60, height: 60, backgroundColor: "#4A90E2", borderRadius: 30 }} />
+    <Stack gap={4}>
+      <Text style={{ fontSize: 16, fontWeight: "600" }}>John Doe</Text>
+      <Text style={{ fontSize: 14, color: "#6B7280" }}>Software Engineer</Text>
+    </Stack>
+  </Stack>
+
+  <Stack gap={8}>
+    <Stack direction="horizontal" justify="space-between">
+      <Text style={{ color: "#6B7280" }}>Email</Text>
+      <Text style={{ fontWeight: "600" }}>john@example.com</Text>
+    </Stack>
+    <Stack direction="horizontal" justify="space-between">
+      <Text style={{ color: "#6B7280" }}>Location</Text>
+      <Text style={{ fontWeight: "600" }}>San Francisco, CA</Text>
+    </Stack>
+    <Stack direction="horizontal" justify="space-between">
+      <Text style={{ color: "#6B7280" }}>Member Since</Text>
+      <Text style={{ fontWeight: "600" }}>January 2024</Text>
+    </Stack>
+  </Stack>
+
+  <Stack direction="horizontal" gap={8}>
+    <View style={{ flex: 1, backgroundColor: "#4A90E2", padding: 12, borderRadius: 6, alignItems: "center" }}>
+      <Text style={{ color: "#FFFFFF", fontWeight: "600" }}>Follow</Text>
+    </View>
+    <View style={{ flex: 1, backgroundColor: "#E5E7EB", padding: 12, borderRadius: 6, alignItems: "center" }}>
+      <Text style={{ fontWeight: "600" }}>Message</Text>
+    </View>
+  </Stack>
+</Stack>
+
+## Props
+
+| Prop      | Type                                                   | Default      | Description                          |
+| --------- | ------------------------------------------------------ | ------------ | ------------------------------------ |
+| children  | `ReactNode`                                            | -            | Child elements to stack              |
+| direction | `"horizontal"` \| `"vertical"`                         | `"vertical"` | Stack direction                      |
+| gap       | `number`                                               | `8`          | Space between children (pixels)      |
+| align     | `"start"` \| `"center"` \| `"end"` \| `"stretch"`      | `"stretch"`  | Cross-axis alignment                 |
+| justify   | `"start"` \| `"center"` \| `"end"` \| `"space-between"` | `"start"`    | Main-axis justification              |
+| wrap      | `boolean`                                              | `false`      | Allow wrapping to multiple lines     |
+| style     | `StyleProp<ViewStyle>`                                 | `undefined`  | Custom styles                        |
+| ...props  | `ViewProps`                                            | -            | All other View props                 |
+
+## Usage Examples
+
+### Vertical Stack
+
+```tsx
+import { Stack } from "@warp-ui/react-native";
+import { Text } from "react-native";
+
+<Stack gap={12}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+  <Text>Item 3</Text>
+</Stack>
+```
+
+### Horizontal Stack with Centered Items
+
+```tsx
+<Stack direction="horizontal" gap={16} align="center">
+  <Text>Left</Text>
+  <Text>Center</Text>
+  <Text>Right</Text>
+</Stack>
+```
+
+### Space Between Layout
+
+```tsx
+<Stack direction="horizontal" justify="space-between">
+  <Text>Start</Text>
+  <Text>End</Text>
+</Stack>
+```
+
+### Wrapping Stack
+
+```tsx
+<Stack direction="horizontal" wrap={true} gap={8}>
+  <View style={{ width: 100 }}>Item 1</View>
+  <View style={{ width: 100 }}>Item 2</View>
+  <View style={{ width: 100 }}>Item 3</View>
+</Stack>
+```
+
+## Behavior Notes
+
+- Stack uses CSS gap property, which requires React Native 0.71 or higher
+- Default gap is 8px for comfortable spacing
+- Vertical direction (column) is default
+- Align controls cross-axis alignment (perpendicular to direction)
+- Justify controls main-axis alignment (parallel to direction)
+- Wrap allows children to flow to multiple lines when space is limited
+- Custom styles are merged last for full override capability

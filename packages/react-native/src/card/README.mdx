@@ -1,0 +1,216 @@
+import { Card } from "./Card";
+import { Typography } from "../typography";
+import { View } from "react-native";
+
+# Card Component
+
+A versatile content container component with elevation, borders, and padding for grouping related information and actions. Supports four visual variants and three sizes with optional press interaction.
+
+## Basic Usage
+
+<Card>
+  <Typography variant="heading" style={{ marginBottom: 8 }}>
+    Card Title
+  </Typography>
+  <Typography variant="callout" style={{ color: "#6B7280" }}>
+    This is a basic card with default elevated variant and medium size.
+  </Typography>
+</Card>
+
+## Variants
+
+### Elevated (Default)
+
+<View style={{ gap: 16, paddingVertical: 16 }}>
+  <Card variant="elevated">
+    <Typography variant="heading">Elevated Card</Typography>
+    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
+      White background with shadow elevation
+    </Typography>
+  </Card>
+</View>
+
+### Outline
+
+<View style={{ gap: 16, paddingVertical: 16 }}>
+  <Card variant="outline">
+    <Typography variant="heading">Outline Card</Typography>
+    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
+      Border with transparent background
+    </Typography>
+  </Card>
+</View>
+
+### Ghost
+
+<View style={{ gap: 16, paddingVertical: 16 }}>
+  <Card variant="ghost">
+    <Typography variant="heading">Ghost Card</Typography>
+    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
+      Subtle background, no border or shadow
+    </Typography>
+  </Card>
+</View>
+
+### Filled
+
+<View style={{ gap: 16, paddingVertical: 16 }}>
+  <Card variant="filled">
+    <Typography variant="heading">Filled Card</Typography>
+    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
+      Solid gray background color
+    </Typography>
+  </Card>
+</View>
+
+## Sizes
+
+<View style={{ gap: 16, paddingVertical: 16 }}>
+  <Card size="sm" variant="outline">
+    <Typography variant="footnote">Small card (12px padding, 8px radius)</Typography>
+  </Card>
+  <Card size="md" variant="outline">
+    <Typography variant="callout">Medium card (16px padding, 12px radius)</Typography>
+  </Card>
+  <Card size="lg" variant="outline">
+    <Typography variant="body">Large card (20px padding, 16px radius)</Typography>
+  </Card>
+</View>
+
+## Pressable Card
+
+Cards become pressable when `onPress` is provided, with opacity feedback on press.
+
+<View style={{ gap: 16, paddingVertical: 16 }}>
+  <Card onPress={() => console.log("Card pressed")}>
+    <Typography variant="heading">Pressable Card</Typography>
+    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
+      Tap this card to trigger action
+    </Typography>
+  </Card>
+</View>
+
+## Complex Card Example
+
+<Card variant="elevated" size="lg">
+  <View style={{ marginBottom: 12 }}>
+    <Typography variant="title-3">Product Card</Typography>
+    <Typography variant="footnote" style={{ color: "#6B7280", marginTop: 4 }}>
+      Premium subscription plan
+    </Typography>
+  </View>
+  <View
+    style={{
+      backgroundColor: "#EEF2FF",
+      padding: 12,
+      borderRadius: 8,
+      marginBottom: 12,
+    }}
+  >
+    <Typography variant="large-title" style={{ color: "#4A90E2" }}>
+      $29
+      <Typography variant="callout" style={{ color: "#6B7280" }}>
+        /month
+      </Typography>
+    </Typography>
+  </View>
+  <View style={{ gap: 8, marginBottom: 16 }}>
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <Typography style={{ marginRight: 8 }}>✓</Typography>
+      <Typography variant="callout">Unlimited access</Typography>
+    </View>
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <Typography style={{ marginRight: 8 }}>✓</Typography>
+      <Typography variant="callout">Priority support</Typography>
+    </View>
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <Typography style={{ marginRight: 8 }}>✓</Typography>
+      <Typography variant="callout">Advanced features</Typography>
+    </View>
+  </View>
+  <View
+    style={{
+      backgroundColor: "#4A90E2",
+      padding: 14,
+      borderRadius: 8,
+      alignItems: "center",
+    }}
+  >
+    <Typography variant="heading" style={{ color: "#FFFFFF" }}>Get Started</Typography>
+  </View>
+</Card>
+
+## Gallery of Combinations
+
+<View style={{ gap: 16, paddingVertical: 16 }}>
+  <Card variant="elevated" size="sm" onPress={() => {}}>
+    <Typography variant="footnote" style={{ fontWeight: "600" }}>Small Elevated Pressable</Typography>
+  </Card>
+  <Card variant="outline" size="md">
+    <Typography variant="heading">Medium Outline Static</Typography>
+  </Card>
+  <Card variant="ghost" size="lg" onPress={() => {}}>
+    <Typography variant="body" style={{ fontWeight: "600" }}>Large Ghost Pressable</Typography>
+  </Card>
+  <Card variant="filled" size="md">
+    <Typography variant="heading">Medium Filled Static</Typography>
+  </Card>
+</View>
+
+## Props
+
+| Prop     | Type                                           | Default      | Description                          |
+| -------- | ---------------------------------------------- | ------------ | ------------------------------------ |
+| children | `ReactNode`                                    | -            | Card content                         |
+| variant  | `"elevated"` \| `"outline"` \| `"ghost"` \| `"filled"` | `"elevated"` | Visual style variant                 |
+| size     | `"sm"` \| `"md"` \| `"lg"`                     | `"md"`       | Padding and border radius size       |
+| onPress  | `() => void`                                   | `undefined`  | Makes card pressable                 |
+| style    | `StyleProp<ViewStyle>`                         | `undefined`  | Custom styles                        |
+| ...props | `ViewProps`                                    | -            | All other View props                 |
+
+## Usage Examples
+
+### Simple Card
+
+```tsx
+import { Card } from "@warp-ui/react-native";
+import { Typography } from "@warp-ui/react-native";
+
+<Card>
+  <Typography>Simple card content</Typography>
+</Card>
+```
+
+### Interactive Card with Outline
+
+```tsx
+<Card variant="outline" onPress={handlePress}>
+  <Typography>Tap me</Typography>
+</Card>
+```
+
+### Large Filled Card
+
+```tsx
+<Card variant="filled" size="lg">
+  <Typography>Large card with solid background</Typography>
+</Card>
+```
+
+### Card with Custom Styling
+
+```tsx
+<Card style={{ marginTop: 20, marginHorizontal: 16 }}>
+  <Typography>Custom margin card</Typography>
+</Card>
+```
+
+## Behavior Notes
+
+- Cards without `onPress` render as static `View` components
+- Cards with `onPress` render as `Pressable` with `accessibilityRole="button"`
+- Press feedback applies 0.8 opacity to the entire card
+- Elevated variant uses platform-specific shadows (shadowColor on iOS, elevation on Android)
+- Dark mode automatically adjusts background colors and shadow opacity
+- All variants support all sizes
+- Custom styles are merged last, allowing full override capability

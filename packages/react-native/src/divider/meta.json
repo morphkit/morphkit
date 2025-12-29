@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "divider",
+  "description": "Visual separator line with horizontal or vertical orientation",
+  "dependencies": []
+}

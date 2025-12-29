@@ -16,8 +16,38 @@
     },
     {
       "type": "react-native",
+      "name": "box",
+      "description": "Flexible container component for layouts with spacing, sizing, and flexbox props",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
       "name": "button",
       "description": "Pressable button component with 4 variants, 5 sizes, icon support, and loading states",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "card",
+      "description": "Content container with elevation, borders, and padding for grouping information",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "container",
+      "description": "Centered max-width wrapper for page content with responsive width constraints",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "divider",
+      "description": "Visual separator line with horizontal or vertical orientation",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "stack",
+      "description": "Layout component for arranging children with consistent spacing and alignment",
       "dependencies": []
     },
     {
