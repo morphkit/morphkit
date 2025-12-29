@@ -1,10 +1,27 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, useColorScheme } from "react-native";
 import { Typography } from "@warp-ui/react-native";
+
+export default function HomeScreen() {
+  const colorScheme = useColorScheme() ?? "light";
+
+  return (
+    <View style={[styles.container, themeStyles[colorScheme]]}>
+      <Typography variant="title-1" style={styles.title}>
+        Warp UI Components
+      </Typography>
+      <Typography
+        variant="body"
+        style={[styles.description, textTheme[colorScheme]]}
+      >
+        Select a component from the sidebar
+      </Typography>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
     alignItems: "center",
     justifyContent: "center",
     padding: 24,
@@ -13,20 +30,24 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   description: {
-    color: "#666666",
     textAlign: "center",
   },
 });
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <Typography variant="title-1" style={styles.title}>
-        Warp UI Components
-      </Typography>
-      <Typography variant="body" style={styles.description}>
-        Select a component from the sidebar
-      </Typography>
-    </View>
-  );
-}
+const themeStyles = StyleSheet.create({
+  light: {
+    backgroundColor: "#ffffff",
+  },
+  dark: {
+    backgroundColor: "#000000",
+  },
+});
+
+const textTheme = StyleSheet.create({
+  light: {
+    color: "#666666",
+  },
+  dark: {
+    color: "#9CA3AF",
+  },
+});

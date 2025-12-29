@@ -1,11 +1,14 @@
 import "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useColorScheme } from "react-native";
 import { ComponentSidebar } from "../components/ComponentSidebar";
 import { MDXProvider } from "../components/MDXProvider";
 import type { DrawerContentComponentProps } from "@react-navigation/drawer";
 
 export default function RootLayout() {
+  const colorScheme = useColorScheme() ?? "light";
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <MDXProvider>
@@ -16,6 +19,13 @@ export default function RootLayout() {
           screenOptions={{
             headerShown: true,
             headerTitle: "Warp UI Components",
+            headerStyle: {
+              backgroundColor: colorScheme === "dark" ? "#000000" : "#ffffff",
+            },
+            headerTitleStyle: {
+              color: colorScheme === "dark" ? "#ffffff" : "#000000",
+            },
+            headerTintColor: colorScheme === "dark" ? "#ffffff" : "#000000",
           }}
         >
           <Drawer.Screen

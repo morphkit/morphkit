@@ -1,49 +1,17 @@
-import { View, Pressable, ScrollView, StyleSheet } from "react-native";
+import {
+  View,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useRouter, usePathname } from "expo-router";
 import { Typography } from "@warp-ui/react-native";
 import registry from "@warp-ui/react-native/src/registry.json";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#ffffff",
-    paddingTop: 48,
-    paddingHorizontal: 16,
-  },
-  title: {
-    marginBottom: 24,
-  },
-  itemActive: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    marginBottom: 8,
-    borderRadius: 8,
-    backgroundColor: "#dbeafe",
-  },
-  itemInactive: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    marginBottom: 8,
-    borderRadius: 8,
-    backgroundColor: "#f9fafb",
-  },
-  itemTextActive: {
-    textTransform: "capitalize",
-    fontWeight: "bold",
-    color: "#2563eb",
-  },
-  itemTextInactive: {
-    textTransform: "capitalize",
-    color: "#1f2937",
-  },
-  description: {
-    color: "#6b7280",
-    marginTop: 4,
-  },
-});
-
 export const ComponentSidebar = (props: DrawerContentComponentProps) => {
+  const colorScheme = useColorScheme() ?? "light";
   const router = useRouter();
   const pathname = usePathname();
 
@@ -53,7 +21,7 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerTheme[colorScheme]]}>
       <Typography variant="title-2" style={styles.title}>
         Components
       </Typography>
@@ -65,18 +33,29 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
             <Pressable
               key={component.name}
               onPress={() => handleComponentPress(component.name)}
-              style={isActive ? styles.itemActive : styles.itemInactive}
+              style={[
+                styles.item,
+                isActive
+                  ? activeItemTheme[colorScheme]
+                  : inactiveItemTheme[colorScheme],
+              ]}
             >
               <Typography
                 variant="callout"
-                style={
-                  isActive ? styles.itemTextActive : styles.itemTextInactive
-                }
+                style={[
+                  styles.itemText,
+                  isActive
+                    ? activeTextTheme[colorScheme]
+                    : inactiveTextTheme[colorScheme],
+                ]}
               >
                 {component.name}
               </Typography>
               {component.description && (
-                <Typography variant="footnote" style={styles.description}>
+                <Typography
+                  variant="footnote"
+                  style={[styles.description, descriptionTheme[colorScheme]]}
+                >
                   {component.description}
                 </Typography>
               )}
@@ -87,3 +66,81 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 48,
+    paddingHorizontal: 16,
+  },
+  title: {
+    marginBottom: 24,
+  },
+  item: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginBottom: 8,
+    borderRadius: 8,
+  },
+  itemText: {
+    textTransform: "capitalize",
+    fontWeight: "bold",
+  },
+  description: {
+    marginTop: 4,
+  },
+});
+
+const containerTheme = StyleSheet.create({
+  light: {
+    backgroundColor: "#ffffff",
+  },
+  dark: {
+    backgroundColor: "#000000",
+  },
+});
+
+const activeItemTheme = StyleSheet.create({
+  light: {
+    backgroundColor: "#f3f4f6",
+  },
+  dark: {
+    backgroundColor: "#1a1a1a",
+  },
+});
+
+const inactiveItemTheme = StyleSheet.create({
+  light: {
+    backgroundColor: "#ffffff",
+  },
+  dark: {
+    backgroundColor: "#000000",
+  },
+});
+
+const activeTextTheme = StyleSheet.create({
+  light: {
+    color: "#000000",
+  },
+  dark: {
+    color: "#ffffff",
+  },
+});
+
+const inactiveTextTheme = StyleSheet.create({
+  light: {
+    color: "#666666",
+  },
+  dark: {
+    color: "#aaaaaa",
+  },
+});
+
+const descriptionTheme = StyleSheet.create({
+  light: {
+    color: "#999999",
+  },
+  dark: {
+    color: "#666666",
+  },
+});
