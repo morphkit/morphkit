@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "accordion",
+  "description": "Collapsible content sections with expand/collapse animation",
+  "dependencies": []
+}

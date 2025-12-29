@@ -1,0 +1,442 @@
+import {
+  TabsContainer,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "./Tabs";
+import { View, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+
+# Tabs Component
+
+Tabbed navigation component for organizing content into switchable panels with horizontal or vertical layout and multiple visual variants. Tabs consist of four sub-components working together: TabsContainer (root), TabsList (tab buttons container), TabsTrigger (individual tab button), and TabsContent (panel content).
+
+**Horizontal tabs are swipeable!** Swipe left or right to navigate between tabs with smooth transitions.
+
+## Basic Usage
+
+export const BasicExample = () => {
+  const [activeTab, setActiveTab] = useState("overview");
+  return (
+    <TabsContainer value={activeTab} onValueChange={setActiveTab}>
+      <TabsList>
+        <TabsTrigger value="overview" label="Overview" />
+        <TabsTrigger value="details" label="Details" />
+        <TabsTrigger value="reviews" label="Reviews" />
+      </TabsList>
+      <TabsContent value="overview">
+        <View style={{ padding: 16 }}>
+          <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 8 }}>
+            Product Overview
+          </Text>
+          <Text style={{ fontSize: 14, lineHeight: 20, color: "#6B7280" }}>
+            This premium wireless headphones deliver exceptional sound quality
+            with active noise cancellation. Perfect for music lovers and
+            professionals alike.
+          </Text>
+        </View>
+      </TabsContent>
+      <TabsContent value="details">
+        <View style={{ padding: 16 }}>
+          <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 8 }}>
+            Specifications
+          </Text>
+          <Text style={{ fontSize: 14, lineHeight: 20, color: "#6B7280" }}>
+            • Battery Life: 30 hours{"\n"}• Bluetooth 5.0{"\n"}• Weight: 250g
+            {"\n"}• Charging: USB-C fast charging
+          </Text>
+        </View>
+      </TabsContent>
+      <TabsContent value="reviews">
+        <View style={{ padding: 16 }}>
+          <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 8 }}>
+            Customer Reviews
+          </Text>
+          <Text style={{ fontSize: 14, lineHeight: 20, color: "#6B7280" }}>
+            ⭐⭐⭐⭐⭐ "Amazing sound quality!"{"\n"}⭐⭐⭐⭐ "Great for daily use"
+            {"\n"}⭐⭐⭐⭐⭐ "Best purchase this year"
+          </Text>
+        </View>
+      </TabsContent>
+    </TabsContainer>
+  );
+};
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <BasicExample />
+</View>
+
+## Swipeable Tabs
+
+Horizontal tabs support swipe gestures! Swipe left or right to navigate between tabs.
+
+export const SwipeExample = () => {
+  const [activeTab, setActiveTab] = useState("code");
+  return (
+    <TabsContainer value={activeTab} onValueChange={setActiveTab} variant="pills">
+      <TabsList>
+        <TabsTrigger value="code" label="Code" />
+        <TabsTrigger value="preview" label="Preview" />
+        <TabsTrigger value="docs" label="Docs" />
+      </TabsList>
+      <TabsContent value="code">
+        <View style={{ padding: 16, backgroundColor: "#1F2937", borderRadius: 8 }}>
+          <Text style={{ fontFamily: "monospace", fontSize: 12, color: "#10B981" }}>
+            const App = () => {"{"}
+            {"\n"}  return &lt;View&gt;...&lt;/View&gt;;
+            {"\n"}{"}"};
+          </Text>
+        </View>
+      </TabsContent>
+      <TabsContent value="preview">
+        <View style={{ padding: 16, backgroundColor: "#F3F4F6", borderRadius: 8 }}>
+          <Text style={{ fontSize: 14, color: "#1F2937" }}>
+            Preview of your component appears here
+          </Text>
+        </View>
+      </TabsContent>
+      <TabsContent value="docs">
+        <View style={{ padding: 16 }}>
+          <Text style={{ fontSize: 14, lineHeight: 20, color: "#6B7280" }}>
+            API documentation and usage examples
+          </Text>
+        </View>
+      </TabsContent>
+    </TabsContainer>
+  );
+};
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <SwipeExample />
+</View>
+
+## Variants
+
+### Line Variant
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <TabsContainer value="tab1" onValueChange={() => {}} variant="line">
+    <TabsList>
+      <TabsTrigger value="tab1" label="Tab 1" />
+      <TabsTrigger value="tab2" label="Tab 2" />
+      <TabsTrigger value="tab3" label="Tab 3" />
+    </TabsList>
+    <TabsContent value="tab1">
+      <View style={{ padding: 12 }}>
+        <Text style={{ color: "#6B7280" }}>
+          Line variant with clean underline indicator
+        </Text>
+      </View>
+    </TabsContent>
+  </TabsContainer>
+</View>
+
+### Filled Variant
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <TabsContainer value="tab1" onValueChange={() => {}} variant="filled">
+    <TabsList>
+      <TabsTrigger value="tab1" label="Tab 1" />
+      <TabsTrigger value="tab2" label="Tab 2" />
+      <TabsTrigger value="tab3" label="Tab 3" />
+    </TabsList>
+    <TabsContent value="tab1">
+      <View style={{ padding: 12 }}>
+        <Text style={{ color: "#6B7280" }}>
+          Filled variant with solid background color
+        </Text>
+      </View>
+    </TabsContent>
+  </TabsContainer>
+</View>
+
+### Pills Variant
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <TabsContainer value="tab1" onValueChange={() => {}} variant="pills">
+    <TabsList>
+      <TabsTrigger value="tab1" label="Tab 1" />
+      <TabsTrigger value="tab2" label="Tab 2" />
+      <TabsTrigger value="tab3" label="Tab 3" />
+    </TabsList>
+    <TabsContent value="tab1">
+      <View style={{ padding: 12 }}>
+        <Text style={{ color: "#6B7280" }}>
+          Pills variant with rounded, pill-shaped backgrounds
+        </Text>
+      </View>
+    </TabsContent>
+  </TabsContainer>
+</View>
+
+## Orientations
+
+### Horizontal (Default)
+
+Swipe to navigate between tabs!
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <TabsContainer value="tab1" onValueChange={() => {}} orientation="horizontal">
+    <TabsList>
+      <TabsTrigger value="tab1" label="Tab 1" />
+      <TabsTrigger value="tab2" label="Tab 2" />
+    </TabsList>
+    <TabsContent value="tab1">
+      <View style={{ padding: 12 }}>
+        <Text style={{ color: "#6B7280" }}>
+          Horizontal tabs with content below. Swipe left to see Tab 2!
+        </Text>
+      </View>
+    </TabsContent>
+    <TabsContent value="tab2">
+      <View style={{ padding: 12 }}>
+        <Text style={{ color: "#6B7280" }}>
+          You swiped! Swipe right to go back to Tab 1.
+        </Text>
+      </View>
+    </TabsContent>
+  </TabsContainer>
+</View>
+
+### Vertical
+
+Vertical tabs are not swipeable (click to switch).
+
+<View style={{ padding: 16, marginVertical: 12, minHeight: 200 }}>
+  <TabsContainer value="tab1" onValueChange={() => {}} orientation="vertical">
+    <TabsList>
+      <TabsTrigger value="tab1" label="Account" />
+      <TabsTrigger value="tab2" label="Security" />
+      <TabsTrigger value="tab3" label="Settings" />
+    </TabsList>
+    <TabsContent value="tab1">
+      <View style={{ padding: 12 }}>
+        <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 4 }}>
+          Account Settings
+        </Text>
+        <Text style={{ color: "#6B7280" }}>
+          Manage your account information and preferences
+        </Text>
+      </View>
+    </TabsContent>
+    <TabsContent value="tab2">
+      <View style={{ padding: 12 }}>
+        <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 4 }}>
+          Security Settings
+        </Text>
+        <Text style={{ color: "#6B7280" }}>
+          Configure your security and privacy options
+        </Text>
+      </View>
+    </TabsContent>
+    <TabsContent value="tab3">
+      <View style={{ padding: 12 }}>
+        <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 4 }}>
+          General Settings
+        </Text>
+        <Text style={{ color: "#6B7280" }}>
+          Customize your application preferences
+        </Text>
+      </View>
+    </TabsContent>
+  </TabsContainer>
+</View>
+
+## With Icons
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <TabsContainer value="tab1" onValueChange={() => {}} variant="pills">
+    <TabsList>
+      <TabsTrigger
+        value="tab1"
+        label="Account"
+        icon={<Ionicons name="person" size={16} color="#FFFFFF" />}
+      />
+      <TabsTrigger
+        value="tab2"
+        label="Security"
+        icon={<Ionicons name="lock-closed" size={16} color="#6B7280" />}
+      />
+      <TabsTrigger
+        value="tab3"
+        label="Notifications"
+        icon={<Ionicons name="notifications" size={16} color="#6B7280" />}
+      />
+    </TabsList>
+    <TabsContent value="tab1">
+      <Text>Account settings with icon tabs</Text>
+    </TabsContent>
+  </TabsContainer>
+</View>
+
+## Disabled State
+
+### Individual Tab Disabled
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <TabsContainer value="tab1" onValueChange={() => {}}>
+    <TabsList>
+      <TabsTrigger value="tab1" label="Enabled" />
+      <TabsTrigger value="tab2" label="Disabled" disabled />
+      <TabsTrigger value="tab3" label="Enabled" />
+    </TabsList>
+    <TabsContent value="tab1">
+      <Text>Only the middle tab is disabled</Text>
+    </TabsContent>
+  </TabsContainer>
+</View>
+
+### All Tabs Disabled
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <TabsContainer value="tab1" onValueChange={() => {}} disabled>
+    <TabsList>
+      <TabsTrigger value="tab1" label="Tab 1" />
+      <TabsTrigger value="tab2" label="Tab 2" />
+      <TabsTrigger value="tab3" label="Tab 3" />
+    </TabsList>
+    <TabsContent value="tab1">
+      <Text>All tabs disabled via container prop</Text>
+    </TabsContent>
+  </TabsContainer>
+</View>
+
+## Advanced Example
+
+export const AdvancedExample = () => {
+  const [activeTab, setActiveTab] = useState("account");
+  return (
+    <TabsContainer
+      value={activeTab}
+      onValueChange={setActiveTab}
+      orientation="vertical"
+      variant="pills"
+    >
+      <TabsList>
+        <TabsTrigger
+          value="account"
+          label="Account"
+          icon={<Ionicons name="person" size={16} color="#FFFFFF" />}
+        />
+        <TabsTrigger
+          value="security"
+          label="Security"
+          icon={<Ionicons name="lock-closed" size={16} color="#6B7280" />}
+        />
+        <TabsTrigger
+          value="notifications"
+          label="Notifications"
+          icon={<Ionicons name="notifications" size={16} color="#6B7280" />}
+          disabled
+        />
+      </TabsList>
+      <TabsContent value="account">
+        <Text style={{ fontSize: 16, marginBottom: 8 }}>Account Settings</Text>
+        <Text style={{ color: "#6B7280" }}>
+          Manage your account information and preferences
+        </Text>
+      </TabsContent>
+      <TabsContent value="security">
+        <Text style={{ fontSize: 16, marginBottom: 8 }}>Security Settings</Text>
+        <Text style={{ color: "#6B7280" }}>
+          Configure your security and privacy options
+        </Text>
+      </TabsContent>
+      <TabsContent value="notifications">
+        <Text style={{ fontSize: 16, marginBottom: 8 }}>
+          Notification Settings
+        </Text>
+        <Text style={{ color: "#6B7280" }}>
+          Control your notification preferences
+        </Text>
+      </TabsContent>
+    </TabsContainer>
+  );
+};
+
+<View style={{ padding: 16, marginVertical: 12, minHeight: 200 }}>
+  <AdvancedExample />
+</View>
+
+## Props
+
+### TabsContainer Props
+
+| Prop          | Type                                   | Default        | Description                    |
+| ------------- | -------------------------------------- | -------------- | ------------------------------ |
+| value         | `string`                               | required       | Active tab value (controlled)  |
+| onValueChange | `(value: string) => void`              | required       | Tab change callback            |
+| orientation   | `"horizontal" \| "vertical"`           | `"horizontal"` | Layout direction               |
+| variant       | `"line" \| "filled" \| "pills"`        | `"line"`       | Visual style variant           |
+| disabled      | `boolean`                              | `false`        | Disables all tabs              |
+| children      | `ReactNode`                            | required       | TabsList and TabsContent       |
+| style         | `StyleProp<ViewStyle>`                 | `undefined`    | Custom styles                  |
+| ...ViewProps  | All other View props are supported     |                |                                |
+
+### TabsList Props
+
+| Prop         | Type                               | Default     | Description            |
+| ------------ | ---------------------------------- | ----------- | ---------------------- |
+| children     | `ReactNode`                        | required    | TabsTrigger components |
+| style        | `StyleProp<ViewStyle>`             | `undefined` | Custom styles          |
+| ...ViewProps | All other View props are supported |             |                        |
+
+### TabsTrigger Props
+
+| Prop         | Type                               | Default     | Description              |
+| ------------ | ---------------------------------- | ----------- | ------------------------ |
+| value        | `string`                           | required    | Unique tab identifier    |
+| label        | `string`                           | required    | Tab button text          |
+| icon         | `ReactNode`                        | `undefined` | Leading icon             |
+| disabled     | `boolean`                          | `false`     | Disables tab interaction |
+| style        | `StyleProp<ViewStyle>`             | `undefined` | Custom styles            |
+| ...ViewProps | All other View props are supported |             |                          |
+
+### TabsContent Props
+
+| Prop         | Type                               | Default     | Description                |
+| ------------ | ---------------------------------- | ----------- | -------------------------- |
+| value        | `string`                           | required    | Tab identifier to show for |
+| children     | `ReactNode`                        | required    | Panel content              |
+| style        | `StyleProp<ViewStyle>`             | `undefined` | Custom styles              |
+| ...ViewProps | All other View props are supported |             |                            |
+
+## Usage Examples
+
+```tsx
+import {
+  TabsContainer,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@repo/react-native/tabs";
+import { useState } from "react";
+import { Text } from "react-native";
+
+function MyComponent() {
+  const [activeTab, setActiveTab] = useState("overview");
+
+  return (
+    <TabsContainer value={activeTab} onValueChange={setActiveTab}>
+      <TabsList>
+        <TabsTrigger value="overview" label="Overview" />
+        <TabsTrigger value="details" label="Details" />
+        <TabsTrigger value="reviews" label="Reviews" />
+      </TabsList>
+
+      <TabsContent value="overview">
+        <Text>Overview content here</Text>
+      </TabsContent>
+
+      <TabsContent value="details">
+        <Text>Details content here</Text>
+      </TabsContent>
+
+      <TabsContent value="reviews">
+        <Text>Reviews content here</Text>
+      </TabsContent>
+    </TabsContainer>
+  );
+}
+```

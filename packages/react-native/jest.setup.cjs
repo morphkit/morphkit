@@ -4,3 +4,8 @@ global.requestAnimationFrame = (callback) => {
 };
 
 global.cancelAnimationFrame = () => {};
+
+/* global jest */
+jest.mock("@expo/vector-icons", () => ({
+  Ionicons: "Ionicons",
+}));

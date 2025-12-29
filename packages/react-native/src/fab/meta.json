@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "fab",
+  "description": "Floating action button with placement options and extended variant",
+  "dependencies": []
+}

@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "tabs",
+  "description": "Tabbed navigation with multiple variants and orientations",
+  "dependencies": []
+}

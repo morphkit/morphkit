@@ -4,7 +4,7 @@ module.exports = {
     "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { configFile: "./babel.config.cjs" }],
   },
   transformIgnorePatterns: [
-    "node_modules/(?!(react-native|@react-native|@testing-library)/)",
+    "node_modules/(?!(react-native|@react-native|@testing-library|@expo|expo-.*)/)",
   ],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.cjs"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

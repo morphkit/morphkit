@@ -4,6 +4,12 @@
   "components": [
     {
       "type": "react-native",
+      "name": "accordion",
+      "description": "Collapsible content sections with expand/collapse animation",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
       "name": "alert",
       "description": "Inline notification component with 4 variants (info, success, warning, error), optional dismiss button, and customizable icons",
       "dependencies": []
@@ -54,6 +60,12 @@
       "type": "react-native",
       "name": "divider",
       "description": "Visual separator line with horizontal or vertical orientation",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "fab",
+      "description": "Floating action button with placement options and extended variant",
       "dependencies": []
     },
     {
@@ -120,6 +132,12 @@
       "type": "react-native",
       "name": "tag",
       "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
+      "name": "tabs",
+      "description": "Tabbed navigation with multiple variants and orientations",
       "dependencies": []
     },
     {

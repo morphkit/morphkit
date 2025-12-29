@@ -1,0 +1,237 @@
+import { Accordion, AccordionItem } from "./Accordion";
+import { View, Text } from "react-native";
+import { useState } from "react";
+
+# Accordion Component
+
+Collapsible content sections with expand/collapse functionality supporting single or multiple open items for organizing dense information hierarchically. Each item has a pressable header and collapsible content with smooth height animation and rotating chevron indicator.
+
+## Basic Usage (Single Mode)
+
+export const BasicExample = () => {
+  const [activeItem, setActiveItem] = useState("item-1");
+  return (
+    <Accordion type="single" value={activeItem} onValueChange={setActiveItem}>
+      <AccordionItem value="item-1" title="What is React Native?">
+        <Text>
+          React Native is a framework for building native mobile apps using
+          React.
+        </Text>
+      </AccordionItem>
+      <AccordionItem value="item-2" title="How do I get started?">
+        <Text>Follow our quickstart guide to create your first app.</Text>
+      </AccordionItem>
+      <AccordionItem value="item-3" title="Is it production ready?">
+        <Text>
+          Yes, React Native is used by many major companies in production.
+        </Text>
+      </AccordionItem>
+    </Accordion>
+  );
+};
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <BasicExample />
+</View>
+
+## Multiple Mode
+
+export const MultipleExample = () => {
+  const [openItems, setOpenItems] = useState(["item-1"]);
+  return (
+    <Accordion type="multiple" value={openItems} onValueChange={setOpenItems}>
+      <AccordionItem value="item-1" title="Account Settings">
+        <Text>Manage your account information and preferences</Text>
+      </AccordionItem>
+      <AccordionItem value="item-2" title="Privacy & Security">
+        <Text>Configure your security and privacy options</Text>
+      </AccordionItem>
+      <AccordionItem value="item-3" title="Notification Preferences">
+        <Text>Control your notification settings</Text>
+      </AccordionItem>
+    </Accordion>
+  );
+};
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <MultipleExample />
+</View>
+
+## Collapsible Mode
+
+### Collapsible (Default)
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <Accordion
+    type="single"
+    value="item-1"
+    onValueChange={() => {}}
+    collapsible={true}
+  >
+    <AccordionItem value="item-1" title="Collapsible Item">
+      <Text>You can click the open item to close it</Text>
+    </AccordionItem>
+    <AccordionItem value="item-2" title="Another Item">
+      <Text>Click to expand this item</Text>
+    </AccordionItem>
+  </Accordion>
+</View>
+
+### Non-Collapsible
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <Accordion
+    type="single"
+    value="item-1"
+    onValueChange={() => {}}
+    collapsible={false}
+  >
+    <AccordionItem value="item-1" title="Always Open Item">
+      <Text>At least one item must always be open</Text>
+    </AccordionItem>
+    <AccordionItem value="item-2" title="Another Item">
+      <Text>Switch to this item</Text>
+    </AccordionItem>
+  </Accordion>
+</View>
+
+## Disabled State
+
+### Individual Item Disabled
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <Accordion type="single" value="item-1" onValueChange={() => {}}>
+    <AccordionItem value="item-1" title="Enabled Item">
+      <Text>This item can be interacted with</Text>
+    </AccordionItem>
+    <AccordionItem value="item-2" title="Disabled Item" disabled>
+      <Text>This item is disabled</Text>
+    </AccordionItem>
+    <AccordionItem value="item-3" title="Another Enabled Item">
+      <Text>This item can be interacted with</Text>
+    </AccordionItem>
+  </Accordion>
+</View>
+
+### All Items Disabled
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <Accordion type="single" value="item-1" onValueChange={() => {}} disabled>
+    <AccordionItem value="item-1" title="Item 1">
+      <Text>Content is visible but cannot be toggled</Text>
+    </AccordionItem>
+    <AccordionItem value="item-2" title="Item 2">
+      <Text>All items are disabled</Text>
+    </AccordionItem>
+    <AccordionItem value="item-3" title="Item 3">
+      <Text>No interaction allowed</Text>
+    </AccordionItem>
+  </Accordion>
+</View>
+
+## FAQ Example
+
+export const FAQExample = () => {
+  const [activeItem, setActiveItem] = useState("");
+  return (
+    <Accordion type="single" value={activeItem} onValueChange={setActiveItem}>
+      <AccordionItem value="shipping" title="What are the shipping options?">
+        <Text style={{ lineHeight: 20 }}>
+          We offer standard (5-7 business days) and express (2-3 business days)
+          shipping. Free standard shipping on orders over $50.
+        </Text>
+      </AccordionItem>
+      <AccordionItem value="returns" title="What is your return policy?">
+        <Text style={{ lineHeight: 20 }}>
+          We accept returns within 30 days of purchase. Items must be unused
+          and in original packaging.
+        </Text>
+      </AccordionItem>
+      <AccordionItem value="warranty" title="Do you offer a warranty?">
+        <Text style={{ lineHeight: 20 }}>
+          All products come with a 1-year manufacturer warranty covering
+          defects in materials and workmanship.
+        </Text>
+      </AccordionItem>
+      <AccordionItem value="international" title="Do you ship internationally?">
+        <Text style={{ lineHeight: 20 }}>
+          Yes, we ship to over 50 countries worldwide. International shipping
+          rates vary by destination.
+        </Text>
+      </AccordionItem>
+    </Accordion>
+  );
+};
+
+<View style={{ padding: 16, marginVertical: 12 }}>
+  <FAQExample />
+</View>
+
+## Props
+
+### Accordion Props
+
+| Prop          | Type                                  | Default     | Description                                    |
+| ------------- | ------------------------------------- | ----------- | ---------------------------------------------- |
+| type          | `"single" \| "multiple"`              | `"single"`  | Single or multiple items open                  |
+| value         | `string \| string[]`                  | required    | Controlled value (item value or array)         |
+| onValueChange | `(value: string \| string[]) => void` | required    | Value change callback                          |
+| collapsible   | `boolean`                             | `true`      | Allow closing the only open item (single mode) |
+| disabled      | `boolean`                             | `false`     | Disables all items                             |
+| children      | `ReactNode`                           | required    | AccordionItem components                       |
+| style         | `StyleProp<ViewStyle>`                | `undefined` | Custom styles                                  |
+| ...ViewProps  | All other View props are supported    |             |                                                |
+
+### AccordionItem Props
+
+| Prop         | Type                               | Default     | Description                 |
+| ------------ | ---------------------------------- | ----------- | --------------------------- |
+| value        | `string`                           | required    | Unique item identifier      |
+| title        | `string`                           | required    | Header text                 |
+| children     | `ReactNode`                        | required    | Collapsible content         |
+| disabled     | `boolean`                          | `false`     | Disables this specific item |
+| style        | `StyleProp<ViewStyle>`             | `undefined` | Custom styles               |
+| ...ViewProps | All other View props are supported |             |                             |
+
+## Usage Examples
+
+```tsx
+import { Accordion, AccordionItem } from "@repo/react-native/accordion";
+import { useState } from "react";
+import { Text } from "react-native";
+
+// Single mode example
+function SingleModeAccordion() {
+  const [activeItem, setActiveItem] = useState("item-1");
+
+  return (
+    <Accordion type="single" value={activeItem} onValueChange={setActiveItem}>
+      <AccordionItem value="item-1" title="What is React Native?">
+        <Text>
+          React Native is a framework for building native mobile apps using
+          React.
+        </Text>
+      </AccordionItem>
+      <AccordionItem value="item-2" title="How do I get started?">
+        <Text>Follow our quickstart guide to create your first app.</Text>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+
+// Multiple mode example
+function MultipleModeAccordion() {
+  const [openItems, setOpenItems] = useState(["item-1", "item-2"]);
+
+  return (
+    <Accordion type="multiple" value={openItems} onValueChange={setOpenItems}>
+      <AccordionItem value="item-1" title="Account Settings">
+        <Text>Manage your account information</Text>
+      </AccordionItem>
+      <AccordionItem value="item-2" title="Privacy & Security">
+        <Text>Configure your security options</Text>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+```

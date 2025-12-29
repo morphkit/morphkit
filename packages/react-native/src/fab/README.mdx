@@ -1,0 +1,169 @@
+import { FAB } from "./FAB";
+import { View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+# FAB (Floating Action Button)
+
+A floating action button for primary actions, positioned at screen corners with icon, extended label variant, and customizable placement.
+
+## Basic Usage
+
+<View style={{ padding: 16, position: "relative", height: 200, backgroundColor: "#F9FAFB" }}>
+  <FAB
+    icon={<Ionicons name="add" size={24} color="#FFFFFF" />}
+    onPress={() => console.log("FAB pressed")}
+    accessibilityLabel="Create new item"
+  />
+</View>
+
+## Extended FAB
+
+<View style={{ padding: 16, position: "relative", height: 200, backgroundColor: "#F9FAFB" }}>
+  <FAB
+    icon={<Ionicons name="create" size={20} color="#FFFFFF" />}
+    label="Compose"
+    onPress={() => console.log("Compose pressed")}
+  />
+</View>
+
+## Sizes
+
+<View style={{ padding: 16, gap: 20 }}>
+  <View style={{ position: "relative", height: 120, backgroundColor: "#F9FAFB" }}>
+    <FAB
+      icon={<Ionicons name="add" size={16} color="#FFFFFF" />}
+      size="sm"
+      placement="bottom-left"
+      onPress={() => {}}
+    />
+    <FAB
+      icon={<Ionicons name="add" size={20} color="#FFFFFF" />}
+      size="md"
+      onPress={() => {}}
+    />
+  </View>
+  <View style={{ position: "relative", height: 120, backgroundColor: "#F9FAFB" }}>
+    <FAB
+      icon={<Ionicons name="add" size={24} color="#FFFFFF" />}
+      size="lg"
+      onPress={() => {}}
+    />
+  </View>
+</View>
+
+## Variants
+
+<View style={{ padding: 16, gap: 20 }}>
+  <View style={{ position: "relative", height: 120, backgroundColor: "#F9FAFB" }}>
+    <FAB
+      icon={<Ionicons name="add" size={20} color="#FFFFFF" />}
+      variant="primary"
+      placement="bottom-left"
+      onPress={() => {}}
+    />
+    <FAB
+      icon={<Ionicons name="add" size={20} color="#333333" />}
+      variant="secondary"
+      onPress={() => {}}
+    />
+  </View>
+</View>
+
+## Placements
+
+<View style={{ padding: 16, gap: 20 }}>
+  <View style={{ position: "relative", height: 140, backgroundColor: "#F9FAFB" }}>
+    <FAB
+      icon={<Ionicons name="arrow-up" size={16} color="#FFFFFF" />}
+      size="sm"
+      placement="top-left"
+      onPress={() => {}}
+    />
+    <FAB
+      icon={<Ionicons name="arrow-up" size={16} color="#FFFFFF" />}
+      size="sm"
+      placement="top-center"
+      onPress={() => {}}
+    />
+    <FAB
+      icon={<Ionicons name="arrow-up" size={16} color="#FFFFFF" />}
+      size="sm"
+      placement="top-right"
+      onPress={() => {}}
+    />
+  </View>
+  <View style={{ position: "relative", height: 140, backgroundColor: "#F9FAFB" }}>
+    <FAB
+      icon={<Ionicons name="arrow-down" size={16} color="#FFFFFF" />}
+      size="sm"
+      placement="bottom-left"
+      onPress={() => {}}
+    />
+    <FAB
+      icon={<Ionicons name="arrow-down" size={16} color="#FFFFFF" />}
+      size="sm"
+      placement="bottom-center"
+      onPress={() => {}}
+    />
+    <FAB
+      icon={<Ionicons name="arrow-down" size={16} color="#FFFFFF" />}
+      size="sm"
+      placement="bottom-right"
+      onPress={() => {}}
+    />
+  </View>
+</View>
+
+## Disabled State
+
+<View style={{ padding: 16, position: "relative", height: 200, backgroundColor: "#F9FAFB" }}>
+  <FAB
+    icon={<Ionicons name="add" size={24} color="#FFFFFF" />}
+    onPress={() => {}}
+    disabled
+  />
+</View>
+
+## Props
+
+| Prop         | Type                                                                                              | Default          | Description                       |
+| ------------ | ------------------------------------------------------------------------------------------------- | ---------------- | --------------------------------- |
+| icon         | ReactNode                                                                                         | -                | Icon component (required)         |
+| onPress      | () => void                                                                                        | -                | Press handler (required)          |
+| label        | string                                                                                            | -                | Extended FAB label text           |
+| size         | "sm" \\| "md" \\| "lg"                                                                            | "md"             | Button size                       |
+| placement    | "top-left" \\| "top-right" \\| "top-center" \\| "bottom-left" \\| "bottom-right" \\| "bottom-center" | "bottom-right"   | Screen position                   |
+| variant      | "primary" \\| "secondary"                                                                         | "primary"        | Color variant                     |
+| disabled     | boolean                                                                                           | false            | Disables interaction              |
+| style        | StyleProp\<ViewStyle\>                                                                            | -                | Custom container styles           |
+
+## Usage Example
+
+```tsx
+import { FAB } from "@warp-ui/react-native";
+
+function CreateButton() {
+  return (
+    <FAB
+      icon={<PlusIcon />}
+      onPress={handleCreate}
+      accessibilityLabel="Create new item"
+    />
+  );
+}
+
+function ComposeButton() {
+  return (
+    <FAB
+      icon={<EditIcon />}
+      label="Compose"
+      size="lg"
+      placement="bottom-center"
+      variant="secondary"
+      onPress={handleCompose}
+      accessibilityLabel="Compose new message"
+      accessibilityHint="Opens message composer"
+    />
+  );
+}
+```
