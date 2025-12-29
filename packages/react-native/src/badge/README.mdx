@@ -1,0 +1,166 @@
+import { Badge } from "./Badge";
+import { View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+# Badge Component
+
+A notification badge overlay component that displays a count on top of child content. Supports red/blue color variants, custom max count thresholds, and full light/dark theme support. Automatically hides when count is zero or negative.
+
+## Basic Usage
+
+<View
+  style={{
+    padding: 16,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 24,
+  }}
+>
+  <Badge count={6}>
+    <Ionicons name="notifications-outline" size={32} color="#333333" />
+  </Badge>
+  <Badge count={99}>
+    <Ionicons name="mail-outline" size={32} color="#333333" />
+  </Badge>
+  <Badge count={150}>
+    <Ionicons name="chatbubbles-outline" size={32} color="#333333" />
+  </Badge>
+</View>
+
+## Color Variants
+
+<View
+  style={{
+    padding: 16,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 24,
+  }}
+>
+  <Badge count={6} color="red">
+    <Ionicons name="notifications-outline" size={32} color="#333333" />
+  </Badge>
+  <Badge count={9} color="blue">
+    <Ionicons name="mail-outline" size={32} color="#333333" />
+  </Badge>
+</View>
+
+## Max Count Threshold
+
+<View
+  style={{
+    padding: 16,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 24,
+  }}
+>
+  <Badge count={50} maxCount={99}>
+    <Ionicons name="notifications-outline" size={32} color="#333333" />
+  </Badge>
+  <Badge count={150} maxCount={99}>
+    <Ionicons name="notifications-outline" size={32} color="#333333" />
+  </Badge>
+  <Badge count={1500} maxCount={999}>
+    <Ionicons name="mail-outline" size={32} color="#333333" />
+  </Badge>
+</View>
+
+## Hidden Badge
+
+Badge is automatically hidden when count is zero or negative.
+
+<View
+  style={{
+    padding: 16,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 24,
+  }}
+>
+  <Badge count={0}>
+    <Ionicons name="notifications-outline" size={32} color="#333333" />
+  </Badge>
+  <Badge count={-5}>
+    <Ionicons name="mail-outline" size={32} color="#333333" />
+  </Badge>
+</View>
+
+## With Different Icons
+
+<View
+  style={{
+    padding: 16,
+    marginVertical: 12,
+    flexDirection: "row",
+    gap: 24,
+    alignItems: "center",
+  }}
+>
+  <Badge count={3}>
+    <Ionicons name="heart-outline" size={32} color="#333333" />
+  </Badge>
+  <Badge count={12} color="blue">
+    <Ionicons name="cart-outline" size={32} color="#333333" />
+  </Badge>
+  <Badge count={999}>
+    <Ionicons name="chatbox-outline" size={32} color="#333333" />
+  </Badge>
+</View>
+
+## Props
+
+| Prop     | Type                   | Default | Description                                    |
+| -------- | ---------------------- | ------- | ---------------------------------------------- |
+| count    | `number`               | -       | The count to display in the badge (required)   |
+| maxCount | `number`               | `99`    | Maximum count before showing "{maxCount}+"     |
+| color    | `"red"` \| `"blue"`    | `"red"` | Badge background color                         |
+| children | `ReactNode`            | -       | Content to wrap with badge (typically an icon) |
+| style    | `StyleProp<ViewStyle>` | -       | Custom styles for the wrapper container        |
+| ...props | `ViewProps`            | -       | All other View props are passed to wrapper     |
+
+## Usage Examples
+
+### Basic Notification Badge
+
+```tsx
+import { Badge } from "@warpui/react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+<Badge count={notificationCount}>
+  <Ionicons name="notifications-outline" size={32} color="#333333" />
+</Badge>;
+```
+
+### Blue Badge with Custom Max Count
+
+```tsx
+<Badge count={messageCount} maxCount={999} color="blue">
+  <Ionicons name="mail-outline" size={32} color="#333333" />
+</Badge>
+```
+
+### Shopping Cart Badge
+
+```tsx
+<Badge count={cartItemCount} color="red">
+  <Ionicons name="cart-outline" size={32} color="#333333" />
+</Badge>
+```
+
+### Custom Wrapper Styling
+
+```tsx
+<Badge count={5} style={{ marginRight: 16 }}>
+  <Ionicons name="heart-outline" size={32} color="#333333" />
+</Badge>
+```
+
+## Behavior Notes
+
+- Badge automatically hides when `count <= 0`
+- When `count > maxCount`, displays `{maxCount}+` (e.g., "99+")
+- Badge is positioned at top-right corner with slight overlap (`top: -6, right: -6`)
+- White border (2px) provides visual separation from child content
+- Badge expands horizontally for longer text (e.g., "999+") while maintaining circular shape for single digits
+- Fully supports iOS light/dark mode with optimized contrast colors

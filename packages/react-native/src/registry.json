@@ -10,6 +10,12 @@
     },
     {
       "type": "react-native",
+      "name": "badge",
+      "description": "Notification badge overlay component that displays count on top of children with red/blue variants",
+      "dependencies": []
+    },
+    {
+      "type": "react-native",
       "name": "button",
       "description": "Pressable button component with 4 variants, 5 sizes, icon support, and loading states",
       "dependencies": []

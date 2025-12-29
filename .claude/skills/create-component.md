@@ -78,15 +78,12 @@ both humans and AI coding assistants.
 <View
   style={{
     padding: 16,
-    backgroundColor: "#f9fafb",
-    borderRadius: 8,
     marginVertical: 12,
+    gap: 12,
   }}
 >
   <Component variant="variant1">Example 1</Component>
-  <Component variant="variant2" style={{ marginTop: 12 }}>
-    Example 2
-  </Component>
+  <Component variant="variant2">Example 2</Component>
 </View>
 
 ## Props
@@ -98,6 +95,8 @@ both humans and AI coding assistants.
 | style    | `StyleProp<ComponentStyle>`  | -            |
 | ...props | `ComponentProps`             | -            |
 ```
+
+**IMPORTANT:** Never include `backgroundColor` or `borderRadius` in View wrapper styles for MDX examples. These containers should be transparent to properly support dark/light mode. Only include layout properties like `padding`, `marginVertical`, `gap`, and `flexDirection`.
 
 ## 5. meta.json Structure
 

@@ -1,0 +1,6 @@
+{
+  "type": "react-native",
+  "name": "badge",
+  "description": "Notification badge overlay component that displays count on top of children with red/blue variants",
+  "dependencies": []
+}
