@@ -6,9 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import { useColorScheme as useDeviceColorScheme } from "react-native";
-import { type Theme, themes } from "./theme";
-
-type ColorScheme = "light" | "dark";
+import { type Theme, type ColorScheme, themes } from "./theme";
 
 export interface ThemeContextValue {
   theme: Theme;
