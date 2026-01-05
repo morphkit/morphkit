@@ -48,3 +48,14 @@ export {
 export { Textarea, type TextareaProps } from "./textarea";
 export { Toast, type ToastProps } from "./toast";
 export { Typography, type TypographyProps } from "./typography";
+
+export { ThemeProvider, useTheme } from "./theme";
+export { themes, defaultTheme } from "./theme";
+export type {
+  Theme,
+  ThemeContextValue,
+  ThemeProviderProps,
+  TypographyStyle,
+  ShadowStyle,
+  SpringConfig,
+} from "./theme";

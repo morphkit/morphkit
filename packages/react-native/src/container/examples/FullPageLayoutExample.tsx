@@ -18,7 +18,7 @@ export const FullPageLayoutExample = () => {
           <Stack gap={12}>
             <Typography variant="title-3">Main Content Section</Typography>
             <Typography variant="body" style={{ color: "#6B7280", lineHeight: 24 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Container ensures this text doesn't stretch too wide on large screens, maintaining optimal readability across all device sizes.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Container ensures this text does not stretch too wide on large screens, maintaining optimal readability across all device sizes.
             </Typography>
           </Stack>
         </Card>
