@@ -49,7 +49,7 @@ export { Textarea, type TextareaProps } from "./textarea";
 export { Toast, type ToastProps } from "./toast";
 export { Typography, type TypographyProps } from "./typography";
 
-export { ThemeProvider, useTheme } from "./theme";
+export { ThemeProvider, useTheme, getThemeColor, getThemeSpacing } from "./theme";
 export { themes, defaultTheme, tokens } from "./theme";
 export type {
   Theme,
@@ -59,4 +59,8 @@ export type {
   TypographyStyle,
   ShadowStyle,
   SpringConfig,
+  ThemeColor,
+  ThemeSpacing,
+  ColorPath,
+  SpacingKey,
 } from "./theme";
