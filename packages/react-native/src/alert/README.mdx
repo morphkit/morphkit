@@ -1,76 +1,272 @@
 import { Alert } from "./Alert";
-import { View } from "react-native";
+import { Box, Stack, Typography, Card } from "../";
+import { DismissibleAlertsExample } from "./examples";
 
 # Alert
 
-An inline notification component for important messages.
+An inline notification component for displaying important messages, warnings, errors, and success states. Provides clear visual feedback with semantic color variants, optional icons, and dismissible functionality for temporary notifications.
 
 ## Basic Usage
 
-<View style={{ padding: 16 }}>
+The default info variant for general informational messages.
+
+<Box marginVertical={12}>
   <Alert title="Your changes have been saved" />
-</View>
+</Box>
 
 ## Variants
 
-<View style={{ padding: 16, gap: 12 }}>
-  <Alert variant="info" title="New features are available" />
-  <Alert variant="success" title="Payment processed successfully" />
-  <Alert variant="warning" title="Your session will expire soon" />
-  <Alert variant="error" title="Failed to connect to server" />
-</View>
+Four semantic variants to convey different message types: info for general notices, success for positive outcomes, warning for caution, and error for critical issues.
+
+<Box marginVertical={12}>
+  <Stack gap={12}>
+    <Alert variant="info" title="New features are available" />
+    <Alert variant="success" title="Payment processed successfully" />
+    <Alert variant="warning" title="Your session will expire soon" />
+    <Alert variant="error" title="Failed to connect to server" />
+  </Stack>
+</Box>
 
 ## With Description
 
-<View style={{ padding: 16 }}>
-  <Alert
-    variant="success"
-    title="Account created successfully"
-    description="Welcome to our platform! You can now access all features."
-  />
-</View>
+Add a description to provide additional context or instructions alongside the title.
 
-## Dismissible
+<Box marginVertical={12}>
+  <Stack gap={12}>
+    <Alert
+      variant="success"
+      title="Account created successfully"
+      description="Welcome to our platform! You can now access all features."
+    />
+    <Alert
+      variant="warning"
+      title="Storage almost full"
+      description="Consider deleting old files to free up space."
+    />
+  </Stack>
+</Box>
 
-<View style={{ padding: 16, gap: 12 }}>
-  <Alert
-    title="Cookie preferences updated"
-    dismissible
-    onDismiss={() => console.log("Dismissed")}
-  />
-  <Alert
-    variant="warning"
-    title="Storage almost full"
-    description="Consider deleting old files to free up space."
-    dismissible
-    onDismiss={() => {}}
-  />
-</View>
+## Dismissible Alerts
+
+Add an × button to allow users to dismiss temporary notifications.
+
+<Box marginVertical={12}>
+  <Stack gap={12}>
+    <Alert
+      title="Cookie preferences updated"
+      dismissible
+      onDismiss={() => console.log("Dismissed")}
+    />
+    <Alert
+      variant="info"
+      title="New update available"
+      description="Version 2.0 is ready to install."
+      dismissible
+      onDismiss={() => console.log("Dismissed")}
+    />
+  </Stack>
+</Box>
+
+## Form Validation Alerts
+
+Alerts used to show form submission results with success and error states.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={16}>
+      <Typography variant="title-3">Contact Form</Typography>
+      <Alert
+        variant="success"
+        title="Message sent successfully"
+        description="We'll get back to you within 24 hours."
+      />
+      <Typography variant="callout" style={{ color: "#6B7280" }}>
+        Your message has been received and our team will respond soon.
+      </Typography>
+    </Stack>
+  </Card>
+</Box>
+
+## Dashboard Notifications
+
+Alerts in a dashboard context showing system status and important updates.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={12}>
+      <Typography variant="heading">System Status</Typography>
+      <Alert
+        variant="success"
+        title="All systems operational"
+        description="No issues detected in the past 24 hours."
+      />
+      <Alert
+        variant="warning"
+        title="Scheduled maintenance"
+        description="System will be down for maintenance on Saturday at 2 AM."
+      />
+    </Stack>
+  </Card>
+</Box>
+
+## Error Recovery Flow
+
+Alert showing an error with action guidance in an application flow.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={16}>
+      <Typography variant="title-3">Payment Error</Typography>
+      <Alert
+        variant="error"
+        title="Payment failed"
+        description="Your card was declined. Please try a different payment method."
+      />
+      <Stack gap={8}>
+        <Typography variant="callout" style={{ fontWeight: "600" }}>
+          What you can do:
+        </Typography>
+        <Typography variant="callout" style={{ color: "#6B7280" }}>
+          • Check your card details are correct
+        </Typography>
+        <Typography variant="callout" style={{ color: "#6B7280" }}>
+          • Ensure you have sufficient funds
+        </Typography>
+        <Typography variant="callout" style={{ color: "#6B7280" }}>
+          • Try a different payment method
+        </Typography>
+      </Stack>
+    </Stack>
+  </Card>
+</Box>
+
+## Dismissible Alerts Example
+
+Interactive example showing alerts that can be dismissed, with state management.
+
+<Box marginVertical={12}>
+  <DismissibleAlertsExample />
+</Box>
+
+## Security Alerts
+
+Alerts for security-related messages in account settings.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={12}>
+      <Typography variant="heading">Security Center</Typography>
+      <Alert
+        variant="error"
+        title="Unusual login detected"
+        description="A login from an unrecognized device was detected in New York."
+      />
+      <Alert
+        variant="warning"
+        title="Two-factor authentication disabled"
+        description="Enable 2FA to add an extra layer of security to your account."
+      />
+      <Alert
+        variant="success"
+        title="Password updated successfully"
+        description="Your password was changed 2 hours ago."
+      />
+    </Stack>
+  </Card>
+</Box>
 
 ## Props
 
-| Prop        | Type                                            | Default  | Description                |
-| ----------- | ----------------------------------------------- | -------- | -------------------------- |
-| title       | string                                          | -        | Alert heading              |
-| variant     | "info" \\| "success" \\| "warning" \\| "error"  | "info"   | Color theme                |
-| description | string                                          | -        | Additional description     |
-| dismissible | boolean                                         | false    | Show dismiss button        |
-| onDismiss   | () => void                                      | -        | Dismiss callback           |
-| icon        | ReactNode                                       | Variant  | Custom icon                |
-| style       | StyleProp\<ViewStyle\>                          | -        | Custom container styles    |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| title | `string` | - | Alert heading (required) |
+| variant | `"info"` \| `"success"` \| `"warning"` \| `"error"` | `"info"` | Color theme for semantic meaning |
+| description | `string` | - | Additional context or instructions |
+| dismissible | `boolean` | `false` | Show dismiss × button for removable alerts |
+| onDismiss | `() => void` | - | Callback when dismiss button is pressed |
+| icon | `ReactNode` | Variant icon | Custom icon override (auto-selected by variant) |
+| style | `StyleProp<ViewStyle>` | - | Custom container styles |
 
-## Usage Example
+## Usage Examples
+
+### Basic Alert
 
 ```tsx
-import { Alert } from "@warp-ui/react-native";
+import { Alert } from "@repo/react-native";
 
-function FormSuccess() {
+<Alert variant="success" title="Changes saved" />
+```
+
+### Alert with Description
+
+```tsx
+import { Alert, Stack } from "@repo/react-native";
+
+<Stack gap={12}>
+  <Alert
+    variant="error"
+    title="Connection failed"
+    description="Please check your internet connection and try again."
+  />
+</Stack>
+```
+
+### Dismissible Alert with State
+
+```tsx
+import { Alert } from "@repo/react-native";
+import { useState } from "react";
+
+function NotificationAlert() {
+  const [visible, setVisible] = useState(true);
+
+  if (!visible) return null;
+
   return (
     <Alert
-      variant="success"
-      title="Form submitted"
-      description="We'll get back to you within 24 hours."
+      variant="info"
+      title="New message received"
+      description="You have 3 unread messages"
+      dismissible
+      onDismiss={() => setVisible(false)}
     />
+  );
+}
+```
+
+### Form Validation
+
+```tsx
+import { Alert, Card, Stack, Typography } from "@repo/react-native";
+
+function FormWithValidation() {
+  return (
+    <Card>
+      <Stack gap={16}>
+        <Typography variant="heading">Submit Form</Typography>
+        <Alert
+          variant="error"
+          title="Please fix the following errors"
+          description="Email address is required and password must be at least 8 characters."
+        />
+      </Stack>
+    </Card>
+  );
+}
+```
+
+### Multi-Alert Dashboard
+
+```tsx
+import { Alert, Stack } from "@repo/react-native";
+
+function DashboardAlerts() {
+  return (
+    <Stack gap={12}>
+      <Alert variant="success" title="System operational" />
+      <Alert variant="warning" title="Maintenance scheduled" description="Saturday 2 AM - 4 AM" />
+      <Alert variant="info" title="New features" description="Check out our latest updates" />
+    </Stack>
   );
 }
 ```

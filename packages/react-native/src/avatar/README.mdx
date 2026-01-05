@@ -1,88 +1,165 @@
 import { Avatar } from "./Avatar";
-import { View } from "react-native";
+import { Box, Stack, Typography, Card } from "../";
+import { InteractiveProfileExample } from "./examples";
 
-# Avatar Component
+# Avatar
 
-A circular avatar component that displays user images or fallback text (typically initials). Always wrapped in Pressable for touch handling with full light/dark theme support.
+A circular avatar component that displays user profile images with automatic fallback to initials when no image is provided. Always pressable for interaction and fully theme-aware for light and dark modes.
 
 ## Sizes
 
-<View
-  style={{
-    padding: 16,
-    marginVertical: 12,
-    flexDirection: "row",
-    gap: 12,
-  }}
->
-  <Avatar size="sm" fallback="AB" />
-  <Avatar size="md" fallback="CD" />
-  <Avatar size="lg" fallback="EF" />
-</View>
+Three preset sizes for different contexts: small for compact lists, medium for standard use, and large for profile headers.
+
+<Box marginVertical={12}>
+  <Stack direction="horizontal" gap={12} align="center">
+    <Avatar size="sm" fallback="AB" />
+    <Avatar size="md" fallback="CD" />
+    <Avatar size="lg" fallback="EF" />
+  </Stack>
+</Box>
 
 ## With Images
 
-<View
-  style={{
-    padding: 16,
-    marginVertical: 12,
-    flexDirection: "row",
-    gap: 12,
-  }}
->
-  <Avatar size="sm" source={{ uri: "https://i.pravatar.cc/32" }} />
-  <Avatar size="md" source={{ uri: "https://i.pravatar.cc/40" }} />
-  <Avatar size="lg" source={{ uri: "https://i.pravatar.cc/48" }} />
-</View>
+When an image source is provided, it displays the image; otherwise falls back to the initials.
 
-## Fallback Text
+<Box marginVertical={12}>
+  <Stack direction="horizontal" gap={12} align="center">
+    <Avatar size="sm" source={{ uri: "https://i.pravatar.cc/32" }} />
+    <Avatar size="md" source={{ uri: "https://i.pravatar.cc/40" }} />
+    <Avatar size="lg" source={{ uri: "https://i.pravatar.cc/48" }} />
+  </Stack>
+</Box>
 
-<View
-  style={{
-    padding: 16,
-    marginVertical: 12,
-    flexDirection: "row",
-    gap: 12,
-  }}
->
-  <Avatar fallback="JD" />
-  <Avatar fallback="SM" />
-  <Avatar fallback="KL" />
-</View>
+## Fallback Text (Initials)
+
+Use initials or any short text as a fallback when images aren't available.
+
+<Box marginVertical={12}>
+  <Stack direction="horizontal" gap={12} align="center">
+    <Avatar fallback="JD" />
+    <Avatar fallback="SM" />
+    <Avatar fallback="KL" />
+  </Stack>
+</Box>
+
+## Profile Card Example
+
+Avatar combined with user information in a card layout - a common pattern for profile displays.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={16}>
+      <Stack direction="horizontal" gap={12} align="center">
+        <Avatar
+          size="lg"
+          source={{ uri: "https://i.pravatar.cc/48" }}
+        />
+        <Stack gap={4}>
+          <Typography variant="heading">Jane Doe</Typography>
+          <Typography variant="callout" style={{ color: "#6B7280" }}>
+            Product Designer
+          </Typography>
+        </Stack>
+      </Stack>
+    </Stack>
+  </Card>
+</Box>
+
+## User List with Avatars
+
+Common list pattern showing multiple users with avatars and names.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={12}>
+      <Stack direction="horizontal" gap={12} align="center">
+        <Avatar source={{ uri: "https://i.pravatar.cc/40?img=1" }} />
+        <Stack gap={2} style={{ flex: 1 }}>
+          <Typography variant="body">Alice Johnson</Typography>
+          <Typography variant="caption-1" style={{ color: "#6B7280" }}>
+            Online
+          </Typography>
+        </Stack>
+      </Stack>
+      <Stack direction="horizontal" gap={12} align="center">
+        <Avatar source={{ uri: "https://i.pravatar.cc/40?img=2" }} />
+        <Stack gap={2} style={{ flex: 1 }}>
+          <Typography variant="body">Bob Smith</Typography>
+          <Typography variant="caption-1" style={{ color: "#6B7280" }}>
+            Away
+          </Typography>
+        </Stack>
+      </Stack>
+      <Stack direction="horizontal" gap={12} align="center">
+        <Avatar fallback="CD" />
+        <Stack gap={2} style={{ flex: 1 }}>
+          <Typography variant="body">Charlie Davis</Typography>
+          <Typography variant="caption-1" style={{ color: "#6B7280" }}>
+            Offline
+          </Typography>
+        </Stack>
+      </Stack>
+    </Stack>
+  </Card>
+</Box>
+
+## Interactive Profile Example
+
+Avatar with press handling to show profile actions.
+
+<Box marginVertical={12}>
+  <InteractiveProfileExample />
+</Box>
 
 ## Props
 
-| Prop     | Type                       | Default |
-| -------- | -------------------------- | ------- |
-| source   | `ImageSourcePropType`      | -       |
-| fallback | `string`                   | `""`    |
-| size     | `"sm"` \| `"md"` \| `"lg"` | `"md"`  |
-| style    | `StyleProp<ViewStyle>`     | -       |
-| ...props | `PressableProps`           | -       |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| source | `ImageSourcePropType` | - | Image source for avatar |
+| fallback | `string` | `""` | Text to display when no image (typically initials) |
+| size | `"sm"` \| `"md"` \| `"lg"` | `"md"` | Avatar size (32px, 40px, 48px) |
+| onPress | `() => void` | - | Press handler (avatar is always Pressable) |
+| style | `StyleProp<ViewStyle>` | - | Custom container styles |
 
 ## Usage Examples
 
 ### Basic Avatar with Image
 
 ```tsx
+import { Avatar } from "@repo/react-native";
+
 <Avatar source={{ uri: "https://example.com/avatar.jpg" }} />
 ```
 
-### Fallback Text (Initials)
+### Fallback Initials
 
 ```tsx
+import { Avatar } from "@repo/react-native";
+
 <Avatar fallback="JD" />
 ```
 
-### Custom Size
+### Profile Card with Avatar
 
 ```tsx
-<Avatar size="lg" source={{ uri: "https://example.com/avatar.jpg" }} />
+import { Avatar, Card, Stack, Typography } from "@repo/react-native";
+
+<Card>
+  <Stack direction="horizontal" gap={12} align="center">
+    <Avatar size="lg" source={{ uri: "https://..." }} />
+    <Stack gap={4}>
+      <Typography variant="heading">John Doe</Typography>
+      <Typography variant="callout">Software Engineer</Typography>
+    </Stack>
+  </Stack>
+</Card>
 ```
 
 ### Pressable Avatar
 
 ```tsx
+import { Avatar } from "@repo/react-native";
+
 <Avatar
   source={{ uri: "https://example.com/avatar.jpg" }}
   onPress={() => console.log("Avatar pressed")}

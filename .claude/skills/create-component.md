@@ -6,13 +6,27 @@
 
 ## 1. Component Structure
 
-Always create these 5 files in `packages/react-native/src/<component-name>/`:
+Always create these files in `packages/react-native/src/<component-name>/`:
 
+### Required Files
 - `<ComponentName>.tsx` - Main component implementation
 - `index.ts` - Barrel export
 - `meta.json` - Component metadata
 - `README.mdx` - Documentation with live examples
 - `<ComponentName>.test.tsx` - Jest tests
+
+### Examples Directory
+- `examples/` - Directory containing all example components
+  - `BasicExample.tsx` - Basic usage example
+  - `VariantsExample.tsx` - Variants demonstration (if applicable)
+  - `[OtherExamples].tsx` - Additional examples as needed
+  - `index.ts` - Barrel export for all examples
+
+**IMPORTANT**: All interactive JSX examples MUST be extracted to separate `.tsx` files in the `examples/` directory. This provides:
+- Full TypeScript validation
+- ESLint checking
+- IDE autocomplete support
+- Easier maintenance and testing
 
 ## 2. StyleSheet Patterns
 
@@ -61,11 +75,61 @@ export interface ComponentProps extends NativeComponentProps {
 export { Component, type ComponentProps };
 ```
 
-## 4. README.mdx Structure
+## 4. Example Files Pattern
+
+Create example files in `examples/` directory following this pattern:
+
+```typescript
+// examples/BasicExample.tsx
+import { Component } from "../Component";
+import { View, Text } from "react-native";
+
+export const BasicExample = () => {
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <Component variant="variant1">Example 1</Component>
+      <Component variant="variant2">Example 2</Component>
+    </View>
+  );
+};
+```
+
+```typescript
+// examples/InteractiveExample.tsx (with state)
+import { Component } from "../Component";
+import { View } from "react-native";
+import { useState } from "react";
+
+export const InteractiveExample = () => {
+  const [value, setValue] = useState("");
+
+  return (
+    <View style={{ padding: 16 }}>
+      <Component value={value} onValueChange={setValue} />
+    </View>
+  );
+};
+```
+
+```typescript
+// examples/index.ts
+export * from "./BasicExample";
+export * from "./InteractiveExample";
+```
+
+**Example Naming Conventions:**
+- `BasicExample` - Basic usage
+- `VariantsExample` - Variants demonstration
+- `SizesExample` - Size variations
+- `InteractiveExample` - Examples with state
+- `[FeatureName]Example` - Specific feature demonstrations
+
+## 5. README.mdx Structure
 
 ```mdx
 import { Component } from "./Component";
 import { View } from "react-native";
+import { BasicExample, InteractiveExample } from "./examples";
 
 # Component Name
 
@@ -73,17 +137,16 @@ Single paragraph describing what this component is and how to use it.
 Mention key features and intended use cases. This documentation is for
 both humans and AI coding assistants.
 
-## Variants (or Examples)
+## Basic Usage
 
-<View
-  style={{
-    padding: 16,
-    marginVertical: 12,
-    gap: 12,
-  }}
->
-  <Component variant="variant1">Example 1</Component>
-  <Component variant="variant2">Example 2</Component>
+<View style={{ marginVertical: 12 }}>
+  <BasicExample />
+</View>
+
+## Interactive Example
+
+<View style={{ marginVertical: 12 }}>
+  <InteractiveExample />
 </View>
 
 ## Props
@@ -94,11 +157,26 @@ both humans and AI coding assistants.
 | children | `ReactNode`                  | -            |
 | style    | `StyleProp<ComponentStyle>`  | -            |
 | ...props | `ComponentProps`             | -            |
+
+## Usage Examples
+
+Code blocks showing copy-paste usage patterns:
+
+\`\`\`tsx
+import { Component } from "@repo/react-native";
+
+<Component variant="variant1">Content</Component>
+\`\`\`
 ```
 
-**IMPORTANT:** Never include `backgroundColor` or `borderRadius` in View wrapper styles for MDX examples. These containers should be transparent to properly support dark/light mode. Only include layout properties like `padding`, `marginVertical`, `gap`, and `flexDirection`.
+**IMPORTANT:**
+- Extract ALL rendered JSX examples to separate `.tsx` files
+- Import examples at the top of README.mdx
+- Use `<View style={{ marginVertical: 12 }}>` wrappers around examples
+- Never include `backgroundColor` or `borderRadius` in View wrapper styles
+- Keep code blocks (in backticks) for documentation - don't extract these
 
-## 5. meta.json Structure
+## 6. meta.json Structure
 
 ```json
 {
@@ -111,7 +189,7 @@ both humans and AI coding assistants.
 
 **Dependencies array:** List other warpui components this component uses (e.g., `["typography"]`)
 
-## 6. Test Structure
+## 7. Test Structure
 
 ```typescript
 import { render } from "@testing-library/react-native";
@@ -146,7 +224,7 @@ describe("<Component />", () => {
 });
 ```
 
-## 7. Automatic Registry Updates
+## 8. Automatic Registry Updates
 
 After creating component files, automatically update:
 
@@ -183,7 +261,7 @@ export const docsRegistry: Record<string, React.FC> = {
 }
 ```
 
-## 8. Verification Steps
+## 9. Verification Steps
 
 After creating all files, automatically run:
 
@@ -194,36 +272,50 @@ After creating all files, automatically run:
 
 All checks must pass before considering component complete.
 
-## 9. Example: Typography Component
+## 10. Example: Typography Component
 
 Reference `packages/react-native/src/typography/` for a complete example of all these patterns.
 
-## Quality Checklist
+## 11. Quality Checklist
 
 Before marking component creation complete, verify:
 
-- ✅ All 5 files created (`Component.tsx`, `index.ts`, `meta.json`, `README.mdx`, `Component.test.tsx`)
+- ✅ All 5 core files created (`Component.tsx`, `index.ts`, `meta.json`, `README.mdx`, `Component.test.tsx`)
+- ✅ Examples directory created with:
+  - ✅ At least `BasicExample.tsx` created
+  - ✅ Additional examples as needed (Variants, Interactive, etc.)
+  - ✅ `examples/index.ts` barrel export exists
+  - ✅ All examples have proper TypeScript types
+  - ✅ Examples imported and used in README.mdx
 - ✅ StyleSheet uses `StyleSheet.create()`
 - ✅ Theme support with `useColorScheme()` included
-- ✅ README.mdx has live component examples
+- ✅ README.mdx imports examples from `./examples`
+- ✅ No inline JSX examples in README.mdx (all extracted to .tsx files)
+- ✅ Code blocks (in backticks) kept for documentation purposes
 - ✅ meta.json populated with correct metadata
 - ✅ Tests cover rendering, variants, style merging, props forwarding
 - ✅ Exports follow pattern (named exports only, no default)
 - ✅ All registry files updated (index.ts, docs-registry.ts, registry.json)
 - ✅ All verification steps pass (format, type-check, lint, test)
 
-## Component Naming Conventions
+## 12. Component Naming Conventions
 
 - **Directory**: kebab-case (e.g., `button`, `input-field`)
 - **Component file**: PascalCase (e.g., `Button.tsx`, `InputField.tsx`)
 - **meta.json name**: kebab-case matching directory
 - **Variant values**: kebab-case (e.g., `"primary"`, `"large-filled"`)
+- **Example files**: PascalCase with "Example" suffix (e.g., `BasicExample.tsx`, `InteractiveExample.tsx`)
 
-## AI Optimization Notes
+## 13. AI Optimization Notes
 
 - Keep implementation simple - AI will customize after pulling
 - Use clear, descriptive variable names
 - Hardcode sensible defaults (AI will replace with theme values)
-- Include inline style examples in README.mdx
+- Extract ALL examples to `.tsx` files for full TypeScript validation
 - Document all props thoroughly for AI understanding
 - Mention customization points in README description
+- Examples in separate files enable:
+  - AI code completion and IntelliSense
+  - Automatic error detection during development
+  - Easier testing and maintenance
+  - Reusable example components

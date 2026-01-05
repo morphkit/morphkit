@@ -1,67 +1,147 @@
 import { Skeleton } from "./Skeleton";
-import { View } from "react-native";
+import { Box, Stack, Typography, Card } from "../";
 
 # Skeleton
 
-A placeholder loading component with shimmer animation.
+A placeholder loading component with shimmer animation, ideal for showing content structure while data is being fetched. Creates a better loading experience than blank screens or generic spinners.
 
 ## Basic Usage
 
-<View style={{ padding: 16, gap: 12 }}>
+The default rectangular skeleton with automatic width and height.
+
+<Box marginVertical={12}>
   <Skeleton />
-</View>
+</Box>
 
 ## Variants
 
-<View style={{ padding: 16, gap: 12 }}>
-  <Skeleton variant="rect" />
-  <Skeleton variant="circle" />
-  <Skeleton variant="text" />
-</View>
+Three shape variants for different content types: rectangles for images/blocks, circles for avatars, and text for single lines.
+
+<Box marginVertical={12}>
+  <Stack gap={12}>
+    <Skeleton variant="rect" />
+    <Skeleton variant="circle" width={48} height={48} />
+    <Skeleton variant="text" />
+  </Stack>
+</Box>
 
 ## Custom Dimensions
 
-<View style={{ padding: 16, gap: 12 }}>
-  <Skeleton width={200} height={100} />
-  <Skeleton variant="circle" width={60} height={60} />
-  <Skeleton width="80%" height={15} />
-</View>
+Control width and height with pixel values or percentage strings.
 
-## Content Placeholder
+<Box marginVertical={12}>
+  <Stack gap={12}>
+    <Skeleton width={200} height={100} />
+    <Skeleton variant="circle" width={60} height={60} />
+    <Skeleton width="80%" height={15} />
+  </Stack>
+</Box>
 
-<View style={{ padding: 16, gap: 12 }}>
-  <View style={{ flexDirection: "row", gap: 12 }}>
-    <Skeleton variant="circle" width={48} height={48} />
-    <View style={{ flex: 1, gap: 8 }}>
-      <Skeleton variant="text" width="60%" />
-      <Skeleton variant="text" width="40%" />
-    </View>
-  </View>
-  <Skeleton width="100%" height={200} />
-</View>
+## Profile Card Loading State
+
+Realistic example showing avatar, name, and description placeholders.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={12}>
+      <Stack direction="horizontal" gap={12} align="center">
+        <Skeleton variant="circle" width={48} height={48} />
+        <Stack gap={8} style={{ flex: 1 }}>
+          <Skeleton variant="text" width="60%" />
+          <Skeleton variant="text" width="40%" />
+        </Stack>
+      </Stack>
+      <Skeleton width="100%" height={200} />
+    </Stack>
+  </Card>
+</Box>
+
+## Content Feed Loading
+
+Multiple skeleton cards showing a list loading state.
+
+<Box marginVertical={12}>
+  <Stack gap={12}>
+    <Card>
+      <Stack gap={8}>
+        <Skeleton variant="text" width="80%" />
+        <Skeleton variant="text" width="60%" />
+        <Skeleton width="100%" height={150} />
+      </Stack>
+    </Card>
+    <Card>
+      <Stack gap={8}>
+        <Skeleton variant="text" width="70%" />
+        <Skeleton variant="text" width="50%" />
+        <Skeleton width="100%" height={150} />
+      </Stack>
+    </Card>
+  </Stack>
+</Box>
 
 ## Props
 
-| Prop    | Type                           | Default   | Description            |
-| ------- | ------------------------------ | --------- | ---------------------- |
-| variant | "rect" \\| "circle" \\| "text" | "rect"    | Shape type             |
-| width   | number \\| string              | Variant   | Custom width           |
-| height  | number \\| string              | Variant   | Custom height          |
-| style   | StyleProp\<ViewStyle\>         | -         | Custom container styles |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | `"rect"` \| `"circle"` \| `"text"` | `"rect"` | Shape type for different content placeholders |
+| width | `number` \| `string` | Variant default | Custom width in pixels or percentage |
+| height | `number` \| `string` | Variant default | Custom height in pixels or percentage |
+| style | `StyleProp<ViewStyle>` | - | Custom container styles |
 
-## Usage Example
+## Usage Examples
+
+### Profile Loading
 
 ```tsx
-import { Skeleton } from "@warp-ui/react-native";
+import { Skeleton, Card, Stack } from "@repo/react-native";
 
-function LoadingCard() {
+function ProfileLoading() {
   return (
-    <View style={{ padding: 16, gap: 12 }}>
-      <Skeleton variant="circle" width={48} height={48} />
-      <Skeleton variant="text" />
-      <Skeleton variant="text" width="70%" />
+    <Card>
+      <Stack gap={12}>
+        <Stack direction="horizontal" gap={12} align="center">
+          <Skeleton variant="circle" width={48} height={48} />
+          <Stack gap={8} style={{ flex: 1 }}>
+            <Skeleton variant="text" width="60%" />
+            <Skeleton variant="text" width="40%" />
+          </Stack>
+        </Stack>
+      </Stack>
+    </Card>
+  );
+}
+```
+
+### Article Loading
+
+```tsx
+import { Skeleton, Stack } from "@repo/react-native";
+
+function ArticleLoading() {
+  return (
+    <Stack gap={12}>
+      <Skeleton variant="text" width="80%" />
+      <Skeleton variant="text" width="60%" />
       <Skeleton width="100%" height={200} />
-    </View>
+    </Stack>
+  );
+}
+```
+
+### List Item Loading
+
+```tsx
+import { Skeleton, Stack } from "@repo/react-native";
+
+function ListItemLoading() {
+  return (
+    <Stack direction="horizontal" gap={12}>
+      <Skeleton variant="circle" width={40} height={40} />
+      <Stack gap={6} style={{ flex: 1 }}>
+        <Skeleton variant="text" />
+        <Skeleton variant="text" width="70%" />
+      </Stack>
+    </Stack>
   );
 }
 ```

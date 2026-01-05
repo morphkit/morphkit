@@ -1,64 +1,294 @@
 import { Progress } from "./Progress";
-import { View } from "react-native";
+import { Box, Stack, Typography, Card } from "../";
+import { AnimatedProgressExample } from "./examples";
 
 # Progress
 
-A visual progress indicator with bar and circular displays.
+A visual progress indicator available in bar and circular variants. Shows completion percentage for tasks, file uploads, form steps, or any operation with measurable progress. Supports indeterminate state for unknown duration operations.
 
 ## Basic Bar
 
-<View style={{ padding: 16, gap: 16 }}>
-  <Progress value={60} />
-  <Progress value={75} showValue />
-</View>
+The default horizontal bar showing progress from 0-100%, with optional percentage display.
 
-## Indeterminate
+<Box marginVertical={12}>
+  <Stack gap={16}>
+    <Progress value={60} />
+    <Progress value={75} showValue />
+  </Stack>
+</Box>
 
-<View style={{ padding: 16 }}>
+## Indeterminate Progress
+
+Animated progress bar for operations without a known completion percentage, like loading or processing.
+
+<Box marginVertical={12}>
   <Progress />
-</View>
+</Box>
 
-## Sizes (Bar)
+## Bar Sizes
 
-<View style={{ padding: 16, gap: 16 }}>
-  <Progress value={40} size="sm" />
-  <Progress value={60} size="md" />
-  <Progress value={80} size="lg" />
-</View>
+Three size presets for different contexts: small for compact layouts, medium for standard use, and large for prominent displays.
+
+<Box marginVertical={12}>
+  <Stack gap={16}>
+    <Progress value={40} size="sm" />
+    <Progress value={60} size="md" />
+    <Progress value={80} size="lg" />
+  </Stack>
+</Box>
 
 ## Circle Variant
 
-<View style={{ padding: 16, flexDirection: "row", gap: 24, justifyContent: "center" }}>
-  <Progress value={50} variant="circle" size="sm" />
-  <Progress value={75} variant="circle" showValue />
-  <Progress value={90} variant="circle" size="lg" />
-</View>
+Circular progress indicators perfect for compact spaces, dashboards, or when displaying multiple progress metrics.
 
-## Custom Color
+<Box marginVertical={12}>
+  <Stack direction="horizontal" gap={24} justify="center">
+    <Progress value={50} variant="circle" size="sm" />
+    <Progress value={75} variant="circle" showValue />
+    <Progress value={90} variant="circle" size="lg" />
+  </Stack>
+</Box>
 
-<View style={{ padding: 16, gap: 16 }}>
-  <Progress value={65} color="#10B981" />
-  <Progress value={45} color="#F59E0B" />
-  <Progress value={80} color="#EF4444" />
-</View>
+## Custom Colors
+
+Override the default theme color to match specific contexts like success (green), warning (yellow), or error (red).
+
+<Box marginVertical={12}>
+  <Stack gap={16}>
+    <Progress value={65} color="#10B981" />
+    <Progress value={45} color="#F59E0B" />
+    <Progress value={80} color="#EF4444" />
+  </Stack>
+</Box>
+
+## File Upload Progress
+
+Realistic example showing progress during a file upload operation with file details.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={12}>
+      <Stack direction="horizontal" justify="space-between" align="center">
+        <Typography variant="heading">Uploading document.pdf</Typography>
+        <Typography variant="callout" style={{ color: "#6B7280" }}>
+          2.4 MB / 3.2 MB
+        </Typography>
+      </Stack>
+      <Progress value={75} showValue />
+      <Typography variant="callout" style={{ color: "#6B7280" }}>
+        Estimated time remaining: 12 seconds
+      </Typography>
+    </Stack>
+  </Card>
+</Box>
+
+## Multi-Step Form Progress
+
+Progress bar showing completion through a multi-step form process.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={16}>
+      <Typography variant="title-3">Account Setup</Typography>
+      <Progress value={66} size="lg" showValue />
+      <Stack gap={8}>
+        <Typography variant="callout" style={{ fontWeight: "600" }}>
+          Step 2 of 3: Personal Information
+        </Typography>
+        <Typography variant="callout" style={{ color: "#6B7280" }}>
+          Complete your profile to continue
+        </Typography>
+      </Stack>
+    </Stack>
+  </Card>
+</Box>
+
+## Dashboard Metrics
+
+Circular progress indicators showing various system metrics on a dashboard.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={16}>
+      <Typography variant="heading">System Overview</Typography>
+      <Stack direction="horizontal" gap={24} justify="space-around">
+        <Stack gap={8} align="center">
+          <Progress value={85} variant="circle" size="lg" showValue />
+          <Typography variant="callout" style={{ color: "#6B7280" }}>
+            CPU Usage
+          </Typography>
+        </Stack>
+        <Stack gap={8} align="center">
+          <Progress value={62} variant="circle" size="lg" showValue color="#10B981" />
+          <Typography variant="callout" style={{ color: "#6B7280" }}>
+            Memory
+          </Typography>
+        </Stack>
+        <Stack gap={8} align="center">
+          <Progress value={45} variant="circle" size="lg" showValue color="#F59E0B" />
+          <Typography variant="callout" style={{ color: "#6B7280" }}>
+            Storage
+          </Typography>
+        </Stack>
+      </Stack>
+    </Stack>
+  </Card>
+</Box>
+
+## Animated Progress Example
+
+Interactive example showing progress that updates over time, simulating a real loading operation.
+
+<Box marginVertical={12}>
+  <AnimatedProgressExample />
+</Box>
+
+## Storage Quota Display
+
+Progress bars showing storage usage with color-coded warnings.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={16}>
+      <Typography variant="heading">Storage Usage</Typography>
+      <Stack gap={12}>
+        <Stack gap={8}>
+          <Stack direction="horizontal" justify="space-between">
+            <Typography variant="callout">Documents</Typography>
+            <Typography variant="callout" style={{ color: "#6B7280" }}>
+              4.2 GB / 10 GB
+            </Typography>
+          </Stack>
+          <Progress value={42} color="#10B981" />
+        </Stack>
+        <Stack gap={8}>
+          <Stack direction="horizontal" justify="space-between">
+            <Typography variant="callout">Photos</Typography>
+            <Typography variant="callout" style={{ color: "#6B7280" }}>
+              7.8 GB / 10 GB
+            </Typography>
+          </Stack>
+          <Progress value={78} color="#F59E0B" />
+        </Stack>
+        <Stack gap={8}>
+          <Stack direction="horizontal" justify="space-between">
+            <Typography variant="callout">Videos</Typography>
+            <Typography variant="callout" style={{ color: "#6B7280" }}>
+              9.5 GB / 10 GB
+            </Typography>
+          </Stack>
+          <Progress value={95} color="#EF4444" />
+        </Stack>
+      </Stack>
+    </Stack>
+  </Card>
+</Box>
 
 ## Props
 
-| Prop      | Type                    | Default | Description                  |
-| --------- | ----------------------- | ------- | ---------------------------- |
-| value     | number                  | -       | Progress 0-100 (undefined = indeterminate) |
-| variant   | "bar" \\| "circle"      | "bar"   | Display style                |
-| size      | "sm" \\| "md" \\| "lg"  | "md"    | Size preset                  |
-| color     | string                  | Theme   | Progress color               |
-| showValue | boolean                 | false   | Display percentage           |
-| style     | StyleProp\<ViewStyle\>  | -       | Custom container styles      |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | `number` | - | Progress percentage 0-100 (undefined for indeterminate) |
+| variant | `"bar"` \| `"circle"` | `"bar"` | Display style: horizontal bar or circular |
+| size | `"sm"` \| `"md"` \| `"lg"` | `"md"` | Size preset for bar height or circle diameter |
+| color | `string` | Theme primary | Custom progress color override |
+| showValue | `boolean` | `false` | Display percentage text |
+| style | `StyleProp<ViewStyle>` | - | Custom container styles |
 
-## Usage Example
+## Usage Examples
+
+### Basic Progress Bar
 
 ```tsx
-import { Progress } from "@warp-ui/react-native";
+import { Progress } from "@repo/react-native";
 
-function UploadProgress({ percent }: { percent: number }) {
-  return <Progress value={percent} showValue />;
+<Progress value={60} />
+```
+
+### Progress with Percentage
+
+```tsx
+import { Progress } from "@repo/react-native";
+
+<Progress value={75} showValue />
+```
+
+### File Upload Progress
+
+```tsx
+import { Progress, Card, Stack, Typography } from "@repo/react-native";
+
+function FileUpload({ fileName, progress }: { fileName: string; progress: number }) {
+  return (
+    <Card>
+      <Stack gap={12}>
+        <Typography variant="heading">Uploading {fileName}</Typography>
+        <Progress value={progress} showValue />
+      </Stack>
+    </Card>
+  );
+}
+```
+
+### Circular Progress Dashboard
+
+```tsx
+import { Progress, Stack, Typography } from "@repo/react-native";
+
+function MetricCard({ label, value }: { label: string; value: number }) {
+  return (
+    <Stack gap={8} align="center">
+      <Progress value={value} variant="circle" size="lg" showValue />
+      <Typography variant="callout">{label}</Typography>
+    </Stack>
+  );
+}
+```
+
+### Animated Progress
+
+```tsx
+import { Progress, Stack } from "@repo/react-native";
+import { useState, useEffect } from "react";
+
+function LoadingProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => (prev >= 100 ? 100 : prev + 10));
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Stack gap={12}>
+      <Progress value={progress} showValue />
+      <Typography variant="callout">
+        {progress === 100 ? "Complete!" : "Loading..."}
+      </Typography>
+    </Stack>
+  );
+}
+```
+
+### Color-Coded Storage
+
+```tsx
+import { Progress, Stack, Typography } from "@repo/react-native";
+
+function StorageBar({ used, total }: { used: number; total: number }) {
+  const percentage = (used / total) * 100;
+  const color = percentage > 90 ? "#EF4444" : percentage > 70 ? "#F59E0B" : "#10B981";
+
+  return (
+    <Stack gap={8}>
+      <Stack direction="horizontal" justify="space-between">
+        <Typography variant="callout">Storage</Typography>
+        <Typography variant="callout">{used} GB / {total} GB</Typography>
+      </Stack>
+      <Progress value={percentage} color={color} showValue />
+    </Stack>
+  );
 }
 ```

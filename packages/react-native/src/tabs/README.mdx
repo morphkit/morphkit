@@ -6,7 +6,7 @@ import {
 } from "./Tabs";
 import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { BasicExample, SwipeExample, AdvancedExample } from "./examples";
 
 # Tabs Component
 
@@ -16,53 +16,6 @@ Tabbed navigation component for organizing content into switchable panels with h
 
 ## Basic Usage
 
-export const BasicExample = () => {
-  const [activeTab, setActiveTab] = useState("overview");
-  return (
-    <TabsContainer value={activeTab} onValueChange={setActiveTab}>
-      <TabsList>
-        <TabsTrigger value="overview" label="Overview" />
-        <TabsTrigger value="details" label="Details" />
-        <TabsTrigger value="reviews" label="Reviews" />
-      </TabsList>
-      <TabsContent value="overview">
-        <View style={{ padding: 16 }}>
-          <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 8 }}>
-            Product Overview
-          </Text>
-          <Text style={{ fontSize: 14, lineHeight: 20, color: "#6B7280" }}>
-            This premium wireless headphones deliver exceptional sound quality
-            with active noise cancellation. Perfect for music lovers and
-            professionals alike.
-          </Text>
-        </View>
-      </TabsContent>
-      <TabsContent value="details">
-        <View style={{ padding: 16 }}>
-          <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 8 }}>
-            Specifications
-          </Text>
-          <Text style={{ fontSize: 14, lineHeight: 20, color: "#6B7280" }}>
-            • Battery Life: 30 hours{"\n"}• Bluetooth 5.0{"\n"}• Weight: 250g
-            {"\n"}• Charging: USB-C fast charging
-          </Text>
-        </View>
-      </TabsContent>
-      <TabsContent value="reviews">
-        <View style={{ padding: 16 }}>
-          <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 8 }}>
-            Customer Reviews
-          </Text>
-          <Text style={{ fontSize: 14, lineHeight: 20, color: "#6B7280" }}>
-            ⭐⭐⭐⭐⭐ "Amazing sound quality!"{"\n"}⭐⭐⭐⭐ "Great for daily use"
-            {"\n"}⭐⭐⭐⭐⭐ "Best purchase this year"
-          </Text>
-        </View>
-      </TabsContent>
-    </TabsContainer>
-  );
-};
-
 <View style={{ padding: 16, marginVertical: 12 }}>
   <BasicExample />
 </View>
@@ -70,42 +23,6 @@ export const BasicExample = () => {
 ## Swipeable Tabs
 
 Horizontal tabs support swipe gestures! Swipe left or right to navigate between tabs.
-
-export const SwipeExample = () => {
-  const [activeTab, setActiveTab] = useState("code");
-  return (
-    <TabsContainer value={activeTab} onValueChange={setActiveTab} variant="pills">
-      <TabsList>
-        <TabsTrigger value="code" label="Code" />
-        <TabsTrigger value="preview" label="Preview" />
-        <TabsTrigger value="docs" label="Docs" />
-      </TabsList>
-      <TabsContent value="code">
-        <View style={{ padding: 16, backgroundColor: "#1F2937", borderRadius: 8 }}>
-          <Text style={{ fontFamily: "monospace", fontSize: 12, color: "#10B981" }}>
-            const App = () => {"{"}
-            {"\n"}  return &lt;View&gt;...&lt;/View&gt;;
-            {"\n"}{"}"};
-          </Text>
-        </View>
-      </TabsContent>
-      <TabsContent value="preview">
-        <View style={{ padding: 16, backgroundColor: "#F3F4F6", borderRadius: 8 }}>
-          <Text style={{ fontSize: 14, color: "#1F2937" }}>
-            Preview of your component appears here
-          </Text>
-        </View>
-      </TabsContent>
-      <TabsContent value="docs">
-        <View style={{ padding: 16 }}>
-          <Text style={{ fontSize: 14, lineHeight: 20, color: "#6B7280" }}>
-            API documentation and usage examples
-          </Text>
-        </View>
-      </TabsContent>
-    </TabsContainer>
-  );
-};
 
 <View style={{ padding: 16, marginVertical: 12 }}>
   <SwipeExample />
@@ -303,57 +220,6 @@ Vertical tabs are not swipeable (click to switch).
 </View>
 
 ## Advanced Example
-
-export const AdvancedExample = () => {
-  const [activeTab, setActiveTab] = useState("account");
-  return (
-    <TabsContainer
-      value={activeTab}
-      onValueChange={setActiveTab}
-      orientation="vertical"
-      variant="pills"
-    >
-      <TabsList>
-        <TabsTrigger
-          value="account"
-          label="Account"
-          icon={<Ionicons name="person" size={16} color="#FFFFFF" />}
-        />
-        <TabsTrigger
-          value="security"
-          label="Security"
-          icon={<Ionicons name="lock-closed" size={16} color="#6B7280" />}
-        />
-        <TabsTrigger
-          value="notifications"
-          label="Notifications"
-          icon={<Ionicons name="notifications" size={16} color="#6B7280" />}
-          disabled
-        />
-      </TabsList>
-      <TabsContent value="account">
-        <Text style={{ fontSize: 16, marginBottom: 8 }}>Account Settings</Text>
-        <Text style={{ color: "#6B7280" }}>
-          Manage your account information and preferences
-        </Text>
-      </TabsContent>
-      <TabsContent value="security">
-        <Text style={{ fontSize: 16, marginBottom: 8 }}>Security Settings</Text>
-        <Text style={{ color: "#6B7280" }}>
-          Configure your security and privacy options
-        </Text>
-      </TabsContent>
-      <TabsContent value="notifications">
-        <Text style={{ fontSize: 16, marginBottom: 8 }}>
-          Notification Settings
-        </Text>
-        <Text style={{ color: "#6B7280" }}>
-          Control your notification preferences
-        </Text>
-      </TabsContent>
-    </TabsContainer>
-  );
-};
 
 <View style={{ padding: 16, marginVertical: 12, minHeight: 200 }}>
   <AdvancedExample />

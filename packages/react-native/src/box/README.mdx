@@ -1,197 +1,317 @@
 import { Box } from "./Box";
-import { Text } from "react-native";
+import { Typography, Stack, Card } from "../";
 
-# Box Component
+# Box
 
-A flexible container component serving as the fundamental building block for layouts with comprehensive spacing, sizing, and styling props. Box provides a declarative API for common layout patterns without writing custom styles.
+A flexible container component serving as the fundamental building block for layouts. Provides declarative spacing, sizing, border, and flexbox props without writing custom styles. Use Box for any layout needs where you need precise control over spacing and positioning.
 
 ## Basic Usage
 
-<Box padding={16} backgroundColor="#F3F4F6" borderRadius={8}>
-  <Text>Simple box with padding and background</Text>
-</Box>
+Simple box with padding, background color, and rounded corners.
 
-## Spacing
-
-### Padding
-
-<Box flexDirection="row" gap={16} padding={16}>
-  <Box padding={16} backgroundColor="#E0E7FF" borderRadius={4}>
-    <Text>padding: 16</Text>
-  </Box>
-  <Box
-    padding={{ top: 8, right: 16, bottom: 8, left: 16 }}
-    backgroundColor="#DBEAFE"
-    borderRadius={4}
-  >
-    <Text>Custom padding</Text>
+<Box marginVertical={12}>
+  <Box padding={16} backgroundColor="#F3F4F6" borderRadius={8}>
+    <Typography variant="body">Simple box with padding and background</Typography>
   </Box>
 </Box>
 
-### Margin
+## Padding Variants
 
-<Box backgroundColor="#F9FAFB" padding={8}>
-  <Box margin={8} padding={12} backgroundColor="#FEF3C7" borderRadius={4}>
-    <Text>margin: 8</Text>
+Apply uniform padding or customize individual sides with an object.
+
+<Box marginVertical={12}>
+  <Box flexDirection="row" gap={16}>
+    <Box padding={16} backgroundColor="#E0E7FF" borderRadius={4}>
+      <Typography variant="callout">padding: 16</Typography>
+    </Box>
+    <Box
+      padding={{ top: 8, right: 16, bottom: 8, left: 16 }}
+      backgroundColor="#DBEAFE"
+      borderRadius={4}
+    >
+      <Typography variant="callout">Custom padding</Typography>
+    </Box>
   </Box>
-  <Box
-    margin={{ top: 16, bottom: 16 }}
-    padding={12}
-    backgroundColor="#FED7AA"
-    borderRadius={4}
-  >
-    <Text>Vertical margin</Text>
+</Box>
+
+## Margin Control
+
+Margin adds space around the box, useful for separating elements without nested containers.
+
+<Box marginVertical={12}>
+  <Box backgroundColor="#F9FAFB" padding={8}>
+    <Box margin={8} padding={12} backgroundColor="#FEF3C7" borderRadius={4}>
+      <Typography variant="body">margin: 8</Typography>
+    </Box>
+    <Box
+      margin={{ top: 16, bottom: 16 }}
+      padding={12}
+      backgroundColor="#FED7AA"
+      borderRadius={4}
+    >
+      <Typography variant="body">Vertical margin</Typography>
+    </Box>
   </Box>
 </Box>
 
 ## Border Styles
 
-<Box flexDirection="row" gap={16} padding={16}>
-  <Box
-    padding={16}
-    borderWidth={1}
-    borderColor="#E5E7EB"
-    borderRadius={4}
-  >
-    <Text>With border</Text>
+Combine borderWidth, borderColor, and borderRadius for custom borders and shapes.
+
+<Box marginVertical={12}>
+  <Box flexDirection="row" gap={16}>
+    <Box
+      padding={16}
+      borderWidth={1}
+      borderColor="#E5E7EB"
+      borderRadius={4}
+    >
+      <Typography variant="callout">With border</Typography>
+    </Box>
+    <Box
+      padding={16}
+      borderWidth={2}
+      borderColor="#4A90E2"
+      borderRadius={8}
+    >
+      <Typography variant="callout">Thick border</Typography>
+    </Box>
+    <Box
+      padding={16}
+      borderWidth={1}
+      borderColor="#10B981"
+      borderRadius={16}
+    >
+      <Typography variant="callout">Rounded</Typography>
+    </Box>
   </Box>
+</Box>
+
+## Horizontal Layout
+
+Use flexDirection="row" with justifyContent and alignItems for horizontal layouts.
+
+<Box marginVertical={12}>
   <Box
+    flexDirection="row"
+    justifyContent="space-between"
+    alignItems="center"
     padding={16}
-    borderWidth={2}
-    borderColor="#4A90E2"
+    backgroundColor="#F3F4F6"
     borderRadius={8}
   >
-    <Text>Thick border</Text>
-  </Box>
-  <Box
-    padding={16}
-    borderWidth={1}
-    borderColor="#10B981"
-    borderRadius={16}
-  >
-    <Text>Rounded</Text>
-  </Box>
-</Box>
-
-## Flexbox Layout
-
-### Horizontal Layout
-
-<Box
-  flexDirection="row"
-  justifyContent="space-between"
-  alignItems="center"
-  padding={16}
-  backgroundColor="#F3F4F6"
-  borderRadius={8}
->
-  <Box padding={8} backgroundColor="#4A90E2" borderRadius={4}>
-    <Text style={{ color: "#FFFFFF" }}>Left</Text>
-  </Box>
-  <Box padding={8} backgroundColor="#10B981" borderRadius={4}>
-    <Text style={{ color: "#FFFFFF" }}>Center</Text>
-  </Box>
-  <Box padding={8} backgroundColor="#F59E0B" borderRadius={4}>
-    <Text style={{ color: "#FFFFFF" }}>Right</Text>
+    <Box padding={8} backgroundColor="#4A90E2" borderRadius={4}>
+      <Typography variant="callout" style={{ color: "#FFFFFF" }}>Left</Typography>
+    </Box>
+    <Box padding={8} backgroundColor="#10B981" borderRadius={4}>
+      <Typography variant="callout" style={{ color: "#FFFFFF" }}>Center</Typography>
+    </Box>
+    <Box padding={8} backgroundColor="#F59E0B" borderRadius={4}>
+      <Typography variant="callout" style={{ color: "#FFFFFF" }}>Right</Typography>
+    </Box>
   </Box>
 </Box>
 
-### Vertical Layout with Gap
+## Vertical Layout with Gap
 
-<Box gap={8} padding={16} backgroundColor="#F3F4F6" borderRadius={8}>
-  <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
-    <Text>Item 1</Text>
-  </Box>
-  <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
-    <Text>Item 2</Text>
-  </Box>
-  <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
-    <Text>Item 3</Text>
+The gap property automatically adds space between children without manual margins.
+
+<Box marginVertical={12}>
+  <Box gap={8} padding={16} backgroundColor="#F3F4F6" borderRadius={8}>
+    <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
+      <Typography variant="body">Item 1</Typography>
+    </Box>
+    <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
+      <Typography variant="body">Item 2</Typography>
+    </Box>
+    <Box padding={12} backgroundColor="#FFFFFF" borderRadius={4}>
+      <Typography variant="body">Item 3</Typography>
+    </Box>
   </Box>
 </Box>
 
 ## Centered Content
 
-<Box
-  padding={32}
-  backgroundColor="#EEF2FF"
-  borderRadius={8}
-  justifyContent="center"
-  alignItems="center"
->
-  <Text style={{ fontSize: 18, fontWeight: "600" }}>Centered Text</Text>
+Center content both horizontally and vertically using justifyContent and alignItems.
+
+<Box marginVertical={12}>
+  <Box
+    padding={32}
+    backgroundColor="#EEF2FF"
+    borderRadius={8}
+    justifyContent="center"
+    alignItems="center"
+  >
+    <Typography variant="heading">Centered Text</Typography>
+  </Box>
 </Box>
 
-## Complex Layout Example
+## Profile Card with Box
 
-<Box padding={16} backgroundColor="#FFFFFF" borderRadius={12} borderWidth={1} borderColor="#E5E7EB">
-  <Box flexDirection="row" justifyContent="space-between" alignItems="center" marginBottom={12}>
-    <Text style={{ fontSize: 18, fontWeight: "600" }}>Card Title</Text>
-    <Box padding={4} backgroundColor="#EF4444" borderRadius={12}>
-      <Text style={{ color: "#FFFFFF", fontSize: 12 }}>New</Text>
+Complex card layout built entirely with Box for precise control over spacing and structure.
+
+<Box marginVertical={12}>
+  <Box padding={16} backgroundColor="#FFFFFF" borderRadius={12} borderWidth={1} borderColor="#E5E7EB">
+    <Box flexDirection="row" justifyContent="space-between" alignItems="center" marginBottom={12}>
+      <Typography variant="heading">Sarah Johnson</Typography>
+      <Box padding={4} backgroundColor="#EF4444" borderRadius={12}>
+        <Typography variant="caption-1" style={{ color: "#FFFFFF" }}>New</Typography>
+      </Box>
+    </Box>
+    <Box marginBottom={16}>
+      <Typography variant="callout" style={{ color: "#6B7280" }}>
+        Product Designer at TechCorp. Passionate about creating accessible and delightful user experiences.
+      </Typography>
+    </Box>
+    <Box flexDirection="row" gap={8}>
+      <Box flex={1} padding={12} backgroundColor="#4A90E2" borderRadius={8} alignItems="center">
+        <Typography variant="callout" style={{ color: "#FFFFFF", fontWeight: "600" }}>Follow</Typography>
+      </Box>
+      <Box flex={1} padding={12} backgroundColor="#F3F4F6" borderRadius={8} alignItems="center">
+        <Typography variant="callout" style={{ fontWeight: "600" }}>Message</Typography>
+      </Box>
     </Box>
   </Box>
-  <Box marginBottom={16}>
-    <Text style={{ color: "#6B7280" }}>This is a card built entirely with Box components using flexbox layout properties.</Text>
-  </Box>
-  <Box flexDirection="row" gap={8}>
-    <Box flex={1} padding={12} backgroundColor="#4A90E2" borderRadius={8} alignItems="center">
-      <Text style={{ color: "#FFFFFF", fontWeight: "600" }}>Action</Text>
+</Box>
+
+## Box with Card and Typography
+
+Box used alongside other library components for flexible layout composition.
+
+<Box marginVertical={12}>
+  <Card>
+    <Box gap={16}>
+      <Box flexDirection="row" justifyContent="space-between" alignItems="center">
+        <Typography variant="title-3">Dashboard Stats</Typography>
+        <Box padding={6} backgroundColor="#10B981" borderRadius={6}>
+          <Typography variant="caption-1" style={{ color: "#FFFFFF", fontWeight: "600" }}>
+            +12%
+          </Typography>
+        </Box>
+      </Box>
+      <Box flexDirection="row" gap={12}>
+        <Box flex={1} padding={16} backgroundColor="#F3F4F6" borderRadius={8}>
+          <Typography variant="caption-1" style={{ color: "#6B7280" }}>Total Users</Typography>
+          <Typography variant="title-2" style={{ marginTop: 4 }}>1,284</Typography>
+        </Box>
+        <Box flex={1} padding={16} backgroundColor="#F3F4F6" borderRadius={8}>
+          <Typography variant="caption-1" style={{ color: "#6B7280" }}>Active Now</Typography>
+          <Typography variant="title-2" style={{ marginTop: 4 }}>243</Typography>
+        </Box>
+      </Box>
     </Box>
-    <Box flex={1} padding={12} backgroundColor="#F3F4F6" borderRadius={8} alignItems="center">
-      <Text style={{ fontWeight: "600" }}>Cancel</Text>
+  </Card>
+</Box>
+
+## Grid Layout with Box
+
+Create grid-like layouts using nested Box components with flexDirection and flex.
+
+<Box marginVertical={12}>
+  <Box gap={12}>
+    <Box flexDirection="row" gap={12}>
+      <Box flex={1} padding={20} backgroundColor="#E0E7FF" borderRadius={8} alignItems="center">
+        <Typography variant="heading">1</Typography>
+      </Box>
+      <Box flex={1} padding={20} backgroundColor="#DBEAFE" borderRadius={8} alignItems="center">
+        <Typography variant="heading">2</Typography>
+      </Box>
+      <Box flex={1} padding={20} backgroundColor="#E0F2FE" borderRadius={8} alignItems="center">
+        <Typography variant="heading">3</Typography>
+      </Box>
+    </Box>
+    <Box flexDirection="row" gap={12}>
+      <Box flex={1} padding={20} backgroundColor="#FEF3C7" borderRadius={8} alignItems="center">
+        <Typography variant="heading">4</Typography>
+      </Box>
+      <Box flex={1} padding={20} backgroundColor="#FED7AA" borderRadius={8} alignItems="center">
+        <Typography variant="heading">5</Typography>
+      </Box>
+      <Box flex={1} padding={20} backgroundColor="#FEE2E2" borderRadius={8} alignItems="center">
+        <Typography variant="heading">6</Typography>
+      </Box>
     </Box>
   </Box>
+</Box>
+
+## Form Layout with Stack and Box
+
+Box combined with Stack for complex form layouts with custom spacing.
+
+<Box marginVertical={12}>
+  <Card>
+    <Stack gap={16}>
+      <Typography variant="title-3">Contact Information</Typography>
+      <Box flexDirection="row" gap={12}>
+        <Box flex={1} padding={12} backgroundColor="#F9FAFB" borderRadius={6}>
+          <Typography variant="callout" style={{ color: "#6B7280" }}>First Name</Typography>
+        </Box>
+        <Box flex={1} padding={12} backgroundColor="#F9FAFB" borderRadius={6}>
+          <Typography variant="callout" style={{ color: "#6B7280" }}>Last Name</Typography>
+        </Box>
+      </Box>
+      <Box padding={12} backgroundColor="#F9FAFB" borderRadius={6}>
+        <Typography variant="callout" style={{ color: "#6B7280" }}>Email Address</Typography>
+      </Box>
+      <Box padding={12} backgroundColor="#F9FAFB" borderRadius={6}>
+        <Typography variant="callout" style={{ color: "#6B7280" }}>Phone Number</Typography>
+      </Box>
+    </Stack>
+  </Card>
 </Box>
 
 ## Props
 
-| Prop            | Type                                                                                            | Default     | Description                                   |
-| --------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------- |
-| children        | `ReactNode`                                                                                     | -           | Child elements to render                      |
-| padding         | `number \| { top?, right?, bottom?, left? }`                                                    | `undefined` | Padding around content                        |
-| margin          | `number \| { top?, right?, bottom?, left? }`                                                    | `undefined` | Margin around box                             |
-| borderRadius    | `number`                                                                                        | `undefined` | Border corner radius                          |
-| borderWidth     | `number`                                                                                        | `undefined` | Border thickness                              |
-| borderColor     | `string`                                                                                        | `undefined` | Border color                                  |
-| backgroundColor | `string`                                                                                        | `undefined` | Background color                              |
-| flex            | `number`                                                                                        | `undefined` | Flex grow/shrink value                        |
-| flexDirection   | `"row"` \| `"column"` \| `"row-reverse"` \| `"column-reverse"`                                  | `undefined` | Flex direction                                |
-| justifyContent  | `"flex-start"` \| `"flex-end"` \| `"center"` \| `"space-between"` \| `"space-around"` \| `"space-evenly"` | `undefined` | Main axis alignment                           |
-| alignItems      | `"flex-start"` \| `"flex-end"` \| `"center"` \| `"stretch"` \| `"baseline"`                    | `undefined` | Cross axis alignment                          |
-| gap             | `number`                                                                                        | `undefined` | Space between children (requires RN >= 0.71)  |
-| style           | `StyleProp<ViewStyle>`                                                                          | `undefined` | Custom styles                                 |
-| ...props        | `ViewProps`                                                                                     | -           | All other View props                          |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | - | Child elements to render |
+| padding | `number` \| `{ top?, right?, bottom?, left? }` | - | Padding around content (single value or object) |
+| margin | `number` \| `{ top?, right?, bottom?, left? }` | - | Margin around box (single value or object) |
+| borderRadius | `number` | - | Border corner radius in pixels |
+| borderWidth | `number` | - | Border thickness in pixels |
+| borderColor | `string` | - | Border color (hex, rgb, or named color) |
+| backgroundColor | `string` | - | Background color (hex, rgb, or named color) |
+| flex | `number` | - | Flex grow/shrink value for parent flex containers |
+| flexDirection | `"row"` \| `"column"` \| `"row-reverse"` \| `"column-reverse"` | - | Main axis direction |
+| justifyContent | `"flex-start"` \| `"flex-end"` \| `"center"` \| `"space-between"` \| `"space-around"` \| `"space-evenly"` | - | Main axis alignment |
+| alignItems | `"flex-start"` \| `"flex-end"` \| `"center"` \| `"stretch"` \| `"baseline"` | - | Cross axis alignment |
+| gap | `number` | - | Space between children in pixels (requires RN >= 0.71) |
+| style | `StyleProp<ViewStyle>` | - | Custom styles merged after all other props |
+
+Box extends View, so all View props are supported (testID, accessibilityLabel, onPress, etc.).
 
 ## Usage Examples
 
 ### Simple Container
 
 ```tsx
-import { Box } from "@warpui/react-native";
-import { Text } from "react-native";
+import { Box, Typography } from "@repo/react-native";
 
 <Box padding={16} backgroundColor="#F3F4F6">
-  <Text>Content here</Text>
+  <Typography variant="body">Content here</Typography>
 </Box>
 ```
 
 ### Horizontal Layout
 
 ```tsx
+import { Box, Typography } from "@repo/react-native";
+
 <Box flexDirection="row" gap={8} padding={16}>
   <Box flex={1} padding={12} backgroundColor="#4A90E2">
-    <Text>Left</Text>
+    <Typography variant="body" style={{ color: "#FFFFFF" }}>Left</Typography>
   </Box>
   <Box flex={1} padding={12} backgroundColor="#10B981">
-    <Text>Right</Text>
+    <Typography variant="body" style={{ color: "#FFFFFF" }}>Right</Typography>
   </Box>
 </Box>
 ```
 
-### Card Layout
+### Card-Style Container
 
 ```tsx
+import { Box, Typography } from "@repo/react-native";
+
 <Box
   padding={20}
   margin={16}
@@ -200,27 +320,50 @@ import { Text } from "react-native";
   borderWidth={1}
   borderColor="#E5E7EB"
 >
-  <Text>Card Content</Text>
+  <Typography variant="heading">Card Content</Typography>
 </Box>
 ```
 
 ### Centered Content
 
 ```tsx
+import { Box, Typography } from "@repo/react-native";
+
 <Box
   flex={1}
   justifyContent="center"
   alignItems="center"
 >
-  <Text>Centered</Text>
+  <Typography variant="heading">Centered</Typography>
 </Box>
 ```
 
-## Behavior Notes
+### Complex Layout with Multiple Components
 
-- Box is a pure layout primitive with no default styling
-- All props are optional for maximum flexibility
-- Spacing can be specified as a single number or object with individual sides
-- The `gap` property requires React Native 0.71 or higher
-- Custom styles via the `style` prop are merged after all other props
-- Box extends View, so all View props are supported (testID, accessibilityLabel, etc.)
+```tsx
+import { Box, Card, Stack, Typography } from "@repo/react-native";
+
+<Card>
+  <Box gap={16}>
+    <Box flexDirection="row" justifyContent="space-between">
+      <Typography variant="title-3">Header</Typography>
+      <Box padding={6} backgroundColor="#10B981" borderRadius={6}>
+        <Typography variant="caption-1" style={{ color: "#FFFFFF" }}>
+          New
+        </Typography>
+      </Box>
+    </Box>
+    <Stack gap={12}>
+      <Typography variant="body">Card content with flexible layout</Typography>
+      <Box flexDirection="row" gap={8}>
+        <Box flex={1} padding={12} backgroundColor="#F3F4F6" borderRadius={6}>
+          <Typography variant="callout">Action 1</Typography>
+        </Box>
+        <Box flex={1} padding={12} backgroundColor="#F3F4F6" borderRadius={6}>
+          <Typography variant="callout">Action 2</Typography>
+        </Box>
+      </Box>
+    </Stack>
+  </Box>
+</Card>
+```
