@@ -3,12 +3,12 @@ import {
   PressableProps,
   Text,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
   Animated,
 } from "react-native";
 import { ReactNode, useRef } from "react";
+import { useTheme } from "../theme";
 
 type FABPlacement =
   | "top-left"
@@ -42,7 +42,7 @@ export const FAB = ({
   style,
   ...props
 }: FABProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
   const scaleValue = useRef(new Animated.Value(1)).current;
   const opacityValue = useRef(new Animated.Value(1)).current;
 
@@ -55,8 +55,8 @@ export const FAB = ({
         useNativeDriver: true,
       }),
       Animated.timing(opacityValue, {
-        toValue: 0.9,
-        duration: 100,
+        toValue: theme.semantic.state.hover.opacity,
+        duration: theme.primitive.duration.fast,
         useNativeDriver: true,
       }),
     ]).start();
@@ -66,19 +66,19 @@ export const FAB = ({
     Animated.parallel([
       Animated.spring(scaleValue, {
         toValue: 1,
-        friction: 3,
+        ...theme.primitive.spring.default,
         useNativeDriver: true,
       }),
       Animated.timing(opacityValue, {
         toValue: 1,
-        duration: 100,
+        duration: theme.primitive.duration.fast,
         useNativeDriver: true,
       }),
     ]).start();
   };
 
   const getPlacementStyles = (): ViewStyle => {
-    const offset = 16;
+    const offset = theme.component.fab.offset;
     switch (placement) {
       case "top-left":
         return { top: offset, left: offset };
@@ -95,19 +95,43 @@ export const FAB = ({
     }
   };
 
-  const themeStyles = fabColors[colorScheme][variant];
-  const sizeStyle = isExtended ? extendedSizeStyles[size] : sizeStyles[size];
+  const variantColors = theme.component.fab.variant[colorScheme][variant];
+  const sizeTokens = theme.component.fab.size[size];
   const placementStyles = getPlacementStyles();
 
-  const containerStyles = [
-    baseStyles.container,
-    themeStyles,
-    sizeStyle,
-    placementStyles,
-    isExtended && baseStyles.extended,
-    disabled && baseStyles.disabled,
-    style,
-  ];
+  const extendedSizeMap = {
+    sm: {
+      height: sizeTokens.height,
+      borderRadius: sizeTokens.borderRadius,
+      minWidth: 80,
+    },
+    md: {
+      height: sizeTokens.height,
+      borderRadius: sizeTokens.borderRadius,
+      minWidth: 96,
+    },
+    lg: {
+      height: sizeTokens.height,
+      borderRadius: sizeTokens.borderRadius,
+      minWidth: 112,
+    },
+  };
+
+  const containerStyles: ViewStyle = {
+    ...baseStyles.container,
+    backgroundColor: variantColors.background,
+    width: isExtended ? undefined : sizeTokens.width,
+    height: sizeTokens.height,
+    borderRadius: sizeTokens.borderRadius,
+    minWidth: isExtended ? extendedSizeMap[size].minWidth : undefined,
+    ...theme.primitive.shadowPresets.lg,
+    ...placementStyles,
+    flexDirection: isExtended ? ("row" as const) : undefined,
+    opacity: disabled ? theme.semantic.state.disabled.opacity : undefined,
+    shadowOpacity: disabled ? 0 : undefined,
+    elevation: disabled ? 0 : undefined,
+    ...(style as ViewStyle),
+  };
 
   return (
     <Animated.View
@@ -126,13 +150,26 @@ export const FAB = ({
         accessibilityState={{ disabled }}
         style={[
           baseStyles.pressable,
-          isExtended && baseStyles.extendedPressable,
+          isExtended && {
+            flexDirection: "row",
+            alignItems: "center",
+            gap: theme.primitive.spacing[2],
+            paddingHorizontal: theme.primitive.spacing[4],
+          },
         ]}
         {...props}
       >
         {icon}
         {isExtended && label && (
-          <Text style={[baseStyles.label, fabColors[colorScheme].text]}>
+          <Text
+            style={[
+              {
+                fontSize: theme.primitive.fontSize.base,
+                fontWeight: theme.primitive.fontWeight.semibold,
+                color: variantColors.icon,
+              },
+            ]}
+          >
             {label}
           </Text>
         )}
@@ -147,11 +184,6 @@ const baseStyles = StyleSheet.create({
   container: {
     position: "absolute",
     zIndex: 999,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 6,
   },
   pressable: {
     justifyContent: "center",
@@ -159,83 +191,4 @@ const baseStyles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  extended: {
-    flexDirection: "row",
-  },
-  extendedPressable: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    paddingHorizontal: 16,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  disabled: {
-    opacity: 0.5,
-    shadowOpacity: 0,
-    elevation: 0,
-  },
 });
-
-const sizeStyles = StyleSheet.create({
-  sm: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-  md: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-  },
-  lg: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-  },
-});
-
-const extendedSizeStyles = StyleSheet.create({
-  sm: {
-    height: 40,
-    borderRadius: 20,
-    minWidth: 80,
-  },
-  md: {
-    height: 56,
-    borderRadius: 28,
-    minWidth: 96,
-  },
-  lg: {
-    height: 64,
-    borderRadius: 32,
-    minWidth: 112,
-  },
-});
-
-const fabColors = {
-  light: StyleSheet.create({
-    primary: {
-      backgroundColor: "#4A90E2",
-    },
-    secondary: {
-      backgroundColor: "#6B7280",
-    },
-    text: {
-      color: "#FFFFFF",
-    },
-  }),
-  dark: StyleSheet.create({
-    primary: {
-      backgroundColor: "#5AA2F5",
-    },
-    secondary: {
-      backgroundColor: "#9CA3AF",
-    },
-    text: {
-      color: "#FFFFFF",
-    },
-  }),
-};

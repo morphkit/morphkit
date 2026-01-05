@@ -4,12 +4,12 @@ import {
   ViewProps,
   Text,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
   PanResponder,
   GestureResponderEvent,
 } from "react-native";
+import { useTheme } from "../theme";
 
 export interface SliderProps extends Omit<ViewProps, "children"> {
   value: number | [number, number];
@@ -44,7 +44,7 @@ export const Slider = forwardRef<View, SliderProps>(
     },
     ref,
   ) => {
-    const colorScheme = useColorScheme() ?? "light";
+    const { theme, colorScheme } = useTheme();
     const [trackWidth, setTrackWidth] = useState(0);
     const trackRef = useRef<View>(null);
 
@@ -52,10 +52,12 @@ export const Slider = forwardRef<View, SliderProps>(
     const currentValue = isRange ? value[0] : value;
     const endValue = isRange ? value[1] : undefined;
 
-    const themeColors = colorTheme[colorScheme];
-    const activeColor = color ?? themeColors.active;
-
-    const { trackHeight, thumbSize } = sizeMap[size];
+    const trackHeight = theme.component.slider.trackHeight;
+    const thumbSize = theme.component.slider.thumbSize[size];
+    const activeColor = color ?? theme.component.slider.variant[colorScheme].track.active;
+    const inactiveColor = theme.component.slider.variant[colorScheme].track.inactive;
+    const thumbColor = theme.component.slider.variant[colorScheme].thumb;
+    const thumbBorderColor = theme.component.slider.variant[colorScheme].thumbBorder;
 
     const normalizeValue = (val: number): number => {
       let normalized = Math.max(min, Math.min(max, val));
@@ -121,7 +123,14 @@ export const Slider = forwardRef<View, SliderProps>(
     return (
       <View
         ref={ref}
-        style={[baseStyles.container, disabled && baseStyles.disabled, style]}
+        style={[
+          baseStyles.container,
+          {
+            paddingVertical: theme.primitive.spacing[5],
+            opacity: disabled ? theme.semantic.state.disabled.opacity : 1,
+          },
+          style,
+        ]}
         {...props}
       >
         <View
@@ -136,7 +145,7 @@ export const Slider = forwardRef<View, SliderProps>(
               {
                 height: trackHeight,
                 borderRadius: trackHeight / 2,
-                backgroundColor: themeColors.inactive,
+                backgroundColor: inactiveColor,
               },
             ]}
           />
@@ -159,13 +168,32 @@ export const Slider = forwardRef<View, SliderProps>(
                 width: thumbSize,
                 height: thumbSize,
                 borderRadius: thumbSize / 2,
-                backgroundColor: activeColor,
+                backgroundColor: thumbColor,
+                borderWidth: 2,
+                borderColor: thumbBorderColor,
                 left: currentPosition - thumbSize / 2,
+                shadowColor: theme.primitive.shadowPresets.sm.shadowColor,
+                shadowOffset: theme.primitive.shadowPresets.sm.offset,
+                shadowOpacity: theme.primitive.shadowPresets.sm.opacity,
+                shadowRadius: theme.primitive.shadowPresets.sm.radius,
+                elevation: theme.primitive.shadowPresets.sm.elevation,
               },
             ]}
           >
             {showValue && (
-              <Text style={baseStyles.valueText}>{currentValue}</Text>
+              <Text
+                style={[
+                  baseStyles.valueText,
+                  {
+                    top: -(theme.primitive.spacing[6]),
+                    fontSize: theme.primitive.fontSize.xs,
+                    fontWeight: theme.primitive.fontWeight.semibold,
+                    color: theme.semantic.colors.text.primary,
+                  },
+                ]}
+              >
+                {currentValue}
+              </Text>
             )}
           </View>
           {isRange && endValue !== undefined && (
@@ -176,13 +204,32 @@ export const Slider = forwardRef<View, SliderProps>(
                   width: thumbSize,
                   height: thumbSize,
                   borderRadius: thumbSize / 2,
-                  backgroundColor: activeColor,
+                  backgroundColor: thumbColor,
+                  borderWidth: 2,
+                  borderColor: thumbBorderColor,
                   left: endPosition - thumbSize / 2,
+                  shadowColor: theme.primitive.shadowPresets.sm.shadowColor,
+                  shadowOffset: theme.primitive.shadowPresets.sm.offset,
+                  shadowOpacity: theme.primitive.shadowPresets.sm.opacity,
+                  shadowRadius: theme.primitive.shadowPresets.sm.radius,
+                  elevation: theme.primitive.shadowPresets.sm.elevation,
                 },
               ]}
             >
               {showValue && (
-                <Text style={baseStyles.valueText}>{endValue}</Text>
+                <Text
+                  style={[
+                    baseStyles.valueText,
+                    {
+                      top: -(theme.primitive.spacing[6]),
+                      fontSize: theme.primitive.fontSize.xs,
+                      fontWeight: theme.primitive.fontWeight.semibold,
+                      color: theme.semantic.colors.text.primary,
+                    },
+                  ]}
+                >
+                  {endValue}
+                </Text>
               )}
             </View>
           )}
@@ -194,27 +241,8 @@ export const Slider = forwardRef<View, SliderProps>(
 
 Slider.displayName = "Slider";
 
-const sizeMap = {
-  sm: { trackHeight: 2, thumbSize: 16 },
-  md: { trackHeight: 4, thumbSize: 20 },
-  lg: { trackHeight: 6, thumbSize: 24 },
-};
-
-const colorTheme = {
-  light: {
-    inactive: "#E5E7EB",
-    active: "#4A90E2",
-  },
-  dark: {
-    inactive: "#4B5563",
-    active: "#5AA2F5",
-  },
-};
-
 const baseStyles = StyleSheet.create({
-  container: {
-    paddingVertical: 20,
-  },
+  container: {},
   track: {
     position: "relative",
     justifyContent: "center",
@@ -230,20 +258,8 @@ const baseStyles = StyleSheet.create({
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
   },
   valueText: {
     position: "absolute",
-    top: -24,
-    fontSize: 12,
-    fontWeight: "600",
-    color: "#374151",
-  },
-  disabled: {
-    opacity: 0.5,
   },
 });

@@ -5,10 +5,10 @@ import {
   Text,
   Pressable,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
 } from "react-native";
+import { useTheme } from "../theme";
 
 type AlertVariant = "info" | "success" | "warning" | "error";
 
@@ -32,9 +32,9 @@ export const Alert = ({
   style,
   ...props
 }: AlertProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
 
-  const variantColors = colors[colorScheme][variant];
+  const variantColors = theme.component.alert.variant[colorScheme][variant];
   const defaultIcon = icon ?? getDefaultIcon(variant);
 
   return (
@@ -44,6 +44,9 @@ export const Alert = ({
         {
           backgroundColor: variantColors.background,
           borderColor: variantColors.border,
+          padding: theme.component.alert.padding,
+          borderRadius: theme.component.alert.borderRadius,
+          gap: theme.component.alert.gap,
         },
         style,
       ]}
@@ -52,7 +55,13 @@ export const Alert = ({
     >
       <View style={baseStyles.iconContainer}>
         {typeof defaultIcon === "string" ? (
-          <Text style={[baseStyles.iconText, { color: variantColors.icon }]}>
+          <Text style={[
+            baseStyles.iconText,
+            {
+              color: variantColors.icon,
+              fontSize: theme.component.alert.iconSize,
+            }
+          ]}>
             {defaultIcon}
           </Text>
         ) : (
@@ -60,12 +69,26 @@ export const Alert = ({
         )}
       </View>
 
-      <View style={baseStyles.content}>
-        <Text style={[baseStyles.title, { color: variantColors.text }]}>
+      <View style={[baseStyles.content, { gap: theme.primitive.spacing[1] }]}>
+        <Text style={[
+          baseStyles.title,
+          {
+            color: variantColors.text,
+            fontSize: theme.primitive.fontSize.base,
+            lineHeight: theme.primitive.fontSize.base * theme.primitive.lineHeight.normal,
+          }
+        ]}>
           {title}
         </Text>
         {description && (
-          <Text style={[baseStyles.description, { color: variantColors.text }]}>
+          <Text style={[
+            baseStyles.description,
+            {
+              color: variantColors.text,
+              fontSize: theme.primitive.fontSize.md,
+              lineHeight: theme.primitive.fontSize.md * theme.primitive.lineHeight.normal,
+            }
+          ]}>
             {description}
           </Text>
         )}
@@ -76,10 +99,16 @@ export const Alert = ({
           onPress={onDismiss}
           accessibilityRole="button"
           accessibilityLabel="Dismiss alert"
-          hitSlop={8}
+          hitSlop={theme.primitive.spacing[2]}
           style={baseStyles.dismissButton}
         >
-          <Text style={[baseStyles.dismissIcon, { color: variantColors.text }]}>
+          <Text style={[
+            baseStyles.dismissIcon,
+            {
+              color: variantColors.text,
+              fontSize: theme.component.alert.iconSize,
+            }
+          ]}>
             ×
           </Text>
         </Pressable>
@@ -104,97 +133,31 @@ const getDefaultIcon = (variant: AlertVariant): string => {
   }
 };
 
-const colors = {
-  light: {
-    info: {
-      background: "#EFF6FF",
-      border: "#DBEAFE",
-      text: "#1E40AF",
-      icon: "#3B82F6",
-    },
-    success: {
-      background: "#F0FDF4",
-      border: "#D1FAE5",
-      text: "#065F46",
-      icon: "#10B981",
-    },
-    warning: {
-      background: "#FFFBEB",
-      border: "#FEF3C7",
-      text: "#92400E",
-      icon: "#F59E0B",
-    },
-    error: {
-      background: "#FEF2F2",
-      border: "#FEE2E2",
-      text: "#991B1B",
-      icon: "#EF4444",
-    },
-  },
-  dark: {
-    info: {
-      background: "#1E3A8A",
-      border: "#1E40AF",
-      text: "#DBEAFE",
-      icon: "#60A5FA",
-    },
-    success: {
-      background: "#064E3B",
-      border: "#065F46",
-      text: "#D1FAE5",
-      icon: "#34D399",
-    },
-    warning: {
-      background: "#78350F",
-      border: "#92400E",
-      text: "#FEF3C7",
-      icon: "#FBBF24",
-    },
-    error: {
-      background: "#7F1D1D",
-      border: "#991B1B",
-      text: "#FEE2E2",
-      icon: "#F87171",
-    },
-  },
-};
-
 const baseStyles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "flex-start",
-    padding: 12,
-    borderRadius: 8,
     borderWidth: 1,
-    gap: 12,
   },
   iconContainer: {
     marginTop: 2,
   },
   iconText: {
-    fontSize: 20,
     fontWeight: "bold",
   },
   content: {
     flex: 1,
-    gap: 4,
   },
   title: {
-    fontSize: 14,
     fontWeight: "600",
-    lineHeight: 20,
   },
-  description: {
-    fontSize: 13,
-    lineHeight: 18,
-  },
+  description: {},
   dismissButton: {
     marginTop: 2,
     justifyContent: "center",
     alignItems: "center",
   },
   dismissIcon: {
-    fontSize: 20,
     fontWeight: "bold",
   },
 });

@@ -4,12 +4,12 @@ import {
   ViewProps,
   Text,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
   Animated,
   Easing,
 } from "react-native";
+import { useTheme } from "../theme";
 
 type ProgressVariant = "bar" | "circle";
 type ProgressSize = "sm" | "md" | "lg";
@@ -32,14 +32,15 @@ export const Progress = ({
   style,
   ...props
 }: ProgressProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
   const animValue = useRef(new Animated.Value(0)).current;
 
   const isIndeterminate = value === undefined;
   const clampedValue = Math.max(0, Math.min(100, value ?? 0));
 
-  const progressColor = color ?? colors[colorScheme].progress;
-  const themeColors = colors[colorScheme];
+  const progressColor = color ?? theme.component.progress.variant[colorScheme].fill;
+  const trackColor = theme.component.progress.variant[colorScheme].track;
+  const textColor = theme.semantic.colors.text.secondary;
 
   useEffect(() => {
     if (isIndeterminate) {
@@ -47,20 +48,20 @@ export const Progress = ({
         Animated.sequence([
           Animated.timing(animValue, {
             toValue: 1,
-            duration: 1000,
+            duration: theme.primitive.duration.slow,
             easing: Easing.ease,
             useNativeDriver: false,
           }),
           Animated.timing(animValue, {
             toValue: 0,
-            duration: 1000,
+            duration: theme.primitive.duration.slow,
             easing: Easing.ease,
             useNativeDriver: false,
           }),
         ]),
       ).start();
     }
-  }, [isIndeterminate, animValue]);
+  }, [isIndeterminate, animValue, theme]);
 
   const accessibilityValue = isIndeterminate
     ? undefined
@@ -71,6 +72,8 @@ export const Progress = ({
       };
 
   if (variant === "bar") {
+    const barHeight = theme.component.progress.height[size];
+
     return (
       <View
         style={[baseStyles.container, style]}
@@ -82,8 +85,9 @@ export const Progress = ({
           style={[
             barStyles.track,
             {
-              height: barSizes[size],
-              backgroundColor: themeColors.track,
+              height: barHeight,
+              backgroundColor: trackColor,
+              borderRadius: theme.component.progress.borderRadius,
             },
           ]}
         >
@@ -92,9 +96,10 @@ export const Progress = ({
               style={[
                 barStyles.fill,
                 {
-                  height: barSizes[size],
+                  height: barHeight,
                   backgroundColor: progressColor,
                   width: "30%",
+                  borderRadius: theme.component.progress.borderRadius,
                   left: animValue.interpolate({
                     inputRange: [0, 1],
                     outputRange: ["0%", "100%"],
@@ -107,16 +112,27 @@ export const Progress = ({
               style={[
                 barStyles.fill,
                 {
-                  height: barSizes[size],
+                  height: barHeight,
                   backgroundColor: progressColor,
                   width: `${clampedValue}%`,
+                  borderRadius: theme.component.progress.borderRadius,
                 },
               ]}
             />
           )}
         </View>
         {showValue && !isIndeterminate && (
-          <Text style={[barStyles.valueText, { color: themeColors.text }]}>
+          <Text
+            style={[
+              barStyles.valueText,
+              {
+                color: textColor,
+                marginTop: theme.primitive.spacing[2],
+                fontSize: theme.primitive.fontSize.xs,
+                fontWeight: theme.primitive.fontWeight.semibold,
+              },
+            ]}
+          >
             {clampedValue}%
           </Text>
         )}
@@ -152,7 +168,7 @@ export const Progress = ({
             height: circleSize,
             borderRadius: circleSize / 2,
             borderWidth: strokeWidth,
-            borderColor: themeColors.track,
+            borderColor: trackColor,
           },
         ]}
       >
@@ -186,8 +202,11 @@ export const Progress = ({
         <Text
           style={[
             circleStyles.valueText,
-            circleSizes[size] <= 32 && { fontSize: 10 },
-            { color: themeColors.text },
+            {
+              fontSize: circleSizes[size] <= 32 ? theme.primitive.fontSize.xs : theme.primitive.fontSize.sm,
+              fontWeight: theme.primitive.fontWeight.semibold,
+              color: textColor,
+            },
           ]}
         >
           {clampedValue}%
@@ -199,29 +218,10 @@ export const Progress = ({
 
 Progress.displayName = "Progress";
 
-const barSizes = {
-  sm: 4,
-  md: 8,
-  lg: 12,
-};
-
 const circleSizes = {
   sm: 32,
   md: 48,
   lg: 64,
-};
-
-const colors = {
-  light: {
-    track: "#E5E7EB",
-    progress: "#4A90E2",
-    text: "#374151",
-  },
-  dark: {
-    track: "#4B5563",
-    progress: "#5AA2F5",
-    text: "#E5E7EB",
-  },
 };
 
 const baseStyles = StyleSheet.create({
@@ -233,20 +233,14 @@ const baseStyles = StyleSheet.create({
 const barStyles = StyleSheet.create({
   track: {
     width: "100%",
-    borderRadius: 999,
     overflow: "hidden",
     position: "relative",
   },
   fill: {
-    borderRadius: 999,
     position: "absolute",
     left: 0,
   },
-  valueText: {
-    marginTop: 8,
-    fontSize: 12,
-    fontWeight: "600",
-  },
+  valueText: {},
 });
 
 const circleStyles = StyleSheet.create({
@@ -264,7 +258,5 @@ const circleStyles = StyleSheet.create({
   },
   valueText: {
     position: "absolute",
-    fontSize: 12,
-    fontWeight: "600",
   },
 });

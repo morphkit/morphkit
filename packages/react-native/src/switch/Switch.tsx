@@ -5,11 +5,11 @@ import {
   Pressable,
   Text,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
   Animated,
 } from "react-native";
+import { useTheme } from "../theme";
 
 export interface SwitchProps extends Omit<ViewProps, "children"> {
   checked: boolean;
@@ -39,16 +39,16 @@ export const Switch = forwardRef<View, SwitchProps>(
     },
     ref,
   ) => {
-    const colorScheme = useColorScheme() ?? "light";
+    const { theme, colorScheme } = useTheme();
     const animation = useRef(new Animated.Value(checked ? 1 : 0)).current;
 
     useEffect(() => {
       Animated.timing(animation, {
         toValue: checked ? 1 : 0,
-        duration: 200,
+        duration: theme.primitive.duration.normal,
         useNativeDriver: true,
       }).start();
-    }, [checked, animation]);
+    }, [checked, animation, theme]);
 
     const handlePress = () => {
       if (!disabled) {
@@ -56,11 +56,19 @@ export const Switch = forwardRef<View, SwitchProps>(
       }
     };
 
-    const { trackWidth, trackHeight, thumbSize, thumbPadding } = sizeMap[size];
+    const { trackWidth, trackHeight, thumbSize, thumbPadding } = theme.component.switchComponent.size[size];
 
-    const themeColors = colorTheme[colorScheme];
-    const activeColor = color ?? themeColors.active;
-    const trackColor = checked ? activeColor : themeColors.inactive;
+    const trackColor = disabled
+      ? theme.component.switchComponent.variant[colorScheme].disabled.track
+      : checked
+        ? color ?? theme.component.switchComponent.variant[colorScheme].on.track
+        : theme.component.switchComponent.variant[colorScheme].off.track;
+
+    const thumbColor = disabled
+      ? theme.component.switchComponent.variant[colorScheme].disabled.thumb
+      : checked
+        ? theme.component.switchComponent.variant[colorScheme].on.thumb
+        : theme.component.switchComponent.variant[colorScheme].off.thumb;
 
     const thumbTranslateX = animation.interpolate({
       inputRange: [0, 1],
@@ -73,7 +81,15 @@ export const Switch = forwardRef<View, SwitchProps>(
         onPress={handlePress}
         onPressOut={onBlur}
         disabled={disabled}
-        style={[baseStyles.container, disabled && baseStyles.disabled, style]}
+        style={[
+          baseStyles.container,
+          {
+            gap: theme.primitive.spacing[2],
+            minHeight: theme.primitive.spacing[12],
+            opacity: disabled ? theme.semantic.state.disabled.opacity : 1,
+          },
+          style,
+        ]}
         accessibilityRole="switch"
         accessibilityState={{ checked }}
         accessibilityLabel={label || name}
@@ -97,12 +113,30 @@ export const Switch = forwardRef<View, SwitchProps>(
                 width: thumbSize,
                 height: thumbSize,
                 borderRadius: thumbSize / 2,
+                backgroundColor: thumbColor,
+                shadowColor: theme.primitive.shadowPresets.sm.shadowColor,
+                shadowOffset: theme.primitive.shadowPresets.sm.offset,
+                shadowOpacity: theme.primitive.shadowPresets.sm.opacity,
+                shadowRadius: theme.primitive.shadowPresets.sm.radius,
+                elevation: theme.primitive.shadowPresets.sm.elevation,
                 transform: [{ translateX: thumbTranslateX }],
               },
             ]}
           />
         </View>
-        {label && <Text style={baseStyles.label}>{label}</Text>}
+        {label && (
+          <Text
+            style={[
+              baseStyles.label,
+              {
+                fontSize: theme.primitive.fontSize.lg,
+                color: theme.semantic.colors.text.primary,
+              },
+            ]}
+          >
+            {label}
+          </Text>
+        )}
       </Pressable>
     );
   },
@@ -110,46 +144,14 @@ export const Switch = forwardRef<View, SwitchProps>(
 
 Switch.displayName = "Switch";
 
-const sizeMap = {
-  sm: { trackWidth: 32, trackHeight: 20, thumbSize: 16, thumbPadding: 2 },
-  md: { trackWidth: 40, trackHeight: 24, thumbSize: 20, thumbPadding: 2 },
-  lg: { trackWidth: 48, trackHeight: 28, thumbSize: 24, thumbPadding: 2 },
-};
-
-const colorTheme = {
-  light: {
-    inactive: "#D1D5DB",
-    active: "#4A90E2",
-  },
-  dark: {
-    inactive: "#6B7280",
-    active: "#5AA2F5",
-  },
-};
-
 const baseStyles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
-    minHeight: 44,
   },
   track: {
     justifyContent: "center",
   },
-  thumb: {
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  label: {
-    fontSize: 16,
-    color: "#374151",
-  },
-  disabled: {
-    opacity: 0.5,
-  },
+  thumb: {},
+  label: {},
 });

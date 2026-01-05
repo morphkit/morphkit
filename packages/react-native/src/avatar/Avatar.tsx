@@ -6,12 +6,12 @@ import {
   Image,
   ImageSourcePropType,
   StyleSheet,
-  useColorScheme,
   ViewStyle,
   StyleProp,
 } from "react-native";
+import { useTheme } from "../theme";
 
-type AvatarSize = "sm" | "md" | "lg";
+type AvatarSize = "sm" | "md" | "lg" | "xl";
 
 export interface AvatarProps extends Omit<PressableProps, "children"> {
   source?: ImageSourcePropType;
@@ -27,14 +27,26 @@ export const Avatar = ({
   style,
   ...props
 }: AvatarProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
 
   const renderContent = ({ pressed }: { pressed: boolean }) => {
+    const avatarSize = theme.component.avatar.size[size];
+    const textSizeMap = {
+      sm: theme.primitive.fontSize.xs,
+      md: theme.primitive.fontSize.lg,
+      lg: theme.primitive.fontSize['2xl'],
+      xl: theme.primitive.fontSize['3xl'],
+    };
+
     const containerStyles = [
       baseStyles.container,
-      sizeStyles[size],
-      !source && fallbackTheme[colorScheme],
-      pressed && { opacity: 0.8 },
+      {
+        width: avatarSize,
+        height: avatarSize,
+        borderRadius: theme.component.avatar.borderRadius,
+        backgroundColor: !source ? theme.component.avatar.variant[colorScheme].background : undefined,
+        opacity: pressed ? theme.semantic.state.pressed.opacity : 1,
+      },
       style,
     ];
 
@@ -43,7 +55,16 @@ export const Avatar = ({
         {source ? (
           <Image source={source} style={baseStyles.image} />
         ) : (
-          <Text style={[textSizeStyles[size], textTheme[colorScheme]]}>
+          <Text
+            style={[
+              baseStyles.text,
+              {
+                fontSize: textSizeMap[size],
+                fontWeight: theme.primitive.fontWeight.semibold,
+                color: theme.component.avatar.variant[colorScheme].text,
+              },
+            ]}
+          >
             {fallback}
           </Text>
         )}
@@ -68,26 +89,5 @@ const baseStyles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-});
-
-const sizeStyles = StyleSheet.create({
-  sm: { width: 32, height: 32, borderRadius: 16 },
-  md: { width: 40, height: 40, borderRadius: 20 },
-  lg: { width: 48, height: 48, borderRadius: 24 },
-});
-
-const textSizeStyles = StyleSheet.create({
-  sm: { fontSize: 12, fontWeight: "600" },
-  md: { fontSize: 16, fontWeight: "600" },
-  lg: { fontSize: 20, fontWeight: "600" },
-});
-
-const fallbackTheme = StyleSheet.create({
-  light: { backgroundColor: "#E0E0E0" },
-  dark: { backgroundColor: "#424242" },
-});
-
-const textTheme = StyleSheet.create({
-  light: { color: "#333333" },
-  dark: { color: "#E0E0E0" },
+  text: {},
 });

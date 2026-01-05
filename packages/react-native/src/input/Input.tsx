@@ -5,10 +5,10 @@ import {
   TextInputProps,
   Text,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
 } from "react-native";
+import { useTheme } from "../theme";
 
 export interface InputProps extends Omit<TextInputProps, "style" | "onChange"> {
   value: string;
@@ -48,28 +48,30 @@ export const Input = forwardRef<TextInput, InputProps>(
     },
     ref,
   ) => {
-    const colorScheme = useColorScheme() ?? "light";
+    const { theme, colorScheme } = useTheme();
     const [isFocused, setIsFocused] = useState(false);
 
-    const themeColors = variantTheme[colorScheme][variant];
-    const { height, fontSize, padding } = sizeMap[size];
+    const sizeTokens = theme.component.input.size[size];
+    const variantTokens = theme.component.input.variant[colorScheme];
 
     const keyboardType = typeToKeyboard[type];
     const secureTextEntry = type === "password";
 
     const containerBorderColor = error
-      ? errorColors[colorScheme]
+      ? variantTokens.error.border
       : isFocused
-        ? focusColors[colorScheme]
-        : themeColors.border;
+        ? variantTokens.focus.border
+        : variantTokens.default.border;
 
     const containerStyles: ViewStyle = {
-      height,
+      height: sizeTokens.height,
       borderWidth: variant === "outline" ? 1 : 0,
       borderColor: containerBorderColor,
-      backgroundColor: themeColors.background,
-      paddingHorizontal: padding,
-      opacity: disabled ? 0.5 : 1,
+      backgroundColor: variant === "outline"
+        ? variantTokens.default.background
+        : theme.semantic.colors.surface.tertiary,
+      paddingHorizontal: sizeTokens.padding,
+      opacity: disabled ? theme.semantic.state.disabled.opacity : 1,
     };
 
     const handleBlur = () => {
@@ -80,18 +82,33 @@ export const Input = forwardRef<TextInput, InputProps>(
     return (
       <View style={style}>
         {label && (
-          <Text style={[baseStyles.label, { color: themeColors.labelColor }]}>
+          <Text style={[
+            baseStyles.label,
+            {
+              color: theme.semantic.colors.text.secondary,
+              fontSize: theme.component.label.fontSize,
+              fontWeight: theme.component.label.fontWeight,
+              marginBottom: theme.component.label.marginBottom,
+            }
+          ]}>
             {label}
           </Text>
         )}
-        <View style={[baseStyles.inputContainer, containerStyles]}>
+        <View style={[
+          baseStyles.inputContainer,
+          {
+            borderRadius: sizeTokens.borderRadius,
+            gap: theme.primitive.spacing[2],
+          },
+          containerStyles,
+        ]}>
           {prefixIcon && <View style={baseStyles.icon}>{prefixIcon}</View>}
           <TextInput
             ref={ref}
             value={value}
             onChangeText={onChange}
             placeholder={placeholder}
-            placeholderTextColor={themeColors.placeholderColor}
+            placeholderTextColor={variantTokens.default.placeholder}
             editable={!disabled}
             onFocus={() => setIsFocused(true)}
             onBlur={handleBlur}
@@ -100,8 +117,8 @@ export const Input = forwardRef<TextInput, InputProps>(
             style={[
               baseStyles.textInput,
               {
-                fontSize,
-                color: themeColors.textColor,
+                fontSize: sizeTokens.fontSize,
+                color: variantTokens.default.text,
               },
             ]}
             accessibilityLabel={label || name}
@@ -111,7 +128,14 @@ export const Input = forwardRef<TextInput, InputProps>(
         </View>
         {error && (
           <Text
-            style={[baseStyles.error, { color: errorColors[colorScheme] }]}
+            style={[
+              baseStyles.error,
+              {
+                color: theme.semantic.colors.status.error.main,
+                fontSize: theme.primitive.fontSize.sm,
+                marginTop: theme.primitive.spacing[1],
+              }
+            ]}
             accessibilityLiveRegion="polite"
           >
             {error}
@@ -124,12 +148,6 @@ export const Input = forwardRef<TextInput, InputProps>(
 
 Input.displayName = "Input";
 
-const sizeMap = {
-  sm: { height: 36, fontSize: 14, padding: 8 },
-  md: { height: 44, fontSize: 16, padding: 12 },
-  lg: { height: 52, fontSize: 18, padding: 16 },
-};
-
 const typeToKeyboard: Record<string, TextInputProps["keyboardType"]> = {
   text: "default",
   email: "email-address",
@@ -137,62 +155,13 @@ const typeToKeyboard: Record<string, TextInputProps["keyboardType"]> = {
   number: "numeric",
 };
 
-const variantTheme = {
-  light: {
-    outline: {
-      background: "#FFFFFF",
-      border: "#E5E7EB",
-      textColor: "#1F2937",
-      placeholderColor: "#9CA3AF",
-      labelColor: "#374151",
-    },
-    filled: {
-      background: "#F3F4F6",
-      border: "transparent",
-      textColor: "#1F2937",
-      placeholderColor: "#9CA3AF",
-      labelColor: "#374151",
-    },
-  },
-  dark: {
-    outline: {
-      background: "#374151",
-      border: "#4B5563",
-      textColor: "#F9FAFB",
-      placeholderColor: "#9CA3AF",
-      labelColor: "#D1D5DB",
-    },
-    filled: {
-      background: "#4B5563",
-      border: "transparent",
-      textColor: "#F9FAFB",
-      placeholderColor: "#9CA3AF",
-      labelColor: "#D1D5DB",
-    },
-  },
-};
-
-const focusColors = {
-  light: "#4A90E2",
-  dark: "#5AA2F5",
-};
-
-const errorColors = {
-  light: "#EF4444",
-  dark: "#F87171",
-};
-
 const baseStyles = StyleSheet.create({
   label: {
-    fontSize: 14,
     fontWeight: "500",
-    marginBottom: 4,
   },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 8,
-    gap: 8,
   },
   textInput: {
     flex: 1,
@@ -202,8 +171,5 @@ const baseStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  error: {
-    fontSize: 12,
-    marginTop: 4,
-  },
+  error: {},
 });

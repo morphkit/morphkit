@@ -5,11 +5,11 @@ import {
   Text,
   ActivityIndicator,
   StyleSheet,
-  useColorScheme,
   ViewStyle,
   StyleProp,
 } from "react-native";
 import { ReactNode } from "react";
+import { useTheme } from "../theme";
 
 type ButtonVariant = "primary" | "secondary" | "tonal" | "plain";
 type ButtonSize = "none" | "sm" | "md" | "lg" | "icon";
@@ -38,29 +38,48 @@ export const Button = ({
   style,
   ...props
 }: ButtonProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
   const isIconButton = size === "icon";
   const isDisabled = disabled || loading;
 
   const renderContent = ({ pressed }: { pressed: boolean }) => {
     const themeStyles = getThemeStyles(
+      theme,
       colorScheme,
       variant,
       pressed,
       isDisabled,
     );
     const textThemeStyles = getTextThemeStyles(
+      theme,
       colorScheme,
       variant,
       isDisabled,
     );
 
+    const sizeTokens = theme.component.button.size[size === "none" ? "md" : size === "icon" ? "md" : size];
+
     const containerStyles = [
       baseStyles.container,
-      variantStyles[variant],
-      isIconButton ? iconSizeStyles[size] : sizeStyles[size],
+      {
+        borderRadius: sizeTokens.borderRadius,
+        borderWidth: variant === "secondary" ? 1 : 0,
+      },
+      !isIconButton && size !== "none" && {
+        paddingHorizontal: sizeTokens.paddingHorizontal,
+        paddingVertical: sizeTokens.paddingVertical,
+        minHeight: sizeTokens.height,
+        gap: sizeTokens.gap,
+      },
+      isIconButton && {
+        width: sizeTokens.height,
+        height: sizeTokens.height,
+        borderRadius: sizeTokens.height / 2,
+      },
       themeStyles,
-      isDisabled && baseStyles.disabled,
+      isDisabled && {
+        opacity: theme.semantic.state.disabled.opacity,
+      },
       style,
     ];
 
@@ -72,7 +91,7 @@ export const Button = ({
           <>
             {iconLeft && !isIconButton && <View>{iconLeft}</View>}
             {!isIconButton && children && (
-              <Text style={textThemeStyles}>{children}</Text>
+              <Text style={[{ fontSize: sizeTokens.fontSize }, textThemeStyles]}>{children}</Text>
             )}
             {isIconButton && children && (
               <Text style={textThemeStyles}>{children}</Text>
@@ -103,176 +122,82 @@ const baseStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  disabled: {
-    opacity: 0.5,
-  },
 });
-
-const variantStyles = StyleSheet.create({
-  primary: {
-    borderRadius: 8,
-    borderWidth: 0,
-  },
-  secondary: {
-    borderRadius: 8,
-    borderWidth: 1,
-  },
-  tonal: {
-    borderRadius: 8,
-    borderWidth: 0,
-  },
-  plain: {
-    borderRadius: 8,
-    borderWidth: 0,
-  },
-});
-
-const sizeStyles = StyleSheet.create({
-  none: {},
-  sm: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    minHeight: 32,
-    gap: 6,
-  },
-  md: {
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    minHeight: 40,
-    gap: 8,
-  },
-  lg: {
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    minHeight: 48,
-    gap: 10,
-  },
-  icon: {},
-});
-
-const iconSizeStyles = StyleSheet.create({
-  none: {},
-  sm: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-  },
-  md: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-  lg: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-  },
-  icon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-});
-
-const colors = {
-  light: {
-    primary: {
-      background: "#4A90E2",
-      backgroundPressed: "#357ABD",
-      text: "#FFFFFF",
-      border: "transparent",
-    },
-    secondary: {
-      background: "#FFFFFF",
-      backgroundPressed: "#F5F5F5",
-      text: "#333333",
-      border: "#E0E0E0",
-    },
-    tonal: {
-      background: "#E3F2FD",
-      backgroundPressed: "#BBDEFB",
-      text: "#1565C0",
-      border: "transparent",
-    },
-    plain: {
-      background: "transparent",
-      backgroundPressed: "rgba(74, 144, 226, 0.1)",
-      text: "#4A90E2",
-      border: "transparent",
-    },
-    disabled: {
-      background: "#E0E0E0",
-      text: "#9E9E9E",
-      border: "#CCCCCC",
-    },
-  },
-  dark: {
-    primary: {
-      background: "#5AA2F5",
-      backgroundPressed: "#4A90E2",
-      text: "#FFFFFF",
-      border: "transparent",
-    },
-    secondary: {
-      background: "#2C2C2C",
-      backgroundPressed: "#3D3D3D",
-      text: "#E0E0E0",
-      border: "#4D4D4D",
-    },
-    tonal: {
-      background: "#1E3A5F",
-      backgroundPressed: "#2A4D7C",
-      text: "#90CAF9",
-      border: "transparent",
-    },
-    plain: {
-      background: "transparent",
-      backgroundPressed: "rgba(90, 162, 245, 0.1)",
-      text: "#5AA2F5",
-      border: "transparent",
-    },
-    disabled: {
-      background: "#3D3D3D",
-      text: "#6E6E6E",
-      border: "#4D4D4D",
-    },
-  },
-};
 
 const getThemeStyles = (
+  theme: ReturnType<typeof useTheme>["theme"],
   colorScheme: "light" | "dark",
   variant: ButtonVariant,
   pressed: boolean,
   isDisabled: boolean,
 ) => {
+  const { colors } = theme.semantic;
+
   if (isDisabled) {
     return {
-      backgroundColor: colors[colorScheme].disabled.background,
-      borderColor: colors[colorScheme].disabled.border,
+      backgroundColor: colors.surface.tertiary,
+      borderColor: colors.border.primary,
     };
   }
 
-  const variantColors = colors[colorScheme][variant];
-  return {
-    backgroundColor: pressed
-      ? variantColors.backgroundPressed
-      : variantColors.background,
-    borderColor: variantColors.border,
-  };
+  switch (variant) {
+    case "primary":
+      return {
+        backgroundColor: pressed ? colors.action.primaryPressed : colors.action.primary,
+        borderColor: "transparent",
+      };
+    case "secondary":
+      return {
+        backgroundColor: colors.surface.primary,
+        borderColor: colors.border.primary,
+      };
+    case "tonal":
+      return {
+        backgroundColor: colorScheme === "light"
+          ? colors.status.info.surface
+          : colors.surface.tertiary,
+        borderColor: "transparent",
+      };
+    case "plain":
+      return {
+        backgroundColor: pressed
+          ? (colorScheme === "light" ? colors.surface.secondary : colors.surface.tertiary)
+          : "transparent",
+        borderColor: "transparent",
+      };
+  }
 };
 
 const getTextThemeStyles = (
+  theme: ReturnType<typeof useTheme>["theme"],
   colorScheme: "light" | "dark",
   variant: ButtonVariant,
   isDisabled: boolean,
 ) => {
+  const { colors } = theme.semantic;
+
   if (isDisabled) {
     return {
-      color: colors[colorScheme].disabled.text,
+      color: colors.text.disabled,
     };
   }
 
-  return {
-    color: colors[colorScheme][variant].text,
-  };
+  switch (variant) {
+    case "primary":
+      return {
+        color: colors.text.inverse,
+      };
+    case "secondary":
+      return {
+        color: colors.text.primary,
+      };
+    case "tonal":
+      return {
+        color: colors.status.info.text,
+      };
+    case "plain":
+      return {
+        color: colors.action.primary,
+      };
+  }
 };

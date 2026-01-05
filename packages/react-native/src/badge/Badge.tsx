@@ -3,11 +3,11 @@ import {
   ViewProps,
   Text,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
 } from "react-native";
 import { ReactNode } from "react";
+import { useTheme } from "../theme";
 
 type BadgeColor = "red" | "blue";
 
@@ -27,16 +27,21 @@ export const Badge = ({
   style,
   ...props
 }: BadgeProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
   const shouldShowBadge = count > 0;
   const displayCount = count > maxCount ? `${maxCount}+` : `${count}`;
-  const badgeThemeStyles = badgeColors[colorScheme][color];
 
-  const getTextStyle = () => {
-    if (displayCount.length >= 4) return baseStyles.badgeTextTiny;
-    if (displayCount.length === 3) return baseStyles.badgeTextSmaller;
-    if (displayCount.length === 2) return baseStyles.badgeTextSmall;
-    return baseStyles.badgeText;
+  const colorMap = {
+    red: theme.component.badge.variant[colorScheme].error,
+    blue: theme.component.badge.variant[colorScheme].primary,
+  };
+  const badgeColors = colorMap[color];
+
+  const getTextFontSize = () => {
+    if (displayCount.length >= 4) return theme.primitive.fontSize.xs * 0.75;
+    if (displayCount.length === 3) return theme.primitive.fontSize.xs * 0.75;
+    if (displayCount.length === 2) return theme.primitive.fontSize.xs * 0.83;
+    return theme.component.badge.fontSize;
   };
 
   const getBadgePositioning = () => {
@@ -56,9 +61,28 @@ export const Badge = ({
       {children}
       {shouldShowBadge && (
         <View
-          style={[baseStyles.badge, badgeThemeStyles, getBadgePositioning()]}
+          style={[
+            baseStyles.badge,
+            {
+              backgroundColor: badgeColors.background,
+              borderRadius: theme.component.badge.borderRadius,
+              paddingHorizontal: theme.component.badge.paddingHorizontal,
+            },
+            getBadgePositioning(),
+          ]}
         >
-          <Text style={getTextStyle()}>{displayCount}</Text>
+          <Text
+            style={[
+              baseStyles.badgeText,
+              {
+                color: badgeColors.text,
+                fontSize: getTextFontSize(),
+                fontWeight: theme.primitive.fontWeight.semibold,
+              },
+            ]}
+          >
+            {displayCount}
+          </Text>
         </View>
       )}
     </View>
@@ -74,8 +98,6 @@ const baseStyles = StyleSheet.create({
     top: -6,
     minWidth: 20,
     height: 20,
-    borderRadius: 10,
-    paddingHorizontal: 3,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "flex-start",
@@ -89,43 +111,5 @@ const baseStyles = StyleSheet.create({
   badgePosition3Digits: {
     right: -14,
   },
-  badgeText: {
-    color: "#FFFFFF",
-    fontSize: 12,
-    fontWeight: "600",
-  },
-  badgeTextSmall: {
-    color: "#FFFFFF",
-    fontSize: 10,
-    fontWeight: "600",
-  },
-  badgeTextSmaller: {
-    color: "#FFFFFF",
-    fontSize: 9,
-    fontWeight: "600",
-  },
-  badgeTextTiny: {
-    color: "#FFFFFF",
-    fontSize: 9,
-    fontWeight: "600",
-  },
+  badgeText: {},
 });
-
-const badgeColors = {
-  light: StyleSheet.create({
-    red: {
-      backgroundColor: "#EF5350",
-    },
-    blue: {
-      backgroundColor: "#4A90E2",
-    },
-  }),
-  dark: StyleSheet.create({
-    red: {
-      backgroundColor: "#E57373",
-    },
-    blue: {
-      backgroundColor: "#5AA2F5",
-    },
-  }),
-};

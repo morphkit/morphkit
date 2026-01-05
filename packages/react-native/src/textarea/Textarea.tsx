@@ -5,10 +5,10 @@ import {
   TextInputProps,
   Text,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
 } from "react-native";
+import { useTheme } from "../theme";
 
 export interface TextareaProps extends Omit<
   TextInputProps,
@@ -51,20 +51,21 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
     },
     ref,
   ) => {
-    const colorScheme = useColorScheme() ?? "light";
+    const { theme, colorScheme } = useTheme();
     const [isFocused, setIsFocused] = useState(false);
     const [height, setHeight] = useState<number | undefined>(undefined);
 
-    const themeColors = variantTheme[colorScheme];
-    const { fontSize, padding, lineHeight } = sizeMap[size];
+    const sizeTokens = theme.component.input.size[size];
+    const variantTokens = theme.component.input.variant[colorScheme];
 
-    const initialHeight = rows * lineHeight + padding * 2;
+    const lineHeight = sizeTokens.fontSize * theme.primitive.lineHeight.relaxed;
+    const initialHeight = rows * lineHeight + sizeTokens.padding * 2;
 
     const borderColor = error
-      ? errorColors[colorScheme]
+      ? variantTokens.error.border
       : isFocused
-        ? focusColors[colorScheme]
-        : themeColors.border;
+        ? variantTokens.focus.border
+        : variantTokens.default.border;
 
     const handleBlur = () => {
       setIsFocused(false);
@@ -75,7 +76,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
       nativeEvent: { contentSize: { height: number } };
     }) => {
       if (autoResize) {
-        setHeight(event.nativeEvent.contentSize.height + padding * 2);
+        setHeight(event.nativeEvent.contentSize.height + sizeTokens.padding * 2);
       }
     };
 
@@ -87,7 +88,17 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
     return (
       <View style={style}>
         {label && (
-          <Text style={[baseStyles.label, { color: themeColors.labelColor }]}>
+          <Text
+            style={[
+              baseStyles.label,
+              {
+                color: theme.semantic.colors.text.secondary,
+                fontSize: theme.component.label.fontSize,
+                fontWeight: theme.component.label.fontWeight,
+                marginBottom: theme.component.label.marginBottom,
+              },
+            ]}
+          >
             {label}
           </Text>
         )}
@@ -96,12 +107,13 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
             baseStyles.textareaContainer,
             {
               borderColor,
-              backgroundColor: themeColors.background,
-              paddingHorizontal: padding,
-              paddingVertical: padding,
+              backgroundColor: variantTokens.default.background,
+              borderRadius: sizeTokens.borderRadius,
+              paddingHorizontal: sizeTokens.padding,
+              paddingVertical: sizeTokens.padding,
               minHeight: autoResize ? initialHeight : undefined,
               height: autoResize ? height : initialHeight,
-              opacity: disabled ? 0.5 : 1,
+              opacity: disabled ? theme.semantic.state.disabled.opacity : 1,
             },
           ]}
         >
@@ -110,7 +122,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
             value={value}
             onChangeText={onChange}
             placeholder={placeholder}
-            placeholderTextColor={themeColors.placeholderColor}
+            placeholderTextColor={variantTokens.default.placeholder}
             editable={!disabled}
             multiline
             onFocus={() => setIsFocused(true)}
@@ -120,26 +132,48 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
             style={[
               baseStyles.textInput,
               {
-                fontSize,
+                fontSize: sizeTokens.fontSize,
                 lineHeight,
-                color: themeColors.textColor,
+                color: variantTokens.default.text,
               },
             ]}
             accessibilityLabel={label || name}
             {...props}
           />
         </View>
-        <View style={baseStyles.footer}>
+        <View
+          style={[
+            baseStyles.footer,
+            {
+              marginTop: theme.primitive.spacing[1],
+            },
+          ]}
+        >
           {error && (
             <Text
-              style={[baseStyles.error, { color: errorColors[colorScheme] }]}
+              style={[
+                baseStyles.error,
+                {
+                  color: theme.semantic.colors.status.error.main,
+                  fontSize: theme.primitive.fontSize.xs,
+                },
+              ]}
               accessibilityLiveRegion="polite"
             >
               {error}
             </Text>
           )}
           {showCount && (
-            <Text style={[baseStyles.count, { color: themeColors.labelColor }]}>
+            <Text
+              style={[
+                baseStyles.count,
+                {
+                  color: theme.semantic.colors.text.secondary,
+                  fontSize: theme.primitive.fontSize.xs,
+                  marginLeft: theme.primitive.spacing[2],
+                },
+              ]}
+            >
               {countText}
             </Text>
           )}
@@ -151,48 +185,10 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
 
 Textarea.displayName = "Textarea";
 
-const sizeMap = {
-  sm: { fontSize: 14, padding: 8, lineHeight: 20 },
-  md: { fontSize: 16, padding: 12, lineHeight: 24 },
-  lg: { fontSize: 18, padding: 16, lineHeight: 28 },
-};
-
-const variantTheme = {
-  light: {
-    background: "#FFFFFF",
-    border: "#E5E7EB",
-    textColor: "#1F2937",
-    placeholderColor: "#9CA3AF",
-    labelColor: "#374151",
-  },
-  dark: {
-    background: "#374151",
-    border: "#4B5563",
-    textColor: "#F9FAFB",
-    placeholderColor: "#9CA3AF",
-    labelColor: "#D1D5DB",
-  },
-};
-
-const focusColors = {
-  light: "#4A90E2",
-  dark: "#5AA2F5",
-};
-
-const errorColors = {
-  light: "#EF4444",
-  dark: "#F87171",
-};
-
 const baseStyles = StyleSheet.create({
-  label: {
-    fontSize: 14,
-    fontWeight: "500",
-    marginBottom: 4,
-  },
+  label: {},
   textareaContainer: {
     borderWidth: 1,
-    borderRadius: 8,
   },
   textInput: {
     padding: 0,
@@ -202,14 +198,9 @@ const baseStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 4,
   },
   error: {
-    fontSize: 12,
     flex: 1,
   },
-  count: {
-    fontSize: 12,
-    marginLeft: 8,
-  },
+  count: {},
 });

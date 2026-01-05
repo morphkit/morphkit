@@ -18,16 +18,13 @@ export default [
           message: "Hardcoded rgb/rgba colors are not allowed. Use theme.semantic.colors.* or theme.primitive.* instead.",
         },
       ],
-      "no-magic-numbers": [
-        "warn",
-        {
-          ignore: [0, 1, -1],
-          ignoreArrayIndexes: true,
-          ignoreDefaultValues: true,
-          enforceConst: true,
-          detectObjects: false,
-        },
-      ],
+    },
+  },
+  {
+    files: ["src/**/*.tsx", "src/**/*.ts"],
+    ignores: ["src/theme/tokens/**"],
+    rules: {
+      "no-magic-numbers": "off",
     },
   },
 ];

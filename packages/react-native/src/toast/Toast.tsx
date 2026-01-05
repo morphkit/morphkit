@@ -3,11 +3,11 @@ import {
   ViewProps,
   Text,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
   Animated,
 } from "react-native";
+import { useTheme } from "../theme";
 
 type ToastVariant = "info" | "success" | "warning" | "error";
 type ToastPosition = "top" | "bottom";
@@ -32,18 +32,17 @@ export const Toast = ({
   style,
   ...props
 }: ToastProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
   const slideValue = useRef(new Animated.Value(0)).current;
   const timerRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
-  const variantColors = colors[colorScheme][variant];
+  const variantColors = theme.component.toast.variant[colorScheme][variant];
 
   useEffect(() => {
     if (visible) {
       Animated.spring(slideValue, {
         toValue: 1,
-        friction: 8,
-        tension: 40,
+        ...theme.primitive.spring.gentle,
         useNativeDriver: true,
       }).start();
 
@@ -55,7 +54,7 @@ export const Toast = ({
     } else {
       Animated.timing(slideValue, {
         toValue: 0,
-        duration: 200,
+        duration: theme.primitive.duration.normal,
         useNativeDriver: true,
       }).start();
     }
@@ -65,7 +64,7 @@ export const Toast = ({
         clearTimeout(timerRef.current);
       }
     };
-  }, [visible, duration, onDismiss, slideValue]);
+  }, [visible, duration, onDismiss, slideValue, theme]);
 
   const translateY = slideValue.interpolate({
     inputRange: [0, 1],
@@ -80,10 +79,20 @@ export const Toast = ({
     <Animated.View
       style={[
         baseStyles.container,
-        position === "top" ? baseStyles.positionTop : baseStyles.positionBottom,
+        position === "top" ? { top: theme.primitive.spacing[12] } : { bottom: theme.primitive.spacing[12] },
         {
+          left: theme.primitive.spacing[4],
+          right: theme.primitive.spacing[4],
           backgroundColor: variantColors.background,
           borderColor: variantColors.border,
+          padding: theme.component.toast.padding,
+          borderRadius: theme.component.toast.borderRadius,
+          gap: theme.component.toast.gap,
+          shadowColor: theme.primitive.shadowPresets.lg.shadowColor,
+          shadowOffset: theme.primitive.shadowPresets.lg.offset,
+          shadowOpacity: theme.primitive.shadowPresets.lg.opacity,
+          shadowRadius: theme.primitive.shadowPresets.lg.radius,
+          elevation: theme.primitive.shadowPresets.lg.elevation,
           transform: [{ translateY }],
           opacity: slideValue,
         },
@@ -93,10 +102,27 @@ export const Toast = ({
       accessibilityLiveRegion="polite"
       {...props}
     >
-      <Text style={[baseStyles.icon, { color: variantColors.icon }]}>
+      <Text
+        style={[
+          baseStyles.icon,
+          {
+            color: variantColors.icon,
+            fontSize: theme.component.toast.iconSize,
+          },
+        ]}
+      >
         {getIcon(variant)}
       </Text>
-      <Text style={[baseStyles.message, { color: variantColors.text }]}>
+      <Text
+        style={[
+          baseStyles.message,
+          {
+            color: variantColors.text,
+            fontSize: theme.primitive.fontSize.sm,
+            lineHeight: theme.primitive.fontSize.sm * theme.primitive.lineHeight.relaxed,
+          },
+        ]}
+      >
         {message}
       </Text>
     </Animated.View>
@@ -119,91 +145,17 @@ const getIcon = (variant: ToastVariant): string => {
   }
 };
 
-const colors = {
-  light: {
-    info: {
-      background: "#EFF6FF",
-      border: "#DBEAFE",
-      text: "#1E40AF",
-      icon: "#3B82F6",
-    },
-    success: {
-      background: "#F0FDF4",
-      border: "#D1FAE5",
-      text: "#065F46",
-      icon: "#10B981",
-    },
-    warning: {
-      background: "#FFFBEB",
-      border: "#FEF3C7",
-      text: "#92400E",
-      icon: "#F59E0B",
-    },
-    error: {
-      background: "#FEF2F2",
-      border: "#FEE2E2",
-      text: "#991B1B",
-      icon: "#EF4444",
-    },
-  },
-  dark: {
-    info: {
-      background: "#1E3A8A",
-      border: "#1E40AF",
-      text: "#DBEAFE",
-      icon: "#60A5FA",
-    },
-    success: {
-      background: "#064E3B",
-      border: "#065F46",
-      text: "#D1FAE5",
-      icon: "#34D399",
-    },
-    warning: {
-      background: "#78350F",
-      border: "#92400E",
-      text: "#FEF3C7",
-      icon: "#FBBF24",
-    },
-    error: {
-      background: "#7F1D1D",
-      border: "#991B1B",
-      text: "#FEE2E2",
-      icon: "#F87171",
-    },
-  },
-};
-
 const baseStyles = StyleSheet.create({
   container: {
     position: "absolute",
-    left: 16,
-    right: 16,
     flexDirection: "row",
     alignItems: "center",
-    padding: 16,
-    borderRadius: 8,
     borderWidth: 1,
-    gap: 12,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 8,
-  },
-  positionTop: {
-    top: 48,
-  },
-  positionBottom: {
-    bottom: 48,
   },
   icon: {
-    fontSize: 20,
     fontWeight: "bold",
   },
   message: {
     flex: 1,
-    fontSize: 14,
-    lineHeight: 20,
   },
 });

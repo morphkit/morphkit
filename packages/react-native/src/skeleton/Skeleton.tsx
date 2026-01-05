@@ -3,12 +3,12 @@ import {
   View,
   ViewProps,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
   Animated,
   Easing,
 } from "react-native";
+import { useTheme } from "../theme";
 
 type SkeletonVariant = "rect" | "circle" | "text";
 
@@ -26,7 +26,7 @@ export const Skeleton = ({
   style,
   ...props
 }: SkeletonProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
   const shimmerValue = useRef(new Animated.Value(0)).current;
   const [layoutWidth, setLayoutWidth] = useState(0);
 
@@ -34,30 +34,28 @@ export const Skeleton = ({
   const finalWidth = width ?? dimensions.width;
   const finalHeight = height ?? dimensions.height;
 
-  const themeColors = colors[colorScheme];
-
   useEffect(() => {
     Animated.loop(
       Animated.timing(shimmerValue, {
         toValue: 1,
-        duration: 1500,
+        duration: theme.primitive.duration.verySlow,
         easing: Easing.ease,
         useNativeDriver: true,
       }),
     ).start();
-  }, [shimmerValue]);
+  }, [shimmerValue, theme]);
 
   const translateX = shimmerValue.interpolate({
     inputRange: [0, 1],
     outputRange: [-layoutWidth, layoutWidth],
   });
 
-  const variantStyles = getVariantStyles(variant, finalHeight);
+  const variantStyles = getVariantStyles(variant, finalHeight, theme);
 
   const dimensionStyles: ViewStyle = {
     width: finalWidth as ViewStyle["width"],
     height: finalHeight as ViewStyle["height"],
-    backgroundColor: themeColors.base,
+    backgroundColor: theme.component.skeleton.variant[colorScheme].background,
   };
 
   return (
@@ -71,7 +69,8 @@ export const Skeleton = ({
           baseStyles.shimmer,
           {
             transform: [{ translateX }],
-            backgroundColor: themeColors.shimmer,
+            backgroundColor: theme.component.skeleton.variant[colorScheme].shimmer,
+            opacity: theme.primitive.opacity.shimmer,
           },
         ]}
       />
@@ -96,6 +95,7 @@ const getDefaultDimensions = (variant: SkeletonVariant) => {
 const getVariantStyles = (
   variant: SkeletonVariant,
   height: number | string,
+  theme: ReturnType<typeof useTheme>["theme"],
 ) => {
   if (variant === "circle") {
     const size = typeof height === "number" ? height : 40;
@@ -104,19 +104,8 @@ const getVariantStyles = (
     };
   }
   return {
-    borderRadius: 4,
+    borderRadius: theme.component.skeleton.borderRadius,
   };
-};
-
-const colors = {
-  light: {
-    base: "#E5E7EB",
-    shimmer: "#F3F4F6",
-  },
-  dark: {
-    base: "#374151",
-    shimmer: "#4B5563",
-  },
 };
 
 const baseStyles = StyleSheet.create({
@@ -130,6 +119,5 @@ const baseStyles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    opacity: 0.5,
   },
 });

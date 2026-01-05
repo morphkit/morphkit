@@ -4,10 +4,10 @@ import {
   ViewProps,
   Pressable,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
 } from "react-native";
+import { useTheme } from "../theme";
 
 interface RadioContextValue {
   value: string;
@@ -85,7 +85,7 @@ export const RadioButton = forwardRef<View, RadioButtonProps>(
     ref,
   ) => {
     const context = useRadioContext();
-    const colorScheme = useColorScheme() ?? "light";
+    const { theme, colorScheme } = useTheme();
 
     const isSelected = context.value === value;
     const isDisabled = disabled || context.disabled;
@@ -101,11 +101,14 @@ export const RadioButton = forwardRef<View, RadioButtonProps>(
       buttonOnBlur?.();
     };
 
-    const circleSize = sizeMap[size].circle;
-    const innerSize = sizeMap[size].inner;
+    const circleSize = theme.component.radio.size[size];
+    const innerSize = Math.round(circleSize / 2);
 
-    const themeColors = colorTheme[colorScheme];
-    const borderColor = isSelected ? themeColors.primary : themeColors.border;
+    const variantColors = isDisabled
+      ? theme.component.radio.variant[colorScheme].disabled
+      : isSelected
+        ? theme.component.radio.variant[colorScheme].checked
+        : theme.component.radio.variant[colorScheme].unchecked;
 
     return (
       <Pressable
@@ -113,7 +116,16 @@ export const RadioButton = forwardRef<View, RadioButtonProps>(
         onPress={handlePress}
         onPressOut={handlePressOut}
         disabled={isDisabled}
-        style={[baseStyles.container, isDisabled && baseStyles.disabled, style]}
+        style={[
+          baseStyles.container,
+          {
+            gap: theme.primitive.spacing[2],
+            minHeight: theme.primitive.spacing[12],
+            minWidth: theme.primitive.spacing[12],
+            opacity: isDisabled ? theme.semantic.state.disabled.opacity : 1,
+          },
+          style,
+        ]}
         accessibilityRole="radio"
         accessibilityState={{ checked: isSelected, disabled: isDisabled }}
         {...props}
@@ -124,8 +136,8 @@ export const RadioButton = forwardRef<View, RadioButtonProps>(
             {
               width: circleSize,
               height: circleSize,
-              borderRadius: circleSize / 2,
-              borderColor,
+              borderRadius: theme.component.radio.borderRadius,
+              borderColor: variantColors.border,
             },
           ]}
         >
@@ -137,7 +149,7 @@ export const RadioButton = forwardRef<View, RadioButtonProps>(
                   width: innerSize,
                   height: innerSize,
                   borderRadius: innerSize / 2,
-                  backgroundColor: themeColors.primary,
+                  backgroundColor: variantColors.dot,
                 },
               ]}
             />
@@ -151,30 +163,10 @@ export const RadioButton = forwardRef<View, RadioButtonProps>(
 
 RadioButton.displayName = "RadioButton";
 
-const sizeMap = {
-  sm: { circle: 16, inner: 8 },
-  md: { circle: 20, inner: 10 },
-  lg: { circle: 24, inner: 12 },
-};
-
-const colorTheme = {
-  light: {
-    border: "#9CA3AF",
-    primary: "#4A90E2",
-  },
-  dark: {
-    border: "#6B7280",
-    primary: "#5AA2F5",
-  },
-};
-
 const baseStyles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
-    minHeight: 44,
-    minWidth: 44,
   },
   circle: {
     borderWidth: 2,
@@ -182,7 +174,4 @@ const baseStyles = StyleSheet.create({
     alignItems: "center",
   },
   innerCircle: {},
-  disabled: {
-    opacity: 0.5,
-  },
 });

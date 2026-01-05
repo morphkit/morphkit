@@ -3,12 +3,12 @@ import {
   View,
   ViewProps,
   StyleSheet,
-  useColorScheme,
   StyleProp,
   ViewStyle,
   Animated,
   Easing,
 } from "react-native";
+import { useTheme } from "../theme";
 
 export interface SpinnerProps extends Omit<ViewProps, "children"> {
   size?: "sm" | "md" | "lg" | number;
@@ -22,22 +22,23 @@ export const Spinner = ({
   style,
   ...props
 }: SpinnerProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme, colorScheme } = useTheme();
   const spinValue = useRef(new Animated.Value(0)).current;
 
-  const spinnerSize = typeof size === "number" ? size : sizeMap[size];
-  const spinnerColor = color ?? colors[colorScheme].primary;
+  const spinnerSize = typeof size === "number" ? size : theme.component.spinner.size[size];
+  const strokeWidth = typeof size === "number" ? 2 : theme.component.spinner.strokeWidth[size];
+  const spinnerColor = color ?? theme.component.spinner.variant[colorScheme].color;
 
   useEffect(() => {
     Animated.loop(
       Animated.timing(spinValue, {
         toValue: 1,
-        duration: 1000,
+        duration: theme.primitive.duration.slow,
         easing: Easing.linear,
         useNativeDriver: true,
       }),
     ).start();
-  }, [spinValue]);
+  }, [spinValue, theme]);
 
   const spin = spinValue.interpolate({
     inputRange: [0, 1],
@@ -57,6 +58,7 @@ export const Spinner = ({
           {
             width: spinnerSize,
             height: spinnerSize,
+            borderWidth: strokeWidth,
             borderColor: spinnerColor,
             borderTopColor: "transparent",
             borderRadius: spinnerSize / 2,
@@ -70,27 +72,10 @@ export const Spinner = ({
 
 Spinner.displayName = "Spinner";
 
-const sizeMap = {
-  sm: 16,
-  md: 24,
-  lg: 32,
-};
-
-const colors = {
-  light: {
-    primary: "#4A90E2",
-  },
-  dark: {
-    primary: "#5AA2F5",
-  },
-};
-
 const baseStyles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
   },
-  spinner: {
-    borderWidth: 2,
-  },
+  spinner: {},
 });

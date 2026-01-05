@@ -6,6 +6,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { ReactNode } from "react";
+import { useTheme } from "../theme";
 
 type MaxWidthPreset = "sm" | "md" | "lg" | "xl";
 
@@ -20,23 +21,27 @@ export interface ContainerProps extends Omit<ViewProps, "children"> {
 export const Container = ({
   children,
   maxWidth = "lg",
-  padding = 16,
+  padding,
   centered = true,
   style,
   ...props
 }: ContainerProps) => {
+  const { theme } = useTheme();
+
   const getMaxWidth = (): number => {
     if (typeof maxWidth === "number") {
       return maxWidth;
     }
-    return maxWidthPresets[maxWidth];
+    return theme.component.container.maxWidth[maxWidth];
   };
+
+  const containerPadding = padding ?? theme.component.container.padding;
 
   const containerStyles: StyleProp<ViewStyle> = [
     baseStyles.container,
     {
       maxWidth: getMaxWidth(),
-      paddingHorizontal: padding,
+      paddingHorizontal: containerPadding,
     },
     centered && baseStyles.centered,
     style,
@@ -57,10 +62,3 @@ const baseStyles = StyleSheet.create({
     alignSelf: "center",
   },
 });
-
-const maxWidthPresets: Record<MaxWidthPreset, number> = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-};
