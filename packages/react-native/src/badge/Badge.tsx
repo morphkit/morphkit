@@ -1,13 +1,13 @@
 import {
   View,
   ViewProps,
-  Text,
   StyleSheet,
   StyleProp,
   ViewStyle,
 } from "react-native";
 import { ReactNode } from "react";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 type BadgeColor = "red" | "blue";
 
@@ -36,13 +36,6 @@ export const Badge = ({
     blue: theme.component.badge.variant[colorScheme].primary,
   };
   const badgeColors = colorMap[color];
-
-  const getTextFontSize = () => {
-    if (displayCount.length >= 4) return theme.component.badge.fontSize * 0.75;
-    if (displayCount.length === 3) return theme.component.badge.fontSize * 0.75;
-    if (displayCount.length === 2) return theme.component.badge.fontSize * 0.83;
-    return theme.component.badge.fontSize;
-  };
 
   const getBadgePositioning = (): ViewStyle => {
     if (displayCount.length >= 3) {
@@ -78,18 +71,18 @@ export const Badge = ({
             getBadgePositioning(),
           ]}
         >
-          <Text
+          <Typography
+            variant="caption-1"
             style={[
               baseStyles.badgeText,
               {
                 color: badgeColors.text,
-                fontSize: getTextFontSize(),
                 fontWeight: theme.component.badge.fontWeight,
               },
             ]}
           >
             {displayCount}
-          </Text>
+          </Typography>
         </View>
       )}
     </View>

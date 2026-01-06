@@ -38,9 +38,7 @@ export const FilterTagsExample = () => {
             ))}
           </Stack>
         ) : (
-          <Typography variant="callout" style={{ color: "#6B7280" }}>
-            No active filters
-          </Typography>
+          <Typography variant="callout">No active filters</Typography>
         )}
       </Stack>
     </Card>

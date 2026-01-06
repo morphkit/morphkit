@@ -63,7 +63,7 @@ export const button = {
       },
       disabled: {
         background: light.surface.tertiary,
-        text: light.text.disabled,
+        text: light.text.secondary,
         border: light.border.primary,
         opacity: primitive.opacity.disabled,
       },
@@ -95,7 +95,7 @@ export const button = {
       },
       disabled: {
         background: dark.surface.tertiary,
-        text: dark.text.disabled,
+        text: dark.text.secondary,
         border: dark.border.primary,
         opacity: primitive.opacity.disabled,
       },

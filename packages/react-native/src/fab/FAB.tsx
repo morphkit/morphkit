@@ -1,7 +1,6 @@
 import {
   Pressable,
   PressableProps,
-  Text,
   StyleSheet,
   StyleProp,
   ViewStyle,
@@ -9,6 +8,7 @@ import {
 } from "react-native";
 import { ReactNode, useRef } from "react";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 type FABPlacement =
   | "top-left"
@@ -147,17 +147,16 @@ export const FAB = ({
       >
         {icon}
         {isExtended && label && (
-          <Text
-            style={[
-              {
-                fontSize: theme.component.fab.extended.fontSize,
-                fontWeight: theme.component.fab.extended.fontWeight,
-                color: variantColors.icon,
-              },
-            ]}
+          <Typography
+            variant="body"
+            style={{
+              fontWeight: theme.component.fab.extended.fontWeight,
+              color:
+                theme.component.fab.extended.variant[colorScheme][variant].text,
+            }}
           >
             {label}
-          </Text>
+          </Typography>
         )}
       </Pressable>
     </Animated.View>

@@ -7,10 +7,7 @@ export const DividersInCardExample = () => {
       <Stack gap={12}>
         <Box>
           <Typography variant="heading">Section 1</Typography>
-          <Typography
-            variant="callout"
-            style={{ color: "#6B7280", marginTop: 4 }}
-          >
+          <Typography variant="callout" style={{ marginTop: 4 }}>
             Content for the first section with important details
           </Typography>
         </Box>
@@ -19,10 +16,7 @@ export const DividersInCardExample = () => {
 
         <Box>
           <Typography variant="heading">Section 2</Typography>
-          <Typography
-            variant="callout"
-            style={{ color: "#6B7280", marginTop: 4 }}
-          >
+          <Typography variant="callout" style={{ marginTop: 4 }}>
             Content for the second section with more information
           </Typography>
         </Box>
@@ -31,10 +25,7 @@ export const DividersInCardExample = () => {
 
         <Box>
           <Typography variant="heading">Section 3</Typography>
-          <Typography
-            variant="callout"
-            style={{ color: "#6B7280", marginTop: 4 }}
-          >
+          <Typography variant="callout" style={{ marginTop: 4 }}>
             Content for the third section wrapping things up
           </Typography>
         </Box>

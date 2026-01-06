@@ -10,13 +10,13 @@ import {
   View,
   ViewProps,
   Pressable,
-  Text,
   StyleProp,
   ViewStyle,
   StyleSheet,
   PanResponder,
 } from "react-native";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 interface TabsContextValue {
   value: string;
@@ -278,17 +278,15 @@ export const TabsTrigger = ({
             {icon}
           </View>
         )}
-        <Text
-          style={[
-            {
-              fontSize: theme.component.tabs.label.fontSize,
-              fontWeight: theme.component.tabs.label.fontWeight,
-              color: getTextColor(),
-            },
-          ]}
+        <Typography
+          variant="body"
+          style={{
+            fontWeight: theme.component.tabs.label.fontWeight,
+            color: getTextColor(),
+          }}
         >
           {label}
-        </Text>
+        </Typography>
       </View>
     </Pressable>
   );

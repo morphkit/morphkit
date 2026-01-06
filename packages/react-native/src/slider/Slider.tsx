@@ -2,7 +2,6 @@ import { useRef, useState, forwardRef } from "react";
 import {
   View,
   ViewProps,
-  Text,
   StyleSheet,
   StyleProp,
   ViewStyle,
@@ -10,6 +9,7 @@ import {
   GestureResponderEvent,
 } from "react-native";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 export interface SliderProps extends Omit<ViewProps, "children"> {
   value: number | [number, number];
@@ -175,28 +175,27 @@ export const Slider = forwardRef<View, SliderProps>(
                 borderWidth: theme.component.slider.thumbBorderWidth,
                 borderColor: thumbBorderColor,
                 left: currentPosition - thumbSize / 2,
-                shadowColor: theme.primitive.shadowPresets.sm.shadowColor,
-                shadowOffset: theme.primitive.shadowPresets.sm.offset,
-                shadowOpacity: theme.primitive.shadowPresets.sm.opacity,
-                shadowRadius: theme.primitive.shadowPresets.sm.radius,
-                elevation: theme.primitive.shadowPresets.sm.elevation,
+                ...theme.primitive.shadowPresets.sm,
               },
             ]}
           >
             {showValue && (
-              <Text
+              <Typography
+                variant="caption-1"
+                numberOfLines={1}
                 style={[
                   baseStyles.valueText,
                   {
                     top: -theme.primitive.spacing[6],
-                    fontSize: theme.primitive.fontSize.xs,
                     fontWeight: theme.primitive.fontWeight.semibold,
                     color: theme.semantic.colors.text.primary,
+                    minWidth: 40,
+                    textAlign: "center",
                   },
                 ]}
               >
                 {currentValue}
-              </Text>
+              </Typography>
             )}
           </View>
           {isRange && endValue !== undefined && (
@@ -211,28 +210,27 @@ export const Slider = forwardRef<View, SliderProps>(
                   borderWidth: theme.component.slider.thumbBorderWidth,
                   borderColor: thumbBorderColor,
                   left: endPosition - thumbSize / 2,
-                  shadowColor: theme.primitive.shadowPresets.sm.shadowColor,
-                  shadowOffset: theme.primitive.shadowPresets.sm.offset,
-                  shadowOpacity: theme.primitive.shadowPresets.sm.opacity,
-                  shadowRadius: theme.primitive.shadowPresets.sm.radius,
-                  elevation: theme.primitive.shadowPresets.sm.elevation,
+                  ...theme.primitive.shadowPresets.sm,
                 },
               ]}
             >
               {showValue && (
-                <Text
+                <Typography
+                  variant="caption-1"
+                  numberOfLines={1}
                   style={[
                     baseStyles.valueText,
                     {
                       top: -theme.primitive.spacing[6],
-                      fontSize: theme.primitive.fontSize.xs,
                       fontWeight: theme.primitive.fontWeight.semibold,
                       color: theme.semantic.colors.text.primary,
+                      minWidth: 40,
+                      textAlign: "center",
                     },
                   ]}
                 >
                   {endValue}
-                </Text>
+                </Typography>
               )}
             </View>
           )}

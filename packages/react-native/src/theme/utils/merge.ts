@@ -1,7 +1,9 @@
 import type { DeepPartial } from "./types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const merge = <T extends Record<string, any>>(...sources: Array<DeepPartial<T> | Partial<T>>): T => {
+export const merge = <T extends Record<string, any>>(
+  ...sources: Array<DeepPartial<T> | Partial<T>>
+): T => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result: Record<string, any> = {};
 

@@ -1,30 +1,16 @@
+import { ViewStyle } from "react-native";
+
 export const shadowPresets = {
   sm: {
-    shadowColor: "#000000",
-    offset: { width: 0, height: 2 },
-    opacity: 0.1,
-    radius: 4,
-    elevation: 2,
-  },
+    boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
+  } as ViewStyle,
   md: {
-    shadowColor: "#000000",
-    offset: { width: 0, height: 2 },
-    opacity: 0.1,
-    radius: 8,
-    elevation: 4,
-  },
+    boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.1)",
+  } as ViewStyle,
   lg: {
-    shadowColor: "#000000",
-    offset: { width: 0, height: 4 },
-    opacity: 0.3,
-    radius: 8,
-    elevation: 6,
-  },
+    boxShadow: "0px 4px 8px 0px rgba(0, 0, 0, 0.3)",
+  } as ViewStyle,
   xl: {
-    shadowColor: "#000000",
-    offset: { width: 0, height: 6 },
-    opacity: 0.4,
-    radius: 12,
-    elevation: 8,
-  },
+    boxShadow: "0px 6px 12px 0px rgba(0, 0, 0, 0.4)",
+  } as ViewStyle,
 } as const;

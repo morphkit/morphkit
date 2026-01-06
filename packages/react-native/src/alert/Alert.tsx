@@ -2,13 +2,14 @@ import { ReactNode } from "react";
 import {
   View,
   ViewProps,
-  Text,
   Pressable,
   StyleSheet,
   StyleProp,
   ViewStyle,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 type AlertVariant = "info" | "success" | "warning" | "error";
 
@@ -35,7 +36,9 @@ export const Alert = ({
   const { theme, colorScheme } = useTheme();
 
   const variantColors = theme.component.alert.variant[colorScheme][variant];
-  const defaultIcon = icon ?? getDefaultIcon(variant);
+  const defaultIcon =
+    icon ??
+    getDefaultIcon(variant, variantColors.icon, theme.component.alert.iconSize);
 
   return (
     <View
@@ -53,56 +56,34 @@ export const Alert = ({
       accessibilityRole="alert"
       {...props}
     >
-      <View style={baseStyles.iconContainer}>
-        {typeof defaultIcon === "string" ? (
-          <Text
-            style={[
-              baseStyles.iconText,
-              {
-                color: variantColors.icon,
-                fontSize: theme.component.alert.iconSize,
-              },
-            ]}
-          >
-            {defaultIcon}
-          </Text>
-        ) : (
-          defaultIcon
-        )}
-      </View>
+      <View style={baseStyles.iconContainer}>{defaultIcon}</View>
 
       <View
         style={[baseStyles.content, { gap: theme.component.alert.contentGap }]}
       >
-        <Text
+        <Typography
+          variant="body"
           style={[
             baseStyles.title,
             {
               color: variantColors.text,
-              fontSize: theme.component.alert.title.fontSize,
-              lineHeight:
-                theme.component.alert.title.fontSize *
-                theme.component.alert.title.lineHeight,
             },
           ]}
         >
           {title}
-        </Text>
+        </Typography>
         {description && (
-          <Text
+          <Typography
+            variant="footnote"
             style={[
               baseStyles.description,
               {
                 color: variantColors.text,
-                fontSize: theme.component.alert.description.fontSize,
-                lineHeight:
-                  theme.component.alert.description.fontSize *
-                  theme.component.alert.description.lineHeight,
               },
             ]}
           >
             {description}
-          </Text>
+          </Typography>
         )}
       </View>
 
@@ -114,17 +95,11 @@ export const Alert = ({
           hitSlop={theme.component.alert.dismissHitSlop}
           style={baseStyles.dismissButton}
         >
-          <Text
-            style={[
-              baseStyles.dismissIcon,
-              {
-                color: variantColors.text,
-                fontSize: theme.component.alert.iconSize,
-              },
-            ]}
-          >
-            ×
-          </Text>
+          <Ionicons
+            name="close"
+            size={theme.component.alert.iconSize}
+            color={variantColors.text}
+          />
         </Pressable>
       )}
     </View>
@@ -133,28 +108,30 @@ export const Alert = ({
 
 Alert.displayName = "Alert";
 
-const getDefaultIcon = (variant: AlertVariant): string => {
-  switch (variant) {
-    case "success":
-      return "✓";
-    case "warning":
-      return "⚠";
-    case "error":
-      return "✕";
-    case "info":
-    default:
-      return "ℹ";
-  }
+const getDefaultIcon = (
+  variant: AlertVariant,
+  color: string,
+  size: number,
+): ReactNode => {
+  const iconMap = {
+    success: "checkmark-circle",
+    warning: "warning",
+    error: "close-circle",
+    info: "information-circle",
+  } as const;
+
+  return <Ionicons name={iconMap[variant]} size={size} color={color} />;
 };
 
 const baseStyles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     borderWidth: 1,
   },
   iconContainer: {
-    marginTop: 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
   iconText: {
     fontWeight: "bold",

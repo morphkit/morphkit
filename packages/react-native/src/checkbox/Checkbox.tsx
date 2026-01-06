@@ -3,11 +3,11 @@ import {
   View,
   ViewProps,
   Pressable,
-  Text,
   StyleSheet,
   StyleProp,
   ViewStyle,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../theme";
 
 export interface CheckboxProps extends Omit<ViewProps, "children"> {
@@ -109,14 +109,7 @@ Checkbox.displayName = "Checkbox";
 
 const CheckIcon = ({ size, color }: { size: number; color: string }) => (
   <View style={iconStyles.checkContainer}>
-    <Text
-      style={[
-        iconStyles.checkIcon,
-        { fontSize: size, lineHeight: size, color },
-      ]}
-    >
-      ✓
-    </Text>
+    <Ionicons name="checkmark" size={size * 0.7} color={color} />
   </View>
 );
 

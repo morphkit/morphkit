@@ -116,11 +116,7 @@ export const Switch = forwardRef<View, SwitchProps>(
                 height: thumbSize,
                 borderRadius: thumbSize / 2,
                 backgroundColor: thumbColor,
-                shadowColor: theme.primitive.shadowPresets.sm.shadowColor,
-                shadowOffset: theme.primitive.shadowPresets.sm.offset,
-                shadowOpacity: theme.primitive.shadowPresets.sm.opacity,
-                shadowRadius: theme.primitive.shadowPresets.sm.radius,
-                elevation: theme.primitive.shadowPresets.sm.elevation,
+                ...theme.primitive.shadowPresets.sm,
                 transform: [{ translateX: thumbTranslateX }],
               },
             ]}

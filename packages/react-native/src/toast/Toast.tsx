@@ -1,13 +1,14 @@
 import { useEffect, useRef } from "react";
 import {
   ViewProps,
-  Text,
   StyleSheet,
   StyleProp,
   ViewStyle,
   Animated,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 type ToastVariant = "info" | "success" | "warning" | "error";
 type ToastPosition = "top" | "bottom";
@@ -90,11 +91,7 @@ export const Toast = ({
           padding: theme.component.toast.padding,
           borderRadius: theme.component.toast.borderRadius,
           gap: theme.component.toast.gap,
-          shadowColor: variantColors.shadow.shadowColor,
-          shadowOffset: variantColors.shadow.offset,
-          shadowOpacity: variantColors.shadow.opacity,
-          shadowRadius: variantColors.shadow.radius,
-          elevation: variantColors.shadow.elevation,
+          ...variantColors.shadow,
           transform: [{ translateY }],
           opacity: slideValue,
         },
@@ -104,49 +101,33 @@ export const Toast = ({
       accessibilityLiveRegion="polite"
       {...props}
     >
-      <Text
-        style={[
-          baseStyles.icon,
-          {
-            color: variantColors.icon,
-            fontSize: theme.component.toast.iconSize,
-          },
-        ]}
-      >
-        {getIcon(variant)}
-      </Text>
-      <Text
+      {getIcon(variant, variantColors.icon, theme.component.toast.iconSize)}
+      <Typography
+        variant="body"
         style={[
           baseStyles.message,
           {
             color: variantColors.text,
-            fontSize: theme.component.toast.text.fontSize,
-            lineHeight:
-              theme.component.toast.text.fontSize *
-              theme.component.toast.text.lineHeight,
           },
         ]}
       >
         {message}
-      </Text>
+      </Typography>
     </Animated.View>
   );
 };
 
 Toast.displayName = "Toast";
 
-const getIcon = (variant: ToastVariant): string => {
-  switch (variant) {
-    case "success":
-      return "✓";
-    case "warning":
-      return "⚠";
-    case "error":
-      return "✕";
-    case "info":
-    default:
-      return "ℹ";
-  }
+const getIcon = (variant: ToastVariant, color: string, size: number) => {
+  const iconMap = {
+    success: "checkmark-circle",
+    warning: "warning",
+    error: "close-circle",
+    info: "information-circle",
+  } as const;
+
+  return <Ionicons name={iconMap[variant]} size={size} color={color} />;
 };
 
 const baseStyles = StyleSheet.create({

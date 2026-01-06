@@ -33,6 +33,28 @@ export const fab = {
     paddingHorizontal: primitive.spacing[4],
     fontSize: primitive.fontSize.base,
     fontWeight: primitive.fontWeight.semibold,
+    variant: {
+      light: {
+        primary: {
+          icon: light.text.inverse,
+          text: light.text.inverse,
+        },
+        secondary: {
+          icon: light.text.primary,
+          text: light.text.primary,
+        },
+      },
+      dark: {
+        primary: {
+          icon: dark.text.inverse,
+          text: dark.text.primary,
+        },
+        secondary: {
+          icon: dark.text.inverse,
+          text: dark.text.inverse,
+        },
+      },
+    },
   },
   animation: {
     duration: primitive.duration.fast,
@@ -65,7 +87,7 @@ export const fab = {
       },
       secondary: {
         background: dark.surface.elevated,
-        icon: dark.text.primary,
+        icon: dark.text.inverse,
         shadow: primitive.shadowPresets.lg,
       },
       disabled: {

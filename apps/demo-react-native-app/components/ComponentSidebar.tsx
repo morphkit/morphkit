@@ -1,17 +1,12 @@
-import {
-  View,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  useColorScheme,
-} from "react-native";
+import { View, Pressable, ScrollView, StyleSheet } from "react-native";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useRouter, usePathname } from "expo-router";
-import { Typography } from "@warp-ui/react-native";
+import { Typography, useTheme } from "@warp-ui/react-native";
 import registry from "@warp-ui/react-native/src/registry.json";
 
 export const ComponentSidebar = (props: DrawerContentComponentProps) => {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme } = useTheme();
+  const colors = theme.semantic.colors;
   const router = useRouter();
   const pathname = usePathname();
 
@@ -21,7 +16,9 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
   };
 
   return (
-    <View style={[styles.container, containerTheme[colorScheme]]}>
+    <View
+      style={[styles.container, { backgroundColor: colors.surface.primary }]}
+    >
       <Typography variant="title-2" style={styles.title}>
         Components
       </Typography>
@@ -35,18 +32,22 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
               onPress={() => handleComponentPress(component.name)}
               style={[
                 styles.item,
-                isActive
-                  ? activeItemTheme[colorScheme]
-                  : inactiveItemTheme[colorScheme],
+                {
+                  backgroundColor: isActive
+                    ? colors.surface.secondary
+                    : colors.surface.primary,
+                },
               ]}
             >
               <Typography
                 variant="callout"
                 style={[
                   styles.itemText,
-                  isActive
-                    ? activeTextTheme[colorScheme]
-                    : inactiveTextTheme[colorScheme],
+                  {
+                    color: isActive
+                      ? colors.text.primary
+                      : colors.text.secondary,
+                  },
                 ]}
               >
                 {component.name}
@@ -54,7 +55,7 @@ export const ComponentSidebar = (props: DrawerContentComponentProps) => {
               {component.description && (
                 <Typography
                   variant="footnote"
-                  style={[styles.description, descriptionTheme[colorScheme]]}
+                  style={[styles.description, { color: colors.text.tertiary }]}
                 >
                   {component.description}
                 </Typography>
@@ -88,59 +89,5 @@ const styles = StyleSheet.create({
   },
   description: {
     marginTop: 4,
-  },
-});
-
-const containerTheme = StyleSheet.create({
-  light: {
-    backgroundColor: "#ffffff",
-  },
-  dark: {
-    backgroundColor: "#000000",
-  },
-});
-
-const activeItemTheme = StyleSheet.create({
-  light: {
-    backgroundColor: "#f3f4f6",
-  },
-  dark: {
-    backgroundColor: "#1a1a1a",
-  },
-});
-
-const inactiveItemTheme = StyleSheet.create({
-  light: {
-    backgroundColor: "#ffffff",
-  },
-  dark: {
-    backgroundColor: "#000000",
-  },
-});
-
-const activeTextTheme = StyleSheet.create({
-  light: {
-    color: "#000000",
-  },
-  dark: {
-    color: "#ffffff",
-  },
-});
-
-const inactiveTextTheme = StyleSheet.create({
-  light: {
-    color: "#666666",
-  },
-  dark: {
-    color: "#aaaaaa",
-  },
-});
-
-const descriptionTheme = StyleSheet.create({
-  light: {
-    color: "#999999",
-  },
-  dark: {
-    color: "#666666",
   },
 });

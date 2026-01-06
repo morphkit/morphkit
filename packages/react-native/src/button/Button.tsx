@@ -2,14 +2,14 @@ import {
   Pressable,
   PressableProps,
   View,
-  Text,
   ActivityIndicator,
   StyleSheet,
   ViewStyle,
   StyleProp,
 } from "react-native";
-import { ReactNode } from "react";
+import { ReactNode, ReactElement, isValidElement, cloneElement } from "react";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 type ButtonVariant = "primary" | "secondary" | "tonal" | "plain";
 type ButtonSize = "none" | "sm" | "md" | "lg" | "icon";
@@ -93,21 +93,53 @@ export const Button = ({
           <ActivityIndicator color={variantTokens.text} size="small" />
         ) : (
           <>
-            {iconLeft && !isIconButton && <View>{iconLeft}</View>}
+            {iconLeft && !isIconButton && (
+              <View>
+                {isValidElement(iconLeft)
+                  ? cloneElement(
+                      iconLeft as ReactElement<{
+                        color?: string;
+                        size?: number;
+                      }>,
+                      {
+                        color: variantTokens.text,
+                        size: sizeTokens.iconSize,
+                      },
+                    )
+                  : iconLeft}
+              </View>
+            )}
             {!isIconButton && children && (
-              <Text
+              <Typography
+                variant="body"
                 style={{
-                  fontSize: sizeTokens.fontSize,
                   color: variantTokens.text,
                 }}
               >
                 {children}
-              </Text>
+              </Typography>
             )}
             {isIconButton && children && (
-              <Text style={{ color: variantTokens.text }}>{children}</Text>
+              <Typography variant="body" style={{ color: variantTokens.text }}>
+                {children}
+              </Typography>
             )}
-            {iconRight && !isIconButton && <View>{iconRight}</View>}
+            {iconRight && !isIconButton && (
+              <View>
+                {isValidElement(iconRight)
+                  ? cloneElement(
+                      iconRight as ReactElement<{
+                        color?: string;
+                        size?: number;
+                      }>,
+                      {
+                        color: variantTokens.text,
+                        size: sizeTokens.iconSize,
+                      },
+                    )
+                  : iconRight}
+              </View>
+            )}
           </>
         )}
       </View>

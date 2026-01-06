@@ -2,14 +2,15 @@ import { ReactNode } from "react";
 import {
   View,
   ViewProps,
-  Text,
   Pressable,
   StyleSheet,
   StyleProp,
   ViewStyle,
   TextStyle,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 type TagVariant = "default" | "primary" | "success" | "warning" | "error";
 type TagSize = "sm" | "md" | "lg";
@@ -57,24 +58,27 @@ export const Tag = ({
   const textStyles: TextStyle[] = [
     baseStyles.text,
     {
-      fontSize: sizeTokens.fontSize,
-      lineHeight: sizeTokens.fontSize * sizeTokens.lineHeight,
       fontWeight: theme.component.tag.fontWeight,
       color: variantTokens.text,
+      fontSize: theme.primitive.fontSize[size],
     },
   ];
 
   if (!dismissible) {
     return (
       <View style={containerStyles} accessibilityRole="text" {...props}>
-        <Text style={textStyles}>{children}</Text>
+        <Typography variant="callout" style={textStyles}>
+          {children}
+        </Typography>
       </View>
     );
   }
 
   return (
     <View style={containerStyles} {...props}>
-      <Text style={textStyles}>{children}</Text>
+      <Typography variant="callout" style={textStyles}>
+        {children}
+      </Typography>
       <Pressable
         onPress={onDismiss}
         accessibilityRole="button"
@@ -82,18 +86,11 @@ export const Tag = ({
         hitSlop={theme.primitive.spacing[2]}
         style={baseStyles.dismissButton}
       >
-        <Text
-          style={[
-            baseStyles.dismissIcon,
-            {
-              fontSize: sizeTokens.fontSize,
-              lineHeight: sizeTokens.fontSize * sizeTokens.lineHeight,
-              color: variantTokens.text,
-            },
-          ]}
-        >
-          ×
-        </Text>
+        <Ionicons
+          name="close"
+          size={sizeTokens.fontSize}
+          color={variantTokens.text}
+        />
       </Pressable>
     </View>
   );

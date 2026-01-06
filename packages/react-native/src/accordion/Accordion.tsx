@@ -3,7 +3,6 @@ import {
   View,
   ViewProps,
   Pressable,
-  Text,
   StyleProp,
   ViewStyle,
   StyleSheet,
@@ -13,6 +12,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 interface AccordionContextValue {
   value: string | string[];
@@ -182,11 +182,11 @@ export const AccordionItem = ({
         accessibilityState={{ expanded: isExpanded, disabled: isDisabled }}
         accessibilityLabel={title}
       >
-        <Text
+        <Typography
+          variant="body"
           style={[
             {
               flex: 1,
-              fontSize: theme.component.accordion.header.fontSize,
               fontWeight: theme.component.accordion.header.fontWeight,
               color: variantColors.header.text,
             },
@@ -194,7 +194,7 @@ export const AccordionItem = ({
           ]}
         >
           {title}
-        </Text>
+        </Typography>
         <ChevronIcon rotation={rotateAnim} />
       </Pressable>
 

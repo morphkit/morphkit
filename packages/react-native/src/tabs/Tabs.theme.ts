@@ -77,10 +77,10 @@ export const tabs = {
         },
       },
       filled: {
-        text: dark.text.inverse,
+        text: dark.text.primary,
       },
       pills: {
-        text: dark.text.inverse,
+        text: dark.text.primary,
       },
       disabled: {
         opacity: primitive.opacity.disabled,

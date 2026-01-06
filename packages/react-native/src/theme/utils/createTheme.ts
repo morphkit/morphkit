@@ -13,7 +13,7 @@ export interface CreateThemeOptions {
 }
 
 export const createTheme = (
-  overrides: CreateThemeOptions = {}
+  overrides: CreateThemeOptions = {},
 ): { light: Theme; dark: Theme } => {
   const { fonts, light, dark } = overrides;
 
@@ -21,7 +21,8 @@ export const createTheme = (
     ? {
         semantic: {
           fontFamilies: {
-            display: fonts.display ?? themes.light.semantic.fontFamilies.display,
+            display:
+              fonts.display ?? themes.light.semantic.fontFamilies.display,
             body: fonts.body ?? themes.light.semantic.fontFamilies.body,
             mono: fonts.mono ?? themes.light.semantic.fontFamilies.mono,
           },
