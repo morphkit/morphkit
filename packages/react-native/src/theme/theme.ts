@@ -1,6 +1,6 @@
 import * as primitive from "./tokens/primitive";
 import * as semantic from "./tokens/semantic";
-import * as component from "./tokens/component";
+import * as component from "./tokens/components";
 import * as fonts from "./tokens/primitive/fonts";
 
 export interface FontFamilies {

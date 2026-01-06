@@ -1,4 +1,4 @@
-import { light, dark } from "../semantic/colors";
+import { light, dark } from "../theme/tokens/semantic/colors";
 
 export const divider = {
   thickness: 1,

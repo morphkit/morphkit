@@ -1,5 +1,5 @@
-import { textStyles, fontFamilies } from "../semantic/typography";
-import { light, dark } from "../semantic/colors";
+import { textStyles, fontFamilies } from "../theme/tokens/semantic/typography";
+import { light, dark } from "../theme/tokens/semantic/colors";
 
 export const typography = {
   styles: textStyles,

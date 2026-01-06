@@ -1,5 +1,5 @@
-import * as primitive from "../primitive";
-import { light, dark } from "../semantic/colors";
+import * as primitive from "../theme/tokens/primitive";
+import { light, dark } from "../theme/tokens/semantic/colors";
 
 export const radio = {
   size: {

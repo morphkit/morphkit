@@ -1,5 +1,4 @@
-import * as primitive from "../primitive";
-import { light, dark } from "../semantic/colors";
+import { light, dark } from "../theme/tokens/semantic/colors";
 
 export const slider = {
   trackHeight: 4,

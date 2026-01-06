@@ -1,4 +1,4 @@
-import * as primitive from "../primitive";
+import * as primitive from "../theme/tokens/primitive";
 
 export const container = {
   maxWidth: {
