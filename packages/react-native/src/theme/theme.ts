@@ -1,6 +1,6 @@
-import * as primitive from './tokens/primitive';
-import * as semantic from './tokens/semantic';
-import * as component from './tokens/component';
+import * as primitive from "./tokens/primitive";
+import * as semantic from "./tokens/semantic";
+import * as component from "./tokens/component";
 
 export interface Theme {
   primitive: typeof primitive;
@@ -34,11 +34,11 @@ export const themes = {
 };
 
 export const defaultTheme = themes.light;
-export type ColorScheme = 'light' | 'dark';
+export type ColorScheme = "light" | "dark";
 
 export interface TypographyStyle {
   fontSize: number;
-  fontWeight: '400' | '500' | '600' | '700';
+  fontWeight: "400" | "500" | "600" | "700";
   lineHeight: number;
   letterSpacing: number;
 }

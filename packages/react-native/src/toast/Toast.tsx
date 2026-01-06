@@ -79,7 +79,9 @@ export const Toast = ({
     <Animated.View
       style={[
         baseStyles.container,
-        position === "top" ? { top: theme.primitive.spacing[12] } : { bottom: theme.primitive.spacing[12] },
+        position === "top"
+          ? { top: theme.primitive.spacing[12] }
+          : { bottom: theme.primitive.spacing[12] },
         {
           left: theme.primitive.spacing[4],
           right: theme.primitive.spacing[4],
@@ -119,7 +121,8 @@ export const Toast = ({
           {
             color: variantColors.text,
             fontSize: theme.primitive.fontSize.sm,
-            lineHeight: theme.primitive.fontSize.sm * theme.primitive.lineHeight.relaxed,
+            lineHeight:
+              theme.primitive.fontSize.sm * theme.primitive.lineHeight.relaxed,
           },
         ]}
       >

@@ -56,12 +56,14 @@ export const Switch = forwardRef<View, SwitchProps>(
       }
     };
 
-    const { trackWidth, trackHeight, thumbSize, thumbPadding } = theme.component.switchComponent.size[size];
+    const { trackWidth, trackHeight, thumbSize, thumbPadding } =
+      theme.component.switchComponent.size[size];
 
     const trackColor = disabled
       ? theme.component.switchComponent.variant[colorScheme].disabled.track
       : checked
-        ? color ?? theme.component.switchComponent.variant[colorScheme].on.track
+        ? (color ??
+          theme.component.switchComponent.variant[colorScheme].on.track)
         : theme.component.switchComponent.variant[colorScheme].off.track;
 
     const thumbColor = disabled

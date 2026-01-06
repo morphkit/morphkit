@@ -69,7 +69,8 @@ export const Skeleton = ({
           baseStyles.shimmer,
           {
             transform: [{ translateX }],
-            backgroundColor: theme.component.skeleton.variant[colorScheme].shimmer,
+            backgroundColor:
+              theme.component.skeleton.variant[colorScheme].shimmer,
             opacity: theme.primitive.opacity.shimmer,
           },
         ]}

@@ -62,7 +62,9 @@ describe("<Button />", () => {
   });
 
   test("applies medium size styles by default", () => {
-    const { UNSAFE_getAllByType } = render(<Button testID="button-md">Medium</Button>);
+    const { UNSAFE_getAllByType } = render(
+      <Button testID="button-md">Medium</Button>,
+    );
     const views = UNSAFE_getAllByType(View);
     const container = views.find((v) => {
       const style = StyleSheet.flatten(v.props.style);
@@ -94,7 +96,12 @@ describe("<Button />", () => {
     const views = UNSAFE_getAllByType(View);
     const container = views.find((v) => {
       const style = StyleSheet.flatten(v.props.style);
-      return style && style.width === 40 && style.height === 40 && style.borderRadius === 20;
+      return (
+        style &&
+        style.width === 40 &&
+        style.height === 40 &&
+        style.borderRadius === 20
+      );
     });
     expect(container).toBeTruthy();
   });

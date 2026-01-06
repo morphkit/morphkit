@@ -1,5 +1,5 @@
-import * as primitive from '../primitive';
-import { light, dark } from '../semantic/colors';
+import * as primitive from "../primitive";
+import { light, dark } from "../semantic/colors";
 
 export const input = {
   size: {

@@ -321,11 +321,7 @@ describe("Accordion", () => {
 
     it("collapses when value not in array in multiple mode", () => {
       const { queryByText } = render(
-        <Accordion
-          type="multiple"
-          value={["item2"]}
-          onValueChange={() => {}}
-        >
+        <Accordion type="multiple" value={["item2"]} onValueChange={() => {}}>
           <AccordionItem value="item1" title="Item 1">
             <Text>Content 1</Text>
           </AccordionItem>
@@ -389,12 +385,7 @@ describe("Accordion", () => {
     it("applies container disabled state", () => {
       const handleChange = jest.fn();
       const { getAllByRole } = render(
-        <Accordion
-          type="single"
-          value=""
-          onValueChange={handleChange}
-          disabled
-        >
+        <Accordion type="single" value="" onValueChange={handleChange} disabled>
           <AccordionItem value="item1" title="Item 1">
             <Text>Content 1</Text>
           </AccordionItem>
@@ -483,7 +474,11 @@ describe("Accordion", () => {
       };
 
       const { rerender, getByText, queryByText } = render(
-        <Accordion type="single" value={currentValue} onValueChange={handleChange}>
+        <Accordion
+          type="single"
+          value={currentValue}
+          onValueChange={handleChange}
+        >
           <AccordionItem value="item1" title="Item 1">
             <Text>Content 1</Text>
           </AccordionItem>
@@ -500,7 +495,11 @@ describe("Accordion", () => {
       currentValue = "item2";
 
       rerender(
-        <Accordion type="single" value={currentValue} onValueChange={handleChange}>
+        <Accordion
+          type="single"
+          value={currentValue}
+          onValueChange={handleChange}
+        >
           <AccordionItem value="item1" title="Item 1">
             <Text>Content 1</Text>
           </AccordionItem>

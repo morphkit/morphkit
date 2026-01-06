@@ -31,8 +31,8 @@ export const AnimatedProgressExample = () => {
           {progress === 100
             ? "Download complete!"
             : isLoading
-            ? "Downloading..."
-            : "Ready to download"}
+              ? "Downloading..."
+              : "Ready to download"}
         </Typography>
         {!isLoading && (
           <Typography

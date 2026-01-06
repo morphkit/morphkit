@@ -6,7 +6,11 @@ export const BasicExample = () => {
   const [activeItem, setActiveItem] = useState("item-1");
 
   return (
-    <Accordion type="single" value={activeItem} onValueChange={(value) => setActiveItem(value as string)}>
+    <Accordion
+      type="single"
+      value={activeItem}
+      onValueChange={(value) => setActiveItem(value as string)}
+    >
       <AccordionItem value="item-1" title="What is React Native?">
         <Text>
           React Native is a framework for building native mobile apps using

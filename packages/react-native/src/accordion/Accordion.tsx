@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  ReactNode,
-  useEffect,
-  useRef,
-} from "react";
+import { createContext, useContext, ReactNode, useEffect, useRef } from "react";
 import {
   View,
   ViewProps,
@@ -33,9 +27,7 @@ const AccordionContext = createContext<AccordionContextValue | null>(null);
 const useAccordionContext = () => {
   const context = useContext(AccordionContext);
   if (!context) {
-    throw new Error(
-      "AccordionItem must be used within Accordion",
-    );
+    throw new Error("AccordionItem must be used within Accordion");
   }
   return context;
 };
@@ -72,10 +64,7 @@ export const Accordion = ({
 
   return (
     <AccordionContext.Provider value={contextValue}>
-      <View
-        style={[{ gap: theme.component.accordion.gap }, style]}
-        {...props}
-      >
+      <View style={[{ gap: theme.component.accordion.gap }, style]} {...props}>
         {children}
       </View>
     </AccordionContext.Provider>
@@ -150,8 +139,7 @@ export const AccordionItem = ({
     }
 
     if (context.type === "single") {
-      const newValue =
-        isExpanded && context.collapsible ? "" : value;
+      const newValue = isExpanded && context.collapsible ? "" : value;
       context.onValueChange(newValue);
     } else {
       const currentValues = context.value as string[];
@@ -185,7 +173,9 @@ export const AccordionItem = ({
             backgroundColor: variantColors.header.background,
             padding: theme.component.accordion.padding,
           },
-          pressed && { backgroundColor: theme.semantic.colors.surface.tertiary },
+          pressed && {
+            backgroundColor: theme.semantic.colors.surface.tertiary,
+          },
           isDisabled && { opacity: theme.semantic.state.disabled.opacity },
         ]}
         accessibilityRole="button"

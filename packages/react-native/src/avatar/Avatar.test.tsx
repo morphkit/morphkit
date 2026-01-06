@@ -24,7 +24,11 @@ describe("<Avatar />", () => {
     });
     expect(container).toBeTruthy();
     const flatStyle = StyleSheet.flatten(container!.props.style);
-    expect(flatStyle).toMatchObject({ width: 32, height: 32, borderRadius: 16 });
+    expect(flatStyle).toMatchObject({
+      width: 32,
+      height: 32,
+      borderRadius: 16,
+    });
   });
 
   test("applies medium size by default", () => {
@@ -36,7 +40,11 @@ describe("<Avatar />", () => {
     });
     expect(container).toBeTruthy();
     const flatStyle = StyleSheet.flatten(container!.props.style);
-    expect(flatStyle).toMatchObject({ width: 40, height: 40, borderRadius: 20 });
+    expect(flatStyle).toMatchObject({
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+    });
   });
 
   test("applies large size styles", () => {
@@ -48,7 +56,11 @@ describe("<Avatar />", () => {
     });
     expect(container).toBeTruthy();
     const flatStyle = StyleSheet.flatten(container!.props.style);
-    expect(flatStyle).toMatchObject({ width: 48, height: 48, borderRadius: 24 });
+    expect(flatStyle).toMatchObject({
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+    });
   });
 
   test("shows image when source is provided", () => {

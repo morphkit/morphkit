@@ -1,4 +1,4 @@
-import * as primitive from '../primitive/opacity';
+import * as primitive from "../primitive/opacity";
 
 export const state = {
   hover: {
@@ -10,7 +10,5 @@ export const state = {
   disabled: {
     opacity: primitive.opacity.disabled,
   },
-  focus: {
-
-  },
+  focus: {},
 } as const;

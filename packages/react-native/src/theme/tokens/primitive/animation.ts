@@ -6,11 +6,11 @@ export const duration = {
 } as const;
 
 export const easing = {
-  linear: 'linear',
-  ease: 'ease',
-  easeIn: 'ease-in',
-  easeOut: 'ease-out',
-  easeInOut: 'ease-in-out',
+  linear: "linear",
+  ease: "ease",
+  easeIn: "ease-in",
+  easeOut: "ease-out",
+  easeInOut: "ease-in-out",
 } as const;
 
 export const spring = {

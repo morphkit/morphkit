@@ -47,12 +47,7 @@ describe("<FAB />", () => {
 
   test("applies extended size when label provided", () => {
     const { root } = render(
-      <FAB
-        icon={<TestIcon />}
-        label="Create"
-        size="md"
-        onPress={() => {}}
-      />,
+      <FAB icon={<TestIcon />} label="Create" size="md" onPress={() => {}} />,
     );
     expect(root).toBeTruthy();
   });
@@ -137,11 +132,7 @@ describe("<FAB />", () => {
   test("merges custom style prop", () => {
     const customStyle = { margin: 10 };
     const { root } = render(
-      <FAB
-        icon={<TestIcon />}
-        onPress={() => {}}
-        style={customStyle}
-      />,
+      <FAB icon={<TestIcon />} onPress={() => {}} style={customStyle} />,
     );
     expect(root).toBeTruthy();
   });

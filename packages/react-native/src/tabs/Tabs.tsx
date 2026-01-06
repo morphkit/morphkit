@@ -130,10 +130,7 @@ export const TabsContainer = ({
   return (
     <TabsContext.Provider value={contextValue}>
       <View
-        style={[
-          orientation === "vertical" && styles.verticalContainer,
-          style,
-        ]}
+        style={[orientation === "vertical" && styles.verticalContainer, style]}
         {...props}
         {...(orientation === "horizontal" ? panResponder.panHandlers : {})}
       >

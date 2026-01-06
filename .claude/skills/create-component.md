@@ -9,6 +9,7 @@
 Always create these files in `packages/react-native/src/<component-name>/`:
 
 ### Required Files
+
 - `<ComponentName>.tsx` - Main component implementation
 - `index.ts` - Barrel export
 - `meta.json` - Component metadata
@@ -16,6 +17,7 @@ Always create these files in `packages/react-native/src/<component-name>/`:
 - `<ComponentName>.test.tsx` - Jest tests
 
 ### Examples Directory
+
 - `examples/` - Directory containing all example components
   - `BasicExample.tsx` - Basic usage example
   - `VariantsExample.tsx` - Variants demonstration (if applicable)
@@ -23,6 +25,7 @@ Always create these files in `packages/react-native/src/<component-name>/`:
   - `index.ts` - Barrel export for all examples
 
 **IMPORTANT**: All interactive JSX examples MUST be extracted to separate `.tsx` files in the `examples/` directory. This provides:
+
 - Full TypeScript validation
 - ESLint checking
 - IDE autocomplete support
@@ -118,6 +121,7 @@ export * from "./InteractiveExample";
 ```
 
 **Example Naming Conventions:**
+
 - `BasicExample` - Basic usage
 - `VariantsExample` - Variants demonstration
 - `SizesExample` - Size variations
@@ -170,6 +174,7 @@ import { Component } from "@repo/react-native";
 ```
 
 **IMPORTANT:**
+
 - Extract ALL rendered JSX examples to separate `.tsx` files
 - Import examples at the top of README.mdx
 - Use `<View style={{ marginVertical: 12 }}>` wrappers around examples

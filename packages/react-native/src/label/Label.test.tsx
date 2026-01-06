@@ -9,7 +9,9 @@ describe("Label", () => {
   });
 
   it("renders required asterisk when required is true", () => {
-    const { getByText, UNSAFE_getAllByType } = render(<Label required>Password</Label>);
+    const { getByText, UNSAFE_getAllByType } = render(
+      <Label required>Password</Label>,
+    );
     const texts = UNSAFE_getAllByType(Text);
     expect(texts.length).toBeGreaterThan(1);
     expect(getByText("*")).toBeTruthy();

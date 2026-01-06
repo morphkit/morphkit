@@ -6,7 +6,11 @@ export const MultipleExample = () => {
   const [openItems, setOpenItems] = useState(["item-1"]);
 
   return (
-    <Accordion type="multiple" value={openItems} onValueChange={(value) => setOpenItems(value as string[])}>
+    <Accordion
+      type="multiple"
+      value={openItems}
+      onValueChange={(value) => setOpenItems(value as string[])}
+    >
       <AccordionItem value="item-1" title="Account Settings">
         <Text>Manage your account information and preferences</Text>
       </AccordionItem>

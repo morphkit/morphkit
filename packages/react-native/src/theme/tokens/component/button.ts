@@ -1,5 +1,5 @@
-import * as primitive from '../primitive';
-import { light, dark } from '../semantic/colors';
+import * as primitive from "../primitive";
+import { light, dark } from "../semantic/colors";
 
 export const button = {
   size: {
@@ -45,23 +45,23 @@ export const button = {
       },
       outline: {
         primary: {
-          background: 'transparent',
+          background: "transparent",
           text: light.action.primary,
           border: light.action.primary,
         },
         secondary: {
-          background: 'transparent',
+          background: "transparent",
           text: light.text.primary,
           border: light.border.primary,
         },
       },
       ghost: {
         primary: {
-          background: 'transparent',
+          background: "transparent",
           text: light.action.primary,
         },
         secondary: {
-          background: 'transparent',
+          background: "transparent",
           text: light.text.primary,
         },
       },
@@ -79,23 +79,23 @@ export const button = {
       },
       outline: {
         primary: {
-          background: 'transparent',
+          background: "transparent",
           text: dark.action.primary,
           border: dark.action.primary,
         },
         secondary: {
-          background: 'transparent',
+          background: "transparent",
           text: dark.text.primary,
           border: dark.border.primary,
         },
       },
       ghost: {
         primary: {
-          background: 'transparent',
+          background: "transparent",
           text: dark.action.primary,
         },
         secondary: {
-          background: 'transparent',
+          background: "transparent",
           text: dark.text.primary,
         },
       },

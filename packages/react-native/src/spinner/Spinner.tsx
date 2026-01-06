@@ -25,9 +25,12 @@ export const Spinner = ({
   const { theme, colorScheme } = useTheme();
   const spinValue = useRef(new Animated.Value(0)).current;
 
-  const spinnerSize = typeof size === "number" ? size : theme.component.spinner.size[size];
-  const strokeWidth = typeof size === "number" ? 2 : theme.component.spinner.strokeWidth[size];
-  const spinnerColor = color ?? theme.component.spinner.variant[colorScheme].color;
+  const spinnerSize =
+    typeof size === "number" ? size : theme.component.spinner.size[size];
+  const strokeWidth =
+    typeof size === "number" ? 2 : theme.component.spinner.strokeWidth[size];
+  const spinnerColor =
+    color ?? theme.component.spinner.variant[colorScheme].color;
 
   useEffect(() => {
     Animated.loop(

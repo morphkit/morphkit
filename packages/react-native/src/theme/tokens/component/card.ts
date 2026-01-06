@@ -1,5 +1,5 @@
-import * as primitive from '../primitive';
-import { light, dark } from '../semantic/colors';
+import * as primitive from "../primitive";
+import { light, dark } from "../semantic/colors";
 
 export const card = {
   padding: primitive.spacing[4],
@@ -14,7 +14,7 @@ export const card = {
       },
       elevated: {
         background: light.surface.elevated,
-        border: 'transparent',
+        border: "transparent",
         shadow: primitive.shadowPresets.lg,
       },
       outlined: {
@@ -31,7 +31,7 @@ export const card = {
       },
       elevated: {
         background: dark.surface.elevated,
-        border: 'transparent',
+        border: "transparent",
         shadow: primitive.shadowPresets.lg,
       },
       outlined: {

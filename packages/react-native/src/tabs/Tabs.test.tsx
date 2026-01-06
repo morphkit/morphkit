@@ -1,11 +1,6 @@
 import { render, fireEvent } from "@testing-library/react-native";
 import { Text, View, StyleSheet } from "react-native";
-import {
-  TabsContainer,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "./Tabs";
+import { TabsContainer, TabsList, TabsTrigger, TabsContent } from "./Tabs";
 
 const TestIcon = () => <Text>Icon</Text>;
 

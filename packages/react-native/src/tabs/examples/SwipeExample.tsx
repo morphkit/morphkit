@@ -6,15 +6,23 @@ export const SwipeExample = () => {
   const [activeTab, setActiveTab] = useState("code");
 
   return (
-    <TabsContainer value={activeTab} onValueChange={setActiveTab} variant="pills">
+    <TabsContainer
+      value={activeTab}
+      onValueChange={setActiveTab}
+      variant="pills"
+    >
       <TabsList>
         <TabsTrigger value="code" label="Code" />
         <TabsTrigger value="preview" label="Preview" />
         <TabsTrigger value="docs" label="Docs" />
       </TabsList>
       <TabsContent value="code">
-        <View style={{ padding: 16, backgroundColor: "#1F2937", borderRadius: 8 }}>
-          <Text style={{ fontFamily: "monospace", fontSize: 12, color: "#10B981" }}>
+        <View
+          style={{ padding: 16, backgroundColor: "#1F2937", borderRadius: 8 }}
+        >
+          <Text
+            style={{ fontFamily: "monospace", fontSize: 12, color: "#10B981" }}
+          >
             {`const App = () => {
   return <View>...</View>;
 };`}
@@ -22,7 +30,9 @@ export const SwipeExample = () => {
         </View>
       </TabsContent>
       <TabsContent value="preview">
-        <View style={{ padding: 16, backgroundColor: "#F3F4F6", borderRadius: 8 }}>
+        <View
+          style={{ padding: 16, backgroundColor: "#F3F4F6", borderRadius: 8 }}
+        >
           <Text style={{ fontSize: 14, color: "#1F2937" }}>
             Preview of your component appears here
           </Text>

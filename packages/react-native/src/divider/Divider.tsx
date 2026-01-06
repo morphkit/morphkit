@@ -1,9 +1,4 @@
-import {
-  View,
-  ViewProps,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
+import { View, ViewProps, StyleProp, ViewStyle } from "react-native";
 import { useTheme } from "../theme";
 
 type DividerOrientation = "horizontal" | "vertical";
@@ -26,7 +21,8 @@ export const Divider = ({
 }: DividerProps) => {
   const { theme, colorScheme } = useTheme();
   const dividerThickness = thickness ?? theme.component.divider.thickness;
-  const dividerColor = color ?? theme.component.divider.variant[colorScheme].color;
+  const dividerColor =
+    color ?? theme.component.divider.variant[colorScheme].color;
 
   const dividerStyles: ViewStyle =
     orientation === "horizontal"

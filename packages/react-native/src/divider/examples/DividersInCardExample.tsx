@@ -4,32 +4,41 @@ import { Box, Stack, Typography, Card } from "../..";
 export const DividersInCardExample = () => {
   return (
     <Card>
-        <Stack gap={12}>
-          <Box>
-            <Typography variant="heading">Section 1</Typography>
-            <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-              Content for the first section with important details
-            </Typography>
-          </Box>
+      <Stack gap={12}>
+        <Box>
+          <Typography variant="heading">Section 1</Typography>
+          <Typography
+            variant="callout"
+            style={{ color: "#6B7280", marginTop: 4 }}
+          >
+            Content for the first section with important details
+          </Typography>
+        </Box>
 
-          <Divider />
+        <Divider />
 
-          <Box>
-            <Typography variant="heading">Section 2</Typography>
-            <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-              Content for the second section with more information
-            </Typography>
-          </Box>
+        <Box>
+          <Typography variant="heading">Section 2</Typography>
+          <Typography
+            variant="callout"
+            style={{ color: "#6B7280", marginTop: 4 }}
+          >
+            Content for the second section with more information
+          </Typography>
+        </Box>
 
-          <Divider />
+        <Divider />
 
-          <Box>
-            <Typography variant="heading">Section 3</Typography>
-            <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-              Content for the third section wrapping things up
-            </Typography>
-          </Box>
-        </Stack>
-      </Card>
+        <Box>
+          <Typography variant="heading">Section 3</Typography>
+          <Typography
+            variant="callout"
+            style={{ color: "#6B7280", marginTop: 4 }}
+          >
+            Content for the third section wrapping things up
+          </Typography>
+        </Box>
+      </Stack>
+    </Card>
   );
 };

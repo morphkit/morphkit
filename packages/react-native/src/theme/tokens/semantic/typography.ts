@@ -1,28 +1,28 @@
-import * as primitive from '../primitive/typography';
+import * as primitive from "../primitive/typography";
 
 export const textStyles = {
   largeTitle: {
-    fontSize: primitive.fontSize['5xl'],
+    fontSize: primitive.fontSize["5xl"],
     fontWeight: primitive.fontWeight.regular,
-    lineHeight: primitive.fontSize['5xl'] * primitive.lineHeight.tight,
+    lineHeight: primitive.fontSize["5xl"] * primitive.lineHeight.tight,
     letterSpacing: primitive.letterSpacing.tighter,
   },
   title1: {
-    fontSize: primitive.fontSize['4xl'],
+    fontSize: primitive.fontSize["4xl"],
     fontWeight: primitive.fontWeight.regular,
-    lineHeight: primitive.fontSize['4xl'] * primitive.lineHeight.tight,
+    lineHeight: primitive.fontSize["4xl"] * primitive.lineHeight.tight,
     letterSpacing: primitive.letterSpacing.tight,
   },
   title2: {
-    fontSize: primitive.fontSize['3xl'],
+    fontSize: primitive.fontSize["3xl"],
     fontWeight: primitive.fontWeight.regular,
-    lineHeight: primitive.fontSize['3xl'] * primitive.lineHeight.normal,
+    lineHeight: primitive.fontSize["3xl"] * primitive.lineHeight.normal,
     letterSpacing: primitive.letterSpacing.tight,
   },
   title3: {
-    fontSize: primitive.fontSize['2xl'],
+    fontSize: primitive.fontSize["2xl"],
     fontWeight: primitive.fontWeight.regular,
-    lineHeight: primitive.fontSize['2xl'] * primitive.lineHeight.normal,
+    lineHeight: primitive.fontSize["2xl"] * primitive.lineHeight.normal,
     letterSpacing: primitive.letterSpacing.normal,
   },
   heading: {

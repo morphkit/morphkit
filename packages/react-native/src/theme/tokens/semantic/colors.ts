@@ -1,5 +1,5 @@
-import * as primitive from '../primitive/colors';
-import { opacity } from '../primitive/opacity';
+import * as primitive from "../primitive/colors";
+import { opacity } from "../primitive/opacity";
 
 export const light = {
   action: {

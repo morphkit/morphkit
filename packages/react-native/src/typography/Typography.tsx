@@ -19,11 +19,11 @@ const variantMap: Record<TypographyVariant, string> = {
   "title-1": "title1",
   "title-2": "title2",
   "title-3": "title3",
-  "heading": "heading",
-  "body": "body",
-  "callout": "callout",
-  "subhead": "subhead",
-  "footnote": "footnote",
+  heading: "heading",
+  body: "body",
+  callout: "callout",
+  subhead: "subhead",
+  footnote: "footnote",
   "caption-1": "caption1",
   "caption-2": "caption2",
 };
@@ -41,16 +41,14 @@ export const Typography = ({
 }: TypographyProps) => {
   const { theme } = useTheme();
 
-  const textStyleKey = variantMap[variant] as keyof typeof theme.semantic.textStyles;
+  const textStyleKey = variantMap[
+    variant
+  ] as keyof typeof theme.semantic.textStyles;
   const textStyle = theme.semantic.textStyles[textStyleKey];
 
   return (
     <Text
-      style={[
-        textStyle,
-        { color: theme.semantic.colors.text.primary },
-        style,
-      ]}
+      style={[textStyle, { color: theme.semantic.colors.text.primary }, style]}
       {...props}
     >
       {children}

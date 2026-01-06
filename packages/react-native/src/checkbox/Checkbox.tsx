@@ -64,8 +64,10 @@ export const Checkbox = forwardRef<View, CheckboxProps>(
         width: boxSize,
         height: boxSize,
         borderRadius: theme.component.checkbox.borderRadius,
-        borderColor: color && isCheckedOrIndeterminate ? color : variantColors.border,
-        backgroundColor: color && isCheckedOrIndeterminate ? color : variantColors.background,
+        borderColor:
+          color && isCheckedOrIndeterminate ? color : variantColors.border,
+        backgroundColor:
+          color && isCheckedOrIndeterminate ? color : variantColors.background,
       },
     ];
 
@@ -106,7 +108,12 @@ Checkbox.displayName = "Checkbox";
 
 const CheckIcon = ({ size, color }: { size: number; color: string }) => (
   <View style={iconStyles.checkContainer}>
-    <Text style={[iconStyles.checkIcon, { fontSize: size, lineHeight: size, color }]}>
+    <Text
+      style={[
+        iconStyles.checkIcon,
+        { fontSize: size, lineHeight: size, color },
+      ]}
+    >
       ✓
     </Text>
   </View>
@@ -114,7 +121,9 @@ const CheckIcon = ({ size, color }: { size: number; color: string }) => (
 
 const MinusIcon = ({ size, color }: { size: number; color: string }) => (
   <View style={iconStyles.minusContainer}>
-    <View style={[iconStyles.minusIcon, { width: size, backgroundColor: color }]} />
+    <View
+      style={[iconStyles.minusIcon, { width: size, backgroundColor: color }]}
+    />
   </View>
 );
 

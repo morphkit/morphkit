@@ -9,7 +9,10 @@ export const DashboardLayoutExample = () => {
           <Typography variant="title-1" style={{ color: "#FFFFFF" }}>
             Dashboard Overview
           </Typography>
-          <Typography variant="callout" style={{ color: "#FFFFFF", marginTop: 4 }}>
+          <Typography
+            variant="callout"
+            style={{ color: "#FFFFFF", marginTop: 4 }}
+          >
             Welcome back, Sarah
           </Typography>
         </Box>
@@ -18,18 +21,26 @@ export const DashboardLayoutExample = () => {
           <Box flex={1}>
             <Card>
               <Stack gap={8}>
-                <Typography variant="caption-1" style={{ color: "#6B7280" }}>Total Revenue</Typography>
+                <Typography variant="caption-1" style={{ color: "#6B7280" }}>
+                  Total Revenue
+                </Typography>
                 <Typography variant="title-2">$45,231</Typography>
-                <Typography variant="footnote" style={{ color: "#10B981" }}>+12.5% from last month</Typography>
+                <Typography variant="footnote" style={{ color: "#10B981" }}>
+                  +12.5% from last month
+                </Typography>
               </Stack>
             </Card>
           </Box>
           <Box flex={1}>
             <Card>
               <Stack gap={8}>
-                <Typography variant="caption-1" style={{ color: "#6B7280" }}>Active Users</Typography>
+                <Typography variant="caption-1" style={{ color: "#6B7280" }}>
+                  Active Users
+                </Typography>
                 <Typography variant="title-2">2,483</Typography>
-                <Typography variant="footnote" style={{ color: "#10B981" }}>+8.2% from last month</Typography>
+                <Typography variant="footnote" style={{ color: "#10B981" }}>
+                  +8.2% from last month
+                </Typography>
               </Stack>
             </Card>
           </Box>

@@ -76,7 +76,9 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
       nativeEvent: { contentSize: { height: number } };
     }) => {
       if (autoResize) {
-        setHeight(event.nativeEvent.contentSize.height + sizeTokens.padding * 2);
+        setHeight(
+          event.nativeEvent.contentSize.height + sizeTokens.padding * 2,
+        );
       }
     };
 

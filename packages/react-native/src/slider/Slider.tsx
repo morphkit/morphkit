@@ -54,10 +54,13 @@ export const Slider = forwardRef<View, SliderProps>(
 
     const trackHeight = theme.component.slider.trackHeight;
     const thumbSize = theme.component.slider.thumbSize[size];
-    const activeColor = color ?? theme.component.slider.variant[colorScheme].track.active;
-    const inactiveColor = theme.component.slider.variant[colorScheme].track.inactive;
+    const activeColor =
+      color ?? theme.component.slider.variant[colorScheme].track.active;
+    const inactiveColor =
+      theme.component.slider.variant[colorScheme].track.inactive;
     const thumbColor = theme.component.slider.variant[colorScheme].thumb;
-    const thumbBorderColor = theme.component.slider.variant[colorScheme].thumbBorder;
+    const thumbBorderColor =
+      theme.component.slider.variant[colorScheme].thumbBorder;
 
     const normalizeValue = (val: number): number => {
       let normalized = Math.max(min, Math.min(max, val));
@@ -185,7 +188,7 @@ export const Slider = forwardRef<View, SliderProps>(
                 style={[
                   baseStyles.valueText,
                   {
-                    top: -(theme.primitive.spacing[6]),
+                    top: -theme.primitive.spacing[6],
                     fontSize: theme.primitive.fontSize.xs,
                     fontWeight: theme.primitive.fontWeight.semibold,
                     color: theme.semantic.colors.text.primary,
@@ -221,7 +224,7 @@ export const Slider = forwardRef<View, SliderProps>(
                   style={[
                     baseStyles.valueText,
                     {
-                      top: -(theme.primitive.spacing[6]),
+                      top: -theme.primitive.spacing[6],
                       fontSize: theme.primitive.fontSize.xs,
                       fontWeight: theme.primitive.fontWeight.semibold,
                       color: theme.semantic.colors.text.primary,

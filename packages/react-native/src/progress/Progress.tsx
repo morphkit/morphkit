@@ -38,7 +38,8 @@ export const Progress = ({
   const isIndeterminate = value === undefined;
   const clampedValue = Math.max(0, Math.min(100, value ?? 0));
 
-  const progressColor = color ?? theme.component.progress.variant[colorScheme].fill;
+  const progressColor =
+    color ?? theme.component.progress.variant[colorScheme].fill;
   const trackColor = theme.component.progress.variant[colorScheme].track;
   const textColor = theme.semantic.colors.text.secondary;
 
@@ -203,7 +204,10 @@ export const Progress = ({
           style={[
             circleStyles.valueText,
             {
-              fontSize: circleSizes[size] <= 32 ? theme.primitive.fontSize.xs : theme.primitive.fontSize.sm,
+              fontSize:
+                circleSizes[size] <= 32
+                  ? theme.primitive.fontSize.xs
+                  : theme.primitive.fontSize.sm,
               fontWeight: theme.primitive.fontWeight.semibold,
               color: textColor,
             },

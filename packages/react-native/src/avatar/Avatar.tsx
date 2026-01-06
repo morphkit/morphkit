@@ -34,8 +34,8 @@ export const Avatar = ({
     const textSizeMap = {
       sm: theme.primitive.fontSize.xs,
       md: theme.primitive.fontSize.lg,
-      lg: theme.primitive.fontSize['2xl'],
-      xl: theme.primitive.fontSize['3xl'],
+      lg: theme.primitive.fontSize["2xl"],
+      xl: theme.primitive.fontSize["3xl"],
     };
 
     const containerStyles = [
@@ -44,7 +44,9 @@ export const Avatar = ({
         width: avatarSize,
         height: avatarSize,
         borderRadius: theme.component.avatar.borderRadius,
-        backgroundColor: !source ? theme.component.avatar.variant[colorScheme].background : undefined,
+        backgroundColor: !source
+          ? theme.component.avatar.variant[colorScheme].background
+          : undefined,
         opacity: pressed ? theme.semantic.state.pressed.opacity : 1,
       },
       style,

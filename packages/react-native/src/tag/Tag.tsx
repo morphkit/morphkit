@@ -70,7 +70,8 @@ export const Tag = ({
       minHeight: 20,
       gap: theme.primitive.spacing[1],
       fontSize: theme.primitive.fontSize.xs,
-      lineHeight: theme.primitive.fontSize.xs * theme.primitive.lineHeight.normal,
+      lineHeight:
+        theme.primitive.fontSize.xs * theme.primitive.lineHeight.normal,
     },
     md: {
       paddingHorizontal: theme.component.tag.paddingHorizontal,
@@ -78,7 +79,8 @@ export const Tag = ({
       minHeight: 24,
       gap: theme.component.tag.gap,
       fontSize: theme.component.tag.fontSize,
-      lineHeight: theme.component.tag.fontSize * theme.primitive.lineHeight.normal,
+      lineHeight:
+        theme.component.tag.fontSize * theme.primitive.lineHeight.normal,
     },
     lg: {
       paddingHorizontal: theme.primitive.spacing[2.5],
@@ -86,7 +88,8 @@ export const Tag = ({
       minHeight: 32,
       gap: theme.primitive.spacing[2],
       fontSize: theme.primitive.fontSize.md,
-      lineHeight: theme.primitive.fontSize.md * theme.primitive.lineHeight.relaxed,
+      lineHeight:
+        theme.primitive.fontSize.md * theme.primitive.lineHeight.relaxed,
     },
   };
   const sizeTokens = sizeMap[size];

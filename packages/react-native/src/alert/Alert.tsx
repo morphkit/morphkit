@@ -55,13 +55,15 @@ export const Alert = ({
     >
       <View style={baseStyles.iconContainer}>
         {typeof defaultIcon === "string" ? (
-          <Text style={[
-            baseStyles.iconText,
-            {
-              color: variantColors.icon,
-              fontSize: theme.component.alert.iconSize,
-            }
-          ]}>
+          <Text
+            style={[
+              baseStyles.iconText,
+              {
+                color: variantColors.icon,
+                fontSize: theme.component.alert.iconSize,
+              },
+            ]}
+          >
             {defaultIcon}
           </Text>
         ) : (
@@ -70,25 +72,33 @@ export const Alert = ({
       </View>
 
       <View style={[baseStyles.content, { gap: theme.primitive.spacing[1] }]}>
-        <Text style={[
-          baseStyles.title,
-          {
-            color: variantColors.text,
-            fontSize: theme.primitive.fontSize.base,
-            lineHeight: theme.primitive.fontSize.base * theme.primitive.lineHeight.normal,
-          }
-        ]}>
+        <Text
+          style={[
+            baseStyles.title,
+            {
+              color: variantColors.text,
+              fontSize: theme.primitive.fontSize.base,
+              lineHeight:
+                theme.primitive.fontSize.base *
+                theme.primitive.lineHeight.normal,
+            },
+          ]}
+        >
           {title}
         </Text>
         {description && (
-          <Text style={[
-            baseStyles.description,
-            {
-              color: variantColors.text,
-              fontSize: theme.primitive.fontSize.md,
-              lineHeight: theme.primitive.fontSize.md * theme.primitive.lineHeight.normal,
-            }
-          ]}>
+          <Text
+            style={[
+              baseStyles.description,
+              {
+                color: variantColors.text,
+                fontSize: theme.primitive.fontSize.md,
+                lineHeight:
+                  theme.primitive.fontSize.md *
+                  theme.primitive.lineHeight.normal,
+              },
+            ]}
+          >
             {description}
           </Text>
         )}
@@ -102,13 +112,15 @@ export const Alert = ({
           hitSlop={theme.primitive.spacing[2]}
           style={baseStyles.dismissButton}
         >
-          <Text style={[
-            baseStyles.dismissIcon,
-            {
-              color: variantColors.text,
-              fontSize: theme.component.alert.iconSize,
-            }
-          ]}>
+          <Text
+            style={[
+              baseStyles.dismissIcon,
+              {
+                color: variantColors.text,
+                fontSize: theme.component.alert.iconSize,
+              },
+            ]}
+          >
             ×
           </Text>
         </Pressable>

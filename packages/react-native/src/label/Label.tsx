@@ -53,7 +53,12 @@ export const Label = ({
     <Text style={labelStyles} {...props}>
       {children}
       {required && (
-        <Text style={[baseStyles.asterisk, { color: theme.component.label.variant[colorScheme].required }]}>
+        <Text
+          style={[
+            baseStyles.asterisk,
+            { color: theme.component.label.variant[colorScheme].required },
+          ]}
+        >
           {" "}
           *
         </Text>

@@ -67,9 +67,10 @@ export const Input = forwardRef<TextInput, InputProps>(
       height: sizeTokens.height,
       borderWidth: variant === "outline" ? 1 : 0,
       borderColor: containerBorderColor,
-      backgroundColor: variant === "outline"
-        ? variantTokens.default.background
-        : theme.semantic.colors.surface.tertiary,
+      backgroundColor:
+        variant === "outline"
+          ? variantTokens.default.background
+          : theme.semantic.colors.surface.tertiary,
       paddingHorizontal: sizeTokens.padding,
       opacity: disabled ? theme.semantic.state.disabled.opacity : 1,
     };
@@ -82,26 +83,30 @@ export const Input = forwardRef<TextInput, InputProps>(
     return (
       <View style={style}>
         {label && (
-          <Text style={[
-            baseStyles.label,
-            {
-              color: theme.semantic.colors.text.secondary,
-              fontSize: theme.component.label.fontSize,
-              fontWeight: theme.component.label.fontWeight,
-              marginBottom: theme.component.label.marginBottom,
-            }
-          ]}>
+          <Text
+            style={[
+              baseStyles.label,
+              {
+                color: theme.semantic.colors.text.secondary,
+                fontSize: theme.component.label.fontSize,
+                fontWeight: theme.component.label.fontWeight,
+                marginBottom: theme.component.label.marginBottom,
+              },
+            ]}
+          >
             {label}
           </Text>
         )}
-        <View style={[
-          baseStyles.inputContainer,
-          {
-            borderRadius: sizeTokens.borderRadius,
-            gap: theme.primitive.spacing[2],
-          },
-          containerStyles,
-        ]}>
+        <View
+          style={[
+            baseStyles.inputContainer,
+            {
+              borderRadius: sizeTokens.borderRadius,
+              gap: theme.primitive.spacing[2],
+            },
+            containerStyles,
+          ]}
+        >
           {prefixIcon && <View style={baseStyles.icon}>{prefixIcon}</View>}
           <TextInput
             ref={ref}
@@ -134,7 +139,7 @@ export const Input = forwardRef<TextInput, InputProps>(
                 color: theme.semantic.colors.status.error.main,
                 fontSize: theme.primitive.fontSize.sm,
                 marginTop: theme.primitive.spacing[1],
-              }
+              },
             ]}
             accessibilityLiveRegion="polite"
           >

@@ -5,17 +5,17 @@ export const fontSize = {
   base: 14,
   lg: 16,
   xl: 17,
-  '2xl': 20,
-  '3xl': 22,
-  '4xl': 28,
-  '5xl': 34,
+  "2xl": 20,
+  "3xl": 22,
+  "4xl": 28,
+  "5xl": 34,
 } as const;
 
 export const fontWeight = {
-  regular: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
+  regular: "400",
+  medium: "500",
+  semibold: "600",
+  bold: "700",
 } as const;
 
 export const lineHeight = {

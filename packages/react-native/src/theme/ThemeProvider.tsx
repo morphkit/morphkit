@@ -30,7 +30,7 @@ export const ThemeProvider = ({
 }: ThemeProviderProps) => {
   const deviceColorScheme = useDeviceColorScheme();
   const [colorScheme, setColorScheme] = useState<ColorScheme>(
-    initialColorScheme ?? deviceColorScheme ?? "light"
+    initialColorScheme ?? deviceColorScheme ?? "light",
   );
 
   useEffect(() => {

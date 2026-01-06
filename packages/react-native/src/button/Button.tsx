@@ -57,7 +57,10 @@ export const Button = ({
       isDisabled,
     );
 
-    const sizeTokens = theme.component.button.size[size === "none" ? "md" : size === "icon" ? "md" : size];
+    const sizeTokens =
+      theme.component.button.size[
+        size === "none" ? "md" : size === "icon" ? "md" : size
+      ];
 
     const containerStyles = [
       baseStyles.container,
@@ -65,12 +68,13 @@ export const Button = ({
         borderRadius: sizeTokens.borderRadius,
         borderWidth: variant === "secondary" ? 1 : 0,
       },
-      !isIconButton && size !== "none" && {
-        paddingHorizontal: sizeTokens.paddingHorizontal,
-        paddingVertical: sizeTokens.paddingVertical,
-        minHeight: sizeTokens.height,
-        gap: sizeTokens.gap,
-      },
+      !isIconButton &&
+        size !== "none" && {
+          paddingHorizontal: sizeTokens.paddingHorizontal,
+          paddingVertical: sizeTokens.paddingVertical,
+          minHeight: sizeTokens.height,
+          gap: sizeTokens.gap,
+        },
       isIconButton && {
         width: sizeTokens.height,
         height: sizeTokens.height,
@@ -91,7 +95,11 @@ export const Button = ({
           <>
             {iconLeft && !isIconButton && <View>{iconLeft}</View>}
             {!isIconButton && children && (
-              <Text style={[{ fontSize: sizeTokens.fontSize }, textThemeStyles]}>{children}</Text>
+              <Text
+                style={[{ fontSize: sizeTokens.fontSize }, textThemeStyles]}
+              >
+                {children}
+              </Text>
             )}
             {isIconButton && children && (
               <Text style={textThemeStyles}>{children}</Text>
@@ -143,7 +151,9 @@ const getThemeStyles = (
   switch (variant) {
     case "primary":
       return {
-        backgroundColor: pressed ? colors.action.primaryPressed : colors.action.primary,
+        backgroundColor: pressed
+          ? colors.action.primaryPressed
+          : colors.action.primary,
         borderColor: "transparent",
       };
     case "secondary":
@@ -153,15 +163,18 @@ const getThemeStyles = (
       };
     case "tonal":
       return {
-        backgroundColor: colorScheme === "light"
-          ? colors.status.info.surface
-          : colors.surface.tertiary,
+        backgroundColor:
+          colorScheme === "light"
+            ? colors.status.info.surface
+            : colors.surface.tertiary,
         borderColor: "transparent",
       };
     case "plain":
       return {
         backgroundColor: pressed
-          ? (colorScheme === "light" ? colors.surface.secondary : colors.surface.tertiary)
+          ? colorScheme === "light"
+            ? colors.surface.secondary
+            : colors.surface.tertiary
           : "transparent",
         borderColor: "transparent",
       };
