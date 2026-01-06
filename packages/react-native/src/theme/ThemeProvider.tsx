@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import { useColorScheme as useDeviceColorScheme } from "react-native";
+import { useFonts } from "expo-font";
 import { type Theme, type ColorScheme, themes } from "./theme";
 
 export interface ThemeContextValue {
@@ -21,13 +22,18 @@ export interface ThemeProviderProps {
   children: ReactNode;
   theme?: { light: Theme; dark: Theme };
   initialColorScheme?: ColorScheme;
+  fonts?: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  fontsLoadingFallback?: ReactNode;
 }
 
 export const ThemeProvider = ({
   children,
   theme: customTheme,
   initialColorScheme,
+  fonts,
+  fontsLoadingFallback,
 }: ThemeProviderProps) => {
+  const [fontsLoaded] = useFonts(fonts ?? {});
   const deviceColorScheme = useDeviceColorScheme();
   const [colorScheme, setColorScheme] = useState<ColorScheme>(
     initialColorScheme ?? deviceColorScheme ?? "light",
@@ -52,6 +58,10 @@ export const ThemeProvider = ({
     setColorScheme,
     toggleColorScheme,
   };
+
+  if (fonts && !fontsLoaded) {
+    return fontsLoadingFallback ?? null;
+  }
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
