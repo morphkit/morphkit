@@ -23,6 +23,21 @@ export const fab = {
     },
   },
   offset: primitive.spacing[4],
+  extended: {
+    minWidth: {
+      sm: 80,
+      md: 96,
+      lg: 112,
+    },
+    gap: primitive.spacing[2],
+    paddingHorizontal: primitive.spacing[4],
+    fontSize: primitive.fontSize.base,
+    fontWeight: primitive.fontWeight.semibold,
+  },
+  animation: {
+    duration: primitive.duration.fast,
+    spring: primitive.spring.default,
+  },
   variant: {
     light: {
       primary: {
@@ -35,6 +50,12 @@ export const fab = {
         icon: light.text.primary,
         shadow: primitive.shadowPresets.lg,
       },
+      disabled: {
+        opacity: primitive.opacity.disabled,
+      },
+      hover: {
+        opacity: primitive.opacity.hover,
+      },
     },
     dark: {
       primary: {
@@ -46,6 +67,12 @@ export const fab = {
         background: dark.surface.elevated,
         icon: dark.text.primary,
         shadow: primitive.shadowPresets.lg,
+      },
+      disabled: {
+        opacity: primitive.opacity.disabled,
+      },
+      hover: {
+        opacity: primitive.opacity.hover,
       },
     },
   },

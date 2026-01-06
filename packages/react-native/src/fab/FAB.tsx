@@ -55,8 +55,8 @@ export const FAB = ({
         useNativeDriver: true,
       }),
       Animated.timing(opacityValue, {
-        toValue: theme.semantic.state.hover.opacity,
-        duration: theme.primitive.duration.fast,
+        toValue: theme.component.fab.variant[colorScheme].hover.opacity,
+        duration: theme.component.fab.animation.duration,
         useNativeDriver: true,
       }),
     ]).start();
@@ -66,12 +66,12 @@ export const FAB = ({
     Animated.parallel([
       Animated.spring(scaleValue, {
         toValue: 1,
-        ...theme.primitive.spring.default,
+        ...theme.component.fab.animation.spring,
         useNativeDriver: true,
       }),
       Animated.timing(opacityValue, {
         toValue: 1,
-        duration: theme.primitive.duration.fast,
+        duration: theme.component.fab.animation.duration,
         useNativeDriver: true,
       }),
     ]).start();
@@ -99,35 +99,21 @@ export const FAB = ({
   const sizeTokens = theme.component.fab.size[size];
   const placementStyles = getPlacementStyles();
 
-  const extendedSizeMap = {
-    sm: {
-      height: sizeTokens.height,
-      borderRadius: sizeTokens.borderRadius,
-      minWidth: 80,
-    },
-    md: {
-      height: sizeTokens.height,
-      borderRadius: sizeTokens.borderRadius,
-      minWidth: 96,
-    },
-    lg: {
-      height: sizeTokens.height,
-      borderRadius: sizeTokens.borderRadius,
-      minWidth: 112,
-    },
-  };
-
   const containerStyles: ViewStyle = {
     ...baseStyles.container,
     backgroundColor: variantColors.background,
     width: isExtended ? undefined : sizeTokens.width,
     height: sizeTokens.height,
     borderRadius: sizeTokens.borderRadius,
-    minWidth: isExtended ? extendedSizeMap[size].minWidth : undefined,
-    ...theme.primitive.shadowPresets.lg,
+    minWidth: isExtended
+      ? theme.component.fab.extended.minWidth[size]
+      : undefined,
+    ...variantColors.shadow,
     ...placementStyles,
     flexDirection: isExtended ? ("row" as const) : undefined,
-    opacity: disabled ? theme.semantic.state.disabled.opacity : undefined,
+    opacity: disabled
+      ? theme.component.fab.variant[colorScheme].disabled.opacity
+      : undefined,
     shadowOpacity: disabled ? 0 : undefined,
     elevation: disabled ? 0 : undefined,
     ...(style as ViewStyle),
@@ -153,8 +139,8 @@ export const FAB = ({
           isExtended && {
             flexDirection: "row",
             alignItems: "center",
-            gap: theme.primitive.spacing[2],
-            paddingHorizontal: theme.primitive.spacing[4],
+            gap: theme.component.fab.extended.gap,
+            paddingHorizontal: theme.component.fab.extended.paddingHorizontal,
           },
         ]}
         {...props}
@@ -164,8 +150,8 @@ export const FAB = ({
           <Text
             style={[
               {
-                fontSize: theme.primitive.fontSize.base,
-                fontWeight: theme.primitive.fontWeight.semibold,
+                fontSize: theme.component.fab.extended.fontSize,
+                fontWeight: theme.component.fab.extended.fontWeight,
                 color: variantColors.icon,
               },
             ]}

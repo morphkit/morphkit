@@ -41,7 +41,7 @@ export const Progress = ({
   const progressColor =
     color ?? theme.component.progress.variant[colorScheme].fill;
   const trackColor = theme.component.progress.variant[colorScheme].track;
-  const textColor = theme.semantic.colors.text.secondary;
+  const textColor = theme.component.progress.variant[colorScheme].text;
 
   useEffect(() => {
     if (isIndeterminate) {
@@ -49,13 +49,13 @@ export const Progress = ({
         Animated.sequence([
           Animated.timing(animValue, {
             toValue: 1,
-            duration: theme.primitive.duration.slow,
+            duration: theme.component.progress.duration,
             easing: Easing.ease,
             useNativeDriver: false,
           }),
           Animated.timing(animValue, {
             toValue: 0,
-            duration: theme.primitive.duration.slow,
+            duration: theme.component.progress.duration,
             easing: Easing.ease,
             useNativeDriver: false,
           }),
@@ -128,9 +128,9 @@ export const Progress = ({
               barStyles.valueText,
               {
                 color: textColor,
-                marginTop: theme.primitive.spacing[2],
-                fontSize: theme.primitive.fontSize.xs,
-                fontWeight: theme.primitive.fontWeight.semibold,
+                marginTop: theme.component.progress.label.gap,
+                fontSize: theme.component.progress.label.fontSize.sm,
+                fontWeight: theme.component.progress.label.fontWeight,
               },
             ]}
           >
@@ -141,8 +141,9 @@ export const Progress = ({
     );
   }
 
-  const circleSize = circleSizes[size];
-  const strokeWidth = circleSize / 8;
+  const circleSize = theme.component.progress.circle.size[size];
+  const strokeWidth =
+    circleSize * theme.component.progress.circle.strokeWidthRatio;
   const radius = (circleSize - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = isIndeterminate
@@ -205,10 +206,10 @@ export const Progress = ({
             circleStyles.valueText,
             {
               fontSize:
-                circleSizes[size] <= 32
-                  ? theme.primitive.fontSize.xs
-                  : theme.primitive.fontSize.sm,
-              fontWeight: theme.primitive.fontWeight.semibold,
+                theme.component.progress.circle.size[size] <= 32
+                  ? theme.component.progress.label.fontSize.sm
+                  : theme.component.progress.label.fontSize.md,
+              fontWeight: theme.component.progress.label.fontWeight,
               color: textColor,
             },
           ]}
@@ -221,12 +222,6 @@ export const Progress = ({
 };
 
 Progress.displayName = "Progress";
-
-const circleSizes = {
-  sm: 32,
-  md: 48,
-  lg: 64,
-};
 
 const baseStyles = StyleSheet.create({
   container: {

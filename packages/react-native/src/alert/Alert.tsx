@@ -71,16 +71,18 @@ export const Alert = ({
         )}
       </View>
 
-      <View style={[baseStyles.content, { gap: theme.primitive.spacing[1] }]}>
+      <View
+        style={[baseStyles.content, { gap: theme.component.alert.contentGap }]}
+      >
         <Text
           style={[
             baseStyles.title,
             {
               color: variantColors.text,
-              fontSize: theme.primitive.fontSize.base,
+              fontSize: theme.component.alert.title.fontSize,
               lineHeight:
-                theme.primitive.fontSize.base *
-                theme.primitive.lineHeight.normal,
+                theme.component.alert.title.fontSize *
+                theme.component.alert.title.lineHeight,
             },
           ]}
         >
@@ -92,10 +94,10 @@ export const Alert = ({
               baseStyles.description,
               {
                 color: variantColors.text,
-                fontSize: theme.primitive.fontSize.md,
+                fontSize: theme.component.alert.description.fontSize,
                 lineHeight:
-                  theme.primitive.fontSize.md *
-                  theme.primitive.lineHeight.normal,
+                  theme.component.alert.description.fontSize *
+                  theme.component.alert.description.lineHeight,
               },
             ]}
           >
@@ -109,7 +111,7 @@ export const Alert = ({
           onPress={onDismiss}
           accessibilityRole="button"
           accessibilityLabel="Dismiss alert"
-          hitSlop={theme.primitive.spacing[2]}
+          hitSlop={theme.component.alert.dismissHitSlop}
           style={baseStyles.dismissButton}
         >
           <Text

@@ -30,7 +30,7 @@ export const Skeleton = ({
   const shimmerValue = useRef(new Animated.Value(0)).current;
   const [layoutWidth, setLayoutWidth] = useState(0);
 
-  const dimensions = getDefaultDimensions(variant);
+  const dimensions = theme.component.skeleton.defaultDimensions[variant];
   const finalWidth = width ?? dimensions.width;
   const finalHeight = height ?? dimensions.height;
 
@@ -38,12 +38,12 @@ export const Skeleton = ({
     Animated.loop(
       Animated.timing(shimmerValue, {
         toValue: 1,
-        duration: theme.primitive.duration.verySlow,
+        duration: theme.component.skeleton.duration,
         easing: Easing.ease,
         useNativeDriver: true,
       }),
     ).start();
-  }, [shimmerValue, theme]);
+  }, [shimmerValue, theme.component.skeleton.duration]);
 
   const translateX = shimmerValue.interpolate({
     inputRange: [0, 1],
@@ -80,18 +80,6 @@ export const Skeleton = ({
 };
 
 Skeleton.displayName = "Skeleton";
-
-const getDefaultDimensions = (variant: SkeletonVariant) => {
-  switch (variant) {
-    case "circle":
-      return { width: 40, height: 40 };
-    case "text":
-      return { width: "100%", height: 12 };
-    case "rect":
-    default:
-      return { width: "100%", height: 20 };
-  }
-};
 
 const getVariantStyles = (
   variant: SkeletonVariant,

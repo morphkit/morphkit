@@ -126,10 +126,10 @@ export const AccordionItem = ({
   useEffect(() => {
     Animated.timing(rotateAnim, {
       toValue: isExpanded ? 1 : 0,
-      duration: theme.primitive.duration.normal,
+      duration: theme.component.accordion.duration,
       useNativeDriver: true,
     }).start();
-  }, [isExpanded, rotateAnim, theme.primitive.duration.normal]);
+  }, [isExpanded, rotateAnim, theme.component.accordion.duration]);
 
   const handlePress = () => {
     if (isDisabled) return;
@@ -174,9 +174,9 @@ export const AccordionItem = ({
             padding: theme.component.accordion.padding,
           },
           pressed && {
-            backgroundColor: theme.semantic.colors.surface.tertiary,
+            backgroundColor: variantColors.header.pressed,
           },
-          isDisabled && { opacity: theme.semantic.state.disabled.opacity },
+          isDisabled && { opacity: variantColors.disabled.opacity },
         ]}
         accessibilityRole="button"
         accessibilityState={{ expanded: isExpanded, disabled: isDisabled }}
@@ -186,11 +186,11 @@ export const AccordionItem = ({
           style={[
             {
               flex: 1,
-              fontSize: theme.primitive.fontSize.lg,
-              fontWeight: theme.primitive.fontWeight.medium,
+              fontSize: theme.component.accordion.header.fontSize,
+              fontWeight: theme.component.accordion.header.fontWeight,
               color: variantColors.header.text,
             },
-            isDisabled && { opacity: theme.semantic.state.disabled.opacity },
+            isDisabled && { opacity: variantColors.disabled.opacity },
           ]}
         >
           {title}

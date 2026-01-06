@@ -27,16 +27,10 @@ export const Label = ({
 }: LabelProps) => {
   const { theme, colorScheme } = useTheme();
 
-  const sizeMap = {
-    sm: theme.primitive.fontSize.xs,
-    md: theme.component.label.fontSize,
-    lg: theme.primitive.fontSize.lg,
-  };
-
   const textColor = error
     ? theme.component.label.variant[colorScheme].required
     : theme.component.label.variant[colorScheme].text;
-  const fontSize = sizeMap[size];
+  const fontSize = theme.component.label.fontSize[size];
 
   const labelStyles: StyleProp<TextStyle> = [
     baseStyles.label,

@@ -8,6 +8,7 @@ export const radio = {
     lg: 24,
   },
   borderRadius: primitive.borderRadius.full,
+  borderWidth: 2,
   variant: {
     light: {
       checked: {

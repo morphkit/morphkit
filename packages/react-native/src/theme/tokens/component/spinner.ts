@@ -12,6 +12,7 @@ export const spinner = {
     md: 3,
     lg: 4,
   },
+  duration: primitive.duration.slow,
   variant: {
     light: {
       color: light.action.primary,

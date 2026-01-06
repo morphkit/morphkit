@@ -39,16 +39,20 @@ export const Typography = ({
   style,
   ...props
 }: TypographyProps) => {
-  const { theme } = useTheme();
+  const { theme, colorScheme } = useTheme();
 
   const textStyleKey = variantMap[
     variant
-  ] as keyof typeof theme.semantic.textStyles;
-  const textStyle = theme.semantic.textStyles[textStyleKey];
+  ] as keyof typeof theme.component.typography.styles;
+  const textStyle = theme.component.typography.styles[textStyleKey];
 
   return (
     <Text
-      style={[textStyle, { color: theme.semantic.colors.text.primary }, style]}
+      style={[
+        textStyle,
+        { color: theme.component.typography.variant[colorScheme].text },
+        style,
+      ]}
       {...props}
     >
       {children}

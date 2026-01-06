@@ -31,73 +31,73 @@ export const button = {
       iconSize: 24,
     },
   },
+  borderWidth: {
+    secondary: 1,
+    default: 0,
+  },
   variant: {
     light: {
-      solid: {
-        primary: {
-          background: light.action.primary,
-          text: light.text.inverse,
-        },
-        secondary: {
-          background: light.surface.tertiary,
-          text: light.text.primary,
-        },
+      primary: {
+        background: light.action.primary,
+        backgroundPressed: light.action.primaryPressed,
+        text: light.text.inverse,
+        border: "transparent",
       },
-      outline: {
-        primary: {
-          background: "transparent",
-          text: light.action.primary,
-          border: light.action.primary,
-        },
-        secondary: {
-          background: "transparent",
-          text: light.text.primary,
-          border: light.border.primary,
-        },
+      secondary: {
+        background: light.surface.primary,
+        backgroundPressed: light.surface.secondary,
+        text: light.text.primary,
+        border: light.border.primary,
       },
-      ghost: {
-        primary: {
-          background: "transparent",
-          text: light.action.primary,
-        },
-        secondary: {
-          background: "transparent",
-          text: light.text.primary,
-        },
+      tonal: {
+        background: light.status.info.surface,
+        backgroundPressed: light.surface.tertiary,
+        text: light.status.info.text,
+        border: "transparent",
+      },
+      plain: {
+        background: "transparent",
+        backgroundPressed: light.surface.secondary,
+        text: light.action.primary,
+        border: "transparent",
+      },
+      disabled: {
+        background: light.surface.tertiary,
+        text: light.text.disabled,
+        border: light.border.primary,
+        opacity: primitive.opacity.disabled,
       },
     },
     dark: {
-      solid: {
-        primary: {
-          background: dark.action.primary,
-          text: dark.text.inverse,
-        },
-        secondary: {
-          background: dark.surface.tertiary,
-          text: dark.text.primary,
-        },
+      primary: {
+        background: dark.action.primary,
+        backgroundPressed: dark.action.primaryPressed,
+        text: dark.text.inverse,
+        border: "transparent",
       },
-      outline: {
-        primary: {
-          background: "transparent",
-          text: dark.action.primary,
-          border: dark.action.primary,
-        },
-        secondary: {
-          background: "transparent",
-          text: dark.text.primary,
-          border: dark.border.primary,
-        },
+      secondary: {
+        background: dark.surface.primary,
+        backgroundPressed: dark.surface.secondary,
+        text: dark.text.primary,
+        border: dark.border.primary,
       },
-      ghost: {
-        primary: {
-          background: "transparent",
-          text: dark.action.primary,
-        },
-        secondary: {
-          background: "transparent",
-          text: dark.text.primary,
-        },
+      tonal: {
+        background: dark.status.info.surface,
+        backgroundPressed: dark.surface.tertiary,
+        text: dark.status.info.text,
+        border: "transparent",
+      },
+      plain: {
+        background: "transparent",
+        backgroundPressed: dark.surface.tertiary,
+        text: dark.action.primary,
+        border: "transparent",
+      },
+      disabled: {
+        background: dark.surface.tertiary,
+        text: dark.text.disabled,
+        border: dark.border.primary,
+        opacity: primitive.opacity.disabled,
       },
     },
   },

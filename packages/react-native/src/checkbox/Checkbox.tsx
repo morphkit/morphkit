@@ -64,6 +64,7 @@ export const Checkbox = forwardRef<View, CheckboxProps>(
         width: boxSize,
         height: boxSize,
         borderRadius: theme.component.checkbox.borderRadius,
+        borderWidth: theme.component.checkbox.borderWidth,
         borderColor:
           color && isCheckedOrIndeterminate ? color : variantColors.border,
         backgroundColor:
@@ -133,7 +134,6 @@ const baseStyles = StyleSheet.create({
     alignItems: "flex-start",
   },
   box: {
-    borderWidth: 2,
     justifyContent: "center",
     alignItems: "center",
   },

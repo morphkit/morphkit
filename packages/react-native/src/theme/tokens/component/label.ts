@@ -2,7 +2,11 @@ import * as primitive from "../primitive";
 import { light, dark } from "../semantic/colors";
 
 export const label = {
-  fontSize: primitive.fontSize.sm,
+  fontSize: {
+    sm: primitive.fontSize.xs,
+    md: primitive.fontSize.sm,
+    lg: primitive.fontSize.lg,
+  },
   fontWeight: primitive.fontWeight.medium,
   marginBottom: primitive.spacing[1.5],
   variant: {

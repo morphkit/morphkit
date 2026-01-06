@@ -6,6 +6,16 @@ export const alert = {
   borderRadius: primitive.borderRadius.md,
   gap: primitive.spacing[2],
   iconSize: 20,
+  contentGap: primitive.spacing[1],
+  dismissHitSlop: primitive.spacing[2],
+  title: {
+    fontSize: primitive.fontSize.base,
+    lineHeight: primitive.lineHeight.normal,
+  },
+  description: {
+    fontSize: primitive.fontSize.md,
+    lineHeight: primitive.lineHeight.normal,
+  },
   variant: {
     light: {
       success: {

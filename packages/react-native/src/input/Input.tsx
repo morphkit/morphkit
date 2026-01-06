@@ -57,22 +57,25 @@ export const Input = forwardRef<TextInput, InputProps>(
     const keyboardType = typeToKeyboard[type];
     const secureTextEntry = type === "password";
 
+    const styleVariantTokens =
+      variant === "outline" ? variantTokens.default : variantTokens.filled;
+
     const containerBorderColor = error
       ? variantTokens.error.border
       : isFocused
         ? variantTokens.focus.border
-        : variantTokens.default.border;
+        : styleVariantTokens.border;
 
     const containerStyles: ViewStyle = {
       height: sizeTokens.height,
-      borderWidth: variant === "outline" ? 1 : 0,
+      borderWidth: theme.component.input.borderWidth[variant],
       borderColor: containerBorderColor,
-      backgroundColor:
-        variant === "outline"
-          ? variantTokens.default.background
-          : theme.semantic.colors.surface.tertiary,
+      backgroundColor: styleVariantTokens.background,
       paddingHorizontal: sizeTokens.padding,
-      opacity: disabled ? theme.semantic.state.disabled.opacity : 1,
+      opacity:
+        disabled && "opacity" in variantTokens.disabled
+          ? variantTokens.disabled.opacity
+          : 1,
     };
 
     const handleBlur = () => {
@@ -87,8 +90,8 @@ export const Input = forwardRef<TextInput, InputProps>(
             style={[
               baseStyles.label,
               {
-                color: theme.semantic.colors.text.secondary,
-                fontSize: theme.component.label.fontSize,
+                color: variantTokens.label.text,
+                fontSize: theme.component.label.fontSize.md,
                 fontWeight: theme.component.label.fontWeight,
                 marginBottom: theme.component.label.marginBottom,
               },
@@ -102,7 +105,7 @@ export const Input = forwardRef<TextInput, InputProps>(
             baseStyles.inputContainer,
             {
               borderRadius: sizeTokens.borderRadius,
-              gap: theme.primitive.spacing[2],
+              gap: theme.component.input.gap,
             },
             containerStyles,
           ]}
@@ -136,9 +139,9 @@ export const Input = forwardRef<TextInput, InputProps>(
             style={[
               baseStyles.error,
               {
-                color: theme.semantic.colors.status.error.main,
-                fontSize: theme.primitive.fontSize.sm,
-                marginTop: theme.primitive.spacing[1],
+                color: variantTokens.error.text,
+                fontSize: theme.component.input.errorText.fontSize,
+                marginTop: theme.component.input.errorText.marginTop,
               },
             ]}
             accessibilityLiveRegion="polite"

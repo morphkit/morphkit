@@ -38,16 +38,20 @@ export const Badge = ({
   const badgeColors = colorMap[color];
 
   const getTextFontSize = () => {
-    if (displayCount.length >= 4) return theme.primitive.fontSize.xs * 0.75;
-    if (displayCount.length === 3) return theme.primitive.fontSize.xs * 0.75;
-    if (displayCount.length === 2) return theme.primitive.fontSize.xs * 0.83;
+    if (displayCount.length >= 4) return theme.component.badge.fontSize * 0.75;
+    if (displayCount.length === 3) return theme.component.badge.fontSize * 0.75;
+    if (displayCount.length === 2) return theme.component.badge.fontSize * 0.83;
     return theme.component.badge.fontSize;
   };
 
-  const getBadgePositioning = () => {
-    if (displayCount.length >= 3) return baseStyles.badgePosition3Digits;
-    if (displayCount.length === 2) return baseStyles.badgePosition2Digits;
-    return baseStyles.badgePosition1Digit;
+  const getBadgePositioning = (): ViewStyle => {
+    if (displayCount.length >= 3) {
+      return { right: theme.component.badge.position.right.threeDigits };
+    }
+    if (displayCount.length === 2) {
+      return { right: theme.component.badge.position.right.twoDigits };
+    }
+    return { right: theme.component.badge.position.right.oneDigit };
   };
 
   return (
@@ -67,6 +71,9 @@ export const Badge = ({
               backgroundColor: badgeColors.background,
               borderRadius: theme.component.badge.borderRadius,
               paddingHorizontal: theme.component.badge.paddingHorizontal,
+              top: theme.component.badge.position.top,
+              minWidth: theme.component.badge.dimensions.minWidth,
+              height: theme.component.badge.dimensions.height,
             },
             getBadgePositioning(),
           ]}
@@ -77,7 +84,7 @@ export const Badge = ({
               {
                 color: badgeColors.text,
                 fontSize: getTextFontSize(),
-                fontWeight: theme.primitive.fontWeight.semibold,
+                fontWeight: theme.component.badge.fontWeight,
               },
             ]}
           >
@@ -95,21 +102,9 @@ const baseStyles = StyleSheet.create({
   },
   badge: {
     position: "absolute",
-    top: -6,
-    minWidth: 20,
-    height: 20,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "flex-start",
-  },
-  badgePosition1Digit: {
-    right: -6,
-  },
-  badgePosition2Digits: {
-    right: -8,
-  },
-  badgePosition3Digits: {
-    right: -14,
   },
   badgeText: {},
 });

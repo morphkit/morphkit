@@ -137,6 +137,7 @@ export const RadioButton = forwardRef<View, RadioButtonProps>(
               width: circleSize,
               height: circleSize,
               borderRadius: theme.component.radio.borderRadius,
+              borderWidth: theme.component.radio.borderWidth,
               borderColor: variantColors.border,
             },
           ]}
@@ -169,7 +170,6 @@ const baseStyles = StyleSheet.create({
     alignItems: "center",
   },
   circle: {
-    borderWidth: 2,
     justifyContent: "center",
     alignItems: "center",
   },

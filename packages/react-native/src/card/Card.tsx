@@ -39,7 +39,6 @@ export const Card = ({
           borderColor: variantTokens.elevated.border,
           borderWidth: 0,
           ...variantTokens.elevated.shadow,
-          shadowColor: theme.primitive.shadowPresets.md.shadowColor,
         };
       case "outline":
         return {
@@ -47,17 +46,20 @@ export const Card = ({
           borderColor: variantTokens.outlined.border,
           borderWidth: 1,
           ...variantTokens.outlined.shadow,
-          shadowColor: theme.primitive.shadowPresets.sm.shadowColor,
         };
       case "ghost":
         return {
-          backgroundColor: theme.semantic.colors.surface.secondary,
+          backgroundColor: variantTokens.ghost.background,
+          borderColor: variantTokens.ghost.border,
           borderWidth: 0,
+          ...variantTokens.ghost.shadow,
         };
       case "filled":
         return {
-          backgroundColor: theme.semantic.colors.surface.tertiary,
+          backgroundColor: variantTokens.filled.background,
+          borderColor: variantTokens.filled.border,
           borderWidth: 0,
+          ...variantTokens.filled.shadow,
         };
     }
   };
@@ -78,7 +80,9 @@ export const Card = ({
         onPress={onPress}
         style={({ pressed }) => [
           ...cardStyles,
-          pressed && { opacity: theme.semantic.state.pressed.opacity },
+          pressed && {
+            opacity: theme.component.card.variant[colorScheme].pressed.opacity,
+          },
         ]}
         accessibilityRole="button"
         {...props}

@@ -156,11 +156,11 @@ export const TabsList = ({ children, style, ...props }: TabsListProps) => {
         context.orientation === "horizontal"
           ? {
               flexDirection: "row",
-              gap: theme.primitive.spacing[4],
+              gap: theme.component.tabs.horizontal.gap,
             }
           : {
               flexDirection: "column",
-              width: 200,
+              width: theme.component.tabs.width.vertical,
               gap: theme.component.tabs.gap,
             },
         style,
@@ -207,14 +207,14 @@ export const TabsTrigger = ({
       if (context.orientation === "horizontal") {
         return isActive
           ? {
-              borderBottomWidth: 2,
+              borderBottomWidth: theme.component.tabs.borderWidth.line,
               borderBottomColor: variantColors.tab.active.border,
             }
           : {};
       } else {
         return isActive
           ? {
-              borderLeftWidth: 3,
+              borderLeftWidth: theme.component.tabs.borderWidth.lineVertical,
               borderLeftColor: variantColors.tab.active.border,
             }
           : {};
@@ -228,9 +228,9 @@ export const TabsTrigger = ({
         backgroundColor: isActive
           ? variantColors.tab.active.background
           : variantColors.tab.inactive.background,
-        borderRadius: theme.primitive.borderRadius.md,
-        paddingHorizontal: theme.primitive.spacing[3],
-        paddingVertical: theme.primitive.spacing[2],
+        borderRadius: theme.component.tabs.borderRadius,
+        paddingHorizontal: theme.component.tabs.pill.paddingHorizontal,
+        paddingVertical: theme.component.tabs.pill.paddingVertical,
       };
     }
     return {};
@@ -238,10 +238,10 @@ export const TabsTrigger = ({
 
   const getTextColor = (): string => {
     if (context.variant === "filled" && isActive) {
-      return theme.semantic.colors.text.inverse;
+      return variantColors.filled.text;
     }
     if (context.variant === "pills" && isActive) {
-      return theme.semantic.colors.text.inverse;
+      return variantColors.pills.text;
     }
     return isActive
       ? variantColors.tab.active.text
@@ -257,14 +257,15 @@ export const TabsTrigger = ({
         context.orientation === "horizontal"
           ? {
               paddingVertical: theme.component.tabs.padding,
-              paddingHorizontal: theme.primitive.spacing[4],
+              paddingHorizontal:
+                theme.component.tabs.horizontal.paddingHorizontal,
             }
           : {
-              paddingVertical: theme.primitive.spacing[2.5],
+              paddingVertical: theme.component.tabs.vertical.paddingVertical,
               paddingHorizontal: theme.component.tabs.padding,
             },
         getVariantStyles(),
-        isDisabled && { opacity: theme.semantic.state.disabled.opacity },
+        isDisabled && { opacity: variantColors.disabled.opacity },
         style,
       ]}
       accessibilityRole="tab"
@@ -273,15 +274,15 @@ export const TabsTrigger = ({
     >
       <View style={styles.triggerContent}>
         {icon && (
-          <View style={{ marginRight: theme.primitive.spacing[2] }}>
+          <View style={{ marginRight: theme.component.tabs.iconMargin }}>
             {icon}
           </View>
         )}
         <Text
           style={[
             {
-              fontSize: theme.primitive.fontSize.base,
-              fontWeight: theme.primitive.fontWeight.medium,
+              fontSize: theme.component.tabs.label.fontSize,
+              fontWeight: theme.component.tabs.label.fontWeight,
               color: getTextColor(),
             },
           ]}
@@ -314,7 +315,10 @@ export const TabsContent = ({
 
   return (
     <View
-      style={[{ flex: 1, paddingTop: theme.primitive.spacing[4] }, style]}
+      style={[
+        { flex: 1, paddingTop: theme.component.tabs.content.paddingTop },
+        style,
+      ]}
       {...props}
     >
       {children}

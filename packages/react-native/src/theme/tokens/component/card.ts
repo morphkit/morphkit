@@ -22,6 +22,19 @@ export const card = {
         border: light.border.primary,
         shadow: primitive.shadowPresets.sm,
       },
+      ghost: {
+        background: light.surface.secondary,
+        border: "transparent",
+        shadow: primitive.shadowPresets.sm,
+      },
+      filled: {
+        background: light.surface.tertiary,
+        border: "transparent",
+        shadow: primitive.shadowPresets.md,
+      },
+      pressed: {
+        opacity: primitive.opacity.pressed,
+      },
     },
     dark: {
       default: {
@@ -38,6 +51,19 @@ export const card = {
         background: dark.surface.primary,
         border: dark.border.primary,
         shadow: primitive.shadowPresets.sm,
+      },
+      ghost: {
+        background: dark.surface.secondary,
+        border: "transparent",
+        shadow: primitive.shadowPresets.sm,
+      },
+      filled: {
+        background: dark.surface.tertiary,
+        border: "transparent",
+        shadow: primitive.shadowPresets.md,
+      },
+      pressed: {
+        opacity: primitive.opacity.pressed,
       },
     },
   },

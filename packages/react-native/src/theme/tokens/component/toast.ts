@@ -8,6 +8,18 @@ export const toast = {
   iconSize: 20,
   minWidth: 280,
   maxWidth: 400,
+  position: {
+    offset: primitive.spacing[12],
+    horizontal: primitive.spacing[4],
+  },
+  text: {
+    fontSize: primitive.fontSize.sm,
+    lineHeight: primitive.lineHeight.relaxed,
+  },
+  animation: {
+    spring: primitive.spring.gentle,
+    duration: primitive.duration.normal,
+  },
   variant: {
     light: {
       default: {

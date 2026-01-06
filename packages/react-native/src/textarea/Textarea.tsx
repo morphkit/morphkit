@@ -55,10 +55,10 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
     const [isFocused, setIsFocused] = useState(false);
     const [height, setHeight] = useState<number | undefined>(undefined);
 
-    const sizeTokens = theme.component.input.size[size];
-    const variantTokens = theme.component.input.variant[colorScheme];
+    const sizeTokens = theme.component.textarea.size[size];
+    const variantTokens = theme.component.textarea.variant[colorScheme];
 
-    const lineHeight = sizeTokens.fontSize * theme.primitive.lineHeight.relaxed;
+    const lineHeight = sizeTokens.fontSize * sizeTokens.lineHeight;
     const initialHeight = rows * lineHeight + sizeTokens.padding * 2;
 
     const borderColor = error
@@ -94,8 +94,8 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
             style={[
               baseStyles.label,
               {
-                color: theme.semantic.colors.text.secondary,
-                fontSize: theme.component.label.fontSize,
+                color: variantTokens.label.text,
+                fontSize: theme.component.label.fontSize.md,
                 fontWeight: theme.component.label.fontWeight,
                 marginBottom: theme.component.label.marginBottom,
               },
@@ -108,6 +108,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
           style={[
             baseStyles.textareaContainer,
             {
+              borderWidth: theme.component.textarea.borderWidth,
               borderColor,
               backgroundColor: variantTokens.default.background,
               borderRadius: sizeTokens.borderRadius,
@@ -115,7 +116,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
               paddingVertical: sizeTokens.padding,
               minHeight: autoResize ? initialHeight : undefined,
               height: autoResize ? height : initialHeight,
-              opacity: disabled ? theme.semantic.state.disabled.opacity : 1,
+              opacity: disabled ? variantTokens.disabled.opacity : 1,
             },
           ]}
         >
@@ -147,7 +148,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
           style={[
             baseStyles.footer,
             {
-              marginTop: theme.primitive.spacing[1],
+              marginTop: theme.component.textarea.footer.gap,
             },
           ]}
         >
@@ -156,8 +157,8 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
               style={[
                 baseStyles.error,
                 {
-                  color: theme.semantic.colors.status.error.main,
-                  fontSize: theme.primitive.fontSize.xs,
+                  color: variantTokens.error.text,
+                  fontSize: theme.component.textarea.errorText.fontSize,
                 },
               ]}
               accessibilityLiveRegion="polite"
@@ -170,9 +171,10 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
               style={[
                 baseStyles.count,
                 {
-                  color: theme.semantic.colors.text.secondary,
-                  fontSize: theme.primitive.fontSize.xs,
-                  marginLeft: theme.primitive.spacing[2],
+                  color: variantTokens.count.text,
+                  fontSize: theme.component.textarea.characterCount.fontSize,
+                  marginLeft:
+                    theme.component.textarea.characterCount.marginLeft,
                 },
               ]}
             >
@@ -189,9 +191,7 @@ Textarea.displayName = "Textarea";
 
 const baseStyles = StyleSheet.create({
   label: {},
-  textareaContainer: {
-    borderWidth: 1,
-  },
+  textareaContainer: {},
   textInput: {
     padding: 0,
     textAlignVertical: "top",

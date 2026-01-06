@@ -6,6 +6,19 @@ export const badge = {
   paddingVertical: primitive.spacing[1],
   borderRadius: primitive.borderRadius.full,
   fontSize: primitive.fontSize.xs,
+  fontWeight: primitive.fontWeight.semibold,
+  dimensions: {
+    minWidth: 20,
+    height: 20,
+  },
+  position: {
+    top: -6,
+    right: {
+      oneDigit: -6,
+      twoDigits: -8,
+      threeDigits: -14,
+    },
+  },
   variant: {
     light: {
       primary: {

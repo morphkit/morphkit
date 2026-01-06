@@ -43,30 +43,30 @@ export const Button = ({
   const isDisabled = disabled || loading;
 
   const renderContent = ({ pressed }: { pressed: boolean }) => {
-    const themeStyles = getThemeStyles(
-      theme,
-      colorScheme,
-      variant,
-      pressed,
-      isDisabled,
-    );
-    const textThemeStyles = getTextThemeStyles(
-      theme,
-      colorScheme,
-      variant,
-      isDisabled,
-    );
-
     const sizeTokens =
       theme.component.button.size[
         size === "none" ? "md" : size === "icon" ? "md" : size
       ];
+    const variantTokens = isDisabled
+      ? theme.component.button.variant[colorScheme].disabled
+      : theme.component.button.variant[colorScheme][variant];
+
+    const backgroundColor = isDisabled
+      ? variantTokens.background
+      : pressed && "backgroundPressed" in variantTokens
+        ? variantTokens.backgroundPressed
+        : variantTokens.background;
 
     const containerStyles = [
       baseStyles.container,
       {
+        backgroundColor,
+        borderColor: variantTokens.border,
         borderRadius: sizeTokens.borderRadius,
-        borderWidth: variant === "secondary" ? 1 : 0,
+        borderWidth:
+          variant === "secondary"
+            ? theme.component.button.borderWidth.secondary
+            : theme.component.button.borderWidth.default,
       },
       !isIconButton &&
         size !== "none" && {
@@ -80,29 +80,32 @@ export const Button = ({
         height: sizeTokens.height,
         borderRadius: sizeTokens.height / 2,
       },
-      themeStyles,
-      isDisabled && {
-        opacity: theme.semantic.state.disabled.opacity,
-      },
+      isDisabled &&
+        "opacity" in variantTokens && {
+          opacity: variantTokens.opacity,
+        },
       style,
     ];
 
     return (
       <View style={containerStyles}>
         {loading ? (
-          <ActivityIndicator color={textThemeStyles.color} size="small" />
+          <ActivityIndicator color={variantTokens.text} size="small" />
         ) : (
           <>
             {iconLeft && !isIconButton && <View>{iconLeft}</View>}
             {!isIconButton && children && (
               <Text
-                style={[{ fontSize: sizeTokens.fontSize }, textThemeStyles]}
+                style={{
+                  fontSize: sizeTokens.fontSize,
+                  color: variantTokens.text,
+                }}
               >
                 {children}
               </Text>
             )}
             {isIconButton && children && (
-              <Text style={textThemeStyles}>{children}</Text>
+              <Text style={{ color: variantTokens.text }}>{children}</Text>
             )}
             {iconRight && !isIconButton && <View>{iconRight}</View>}
           </>
@@ -131,86 +134,3 @@ const baseStyles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-const getThemeStyles = (
-  theme: ReturnType<typeof useTheme>["theme"],
-  colorScheme: "light" | "dark",
-  variant: ButtonVariant,
-  pressed: boolean,
-  isDisabled: boolean,
-) => {
-  const { colors } = theme.semantic;
-
-  if (isDisabled) {
-    return {
-      backgroundColor: colors.surface.tertiary,
-      borderColor: colors.border.primary,
-    };
-  }
-
-  switch (variant) {
-    case "primary":
-      return {
-        backgroundColor: pressed
-          ? colors.action.primaryPressed
-          : colors.action.primary,
-        borderColor: "transparent",
-      };
-    case "secondary":
-      return {
-        backgroundColor: colors.surface.primary,
-        borderColor: colors.border.primary,
-      };
-    case "tonal":
-      return {
-        backgroundColor:
-          colorScheme === "light"
-            ? colors.status.info.surface
-            : colors.surface.tertiary,
-        borderColor: "transparent",
-      };
-    case "plain":
-      return {
-        backgroundColor: pressed
-          ? colorScheme === "light"
-            ? colors.surface.secondary
-            : colors.surface.tertiary
-          : "transparent",
-        borderColor: "transparent",
-      };
-  }
-};
-
-const getTextThemeStyles = (
-  theme: ReturnType<typeof useTheme>["theme"],
-  colorScheme: "light" | "dark",
-  variant: ButtonVariant,
-  isDisabled: boolean,
-) => {
-  const { colors } = theme.semantic;
-
-  if (isDisabled) {
-    return {
-      color: colors.text.disabled,
-    };
-  }
-
-  switch (variant) {
-    case "primary":
-      return {
-        color: colors.text.inverse,
-      };
-    case "secondary":
-      return {
-        color: colors.text.primary,
-      };
-    case "tonal":
-      return {
-        color: colors.status.info.text,
-      };
-    case "plain":
-      return {
-        color: colors.action.primary,
-      };
-  }
-};

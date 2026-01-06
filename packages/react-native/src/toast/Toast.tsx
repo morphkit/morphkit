@@ -42,7 +42,7 @@ export const Toast = ({
     if (visible) {
       Animated.spring(slideValue, {
         toValue: 1,
-        ...theme.primitive.spring.gentle,
+        ...theme.component.toast.animation.spring,
         useNativeDriver: true,
       }).start();
 
@@ -54,7 +54,7 @@ export const Toast = ({
     } else {
       Animated.timing(slideValue, {
         toValue: 0,
-        duration: theme.primitive.duration.normal,
+        duration: theme.component.toast.animation.duration,
         useNativeDriver: true,
       }).start();
     }
@@ -80,21 +80,21 @@ export const Toast = ({
       style={[
         baseStyles.container,
         position === "top"
-          ? { top: theme.primitive.spacing[12] }
-          : { bottom: theme.primitive.spacing[12] },
+          ? { top: theme.component.toast.position.offset }
+          : { bottom: theme.component.toast.position.offset },
         {
-          left: theme.primitive.spacing[4],
-          right: theme.primitive.spacing[4],
+          left: theme.component.toast.position.horizontal,
+          right: theme.component.toast.position.horizontal,
           backgroundColor: variantColors.background,
           borderColor: variantColors.border,
           padding: theme.component.toast.padding,
           borderRadius: theme.component.toast.borderRadius,
           gap: theme.component.toast.gap,
-          shadowColor: theme.primitive.shadowPresets.lg.shadowColor,
-          shadowOffset: theme.primitive.shadowPresets.lg.offset,
-          shadowOpacity: theme.primitive.shadowPresets.lg.opacity,
-          shadowRadius: theme.primitive.shadowPresets.lg.radius,
-          elevation: theme.primitive.shadowPresets.lg.elevation,
+          shadowColor: variantColors.shadow.shadowColor,
+          shadowOffset: variantColors.shadow.offset,
+          shadowOpacity: variantColors.shadow.opacity,
+          shadowRadius: variantColors.shadow.radius,
+          elevation: variantColors.shadow.elevation,
           transform: [{ translateY }],
           opacity: slideValue,
         },
@@ -120,9 +120,10 @@ export const Toast = ({
           baseStyles.message,
           {
             color: variantColors.text,
-            fontSize: theme.primitive.fontSize.sm,
+            fontSize: theme.component.toast.text.fontSize,
             lineHeight:
-              theme.primitive.fontSize.sm * theme.primitive.lineHeight.relaxed,
+              theme.component.toast.text.fontSize *
+              theme.component.toast.text.lineHeight,
           },
         ]}
       >

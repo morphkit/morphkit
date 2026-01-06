@@ -36,12 +36,12 @@ export const Spinner = ({
     Animated.loop(
       Animated.timing(spinValue, {
         toValue: 1,
-        duration: theme.primitive.duration.slow,
+        duration: theme.component.spinner.duration,
         easing: Easing.linear,
         useNativeDriver: true,
       }),
     ).start();
-  }, [spinValue, theme]);
+  }, [spinValue, theme.component.spinner.duration]);
 
   const spin = spinValue.interpolate({
     inputRange: [0, 1],

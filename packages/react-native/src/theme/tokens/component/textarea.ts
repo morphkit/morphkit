@@ -1,35 +1,37 @@
 import * as primitive from "../primitive";
 import { light, dark } from "../semantic/colors";
 
-export const input = {
+export const textarea = {
   size: {
     sm: {
-      height: 36,
       fontSize: primitive.fontSize.sm,
       padding: primitive.spacing[2],
       borderRadius: primitive.borderRadius.md,
+      lineHeight: primitive.lineHeight.relaxed,
     },
     md: {
-      height: 44,
       fontSize: primitive.fontSize.base,
       padding: primitive.spacing[3],
       borderRadius: primitive.borderRadius.md,
+      lineHeight: primitive.lineHeight.relaxed,
     },
     lg: {
-      height: 52,
       fontSize: primitive.fontSize.lg,
       padding: primitive.spacing[4],
       borderRadius: primitive.borderRadius.md,
+      lineHeight: primitive.lineHeight.relaxed,
     },
   },
-  gap: primitive.spacing[2],
-  borderWidth: {
-    outline: 1,
-    filled: 0,
+  borderWidth: 1,
+  footer: {
+    gap: primitive.spacing[1],
+  },
+  characterCount: {
+    fontSize: primitive.fontSize.xs,
+    marginLeft: primitive.spacing[2],
   },
   errorText: {
-    fontSize: primitive.fontSize.sm,
-    marginTop: primitive.spacing[1],
+    fontSize: primitive.fontSize.xs,
   },
   variant: {
     light: {
@@ -38,12 +40,6 @@ export const input = {
         text: light.text.primary,
         placeholder: light.text.tertiary,
         border: light.border.primary,
-      },
-      filled: {
-        background: light.surface.tertiary,
-        text: light.text.primary,
-        placeholder: light.text.tertiary,
-        border: "transparent",
       },
       focus: {
         border: light.border.focus,
@@ -61,6 +57,9 @@ export const input = {
       label: {
         text: light.text.secondary,
       },
+      count: {
+        text: light.text.secondary,
+      },
     },
     dark: {
       default: {
@@ -68,12 +67,6 @@ export const input = {
         text: dark.text.primary,
         placeholder: dark.text.tertiary,
         border: dark.border.primary,
-      },
-      filled: {
-        background: dark.surface.tertiary,
-        text: dark.text.primary,
-        placeholder: dark.text.tertiary,
-        border: "transparent",
       },
       focus: {
         border: dark.border.focus,
@@ -89,6 +82,9 @@ export const input = {
         opacity: primitive.opacity.disabled,
       },
       label: {
+        text: dark.text.secondary,
+      },
+      count: {
         text: dark.text.secondary,
       },
     },

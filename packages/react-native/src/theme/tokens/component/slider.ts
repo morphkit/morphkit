@@ -8,6 +8,7 @@ export const slider = {
     md: 20,
     lg: 24,
   },
+  thumbBorderWidth: 2,
   variant: {
     light: {
       track: {

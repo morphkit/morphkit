@@ -8,6 +8,7 @@ export const checkbox = {
     lg: 24,
   },
   borderRadius: primitive.borderRadius.sm,
+  borderWidth: 2,
   variant: {
     light: {
       checked: {
