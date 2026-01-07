@@ -297,14 +297,28 @@ packages/react-native-flows/src/{flow-name}/
 **For each screen**, create a `.tsx` file following this template:
 
 ```typescript
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * PRODUCTION NOTE: Remove the eslint-disable comment above when implementing
+ * this flow. It exists only because handler functions are empty templates.
+ * Once you implement the handlers and use all variables, this comment should be deleted.
+ */
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Input, Button, Container } from "@warp-ui/react-native";
+import {
+  Typography,
+  Input,
+  Button,
+  Container,
+  Stack,
+  useTheme,
+} from "@warp-ui/react-native";
 import { handleLogin, LoginCredentials } from "../handlers/auth-handlers";
 
 export default function Login() {
   const router = useRouter();
+  const { theme } = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -319,28 +333,31 @@ export default function Login() {
 
   return (
     <Container>
-      <View style={styles.container}>
+      <Stack
+        gap={theme.primitive.spacing[6]}
+        style={[styles.container, { padding: theme.primitive.spacing[6] }]}
+      >
         <Typography variant="title-1">Welcome Back</Typography>
         <Input
+          type="email"
           value={email}
           onChange={setEmail}
           placeholder="Email"
-          keyboardType="email-address"
           autoCapitalize="none"
         />
         <Input
+          type="password"
           value={password}
           onChange={setPassword}
           placeholder="Password"
-          secureTextEntry
         />
-        <Button onPress={onLogin} variant="primary">
+        <Button size="lg" onPress={onLogin}>
           Log In
         </Button>
-        <Button onPress={navigateToSignup} variant="plain">
+        <Button variant="plain" onPress={navigateToSignup}>
           Sign up
         </Button>
-      </View>
+      </Stack>
     </Container>
   );
 }
@@ -348,8 +365,6 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
-    gap: 16,
     justifyContent: "center",
   },
 });
@@ -358,10 +373,43 @@ const styles = StyleSheet.create({
 **Create layout file** (`_layout.tsx`):
 
 ```typescript
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Button, useTheme } from "@warp-ui/react-native";
 
 export default function AuthLayout() {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  const router = useRouter();
+  const { theme, colorScheme } = useTheme();
+
+  const iconColor = theme.component.button.variant[colorScheme].tonal.text;
+  const iconSize = theme.component.button.size.md.iconSize;
+
+  const renderBackButton = ({ canGoBack }: { canGoBack?: boolean }) =>
+    canGoBack ? (
+      <Button size="icon" variant="tonal" onPress={() => router.back()}>
+        <Ionicons name="chevron-back" size={iconSize} color={iconColor} />
+      </Button>
+    ) : null;
+
+  return (
+    <Stack
+      screenOptions={{
+        animation: "slide_from_right",
+        gestureEnabled: true,
+        headerStyle: {
+          backgroundColor: "transparent",
+        },
+        headerShadowVisible: false,
+        headerTintColor: iconColor,
+        headerTitle: "",
+        headerBackVisible: false,
+      }}
+    >
+      <Stack.Screen name="welcome" options={{ headerShown: false }} />
+      <Stack.Screen name="login" options={{ headerLeft: renderBackButton }} />
+      <Stack.Screen name="signup" options={{ headerLeft: renderBackButton }} />
+    </Stack>
+  );
 }
 ```
 
@@ -511,6 +559,150 @@ Use component variants and props for styling:
 <Input variant="filled">
 ```
 
+## Code Quality Standards
+
+All generated flow code must follow these strict quality standards:
+
+### Theme Tokens (Required)
+
+**✅ DO:**
+- Import `useTheme` from @warp-ui/react-native in every screen file
+- Use `theme.primitive.spacing[n]` for all spacing values
+- Use theme tokens for colors (iconColor, text colors)
+- Apply padding/margins via inline styles with theme tokens
+- Use Stack component for vertical layouts with theme-based gap
+
+**❌ DON'T:**
+- Hardcode numeric values: `gap={24}`, `padding: 24`
+- Hardcode colors: `"#000"`, `"#fff"`
+- Put spacing values in StyleSheet.create()
+
+**Spacing reference:**
+- 4px = `spacing[1]`
+- 12px = `spacing[3]`
+- 16px = `spacing[4]`
+- 24px = `spacing[6]`
+
+**Example:**
+```typescript
+import { useTheme } from "@warp-ui/react-native";
+
+const { theme } = useTheme();
+
+<Stack
+  gap={theme.primitive.spacing[6]}
+  style={[styles.container, { padding: theme.primitive.spacing[6] }]}
+>
+```
+
+### Default Props (Required)
+
+**Never declare these default props:**
+- Stack: `direction="vertical"` (vertical is default)
+- Button: `variant="primary"` (primary is default)
+- Input: `type="text"` (text is default)
+- Typography: `variant="body"` (body is default)
+
+**Only declare non-default values:**
+- Stack: `direction="horizontal"` ✅
+- Button: `variant="secondary"`, `variant="tonal"`, `size="lg"` ✅
+- Input: `type="email"`, `type="password"` ✅
+- Typography: `variant="title-1"`, `variant="caption-1"` ✅
+
+### ESLint Comments (Required)
+
+Every screen file must start with:
+
+```typescript
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * PRODUCTION NOTE: Remove the eslint-disable comment above when implementing
+ * this flow. It exists only because handler functions are empty templates.
+ * Once you implement the handlers and use all variables, this comment should be deleted.
+ */
+```
+
+### TypeScript Patterns (Required)
+
+**✅ Concise useState:**
+```typescript
+const [error, setError] = useState<string>();
+const [loading, setLoading] = useState(false);
+```
+
+**❌ Verbose useState:**
+```typescript
+const [error, setError] = useState<string | undefined>(undefined);
+```
+
+### StyleSheet Patterns (Required)
+
+**✅ Static layout only:**
+```typescript
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  spacer: {
+    flex: 1,
+  },
+});
+```
+
+**❌ Don't include spacing/colors:**
+```typescript
+const styles = StyleSheet.create({
+  container: {
+    padding: 24,  // ❌ Use theme tokens instead
+    gap: 16,      // ❌ Use theme tokens instead
+  },
+});
+```
+
+### Component Usage (Required)
+
+**Use Stack for vertical layouts:**
+```typescript
+<Stack gap={theme.primitive.spacing[6]}>
+  <Typography variant="title-1">Title</Typography>
+  <Input />
+  <Button>Submit</Button>
+</Stack>
+```
+
+**Don't use View with gap:**
+```typescript
+// ❌ Wrong
+<View style={{ gap: 16 }}>
+```
+
+### Header Navigation (Required)
+
+**Custom back button in _layout.tsx:**
+```typescript
+import { Stack, useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Button, useTheme } from "@warp-ui/react-native";
+
+const { theme, colorScheme } = useTheme();
+const iconColor = theme.component.button.variant[colorScheme].tonal.text;
+const iconSize = theme.component.button.size.md.iconSize;
+
+const renderBackButton = ({ canGoBack }: { canGoBack?: boolean }) =>
+  canGoBack ? (
+    <Button size="icon" variant="tonal" onPress={() => router.back()}>
+      <Ionicons name="chevron-back" size={iconSize} color={iconColor} />
+    </Button>
+  ) : null;
+```
+
+**Key points:**
+- Use Button component with `size="icon"` and `variant="tonal"`
+- Pass icon as children (not via iconLeft prop)
+- Get colors and sizes from theme tokens
+- Apply to screens via `headerLeft: renderBackButton`
+
 ## Examples
 
 ### Example 1: Basic Auth Flow
@@ -540,14 +732,28 @@ packages/react-native-flows/src/auth/
 **Generated login.tsx** (excerpt):
 
 ```typescript
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * PRODUCTION NOTE: Remove the eslint-disable comment above when implementing
+ * this flow. It exists only because handler functions are empty templates.
+ * Once you implement the handlers and use all variables, this comment should be deleted.
+ */
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Input, Button, Container } from "@warp-ui/react-native";
+import {
+  Typography,
+  Input,
+  Button,
+  Container,
+  Stack,
+  useTheme,
+} from "@warp-ui/react-native";
 import { handleLogin, LoginCredentials } from "../handlers/auth-handlers";
 
 export default function Login() {
   const router = useRouter();
+  const { theme } = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -557,30 +763,34 @@ export default function Login() {
 
   return (
     <Container>
-      <View style={styles.container}>
+      <Stack
+        gap={theme.primitive.spacing[6]}
+        style={[styles.container, { padding: theme.primitive.spacing[6] }]}
+      >
         <Typography variant="title-1">Welcome Back</Typography>
         <Input
+          type="email"
           value={email}
           onChange={setEmail}
           placeholder="Email"
-          keyboardType="email-address"
+          autoCapitalize="none"
         />
         <Input
+          type="password"
           value={password}
           onChange={setPassword}
           placeholder="Password"
-          secureTextEntry
         />
-        <Button onPress={onLogin} variant="primary">
+        <Button size="lg" onPress={onLogin}>
           Log In
         </Button>
-      </View>
+      </Stack>
     </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 24, gap: 16, justifyContent: "center" },
+  container: { flex: 1, justifyContent: "center" },
 });
 ```
 
@@ -711,7 +921,16 @@ Before marking the flow creation as complete, verify:
 - [ ] ALL UI components from `@warp-ui/react-native`
 - [ ] Typography component used for all text
 - [ ] useRouter() for navigation
-- [ ] StyleSheet only for layout (no colors, borders, typography)
+- [ ] useTheme() hook imported and used in every screen file
+- [ ] All spacing uses theme tokens (no hardcoded values)
+- [ ] Stack component used for vertical layouts with theme-based gap
+- [ ] Padding/margins applied via inline styles with theme tokens
+- [ ] StyleSheet only for layout (no colors, borders, typography, spacing)
+- [ ] ESLint disable comment with production note at top of each screen
+- [ ] Concise useState types (no explicit undefined)
+- [ ] No default props declared (direction="vertical", variant="primary", type="text")
+- [ ] Custom Button back button in _layout.tsx using theme tokens
+- [ ] Explicit Stack.Screen definitions in _layout.tsx
 - [ ] All handlers extracted to handlers file
 - [ ] Handlers are empty with TypeScript signatures
 - [ ] Handler examples in comments show implementation pattern

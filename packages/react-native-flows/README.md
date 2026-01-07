@@ -5,6 +5,7 @@ Multi-screen user flow templates built with morph-ui components. Flows are desig
 ## Purpose
 
 This package provides ready-to-use flow templates for common multi-screen features:
+
 - Authentication (login, signup, password reset)
 - Onboarding (welcome, features, permissions)
 - Checkout (cart, shipping, payment)
@@ -14,6 +15,7 @@ This package provides ready-to-use flow templates for common multi-screen featur
 ## Philosophy
 
 Flows follow the shadcn/ui approach:
+
 - **Copy-paste friendly**: Copy flow files directly into your app
 - **Full control**: Modify, delete, or extend as needed
 - **Component-only**: Built exclusively with morph-ui components
@@ -110,11 +112,13 @@ Use the `create-flow` skill to generate flows from Figma designs:
 Flows use **only** morph-ui components. React Native UI components (Text, Button, TextInput) are forbidden.
 
 ✅ **Allowed**:
+
 ```typescript
 import { Typography, Button, Input } from "@warp-ui/react-native";
 ```
 
 ❌ **Forbidden**:
+
 ```typescript
 import { Text, Button, TextInput } from "react-native";
 ```
@@ -184,6 +188,7 @@ bun run format
 ## Contributing
 
 When adding new flows:
+
 1. Follow the established structure (variant directories, screen files, types)
 2. Use only morph-ui components (Stack, Box, Container for layout)
 3. Keep event handlers inline with TODO comments

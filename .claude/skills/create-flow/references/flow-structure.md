@@ -96,7 +96,7 @@ Multi-screen user flow templates built with morph-ui components. Flows are desig
 Copy the flow variant you need into your app:
 
 \`\`\`bash
-cp -r packages/react-native-flows/src/auth/default/* app/auth/
+cp -r packages/react-native-flows/src/auth/default/\* app/auth/
 \`\`\`
 
 Then implement the inline event handlers within each screen component according to your business logic.
@@ -172,12 +172,12 @@ Variant directories `/variant-name/` organize different implementations of the s
 
 Use kebab-case with descriptive names:
 
-| Good Names     | Poor Names  |
-| -------------- | ----------- |
-| `/default/`    | `/variant1/` |
-| `/with-phone/` | `/v2/`      |
-| `/with-social/`| `/new/`     |
-| `/simplified/` | `/alt/`     |
+| Good Names      | Poor Names   |
+| --------------- | ------------ |
+| `/default/`     | `/variant1/` |
+| `/with-phone/`  | `/v2/`       |
+| `/with-social/` | `/new/`      |
+| `/simplified/`  | `/alt/`      |
 
 ### Creating Variants
 
@@ -479,11 +479,11 @@ Copy the desired variant into your app:
 
 # For default variant
 
-cp -r packages/react-native-flows/src/auth/default/* app/auth/
+cp -r packages/react-native-flows/src/auth/default/\* app/auth/
 
 # For phone variant
 
-cp -r packages/react-native-flows/src/auth/with-phone/* app/auth/
+cp -r packages/react-native-flows/src/auth/with-phone/\* app/auth/
 \`\`\`
 
 ### Implementation Steps
@@ -494,27 +494,27 @@ cp -r packages/react-native-flows/src/auth/with-phone/* app/auth/
 
    \`\`\`typescript
    export default function LoginScreen() {
-     const [email, setEmail] = useState("");
-     const [password, setPassword] = useState("");
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
 
-     const handleLogin = async () => {
-       try {
-         const user = await authService.login({ email, password });
-         await authStore.setUser(user);
-         router.push("/home");
-       } catch (error) {
-         showErrorToast(error.message);
-       }
-     };
+   const handleLogin = async () => {
+   try {
+   const user = await authService.login({ email, password });
+   await authStore.setUser(user);
+   router.push("/home");
+   } catch (error) {
+   showErrorToast(error.message);
+   }
+   };
 
-     return (
-       <Container>
-         <Stack direction="vertical" spacing={16}>
-           <Input value={email} onChange={setEmail} />
-           <Button onPress={handleLogin}>Log In</Button>
-         </Stack>
-       </Container>
-     );
+   return (
+   <Container>
+   <Stack direction="vertical" spacing={16}>
+   <Input value={email} onChange={setEmail} />
+   <Button onPress={handleLogin}>Log In</Button>
+   </Stack>
+   </Container>
+   );
    }
    \`\`\`
 

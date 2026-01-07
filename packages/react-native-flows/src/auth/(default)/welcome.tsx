@@ -1,4 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-require-imports */
+/**
+ * PRODUCTION NOTE: Remove the eslint-disable comment above when implementing
+ * this flow. It exists only because handler functions are empty templates.
+ * Once you implement the handlers and use all variables, this comment should be deleted.
+ */
 import { View, Image, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -10,12 +15,14 @@ import {
   Stack,
   Box,
   Divider,
+  useTheme,
 } from "@warp-ui/react-native";
 
 type SocialProvider = "apple" | "google" | "facebook";
 
 export default function Welcome() {
   const router = useRouter();
+  const { theme } = useTheme();
   const [loading, setLoading] = useState<SocialProvider | null>(null);
 
   const handleSocialLogin = (provider: SocialProvider) => {};
@@ -26,17 +33,17 @@ export default function Welcome() {
 
   return (
     <Container>
-      <Stack direction="vertical" gap={24} style={styles.container}>
+      <Stack
+        gap={theme.primitive.spacing[6]}
+        style={[styles.container, { padding: theme.primitive.spacing[6] }]}
+      >
         <Box style={styles.centeredContent}>
-          <Stack direction="vertical" gap={24} align="center">
-            <Image
-              source={require("@/assets/icon.png")}
-              style={styles.logo}
-            />
+          <Stack gap={theme.primitive.spacing[6]} align="center">
+            <Image source={require("@/assets/icon.png")} style={styles.logo} />
             <Typography variant="title-1" style={styles.centeredText}>
               Sign up or log in to start exploring
             </Typography>
-            <Stack direction="vertical" gap={12} style={styles.fullWidth}>
+            <Stack gap={theme.primitive.spacing[3]} style={styles.fullWidth}>
               <Button
                 variant="secondary"
                 size="lg"
@@ -70,12 +77,16 @@ export default function Welcome() {
             </Stack>
           </Stack>
         </Box>
-        <Stack direction="horizontal" gap={16} align="center">
+        <Stack
+          direction="horizontal"
+          gap={theme.primitive.spacing[4]}
+          align="center"
+        >
           <Divider style={styles.divider} />
           <Typography variant="footnote">or</Typography>
           <Divider style={styles.divider} />
         </Stack>
-        <Button variant="primary" size="lg" onPress={handleContinueWithEmail}>
+        <Button size="lg" onPress={handleContinueWithEmail}>
           Continue with email
         </Button>
         <Typography variant="caption-1" style={styles.centeredText}>
@@ -89,7 +100,6 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
   },
   centeredContent: {
     flex: 1,

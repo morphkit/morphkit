@@ -1,4 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * PRODUCTION NOTE: Remove the eslint-disable comment above when implementing
+ * this flow. It exists only because handler functions are empty templates.
+ * Once you implement the handlers and use all variables, this comment should be deleted.
+ */
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -8,27 +13,25 @@ import {
   Button,
   Container,
   Stack,
+  useTheme,
 } from "@warp-ui/react-native";
 
 export default function Email() {
   const router = useRouter();
+  const { theme } = useTheme();
   const [email, setEmail] = useState("");
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string>();
   const [loading, setLoading] = useState(false);
-
-  const handleGoBack = () => {
-    router.back();
-  };
 
   const handleContinue = () => {};
 
   return (
     <Container>
-      <Stack direction="vertical" gap={24} style={styles.container}>
-        <Button variant="plain" size="sm" onPress={handleGoBack}>
-          ← Back
-        </Button>
-        <Stack direction="vertical" gap={16}>
+      <Stack
+        gap={theme.primitive.spacing[6]}
+        style={[styles.container, { padding: theme.primitive.spacing[6] }]}
+      >
+        <Stack gap={theme.primitive.spacing[4]}>
           <Typography variant="title-1">{"Let's start with email"}</Typography>
           <Input
             label="Email address"
@@ -41,12 +44,7 @@ export default function Email() {
           />
         </Stack>
         <View style={styles.spacer} />
-        <Button
-          variant="primary"
-          size="lg"
-          loading={loading}
-          onPress={handleContinue}
-        >
+        <Button size="lg" loading={loading} onPress={handleContinue}>
           Continue
         </Button>
       </Stack>
@@ -57,7 +55,6 @@ export default function Email() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
   },
   spacer: {
     flex: 1,

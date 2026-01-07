@@ -5,6 +5,7 @@ Default authentication flow with social login and email/password signup.
 ## Overview
 
 This flow provides a complete authentication experience with 4 screens:
+
 - Welcome screen with social login options (Apple, Google, Facebook)
 - Email input screen
 - Password creation screen with security requirements
@@ -17,12 +18,14 @@ This flow provides a complete authentication experience with 4 screens:
 Standard authentication flow with social login options and email/password fallback.
 
 **Screens**:
+
 - `welcome.tsx` - Entry point with social login buttons and email option
 - `email.tsx` - Email address collection
 - `password.tsx` - Password creation with security requirements
 - `name.tsx` - User name collection (first and last name)
 
 **Navigation Flow**:
+
 ```
 welcome
    ↓ "Continue with email"
@@ -92,13 +95,14 @@ cp -r packages/react-native-flows/src/auth/(default)/* app/auth/
 The handler functions are currently empty. Implement them according to your authentication service:
 
 **welcome.tsx**:
+
 ```typescript
 const handleSocialLogin = async (provider: SocialProvider) => {
   try {
     setLoading(provider);
     const result = await authService.socialLogin(provider);
     await authStore.setUser(result.user);
-    router.replace('/home');
+    router.replace("/home");
   } catch (error) {
     showErrorToast(error.message);
   } finally {
@@ -108,19 +112,20 @@ const handleSocialLogin = async (provider: SocialProvider) => {
 ```
 
 **email.tsx**:
+
 ```typescript
 const handleContinue = async () => {
   setError(undefined);
-  if (!email || !email.includes('@')) {
-    setError('Please enter a valid email address');
+  if (!email || !email.includes("@")) {
+    setError("Please enter a valid email address");
     return;
   }
   setLoading(true);
   try {
     await authService.checkEmailExists(email);
     router.push({
-      pathname: '/auth/password',
-      params: { email }
+      pathname: "/auth/password",
+      params: { email },
     });
   } catch (error) {
     setError(error.message);
@@ -131,28 +136,29 @@ const handleContinue = async () => {
 ```
 
 **password.tsx**:
+
 ```typescript
 const handleContinue = async () => {
   setError(undefined);
 
   if (password.length < 8) {
-    setError('Password must be at least 8 characters');
+    setError("Password must be at least 8 characters");
     return;
   }
   if (!/[A-Z]/.test(password)) {
-    setError('Password must contain an uppercase letter');
+    setError("Password must contain an uppercase letter");
     return;
   }
   if (!/[0-9]/.test(password)) {
-    setError('Password must contain a number');
+    setError("Password must contain a number");
     return;
   }
 
   setLoading(true);
   try {
     router.push({
-      pathname: '/auth/name',
-      params: { email }
+      pathname: "/auth/name",
+      params: { email },
     });
   } catch (error) {
     setError(error.message);
@@ -163,17 +169,18 @@ const handleContinue = async () => {
 ```
 
 **name.tsx**:
+
 ```typescript
 const handleFinish = async () => {
   setFirstNameError(undefined);
   setLastNameError(undefined);
 
   if (!firstName.trim()) {
-    setFirstNameError('First name is required');
+    setFirstNameError("First name is required");
     return;
   }
   if (!lastName.trim()) {
-    setLastNameError('Last name is required');
+    setLastNameError("Last name is required");
     return;
   }
 
@@ -183,10 +190,10 @@ const handleFinish = async () => {
       email,
       password,
       firstName,
-      lastName
+      lastName,
     });
     await authStore.setUser(user);
-    router.replace('/home');
+    router.replace("/home");
   } catch (error) {
     showErrorToast(error.message);
   } finally {
@@ -202,7 +209,7 @@ Create an authentication service to handle API calls:
 ```typescript
 // services/auth.ts
 export const authService = {
-  async socialLogin(provider: 'apple' | 'google' | 'facebook') {
+  async socialLogin(provider: "apple" | "google" | "facebook") {
     // Implement OAuth flow
   },
 
@@ -210,7 +217,12 @@ export const authService = {
     // Check if email is already registered
   },
 
-  async register(data: { email: string; password: string; firstName: string; lastName: string }) {
+  async register(data: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  }) {
     // Create new user account
   },
 };
@@ -294,17 +306,19 @@ Customize icon sizes and colors:
 **Recommended Approaches**:
 
 1. **Use Secure Storage**:
+
 ```typescript
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
 
 // Save password temporarily
-await SecureStore.setItemAsync('temp_password', password);
+await SecureStore.setItemAsync("temp_password", password);
 
 // Retrieve on final screen
-const password = await SecureStore.getItemAsync('temp_password');
+const password = await SecureStore.getItemAsync("temp_password");
 ```
 
 2. **Use Context Provider**:
+
 ```typescript
 // Create auth context
 const AuthContext = createContext();
@@ -315,21 +329,22 @@ setFormData({ email, password });
 ```
 
 3. **Progressive Registration**:
-Send data to backend after each step instead of collecting all data first.
+   Send data to backend after each step instead of collecting all data first.
 
 ### Token Storage
 
 Store authentication tokens securely:
 
 ```typescript
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
 
-await SecureStore.setItemAsync('auth_token', token);
+await SecureStore.setItemAsync("auth_token", token);
 ```
 
 ### OAuth Implementation
 
 For social login, use official libraries:
+
 - **Apple**: `expo-apple-authentication`
 - **Google**: `@react-native-google-signin/google-signin`
 - **Facebook**: `react-native-fbsdk-next`
@@ -348,15 +363,23 @@ const validateEmail = (email: string): boolean => {
 ### Password Validation
 
 ```typescript
-const validatePassword = (password: string): { isValid: boolean; message?: string } => {
+const validatePassword = (
+  password: string,
+): { isValid: boolean; message?: string } => {
   if (password.length < 8) {
-    return { isValid: false, message: 'Password must be at least 8 characters' };
+    return {
+      isValid: false,
+      message: "Password must be at least 8 characters",
+    };
   }
   if (!/[A-Z]/.test(password)) {
-    return { isValid: false, message: 'Password must contain an uppercase letter' };
+    return {
+      isValid: false,
+      message: "Password must contain an uppercase letter",
+    };
   }
   if (!/[0-9]/.test(password)) {
-    return { isValid: false, message: 'Password must contain a number' };
+    return { isValid: false, message: "Password must contain a number" };
   }
   return { isValid: true };
 };
