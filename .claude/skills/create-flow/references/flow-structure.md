@@ -14,13 +14,11 @@ packages/react-native-flows/
 ├── tsconfig.json             # TypeScript configuration
 ├── README.md                 # Package documentation
 └── src/
-    ├── index.ts              # Main exports (optional)
+    ├── index.ts              # Entry point (empty placeholder)
     ├── {flow-name}/          # One directory per flow
-    │   ├── ({variant})/      # Route group for each variant
+    │   ├── /{variant}/       # Variant directory
     │   │   ├── _layout.tsx   # Layout for this variant
-    │   │   └── {screen}.tsx  # Screen files
-    │   ├── handlers/         # Event handlers (empty functions)
-    │   │   └── {flow}-handlers.ts
+    │   │   └── {screen}.tsx  # Screen files with inline handlers
     │   ├── types.ts          # TypeScript type definitions
     │   └── README.md         # Flow documentation
     └── {another-flow}/
@@ -98,10 +96,10 @@ Multi-screen user flow templates built with morph-ui components. Flows are desig
 Copy the flow variant you need into your app:
 
 \`\`\`bash
-cp -r packages/react-native-flows/src/auth/(default)/\* app/(auth)/
+cp -r packages/react-native-flows/src/auth/default/* app/auth/
 \`\`\`
 
-Then implement the handlers in `handlers/{flow}-handlers.ts` according to your business logic.
+Then implement the inline event handlers within each screen component according to your business logic.
 
 ## Features
 
@@ -132,13 +130,11 @@ Each flow has its own directory with this structure:
 
 ```
 src/{flow-name}/
-├── ({variant})/              # Route group for each variant
+├── /{variant}/               # Variant directory
 │   ├── _layout.tsx          # Layout file
-│   ├── {screen-1}.tsx       # First screen
-│   ├── {screen-2}.tsx       # Second screen
+│   ├── {screen-1}.tsx       # First screen with inline handlers
+│   ├── {screen-2}.tsx       # Second screen with inline handlers
 │   └── ...                  # Additional screens
-├── handlers/                 # Event handlers directory
-│   └── {flow}-handlers.ts   # Handler functions
 ├── types.ts                  # Type definitions for this flow
 └── README.md                 # Flow documentation
 ```
@@ -147,49 +143,47 @@ src/{flow-name}/
 
 ```
 src/auth/
-├── (default)/                # Default variant with email/password
+├── /default/                 # Default variant with email/password
 │   ├── _layout.tsx
-│   ├── login.tsx
-│   ├── signup.tsx
-│   └── forgot-password.tsx
-├── (with-phone)/             # Alternative variant with phone number
+│   ├── login.tsx            # Login screen with inline handleLogin
+│   ├── signup.tsx           # Signup screen with inline handleSignup
+│   └── forgot-password.tsx  # Reset screen with inline handleReset
+├── /with-phone/              # Alternative variant with phone number
 │   ├── _layout.tsx
-│   ├── phone.tsx
-│   ├── verify-otp.tsx
-│   └── profile.tsx
-├── handlers/
-│   └── auth-handlers.ts
+│   ├── phone.tsx            # Phone input with inline handleSendOTP
+│   ├── verify-otp.tsx       # OTP verification with inline handleVerifyOTP
+│   └── profile.tsx          # Profile setup with inline handleSaveProfile
 ├── types.ts
 └── README.md
 ```
 
-## Route Groups (Variants)
+## Variants
 
-Route groups `(variant-name)/` allow multiple implementations of the same flow without affecting URLs.
+Variant directories `/variant-name/` organize different implementations of the same flow.
 
-### Why Use Route Groups?
+### Why Use Variants?
 
 - **Organization**: Keep related screens together
-- **Variants**: Support different implementations (email vs phone, simple vs advanced)
-- **Clean URLs**: `(auth)` doesn't appear in the URL path
+- **Multiple Implementations**: Support different implementations (email vs phone, simple vs advanced)
 - **Shared Layouts**: Each variant can have its own layout
+- **Flexibility**: Easy to add, remove, or modify variants
 
 ### Naming Variants
 
 Use kebab-case with descriptive names:
 
-| Good Names      | Poor Names   |
-| --------------- | ------------ |
-| `(default)`     | `(variant1)` |
-| `(with-phone)`  | `(v2)`       |
-| `(with-social)` | `(new)`      |
-| `(simplified)`  | `(alt)`      |
+| Good Names     | Poor Names  |
+| -------------- | ----------- |
+| `/default/`    | `/variant1/` |
+| `/with-phone/` | `/v2/`      |
+| `/with-social/`| `/new/`     |
+| `/simplified/` | `/alt/`     |
 
 ### Creating Variants
 
-1. Create directory with parentheses: `(variant-name)/`
+1. Create variant directory: `/variant-name/`
 2. Add `_layout.tsx` file
-3. Add screen files (`.tsx`)
+3. Add screen files (`.tsx`) with inline event handlers
 4. Update flow README documenting the variant
 
 ## Layout Files
@@ -260,29 +254,34 @@ Each screen is a separate `.tsx` file in the variant directory.
 ### Screen File Template
 
 ```typescript
-import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Input, Button, Container } from "@warp-ui/react-native";
-import { handleLogin, LoginCredentials } from "../handlers/auth-handlers";
+import { Typography, Input, Button, Container, Stack } from "@warp-ui/react-native";
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onLogin = () => {
-    const credentials: LoginCredentials = { email, password };
-    handleLogin(credentials);
+  const handleLogin = () => {
+    // TODO: Implement login logic
+    // Example:
+    // try {
+    //   const user = await authService.login({ email, password });
+    //   await authStore.setUser(user);
+    //   router.push("/home");
+    // } catch (error) {
+    //   showErrorToast(error.message);
+    // }
   };
 
   const navigateToSignup = () => {
-    router.push("/(auth)/signup");
+    router.push("/auth/signup");
   };
 
   return (
     <Container>
-      <View style={styles.container}>
+      <Stack direction="vertical" spacing={16} padding={24} align="center">
         <Typography variant="title-1">Welcome Back</Typography>
         <Typography variant="body">Please enter your credentials</Typography>
         <Input
@@ -298,25 +297,16 @@ export default function Login() {
           placeholder="Password"
           secureTextEntry
         />
-        <Button onPress={onLogin} variant="primary">
+        <Button onPress={handleLogin} variant="primary">
           Log In
         </Button>
         <Button onPress={navigateToSignup} variant="plain">
           Don't have an account? Sign up
         </Button>
-      </View>
+      </Stack>
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    gap: 16,
-    justifyContent: "center",
-  },
-});
 ```
 
 ### Screen Naming Convention
@@ -331,79 +321,65 @@ Screen files are named in kebab-case, matching the route:
 | OTP verification | `verify-otp.tsx`      | `/verify-otp`      |
 | Profile setup    | `profile-setup.tsx`   | `/profile-setup`   |
 
-## Handlers Directory
+## Inline Event Handlers
 
-Handlers contain empty functions with type signatures that developers implement.
+Event handlers are defined within screen components with TODO comments for implementation.
 
-### handlers/{flow}-handlers.ts
+### Handler Pattern
 
 ```typescript
-export interface LoginCredentials {
-  email: string;
-  password: string;
+export default function LoginScreen() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    // TODO: Implement login logic
+    // Example:
+    // try {
+    //   const user = await authService.login({ email, password });
+    //   await authStore.setUser(user);
+    //   router.push("/home");
+    // } catch (error) {
+    //   showErrorToast(error.message);
+    // }
+  };
+
+  const handleSocialLogin = (provider: "google" | "apple" | "facebook") => {
+    // TODO: Implement social login logic
+  };
+
+  return (
+    <Container>
+      <Stack direction="vertical" spacing={16} padding={24}>
+        <Input value={email} onChange={setEmail} placeholder="Email" />
+        <Input value={password} onChange={setPassword} placeholder="Password" secureTextEntry />
+        <Button onPress={handleLogin} variant="primary">Log In</Button>
+        <Button onPress={() => handleSocialLogin("google")} variant="secondary">
+          Continue with Google
+        </Button>
+      </Stack>
+    </Container>
+  );
 }
-
-export interface SignupData {
-  name: string;
-  email: string;
-  password: string;
-}
-
-export interface ResetPasswordData {
-  email: string;
-}
-
-export const handleLogin = (credentials: LoginCredentials): void => {
-  // Implementation left to developer
-  // Example:
-  // try {
-  //   const user = await authService.login(credentials);
-  //   await authStore.setUser(user);
-  //   router.push("/(app)/home");
-  // } catch (error) {
-  //   showErrorToast(error.message);
-  // }
-};
-
-export const handleSignup = (data: SignupData): void => {
-  // Implementation left to developer
-  // Example:
-  // try {
-  //   const user = await authService.signup(data);
-  //   await sendVerificationEmail(user.email);
-  //   router.push("/(auth)/verify-email");
-  // } catch (error) {
-  //   showErrorToast(error.message);
-  // }
-};
-
-export const handleResetPassword = (data: ResetPasswordData): void => {
-  // Implementation left to developer
-};
-
-export const handleSocialLogin = (
-  provider: "google" | "apple" | "facebook",
-): void => {
-  // Implementation left to developer
-};
 ```
 
 ### Handler Best Practices
 
 **Do**:
 
-- Export interfaces for all handler parameters
-- Use descriptive interface names
-- Provide example implementation in comments
-- Keep functions pure (no side effects in signature)
-- Use `void` return type for async operations developers will implement
+- Define handlers inline within screen components
+- Use descriptive handler names (handleLogin, handleSignup, handleVerify)
+- Include TODO comments with example implementation
+- Keep handlers focused on single actions
+- Access component state directly within handlers
 
 **Don't**:
 
-- Implement actual logic (leave empty)
-- Import external services or APIs
-- Add state management
-- Include navigation logic (leave in screens)
+- Create separate handler files
+- Implement actual business logic (leave as TODO)
+- Import external services or APIs in the template
+- Add complex state management in templates
 
 ## Types File
 
@@ -447,7 +423,7 @@ Each flow needs comprehensive documentation in `README.md`:
 
 ## Variants
 
-### Default (\`/(default)/\`)
+### Default (\`/default/\`)
 
 {Description of default variant}
 
@@ -465,7 +441,7 @@ login → signup → verify-email → home
 login → forgot-password → reset-success → login
 \`\`\`
 
-### With Phone Number (\`/(with-phone)/\`)
+### With Phone Number (\`/with-phone/\`)
 
 {Description of alternative variant}
 
@@ -503,29 +479,43 @@ Copy the desired variant into your app:
 
 # For default variant
 
-cp -r packages/react-native-flows/src/auth/(default)/\* app/(auth)/
+cp -r packages/react-native-flows/src/auth/default/* app/auth/
 
 # For phone variant
 
-cp -r packages/react-native-flows/src/auth/(with-phone)/\* app/(auth)/
+cp -r packages/react-native-flows/src/auth/with-phone/* app/auth/
 \`\`\`
 
 ### Implementation Steps
 
-1. **Implement Handlers**
+1. **Implement Inline Handlers**
 
-   Edit \`handlers/auth-handlers.ts\` to add your business logic:
+   Edit the TODO comments within each screen component to add your business logic:
 
    \`\`\`typescript
-   export const handleLogin = async (credentials: LoginCredentials): Promise<void> => {
-   try {
-   const user = await authService.login(credentials);
-   await authStore.setUser(user);
-   router.push("/(app)/home");
-   } catch (error) {
-   showErrorToast(error.message);
+   export default function LoginScreen() {
+     const [email, setEmail] = useState("");
+     const [password, setPassword] = useState("");
+
+     const handleLogin = async () => {
+       try {
+         const user = await authService.login({ email, password });
+         await authStore.setUser(user);
+         router.push("/home");
+       } catch (error) {
+         showErrorToast(error.message);
+       }
+     };
+
+     return (
+       <Container>
+         <Stack direction="vertical" spacing={16}>
+           <Input value={email} onChange={setEmail} />
+           <Button onPress={handleLogin}>Log In</Button>
+         </Stack>
+       </Container>
+     );
    }
-   };
    \`\`\`
 
 2. **Add State Management**
@@ -647,7 +637,7 @@ Flows use a **copy-paste model** inspired by shadcn/ui:
 Developers copy flows into their app's routing structure:
 
 ```bash
-cp -r packages/react-native-flows/src/auth/(default)/* app/(auth)/
+cp -r packages/react-native-flows/src/auth/default/* app/auth/
 ```
 ````
 
@@ -664,8 +654,7 @@ After copying:
 
 - `packages/react-native-flows/` - Root package
 - `src/{flow-name}/` - One directory per flow
-- `({variant})/` - Route groups for variants
-- `handlers/` - Empty handler functions
+- `/{variant}/` - Variant directories
 - `types.ts` - Type definitions
 - `README.md` - Documentation
 

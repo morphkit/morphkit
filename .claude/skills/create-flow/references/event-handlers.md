@@ -1,53 +1,56 @@
 # Event Handlers Guide
 
-Complete guide for extracting and structuring event handlers in flow templates.
+Complete guide for structuring inline event handlers in flow templates.
 
 ## Overview
 
-Event handlers are functions that contain business logic (API calls, data processing, state updates). In flow templates, handlers are **extracted to separate files** and left **empty with type signatures** for developers to implement.
+Event handlers are functions that contain business logic (API calls, data processing, state updates). In flow templates, handlers are **defined inline within screen components** with **TODO comments** for developers to implement.
 
-## Why Extract Handlers?
+## Why Inline Handlers?
 
 **Benefits**:
 
-- Separation of concerns (UI vs logic)
-- Easier to test business logic
-- Clear interface for what needs implementation
-- Developers see exactly what to implement
-- Type-safe contracts
+- Simpler structure (no separate files)
+- Easier to understand flow at a glance
+- Direct access to component state
+- Clear TODO markers show what needs implementation
+- Faster for developers to get started
 
-**Without Extraction** (❌):
-
-```typescript
-const onLogin = async () => {
-  // Business logic mixed with UI component
-  const response = await fetch("/api/login", {
-    method: "POST",
-    body: JSON.stringify({ email, password }),
-  });
-  // ... more logic
-};
-```
-
-**With Extraction** (✅):
+**Inline Handler Pattern** (✅):
 
 ```typescript
-// Screen file - just UI
-const onLogin = () => {
-  handleLogin({ email, password });
-};
+export default function LoginScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-// Handler file - business logic interface
-export const handleLogin = (credentials: LoginCredentials): void => {
-  // Implementation left to developer
-};
+  const handleLogin = () => {
+    // TODO: Implement login logic
+    // Example:
+    // try {
+    //   const user = await authService.login({ email, password });
+    //   await authStore.setUser(user);
+    //   router.push("/home");
+    // } catch (error) {
+    //   showErrorToast(error.message);
+    // }
+  };
+
+  return (
+    <Container>
+      <Stack direction="vertical" spacing={16}>
+        <Input value={email} onChange={setEmail} />
+        <Button onPress={handleLogin}>Log In</Button>
+      </Stack>
+    </Container>
+  );
+}
 ```
 
-## When to Extract Handlers
+## When to Define Handlers
 
-### Extract to Handlers
+### Create Handler Functions
 
-**Extract these to `handlers/{flow}-handlers.ts`**:
+**Define these as named handler functions**:
 
 ✅ **Form Submissions**
 
@@ -77,9 +80,9 @@ export const handleLogin = (credentials: LoginCredentials): void => {
 - File uploads
 - Push notification registration
 
-### Keep Inline
+### Keep as Simple Callbacks
 
-**Keep these in the screen component**:
+**Keep these as simple inline callbacks**:
 
 ❌ **Simple State Updates**
 
@@ -92,7 +95,7 @@ const [email, setEmail] = useState("");
 
 ```typescript
 const navigateToSignup = () => {
-  router.push("/(auth)/signup");
+  router.push("/auth/signup");
 };
 ```
 
@@ -110,82 +113,78 @@ const togglePasswordVisibility = () => {
 const isFormValid = email.length > 0 && password.length > 0;
 ```
 
-## Handler File Structure
+## Inline Handler Structure
 
-### File Location
+### Screen Component Pattern
 
-```
-src/{flow-name}/
-└── handlers/
-    └── {flow}-handlers.ts
-```
-
-Examples:
-
-- `src/auth/handlers/auth-handlers.ts`
-- `src/onboarding/handlers/onboarding-handlers.ts`
-- `src/checkout/handlers/checkout-handlers.ts`
-
-### File Template
+Handlers are defined within screen components:
 
 ```typescript
-// Type definitions at top
-export interface LoginCredentials {
-  email: string;
-  password: string;
+import { useState } from "react";
+import { useRouter } from "expo-router";
+import { Typography, Input, Button, Container, Stack } from "@warp-ui/react-native";
+
+export default function LoginScreen() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    // TODO: Implement login logic
+    // Example:
+    // try {
+    //   const user = await authService.login({ email, password });
+    //   await authStore.setUser(user);
+    //   router.push("/home");
+    // } catch (error) {
+    //   showErrorToast(error.message);
+    // }
+  };
+
+  const handleSocialLogin = (provider: "google" | "apple" | "facebook") => {
+    // TODO: Implement social login logic
+  };
+
+  const handleForgotPassword = () => {
+    // TODO: Implement forgot password logic
+    router.push("/auth/forgot-password");
+  };
+
+  return (
+    <Container>
+      <Stack direction="vertical" spacing={16} padding={24}>
+        <Typography variant="title-1">Welcome Back</Typography>
+
+        <Input
+          value={email}
+          onChange={setEmail}
+          placeholder="Email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+
+        <Input
+          value={password}
+          onChange={setPassword}
+          placeholder="Password"
+          secureTextEntry
+        />
+
+        <Button onPress={handleLogin} variant="primary">
+          Log In
+        </Button>
+
+        <Button onPress={() => handleSocialLogin("google")} variant="secondary">
+          Continue with Google
+        </Button>
+
+        <Button onPress={handleForgotPassword} variant="plain">
+          Forgot Password?
+        </Button>
+      </Stack>
+    </Container>
+  );
 }
-
-export interface SignupData {
-  name: string;
-  email: string;
-  password: string;
-  agreedToTerms: boolean;
-}
-
-export interface SocialProvider {
-  provider: "google" | "apple" | "facebook";
-  accessToken?: string;
-}
-
-// Handler functions below types
-export const handleLogin = (credentials: LoginCredentials): void => {
-  // Implementation left to developer
-  // Example:
-  // try {
-  //   const user = await authService.login(credentials);
-  //   await authStore.setUser(user);
-  //   router.push("/(app)/home");
-  // } catch (error) {
-  //   showErrorToast(error.message);
-  // }
-};
-
-export const handleSignup = (data: SignupData): void => {
-  // Implementation left to developer
-  // Example:
-  // try {
-  //   const user = await authService.signup(data);
-  //   await sendVerificationEmail(user.email);
-  //   router.push("/(auth)/verify-email");
-  // } catch (error) {
-  //   showErrorToast(error.message);
-  // }
-};
-
-export const handleSocialLogin = (social: SocialProvider): void => {
-  // Implementation left to developer
-};
-
-export const handleForgotPassword = (email: string): void => {
-  // Implementation left to developer
-};
-
-export const handleResetPassword = (
-  token: string,
-  newPassword: string,
-): void => {
-  // Implementation left to developer
-};
 ```
 
 ## Naming Conventions
