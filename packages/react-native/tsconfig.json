@@ -1,12 +1,8 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@repo/typescript-config/react-native.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
-    "jsx": "react-native",
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "module": "esnext"
+    "rootDir": "src"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
