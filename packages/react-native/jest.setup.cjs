@@ -9,3 +9,8 @@ global.cancelAnimationFrame = () => {};
 jest.mock("@expo/vector-icons", () => ({
   Ionicons: "Ionicons",
 }));
+
+jest.mock("expo-font", () => ({
+  useFonts: () => [true, null],
+  loadAsync: jest.fn(),
+}));

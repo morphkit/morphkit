@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react-native";
+import { render } from "../test-utils";
 import { Label } from "./Label";
 import { Text } from "react-native";
 

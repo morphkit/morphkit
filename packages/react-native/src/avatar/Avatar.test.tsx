@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent } from "../test-utils";
 import { Avatar } from "./Avatar";
 import { View, StyleSheet } from "react-native";
 
@@ -27,7 +27,7 @@ describe("<Avatar />", () => {
     expect(flatStyle).toMatchObject({
       width: 32,
       height: 32,
-      borderRadius: 16,
+      borderRadius: 999,
     });
   });
 
@@ -43,7 +43,7 @@ describe("<Avatar />", () => {
     expect(flatStyle).toMatchObject({
       width: 40,
       height: 40,
-      borderRadius: 20,
+      borderRadius: 999,
     });
   });
 
@@ -59,7 +59,7 @@ describe("<Avatar />", () => {
     expect(flatStyle).toMatchObject({
       width: 48,
       height: 48,
-      borderRadius: 24,
+      borderRadius: 999,
     });
   });
 
@@ -89,7 +89,7 @@ describe("<Avatar />", () => {
     });
     expect(container).toBeTruthy();
     const flatStyle = StyleSheet.flatten(container!.props.style);
-    expect(flatStyle).toMatchObject({ borderRadius: 20 });
+    expect(flatStyle).toMatchObject({ borderRadius: 999 });
   });
 
   test("calls onPress when pressed", () => {
@@ -139,7 +139,7 @@ describe("<Avatar />", () => {
     const { getByText } = render(<Avatar fallback="JD" />);
     const text = getByText("JD");
     expect(text.props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining({ color: "#333333" })]),
+      expect.arrayContaining([expect.objectContaining({ color: "#FFFFFF" })]),
     );
   });
 

@@ -1,5 +1,5 @@
 import { createRef } from "react";
-import { render } from "@testing-library/react-native";
+import { render } from "../test-utils";
 import { View } from "react-native";
 import { Slider } from "./Slider";
 

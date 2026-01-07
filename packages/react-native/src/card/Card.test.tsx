@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent } from "../test-utils";
 import { Card } from "./Card";
 import { Text, View, StyleSheet } from "react-native";
 
@@ -23,7 +23,7 @@ describe("<Card />", () => {
     const flatStyle = StyleSheet.flatten(cardView.props.style);
     expect(flatStyle).toMatchObject({
       backgroundColor: "#FFFFFF",
-      shadowColor: "#000000",
+      boxShadow: "0px 4px 8px 0px rgba(0, 0, 0, 0.3)",
     });
   });
 
@@ -96,8 +96,8 @@ describe("<Card />", () => {
     const cardView = views[0];
     const flatStyle = StyleSheet.flatten(cardView.props.style);
     expect(flatStyle).toMatchObject({
-      padding: 12,
-      borderRadius: 8,
+      padding: 16,
+      borderRadius: 12,
     });
   });
 
@@ -111,8 +111,8 @@ describe("<Card />", () => {
     const cardView = views[0];
     const flatStyle = StyleSheet.flatten(cardView.props.style);
     expect(flatStyle).toMatchObject({
-      padding: 20,
-      borderRadius: 16,
+      padding: 16,
+      borderRadius: 12,
     });
   });
 
@@ -171,8 +171,8 @@ describe("<Card />", () => {
     const cardView = views[0];
     const flatStyle = StyleSheet.flatten(cardView.props.style);
     expect(flatStyle).toMatchObject({
-      padding: 20,
-      borderRadius: 16,
+      padding: 16,
+      borderRadius: 12,
       borderWidth: 1,
       borderColor: "#E5E7EB",
     });

@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react-native";
+import { render } from "../test-utils";
 import { StyleSheet } from "react-native";
 import { Typography } from "./Typography";
 
@@ -15,7 +15,7 @@ describe("<Typography />", () => {
     expect(flatStyle).toMatchObject({
       fontSize: 17,
       fontWeight: "400",
-      color: "#000",
+      color: "#111827",
     });
   });
 
@@ -28,7 +28,7 @@ describe("<Typography />", () => {
     expect(flatStyle).toMatchObject({
       fontSize: 34,
       fontWeight: "400",
-      color: "#000",
+      color: "#111827",
     });
   });
 
@@ -41,7 +41,7 @@ describe("<Typography />", () => {
     expect(flatStyle).toMatchObject({
       fontSize: 11,
       fontWeight: "400",
-      color: "#000",
+      color: "#111827",
     });
   });
 

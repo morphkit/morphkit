@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent } from "../test-utils";
 import { Button } from "./Button";
 import { View } from "react-native";
 
@@ -25,7 +25,7 @@ describe("<Button />", () => {
     const element = getByText("Secondary");
     const flatStyle = StyleSheet.flatten(element.props.style);
     expect(flatStyle).toMatchObject({
-      color: "#333333",
+      color: "#111827",
     });
   });
 
@@ -34,7 +34,7 @@ describe("<Button />", () => {
     const element = getByText("Tonal");
     const flatStyle = StyleSheet.flatten(element.props.style);
     expect(flatStyle).toMatchObject({
-      color: "#1565C0",
+      color: "#0C4A6E",
     });
   });
 

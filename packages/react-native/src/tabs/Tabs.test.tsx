@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent } from "../test-utils";
 import { Text, View, StyleSheet } from "react-native";
 import { TabsContainer, TabsList, TabsTrigger, TabsContent } from "./Tabs";
 
@@ -136,7 +136,7 @@ describe("Tabs", () => {
       );
       const activeTab = getAllByRole("tab")[0];
       const styles = StyleSheet.flatten(activeTab.props.style);
-      expect(styles.borderRadius).toBe(10);
+      expect(styles.borderRadius).toBe(8);
       expect(styles.backgroundColor).toBeTruthy();
     });
 
@@ -351,8 +351,8 @@ describe("Tabs", () => {
       const activeStyles = StyleSheet.flatten(activeTab.props.style);
       const inactiveStyles = StyleSheet.flatten(inactiveTab.props.style);
 
-      expect(activeStyles.borderRadius).toBe(10);
-      expect(inactiveStyles.borderRadius).toBe(10);
+      expect(activeStyles.borderRadius).toBe(8);
+      expect(inactiveStyles.borderRadius).toBe(8);
       expect(activeStyles.backgroundColor).toBeTruthy();
       expect(inactiveStyles.backgroundColor).toBeTruthy();
     });
@@ -409,7 +409,7 @@ describe("Tabs", () => {
       expect(trigger.props.accessibilityState.disabled).toBe(true);
 
       const styles = StyleSheet.flatten(trigger.props.style);
-      expect(styles.opacity).toBe(0.4);
+      expect(styles.opacity).toBe(0.5);
     });
 
     it("applies container disabled state", () => {
@@ -430,7 +430,7 @@ describe("Tabs", () => {
       triggers.forEach((trigger) => {
         expect(trigger.props.accessibilityState.disabled).toBe(true);
         const styles = StyleSheet.flatten(trigger.props.style);
-        expect(styles.opacity).toBe(0.4);
+        expect(styles.opacity).toBe(0.5);
       });
     });
 

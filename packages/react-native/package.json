@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-export-namespace-from": "^7.27.1",
     "@react-native/babel-preset": "^0.83.1",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",

@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react-native";
+import { render } from "../test-utils";
 import { Stack } from "./Stack";
 import { Text, View, StyleSheet } from "react-native";
 

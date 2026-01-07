@@ -1,5 +1,5 @@
 import { createRef } from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent } from "../test-utils";
 import { Text, View } from "react-native";
 import { Select, SelectOption } from "./Select";
 

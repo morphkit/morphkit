@@ -11,6 +11,7 @@ Always create these files in `packages/react-native/src/<component-name>/`:
 ### Required Files
 
 - `<ComponentName>.tsx` - Main component implementation
+- `<ComponentName>.theme.ts` - **Theme tokens for the component**
 - `index.ts` - Barrel export
 - `meta.json` - Component metadata
 - `README.mdx` - Documentation with live examples
@@ -31,37 +32,257 @@ Always create these files in `packages/react-native/src/<component-name>/`:
 - IDE autocomplete support
 - Easier maintenance and testing
 
-## 2. StyleSheet Patterns
+## 2. Component Theme File
 
-Use this pattern for styling:
+Every component MUST have a colocated `{Component}.theme.ts` file defining its tokens.
+
+### Theme File Structure
 
 ```typescript
-import { StyleSheet, useColorScheme } from "react-native";
+import * as primitive from "../theme/tokens/primitive";
+import { light, dark } from "../theme/tokens/semantic/colors";
 
-const styles = StyleSheet.create({
-  variant1: { /* styles */ },
-  variant2: { /* styles */ },
-});
+export const componentName = {
+  // Size-based tokens (if component has sizes)
+  size: {
+    sm: {
+      height: primitive.spacing[8],
+      paddingHorizontal: primitive.spacing[3],
+      fontSize: primitive.fontSize.sm,
+      borderRadius: primitive.borderRadius.md,
+      gap: primitive.spacing[1.5],
+      iconSize: 16,
+    },
+    md: {
+      height: primitive.spacing[11],
+      paddingHorizontal: primitive.spacing[4],
+      fontSize: primitive.fontSize.base,
+      borderRadius: primitive.borderRadius.md,
+      gap: primitive.spacing[2],
+      iconSize: 20,
+    },
+    lg: {
+      height: primitive.spacing[12],
+      paddingHorizontal: primitive.spacing[6],
+      fontSize: primitive.fontSize.lg,
+      borderRadius: primitive.borderRadius.lg,
+      gap: primitive.spacing[2],
+      iconSize: 24,
+    },
+  },
 
-const theme = StyleSheet.create({
-  dark: { color: "#fff" },
-  light: { color: "#000" },
-});
+  // Shared tokens (apply to all variants/sizes)
+  borderRadius: primitive.borderRadius.md,
+  borderWidth: 1,
+  gap: primitive.spacing[2],
+  padding: primitive.spacing[4],
 
-// In component:
-const colorScheme = useColorScheme() ?? "light";
-<Component style={[styles[variant], theme[colorScheme], style]} />
+  // Variant-based color tokens (separate light/dark)
+  variant: {
+    light: {
+      primary: {
+        background: light.action.primary,
+        backgroundPressed: light.action.primaryPressed,
+        text: light.text.inverse,
+        border: light.border.primary,
+        icon: light.text.inverse,
+      },
+      secondary: {
+        background: light.surface.secondary,
+        backgroundPressed: light.surface.tertiary,
+        text: light.text.primary,
+        border: light.border.primary,
+        icon: light.text.primary,
+      },
+      disabled: {
+        background: light.surface.tertiary,
+        text: light.text.secondary,
+        border: light.border.primary,
+        opacity: primitive.opacity.disabled,
+      },
+    },
+    dark: {
+      primary: {
+        background: dark.action.primary,
+        backgroundPressed: dark.action.primaryPressed,
+        text: dark.text.inverse,
+        border: dark.border.primary,
+        icon: dark.text.inverse,
+      },
+      secondary: {
+        background: dark.surface.secondary,
+        backgroundPressed: dark.surface.tertiary,
+        text: dark.text.primary,
+        border: dark.border.primary,
+        icon: dark.text.primary,
+      },
+      disabled: {
+        background: dark.surface.tertiary,
+        text: dark.text.secondary,
+        border: dark.border.primary,
+        opacity: primitive.opacity.disabled,
+      },
+    },
+  },
+} as const;
 ```
 
-**Key principles:**
+### Token Composition Rules
 
-- Use `StyleSheet.create()` for all styles
-- Separate variant styles and theme styles
-- Always include dark/light theme support (even if simple)
-- Apply styles in order: `[variant, theme, custom]`
-- Prefer variants when component has multiple visual states
+1. **Use Primitive Tokens** for:
+   - Spacing values (`primitive.spacing[4]`)
+   - Font sizes (`primitive.fontSize.base`)
+   - Border radius (`primitive.borderRadius.md`)
+   - Opacity values (`primitive.opacity.disabled`)
+   - Shadows (`primitive.shadowPresets.md`)
 
-## 3. TypeScript Patterns
+2. **Use Semantic Tokens** for:
+   - Colors (`light.text.primary`, `dark.surface.elevated`)
+   - Text styles (`semantic.textStyles.body`)
+   - State-based colors (`light.status.success.main`)
+
+3. **Never Hardcode** values:
+
+   ```typescript
+   // ❌ Wrong
+   paddingHorizontal: 16,
+   backgroundColor: "#4A90E2",
+
+   // ✅ Correct
+   paddingHorizontal: primitive.spacing[4],
+   backgroundColor: light.action.primary,
+   ```
+
+4. **Export as const** for type safety:
+   ```typescript
+   export const componentName = {
+     /* ... */
+   } as const;
+   ```
+
+## 3. Component Implementation Pattern
+
+### Using the Theme
+
+All components must use the `useTheme()` hook:
+
+```typescript
+import { useTheme } from "../theme";
+import { Typography } from "../typography";
+
+export const Component = ({ variant = "primary", size = "md", style, ...props }) => {
+  const { theme, colorScheme } = useTheme();
+
+  // Access component-specific tokens
+  const variantTokens = theme.component.componentName.variant[colorScheme][variant];
+  const sizeTokens = theme.component.componentName.size[size];
+
+  return (
+    <View
+      style={[
+        baseStyles.container,
+        {
+          // Apply theme tokens
+          backgroundColor: variantTokens.background,
+          borderColor: variantTokens.border,
+          borderRadius: sizeTokens.borderRadius,
+          paddingHorizontal: sizeTokens.paddingHorizontal,
+          paddingVertical: sizeTokens.paddingVertical,
+          gap: sizeTokens.gap,
+        },
+        style, // User overrides (last = highest priority)
+      ]}
+      {...props}
+    >
+      <Typography variant="body" style={{ color: variantTokens.text }}>
+        {children}
+      </Typography>
+    </View>
+  );
+};
+
+const baseStyles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+  },
+});
+```
+
+### Typography Usage
+
+**ALWAYS use Typography component instead of Text:**
+
+```typescript
+import { Typography } from "../typography";
+
+// ✅ Correct
+<Typography variant="body" style={{ color: variantTokens.text }}>
+  {children}
+</Typography>
+
+// ✅ Correct with custom styling
+<Typography
+  variant="heading"
+  style={{
+    color: variantTokens.text,
+    fontWeight: theme.primitive.fontWeight.bold, // Can override via tokens
+  }}
+>
+  {title}
+</Typography>
+
+// ❌ Never use Text
+<Text style={{ fontSize: 14, color: "#000" }}>
+  {children}
+</Text>
+```
+
+### Style Merge Order
+
+Follow this pattern for all style merging:
+
+```typescript
+style={[
+  baseStyles.static,          // 1. Static StyleSheet (layout, structure)
+  {
+    // 2. Theme-derived dynamic styles (colors, sizes)
+    backgroundColor: variantTokens.background,
+    color: variantTokens.text,
+    padding: sizeTokens.padding,
+  },
+  style,                      // 3. User overrides (highest priority)
+]}
+```
+
+### State-Based Styling
+
+Handle pressed/hover/disabled states via theme tokens:
+
+```typescript
+const variantTokens = isDisabled
+  ? theme.component.componentName.variant[colorScheme].disabled
+  : theme.component.componentName.variant[colorScheme][variant];
+
+const backgroundColor = isDisabled
+  ? variantTokens.background
+  : pressed && "backgroundPressed" in variantTokens
+    ? variantTokens.backgroundPressed
+    : variantTokens.background;
+
+<Pressable
+  style={[
+    baseStyles.pressable,
+    {
+      backgroundColor,
+      opacity: isDisabled ? variantTokens.opacity : 1,
+    },
+  ]}
+>
+```
+
+## 4. TypeScript Patterns
 
 ```typescript
 // Define variant union type (if component has variants)
@@ -78,7 +299,7 @@ export interface ComponentProps extends NativeComponentProps {
 export { Component, type ComponentProps };
 ```
 
-## 4. Example Files Pattern
+## 5. Example Files Pattern
 
 Create example files in `examples/` directory following this pattern:
 
@@ -128,7 +349,7 @@ export * from "./InteractiveExample";
 - `InteractiveExample` - Examples with state
 - `[FeatureName]Example` - Specific feature demonstrations
 
-## 5. README.mdx Structure
+## 6. README.mdx Structure
 
 ```mdx
 import { Component } from "./Component";
@@ -181,7 +402,7 @@ import { Component } from "@repo/react-native";
 - Never include `backgroundColor` or `borderRadius` in View wrapper styles
 - Keep code blocks (in backticks) for documentation - don't extract these
 
-## 6. meta.json Structure
+## 7. meta.json Structure
 
 ```json
 {
@@ -194,7 +415,7 @@ import { Component } from "@repo/react-native";
 
 **Dependencies array:** List other warpui components this component uses (e.g., `["typography"]`)
 
-## 7. Test Structure
+## 8. Test Structure
 
 ```typescript
 import { render } from "@testing-library/react-native";
@@ -231,26 +452,44 @@ describe("<Component />", () => {
 
 ## 8. Automatic Registry Updates
 
-After creating component files, automatically update:
+After creating component files, automatically update these 4 files:
 
-**a. `packages/react-native/src/index.ts`**
+### a. Component Theme Export
+
+**File**: `packages/react-native/src/theme/tokens/components.ts`
+
+Add export for the new component theme:
 
 ```typescript
-export { Component, type ComponentProps } from "./component-name";
+export * from "../../component-name/ComponentName.theme";
 ```
 
-**b. `packages/react-native/src/docs-registry.ts`**
+**CRITICAL**: This must be done for the theme system to recognize your component tokens.
+
+### b. Main Package Export
+
+**File**: `packages/react-native/src/index.ts`
 
 ```typescript
-import ComponentDocs from "./component-name/README.mdx";
+export { ComponentName, type ComponentNameProps } from "./component-name";
+```
+
+### c. Documentation Registry
+
+**File**: `packages/react-native/src/docs-registry.ts`
+
+```typescript
+import ComponentNameDocs from "./component-name/README.mdx";
 
 export const docsRegistry: Record<string, React.FC> = {
-  "component-name": ComponentDocs,
+  "component-name": ComponentNameDocs,
   // ... existing entries
 };
 ```
 
-**c. `packages/react-native/src/registry.json`**
+### d. Component Registry
+
+**File**: `packages/react-native/src/registry.json`
 
 ```json
 {
@@ -285,22 +524,66 @@ Reference `packages/react-native/src/typography/` for a complete example of all 
 
 Before marking component creation complete, verify:
 
-- ✅ All 5 core files created (`Component.tsx`, `index.ts`, `meta.json`, `README.mdx`, `Component.test.tsx`)
+### Core Files
+
+- ✅ All 6 core files created:
+  - ✅ `Component.tsx` - Main implementation
+  - ✅ `Component.theme.ts` - **Theme tokens file**
+  - ✅ `index.ts` - Barrel export
+  - ✅ `meta.json` - Metadata
+  - ✅ `README.mdx` - Documentation
+  - ✅ `Component.test.tsx` - Tests
+
+### Examples Directory
+
 - ✅ Examples directory created with:
   - ✅ At least `BasicExample.tsx` created
   - ✅ Additional examples as needed (Variants, Interactive, etc.)
   - ✅ `examples/index.ts` barrel export exists
   - ✅ All examples have proper TypeScript types
   - ✅ Examples imported and used in README.mdx
-- ✅ StyleSheet uses `StyleSheet.create()`
-- ✅ Theme support with `useColorScheme()` included
+
+### Theme System Integration
+
+- ✅ `Component.theme.ts` exports token object with `as const`
+- ✅ Theme file composes primitive and semantic tokens
+- ✅ Variant tokens include separate light/dark objects
+- ✅ NO hardcoded values in theme file
+- ✅ Component uses `useTheme()` hook correctly
+- ✅ Component accesses tokens via `theme.component.componentName`
+- ✅ `components.ts` updated with theme export
+
+### Component Implementation
+
+- ✅ Uses `Typography` component (never `Text`)
+- ✅ All colors from `variantTokens`
+- ✅ All sizes from `sizeTokens` or primitive tokens
+- ✅ Style merge follows pattern: [baseStyles, themeStyles, customStyle]
+- ✅ Color scheme switching via `variant[colorScheme]`
+- ✅ NO hardcoded spacing, colors, or font sizes
+
+### Documentation
+
 - ✅ README.mdx imports examples from `./examples`
 - ✅ No inline JSX examples in README.mdx (all extracted to .tsx files)
 - ✅ Code blocks (in backticks) kept for documentation purposes
 - ✅ meta.json populated with correct metadata
+
+### Testing
+
 - ✅ Tests cover rendering, variants, style merging, props forwarding
-- ✅ Exports follow pattern (named exports only, no default)
-- ✅ All registry files updated (index.ts, docs-registry.ts, registry.json)
+- ✅ Tests verify theme token application
+
+### Registry
+
+- ✅ All 4 registry files updated:
+  - ✅ `theme/tokens/components.ts` - **Theme export added**
+  - ✅ `index.ts` - Component export
+  - ✅ `docs-registry.ts` - Docs export
+  - ✅ `registry.json` - Metadata entry
+
+### Validation
+
 - ✅ All verification steps pass (format, type-check, lint, test)
 
 ## 12. Component Naming Conventions
@@ -313,14 +596,41 @@ Before marking component creation complete, verify:
 
 ## 13. AI Optimization Notes
 
-- Keep implementation simple - AI will customize after pulling
-- Use clear, descriptive variable names
-- Hardcode sensible defaults (AI will replace with theme values)
+### Theme-First Development
+
+- Build component theme tokens FIRST before implementation
+- Use tokens for ALL styling - no magic numbers
+- Reference existing component themes for patterns
+- Typography component handles all text styling
+
+### Clear Token Structure
+
+- Use descriptive token names (e.g., `backgroundPressed`, not `bgP`)
+- Group related tokens (size, variant, shared)
+- Separate light/dark color variants explicitly
+- Export with `as const` for strict typing
+
+### Implementation Clarity
+
+- `useTheme()` hook provides full theme access
+- Access pattern: `theme.component.{name}.variant[colorScheme][variant]`
+- Typography variants eliminate fontSize/lineHeight management
+- Style merge order prevents override conflicts
+
+### Documentation
+
 - Extract ALL examples to `.tsx` files for full TypeScript validation
 - Document all props thoroughly for AI understanding
-- Mention customization points in README description
+- Mention customization via theme tokens in README
 - Examples in separate files enable:
   - AI code completion and IntelliSense
   - Automatic error detection during development
   - Easier testing and maintenance
   - Reusable example components
+
+### Component Patterns to Follow
+
+- Reference Button, Alert, or Tabs components for complete examples
+- Copy theme file structure from similar components
+- Use existing primitive/semantic tokens before creating new ones
+- Follow WCAG AA contrast requirements in theme colors

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { render } from "@testing-library/react-native";
+import { render } from "../test-utils";
 import { Badge } from "./Badge";
 import { View, Text } from "react-native";
 
@@ -79,7 +79,7 @@ describe("<Badge />", () => {
     const badgeView = views.find(
       (view) =>
         view.props.style &&
-        StyleSheet.flatten(view.props.style).backgroundColor === "#EF5350",
+        StyleSheet.flatten(view.props.style).backgroundColor === "#DC2626",
     );
     expect(badgeView).toBeTruthy();
   });
@@ -109,7 +109,7 @@ describe("<Badge />", () => {
     const badgeView = views.find(
       (view) =>
         view.props.style &&
-        StyleSheet.flatten(view.props.style).backgroundColor === "#EF5350",
+        StyleSheet.flatten(view.props.style).backgroundColor === "#DC2626",
     );
     expect(badgeView).toBeTruthy();
   });

@@ -100,13 +100,121 @@ Tasks are defined in `turbo.json`:
 
 ## Design Philosophy
 
-As a shadcn/ui-inspired library for React Native:
+As a component library with comprehensive theming:
 
-- **Copy-paste friendly**: Components should be easy to copy into projects and customize
-- **Unstyled by default**: Provide structure and behavior, styling should be flexible
-- **TypeScript-first**: Strong typing for all components and props
+- **Theme-first**: All styling uses the three-tier token system (primitive → semantic → component)
+- **No hardcoded values**: Every color, spacing, size, and style comes from design tokens
+- **Typography-driven**: Use the Typography component for all text rendering
+- **Copy-paste friendly**: Components can be copied and customized via theme tokens
+- **TypeScript-first**: Strong typing for all components, props, and theme tokens
 - **Composable**: Small, focused components that work together
-- **Accessible**: Follow React Native accessibility best practices
+- **Accessible**: Follow React Native accessibility best practices with WCAG AA compliance
+
+## Three-Tier Theme System
+
+The component library uses a hierarchical token system for consistent, theme-aware styling:
+
+### Token Hierarchy
+
+**Tier 1: Primitive Tokens** (`src/theme/tokens/primitive/`)
+
+- Raw design values without semantic meaning
+- Examples: `neutral[900]`, `spacing[4]`, `fontSize.base`, `borderRadius.md`
+- Files: `colors.ts`, `spacing.ts`, `typography.ts`, `radii.ts`, `shadows.ts`, `animation.ts`
+
+**Tier 2: Semantic Tokens** (`src/theme/tokens/semantic/`)
+
+- Context-aware tokens mapped to light/dark themes
+- Examples: `light.text.primary`, `dark.surface.elevated`, `textStyles.body`
+- Provides meaning: "primary action", "text color", "elevated surface"
+- Files: `colors.ts`, `typography.ts`, `state.ts`
+
+**Tier 3: Component Tokens** (Colocated with components)
+
+- Component-specific styling rules
+- File: `{Component}.theme.ts` in each component folder
+- Composes primitive and semantic tokens
+- Exported via `src/theme/tokens/components.ts`
+
+### Theme Token Access
+
+All components use the `useTheme()` hook:
+
+```typescript
+import { useTheme } from "../theme";
+
+const { theme, colorScheme } = useTheme();
+
+// Access component tokens:
+const variantColors = theme.component.button.variant[colorScheme][variant];
+const sizeTokens = theme.component.button.size[size];
+
+// Use in styles:
+<View style={{
+  backgroundColor: variantColors.background,
+  padding: sizeTokens.paddingHorizontal,
+  borderRadius: theme.component.button.borderRadius,
+}} />
+```
+
+### Typography Component
+
+**Always use `Typography` instead of React Native's `Text` component:**
+
+```typescript
+import { Typography } from "../typography";
+
+// ✅ Correct
+<Typography variant="body" style={{ color: variantTokens.text }}>
+  {children}
+</Typography>
+
+// ❌ Never use
+<Text style={{ fontSize: 14, color: "#000" }}>
+  {children}
+</Text>
+```
+
+Typography variants: `large-title`, `title-1`, `title-2`, `title-3`, `heading`, `body`, `callout`, `subheadline`, `footnote`, `caption-1`, `caption-2`
+
+### Token-Based Styling Rules
+
+**NEVER hardcode values. Always use tokens:**
+
+```typescript
+// ❌ Wrong - hardcoded values
+style={{
+  padding: 16,
+  backgroundColor: "#4A90E2",
+  borderRadius: 8,
+  fontSize: 14,
+}}
+
+// ✅ Correct - token-based
+style={{
+  padding: theme.primitive.spacing[4],
+  backgroundColor: theme.semantic.colors.action.primary,
+  borderRadius: theme.primitive.borderRadius.md,
+  // Typography handles fontSize via variant
+}}
+```
+
+### Style Merge Pattern
+
+All components follow this merge order:
+
+```typescript
+style={[
+  baseStyles.container,        // Static StyleSheet styles
+  {
+    // Theme-derived dynamic styles
+    backgroundColor: variantTokens.background,
+    borderColor: variantTokens.border,
+    padding: sizeTokens.padding,
+  },
+  style,                        // Custom user overrides (highest priority)
+]}
+```
 
 ## Development Workflow Rules
 
