@@ -13,6 +13,7 @@ import DividerDocs from "./divider/README.mdx";
 import FABDocs from "./fab/README.mdx";
 import InputDocs from "./input/README.mdx";
 import LabelDocs from "./label/README.mdx";
+import OTPInputDocs from "./otp-input/README.mdx";
 import ProgressDocs from "./progress/README.mdx";
 import RadioDocs from "./radio/README.mdx";
 import SelectDocs from "./select/README.mdx";
@@ -41,6 +42,7 @@ export const docsRegistry: Record<string, React.FC> = {
   fab: FABDocs,
   input: InputDocs,
   label: LabelDocs,
+  "otp-input": OTPInputDocs,
   progress: ProgressDocs,
   radio: RadioDocs,
   select: SelectDocs,

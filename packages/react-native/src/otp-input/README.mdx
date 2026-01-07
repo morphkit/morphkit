@@ -1,0 +1,138 @@
+---
+title: OTPInput
+description: One-time password input with multiple fields for verification codes. Supports auto-advance, paste handling, and auto-submit on completion.
+---
+
+import { OTPInput } from "./OTPInput";
+import { View } from "react-native";
+import { Stack } from "../stack";
+
+# OTPInput
+
+One-time password input with multiple fields for verification codes received via email or SMS. Features auto-advance between fields, paste support, and auto-submit on completion.
+
+## Import
+
+```tsx
+import { OTPInput } from "@repo/react-native";
+```
+
+## Usage
+
+### Basic
+
+<View style={{ padding: 20 }}>
+  <OTPInput value="" onChange={() => {}} />
+</View>
+
+```tsx
+<OTPInput
+  value={otp}
+  onChange={setOtp}
+  onComplete={(code) => submitOTP(code)}
+/>
+```
+
+### Sizes
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <OTPInput value="" onChange={() => {}} size="sm" />
+    <OTPInput value="" onChange={() => {}} size="md" />
+    <OTPInput value="" onChange={() => {}} size="lg" />
+  </Stack>
+</View>
+
+```tsx
+<OTPInput value={otp} onChange={setOtp} size="sm" />
+<OTPInput value={otp} onChange={setOtp} size="md" />
+<OTPInput value={otp} onChange={setOtp} size="lg" />
+```
+
+### Variants
+
+<View style={{ padding: 20 }}>
+  <Stack gap={16}>
+    <OTPInput value="" onChange={() => {}} variant="outline" />
+    <OTPInput value="" onChange={() => {}} variant="filled" />
+  </Stack>
+</View>
+
+```tsx
+<OTPInput value={otp} onChange={setOtp} variant="outline" />
+<OTPInput value={otp} onChange={setOtp} variant="filled" />
+```
+
+### Error State
+
+<View style={{ padding: 20 }}>
+  <OTPInput value="123" onChange={() => {}} error />
+</View>
+
+```tsx
+<OTPInput
+  value={otp}
+  onChange={setOtp}
+  error={isInvalid}
+/>
+```
+
+### Custom Length
+
+<View style={{ padding: 20 }}>
+  <OTPInput value="" onChange={() => {}} length={4} />
+</View>
+
+```tsx
+<OTPInput value={otp} onChange={setOtp} length={4} />
+```
+
+### Text Type
+
+<View style={{ padding: 20 }}>
+  <OTPInput value="" onChange={() => {}} type="text" />
+</View>
+
+```tsx
+<OTPInput value={otp} onChange={setOtp} type="text" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | Current OTP value (controlled) |
+| `onChange` | `(otp: string) => void` | - | Callback when OTP changes |
+| `onComplete` | `(otp: string) => void` | `undefined` | Callback when all fields filled |
+| `length` | `number` | `6` | Number of OTP digits |
+| `type` | `"number" \| "text"` | `"number"` | Input type (affects keyboard) |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset for fields |
+| `variant` | `"outline" \| "filled"` | `"outline"` | Visual style of fields |
+| `error` | `boolean` | `false` | Error state (red borders) |
+| `disabled` | `boolean` | `false` | Disables all fields |
+| `autoFocus` | `boolean` | `true` | Auto-focus first field on mount |
+| `style` | `StyleProp<ViewStyle>` | `undefined` | Container custom styles |
+| `accessibilityLabel` | `string` | `undefined` | Screen reader label |
+
+## Accessibility
+
+- Container has `accessibilityLabel` for screen readers
+- Each field labeled as "Digit N of M"
+- Full keyboard navigation support
+- Screen reader announces field changes
+- WCAG AA compliant color contrast
+
+## Behavior
+
+- **Auto-advance**: Moves to next field on input
+- **Backspace**: Moves to previous field when current is empty
+- **Paste**: Distributes OTP across fields automatically
+- **Auto-submit**: Calls `onComplete` and dismisses keyboard when filled
+- **Success state**: Green borders when all fields filled
+
+## Best Practices
+
+1. Always handle `onComplete` callback for submission
+2. Clear OTP value on error to allow re-entry
+3. Use `type="number"` (default) for OTP codes
+4. Provide visual feedback via `error` prop for invalid codes

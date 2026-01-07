@@ -16,6 +16,7 @@ export { Divider, type DividerProps } from "./divider";
 export { FAB, type FABProps } from "./fab";
 export { Input, type InputProps } from "./input";
 export { Label, type LabelProps } from "./label";
+export { OTPInput, type OTPInputProps } from "./otp-input";
 export { Progress, type ProgressProps } from "./progress";
 export {
   RadioGroup,
