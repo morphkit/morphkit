@@ -43,8 +43,8 @@ export const Typography = ({
 
   const textStyleKey = variantMap[
     variant
-  ] as keyof typeof theme.component.typography.styles;
-  const textStyle = theme.component.typography.styles[textStyleKey];
+  ] as keyof typeof theme.semantic.textStyles;
+  const textStyle = theme.semantic.textStyles[textStyleKey];
 
   return (
     <Text
