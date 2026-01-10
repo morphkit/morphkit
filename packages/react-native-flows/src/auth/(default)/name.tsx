@@ -6,10 +6,11 @@
  */
 import { View, StyleSheet } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Typography,
   Input,
+  type InputRef,
   Button,
   Container,
   Stack,
@@ -26,31 +27,46 @@ export default function Name() {
   const [lastNameError, setLastNameError] = useState<string>();
   const [loading, setLoading] = useState(false);
 
-  const handleFinish = () => {};
+  const lastNameInputRef = useRef<InputRef>(null);
+
+  const handleFinish = () => {
+    router.push("/");
+  };
+
+  const handleNameSubmit = () => {
+    lastNameInputRef.current?.focus();
+  };
 
   return (
-    <Container>
+    <Container insets={["bottom"]}>
       <Stack
         gap={theme.primitive.spacing[6]}
-        style={[styles.container, { padding: theme.primitive.spacing[6] }]}
+        style={[styles.container, { paddingTop: theme.primitive.spacing[6] }]}
       >
         <Stack gap={theme.primitive.spacing[4]}>
-          <Typography variant="title-1">Enter your name</Typography>
           <Input
+            size="lg"
             label="First name"
             value={firstName}
             onChange={setFirstName}
             error={firstNameError}
             placeholder="John"
             autoCapitalize="words"
+            autoComplete="given-name"
+            autoFocus
+            onSubmitEditing={handleNameSubmit}
           />
           <Input
+            ref={lastNameInputRef}
+            size="lg"
             label="Last name"
             value={lastName}
             onChange={setLastName}
             error={lastNameError}
             placeholder="Doe"
             autoCapitalize="words"
+            autoComplete="family-name"
+            onSubmitEditing={handleFinish}
           />
         </Stack>
         <View style={styles.spacer} />

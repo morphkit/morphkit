@@ -23,17 +23,19 @@ export default function Email() {
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState(false);
 
-  const handleContinue = () => {};
+  const handleContinue = () => {
+    router.push("/flows/auth/(default)/password");
+  };
 
   return (
-    <Container>
+    <Container insets={["bottom"]}>
       <Stack
         gap={theme.primitive.spacing[6]}
-        style={[styles.container, { padding: theme.primitive.spacing[6] }]}
+        style={[styles.container, { paddingTop: theme.primitive.spacing[6] }]}
       >
         <Stack gap={theme.primitive.spacing[4]}>
-          <Typography variant="title-1">{"Let's start with email"}</Typography>
           <Input
+            size="lg"
             label="Email address"
             type="email"
             value={email}
@@ -41,6 +43,10 @@ export default function Email() {
             error={error}
             placeholder="your@email.com"
             autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="email"
+            autoFocus
+            onSubmitEditing={handleContinue}
           />
         </Stack>
         <View style={styles.spacer} />

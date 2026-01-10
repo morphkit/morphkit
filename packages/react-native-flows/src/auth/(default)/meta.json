@@ -1,0 +1,47 @@
+{
+  "type": "auth",
+  "name": "default",
+  "version": "1.0.0",
+  "description": "Complete authentication flow with social login (Apple, Google, Facebook) and email/password signup including name collection",
+  "screens": [
+    {
+      "id": "welcome",
+      "file": "welcome.tsx",
+      "title": "Welcome",
+      "description": "Social login options and email entry point"
+    },
+    {
+      "id": "email",
+      "file": "email.tsx",
+      "title": "Email Entry",
+      "description": "Email address input with validation"
+    },
+    {
+      "id": "password",
+      "file": "password.tsx",
+      "title": "Password Creation",
+      "description": "Password input with requirements display"
+    },
+    {
+      "id": "name",
+      "file": "name.tsx",
+      "title": "Name Collection",
+      "description": "First and last name input fields"
+    }
+  ],
+  "components": [
+    "typography",
+    "button",
+    "input",
+    "container",
+    "stack",
+    "box",
+    "divider"
+  ],
+  "dependencies": {
+    "@expo/vector-icons": "^15.0.3",
+    "expo-router": "~6.0.21"
+  },
+  "entryPoint": "welcome",
+  "tags": ["authentication", "signup", "login", "social-auth"]
+}

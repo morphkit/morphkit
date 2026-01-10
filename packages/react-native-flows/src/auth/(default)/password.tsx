@@ -24,26 +24,31 @@ export default function Password() {
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState(false);
 
-  const handleContinue = () => {};
+  const handleContinue = () => {
+    router.push("/flows/auth/(default)/name");
+  };
 
   return (
-    <Container>
+    <Container insets={["bottom"]}>
       <Stack
         gap={theme.primitive.spacing[6]}
-        style={[styles.container, { padding: theme.primitive.spacing[6] }]}
+        style={[styles.container, { paddingTop: theme.primitive.spacing[6] }]}
       >
         <Stack gap={theme.primitive.spacing[4]}>
-          <Typography variant="title-1">Create a password</Typography>
           <Input
+            size="lg"
             label="Password"
             type="password"
             value={password}
             onChange={setPassword}
             error={error}
             placeholder="Enter password"
+            autoComplete="password-new"
+            autoFocus
+            onSubmitEditing={handleContinue}
           />
           <Stack gap={theme.primitive.spacing[1]}>
-            <Typography variant="caption-1">Password must contain:</Typography>
+            <Typography variant="body">Password must contain:</Typography>
             <Typography variant="caption-2">• At least 8 characters</Typography>
             <Typography variant="caption-2">• One uppercase letter</Typography>
             <Typography variant="caption-2">• One number</Typography>

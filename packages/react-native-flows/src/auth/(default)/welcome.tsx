@@ -25,52 +25,54 @@ export default function Welcome() {
   const { theme } = useTheme();
   const [loading, setLoading] = useState<SocialProvider | null>(null);
 
-  const handleSocialLogin = (provider: SocialProvider) => {};
+  const handleSocialLogin = (provider: SocialProvider) => {
+    setLoading((prev) => (prev === provider ? null : provider));
+  };
 
   const handleContinueWithEmail = () => {
-    router.push("/auth/(default)/email");
+    router.push("/flows/auth/(default)/email");
   };
 
   return (
-    <Container>
-      <Stack
-        gap={theme.primitive.spacing[6]}
-        style={[styles.container, { padding: theme.primitive.spacing[6] }]}
-      >
+    <Container insets={["bottom"]}>
+      <Stack gap={theme.primitive.spacing[6]} style={styles.container}>
         <Box style={styles.centeredContent}>
           <Stack gap={theme.primitive.spacing[6]} align="center">
-            <Image source={require("@/assets/icon.png")} style={styles.logo} />
-            <Typography variant="title-1" style={styles.centeredText}>
+            <Image source={require("@/assets/logo.png")} style={styles.logo} />
+            <Typography variant="title-2" style={styles.centeredText}>
               Sign up or log in to start exploring
             </Typography>
-            <Stack gap={theme.primitive.spacing[3]} style={styles.fullWidth}>
+            <Stack
+              gap={theme.primitive.spacing[3]}
+              style={[
+                styles.fullWidth,
+                { paddingTop: theme.primitive.spacing[10] },
+              ]}
+            >
               <Button
                 variant="secondary"
                 size="lg"
-                iconLeft={<Ionicons name="logo-apple" size={20} />}
+                iconAbsoluteLeft={<Ionicons name="logo-apple" size={20} />}
                 onPress={() => handleSocialLogin("apple")}
                 loading={loading === "apple"}
-                disabled={loading !== null && loading !== "apple"}
               >
                 Continue with Apple
               </Button>
               <Button
                 variant="secondary"
                 size="lg"
-                iconLeft={<AntDesign name="google" size={20} />}
+                iconAbsoluteLeft={<AntDesign name="google" size={20} />}
                 onPress={() => handleSocialLogin("google")}
                 loading={loading === "google"}
-                disabled={loading !== null && loading !== "google"}
               >
                 Continue with Google
               </Button>
               <Button
                 variant="secondary"
                 size="lg"
-                iconLeft={<FontAwesome name="facebook" size={20} />}
+                iconAbsoluteLeft={<FontAwesome name="facebook" size={20} />}
                 onPress={() => handleSocialLogin("facebook")}
                 loading={loading === "facebook"}
-                disabled={loading !== null && loading !== "facebook"}
               >
                 Continue with Facebook
               </Button>
@@ -106,8 +108,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    width: 120,
-    height: 120,
+    width: "85%",
+    height: 80,
   },
   centeredText: {
     textAlign: "center",
@@ -117,6 +119,5 @@ const styles = StyleSheet.create({
   },
   divider: {
     flex: 1,
-    height: 1,
   },
 });
