@@ -14,7 +14,7 @@ export { Checkbox, type CheckboxProps } from "./checkbox";
 export { Container, type ContainerProps } from "./container";
 export { Divider, type DividerProps } from "./divider";
 export { FAB, type FABProps } from "./fab";
-export { Input, type InputProps } from "./input";
+export { Input, type InputProps, type InputRef } from "./input";
 export { Label, type LabelProps } from "./label";
 export { OTPInput, type OTPInputProps } from "./otp-input";
 export { Progress, type ProgressProps } from "./progress";

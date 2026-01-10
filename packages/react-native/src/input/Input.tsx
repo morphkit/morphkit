@@ -27,7 +27,9 @@ export interface InputProps extends Omit<TextInputProps, "style" | "onChange"> {
   style?: StyleProp<ViewStyle>;
 }
 
-export const Input = forwardRef<TextInput, InputProps>(
+export type InputRef = TextInput;
+
+export const Input = forwardRef<InputRef, InputProps>(
   (
     {
       value,
