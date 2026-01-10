@@ -45,6 +45,14 @@ export default function RootLayout() {
                 title: "Component Docs",
               }}
             />
+            <Drawer.Screen
+              name="flows"
+              options={{
+                drawerItemStyle: { display: "none" },
+                headerShown: false,
+                title: "Flows",
+              }}
+            />
           </Drawer>
         </MDXProvider>
       </GestureHandlerRootView>
