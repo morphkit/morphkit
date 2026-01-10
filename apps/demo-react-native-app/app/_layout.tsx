@@ -22,7 +22,7 @@ SplashScreen.preventAutoHideAsync();
 
 const customTheme = createTheme({
   fonts: {
-    display: "Inter_900Black",
+    display: "Inter_500Medium",
     body: "Inter_400Regular",
     mono: "monospace",
   },
