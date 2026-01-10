@@ -10,9 +10,6 @@ import { ThemeProvider, createTheme } from "@warp-ui/react-native";
 import {
   Inter_400Regular,
   Inter_500Medium,
-  Inter_600SemiBold,
-  Inter_700Bold,
-  Inter_900Black,
   useFonts,
 } from "@expo-google-fonts/inter";
 import * as SplashScreen from "expo-splash-screen";
@@ -34,9 +31,6 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
-    Inter_600SemiBold,
-    Inter_700Bold,
-    Inter_900Black,
   });
 
   useEffect(() => {
