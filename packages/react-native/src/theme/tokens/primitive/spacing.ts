@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 export const spacing = {
   0: 0,
   0.5: 2,
@@ -19,4 +21,5 @@ export const spacing = {
   16: 64,
   20: 80,
   24: 96,
+  hairline: StyleSheet.hairlineWidth,
 } as const;

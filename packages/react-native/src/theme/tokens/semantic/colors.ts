@@ -76,7 +76,7 @@ export const dark = {
     link: primitive.blue[400],
   },
   surface: {
-    primary: primitive.neutral[900],
+    primary: primitive.neutral[1000],
     secondary: primitive.neutral[800],
     tertiary: primitive.neutral[700],
     elevated: primitive.neutral[800],
