@@ -5,7 +5,7 @@
     "jsx": "react-native",
     "allowSyntheticDefaultImports": true,
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "lib": ["ES2022"],
     "target": "ESNext",
     "skipLibCheck": true,
