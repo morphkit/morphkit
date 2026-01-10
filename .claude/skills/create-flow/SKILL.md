@@ -566,6 +566,7 @@ All generated flow code must follow these strict quality standards:
 ### Theme Tokens (Required)
 
 **✅ DO:**
+
 - Import `useTheme` from @warp-ui/react-native in every screen file
 - Use `theme.primitive.spacing[n]` for all spacing values
 - Use theme tokens for colors (iconColor, text colors)
@@ -573,17 +574,20 @@ All generated flow code must follow these strict quality standards:
 - Use Stack component for vertical layouts with theme-based gap
 
 **❌ DON'T:**
+
 - Hardcode numeric values: `gap={24}`, `padding: 24`
 - Hardcode colors: `"#000"`, `"#fff"`
 - Put spacing values in StyleSheet.create()
 
 **Spacing reference:**
+
 - 4px = `spacing[1]`
 - 12px = `spacing[3]`
 - 16px = `spacing[4]`
 - 24px = `spacing[6]`
 
 **Example:**
+
 ```typescript
 import { useTheme } from "@warp-ui/react-native";
 
@@ -598,12 +602,14 @@ const { theme } = useTheme();
 ### Default Props (Required)
 
 **Never declare these default props:**
+
 - Stack: `direction="vertical"` (vertical is default)
 - Button: `variant="primary"` (primary is default)
 - Input: `type="text"` (text is default)
 - Typography: `variant="body"` (body is default)
 
 **Only declare non-default values:**
+
 - Stack: `direction="horizontal"` ✅
 - Button: `variant="secondary"`, `variant="tonal"`, `size="lg"` ✅
 - Input: `type="email"`, `type="password"` ✅
@@ -625,12 +631,14 @@ Every screen file must start with:
 ### TypeScript Patterns (Required)
 
 **✅ Concise useState:**
+
 ```typescript
 const [error, setError] = useState<string>();
 const [loading, setLoading] = useState(false);
 ```
 
 **❌ Verbose useState:**
+
 ```typescript
 const [error, setError] = useState<string | undefined>(undefined);
 ```
@@ -638,6 +646,7 @@ const [error, setError] = useState<string | undefined>(undefined);
 ### StyleSheet Patterns (Required)
 
 **✅ Static layout only:**
+
 ```typescript
 const styles = StyleSheet.create({
   container: {
@@ -651,11 +660,12 @@ const styles = StyleSheet.create({
 ```
 
 **❌ Don't include spacing/colors:**
+
 ```typescript
 const styles = StyleSheet.create({
   container: {
-    padding: 24,  // ❌ Use theme tokens instead
-    gap: 16,      // ❌ Use theme tokens instead
+    padding: 24, // ❌ Use theme tokens instead
+    gap: 16, // ❌ Use theme tokens instead
   },
 });
 ```
@@ -663,6 +673,7 @@ const styles = StyleSheet.create({
 ### Component Usage (Required)
 
 **Use Stack for vertical layouts:**
+
 ```typescript
 <Stack gap={theme.primitive.spacing[6]}>
   <Typography variant="title-1">Title</Typography>
@@ -672,6 +683,7 @@ const styles = StyleSheet.create({
 ```
 
 **Don't use View with gap:**
+
 ```typescript
 // ❌ Wrong
 <View style={{ gap: 16 }}>
@@ -679,7 +691,8 @@ const styles = StyleSheet.create({
 
 ### Header Navigation (Required)
 
-**Custom back button in _layout.tsx:**
+**Custom back button in \_layout.tsx:**
+
 ```typescript
 import { Stack, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -698,6 +711,7 @@ const renderBackButton = ({ canGoBack }: { canGoBack?: boolean }) =>
 ```
 
 **Key points:**
+
 - Use Button component with `size="icon"` and `variant="tonal"`
 - Pass icon as children (not via iconLeft prop)
 - Get colors and sizes from theme tokens
@@ -929,8 +943,8 @@ Before marking the flow creation as complete, verify:
 - [ ] ESLint disable comment with production note at top of each screen
 - [ ] Concise useState types (no explicit undefined)
 - [ ] No default props declared (direction="vertical", variant="primary", type="text")
-- [ ] Custom Button back button in _layout.tsx using theme tokens
-- [ ] Explicit Stack.Screen definitions in _layout.tsx
+- [ ] Custom Button back button in \_layout.tsx using theme tokens
+- [ ] Explicit Stack.Screen definitions in \_layout.tsx
 - [ ] All handlers extracted to handlers file
 - [ ] Handlers are empty with TypeScript signatures
 - [ ] Handler examples in comments show implementation pattern
