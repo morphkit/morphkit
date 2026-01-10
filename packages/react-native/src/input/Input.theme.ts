@@ -7,24 +7,24 @@ export const input = {
       height: 36,
       fontSize: primitive.fontSize.sm,
       padding: primitive.spacing[2],
-      borderRadius: primitive.borderRadius.md,
+      borderRadius: primitive.borderRadius.lg,
     },
     md: {
       height: 44,
       fontSize: primitive.fontSize.base,
       padding: primitive.spacing[3],
-      borderRadius: primitive.borderRadius.md,
+      borderRadius: primitive.borderRadius.lg,
     },
     lg: {
       height: 52,
       fontSize: primitive.fontSize.lg,
       padding: primitive.spacing[4],
-      borderRadius: primitive.borderRadius.md,
+      borderRadius: primitive.borderRadius.lg,
     },
   },
   gap: primitive.spacing[2],
   borderWidth: {
-    outline: 1,
+    outline: primitive.spacing.hairline,
     filled: 0,
   },
   errorText: {
