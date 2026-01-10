@@ -55,6 +55,7 @@ export {
   useTheme,
   getThemeColor,
   getThemeSpacing,
+  createTheme,
 } from "./theme";
 export { themes, defaultTheme, tokens } from "./theme";
 export type {
@@ -69,4 +70,5 @@ export type {
   ThemeSpacing,
   ColorPath,
   SpacingKey,
+  CreateThemeOptions,
 } from "./theme";
