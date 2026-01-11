@@ -46,7 +46,9 @@ describe("OTPInput", () => {
   });
 
   test("auto-advances to next field on input", () => {
-    const { UNSAFE_getAllByType } = render(<OTPInput value="" onChange={() => {}} />);
+    const { UNSAFE_getAllByType } = render(
+      <OTPInput value="" onChange={() => {}} />,
+    );
     const inputs = UNSAFE_getAllByType(TextInput);
 
     fireEvent.changeText(inputs[0], "1");
@@ -207,7 +209,9 @@ describe("OTPInput", () => {
   });
 
   test("sets individual accessibility labels on fields", () => {
-    const { UNSAFE_getAllByType } = render(<OTPInput value="" onChange={() => {}} />);
+    const { UNSAFE_getAllByType } = render(
+      <OTPInput value="" onChange={() => {}} />,
+    );
     const inputs = UNSAFE_getAllByType(TextInput);
 
     expect(inputs[0].props.accessibilityLabel).toBe("Digit 1 of 6");

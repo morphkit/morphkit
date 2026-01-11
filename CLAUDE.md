@@ -1,12 +1,34 @@
+<!-- OPENSPEC:START -->
+
+# OpenSpec Instructions
+
+These instructions are for AI assistants working in this project.
+
+Always open `@/openspec/AGENTS.md` when the request:
+
+- Mentions planning or proposals (words like proposal, spec, change, plan)
+- Introduces new capabilities, breaking changes, architecture shifts, or big performance/security work
+- Sounds ambiguous and you need the authoritative spec before coding
+
+Use `@/openspec/AGENTS.md` to learn:
+
+- How to create and apply change proposals
+- Spec format and conventions
+- Project structure and guidelines
+
+Keep this managed block so 'openspec update' can refresh the instructions.
+
+<!-- OPENSPEC:END -->
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Repository Overview
 
-**morph-ui** is an internal component library monorepo, similar in spirit to shadcn/ui. The primary focus is building a **React Native component library** with shared tooling and configurations.
+**morph-ui** is a production-ready component library monorepo, similar in spirit to shadcn/ui. The repository features a **fully-implemented React Native component library** (`@warp-ui/react-native`) with 26 components, multi-screen flow templates, CLI tooling, and comprehensive testing infrastructure.
 
-The repository has been configured with a minimal React Native app using Expo Router and full Turborepo integration through shared ESLint and TypeScript configurations.
+The repository includes a full-featured demo app for browsing components and flows, with MDX-based documentation, drawer navigation, and dynamic component showcases. All components follow the three-tier theme system and are backed by Jest tests.
 
 ### Tech Stack
 
@@ -26,13 +48,17 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 
 ### Current Structure
 
-**`apps/react-native-ui/`** - Minimal Expo App with Router
+**`apps/demo-react-native-app/`** - Component Library Browser & Flow Showcase
 
-- Single-screen "Hello World" app using Expo Router
+- Full-featured demo app with Drawer navigation
+- Dynamic component documentation viewer using MDX
+- Multi-screen flow demonstrations (auth flow with 4 screens)
 - Fully integrated with monorepo shared configs
 - Uses `@repo/eslint-config/react-native` and `@repo/typescript-config/react-native`
-- File-based routing in `app/` directory
+- File-based routing with Expo Router in `app/` directory
+- Component sidebar for browsing 26 documented components
 - Entry point: `expo-router/entry`
+- Theme customization with Inter font family
 
 **`packages/*`** - Shared Tooling
 
@@ -46,11 +72,39 @@ The repository uses Turborepo workspaces defined in root `package.json`:
   - `nextjs.json` - Next.js specific config
   - `react-library.json` - React library config
   - `react-native.json` - React Native config (jsx: "react-native", module: "ESNext")
+- **@repo/jest-config**: Shared Jest testing configuration
+  - Used across all packages for consistent test setup
+  - Integrated with React Native testing library
+- **@repo/react-native-flows**: Multi-screen user flow templates
+  - Version: 0.1.0
+  - Flow registry system for managing user journeys
+  - Implements authentication flows using Expo Router
+  - Structure: `src/auth/(default)/` for default auth flow
+  - Components: welcome, email, name, password screens
+- **@warp-ui/cli**: Command-line interface for Warp UI
+  - Version: 0.3.4
+  - Published to GitHub Packages (npm.pkg.github.com)
+  - Supports both CommonJS and ESM exports
+  - Features: GitHub auth, component registry management, config management
 
-**`react-native/*`** - React Native Component Library (Future)
+**`packages/react-native/`** - Production-Ready React Native Component Library
 
-- Reserved for the main component library packages
-- Components will follow shadcn/ui philosophy: customizable, copy-paste friendly
+- **Package name**: `@warp-ui/react-native` (v0.1.0)
+- **26 fully-implemented components** following three-tier theme system
+- Components exported via wildcard pattern for tree-shaking: `"./src/*"`
+- Complete testing infrastructure with Jest
+- MDX documentation system with component registry
+- All components include `.theme.ts` files for token-based styling
+
+**Component Categories**:
+
+- Layout: box, container, stack, divider
+- Input: input, textarea, checkbox, radio, select, switch, slider, otp-input, label
+- Display: typography, badge, tag, avatar, progress, skeleton, spinner
+- Interactive: button, accordion, tabs
+- Feedback: alert, toast
+- Navigation: fab
+- Surfaces: card
 
 ## Development Commands
 
@@ -81,11 +135,21 @@ bun run format
 Use Turbo filters to target specific packages:
 
 ```bash
-# Work with React Native UI app
-turbo dev --filter=react-native-ui
-turbo build --filter=react-native-ui
-turbo lint --filter=react-native-ui
-turbo check-types --filter=react-native-ui
+# Work with demo app
+turbo dev --filter=demo-react-native-app
+turbo build --filter=demo-react-native-app
+turbo lint --filter=demo-react-native-app
+turbo check-types --filter=demo-react-native-app
+```
+
+### Working with Flows
+
+```bash
+# Run the demo app to see flows in action
+turbo dev --filter=demo-react-native-app
+
+# View auth flow documentation
+# Navigate to /flows in the running app
 ```
 
 ## Turborepo Task Configuration
@@ -96,7 +160,10 @@ Tasks are defined in `turbo.json`:
 - **lint**: Has dependency graph (`^lint`)
 - **check-types**: Has dependency graph (`^check-types`)
   - Uses `tsc --noEmit` for type checking
+- **test**: Has dependency graph (`^test`), no caching
 - **dev**: No caching, persistent task
+
+Global environment variables: `DEBUG`, `GITHUB_TOKEN`, `GH_TOKEN`
 
 ## Design Philosophy
 
@@ -109,6 +176,8 @@ As a component library with comprehensive theming:
 - **TypeScript-first**: Strong typing for all components, props, and theme tokens
 - **Composable**: Small, focused components that work together
 - **Accessible**: Follow React Native accessibility best practices with WCAG AA compliance
+- **Flow-based UX**: Multi-screen user journeys using flow templates
+- **Documentation-driven**: MDX-based component documentation with live examples
 
 ## Three-Tier Theme System
 
@@ -159,7 +228,9 @@ const sizeTokens = theme.component.button.size[size];
 
 ### Typography Component
 
-**Always use `Typography` instead of React Native's `Text` component:**
+**Location**: `packages/react-native/src/typography/Typography.tsx`
+
+The Typography component is fully implemented and replaces React Native's `Text`:
 
 ```typescript
 import { Typography } from "../typography";
@@ -175,7 +246,9 @@ import { Typography } from "../typography";
 </Text>
 ```
 
-Typography variants: `large-title`, `title-1`, `title-2`, `title-3`, `heading`, `body`, `callout`, `subheadline`, `footnote`, `caption-1`, `caption-2`
+Typography variants: `large-title`, `title-1`, `title-2`, `title-3`, `heading`, `body`, `callout`, `subhead`, `footnote`, `caption-1`, `caption-2`
+
+Each variant maps to semantic text styles with proper fontSize, fontWeight, lineHeight, letterSpacing, and fontFamily from theme tokens.
 
 ### Token-Based Styling Rules
 
@@ -227,7 +300,10 @@ These rules are **non-negotiable** and must be followed strictly:
 - ✅ `bun run lint` - Zero ESLint warnings/errors
 - ✅ `bun run check-types` - Zero TypeScript errors
 - ✅ `bun run format` - Code must be formatted with Prettier
-- ✅ All tests must pass (when tests are added to the project)
+- ✅ All tests must pass (`bun run test` - Jest with React Native Testing Library)
+  - **CRITICAL**: Even if failing tests are unrelated to your current change, ALL tests must pass before marking work as complete
+  - Never ignore or skip failing tests - fix them before proceeding
+  - Zero tolerance for test failures
 
 **Never say something is "done" or "complete" until all checks pass.**
 
@@ -362,7 +438,72 @@ The monorepo uses ESLint v9 with flat config format:
 - Each package has its own `tsconfig.json` extending the shared configs
 - Type checking runs with `tsc --noEmit`
 
+### Testing Infrastructure
+
+The monorepo has comprehensive testing setup:
+
+- **Shared Config**: `@repo/jest-config` package provides base Jest configuration
+- **Test Utilities**: Custom render utilities in `packages/react-native/src/test-utils.tsx`
+  - Wraps components with ThemeProvider and SafeAreaProvider
+  - Provides type-safe testing helpers
+- **Component Tests**: Each component has corresponding `.test.tsx` file
+- **Run tests**: `bun run test` at root or package level
+
+### Documentation System
+
+Components use MDX for rich documentation:
+
+- **Registry**: `registry.json` contains component metadata
+- **Docs Registry**: `docs-registry.ts` provides MDX documentation loader
+- **MDX Provider**: Maps MDX elements to Warp UI components
+- **Demo App**: Renders documentation dynamically at `/docs/[component]` route
+
+### Flow System
+
+Multi-screen user journeys are managed through the flows package:
+
+- **Package**: `@repo/react-native-flows`
+- **Registry**: Flow metadata for discovery and navigation
+- **Integration**: Uses Expo Router for screen navigation
+- **Current Flows**: Authentication (default variant) with 4 screens
+
 ## Important Patterns
+
+### Working with the Demo App
+
+The demo app at `apps/demo-react-native-app` showcases all components and flows:
+
+1. **Component Documentation**: All components automatically appear in sidebar via registry
+2. **Adding Components**: New components in `@warp-ui/react-native` appear automatically
+3. **Adding Flows**: Register new flows in `@repo/react-native-flows/src/registry.ts`
+4. **Custom Theme**: Demo app uses Inter font family with theme overrides via `createTheme()`
+5. **Navigation**: Drawer navigation with routes:
+   - `/` - Home
+   - `/docs/[component]` - Component documentation
+   - `/flows/[type]/[variant]/[screen]` - Flow screens
+
+### Testing Components
+
+When developing components:
+
+1. Write component tests in `{Component}.test.tsx` alongside component file
+2. Use `customRender()` from test-utils to wrap with providers
+3. Run tests with `bun run test`
+4. Ensure all tests pass before committing
+
+Example:
+
+```typescript
+import { customRender } from "../test-utils";
+import { Button } from "./Button";
+
+describe("Button", () => {
+  it("renders correctly", () => {
+    const { getByText } = customRender(<Button>Click me</Button>);
+    expect(getByText("Click me")).toBeTruthy();
+  });
+});
+```
 
 ### Adding New Dependencies
 
@@ -392,3 +533,21 @@ Similar to shadcn/ui, consider:
 - Minimal dependencies between components
 - Clear, documented component APIs
 - Export pattern that allows selective imports (e.g., wildcard pattern `"./*": "./src/*.tsx"`)
+
+## CLI Usage
+
+The `@warp-ui/cli` package provides scaffolding and management commands:
+
+```bash
+# Install CLI globally (from GitHub Packages)
+npm install -g @warp-ui/cli
+
+# Component management
+warp-ui add [component]     # Add component to project
+warp-ui init                # Initialize Warp UI in project
+
+# Configuration
+warp-ui config              # Manage CLI configuration
+```
+
+**Note**: CLI is published to GitHub Packages and requires authentication.
