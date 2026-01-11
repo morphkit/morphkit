@@ -2,7 +2,6 @@
 name: code-review
 description: Performs comprehensive architectural code reviews for the morph-ui design system. Reviews package naming, component architecture, code duplication, and design patterns. Use when making architectural changes, refactoring, or when user requests "review code", "code health check", "architectural review", or "check codebase quality".
 allowed-tools: Read, Grep, Glob, WebSearch, WebFetch, Task
-model: sonnet
 ---
 
 # Code Review Skill
