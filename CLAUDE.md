@@ -555,3 +555,31 @@ warp-ui config              # Manage CLI configuration
 ```
 
 **Note**: CLI is published to GitHub Packages and requires authentication.
+
+## Component Creation Workflow
+
+**All new components must follow the spec-driven OpenSpec workflow.**
+
+Use the `create-component` skill for all component development work. This skill implements a three-phase process:
+
+1. **Phase 1: Proposal Creation**
+   - Create OpenSpec proposal in `openspec/changes/add-[component-name]-component/`
+   - Write `proposal.md` (why, what, impact)
+   - Write `specs/[component-name]/spec.md` with requirements and scenarios
+   - Write `tasks.md` with 8-section implementation checklist
+   - Validate with `openspec validate --strict`
+   - **Wait for user approval before proceeding**
+
+2. **Phase 2: Implementation**
+   - Follow tasks.md checklist sequentially
+   - Create all 7 required files (Component.tsx, .theme.ts, .test.tsx, index.ts, meta.json, README.mdx, examples/)
+   - Update 4 registries (theme export, package export, docs registry, component registry)
+   - Run verification (format, type-check, lint, test)
+
+3. **Phase 3: Archiving**
+   - After merge, user runs: `openspec archive add-[component-name]-component --yes`
+   - Creates final spec at `openspec/specs/[component-name]/spec.md`
+
+**Important:** Never implement components without an approved OpenSpec proposal. This ensures architectural consistency and creates a documentation trail.
+
+See `.claude/skills/create-component/SKILL.md` for complete details, templates, and requirement patterns.

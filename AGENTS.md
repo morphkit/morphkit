@@ -42,6 +42,17 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 This is non-negotiable. The test suite must always be green.
 
+## Component Creation
+
+When users request component creation (e.g., "create a Button component", "add a new Input component"), use the `create-component` skill. This implements a spec-driven workflow:
+
+- Every component requires an OpenSpec proposal before implementation
+- Proposal must be validated and approved before coding begins
+- Implementation follows a structured tasks.md checklist
+- See `.claude/skills/create-component/SKILL.md` for the three-phase workflow
+
+This ensures architectural consistency and proper documentation for all components.
+
 ## Additional Requirements
 
 For complete project conventions, see:

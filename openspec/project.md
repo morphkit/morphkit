@@ -174,6 +174,17 @@
 - Documentation: MDX files in `docs/` or embedded
 - Metadata: `meta.json` for dependencies and metadata
 
+**Component Creation Workflow:**
+
+All new components follow a spec-driven development workflow using OpenSpec:
+
+1. **Proposal Phase**: Create OpenSpec proposal with requirements and test scenarios using the `create-component` skill
+2. **Approval Gate**: Proposal must be approved before implementation begins
+3. **Implementation Phase**: Build component following tasks.md checklist (theme, component, tests, examples, docs, registries)
+4. **Archiving Phase**: Archive proposal after merge to create final spec
+
+See `.claude/skills/create-component/SKILL.md` for the complete three-phase workflow and OpenSpec proposal templates.
+
 ### Flows System
 
 **Concept:**
