@@ -343,7 +343,7 @@ bun install
 bun run dev
 
 # Run demo app
-turbo dev --filter=demo-react-native-app
+turbo dev --filter=kitchen-sink-app
 ```
 
 ## Project Structure

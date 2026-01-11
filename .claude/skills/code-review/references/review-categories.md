@@ -244,7 +244,7 @@ style={[
 ```
 morph-ui/
 ├── apps/
-│   └── demo-react-native-app/
+│   └── kitchen-sink-app/
 ├── packages/
 │   ├── react-native/              # Component library
 │   ├── react-native-flows/        # Flow templates

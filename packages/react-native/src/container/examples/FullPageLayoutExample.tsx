@@ -4,7 +4,7 @@ import { Box, Stack, Typography, Card } from "../..";
 export const FullPageLayoutExample = () => {
   return (
     <Container maxWidth="lg" padding={20}>
-      <Stack gap={20}>
+      <Stack gap="lg">
         <Box backgroundColor="#4A90E2" padding={20} borderRadius={8}>
           <Typography variant="large-title" style={{ color: "#FFFFFF" }}>
             Page Header

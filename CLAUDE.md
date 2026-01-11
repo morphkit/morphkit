@@ -52,7 +52,7 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 
 ### Current Structure
 
-**`apps/demo-react-native-app/`** - Component Library Browser & Flow Showcase
+**`apps/kitchen-sink-app/`** - Component Library Browser & Flow Showcase
 
 - Full-featured demo app with Drawer navigation
 - Dynamic component documentation viewer using MDX
@@ -140,17 +140,17 @@ Use Turbo filters to target specific packages:
 
 ```bash
 # Work with demo app
-turbo dev --filter=demo-react-native-app
-turbo build --filter=demo-react-native-app
-turbo lint --filter=demo-react-native-app
-turbo check-types --filter=demo-react-native-app
+turbo dev --filter=kitchen-sink-app
+turbo build --filter=kitchen-sink-app
+turbo lint --filter=kitchen-sink-app
+turbo check-types --filter=kitchen-sink-app
 ```
 
 ### Working with Flows
 
 ```bash
 # Run the demo app to see flows in action
-turbo dev --filter=demo-react-native-app
+turbo dev --filter=kitchen-sink-app
 
 # View auth flow documentation
 # Navigate to /flows in the running app
@@ -475,7 +475,7 @@ Multi-screen user journeys are managed through the flows package:
 
 ### Working with the Demo App
 
-The demo app at `apps/demo-react-native-app` showcases all components and flows:
+The demo app at `apps/kitchen-sink-app` showcases all components and flows:
 
 1. **Component Documentation**: All components automatically appear in sidebar via registry
 2. **Adding Components**: New components in `@warp-ui/react-native` appear automatically

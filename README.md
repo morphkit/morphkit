@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="apps/demo-react-native-app/assets/logo.png" alt="MorphUI Logo" width="600" />
+  <img src="apps/kitchen-sink-app/assets/logo.png" alt="MorphUI Logo" width="600" />
 </div>
 
 <div align="center">
@@ -58,7 +58,7 @@ bun run dev
 Run the demo app to see all components and flows:
 
 ```bash
-turbo dev --filter=demo-react-native-app
+turbo dev --filter=kitchen-sink-app
 ```
 
 ## Project Structure
@@ -68,7 +68,7 @@ MorphUI is organized as a Turborepo monorepo with the following structure:
 ```
 morph-ui/
 ├── apps/
-│   └── demo-react-native-app/    # Component library browser & flow showcase
+│   └── kitchen-sink-app/    # Component library browser & flow showcase
 ├── packages/
 │   ├── react-native/              # @warp-ui/react-native - 27 component library
 │   ├── react-native-flows/        # Multi-screen flow templates
@@ -84,7 +84,7 @@ morph-ui/
   - 27 components with `.theme.ts` files for token-based styling
   - Component registry and MDX documentation
   - Comprehensive test coverage
-- **`apps/demo-react-native-app/`**: Full-featured demo application
+- **`apps/kitchen-sink-app/`**: Full-featured demo application
   - Drawer navigation for browsing components
   - Dynamic MDX documentation viewer
   - Multi-screen flow demonstrations
@@ -152,10 +152,10 @@ Use Turbo filters to target specific workspaces:
 
 ```bash
 # Demo app
-turbo dev --filter=demo-react-native-app
-turbo build --filter=demo-react-native-app
-turbo lint --filter=demo-react-native-app
-turbo check-types --filter=demo-react-native-app
+turbo dev --filter=kitchen-sink-app
+turbo build --filter=kitchen-sink-app
+turbo lint --filter=kitchen-sink-app
+turbo check-types --filter=kitchen-sink-app
 
 # Component library
 turbo test --filter=@warp-ui/react-native

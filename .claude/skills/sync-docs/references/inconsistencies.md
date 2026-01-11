@@ -106,7 +106,7 @@ grep -n "React Native.*[0-9]\+\.[0-9]" openspec/project.md
 
 ```bash
 # Extract Expo version from demo app package.json
-expoVersion=$(grep -o '"expo": "[~^]*[0-9][^"]*"' apps/demo-react-native-app/package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+expoVersion=$(grep -o '"expo": "[~^]*[0-9][^"]*"' apps/kitchen-sink-app/package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
 echo "Expo SDK version: $expoVersion"
 
 # Search for Expo version mentions
@@ -115,7 +115,7 @@ grep -n "Expo.*[0-9]\+\.[0-9]" openspec/project.md CLAUDE.md
 
 **Expected format:**
 
-- `apps/demo-react-native-app/package.json`: `"expo": "~54.0.30"`
+- `apps/kitchen-sink-app/package.json`: `"expo": "~54.0.30"`
 - `openspec/project.md` line 48: `- **Platform**: Expo SDK ~54.0.30`
 
 #### Jest Version

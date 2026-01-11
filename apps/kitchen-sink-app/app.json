@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Demo React Native App",
-    "slug": "demo-react-native-app",
+    "name": "Kitchen Sink App",
+    "slug": "kitchen-sink-app",
     "version": "1.0.0",
-    "scheme": "demoreactnativeapp",
+    "scheme": "kitchensinkapp",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

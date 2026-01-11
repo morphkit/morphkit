@@ -1,5 +1,5 @@
 {
-  "name": "demo-react-native-app",
+  "name": "kitchen-sink-app",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
