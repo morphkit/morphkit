@@ -6,6 +6,58 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 
 # Create React Native Component
 
+## OpenSpec Integration
+
+This skill follows a **spec-driven development workflow** using OpenSpec. Every new component requires:
+
+1. **Proposal Creation** - OpenSpec proposal with requirements and scenarios
+2. **User Approval** - Explicit approval before implementation begins
+3. **Implementation** - Follow tasks.md checklist
+4. **Archiving** - Archive change after merge (user triggers)
+
+### Three-Phase Workflow
+
+**Phase 1: Proposal Creation (Automatic)**
+
+- Create change proposal: `openspec/changes/add-[component-name]-component/`
+- Write `proposal.md` (why, what, impact)
+- Write `specs/[component-name]/spec.md` (requirements with scenarios)
+- Write `tasks.md` (8-section implementation checklist)
+- Validate: `openspec validate add-[component-name]-component --strict`
+- **CRITICAL GATE**: Wait for user approval
+
+**Phase 2: Implementation (After Approval)**
+
+- Follow tasks.md sequentially
+- Create all component files
+- Update checkboxes as tasks complete
+- Run verification (format, type-check, lint, test)
+
+**Phase 3: Archiving (User Triggers After Merge)**
+
+- User runs: `openspec archive add-[component-name]-component --yes`
+- Spec moves to `openspec/specs/[component-name]/spec.md`
+- Component added to official catalog
+
+### OpenSpec File Structure
+
+Each component proposal creates:
+
+```
+openspec/changes/add-[component-name]-component/
+├── proposal.md              # Why, what changes, impact
+├── tasks.md                 # Implementation checklist (8 sections)
+└── specs/[component-name]/  # Component specification
+    └── spec.md              # Requirements with scenarios
+```
+
+After archiving:
+
+```
+openspec/specs/[component-name]/
+└── spec.md                  # Final specification
+```
+
 ## Overview
 
 This skill creates complete React Native components for the morph-ui component library following:
@@ -33,7 +85,11 @@ To create a new component:
 
 ## Component Creation Workflow
 
-### Step 1: Define Component Structure
+This skill implements a **three-phase spec-driven workflow** with OpenSpec integration:
+
+### Phase 1: Proposal Creation
+
+**Step 1.1: Gather Requirements**
 
 I'll ask you about:
 
@@ -42,7 +98,72 @@ I'll ask you about:
 - **Features**: Special functionality? (icons, loading states, etc.)
 - **Base component**: Extends View, Pressable, TextInput, etc.?
 
-### Step 2: Create Theme Tokens First
+**Step 1.2: Create OpenSpec Proposal**
+
+Create change directory:
+
+```
+openspec/changes/add-[component-name]-component/
+```
+
+**Step 1.3: Write proposal.md**
+
+```markdown
+# Change: Add [ComponentName] Component
+
+## Why
+
+[1-2 sentences explaining user need for this component]
+
+## What Changes
+
+- Add new [ComponentName] component with [X] variants and [Y] sizes
+- Implement [key features]
+- Include comprehensive tests and MDX documentation
+- Register in all 4 registries (theme, package, docs, metadata)
+
+## Impact
+
+- Affected specs: `[component-name]` (new spec)
+- Affected code:
+  - `packages/react-native/src/[component-name]/` (new directory)
+  - `packages/react-native/src/theme/tokens/components.ts` (export theme)
+  - `packages/react-native/src/index.ts` (export component)
+  - `packages/react-native/src/docs-registry.ts` (register docs)
+  - `packages/react-native/src/registry.json` (add metadata)
+```
+
+**Step 1.4: Write specs/[component-name]/spec.md**
+
+See "OpenSpec Proposal Structure" section below for detailed requirement patterns and scenario templates.
+
+**Step 1.5: Write tasks.md**
+
+See "OpenSpec Proposal Structure" section below for complete tasks.md template.
+
+**Step 1.6: Validate Proposal**
+
+Run validation:
+
+```bash
+openspec validate add-[component-name]-component --strict
+```
+
+Fix any errors (common issues: missing scenarios, wrong format).
+
+**Step 1.7: Wait for User Approval**
+
+**CRITICAL GATE**: Present proposal summary to user. Do NOT proceed to implementation until approved.
+
+### Phase 2: Implementation (After Approval)
+
+**Step 2.1: Read Proposal Files**
+
+- Read proposal.md to understand requirements
+- Read spec.md to understand what must be built
+- Read tasks.md to get implementation roadmap
+
+\*\*Step 2.2: Create Theme Tokens First
 
 Before implementation, I create `Component.theme.ts` with the three-tier system:
 
@@ -80,7 +201,7 @@ export const componentName = {
 
 See [theme-system.md](references/theme-system.md) for complete theme patterns.
 
-### Step 3: Implement Component
+**Step 2.3: Implement Component**
 
 Components follow this pattern:
 
@@ -116,9 +237,9 @@ export const Component = ({ variant = "primary", size = "md", style }) => {
 
 See [component-patterns.md](references/component-patterns.md) for detailed patterns.
 
-### Step 4: Create Supporting Files
+**Step 2.4: Create Supporting Files**
 
-I'll automatically create:
+Follow tasks.md sections 3-6 to create:
 
 **Required files**:
 
@@ -138,9 +259,9 @@ I'll automatically create:
 
 See [file-structure.md](references/file-structure.md) for complete file specifications.
 
-### Step 5: Update Registries
+**Step 2.5: Update Registries**
 
-I'll automatically update 4 registry files:
+Follow tasks.md sections 7 to update 4 registry files:
 
 1. **`src/theme/tokens/components.ts`** - Export component theme
 
@@ -157,9 +278,13 @@ I'll automatically update 4 registry files:
 3. **`src/docs-registry.ts`** - Register documentation
 4. **`src/registry.json`** - Add metadata entry
 
-### Step 6: Verification
+**Step 2.6: Update tasks.md Checkboxes**
 
-I'll run all checks automatically:
+Mark tasks as complete `- [x]` as you finish each one. Track progress through all 8 sections.
+
+**Step 2.7: Verification**
+
+Follow tasks.md section 8 to run all checks:
 
 ```bash
 bun run format                                  # Prettier
@@ -169,6 +294,599 @@ bun run test --filter=@warp-ui/react-native         # Jest
 ```
 
 All checks must pass before the component is complete.
+
+### Phase 3: Archiving (User Triggers After Merge)
+
+After the component is merged to main:
+
+**Step 3.1: Verify Completion**
+
+- [ ] All tasks.md checkboxes marked `- [x]`
+- [ ] All verification checks passing
+- [ ] Component visible in demo app
+- [ ] Documentation loads correctly
+
+**Step 3.2: Archive Proposal (User Command)**
+
+User runs:
+
+```bash
+openspec archive add-[component-name]-component --yes
+```
+
+**Step 3.3: Verify Archive**
+
+Confirm spec is discoverable:
+
+```bash
+openspec list --specs  # Should show [component-name]
+```
+
+**Result:**
+
+- Change moved to `changes/archive/YYYY-MM-DD-add-[component-name]-component/`
+- Final spec at `specs/[component-name]/spec.md`
+- Component now in official catalog
+
+## OpenSpec Proposal Structure
+
+This section provides complete templates for creating OpenSpec proposals.
+
+### proposal.md Template
+
+```markdown
+# Change: Add [ComponentName] Component
+
+## Why
+
+[1-2 sentences explaining user need for this component. Examples:]
+
+- "Users need a themeable, accessible button for all interactive actions"
+- "Apps require a flexible input component for text entry with validation"
+- "Developers need a card component for grouping related content"
+
+## What Changes
+
+- Add new [ComponentName] component with [N] variants ([list variants])
+- Add [M] size options ([list sizes])
+- Implement [key features: icons, loading states, disabled state, etc.]
+- Include comprehensive tests and MDX documentation
+- Register in all 4 registries (theme, package, docs, metadata)
+
+## Impact
+
+- Affected specs: `[component-name]` (new spec)
+- Affected code:
+  - `packages/react-native/src/[component-name]/` (new directory with 7 files)
+  - `packages/react-native/src/theme/tokens/components.ts` (add theme export)
+  - `packages/react-native/src/index.ts` (add component export)
+  - `packages/react-native/src/docs-registry.ts` (register MDX docs)
+  - `packages/react-native/src/registry.json` (add component metadata)
+```
+
+### specs/[component-name]/spec.md Template
+
+Complete specification with all requirements:
+
+```markdown
+## ADDED Requirements
+
+### Requirement: Component Structure
+
+[ComponentName] SHALL follow the morph-ui component architecture.
+
+#### Scenario: File structure compliance
+
+- **WHEN** component is created
+- **THEN** all 7 required files exist (Component.tsx, Component.theme.ts, Component.test.tsx, index.ts, meta.json, README.mdx, examples/)
+- **AND** all files pass TypeScript strict mode
+
+### Requirement: Three-Tier Theme Integration
+
+[ComponentName] SHALL use the three-tier theme system for all styling.
+
+#### Scenario: Theme token usage
+
+- **WHEN** component renders
+- **THEN** all colors come from semantic tokens (light/dark)
+- **AND** all spacing and sizes come from primitive tokens
+- **AND** no hardcoded values exist in styles
+
+#### Scenario: Theme switching
+
+- **WHEN** color scheme changes from light to dark
+- **THEN** component updates to dark variant tokens
+- **AND** all visual elements reflect new theme
+- **AND** contrast remains WCAG AA compliant
+
+### Requirement: Typography Integration
+
+[ComponentName] SHALL use Typography component for all text rendering.
+
+#### Scenario: Text rendering
+
+- **WHEN** component displays text content
+- **THEN** Typography component is used (never React Native Text)
+- **AND** variant prop specifies semantic text style
+- **AND** text color comes from theme tokens
+
+### Requirement: Accessibility
+
+[ComponentName] SHALL meet WCAG AA accessibility standards.
+
+#### Scenario: Screen reader support
+
+- **WHEN** component is rendered
+- **THEN** accessibilityRole is set appropriately
+- **AND** accessibilityLabel provides clear description
+- **AND** accessibilityState reflects current state (disabled, selected, etc.)
+
+#### Scenario: Color contrast
+
+- **WHEN** component renders in any variant
+- **THEN** text-to-background contrast ratio is at least 4.5:1 for normal text
+- **AND** large text (18pt+) has contrast ratio of at least 3:1
+- **AND** UI components have contrast ratio of at least 3:1
+
+### Requirement: Testing Coverage
+
+[ComponentName] SHALL have comprehensive Jest test coverage.
+
+#### Scenario: Core functionality tests
+
+- **WHEN** tests run via `bun run test`
+- **THEN** all variants are tested for correct rendering
+- **AND** all sizes are tested for correct token application
+- **AND** event handlers are tested for correct behavior
+- **AND** style merging is tested (user overrides work)
+- **AND** accessibility props are verified
+- **AND** zero test failures occur
+
+### Requirement: Documentation
+
+[ComponentName] SHALL have complete MDX documentation.
+
+#### Scenario: Documentation completeness
+
+- **WHEN** README.mdx is reviewed
+- **THEN** basic usage example exists
+- **AND** all variants are demonstrated with code
+- **AND** props table lists all component props
+- **AND** accessibility section explains WCAG compliance
+- **AND** theme customization example is provided
+
+[Add component-specific requirements based on type:]
+
+### Requirement: Variants (if component has variants)
+
+[ComponentName] SHALL provide [N] visual style variants: [list variants].
+
+#### Scenario: [Variant name] rendering
+
+- **WHEN** variant="[variant]" is specified
+- **THEN** background matches theme.component.[name].variant[colorScheme].[variant].background
+- **AND** text color matches [variant].text token
+- **AND** border color matches [variant].border token
+
+[Repeat scenario for each variant]
+
+### Requirement: Sizes (if component has sizes)
+
+[ComponentName] SHALL provide [M] size options: [list sizes].
+
+#### Scenario: [Size name] rendering
+
+- **WHEN** size="[size]" is specified
+- **THEN** height matches theme.component.[name].size.[size].height
+- **AND** padding matches theme.component.[name].size.[size].padding
+- **AND** font size comes from size token (if applicable)
+
+[Repeat scenario for each size]
+
+### Requirement: Interactive Behavior (if Pressable-based)
+
+[ComponentName] SHALL respond to user interaction with visual feedback.
+
+#### Scenario: Press state
+
+- **WHEN** user presses the component
+- **THEN** background color changes to backgroundPressed token
+- **AND** onPress event handler is called with correct arguments
+- **AND** visual feedback is immediate (no lag)
+
+#### Scenario: Disabled state
+
+- **WHEN** disabled={true}
+- **THEN** component uses disabled variant tokens
+- **AND** onPress handler is not called on press
+- **AND** opacity is set to theme.primitive.opacity.disabled
+- **AND** accessibilityState.disabled is true
+
+### Requirement: State Management (if stateful)
+
+[ComponentName] SHALL manage internal state correctly.
+
+#### Scenario: Value updates
+
+- **WHEN** onChange/onValueChange is called with new value
+- **THEN** component re-renders with updated value
+- **AND** visual state reflects the new value
+- **AND** controlled mode works with value prop
+
+### Requirement: Icon Integration (if supports icons)
+
+[ComponentName] SHALL support icon placement.
+
+#### Scenario: Icon rendering
+
+- **WHEN** icon prop is provided
+- **THEN** icon is cloned with theme-aware color
+- **AND** icon size matches theme.component.[name].icon.size
+- **AND** gap between icon and content matches theme.component.[name].icon.gap
+
+### Requirement: Loading States (if async)
+
+[ComponentName] SHALL display loading state during async operations.
+
+#### Scenario: Loading activation
+
+- **WHEN** loading={true}
+- **THEN** Spinner component is displayed
+- **AND** component is functionally disabled
+- **AND** spinner color matches variant text color
+- **AND** original content is hidden
+```
+
+### tasks.md Template
+
+Complete implementation checklist (8 sections):
+
+```markdown
+## 1. Theme System
+
+- [ ] 1.1 Create Component.theme.ts with primitive token imports
+- [ ] 1.2 Define size variants using primitive spacing/typography
+- [ ] 1.3 Define color variants with light/dark semantic colors
+- [ ] 1.4 Export theme with `as const` for type safety
+- [ ] 1.5 Add theme export to `src/theme/tokens/components.ts`
+
+## 2. Component Implementation
+
+- [ ] 2.1 Create Component.tsx with TypeScript interface
+- [ ] 2.2 Implement useTheme() hook for theme access
+- [ ] 2.3 Implement variant switching logic
+- [ ] 2.4 Implement size handling
+- [ ] 2.5 Use Typography component for all text
+- [ ] 2.6 Implement style merge pattern (base, theme, user)
+- [ ] 2.7 Add accessibility props (role, label, state, hint)
+- [ ] 2.8 Implement forwardRef (if needed for ref support)
+
+## 3. Testing
+
+- [ ] 3.1 Create Component.test.tsx with customRender from test-utils
+- [ ] 3.2 Test basic rendering with default props
+- [ ] 3.3 Test all variants render with correct tokens
+- [ ] 3.4 Test all sizes render with correct tokens
+- [ ] 3.5 Test event handlers (onPress, onChange, etc.)
+- [ ] 3.6 Test disabled state behavior
+- [ ] 3.7 Test style merging (user styles override defaults)
+- [ ] 3.8 Test accessibility props are set correctly
+- [ ] 3.9 Test ref forwarding (if applicable)
+
+## 4. Examples
+
+- [ ] 4.1 Create examples/ directory
+- [ ] 4.2 Create BasicExample.tsx showing default usage
+- [ ] 4.3 Create VariantsExample.tsx showing all variants
+- [ ] 4.4 Create SizesExample.tsx showing all sizes (if applicable)
+- [ ] 4.5 Create InteractiveExample.tsx showing stateful behavior (if applicable)
+- [ ] 4.6 Create examples/index.ts barrel export
+
+## 5. Documentation
+
+- [ ] 5.1 Create README.mdx with component description
+- [ ] 5.2 Import all examples at top of README.mdx
+- [ ] 5.3 Add Installation section
+- [ ] 5.4 Add Usage section with BasicExample
+- [ ] 5.5 Create props table with all component props
+- [ ] 5.6 Add Variants section with VariantsExample (if applicable)
+- [ ] 5.7 Add Sizes section with SizesExample (if applicable)
+- [ ] 5.8 Add Accessibility section explaining WCAG compliance
+- [ ] 5.9 Add Theme Customization section with override example
+- [ ] 5.10 Add Related Components section
+
+## 6. Metadata
+
+- [ ] 6.1 Create meta.json with name, category, dependencies
+- [ ] 6.2 Create index.ts barrel export (export component and types)
+- [ ] 6.3 Update src/registry.json with component entry
+- [ ] 6.4 Update src/docs-registry.ts with MDX import
+
+## 7. Package Integration
+
+- [ ] 7.1 Update src/index.ts with component and type exports
+
+## 8. Verification
+
+- [ ] 8.1 Run `bun run format` (Prettier)
+- [ ] 8.2 Run `bun run check-types --filter=@warp-ui/react-native` (zero errors)
+- [ ] 8.3 Run `bun run lint --filter=@warp-ui/react-native` (zero warnings)
+- [ ] 8.4 Run `bun run test --filter=@warp-ui/react-native` (all tests passing)
+- [ ] 8.5 Verify component appears in demo app sidebar
+- [ ] 8.6 Verify documentation loads correctly in demo app
+```
+
+## Requirement Patterns
+
+When creating component specs, include requirements based on component type.
+
+### Core Requirements (ALWAYS Include)
+
+These 6 requirements are **mandatory for every component**:
+
+1. **Component Structure** - File organization, TypeScript compliance
+2. **Three-Tier Theme Integration** - Token usage, theme switching
+3. **Typography Integration** - Typography component usage (if component displays text)
+4. **Accessibility** - WCAG AA compliance, screen reader support
+5. **Testing Coverage** - Comprehensive Jest tests
+6. **Documentation** - Complete MDX documentation
+
+### Optional Requirements (Include Based on Type)
+
+Add these requirements when applicable to your component:
+
+**Variants** - Include if component has visual style variations
+
+- Primary, secondary, outline, ghost, etc.
+- Each variant should have its own scenario
+- Example: Button, Badge, Alert
+
+**Sizes** - Include if component has size options
+
+- sm, md, lg, xl, etc.
+- Each size should have its own scenario
+- Example: Button, Input, Typography
+
+**Interactive Behavior** - Include for Pressable-based components
+
+- Press states, hover states
+- Disabled state handling
+- Event handler behavior
+- Example: Button, Card, FAB
+
+**State Management** - Include for stateful components
+
+- Value updates, controlled/uncontrolled modes
+- Internal state handling
+- Example: Input, Checkbox, Switch, Slider
+
+**Input Handling** - Include for TextInput-based components
+
+- Text entry, validation
+- Focus states, placeholder behavior
+- Example: Input, Textarea, OTPInput
+
+**Icon Integration** - Include if component supports icons
+
+- Icon placement (left, right, only)
+- Icon sizing, color inheritance
+- Example: Button, Input, Alert
+
+**Loading States** - Include for async components
+
+- Spinner display during operations
+- Disabled state during loading
+- Example: Button
+
+**Error Handling** - Include for form components
+
+- Error message display
+- Error state styling
+- Validation feedback
+- Example: Input, Textarea, Select
+
+**Compound Components** - Include for complex components
+
+- Sub-component composition
+- Parent-child relationship
+- Example: Accordion, Tabs, Select
+
+**Animation** - Include if component has motion
+
+- Animation timing, easing
+- Reduced motion support
+- Example: Accordion, Toast, Modal
+
+### Requirement Selection Guide
+
+**Container/Display Components** (View-based):
+
+- Core requirements only
+- Optional: Variants, Sizes
+- Example: Box, Container, Card, Divider
+
+**Interactive Components** (Pressable-based):
+
+- Core requirements
+- Interactive Behavior (mandatory)
+- Optional: Variants, Sizes, Icon Integration, Loading States
+- Example: Button, FAB
+
+**Input Components** (TextInput-based):
+
+- Core requirements
+- State Management (mandatory)
+- Input Handling (mandatory)
+- Optional: Variants, Sizes, Icon Integration, Error Handling
+- Example: Input, Textarea, OTPInput, Select
+
+**Display Components** (Text-based):
+
+- Core requirements
+- Typography Integration (mandatory)
+- Optional: Variants, Sizes
+- Example: Typography, Badge, Tag
+
+**Stateful Components** (with internal state):
+
+- Core requirements
+- State Management (mandatory)
+- Interactive Behavior (if clickable)
+- Optional: Variants, Sizes, Icon Integration
+- Example: Checkbox, Radio, Switch, Slider
+
+**Complex Components** (multi-part):
+
+- Core requirements
+- Compound Components (mandatory)
+- State Management (if stateful)
+- Optional: Variants, Animation
+- Example: Accordion, Tabs, Select
+
+### Scenario Writing Tips
+
+**Use WHEN/THEN/AND format:**
+
+```markdown
+#### Scenario: Button press
+
+- **WHEN** user presses the button
+- **THEN** onPress handler is called
+- **AND** background color changes to pressed state
+```
+
+**Be specific with token references:**
+
+```markdown
+- **THEN** background matches theme.component.button.variant[colorScheme].primary.background
+```
+
+**Cover edge cases:**
+
+```markdown
+#### Scenario: Press when disabled
+
+- **WHEN** disabled={true} and user presses button
+- **THEN** onPress handler is NOT called
+```
+
+**Include accessibility checks:**
+
+```markdown
+- **AND** accessibilityState.disabled is true
+```
+
+## OpenSpec Commands Reference
+
+Quick reference for OpenSpec CLI commands used during component creation.
+
+### Exploration Commands
+
+**List existing specs:**
+
+```bash
+openspec list --specs
+```
+
+Use before creating a proposal to check if a component already exists.
+
+**List active changes:**
+
+```bash
+openspec list
+```
+
+Shows proposals currently in development.
+
+**Show spec details:**
+
+```bash
+openspec show [component-name] --type spec
+```
+
+View requirements for an existing component.
+
+**Show change details:**
+
+```bash
+openspec show add-[component-name]-component
+```
+
+View proposal details, tasks, and deltas.
+
+### Validation Commands
+
+**Validate proposal (strict mode):**
+
+```bash
+openspec validate add-[component-name]-component --strict
+```
+
+**CRITICAL**: Always use `--strict` flag for comprehensive validation.
+
+Run this after creating proposal files and before presenting to user.
+
+**Common validation errors:**
+
+- "Change must have at least one delta" → Check `specs/[component]/spec.md` exists with `## ADDED Requirements`
+- "Requirement must have at least one scenario" → Ensure each requirement has `#### Scenario:` (4 hashtags)
+- Silent scenario parsing failures → Verify exact format: `#### Scenario: Name` (not bullets, not bold)
+
+**Debug validation:**
+
+```bash
+openspec show add-[component-name]-component --json --deltas-only
+```
+
+Shows parsed deltas in JSON format for debugging.
+
+### Archiving Commands
+
+**Archive completed change:**
+
+```bash
+openspec archive add-[component-name]-component --yes
+```
+
+User runs this after component is merged to main.
+
+**Verify archive:**
+
+```bash
+openspec list --specs  # Should now show [component-name]
+openspec validate --strict  # Ensure no errors after archiving
+```
+
+### Validation Checklist
+
+Before presenting proposal, ensure:
+
+**Structure:**
+
+- [ ] `proposal.md` has Why, What Changes, Impact sections
+- [ ] `tasks.md` has 8 numbered sections with checkboxes
+- [ ] `spec.md` uses `## ADDED Requirements` header
+- [ ] All markdown properly formatted
+
+**Spec Quality:**
+
+- [ ] Each requirement uses SHALL/MUST wording
+- [ ] Each requirement has ≥1 `#### Scenario:` (4 hashtags, not 3)
+- [ ] Scenarios use **WHEN**/**THEN**/**AND** format (bold keywords)
+- [ ] No bullets or bold for scenario headers (just `#### Scenario: Name`)
+
+**Core Requirements:**
+
+- [ ] Component Structure requirement present
+- [ ] Three-Tier Theme Integration requirement present
+- [ ] Typography Integration requirement present (if component has text)
+- [ ] Accessibility requirement present
+- [ ] Testing Coverage requirement present
+- [ ] Documentation requirement present
+
+**OpenSpec Validation:**
+
+- [ ] `openspec validate add-[component-name]-component --strict` passes with zero errors
 
 ## Required Files Structure
 
@@ -276,9 +994,20 @@ For complete examples, reference existing components:
 
 ## Quality Checklist
 
-Before marking complete, verify:
+Before marking complete, verify all OpenSpec and implementation requirements.
 
-### Files Created
+### OpenSpec Proposal (Phase 1)
+
+- [ ] Change ID follows format: `add-[component-name]-component`
+- [ ] proposal.md has Why, What Changes, Impact sections
+- [ ] spec.md has all 6 core requirements (Structure, Theme, Typography, Accessibility, Testing, Documentation)
+- [ ] spec.md has component-specific requirements (Variants, Sizes, etc.)
+- [ ] Each requirement has at least one `#### Scenario:` (4 hashtags)
+- [ ] Scenarios use **WHEN**/**THEN**/**AND** format
+- [ ] tasks.md has 8 numbered sections with checkboxes
+- [ ] `openspec validate add-[component-name]-component --strict` passes
+
+### Files Created (Phase 2)
 
 - [ ] Component.tsx with proper implementation
 - [ ] Component.theme.ts with three-tier tokens
@@ -311,12 +1040,21 @@ Before marking complete, verify:
 - [ ] `src/docs-registry.ts` updated
 - [ ] `src/registry.json` updated
 
-### Verification
+### Verification (Phase 2)
 
 - [ ] `bun run format` passes
 - [ ] `bun run check-types` passes (zero errors)
 - [ ] `bun run lint` passes (zero warnings)
 - [ ] `bun run test` passes (all tests green)
+- [ ] Component appears in demo app sidebar
+- [ ] Documentation loads correctly in demo app
+
+### Archiving Readiness (Phase 3)
+
+- [ ] All tasks.md checkboxes marked `- [x]`
+- [ ] All verification checks passing
+- [ ] Code merged to main branch
+- [ ] Ready for user to run: `openspec archive add-[component-name]-component --yes`
 
 ## Naming Conventions
 
