@@ -143,6 +143,7 @@ Structure the report as follows:
 [Critical issues that impact architecture, consistency, or maintainability]
 
 ### Issue Title
+
 **Issue**: [Clear description of the problem]
 **Files**: [Specific file paths with line numbers]
 **Impact**: [Why this matters]
@@ -236,11 +237,13 @@ See [best-practices.md](references/best-practices.md) for external standards:
 **Issue**: Mixed usage of `@warp-ui/` and `@repo/` scopes across packages
 
 **Files**:
+
 - `packages/react-native/package.json` - Uses `@warp-ui/react-native`
 - `packages/react-native-flows/package.json` - Uses `@repo/react-native-flows`
 - `packages/cli/package.json` - Uses `@warp-ui/cli`
 
 **Impact**:
+
 - Confusing for developers joining the project
 - Unclear which packages are intended for public consumption
 - Inconsistent with repository name "morph-ui"
@@ -249,22 +252,25 @@ See [best-practices.md](references/best-practices.md) for external standards:
 Choose one primary scope and apply consistently:
 
 Option A: Standardize on `@morph-ui/` (matches repo name)
+
 - Rename `@warp-ui/react-native` → `@morph-ui/react-native`
 - Rename `@warp-ui/cli` → `@morph-ui/cli`
 - Rename `@repo/react-native-flows` → `@morph-ui/react-native-flows`
 
 Option B: Keep `@warp-ui/` (existing branding)
+
 - Keep `@warp-ui/react-native` and `@warp-ui/cli`
 - Rename `@repo/react-native-flows` → `@warp-ui/react-native-flows`
 
 **Research**:
+
 - [npm scope best practices](https://docs.npmjs.com/about-scopes/)
 - [Package organization guide](https://blog.inedo.com/npm/best-practices-for-your-organizations-npm-packages)
 ```
 
 ### Medium Priority Example
 
-```markdown
+````markdown
 ### 🟡 Component Extraction Opportunity: PasswordInput
 
 **Issue**: Password input pattern with visibility toggle is repeated in flow screens
@@ -272,6 +278,7 @@ Option B: Keep `@warp-ui/` (existing branding)
 **File**: `packages/react-native-flows/src/auth/(default)/password.tsx:38-49`
 
 **Current Pattern**:
+
 ```tsx
 <Input
   size="lg"
@@ -286,8 +293,10 @@ Option B: Keep `@warp-ui/` (existing branding)
   onSubmitEditing={handleContinue}
 />
 ```
+````
 
 **Impact**:
+
 - Pattern will be repeated across different flows
 - Misses opportunity for consistent password UX
 - Doesn't follow component library philosophy
@@ -326,14 +335,17 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({...}) => {
 ```
 
 Benefits:
+
 - Encapsulates password visibility toggle logic
 - Provides consistent password input UX
 - Reusable across all flows and applications
 - Follows shadcn/ui component library model
 
 **Research**:
+
 - [React Native input best practices](https://medium.com/@imranrafeek/best-practices-for-naming-conventions-in-react-native-21f16df6179e)
-```
+
+````
 
 ### Low Priority Example
 
@@ -350,32 +362,37 @@ Benefits:
 **Recommendation**: Remove unused imports before next commit
 
 ESLint should catch these with `no-unused-vars` rule. If not, consider enabling.
-```
+````
 
 ## Critical Files to Review
 
 Always review these files in every comprehensive code review:
 
 **Package Manifests** (naming consistency):
+
 - `packages/react-native/package.json`
 - `packages/react-native-flows/package.json`
 - `packages/cli/package.json`
 - `packages/*/package.json` (all shared configs)
 
 **Component Files** (architecture patterns):
+
 - `packages/react-native/src/*/` (all 27 components)
 - Component `.theme.ts` files (theme system compliance)
 - Component `.test.tsx` files (test coverage)
 
 **Flow Files** (duplication detection):
+
 - `packages/react-native-flows/src/auth/(default)/`
 - Flow screen implementations
 
 **Theme Files** (token usage):
+
 - `packages/react-native/src/theme/tokens/`
 - Theme provider and configuration
 
 **Config Files** (consistency):
+
 - `packages/eslint-config/`
 - `packages/typescript-config/`
 - `packages/jest-config/`

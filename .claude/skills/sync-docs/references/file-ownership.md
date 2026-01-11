@@ -198,30 +198,31 @@ When a source of truth changes, update dependent files in this exact order:
 
 Comprehensive mapping of which file owns each piece of information:
 
-| Topic                       | Primary Source           | Update Order | Secondary Consumers                                   |
-| --------------------------- | ------------------------ | ------------ | ----------------------------------------------------- |
-| **Bun version**             | package.json             | 1            | openspec/project.md (2), CLAUDE.md (3)                |
-| **Turborepo version**       | package.json             | 1            | openspec/project.md (2), CLAUDE.md (3)                |
-| **TypeScript version**      | package.json             | 1            | openspec/project.md (2), CLAUDE.md (3)                |
-| **React Native version**    | package.json (workspace) | 1            | openspec/project.md (2)                               |
-| **Expo SDK version**        | package.json (workspace) | 1            | openspec/project.md (2)                               |
-| **Jest version**            | package.json (workspace) | 1            | openspec/project.md (2)                               |
-| **Component count**         | registry.json            | 1            | openspec/project.md (2), CLAUDE.md (3), README.md (5) |
-| **Component names**         | registry.json            | 1            | CLAUDE.md (3)                                         |
-| **Component categories**    | registry.json            | 1            | CLAUDE.md (3)                                         |
-| **Workspace structure**     | package.json             | 1            | openspec/project.md (2), CLAUDE.md (3), README.md (5) |
-| **Code style rules**        | openspec/project.md      | -            | CLAUDE.md (consumer), AGENTS.md (consumer)            |
-| **Zero comments rule**      | openspec/project.md      | -            | CLAUDE.md (consumer)                                  |
-| **Zero `any` type rule**    | openspec/project.md      | -            | CLAUDE.md (consumer)                                  |
-| **Conventional Commits**    | openspec/project.md      | -            | CLAUDE.md (consumer)                                  |
-| **Zero failed tests**       | AGENTS.md                | -            | openspec/project.md (consumer), CLAUDE.md (consumer)  |
-| **Three-tier theme system** | CLAUDE.md                | -            | openspec/project.md (brief reference)                 |
-| **Typography patterns**     | CLAUDE.md                | -            | None                                                  |
-| **Testing infrastructure**  | CLAUDE.md                | -            | openspec/project.md (brief strategy)                  |
-| **Git workflow**            | openspec/project.md      | -            | CLAUDE.md (consumer)                                  |
-| **OpenSpec process**        | openspec/AGENTS.md       | -            | AGENTS.md (reference)                                 |
-| **Project purpose**         | openspec/project.md      | -            | README.md (consumer)                                  |
-| **MCP roadmap**             | openspec/project.md      | -            | None                                                  |
+| Topic                       | Primary Source           | Update Order | Secondary Consumers                                                                                                                |
+| --------------------------- | ------------------------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Bun version**             | package.json             | 1            | openspec/project.md (2), CLAUDE.md (3), skills/code-review (4), skills/sync-docs (4)                                               |
+| **Turborepo version**       | package.json             | 1            | openspec/project.md (2), CLAUDE.md (3), skills/code-review (4), skills/sync-docs (4)                                               |
+| **TypeScript version**      | package.json             | 1            | openspec/project.md (2), CLAUDE.md (3), skills/code-review (4)                                                                     |
+| **React Native version**    | package.json (workspace) | 1            | openspec/project.md (2)                                                                                                            |
+| **Expo SDK version**        | package.json (workspace) | 1            | openspec/project.md (2)                                                                                                            |
+| **Jest version**            | package.json (workspace) | 1            | openspec/project.md (2)                                                                                                            |
+| **Component count**         | registry.json            | 1            | openspec/project.md (2), CLAUDE.md (3), skills/code-review (4), skills/create-component (4), skills/create-flow (4), README.md (7) |
+| **Component names**         | registry.json            | 1            | CLAUDE.md (3), skills/create-component (4), skills/create-flow (4)                                                                 |
+| **Component categories**    | registry.json            | 1            | CLAUDE.md (3), skills/code-review (4), skills/create-flow (4)                                                                      |
+| **Workspace structure**     | package.json             | 1            | openspec/project.md (2), CLAUDE.md (3), README.md (5)                                                                              |
+| **Code style rules**        | openspec/project.md      | -            | CLAUDE.md (consumer), AGENTS.md (consumer)                                                                                         |
+| **Zero comments rule**      | openspec/project.md      | -            | CLAUDE.md (consumer)                                                                                                               |
+| **Zero `any` type rule**    | openspec/project.md      | -            | CLAUDE.md (consumer)                                                                                                               |
+| **Conventional Commits**    | openspec/project.md      | -            | CLAUDE.md (consumer)                                                                                                               |
+| **Zero failed tests**       | AGENTS.md                | -            | openspec/project.md (consumer), CLAUDE.md (consumer)                                                                               |
+| **Three-tier theme system** | CLAUDE.md                | -            | openspec/project.md (brief reference)                                                                                              |
+| **Typography patterns**     | CLAUDE.md                | -            | None                                                                                                                               |
+| **Testing infrastructure**  | CLAUDE.md                | -            | openspec/project.md (brief strategy)                                                                                               |
+| **Git workflow**            | openspec/project.md      | -            | CLAUDE.md (consumer)                                                                                                               |
+| **OpenSpec process**        | openspec/AGENTS.md       | -            | AGENTS.md (reference)                                                                                                              |
+| **Project purpose**         | openspec/project.md      | -            | README.md (consumer)                                                                                                               |
+| **MCP roadmap**             | openspec/project.md      | -            | None                                                                                                                               |
+| **Theme token values**      | theme/tokens/primitive/  | -            | CLAUDE.md (consumer), skills/create-flow (consumer)                                                                                |
 
 ## File Roles Summary
 
@@ -274,6 +275,27 @@ Comprehensive mapping of which file owns each piece of information:
 **Update frequency:** When project details change
 **Consumers:** None (terminal node)
 
+### .claude/skills/_/SKILL.md and references/_.md
+
+**Role:** Skill documentation with reference material
+**Type:** Consumers of project documentation and codebase state
+**Update frequency:** When component count, versions, or patterns change
+**Consumers:** None (terminal nodes)
+
+**Key skills that consume project information:**
+
+- **code-review**: Consumes component count, tech stack versions, component categories
+- **create-component**: Consumes component count, component patterns, theme system
+- **create-flow**: Consumes component list, component props, theme token values
+- **sync-docs**: Consumes tech stack versions (in detection patterns), file structure
+
+**Update triggers:**
+
+- Component added/removed → Update code-review, create-component, create-flow skills
+- Tech stack version change → Update code-review, sync-docs skills
+- Component API change → Update create-flow skill examples
+- Theme token change → Update create-flow skill reference docs
+
 ## Conflict Resolution
 
 If conflicting information exists across files, resolve using this priority:
@@ -283,9 +305,10 @@ If conflicting information exists across files, resolve using this priority:
 1. **package.json** (always wins)
 2. openspec/project.md (should match #1)
 3. CLAUDE.md (should match #1)
-4. README.md (should match #1)
+4. skills/\* (should match #1)
+5. README.md (should match #1)
 
-**Resolution:** Update all files to match package.json.
+**Resolution:** Update all files to match package.json, including skill documentation.
 
 ### Component Count
 
@@ -293,9 +316,10 @@ If conflicting information exists across files, resolve using this priority:
 2. **registry.json** (should match #1)
 3. openspec/project.md (should match #2)
 4. CLAUDE.md (should match #2)
-5. README.md (should match #2)
+5. skills/\* (should match #2)
+6. README.md (should match #2)
 
-**Resolution:** Update registry.json first, then propagate to other files.
+**Resolution:** Update registry.json first, then propagate to docs and skill files.
 
 ### Development Rules
 
@@ -347,16 +371,23 @@ grep -n "TypeScript" package.json openspec/project.md CLAUDE.md README.md
 2. ⬜ openspec/project.md - Update component count (line 9)
 3. ⬜ CLAUDE.md - Update component count (lines 93, 102)
 4. ⬜ CLAUDE.md - Update component categories (lines 100-108)
-5. ⬜ README.md - Update component count if mentioned
+5. ⬜ .claude/skills/code-review/SKILL.md - Update component categories if mentioned
+6. ⬜ .claude/skills/code-review/references/morph-ui-standards.md - Update component list
+7. ⬜ .claude/skills/create-component/SKILL.md - Update component count
+8. ⬜ .claude/skills/create-flow/SKILL.md - Update available components
+9. ⬜ .claude/skills/create-flow/references/component-detection.md - Update component list
+10. ⬜ README.md - Update component count if mentioned
 
 **Verification:**
 
 ```bash
 # Count actual components
-find packages/react-native/src -maxdepth 1 -type d | wc -l
+find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l
 
-# Check mentions
-grep -n "26 components" openspec/project.md CLAUDE.md README.md
+# Check mentions in docs and skills
+grep -n "27 components" openspec/project.md CLAUDE.md README.md
+grep -r "27 components" .claude/skills/
+grep -r "27 total" .claude/skills/
 ```
 
 ### Monorepo Structure Change

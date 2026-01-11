@@ -9,6 +9,7 @@ This document compiles industry best practices for design systems, monorepo arch
 Design systems benefit from hierarchical component organization:
 
 **Levels**:
+
 1. **Atoms** - Basic building blocks (Button, Input, Typography)
 2. **Molecules** - Simple combinations (FormField = Label + Input + Error)
 3. **Organisms** - Complex components (LoginForm, ProductCard)
@@ -16,6 +17,7 @@ Design systems benefit from hierarchical component organization:
 5. **Pages** - Specific instances
 
 **Application to morph-ui**:
+
 - morph-ui's 27 components are primarily atoms and molecules
 - Flows represent organism/template level
 - Demo app shows page-level implementations
@@ -27,11 +29,13 @@ Design systems benefit from hierarchical component organization:
 Industry standard for managing design values:
 
 **Token Hierarchy**:
+
 1. **Global/Primitive Tokens** - Raw values (morph-ui: Tier 1)
 2. **Alias/Semantic Tokens** - Contextual meaning (morph-ui: Tier 2)
 3. **Component Tokens** - Component-specific (morph-ui: Tier 3)
 
 **Best Practices**:
+
 - Never hardcode values in components
 - Single source of truth for all design values
 - Theme-aware token resolution
@@ -40,6 +44,7 @@ Industry standard for managing design values:
 **morph-ui Alignment**: ✅ Fully implements three-tier token system
 
 **Sources**:
+
 - [Design Tokens W3C Community Group](https://design-tokens.github.io/community-group/)
 - [Scaling Your Frontend: A Monorepo and Design System Playbook](https://medium.com/@satnammca/scaling-your-frontend-a-monorepo-and-design-system-playbook-957e38c8c9e4)
 
@@ -48,12 +53,14 @@ Industry standard for managing design values:
 Modern design systems favor copy-paste over npm packages:
 
 **Principles**:
+
 - Components are self-contained and copyable
 - Users can customize without forking
 - No hidden dependencies
 - Source code is the documentation
 
 **Application to morph-ui**:
+
 - Wildcard exports allow selective imports
 - Components are self-contained with colocated themes
 - Theme tokens enable easy customization
@@ -68,12 +75,14 @@ Modern design systems favor copy-paste over npm packages:
 Modern design systems use context-aware theming:
 
 **Best Practices**:
+
 - Single `ThemeProvider` at app root
 - Hook-based theme access (`useTheme()`)
 - Automatic light/dark mode switching
 - CSS variables or token objects for runtime theming
 
 **morph-ui Implementation**:
+
 ```tsx
 // ✅ Correct pattern
 const { theme, colorScheme } = useTheme();
@@ -108,6 +117,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
 **morph-ui Alignment**: ✅ Follows standard workspace structure
 
 **Sources**:
+
 - [Monorepo Architecture: The Ultimate Guide for 2025](https://feature-sliced.design/blog/frontend-monorepo-explained)
 - [A Guide to Monorepos for Front-end Code](https://www.toptal.com/front-end/guide-to-monorepos)
 
@@ -131,6 +141,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
    - Maximize CPU utilization
 
 **Turborepo Implementation** (morph-ui uses):
+
 ```json
 {
   "tasks": {
@@ -171,6 +182,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
 **morph-ui Alignment**: ✅ Implements strict quality enforcement
 
 **Sources**:
+
 - [Monorepo Best Practices](https://circleci.com/blog/monorepo-dev-practices/)
 - [Scaling Your Frontend Playbook](https://medium.com/@satnammca/scaling-your-frontend-a-monorepo-and-design-system-playbook-957e38c8c9e4)
 
@@ -188,6 +200,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
 4. **Test Files**: Match source + `.test.tsx`
 
 **React Native Specifics**:
+
 - Components should describe their role, not appearance
 - Avoid abbreviations (`TextField` not `TxtFld`)
 - Use industry-standard names (`Button` not `CustomButton`)
@@ -195,6 +208,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
 **morph-ui Alignment**: ✅ Follows naming conventions
 
 **Sources**:
+
 - [React Native Naming Conventions](https://medium.com/@imranrafeek/best-practices-for-naming-conventions-in-react-native-21f16df6179e)
 - [React Native Coding Standards](https://medium.com/@mahesh.nagpure.mailbox/react-native-coding-standard-structure-ab5c5f9e6784)
 
@@ -224,12 +238,13 @@ const colors = theme.component.button.variant[colorScheme][variant];
 **morph-ui Alignment**: ✅ Follows variant-based API design
 
 **Example**:
+
 ```tsx
 interface ButtonProps {
-  variant?: "primary" | "secondary" | "ghost";  // ✅ Not 3 booleans
-  size?: "sm" | "md" | "lg";                    // ✅ Consistent values
-  isDisabled?: boolean;                         // ✅ Clear naming
-  onPress: () => void;                          // ✅ Required handler
+  variant?: "primary" | "secondary" | "ghost"; // ✅ Not 3 booleans
+  size?: "sm" | "md" | "lg"; // ✅ Consistent values
+  isDisabled?: boolean; // ✅ Clear naming
+  onPress: () => void; // ✅ Required handler
   children: React.ReactNode;
 }
 ```
@@ -239,6 +254,7 @@ interface ButtonProps {
 **Best Practices**:
 
 Colocated pattern (morph-ui uses):
+
 ```
 ComponentName/
 ├── ComponentName.tsx       # Component
@@ -249,6 +265,7 @@ ComponentName/
 ```
 
 **Benefits**:
+
 - Easy to find related files
 - Simple to copy/move components
 - Clear ownership boundaries
@@ -263,6 +280,7 @@ ComponentName/
 **Best Practices**:
 
 1. **Platform-Specific Files**:
+
    ```
    Component.tsx       # Shared
    Component.ios.tsx   # iOS-specific
@@ -270,6 +288,7 @@ ComponentName/
    ```
 
 2. **Platform Checks**:
+
    ```tsx
    import { Platform } from "react-native";
 
@@ -308,6 +327,7 @@ ComponentName/
    - Private: `"private": true`
 
 **Package.json Example**:
+
 ```json
 {
   "name": "@morph-ui/react-native",
@@ -323,6 +343,7 @@ ComponentName/
 **morph-ui Context**: Should standardize on single scope
 
 **Sources**:
+
 - [About npm Scopes](https://docs.npmjs.com/about-scopes/)
 - [Best Practices for npm Packages](https://blog.inedo.com/npm/best-practices-for-your-organizations-npm-packages)
 
@@ -336,6 +357,7 @@ ComponentName/
 4. **Include platform/framework**: `react-native-*` for RN-specific packages
 
 **URL-Safe Characters Only**:
+
 - Lowercase letters
 - Numbers
 - Hyphens
@@ -356,11 +378,13 @@ Format: `MAJOR.MINOR.PATCH`
 3. **PATCH**: Bug fixes (backward compatible)
 
 **Examples**:
+
 - `1.0.0` → `1.0.1` - Bug fix
 - `1.0.1` → `1.1.0` - New feature
 - `1.1.0` → `2.0.0` - Breaking change
 
 **Pre-release Versions**:
+
 - `1.0.0-alpha.1` - Alpha release
 - `1.0.0-beta.1` - Beta release
 - `1.0.0-rc.1` - Release candidate
@@ -383,19 +407,12 @@ Format: `MAJOR.MINOR.PATCH`
   "exports": {
     "./src/*": "./src/*"
   },
-  "files": [
-    "src",
-    "README.md"
-  ],
+  "files": ["src", "README.md"],
   "peerDependencies": {
     "react": "^18.0.0",
     "react-native": "^0.70.0"
   },
-  "keywords": [
-    "react-native",
-    "component-library",
-    "design-system"
-  ],
+  "keywords": ["react-native", "component-library", "design-system"],
   "repository": {
     "type": "git",
     "url": "https://github.com/org/repo"
@@ -405,6 +422,7 @@ Format: `MAJOR.MINOR.PATCH`
 ```
 
 **Key Points**:
+
 - Include `types` for TypeScript
 - Use `exports` for modern module resolution
 - Specify `files` to control what's published
@@ -434,6 +452,7 @@ Format: `MAJOR.MINOR.PATCH`
    - `accessibilityState` for interactive elements
 
 **React Native Implementation**:
+
 ```tsx
 <Pressable
   accessibilityRole="button"
@@ -467,6 +486,7 @@ Format: `MAJOR.MINOR.PATCH`
    - Theme variants (light/dark)
 
 3. **Test Organization**:
+
    ```tsx
    describe("Button", () => {
      describe("rendering", () => {
@@ -545,6 +565,7 @@ interface ButtonProps {
 ```
 
 **Benefits**:
+
 - IDE autocomplete
 - Inline documentation
 - Type safety
@@ -574,6 +595,7 @@ interface ButtonProps {
    - Block on security vulnerabilities
 
 **Turborepo Integration**:
+
 ```bash
 # Run only affected tasks
 turbo run test --filter=[origin/main]
@@ -647,10 +669,12 @@ morph-ui should align with these industry standards:
 9. **Performance**: Tree-shaking, memo optimization
 
 **Key Alignment**:
+
 - ✅ Excellent: Design system, monorepo, React Native patterns
 - ⚠️ Needs work: Package naming consistency
 
 **Sources**:
+
 - [Scaling Your Frontend Playbook](https://medium.com/@satnammca/scaling-your-frontend-a-monorepo-and-design-system-playbook-957e38c8c9e4)
 - [Monorepo Architecture Guide 2025](https://feature-sliced.design/blog/frontend-monorepo-explained)
 - [npm Scopes Documentation](https://docs.npmjs.com/about-scopes/)

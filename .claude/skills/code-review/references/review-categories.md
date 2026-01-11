@@ -14,15 +14,18 @@ This document provides comprehensive checklists for each review category. Use th
 - [ ] No mixing of scopes for similar packages (e.g., components vs flows)
 
 **Files to Review**:
+
 - All `package.json` files in `packages/*/`
 - All `package.json` files in `apps/*/`
 
 **Common Issues**:
+
 - Mixed `@warp-ui/` and `@morph-ui/` usage
 - Public packages using `@repo/` prefix
 - Inconsistent scope for related packages (components, flows, CLI)
 
 **Best Practice**:
+
 ```json
 // Public package
 {
@@ -47,11 +50,13 @@ This document provides comprehensive checklists for each review category. Use th
 - [ ] Correct `access` level (public/restricted)
 
 **Common Issues**:
+
 - Flows package marked private but should be public
 - Missing `publishConfig.access: "public"` for scoped packages
 - Incorrect private flag
 
 **Best Practice**:
+
 ```json
 // Public scoped package
 {
@@ -74,16 +79,19 @@ This document provides comprehensive checklists for each review category. Use th
 - [ ] No abbreviations unless industry standard
 
 **Common Issues**:
+
 - Generic names like `utils`, `helpers`, `common`
 - PascalCase or camelCase instead of kebab-case
 - Inconsistent prefixes
 
 **Good Examples**:
+
 - `@morph-ui/react-native` ✅
 - `@morph-ui/react-native-flows` ✅
 - `@morph-ui/cli` ✅
 
 **Bad Examples**:
+
 - `@morph-ui/rnComponents` ❌ (camelCase)
 - `@morph-ui/utils` ❌ (too generic)
 - `@morph-ui/rn-lib` ❌ (abbreviation)
@@ -102,32 +110,39 @@ This document provides comprehensive checklists for each review category. Use th
 - [ ] Component tokens compose primitive and semantic tokens correctly
 
 **Files to Review**:
+
 - All component `*.tsx` files in `packages/react-native/src/*/`
 - All `*.theme.ts` files
 - `packages/react-native/src/theme/tokens/components.ts`
 
 **Common Issues**:
+
 - Hardcoded colors: `backgroundColor: "#4A90E2"`
 - Hardcoded spacing: `padding: 16`
 - Hardcoded typography: `fontSize: 14`
 - Missing `.theme.ts` file for component
 
 **Best Practice**:
+
 ```tsx
 // ❌ Wrong - hardcoded values
-<View style={{
-  padding: 16,
-  backgroundColor: "#4A90E2",
-  borderRadius: 8
-}} />
+<View
+  style={{
+    padding: 16,
+    backgroundColor: "#4A90E2",
+    borderRadius: 8,
+  }}
+/>;
 
 // ✅ Correct - theme tokens
 const { theme } = useTheme();
-<View style={{
-  padding: theme.primitive.spacing[4],
-  backgroundColor: theme.semantic.colors.action.primary,
-  borderRadius: theme.component.button.borderRadius
-}} />
+<View
+  style={{
+    padding: theme.primitive.spacing[4],
+    backgroundColor: theme.semantic.colors.action.primary,
+    borderRadius: theme.component.button.borderRadius,
+  }}
+/>;
 ```
 
 ### Typography Component Usage
@@ -140,11 +155,13 @@ const { theme } = useTheme();
 - [ ] No inline fontSize, fontWeight, or color overrides
 
 **Common Issues**:
+
 - Using React Native's `Text` component directly
 - Applying custom styles to override Typography
 - Wrong variant for semantic meaning (e.g., using `body` for headings)
 
 **Best Practice**:
+
 ```tsx
 // ❌ Wrong
 <Text style={{ fontSize: 14, color: "#000" }}>
@@ -167,6 +184,7 @@ const { theme } = useTheme();
 - [ ] Clean `index.ts` with named export only
 
 **Expected Structure**:
+
 ```
 component-name/
 ├── ComponentName.tsx          # Main component (PascalCase)
@@ -178,6 +196,7 @@ component-name/
 ```
 
 **Common Issues**:
+
 - Missing test files
 - Missing theme files
 - Component file and directory name mismatch
@@ -193,6 +212,7 @@ component-name/
 - [ ] Responsive values use theme breakpoints
 
 **Style Merge Pattern**:
+
 ```tsx
 style={[
   baseStyles.container,        // Static StyleSheet styles
@@ -220,6 +240,7 @@ style={[
 - [ ] No deeply nested directories (max 3-4 levels)
 
 **Expected Structure**:
+
 ```
 morph-ui/
 ├── apps/
@@ -246,6 +267,7 @@ morph-ui/
 - [ ] Config files: kebab-case (`jest-config.ts`)
 
 **Common Issues**:
+
 - Component files in camelCase or kebab-case
 - Utility files in PascalCase
 - Inconsistent test file naming
@@ -260,6 +282,7 @@ morph-ui/
 - [ ] No re-export chains (max 1 level)
 
 **Package Exports Example**:
+
 ```json
 {
   "exports": {
@@ -269,6 +292,7 @@ morph-ui/
 ```
 
 **Component Export Example**:
+
 ```tsx
 // ✅ Correct - named export
 export const Button: React.FC<ButtonProps> = ({...}) => {...}
@@ -287,6 +311,7 @@ export default Button;
 - [ ] Shared configs properly referenced
 
 **Common Issues**:
+
 - Workspaces not defined correctly
 - Packages importing from `node_modules` instead of workspace
 - Circular dependencies between packages
@@ -305,12 +330,14 @@ export default Button;
 - [ ] Common UI patterns not extracted
 
 **Detection Strategy**:
+
 1. Search for similar file names across packages
 2. Compare component implementations
 3. Look for repeated props interfaces
 4. Find common styling patterns
 
 **Example Duplication**:
+
 ```tsx
 // File 1: auth/password.tsx
 <Input type="password" /* ... */ />
@@ -331,6 +358,7 @@ export default Button;
 - [ ] Inconsistent token naming for same values
 
 **Detection Strategy**:
+
 ```bash
 # Find duplicate color values
 grep -r "#[0-9A-Fa-f]\{6\}" packages/react-native/src/theme/
@@ -349,6 +377,7 @@ grep -r "spacing.*:" packages/react-native/src/theme/
 - [ ] Repeated API calls or hooks
 
 **Extraction Candidates**:
+
 - Email validation appearing in multiple components
 - Date formatting logic
 - Common hooks like `useDebounce`, `useToggle`
@@ -380,6 +409,7 @@ If `auth/(default)/email.tsx` and `auth/(sso)/email.tsx` are very similar, consi
 - [ ] Compound component patterns where appropriate
 
 **Good Pattern**:
+
 ```tsx
 // Card composes smaller primitives
 <Card>
@@ -403,12 +433,14 @@ If `auth/(default)/email.tsx` and `auth/(sso)/email.tsx` are very similar, consi
 - [ ] Proper TypeScript interfaces with JSDoc
 
 **Common Issues**:
+
 - Inconsistent size values (`small` vs `sm`)
 - Too many boolean props (use `variant` instead)
 - Missing required prop types
 - Unclear prop names
 
 **Good Props Design**:
+
 ```tsx
 interface ButtonProps {
   variant?: "primary" | "secondary" | "ghost";
@@ -430,6 +462,7 @@ interface ButtonProps {
 - [ ] Consistent token naming convention
 
 **Best Practice**:
+
 ```ts
 // Component theme composes base tokens
 export const buttonTheme = {
@@ -462,6 +495,7 @@ export const buttonTheme = {
 - [ ] Appropriate use of layouts
 
 **Common Issues**:
+
 - Mixing navigation approaches
 - Unsafe navigation parameters
 - Missing flow layouts
@@ -474,12 +508,14 @@ export const buttonTheme = {
 ### Unused Imports
 
 **Detection**:
+
 ```bash
 # ESLint should catch these
 grep -r "^import .* from" --include="*.tsx" --include="*.ts" packages/
 ```
 
 **Check for**:
+
 - [ ] Imports not referenced in code
 - [ ] Duplicate imports
 - [ ] Unused type imports
@@ -496,6 +532,7 @@ grep -r "^import .* from" --include="*.tsx" --include="*.ts" packages/
 - [ ] Unused constants or variables
 
 **Detection Strategy**:
+
 1. Search for unused exports
 2. Check for unreachable conditional branches
 3. Look for old commented code
@@ -515,6 +552,7 @@ grep -r "^import .* from" --include="*.tsx" --include="*.ts" packages/
 **Per project standards**: Zero tolerance for test failures. All tests must pass.
 
 **Coverage Expectations**:
+
 - Every component has basic render test
 - Key interactions tested (button press, input change)
 - Theme variants tested
@@ -530,6 +568,7 @@ grep -r "^import .* from" --include="*.tsx" --include="*.ts" packages/
 - [ ] `meta.json` includes dependencies
 
 **Documentation Requirements**:
+
 ```tsx
 /**
  * Button component following the three-tier theme system
@@ -551,30 +590,35 @@ export const Button: React.FC<ButtonProps> = ({...}) => {...}
 Use this checklist to ensure comprehensive coverage:
 
 ### Initial Scan
+
 - [ ] Review all `package.json` files
 - [ ] Check component directory structure
 - [ ] Scan for obvious duplication
 - [ ] Review recent git changes
 
 ### Deep Analysis
+
 - [ ] Read critical component implementations
 - [ ] Analyze theme token usage
 - [ ] Check flow screen patterns
 - [ ] Review shared configuration
 
 ### Pattern Detection
+
 - [ ] Search for repeated code patterns
 - [ ] Identify extraction opportunities
 - [ ] Find inconsistent naming
 - [ ] Locate technical debt
 
 ### Research & Validation
+
 - [ ] Search for relevant best practices
 - [ ] Validate against industry standards
 - [ ] Check official documentation
 - [ ] Compare to similar projects
 
 ### Reporting
+
 - [ ] Categorize findings by priority
 - [ ] Provide specific file references
 - [ ] Include code examples
@@ -588,6 +632,7 @@ Use this checklist to ensure comprehensive coverage:
 ### High Priority 🔴
 
 Issues that:
+
 - Break architectural consistency
 - Affect public API or published packages
 - Create confusion for contributors
@@ -596,6 +641,7 @@ Issues that:
 ### Medium Priority 🟡
 
 Issues that:
+
 - Reduce code quality
 - Miss optimization opportunities
 - Create minor inconsistencies
@@ -604,6 +650,7 @@ Issues that:
 ### Low Priority 🟢
 
 Issues that:
+
 - Are nice-to-haves
 - Have minimal impact
 - Require significant effort for small gain
@@ -612,6 +659,7 @@ Issues that:
 ### Positive Patterns ✅
 
 Always highlight:
+
 - Well-designed abstractions
 - Proper use of patterns
 - Good documentation

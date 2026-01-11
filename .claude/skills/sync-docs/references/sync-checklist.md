@@ -129,8 +129,64 @@ If adding a new "Tooltip" component in the "Feedback" category:
 
 7. Verify:
    ```bash
-   find packages/react-native/src -maxdepth 1 -type d | wc -l  # Should show 27
-   grep "27" openspec/project.md CLAUDE.md
+   find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l  # Should show 28
+   grep "28" openspec/project.md CLAUDE.md
+   grep -r "28 components" .claude/skills/
+   grep -r "28 total" .claude/skills/
+   ```
+
+## Skills Documentation Sync
+
+Use this checklist when component count, versions, or patterns change that affect skill documentation:
+
+- [ ] **Identify affected skills** based on change type:
+  - Component count change → code-review, create-component, create-flow
+  - Tech stack versions → code-review, sync-docs
+  - Component API/props → create-flow, create-component
+  - Theme tokens → create-flow
+- [ ] **Update code-review skill** (if component count or versions changed)
+  - `.claude/skills/code-review/SKILL.md` - Component categories mention
+  - `.claude/skills/code-review/references/morph-ui-standards.md` - Component count and categories
+- [ ] **Update create-component skill** (if component count or patterns changed)
+  - `.claude/skills/create-component/SKILL.md` - Component count references
+  - `.claude/skills/create-component/references/component-patterns.md` - Pattern examples
+- [ ] **Update create-flow skill** (if component list or props changed)
+  - `.claude/skills/create-flow/SKILL.md` - Available components mention
+  - `.claude/skills/create-flow/references/component-detection.md` - Full component list with props
+  - `.claude/skills/create-flow/references/examples.md` - Example usage
+- [ ] **Update sync-docs skill** (if tech stack versions in detection commands changed)
+  - `.claude/skills/sync-docs/SKILL.md` - Detection command examples
+  - `.claude/skills/sync-docs/references/inconsistencies.md` - Version patterns
+- [ ] **Run verification commands** to confirm skills are in sync
+
+### Skills Sync Example
+
+If adding a new "Tooltip" component (28th component):
+
+1. Update all main docs first (openspec/project.md, CLAUDE.md, etc.)
+
+2. Update `.claude/skills/code-review/references/morph-ui-standards.md`:
+   - Line ~93: Change "27 components" to "28 components"
+   - Update Feedback category to include tooltip
+
+3. Update `.claude/skills/create-component/SKILL.md`:
+   - Update any "27 components" references to "28 components"
+
+4. Update `.claude/skills/create-flow/SKILL.md`:
+   - Update "27 total" to "28 total"
+
+5. Update `.claude/skills/create-flow/references/component-detection.md`:
+   - Add Tooltip component with its props and usage examples
+
+6. Verify:
+
+   ```bash
+   # Check all skills updated
+   grep -r "28 components" .claude/skills/
+   grep -r "28 total" .claude/skills/
+   grep -r "tooltip" .claude/skills/create-flow/
+
+   # Should find new component in all expected locations
    ```
 
 ## Structure Changes
@@ -340,11 +396,17 @@ node .claude/skills/sync-docs/scripts/validate-docs.js
 # Or manually:
 # Check Bun version
 bunVersion=$(grep -o '"packageManager": "bun@[^"]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
-grep "$bunVersion" CLAUDE.md openspec/project.md
+grep "$bunVersion" CLAUDE.md openspec/project.md .claude/skills/code-review/references/morph-ui-standards.md
 
 # Check component count
-componentCount=$(find packages/react-native/src -maxdepth 1 -type d | wc -l | tr -d ' ')
-grep -E "${componentCount}\s+(?:fully-implemented\s+)?components" CLAUDE.md openspec/project.md
+componentCount=$(find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l | tr -d ' ')
+grep "$componentCount" CLAUDE.md openspec/project.md
+grep -r "$componentCount components" .claude/skills/
+grep -r "$componentCount total" .claude/skills/
+
+# Check skills exist
+test -f .claude/skills/code-review/references/morph-ui-standards.md && echo "✅ code-review skill exists"
+test -f .claude/skills/create-flow/references/component-detection.md && echo "✅ create-flow skill exists"
 ```
 
 ### 3. Cross-Reference Verification

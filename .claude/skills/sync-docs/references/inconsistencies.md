@@ -289,6 +289,11 @@ if ! grep -q "$actualCount fully-implemented components" CLAUDE.md; then
   echo "❌ CLAUDE.md: Component count mismatch (expected $actualCount)"
 fi
 
+# Check skills
+echo "Checking skills for component count mentions..."
+grep -r "$actualCount components" .claude/skills/ || echo "❌ Skills: Component count may be outdated"
+grep -r "$actualCount total" .claude/skills/ || echo "❌ Skills: Component count may be outdated"
+
 echo "=== Component count check complete ==="
 ```
 
@@ -360,6 +365,178 @@ if ! grep -q "component library" README.md; then
 fi
 
 echo "=== README.md check complete ==="
+```
+
+## Skills Documentation Drift
+
+### Description
+
+Skill documentation in `.claude/skills/` may contain outdated component counts, tech stack versions, component lists, or code examples that drift out of sync with the actual codebase.
+
+### Authoritative Sources
+
+- **Component count**: `registry.json` and actual directories
+- **Tech stack versions**: `package.json`
+- **Component lists**: `registry.json`
+- **Component props**: Component implementation files
+
+### Detection Patterns
+
+#### Check Component Count in Skills
+
+**Command:**
+
+```bash
+# Search for component count mentions in skills
+echo "=== Component count in skills ==="
+grep -rn "27 components" .claude/skills/
+grep -rn "27 total" .claude/skills/
+grep -rn "27 fully" .claude/skills/
+
+# Count actual components
+actualCount=$(find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l | tr -d ' ')
+echo "Actual component count: $actualCount"
+
+# Check for mismatches
+if grep -q "27 components" .claude/skills/ && [ "$actualCount" -ne 27 ]; then
+  echo "❌ Skills reference outdated component count (27 vs $actualCount)"
+fi
+```
+
+**Expected locations:**
+
+- `.claude/skills/code-review/SKILL.md` - May mention component count
+- `.claude/skills/code-review/references/morph-ui-standards.md` - Line ~93 ("27 components")
+- `.claude/skills/create-component/SKILL.md` - May mention component count
+- `.claude/skills/create-flow/SKILL.md` - May mention "27 total"
+- `.claude/skills/create-flow/references/component-detection.md` - Component list
+
+#### Check Tech Stack Versions in Skills
+
+**Command:**
+
+```bash
+# Extract versions from package.json
+bunVersion=$(grep -o '"packageManager": "bun@[^"]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+turboVersion=$(grep -o '"turbo": "[^^]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+tsVersion=$(grep -o '"typescript": "[^^]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+
+echo "=== Tech stack versions in skills ==="
+echo "Bun: $bunVersion"
+echo "Turborepo: $turboVersion"
+echo "TypeScript: $tsVersion"
+
+# Check skills for version mentions
+grep -rn "Bun.*[0-9]\+\.[0-9]" .claude/skills/code-review/
+grep -rn "Turborepo.*[0-9]\+\.[0-9]" .claude/skills/code-review/
+grep -rn "TypeScript.*[0-9]\+\.[0-9]" .claude/skills/code-review/
+
+# Check sync-docs detection commands
+grep -rn "Bun.*1.2.2" .claude/skills/sync-docs/
+grep -rn "Turborepo.*2.7.2" .claude/skills/sync-docs/
+```
+
+**Expected locations:**
+
+- `.claude/skills/code-review/references/morph-ui-standards.md` - Tech stack version references
+- `.claude/skills/sync-docs/SKILL.md` - Detection command examples
+- `.claude/skills/sync-docs/references/inconsistencies.md` - Version detection patterns
+
+#### Check Component Lists in Skills
+
+**Command:**
+
+```bash
+# Get actual component list
+echo "=== Actual components ==="
+find packages/react-native/src -maxdepth 1 -type d -not -name "src" -exec basename {} \; | sort
+
+# Check component lists in skills
+echo "=== Component lists in skills ==="
+echo "Checking create-flow component-detection.md..."
+# This file should list all 27 components with their props
+
+echo "Checking code-review morph-ui-standards.md..."
+# Should list component categories
+
+# Look for outdated component names
+grep -rn "tooltip\|popover\|dropdown" .claude/skills/ && echo "⚠️ Check if these components exist"
+```
+
+#### Check Code Examples in Skills
+
+**Command:**
+
+```bash
+# Check for outdated button size examples
+echo "=== Button size examples ==="
+grep -rn 'Button.*size=' .claude/skills/create-flow/
+
+# Check for outdated spacing token references
+echo "=== Spacing token references ==="
+grep -rn 'spacing\[' .claude/skills/create-flow/
+
+# Check for outdated variant props
+echo "=== Variant props ==="
+grep -rn 'variant=' .claude/skills/create-flow/
+```
+
+### Automated Detection Script
+
+```bash
+#!/bin/bash
+
+echo "=== Skills Documentation Drift Check ==="
+
+errors=0
+
+# Check component count in skills
+actualCount=$(find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l | tr -d ' ')
+echo "Actual component count: $actualCount"
+
+skillComponentRefs=$(grep -r "27 components\|27 total\|27 fully" .claude/skills/ | wc -l)
+if [ "$skillComponentRefs" -gt 0 ] && [ "$actualCount" -ne 27 ]; then
+  echo "❌ Skills contain outdated component count (found 27, actual is $actualCount)"
+  ((errors++))
+fi
+
+# Check tech stack versions in skills
+bunVersion=$(grep -o '"packageManager": "bun@[^"]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+if [ -n "$bunVersion" ]; then
+  # Check if old version is referenced in skills
+  if grep -rq "1.2.2" .claude/skills/ && [ "$bunVersion" != "1.2.2" ]; then
+    echo "❌ Skills may reference outdated Bun version"
+    ((errors++))
+  fi
+fi
+
+turboVersion=$(grep -o '"turbo": "[^^]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+if [ -n "$turboVersion" ]; then
+  if grep -rq "2.7.2" .claude/skills/ && [ "$turboVersion" != "2.7.2" ]; then
+    echo "❌ Skills may reference outdated Turborepo version"
+    ((errors++))
+  fi
+fi
+
+# Check if critical skill files exist
+if [ ! -f .claude/skills/code-review/references/morph-ui-standards.md ]; then
+  echo "❌ code-review morph-ui-standards.md missing"
+  ((errors++))
+fi
+
+if [ ! -f .claude/skills/create-flow/references/component-detection.md ]; then
+  echo "❌ create-flow component-detection.md missing"
+  ((errors++))
+fi
+
+# Summary
+if [ $errors -eq 0 ]; then
+  echo "✅ Skills documentation appears in sync"
+else
+  echo "❌ Found $errors potential skills documentation issues"
+fi
+
+echo "=== Skills drift check complete ==="
 ```
 
 ## Broken Cross-References
@@ -538,7 +715,7 @@ errors=0
 
 # Tech Stack Versions
 echo ""
-echo "[1/5] Tech Stack Versions"
+echo "[1/6] Tech Stack Versions"
 bunVersion=$(grep -o '"packageManager": "bun@[^"]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
 if [ -n "$bunVersion" ]; then
   grep -q "$bunVersion" CLAUDE.md || { echo "❌ CLAUDE.md: Bun version mismatch"; ((errors++)); }
@@ -547,27 +724,38 @@ fi
 
 # Component Count
 echo ""
-echo "[2/5] Component Count"
+echo "[2/6] Component Count"
 actualCount=$(find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l | tr -d ' ')
 grep -q "$actualCount Production-Ready Components" openspec/project.md || { echo "❌ openspec/project.md: Component count mismatch (expected $actualCount)"; ((errors++)); }
 grep -q "$actualCount fully-implemented components" CLAUDE.md || { echo "❌ CLAUDE.md: Component count mismatch (expected $actualCount)"; ((errors++)); }
 
+# Skills Documentation
+echo ""
+echo "[3/6] Skills Documentation"
+skillComponentRefs=$(grep -r "27 components\|27 total" .claude/skills/ 2>/dev/null | wc -l)
+if [ "$skillComponentRefs" -gt 0 ] && [ "$actualCount" -ne 27 ]; then
+  echo "❌ Skills: Component count may be outdated (found 27, actual is $actualCount)"
+  ((errors++))
+fi
+test -f .claude/skills/code-review/references/morph-ui-standards.md || { echo "❌ code-review skill files missing"; ((errors++)); }
+test -f .claude/skills/create-flow/references/component-detection.md || { echo "❌ create-flow skill files missing"; ((errors++)); }
+
 # README Staleness
 echo ""
-echo "[3/5] README.md Staleness"
+echo "[4/6] README.md Staleness"
 grep -q "official starter Turborepo" README.md && { echo "❌ README.md: Contains generic template"; ((errors++)); }
 grep -q "morph-ui\|MorphUI" README.md || { echo "❌ README.md: Project name missing"; ((errors++)); }
 
 # Cross-References
 echo ""
-echo "[4/5] Cross-References"
+echo "[5/6] Cross-References"
 test -f CLAUDE.md || { echo "❌ CLAUDE.md missing"; ((errors++)); }
 test -f openspec/project.md || { echo "❌ openspec/project.md missing"; ((errors++)); }
 test -f openspec/AGENTS.md || { echo "❌ openspec/AGENTS.md missing"; ((errors++)); }
 
 # Development Rules
 echo ""
-echo "[5/5] Development Rules"
+echo "[6/6] Development Rules"
 for gate in "bun run lint" "bun run check-types" "bun run format" "bun run test"; do
   grep -q "$gate" CLAUDE.md || { echo "❌ CLAUDE.md: Missing '$gate'"; ((errors++)); }
   grep -q "$gate" AGENTS.md || { echo "❌ AGENTS.md: Missing '$gate'"; ((errors++)); }

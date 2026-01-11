@@ -13,6 +13,7 @@ The cornerstone of morph-ui's styling architecture.
 Raw design values without semantic meaning. These are the building blocks.
 
 **Token Files**:
+
 - `colors.ts` - Color palette (neutral, primary, success, warning, error)
 - `spacing.ts` - Spacing scale (0-12)
 - `typography.ts` - Font sizes, weights, line heights, letter spacing
@@ -21,11 +22,13 @@ Raw design values without semantic meaning. These are the building blocks.
 - `animation.ts` - Timing and easing functions
 
 **Usage Rules**:
+
 - Never use primitive tokens directly in components
 - Always compose through semantic or component tokens
 - Primitive tokens are the single source of truth for raw values
 
 **Example**:
+
 ```ts
 export const primitiveColors = {
   neutral: {
@@ -50,16 +53,19 @@ export const primitiveColors = {
 Context-aware tokens that provide meaning. Mapped to light/dark themes.
 
 **Token Files**:
+
 - `colors.ts` - Semantic color assignments (text, surface, border, action, feedback)
 - `typography.ts` - Text style definitions (variants like body, heading, caption)
 - `state.ts` - Interactive state colors (hover, active, disabled)
 
 **Usage Rules**:
+
 - Use semantic tokens when component tokens don't exist
 - Semantic tokens map primitive tokens to context
 - Always provide both light and dark mode mappings
 
 **Example**:
+
 ```ts
 export const semanticColors = {
   light: {
@@ -92,6 +98,7 @@ export const semanticColors = {
 Component-specific styling rules that compose primitive and semantic tokens.
 
 **Structure**:
+
 ```ts
 import { primitiveSpacing, primitiveColors } from "../theme/tokens/primitive";
 import { semanticColors } from "../theme/tokens/semantic";
@@ -141,6 +148,7 @@ export const buttonTheme = {
 ```
 
 **Usage Rules**:
+
 - Every component must have a `.theme.ts` file
 - Component tokens are exported via `src/theme/tokens/components.ts`
 - Components access tokens through `useTheme()` hook
@@ -148,6 +156,7 @@ export const buttonTheme = {
 ### Theme Usage in Components
 
 **Standard Pattern**:
+
 ```tsx
 import { useTheme } from "../theme";
 
@@ -182,6 +191,7 @@ export const Button: React.FC<ButtonProps> = ({
 ```
 
 **Critical Rules**:
+
 - ❌ Never hardcode values: `padding: 16`, `backgroundColor: "#4A90E2"`
 - ✅ Always use tokens: `padding: theme.primitive.spacing[4]`
 - ✅ Follow merge order: `[baseStyles, dynamicThemeStyles, customStyle]`
@@ -199,6 +209,7 @@ The Typography component replaces React Native's `Text` component throughout the
 All variants are defined in semantic tokens and map to proper font sizes, weights, line heights, and letter spacing.
 
 **Available Variants**:
+
 - `large-title` - Largest heading (34px)
 - `title-1` - Primary page title (28px)
 - `title-2` - Section title (22px)
@@ -214,6 +225,7 @@ All variants are defined in semantic tokens and map to proper font sizes, weight
 ### Usage Rules
 
 **Always**:
+
 ```tsx
 <Typography variant="body" style={{ color: variantTokens.text }}>
   {children}
@@ -221,13 +233,13 @@ All variants are defined in semantic tokens and map to proper font sizes, weight
 ```
 
 **Never**:
+
 ```tsx
-<Text style={{ fontSize: 14, color: "#000" }}>
-  {children}
-</Text>
+<Text style={{ fontSize: 14, color: "#000" }}>{children}</Text>
 ```
 
 **Styling Typography**:
+
 - Use `style` prop for color only (from theme tokens)
 - Never override fontSize, fontWeight, lineHeight directly
 - Use correct variant for semantic meaning
@@ -252,6 +264,7 @@ component-name/
 ### File Requirements
 
 **ComponentName.tsx**:
+
 - PascalCase naming
 - Named export (not default)
 - TypeScript with full prop interfaces
@@ -261,24 +274,28 @@ component-name/
 - No `any` types
 
 **ComponentName.theme.ts**:
+
 - Export component tokens as `{component}Theme`
 - Compose primitive and semantic tokens
 - Include variant and size definitions
 - Provide light and dark mode mappings
 
 **ComponentName.test.tsx**:
+
 - Test main functionality
 - Test all variants and sizes
 - Test theme compliance
 - All tests must pass (zero tolerance for failures)
 
 **README.mdx**:
+
 - Usage examples
 - Props documentation
 - Variant demonstrations
 - Integration examples
 
 **meta.json**:
+
 ```json
 {
   "name": "Component Name",
@@ -289,6 +306,7 @@ component-name/
 ```
 
 **index.ts**:
+
 ```ts
 export { ComponentName } from "./ComponentName";
 export type { ComponentNameProps } from "./ComponentName";
@@ -319,12 +337,14 @@ flows/
 ### Flow Types
 
 Current types:
+
 - `auth` - Authentication flows
 - (Future: `onboarding`, `checkout`, etc.)
 
 ### Flow Variants
 
 Variants use Expo Router group syntax with parentheses:
+
 - `(default)` - Standard implementation
 - `(with-sso)` - SSO integration
 - `(minimal)` - Simplified version
@@ -360,6 +380,7 @@ Variants use Expo Router group syntax with parentheses:
 ### Current State (To Be Standardized)
 
 **Active scopes**:
+
 - `@warp-ui/` - Published packages (react-native, cli)
 - `@repo/` - Internal packages (configs, flows)
 
@@ -374,6 +395,7 @@ Variants use Expo Router group syntax with parentheses:
 - Include platform prefix for platform-specific packages
 
 **Good Examples**:
+
 - `@morph-ui/react-native`
 - `@morph-ui/react-native-flows`
 - `@morph-ui/cli`
@@ -390,6 +412,7 @@ These rules are strictly enforced:
 #### 1. Static Analysis
 
 All checks must pass before marking work complete:
+
 - ✅ `bun run lint` - Zero warnings/errors
 - ✅ `bun run check-types` - Zero TypeScript errors
 - ✅ `bun run format` - Prettier formatted
@@ -398,6 +421,7 @@ All checks must pass before marking work complete:
 #### 2. Zero Tolerance for Comments
 
 **Absolutely no code comments allowed.** Code must be self-documenting through:
+
 - Clear variable and function names
 - Small, focused functions
 - Proper type annotations
@@ -417,6 +441,7 @@ const calculateTotalPrice = (price: number, quantity: number): number => {
 #### 3. Zero Tolerance for `any` Type
 
 **The `any` type is banned.** Use:
+
 - Specific types, interfaces, or type aliases
 - `unknown` when type is truly unknown
 - Generic type parameters
@@ -442,6 +467,7 @@ All commits follow [Conventional Commits](https://www.conventionalcommits.org/):
 **Format**: `<type>[optional scope]: <description>`
 
 **Types**:
+
 - `feat` - New feature
 - `fix` - Bug fix
 - `docs` - Documentation
@@ -452,6 +478,7 @@ All commits follow [Conventional Commits](https://www.conventionalcommits.org/):
 - `chore` - Tooling/dependencies
 
 **Examples**:
+
 ```
 feat(components): add button component with accessibility support
 fix(routing): resolve navigation state persistence issue
@@ -464,11 +491,13 @@ refactor(utils): extract validation logic into separate module
 **Never commit without explicit user approval.**
 
 Only commit when user says:
+
 - "commit the changes"
 - "create a commit"
 - Or similar direct instruction
 
 Never commit just because:
+
 - Task is complete
 - Checks are passing
 - Code is written
@@ -480,24 +509,31 @@ Never commit just because:
 Components are organized into seven categories:
 
 ### Layout (4 components)
+
 Box, Container, Stack, Divider
 
 ### Input (9 components)
+
 Input, Textarea, Checkbox, Radio, Select, Switch, Slider, OtpInput, Label
 
 ### Display (7 components)
+
 Typography, Badge, Tag, Avatar, Progress, Skeleton, Spinner
 
 ### Interactive (3 components)
+
 Button, Accordion, Tabs
 
 ### Feedback (2 components)
+
 Alert, Toast
 
 ### Navigation (1 component)
+
 Fab
 
 ### Surfaces (1 component)
+
 Card
 
 ---
@@ -517,6 +553,7 @@ Wildcard pattern for tree-shaking:
 ```
 
 This allows:
+
 ```ts
 import { Button } from "@warp-ui/react-native/src/button";
 ```
@@ -569,7 +606,7 @@ describe("Button", () => {
   it("calls onPress when pressed", () => {
     const onPress = jest.fn();
     const { getByText } = customRender(
-      <Button onPress={onPress}>Click me</Button>
+      <Button onPress={onPress}>Click me</Button>,
     );
     fireEvent.press(getByText("Click me"));
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -579,7 +616,7 @@ describe("Button", () => {
     const variants = ["primary", "secondary", "ghost"];
     variants.forEach((variant) => {
       const { getByText } = customRender(
-        <Button variant={variant}>Test</Button>
+        <Button variant={variant}>Test</Button>,
       );
       expect(getByText("Test")).toBeTruthy();
     });
@@ -596,6 +633,7 @@ describe("Button", () => {
 Every component needs comprehensive MDX documentation:
 
 **Structure**:
+
 1. Component overview
 2. Import statement
 3. Basic usage example
@@ -606,6 +644,7 @@ Every component needs comprehensive MDX documentation:
 8. Accessibility notes
 
 **Example**:
+
 ```mdx
 # Button
 
@@ -620,18 +659,17 @@ import { Button } from "@warp-ui/react-native/src/button";
 ## Usage
 
 \`\`\`tsx
-<Button onPress={handlePress}>
-  Click me
-</Button>
+
+<Button onPress={handlePress}>Click me</Button>
 \`\`\`
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+| Prop    | Type                                | Default   | Description    |
+| ------- | ----------------------------------- | --------- | -------------- |
 | variant | "primary" \| "secondary" \| "ghost" | "primary" | Visual variant |
-| size | "sm" \| "md" \| "lg" | "md" | Size variant |
-| ... | ... | ... | ... |
+| size    | "sm" \| "md" \| "lg"                | "md"      | Size variant   |
+| ...     | ...                                 | ...       | ...            |
 
 ## Variants
 

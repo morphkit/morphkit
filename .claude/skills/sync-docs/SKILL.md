@@ -1,6 +1,6 @@
 ---
 name: sync-docs
-description: Keeps documentation files (CLAUDE.md, AGENTS.md, openspec/project.md, README.md) in sync during project development. Use when user mentions "sync docs", "update documentation", "docs out of sync", "keep docs consistent", or when making changes that affect project structure, tech stack, component count, or development rules.
+description: Keeps documentation files (CLAUDE.md, AGENTS.md, openspec/project.md, README.md) and skill documentation (.claude/skills/) in sync during project development. Use when user mentions "sync docs", "update documentation", "docs out of sync", "keep docs consistent", or when making changes that affect project structure, tech stack, component count, or development rules.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
@@ -17,6 +17,8 @@ This skill helps maintain consistency across multiple documentation files in the
 - `openspec/project.md` - Project conventions and philosophies
 - `openspec/AGENTS.md` - OpenSpec workflow instructions
 - `README.md` - User-facing project overview
+- `.claude/skills/*/SKILL.md` - Skill documentation
+- `.claude/skills/*/references/*.md` - Skill reference documentation
 - `package.json` - Single source of truth for tech stack versions
 - `packages/react-native/registry.json` - Component registry
 
@@ -90,8 +92,10 @@ Update files in this exact order to maintain consistency:
 1. **Source of truth** (package.json or registry.json) - Already updated
 2. **openspec/project.md** - Update detailed conventions and tech stack
 3. **CLAUDE.md** - Update comprehensive guide and examples
-4. **AGENTS.md** - Update brief references if critical quality gates changed
-5. **README.md** - Update user-facing overview
+4. **skills/\*/SKILL.md** - Update skill main documentation if component count, versions, or patterns changed
+5. **skills/_/references/_.md** - Update skill reference docs with detailed changes
+6. **AGENTS.md** - Update brief references if critical quality gates changed
+7. **README.md** - Update user-facing overview
 
 **Important:** Never skip files in this order. Each file may reference information updated in previous files.
 
@@ -231,6 +235,118 @@ grep -n "official starter Turborepo" README.md
 **Files to edit:**
 
 - `README.md` (complete replacement)
+
+### Scenario 5: Component Added/Removed
+
+**Trigger:** Component count changes
+
+**Detection:**
+
+```bash
+# Count actual component directories
+find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l
+
+# Compare with registry.json
+grep -c '"' packages/react-native/registry.json
+
+# Grep for old count in all documentation and skills
+grep -r "27 components" CLAUDE.md openspec/project.md .claude/skills/
+grep -r "27 total" .claude/skills/
+```
+
+**Sync workflow:**
+
+1. Update `registry.json` (already done)
+2. Update `openspec/project.md` - Component count (line 9)
+3. Update `CLAUDE.md` - Component count (lines 93, 102) and categories list (lines 100-108)
+4. **Update `.claude/skills/code-review/SKILL.md`** - Component categories if mentioned
+5. **Update `.claude/skills/code-review/references/morph-ui-standards.md`** - Component list and categories
+6. **Update `.claude/skills/create-component/SKILL.md`** - Component count references
+7. **Update `.claude/skills/create-flow/SKILL.md`** - Available components list
+8. **Update `.claude/skills/create-flow/references/component-detection.md`** - Full component list with props
+9. Update `README.md` - Component count if mentioned
+
+**Files to edit:**
+
+- `registry.json`
+- `openspec/project.md`
+- `CLAUDE.md`
+- `.claude/skills/code-review/SKILL.md`
+- `.claude/skills/code-review/references/morph-ui-standards.md`
+- `.claude/skills/create-component/SKILL.md`
+- `.claude/skills/create-flow/SKILL.md`
+- `.claude/skills/create-flow/references/component-detection.md`
+- `README.md`
+
+**Total:** 9 files
+
+### Scenario 6: Tech Stack Version Upgrade
+
+**Trigger:** package.json versions change
+
+**Detection:**
+
+```bash
+# Extract versions from package.json
+bunVersion=$(grep -o '"packageManager": "bun@[^"]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+
+# Grep for old versions in docs and skills
+grep -rn "Bun.*[0-9]\+\.[0-9]" CLAUDE.md openspec/project.md .claude/skills/
+grep -rn "Turborepo.*[0-9]\+\.[0-9]" CLAUDE.md openspec/project.md .claude/skills/
+grep -rn "TypeScript.*[0-9]\+\.[0-9]" CLAUDE.md openspec/project.md .claude/skills/
+```
+
+**Sync workflow:**
+
+1. Read `package.json` (source of truth)
+2. Update `openspec/project.md` - Tech Stack section (lines 39-54)
+3. Update `CLAUDE.md` - Tech Stack section (lines 33-40)
+4. **Update `.claude/skills/code-review/references/morph-ui-standards.md`** - Version mentions in standards
+5. **Update `.claude/skills/sync-docs/SKILL.md`** - If detection commands reference specific versions
+6. Update `README.md` - If versions mentioned in getting started
+
+**Files to edit:**
+
+- `openspec/project.md`
+- `CLAUDE.md`
+- `.claude/skills/code-review/references/morph-ui-standards.md`
+- `.claude/skills/sync-docs/SKILL.md` (this file)
+- `README.md`
+
+**Total:** 5-6 files
+
+### Scenario 7: Component Props/API Change
+
+**Trigger:** Component interface or theme changes
+
+**Detection:**
+
+```bash
+# Manual review or component tests indicate API changes
+# Check skill examples for outdated props
+
+grep -rn "Button.*size=" .claude/skills/create-flow/
+grep -rn "variant=" .claude/skills/create-flow/
+grep -rn "spacing\[" .claude/skills/
+```
+
+**Sync workflow:**
+
+1. Update component implementation (already done)
+2. Update `CLAUDE.md` - Component patterns section
+3. **Update `.claude/skills/create-flow/references/component-detection.md`** - Component props and variants
+4. **Update `.claude/skills/create-flow/references/examples.md`** - Example usage with new props
+5. **Update `.claude/skills/create-component/references/component-patterns.md`** - Pattern examples
+
+**Files to edit:**
+
+- Component implementation
+- `CLAUDE.md`
+- `.claude/skills/create-flow/references/component-detection.md`
+- `.claude/skills/create-flow/references/examples.md`
+- `.claude/skills/create-component/references/component-patterns.md`
+
+**Total:** 5 files
 
 ## Examples
 
