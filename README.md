@@ -1,5 +1,3 @@
-# MorphUI
-
 <div align="center">
   <img src="apps/demo-react-native-app/assets/logo.png" alt="MorphUI Logo" width="600" />
 </div>
