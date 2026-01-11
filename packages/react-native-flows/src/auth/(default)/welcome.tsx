@@ -4,7 +4,7 @@
  * this flow. It exists only because handler functions are empty templates.
  * Once you implement the handlers and use all variables, this comment should be deleted.
  */
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, ImageSourcePropType } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
@@ -20,7 +20,11 @@ import {
 
 type SocialProvider = "apple" | "google" | "facebook";
 
-export default function Welcome() {
+export interface WelcomeProps {
+  logo?: ImageSourcePropType;
+}
+
+export default function Welcome({ logo }: WelcomeProps = {}) {
   const router = useRouter();
   const { theme } = useTheme();
   const [loading, setLoading] = useState<SocialProvider | null>(null);
@@ -38,7 +42,9 @@ export default function Welcome() {
       <Stack gap={theme.primitive.spacing[6]} style={styles.container}>
         <Box style={styles.centeredContent}>
           <Stack gap={theme.primitive.spacing[6]} align="center">
-            <Image source={require("@/assets/logo.png")} style={styles.logo} />
+            {logo && (
+              <Image source={logo} style={styles.logo} resizeMode="contain" />
+            )}
             <Typography variant="title-2" style={styles.centeredText}>
               Sign up or log in to start exploring
             </Typography>
