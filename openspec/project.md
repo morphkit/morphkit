@@ -6,7 +6,7 @@
 
 ### Core Features
 
-- **26 Production-Ready Components** (many more planned): Layout, input, display, interactive, feedback, navigation, and surface components
+- **27 Production-Ready Components** (many more planned): Layout, input, display, interactive, feedback, navigation, and surface components
 - **Multi-Screen Flows**: Pre-built user journeys (auth flow currently, more planned) that can be copied to consumer projects with routing
 - **Three-Tier Customization Model**:
   1. Global theme customization (primitive & semantic token layers)
@@ -43,14 +43,14 @@
 
 **Framework & Runtime:**
 
-- **Framework**: React Native 0.81.5
+- **Framework**: React Native (0.81.5 demo app, ^0.76.6 library peer dependency)
 - **React**: 19.1.0
 - **Platform**: Expo SDK ~54.0.30
 - **Router**: Expo Router (file-based routing)
 
 **Testing:**
 
-- **Test Framework**: Jest 30.0.0
+- **Test Framework**: Jest 30.2.0
 - **Testing Library**: React Native Testing Library
 - **Shared Config**: @repo/jest-config
 
@@ -278,7 +278,7 @@
 
 - **Expo SDK** (~54.0.30): Core platform for React Native development
 - **Expo Router**: File-based routing for navigation
-- **React Native** (0.81.5): Mobile framework
+- **React Native** (0.81.5 demo app, ^0.76.6 library peer dependency): Mobile framework
 - **React** (19.1.0): UI library
 
 ### Publishing & Distribution
@@ -298,6 +298,12 @@
 - **react-native-reanimated**: Performant animations
 - **react-native-screens**: Native screen optimization
 - **react-native-safe-area-context**: Safe area management
+
+### Testing & Development Tools
+
+- **jest-expo** (^52.0.0): Jest preset for Expo projects
+- **@babel/core** and related packages: JavaScript transpilation
+- **react-native-worklets** (0.5.1): High-performance JavaScript worklets
 
 ### Documentation
 

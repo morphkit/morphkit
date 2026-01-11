@@ -26,7 +26,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-**morph-ui** is a production-ready component library monorepo, similar in spirit to shadcn/ui. The repository features a **fully-implemented React Native component library** (`@warp-ui/react-native`) with 26 components, multi-screen flow templates, CLI tooling, and comprehensive testing infrastructure.
+**morph-ui** is a production-ready component library monorepo, similar in spirit to shadcn/ui. The repository features a **fully-implemented React Native component library** (`@warp-ui/react-native`) with 27 components, multi-screen flow templates, CLI tooling, and comprehensive testing infrastructure.
 
 The repository includes a full-featured demo app for browsing components and flows, with MDX-based documentation, drawer navigation, and dynamic component showcases. All components follow the three-tier theme system and are backed by Jest tests.
 
@@ -36,6 +36,10 @@ The repository includes a full-featured demo app for browsing components and flo
 - **Build Tool**: Turborepo (v2.7.2)
 - **Node Version**: >=18
 - **Language**: TypeScript 5.9.2
+- **Framework**: React Native (0.81.5 demo app, ^0.76.6 library peer dependency)
+- **React**: 19.1.0
+- **Platform**: Expo SDK ~54.0.30
+- **Testing**: Jest 30.2.0 with React Native Testing Library
 - **Primary Target**: React Native component library
 
 ## Monorepo Structure
@@ -56,7 +60,7 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 - Fully integrated with monorepo shared configs
 - Uses `@repo/eslint-config/react-native` and `@repo/typescript-config/react-native`
 - File-based routing with Expo Router in `app/` directory
-- Component sidebar for browsing 26 documented components
+- Component sidebar for browsing 27 documented components
 - Entry point: `expo-router/entry`
 - Theme customization with Inter font family
 
@@ -90,7 +94,7 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 **`packages/react-native/`** - Production-Ready React Native Component Library
 
 - **Package name**: `@warp-ui/react-native` (v0.1.0)
-- **26 fully-implemented components** following three-tier theme system
+- **27 fully-implemented components** following three-tier theme system
 - Components exported via wildcard pattern for tree-shaking: `"./src/*"`
 - Complete testing infrastructure with Jest
 - MDX documentation system with component registry

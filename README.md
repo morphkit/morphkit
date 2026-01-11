@@ -1,135 +1,278 @@
-# Turborepo starter
+# MorphUI (morph-ui)
 
-This Turborepo starter is maintained by the Turborepo core team.
+<div align="center">
+  <img src="apps/demo-react-native-app/assets/logo.png" alt="MorphUI Logo" width="600" />
+</div>
 
-## Using this example
+**Production-ready React Native component library with three-tier theming**
 
-Run the following command:
+<div align="center">
 
-```sh
-npx create-turbo@latest
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+![Test Coverage](https://img.shields.io/badge/coverage-84%25-brightgreen)
+![TypeScript](https://img.shields.io/badge/typescript-5.9.2-blue)
+![React Native](https://img.shields.io/badge/react%20native-0.81.5-61dafb)
+![Jest](https://img.shields.io/badge/jest-30.2.0-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+</div>
+
+MorphUI is a next-generation React Native UI library optimized for AI agents. At its core is a growing set of beautifully crafted and highly customizable UI components that "morph" to any app look and feel.
+
+## Overview
+
+MorphUI provides 27 production-ready components, multi-screen flow templates, and a sophisticated three-tier theme system for building beautiful React Native applications. Inspired by shadcn/ui, components are designed to be copied to your project for full customization.
+
+### Key Features
+
+- **27 Production-Ready Components**: Layout, input, display, interactive, feedback, navigation, and surface components
+- **Three-Tier Theme System**: Hierarchical token system (primitive → semantic → component) for consistent, customizable styling
+- **Multi-Screen Flows**: Pre-built user journeys (authentication flow with 4 screens, more planned)
+- **Comprehensive Testing**: Jest with React Native Testing Library for all components
+- **MDX Documentation**: Rich component documentation with live examples
+- **TypeScript-First**: Strict typing for all components, props, and theme tokens
+- **WCAG AA Accessibility**: Target accessibility compliance for all components
+- **CLI Tooling**: Component and flow scaffolding with metadata tracking
+
+## Getting Started
+
+### Prerequisites
+
+- **Bun**: v1.2.2
+- **Node**: >=18
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone <repository-url>
+cd morph-ui
+bun install
 ```
 
-## What's inside?
+### Development
 
-This Turborepo includes the following packages/apps:
+Run all apps and packages in development mode:
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```bash
+bun run dev
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+Run the demo app to see all components and flows:
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+```bash
+turbo dev --filter=demo-react-native-app
 ```
 
-### Develop
+## Project Structure
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+MorphUI is organized as a Turborepo monorepo with the following structure:
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+morph-ui/
+├── apps/
+│   └── demo-react-native-app/    # Component library browser & flow showcase
+├── packages/
+│   ├── react-native/              # @warp-ui/react-native - 27 component library
+│   ├── react-native-flows/        # Multi-screen flow templates
+│   ├── cli/                       # @warp-ui/cli - Component scaffolding tool
+│   ├── eslint-config/             # Shared ESLint configurations
+│   ├── typescript-config/         # Shared TypeScript configurations
+│   └── jest-config/               # Shared Jest testing configuration
 ```
 
-### Remote Caching
+### Primary Workspaces
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+- **`packages/react-native/`**: The core component library (`@warp-ui/react-native`)
+  - 27 components with `.theme.ts` files for token-based styling
+  - Component registry and MDX documentation
+  - Comprehensive test coverage
+- **`apps/demo-react-native-app/`**: Full-featured demo application
+  - Drawer navigation for browsing components
+  - Dynamic MDX documentation viewer
+  - Multi-screen flow demonstrations
+- **`packages/react-native-flows/`**: Multi-screen user journey templates
+  - Authentication flow (welcome, email, name, password screens)
+  - Flow registry system for discovery
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## Tech Stack
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+### Build & Tooling
 
+- **Package Manager**: Bun v1.2.2
+- **Build Tool**: Turborepo v2.7.2
+- **Language**: TypeScript 5.9.2 (strict mode)
+
+### Framework & Runtime
+
+- **Framework**: React Native (0.81.5 demo app, ^0.76.6 library peer dependency)
+- **React**: 19.1.0
+- **Platform**: Expo SDK ~54.0.30
+- **Router**: Expo Router (file-based routing)
+
+### Testing
+
+- **Test Framework**: Jest 30.2.0
+- **Testing Library**: React Native Testing Library
+- **Shared Config**: @repo/jest-config
+
+### Code Quality
+
+- **Linter**: ESLint v9 (flat config, zero warnings policy)
+- **Formatter**: Prettier
+- **TypeScript Config**: Shared via @repo/typescript-config
+
+## Development
+
+### Available Commands
+
+```bash
+# Install dependencies
+bun install
+
+# Run all apps in dev mode
+bun run dev
+
+# Build all apps and packages
+bun run build
+
+# Lint all packages (zero warnings enforced)
+bun run lint
+
+# Type-check all packages
+bun run check-types
+
+# Format code with Prettier
+bun run format
+
+# Run tests
+bun run test
 ```
-cd my-turborepo
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+### Working with Specific Packages
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+Use Turbo filters to target specific workspaces:
+
+```bash
+# Demo app
+turbo dev --filter=demo-react-native-app
+turbo build --filter=demo-react-native-app
+turbo lint --filter=demo-react-native-app
+turbo check-types --filter=demo-react-native-app
+
+# Component library
+turbo test --filter=@warp-ui/react-native
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Development Workflow
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+For comprehensive development guidelines, see:
 
+- **[CLAUDE.md](./CLAUDE.md)**: Complete development guide with architecture patterns, theming system, and coding standards
+- **[openspec/AGENTS.md](./openspec/AGENTS.md)**: OpenSpec workflow for change proposals and specifications
+
+### Non-Negotiable Rules
+
+MorphUI enforces strict code quality standards:
+
+- **Zero tolerance for comments**: Code must be self-documenting
+- **Zero tolerance for `any` type**: Always use proper TypeScript types
+- **Conventional Commits**: All commits follow the [Conventional Commits](https://www.conventionalcommits.org/) specification
+- **Static analysis gates**: All checks must pass before any work is complete:
+  - `bun run lint` (zero warnings)
+  - `bun run check-types` (zero errors)
+  - `bun run format` (Prettier formatted)
+  - `bun run test` (all tests passing)
+
+## Component Library
+
+### Three-Tier Theme System
+
+MorphUI uses a hierarchical token system for consistent, theme-aware styling:
+
+1. **Primitive Tokens**: Raw design values (colors, spacing, typography, radii, shadows)
+2. **Semantic Tokens**: Context-aware tokens mapped to light/dark themes
+3. **Component Tokens**: Component-specific styling in colocated `.theme.ts` files
+
+### Available Components (27)
+
+**Layout**: box, container, stack, divider
+
+**Input**: input, textarea, checkbox, radio, select, switch, slider, otp-input, label
+
+**Display**: typography, badge, tag, avatar, progress, skeleton, spinner
+
+**Interactive**: button, accordion, tabs
+
+**Feedback**: alert, toast
+
+**Navigation**: fab
+
+**Surfaces**: card
+
+### Component Documentation
+
+All components include:
+
+- TypeScript prop interfaces
+- MDX documentation with examples
+- Jest tests with React Native Testing Library
+- Theme tokens for full customization
+
+See the [component registry](./packages/react-native/src/registry.json) for complete component metadata.
+
+### CLI Usage
+
+The `@warp-ui/cli` package provides scaffolding and management commands:
+
+```bash
+# Install CLI globally (from GitHub Packages)
+npm install -g @warp-ui/cli
+
+# Initialize Warp UI in project
+warp-ui init
+
+# Add component to project
+warp-ui add [component]
+
+# Manage CLI configuration
+warp-ui config
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
+**Note**: CLI is published to GitHub Packages and requires authentication.
 
-## Useful Links
+## Contributing
 
-Learn more about the power of Turborepo:
+We welcome contributions! Before submitting a pull request:
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+1. **Follow Conventional Commits**: Use the format `<type>[optional scope]: <description>`
+   - Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`
+   - Breaking changes: Add `!` after type/scope
+
+2. **Pass all static analysis checks**:
+
+   ```bash
+   bun run lint
+   bun run check-types
+   bun run format
+   bun run test
+   ```
+
+3. **Review the development guide**: See [CLAUDE.md](./CLAUDE.md) for complete coding standards, architecture patterns, and theming guidelines
+
+### Development Philosophy
+
+- **Theme-first**: All styling uses design tokens, no hardcoded values
+- **TypeScript-first**: Strict typing for all code
+- **Copy-paste friendly**: Components designed to be copied to consumer projects
+- **Accessible**: WCAG AA compliance target
+- **AI-optimized**: Token-efficient design for AI agent consumption
+
+## License
+
+See [LICENSE](./LICENSE) for license information.
+
+---
+
+**Documentation**: [CLAUDE.md](./CLAUDE.md) | **OpenSpec**: [openspec/AGENTS.md](./openspec/AGENTS.md) | **Component Registry**: [registry.json](./packages/react-native/src/registry.json)
