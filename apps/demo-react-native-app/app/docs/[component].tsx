@@ -1,8 +1,8 @@
 import { View, ScrollView, StyleSheet, useColorScheme } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { Typography } from "@warp-ui/react-native";
-import registry from "@warp-ui/react-native/src/registry.json";
-import { docsRegistry } from "@warp-ui/react-native/src/docs-registry";
+import { Typography } from "@morph-ui/react-native";
+import registry from "@morph-ui/react-native/src/registry.json";
+import { docsRegistry } from "@morph-ui/react-native/src/docs-registry";
 
 export default function ComponentDocPage() {
   const colorScheme = useColorScheme() ?? "light";

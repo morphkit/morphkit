@@ -4,7 +4,7 @@ import { Box, Stack, Typography, Card } from "../..";
 export const DividersInCardExample = () => {
   return (
     <Card>
-      <Stack gap={12}>
+      <Stack gap="md">
         <Box>
           <Typography variant="heading">Section 1</Typography>
           <Typography variant="callout" style={{ marginTop: 4 }}>

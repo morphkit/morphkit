@@ -5,7 +5,7 @@ import { useColorScheme } from "react-native";
 import { ComponentSidebar } from "../components/ComponentSidebar";
 import { MDXProvider } from "../components/MDXProvider";
 import type { DrawerContentComponentProps } from "@react-navigation/drawer";
-import { ThemeProvider, createTheme } from "@warp-ui/react-native";
+import { ThemeProvider, createTheme } from "@morph-ui/react-native";
 
 import {
   Inter_400Regular,

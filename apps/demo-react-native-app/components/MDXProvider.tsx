@@ -1,6 +1,6 @@
 import { MDXComponents, MDXStyles } from "@bacons/mdx";
 import { View, StyleSheet, useColorScheme } from "react-native";
-import { Typography } from "@warp-ui/react-native";
+import { Typography } from "@morph-ui/react-native";
 
 const styles = StyleSheet.create({
   h1: {

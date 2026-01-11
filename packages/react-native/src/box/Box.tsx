@@ -1,5 +1,6 @@
 import { View, ViewProps, StyleProp, ViewStyle } from "react-native";
 import { ReactNode } from "react";
+import { useTheme } from "../theme";
 
 type SpacingValue =
   | number
@@ -9,6 +10,8 @@ type SpacingValue =
       bottom?: number;
       left?: number;
     };
+
+type BoxGap = "none" | "xs" | "sm" | "md" | "lg" | "xl";
 
 export interface BoxProps extends Omit<ViewProps, "children"> {
   children?: ReactNode;
@@ -28,7 +31,7 @@ export interface BoxProps extends Omit<ViewProps, "children"> {
     | "space-around"
     | "space-evenly";
   alignItems?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
-  gap?: number;
+  gap?: BoxGap;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -48,6 +51,9 @@ export const Box = ({
   style,
   ...props
 }: BoxProps) => {
+  const { theme } = useTheme();
+  const gapValue = gap !== undefined ? theme.component.box.gap[gap] : undefined;
+
   const getSpacingStyles = (
     spacing: SpacingValue | undefined,
     prefix: "padding" | "margin",
@@ -80,7 +86,7 @@ export const Box = ({
     ...(flexDirection !== undefined && { flexDirection }),
     ...(justifyContent !== undefined && { justifyContent }),
     ...(alignItems !== undefined && { alignItems }),
-    ...(gap !== undefined && { gap }),
+    ...(gapValue !== undefined && { gap: gapValue }),
   };
 
   return (

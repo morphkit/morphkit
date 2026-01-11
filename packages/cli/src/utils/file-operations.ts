@@ -53,7 +53,7 @@ export async function copyComponent(
   const headers: HeadersInit = {
     Authorization: `token ${token}`,
     Accept: "application/vnd.github.v3+json",
-    "User-Agent": "@warp-ui/cli",
+    "User-Agent": "@morph-ui/cli",
   };
 
   try {

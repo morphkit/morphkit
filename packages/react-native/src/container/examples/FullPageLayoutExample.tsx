@@ -15,7 +15,7 @@ export const FullPageLayoutExample = () => {
         </Box>
 
         <Card>
-          <Stack gap={12}>
+          <Stack gap="md">
             <Typography variant="title-3">Main Content Section</Typography>
             <Typography
               variant="body"

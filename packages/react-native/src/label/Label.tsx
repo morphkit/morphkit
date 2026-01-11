@@ -1,9 +1,12 @@
 import { ReactNode } from "react";
-import { TextProps, StyleSheet, StyleProp, TextStyle } from "react-native";
+import { StyleSheet, StyleProp, TextStyle } from "react-native";
 import { useTheme } from "../theme";
-import { Typography } from "../typography";
+import { Typography, type TypographyProps } from "../typography";
 
-export interface LabelProps extends Omit<TextProps, "children"> {
+export interface LabelProps extends Omit<
+  TypographyProps,
+  "children" | "variant"
+> {
   children: ReactNode;
   htmlFor?: string;
   required?: boolean;

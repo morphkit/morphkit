@@ -37,10 +37,10 @@ export const DismissibleAlertsExample = () => {
 
   return (
     <Card>
-      <Stack gap={12}>
+      <Stack gap="md">
         <Typography variant="heading">Notifications</Typography>
         {alerts.length > 0 ? (
-          <Stack gap={12}>
+          <Stack gap="md">
             {alerts.map((alert) => (
               <Alert
                 key={alert.id}

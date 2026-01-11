@@ -6,4 +6,4 @@ export {
   type TypographyStyle,
   type ShadowStyle,
   type SpringConfig,
-} from "@warp-ui/react-native";
+} from "@morph-ui/react-native";

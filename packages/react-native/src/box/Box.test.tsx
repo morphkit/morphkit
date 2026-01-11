@@ -183,14 +183,14 @@ describe("<Box />", () => {
 
   test("applies gap", () => {
     const { UNSAFE_getAllByType } = render(
-      <Box gap={12}>
+      <Box gap="md">
         <Text>Content</Text>
       </Box>,
     );
     const views = UNSAFE_getAllByType(View);
     const boxView = views[0];
     const flatStyle = StyleSheet.flatten(boxView.props.style);
-    expect(flatStyle).toMatchObject({ gap: 12 });
+    expect(flatStyle).toMatchObject({ gap: 16 });
   });
 
   test("combines multiple props", () => {
@@ -203,7 +203,7 @@ describe("<Box />", () => {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center"
-        gap={8}
+        gap="sm"
       >
         <Text>Content</Text>
       </Box>,

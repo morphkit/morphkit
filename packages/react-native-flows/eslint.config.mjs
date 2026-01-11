@@ -1,3 +1,3 @@
-import { config as reactNativeConfig } from "@repo/eslint-config/react-native";
+import { config as reactNativeConfig } from "@morph-ui/eslint-config/react-native";
 
 export default [...reactNativeConfig];

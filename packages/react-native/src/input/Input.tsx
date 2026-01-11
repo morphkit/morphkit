@@ -3,12 +3,12 @@ import {
   View,
   TextInput,
   TextInputProps,
-  Text,
   StyleSheet,
   StyleProp,
   ViewStyle,
 } from "react-native";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 export interface InputProps extends Omit<TextInputProps, "style" | "onChange"> {
   value: string;
@@ -88,19 +88,15 @@ export const Input = forwardRef<InputRef, InputProps>(
     return (
       <View style={style}>
         {label && (
-          <Text
-            style={[
-              baseStyles.label,
-              {
-                color: variantTokens.label.text,
-                fontSize: theme.component.label.fontSize.md,
-                fontWeight: theme.component.label.fontWeight,
-                marginBottom: theme.component.label.marginBottom,
-              },
-            ]}
+          <Typography
+            variant="subhead"
+            style={{
+              color: variantTokens.label.text,
+              marginBottom: theme.component.label.marginBottom,
+            }}
           >
             {label}
-          </Text>
+          </Typography>
         )}
         <View
           style={[
@@ -137,19 +133,16 @@ export const Input = forwardRef<InputRef, InputProps>(
           {suffixIcon && <View style={baseStyles.icon}>{suffixIcon}</View>}
         </View>
         {error && (
-          <Text
-            style={[
-              baseStyles.error,
-              {
-                color: variantTokens.error.text,
-                fontSize: theme.component.input.errorText.fontSize,
-                marginTop: theme.component.input.errorText.marginTop,
-              },
-            ]}
+          <Typography
+            variant="footnote"
+            style={{
+              color: variantTokens.error.text,
+              marginTop: theme.component.input.errorText.marginTop,
+            }}
             accessibilityLiveRegion="polite"
           >
             {error}
-          </Text>
+          </Typography>
         )}
       </View>
     );

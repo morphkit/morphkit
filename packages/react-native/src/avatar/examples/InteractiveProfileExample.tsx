@@ -7,14 +7,14 @@ export const InteractiveProfileExample = () => {
 
   return (
     <Card>
-      <Stack gap={16}>
-        <Stack direction="horizontal" gap={12} align="center">
+      <Stack gap="md">
+        <Stack direction="horizontal" gap="md" align="center">
           <Avatar
             size="lg"
             source={{ uri: "https://i.pravatar.cc/48?img=5" }}
             onPress={() => console.log("Avatar tapped")}
           />
-          <Stack gap={4} style={{ flex: 1 }}>
+          <Stack gap="xs" style={{ flex: 1 }}>
             <Typography variant="heading">Sarah Miller</Typography>
             <Typography variant="callout" style={{ color: "#6B7280" }}>
               UX Researcher

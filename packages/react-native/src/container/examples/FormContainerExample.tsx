@@ -5,9 +5,9 @@ export const FormContainerExample = () => {
   return (
     <Container maxWidth="sm" padding={20}>
       <Card>
-        <Stack gap={16}>
+        <Stack gap="md">
           <Typography variant="title-3">Create Account</Typography>
-          <Stack gap={12}>
+          <Stack gap="md">
             <Box padding={12} backgroundColor="#F9FAFB" borderRadius={6}>
               <Typography variant="callout" style={{ color: "#6B7280" }}>
                 Full Name

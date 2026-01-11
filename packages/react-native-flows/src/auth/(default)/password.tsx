@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
- * PRODUCTION NOTE: Remove the eslint-disable comment above when implementing
- * this flow. It exists only because handler functions are empty templates.
- * Once you implement the handlers and use all variables, this comment should be deleted.
+ * TEMPLATE NOTE: This flow is a template meant to be copied to consumer projects.
+ * Customize the handler functions and password requirements for your specific use case.
  */
 import { View, StyleSheet } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
@@ -14,7 +12,7 @@ import {
   Container,
   Stack,
   useTheme,
-} from "@warp-ui/react-native";
+} from "@morph-ui/react-native";
 
 export default function Password() {
   const router = useRouter();
@@ -31,10 +29,10 @@ export default function Password() {
   return (
     <Container insets={["bottom"]}>
       <Stack
-        gap={theme.primitive.spacing[6]}
+        gap="lg"
         style={[styles.container, { paddingTop: theme.primitive.spacing[6] }]}
       >
-        <Stack gap={theme.primitive.spacing[4]}>
+        <Stack gap="md">
           <Input
             size="lg"
             label="Password"
@@ -47,7 +45,7 @@ export default function Password() {
             autoFocus
             onSubmitEditing={handleContinue}
           />
-          <Stack gap={theme.primitive.spacing[1]}>
+          <Stack gap="xs">
             <Typography variant="body">Password must contain:</Typography>
             <Typography variant="caption-2">• At least 8 characters</Typography>
             <Typography variant="caption-2">• One uppercase letter</Typography>

@@ -58,7 +58,7 @@ describe("<Stack />", () => {
 
   test("applies custom gap", () => {
     const { UNSAFE_getAllByType } = render(
-      <Stack gap={16}>
+      <Stack gap="md">
         <Text>Content</Text>
       </Stack>,
     );
@@ -214,7 +214,7 @@ describe("<Stack />", () => {
     const { UNSAFE_getAllByType } = render(
       <Stack
         direction="horizontal"
-        gap={12}
+        gap="md"
         align="center"
         justify="space-between"
         wrap={true}
@@ -227,7 +227,7 @@ describe("<Stack />", () => {
     const flatStyle = StyleSheet.flatten(stackView.props.style);
     expect(flatStyle).toMatchObject({
       flexDirection: "row",
-      gap: 12,
+      gap: 16,
       alignItems: "center",
       justifyContent: "space-between",
       flexWrap: "wrap",

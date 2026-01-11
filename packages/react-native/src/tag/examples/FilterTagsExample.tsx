@@ -22,10 +22,10 @@ export const FilterTagsExample = () => {
 
   return (
     <Card>
-      <Stack gap={12}>
+      <Stack gap="md">
         <Typography variant="heading">Active Filters</Typography>
         {filters.length > 0 ? (
-          <Stack direction="horizontal" gap={8} style={{ flexWrap: "wrap" }}>
+          <Stack direction="horizontal" gap="sm" style={{ flexWrap: "wrap" }}>
             {filters.map((filter) => (
               <Tag
                 key={filter.id}

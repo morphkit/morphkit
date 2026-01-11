@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-require-imports */
 /**
- * PRODUCTION NOTE: Remove the eslint-disable comment above when implementing
- * this flow. It exists only because handler functions are empty templates.
- * Once you implement the handlers and use all variables, this comment should be deleted.
+ * TEMPLATE NOTE: This flow is a template meant to be copied to consumer projects.
+ * Customize the handler functions and asset paths for your specific use case.
+ * Replace require("../../../assets/default-logo.png") with your app's logo.
  */
 import { View, Image, StyleSheet, ImageSourcePropType } from "react-native";
 import { useRouter } from "expo-router";
@@ -16,7 +15,7 @@ import {
   Box,
   Divider,
   useTheme,
-} from "@warp-ui/react-native";
+} from "@morph-ui/react-native";
 
 type SocialProvider = "apple" | "google" | "facebook";
 
@@ -35,11 +34,11 @@ export default function Welcome() {
 
   return (
     <Container insets={["bottom"]}>
-      <Stack gap={theme.primitive.spacing[6]} style={styles.container}>
+      <Stack gap="lg" style={styles.container}>
         <Box style={styles.centeredContent}>
-          <Stack gap={theme.primitive.spacing[6]} align="center">
+          <Stack gap="lg" align="center">
             <Image
-              source={require("@/assets/logo.png")}
+              source={require("../../../assets/default-logo.png")}
               style={styles.logo}
               resizeMode="contain"
             />
@@ -47,7 +46,7 @@ export default function Welcome() {
               Sign up or log in to start exploring
             </Typography>
             <Stack
-              gap={theme.primitive.spacing[3]}
+              gap="md"
               style={[
                 styles.fullWidth,
                 { paddingTop: theme.primitive.spacing[10] },
@@ -83,11 +82,7 @@ export default function Welcome() {
             </Stack>
           </Stack>
         </Box>
-        <Stack
-          direction="horizontal"
-          gap={theme.primitive.spacing[4]}
-          align="center"
-        >
+        <Stack direction="horizontal" gap="md" align="center">
           <Divider style={styles.divider} />
           <Typography variant="footnote">or</Typography>
           <Divider style={styles.divider} />

@@ -6,15 +6,17 @@ import {
   ViewStyle,
 } from "react-native";
 import { ReactNode } from "react";
+import { useTheme } from "../theme";
 
 type StackDirection = "horizontal" | "vertical";
 type StackAlign = "start" | "center" | "end" | "stretch";
 type StackJustify = "start" | "center" | "end" | "space-between";
+type StackGap = "none" | "xs" | "sm" | "md" | "lg" | "xl";
 
 export interface StackProps extends Omit<ViewProps, "children"> {
   children?: ReactNode;
   direction?: StackDirection;
-  gap?: number;
+  gap?: StackGap;
   align?: StackAlign;
   justify?: StackJustify;
   wrap?: boolean;
@@ -24,18 +26,21 @@ export interface StackProps extends Omit<ViewProps, "children"> {
 export const Stack = ({
   children,
   direction = "vertical",
-  gap = 8,
+  gap = "sm",
   align = "stretch",
   justify = "start",
   wrap = false,
   style,
   ...props
 }: StackProps) => {
+  const { theme } = useTheme();
+  const gapValue = theme.component.stack.gap[gap];
+
   const stackStyles = [
     baseStyles.stack,
     directionStyles[direction],
     {
-      gap,
+      gap: gapValue,
       alignItems: alignItemsMap[align],
       justifyContent: justifyContentMap[justify],
       flexWrap: wrap ? ("wrap" as const) : ("nowrap" as const),

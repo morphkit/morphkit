@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { useTheme, Typography } from "@warp-ui/react-native";
+import { useTheme, Typography } from "@morph-ui/react-native";
 
 export default function AuthLayout() {
   const { theme, colorScheme } = useTheme();

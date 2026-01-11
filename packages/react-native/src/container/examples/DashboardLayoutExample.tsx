@@ -4,7 +4,7 @@ import { Box, Stack, Typography, Card } from "../..";
 export const DashboardLayoutExample = () => {
   return (
     <Container maxWidth="xl" padding={20}>
-      <Stack gap={16}>
+      <Stack gap="md">
         <Box backgroundColor="#4A90E2" padding={20} borderRadius={8}>
           <Typography variant="title-1" style={{ color: "#FFFFFF" }}>
             Dashboard Overview
@@ -17,10 +17,10 @@ export const DashboardLayoutExample = () => {
           </Typography>
         </Box>
 
-        <Box flexDirection="row" gap={16}>
+        <Box flexDirection="row" gap="md">
           <Box flex={1}>
             <Card>
-              <Stack gap={8}>
+              <Stack gap="sm">
                 <Typography variant="caption-1" style={{ color: "#6B7280" }}>
                   Total Revenue
                 </Typography>
@@ -33,7 +33,7 @@ export const DashboardLayoutExample = () => {
           </Box>
           <Box flex={1}>
             <Card>
-              <Stack gap={8}>
+              <Stack gap="sm">
                 <Typography variant="caption-1" style={{ color: "#6B7280" }}>
                   Active Users
                 </Typography>

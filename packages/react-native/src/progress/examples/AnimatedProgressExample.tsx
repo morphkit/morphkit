@@ -24,7 +24,7 @@ export const AnimatedProgressExample = () => {
 
   return (
     <Card>
-      <Stack gap={16}>
+      <Stack gap="md">
         <Typography variant="heading">Download Simulation</Typography>
         <Progress value={progress} showValue />
         <Typography variant="callout" style={{ color: "#6B7280" }}>

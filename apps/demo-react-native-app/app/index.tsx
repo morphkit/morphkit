@@ -1,5 +1,5 @@
 import { View, StyleSheet, useColorScheme } from "react-native";
-import { Typography } from "@warp-ui/react-native";
+import { Typography } from "@morph-ui/react-native";
 
 export default function HomeScreen() {
   const colorScheme = useColorScheme() ?? "light";
