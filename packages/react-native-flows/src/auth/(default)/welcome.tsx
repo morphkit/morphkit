@@ -20,11 +20,7 @@ import {
 
 type SocialProvider = "apple" | "google" | "facebook";
 
-export interface WelcomeProps {
-  logo?: ImageSourcePropType;
-}
-
-export default function Welcome({ logo }: WelcomeProps = {}) {
+export default function Welcome() {
   const router = useRouter();
   const { theme } = useTheme();
   const [loading, setLoading] = useState<SocialProvider | null>(null);
@@ -42,9 +38,11 @@ export default function Welcome({ logo }: WelcomeProps = {}) {
       <Stack gap={theme.primitive.spacing[6]} style={styles.container}>
         <Box style={styles.centeredContent}>
           <Stack gap={theme.primitive.spacing[6]} align="center">
-            {logo && (
-              <Image source={logo} style={styles.logo} resizeMode="contain" />
-            )}
+            <Image
+              source={require("@/assets/logo.png")}
+              style={styles.logo}
+              resizeMode="contain"
+            />
             <Typography variant="title-2" style={styles.centeredText}>
               Sign up or log in to start exploring
             </Typography>
@@ -115,7 +113,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: "85%",
-    height: 80,
+    height: 136,
   },
   centeredText: {
     textAlign: "center",
