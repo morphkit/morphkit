@@ -57,7 +57,7 @@ Explicit activation phrases:
    - Flow `registry.json` for flow metadata
 
 3. **Build mental model**:
-   - Package scope usage (`@morph-ui/`, `@warp-ui/`, `@repo/`)
+   - Package scope usage (`@morph-ui/`, `@morph-ui/`, `@morph-ui/`)
    - Public vs private package classification
    - Component categories and organization
    - Flow variants and screen counts
@@ -182,7 +182,7 @@ Structure the report as follows:
 Before suggesting changes:
 
 1. **Ask about naming decisions**:
-   - "Should we standardize on `@morph-ui/` or keep `@warp-ui/`?"
+   - "Should we standardize on `@morph-ui/` or keep `@morph-ui/`?"
    - "Should flows package be public or remain private?"
 
 2. **Confirm architectural choices**:
@@ -233,13 +233,13 @@ See [best-practices.md](references/best-practices.md) for external standards:
 ```markdown
 ### 🔴 Package Naming Inconsistency
 
-**Issue**: Mixed usage of `@warp-ui/` and `@repo/` scopes across packages
+**Issue**: Mixed usage of `@morph-ui/` and `@morph-ui/` scopes across packages
 
 **Files**:
 
-- `packages/react-native/package.json` - Uses `@warp-ui/react-native`
-- `packages/react-native-flows/package.json` - Uses `@repo/react-native-flows`
-- `packages/cli/package.json` - Uses `@warp-ui/cli`
+- `packages/react-native/package.json` - Uses `@morph-ui/react-native`
+- `packages/react-native-flows/package.json` - Uses `@morph-ui/react-native-flows`
+- `packages/cli/package.json` - Uses `@morph-ui/cli`
 
 **Impact**:
 
@@ -252,14 +252,14 @@ Choose one primary scope and apply consistently:
 
 Option A: Standardize on `@morph-ui/` (matches repo name)
 
-- Rename `@warp-ui/react-native` → `@morph-ui/react-native`
-- Rename `@warp-ui/cli` → `@morph-ui/cli`
-- Rename `@repo/react-native-flows` → `@morph-ui/react-native-flows`
+- Rename `@morph-ui/react-native` → `@morph-ui/react-native`
+- Rename `@morph-ui/cli` → `@morph-ui/cli`
+- Rename `@morph-ui/react-native-flows` → `@morph-ui/react-native-flows`
 
-Option B: Keep `@warp-ui/` (existing branding)
+Option B: Keep `@morph-ui/` (existing branding)
 
-- Keep `@warp-ui/react-native` and `@warp-ui/cli`
-- Rename `@repo/react-native-flows` → `@warp-ui/react-native-flows`
+- Keep `@morph-ui/react-native` and `@morph-ui/cli`
+- Rename `@morph-ui/react-native-flows` → `@morph-ui/react-native-flows`
 
 **Research**:
 
@@ -301,7 +301,7 @@ Option B: Keep `@warp-ui/` (existing branding)
 - Doesn't follow component library philosophy
 
 **Recommendation**:
-Create `PasswordInput` component in `@warp-ui/react-native`:
+Create `PasswordInput` component in `@morph-ui/react-native`:
 
 ```tsx
 // packages/react-native/src/password-input/PasswordInput.tsx
@@ -446,7 +446,7 @@ Total estimated time: 35-45 minutes for full codebase scan
 
 5. **Be specific and actionable**:
    - Not: "Naming could be better"
-   - Yes: "Rename `@repo/react-native-flows` to `@warp-ui/react-native-flows` for consistency"
+   - Yes: "Rename `@morph-ui/react-native-flows` to `@morph-ui/react-native-flows` for consistency"
 
 ## Principles
 

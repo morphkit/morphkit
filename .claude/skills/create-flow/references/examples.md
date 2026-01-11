@@ -49,7 +49,7 @@ export default function AuthLayout() {
 import { View, StyleSheet, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Input, Button, Container, Divider } from "@warp-ui/react-native";
+import { Typography, Input, Button, Container, Divider } from "@morph-ui/react-native";
 import { handleLogin, handleSocialLogin, LoginCredentials } from "../handlers/auth-handlers";
 
 export default function Login() {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
 import { View, StyleSheet, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Input, Button, Container, Checkbox } from "@warp-ui/react-native";
+import { Typography, Input, Button, Container, Checkbox } from "@morph-ui/react-native";
 import { handleSignup, SignupData } from "../handlers/auth-handlers";
 
 export default function Signup() {
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Input, Button, Container, Alert } from "@warp-ui/react-native";
+import { Typography, Input, Button, Container, Alert } from "@morph-ui/react-native";
 import { handleForgotPassword } from "../handlers/auth-handlers";
 
 export default function ForgotPassword() {
@@ -504,7 +504,7 @@ packages/react-native-flows/src/onboarding/
 ```typescript
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { Typography, Button, Container, Progress } from "@warp-ui/react-native";
+import { Typography, Button, Container, Progress } from "@morph-ui/react-native";
 
 export default function Welcome() {
   const router = useRouter();
@@ -569,7 +569,7 @@ const styles = StyleSheet.create({
 ```typescript
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { Typography, Button, Container, Progress, Card } from "@warp-ui/react-native";
+import { Typography, Button, Container, Progress, Card } from "@morph-ui/react-native";
 
 export default function Features() {
   const router = useRouter();
@@ -649,7 +649,7 @@ const styles = StyleSheet.create({
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Button, Container, Progress, Switch, Alert } from "@warp-ui/react-native";
+import { Typography, Button, Container, Progress, Switch, Alert } from "@morph-ui/react-native";
 import { handleRequestPermissions } from "../handlers/onboarding-handlers";
 
 export default function Permissions() {
@@ -758,7 +758,7 @@ const styles = StyleSheet.create({
 ```typescript
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { Typography, Button, Container, Progress } from "@warp-ui/react-native";
+import { Typography, Button, Container, Progress } from "@morph-ui/react-native";
 import { handleCompleteOnboarding } from "../handlers/onboarding-handlers";
 
 export default function Complete() {

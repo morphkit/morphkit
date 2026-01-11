@@ -52,7 +52,7 @@
 
 - **Test Framework**: Jest 30.2.0
 - **Testing Library**: React Native Testing Library
-- **Shared Config**: @repo/jest-config
+- **Shared Config**: @morph-ui/jest-config
 
 **Documentation:**
 
@@ -63,12 +63,12 @@
 
 - **Linter**: ESLint v9 (flat config, zero warnings policy)
 - **Formatter**: Prettier
-- **TypeScript Config**: Shared via @repo/typescript-config
+- **TypeScript Config**: Shared via @morph-ui/typescript-config
 
 **Publishing:**
 
-- **@warp-ui/cli**: GitHub Packages (v0.3.4)
-- **@warp-ui/react-native**: npm registry (planned)
+- **@morph-ui/cli**: GitHub Packages (v0.3.4)
+- **@morph-ui/react-native**: npm registry (planned)
 
 ## Project Conventions
 
@@ -122,7 +122,7 @@
   - **CRITICAL**: Even if failing tests are unrelated to your current change, ALL tests must pass before marking work as complete
   - Never ignore or skip failing tests
   - Fix all test failures before proceeding
-- **Shared config**: Use `@repo/jest-config` for consistent setup across packages
+- **Shared config**: Use `@morph-ui/jest-config` for consistent setup across packages
 
 **Test Coverage:**
 
@@ -294,8 +294,8 @@ See `.claude/skills/create-component/SKILL.md` for the complete three-phase work
 
 ### Publishing & Distribution
 
-- **GitHub Packages**: Hosts @warp-ui/cli (v0.3.4)
-- **npm registry** (planned): Future home for @warp-ui/react-native
+- **GitHub Packages**: Hosts @morph-ui/cli (v0.3.4)
+- **npm registry** (planned): Future home for @morph-ui/react-native
 
 ### UI & Theming
 

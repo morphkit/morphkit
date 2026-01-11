@@ -373,7 +373,7 @@ both humans and AI coding assistants.
 ### Basic Component
 
 \`\`\`tsx
-import { ComponentName } from "@repo/react-native";
+import { ComponentName } from "@morph-ui/react-native";
 
 <ComponentName variant="primary">Content</ComponentName>
 \`\`\`
@@ -546,7 +546,7 @@ Formats all code with Prettier. Must pass with no changes.
 ### 2. Type Check
 
 ```bash
-bun run check-types --filter=@warp-ui/react-native
+bun run check-types --filter=@morph-ui/react-native
 ```
 
 Runs TypeScript compiler with `--noEmit`. Must pass with zero errors.
@@ -561,7 +561,7 @@ Runs TypeScript compiler with `--noEmit`. Must pass with zero errors.
 ### 3. Lint
 
 ```bash
-bun run lint --filter=@warp-ui/react-native
+bun run lint --filter=@morph-ui/react-native
 ```
 
 Runs ESLint with `--max-warnings 0`. Must pass with zero warnings.
@@ -576,7 +576,7 @@ Runs ESLint with `--max-warnings 0`. Must pass with zero warnings.
 ### 4. Test
 
 ```bash
-bun run test --filter=@warp-ui/react-native
+bun run test --filter=@morph-ui/react-native
 ```
 
 Runs Jest tests. All tests must pass.
@@ -683,9 +683,9 @@ Runs Jest tests. All tests must pass.
 ### Verification
 
 - [ ] `bun run format` passes (no changes needed)
-- [ ] `bun run check-types --filter=@warp-ui/react-native` passes (zero errors)
-- [ ] `bun run lint --filter=@warp-ui/react-native` passes (zero warnings)
-- [ ] `bun run test --filter=@warp-ui/react-native` passes (all tests green)
+- [ ] `bun run check-types --filter=@morph-ui/react-native` passes (zero errors)
+- [ ] `bun run lint --filter=@morph-ui/react-native` passes (zero warnings)
+- [ ] `bun run test --filter=@morph-ui/react-native` passes (all tests green)
 
 ## Troubleshooting
 

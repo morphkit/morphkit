@@ -288,9 +288,9 @@ Follow tasks.md section 8 to run all checks:
 
 ```bash
 bun run format                                  # Prettier
-bun run check-types --filter=@warp-ui/react-native  # TypeScript
-bun run lint --filter=@warp-ui/react-native         # ESLint
-bun run test --filter=@warp-ui/react-native         # Jest
+bun run check-types --filter=@morph-ui/react-native  # TypeScript
+bun run lint --filter=@morph-ui/react-native         # ESLint
+bun run test --filter=@morph-ui/react-native         # Jest
 ```
 
 All checks must pass before the component is complete.
@@ -609,9 +609,9 @@ Complete implementation checklist (8 sections):
 ## 8. Verification
 
 - [ ] 8.1 Run `bun run format` (Prettier)
-- [ ] 8.2 Run `bun run check-types --filter=@warp-ui/react-native` (zero errors)
-- [ ] 8.3 Run `bun run lint --filter=@warp-ui/react-native` (zero warnings)
-- [ ] 8.4 Run `bun run test --filter=@warp-ui/react-native` (all tests passing)
+- [ ] 8.2 Run `bun run check-types --filter=@morph-ui/react-native` (zero errors)
+- [ ] 8.3 Run `bun run lint --filter=@morph-ui/react-native` (zero warnings)
+- [ ] 8.4 Run `bun run test --filter=@morph-ui/react-native` (all tests passing)
 - [ ] 8.5 Verify component appears in demo app sidebar
 - [ ] 8.6 Verify documentation loads correctly in demo app
 ```

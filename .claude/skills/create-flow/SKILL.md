@@ -228,18 +228,18 @@ Create `packages/react-native-flows/package.json`:
 
 ```json
 {
-  "name": "@repo/react-native-flows",
+  "name": "@morph-ui/react-native-flows",
   "version": "0.1.0",
   "private": true,
   "main": "src/index.ts",
   "dependencies": {
-    "@warp-ui/react-native": "workspace:*",
+    "@morph-ui/react-native": "workspace:*",
     "expo-router": "~6.0.21",
     "react": "^18.3.1",
     "react-native": "^0.76.6"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@morph-ui/typescript-config": "workspace:*"
   }
 }
 ```
@@ -248,7 +248,7 @@ Create `packages/react-native-flows/tsconfig.json`:
 
 ```json
 {
-  "extends": "@repo/typescript-config/react-native.json",
+  "extends": "@morph-ui/typescript-config/react-native.json",
   "compilerOptions": {
     "outDir": "dist"
   },
@@ -313,7 +313,7 @@ import {
   Container,
   Stack,
   useTheme,
-} from "@warp-ui/react-native";
+} from "@morph-ui/react-native";
 import { handleLogin, LoginCredentials } from "../handlers/auth-handlers";
 
 export default function Login() {
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
 ```typescript
 import { Stack, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Button, useTheme } from "@warp-ui/react-native";
+import { Button, useTheme } from "@morph-ui/react-native";
 
 export default function AuthLayout() {
   const router = useRouter();
@@ -510,7 +510,7 @@ import {
   Container, // Page wrapper
   Stack, // Layout helper
   // ... other components from registry
-} from "@warp-ui/react-native";
+} from "@morph-ui/react-native";
 ```
 
 ### StyleSheet Rules
@@ -567,7 +567,7 @@ All generated flow code must follow these strict quality standards:
 
 **✅ DO:**
 
-- Import `useTheme` from @warp-ui/react-native in every screen file
+- Import `useTheme` from @morph-ui/react-native in every screen file
 - Use `theme.primitive.spacing[n]` for all spacing values
 - Use theme tokens for colors (iconColor, text colors)
 - Apply padding/margins via inline styles with theme tokens
@@ -575,7 +575,7 @@ All generated flow code must follow these strict quality standards:
 
 **❌ DON'T:**
 
-- Hardcode numeric values: `gap={24}`, `padding: 24`
+- Hardcode numeric gap values: Use theme tokens like `gap="lg"` instead of `gap={24}`
 - Hardcode colors: `"#000"`, `"#fff"`
 - Put spacing values in StyleSheet.create()
 
@@ -589,7 +589,7 @@ All generated flow code must follow these strict quality standards:
 **Example:**
 
 ```typescript
-import { useTheme } from "@warp-ui/react-native";
+import { useTheme } from "@morph-ui/react-native";
 
 const { theme } = useTheme();
 
@@ -696,7 +696,7 @@ const styles = StyleSheet.create({
 ```typescript
 import { Stack, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Button, useTheme } from "@warp-ui/react-native";
+import { Button, useTheme } from "@morph-ui/react-native";
 
 const { theme, colorScheme } = useTheme();
 const iconColor = theme.component.button.variant[colorScheme].tonal.text;
@@ -762,7 +762,7 @@ import {
   Container,
   Stack,
   useTheme,
-} from "@warp-ui/react-native";
+} from "@morph-ui/react-native";
 import { handleLogin, LoginCredentials } from "../handlers/auth-handlers";
 
 export default function Login() {
@@ -910,7 +910,7 @@ Adjust component props for different styling:
 
 ## Dependencies
 
-- @warp-ui/react-native
+- @morph-ui/react-native
 - expo-router ~6.0.0
 - react-native
 ```
@@ -932,7 +932,7 @@ Before marking the flow creation as complete, verify:
 ### Code Quality
 
 - [ ] NO React Native UI imports (Text, Button, TextInput, Pressable)
-- [ ] ALL UI components from `@warp-ui/react-native`
+- [ ] ALL UI components from `@morph-ui/react-native`
 - [ ] Typography component used for all text
 - [ ] useRouter() for navigation
 - [ ] useTheme() hook imported and used in every screen file
@@ -987,7 +987,7 @@ For detailed guidance, see these reference files:
 
 **Component not found**: Check `packages/react-native/src/registry.json` and create missing component first
 
-**Type errors**: Ensure all imports are from `@warp-ui/react-native`, not `react-native`
+**Type errors**: Ensure all imports are from `@morph-ui/react-native`, not `react-native`
 
 **Navigation not working**: Verify route group syntax `(variant)` and screen names match navigation calls
 

@@ -29,7 +29,7 @@ Use **Typography** component for ALL text display. NEVER use React Native's `Tex
 **Code Example**:
 
 ```typescript
-import { Typography } from "@warp-ui/react-native";
+import { Typography } from "@morph-ui/react-native";
 
 <Typography variant="title-1">Welcome Back</Typography>
 <Typography variant="body">Please enter your credentials</Typography>
@@ -64,7 +64,7 @@ import { Typography } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Input } from "@warp-ui/react-native";
+import { Input } from "@morph-ui/react-native";
 
 <Input
   value={email}
@@ -104,7 +104,7 @@ import { Input } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Textarea } from "@warp-ui/react-native";
+import { Textarea } from "@morph-ui/react-native";
 
 <Textarea
   value={message}
@@ -128,7 +128,7 @@ import { Textarea } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { OTPInput } from "@warp-ui/react-native";
+import { OTPInput } from "@morph-ui/react-native";
 
 <OTPInput
   length={6}
@@ -149,7 +149,7 @@ import { OTPInput } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Select } from "@warp-ui/react-native";
+import { Select } from "@morph-ui/react-native";
 
 <Select
   value={selectedCountry}
@@ -173,7 +173,7 @@ import { Select } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Checkbox } from "@warp-ui/react-native";
+import { Checkbox } from "@morph-ui/react-native";
 
 <Checkbox
   checked={agreedToTerms}
@@ -194,7 +194,7 @@ import { Checkbox } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Radio } from "@warp-ui/react-native";
+import { Radio } from "@morph-ui/react-native";
 
 <Radio
   value={paymentMethod}
@@ -219,7 +219,7 @@ import { Radio } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Switch } from "@warp-ui/react-native";
+import { Switch } from "@morph-ui/react-native";
 
 <Switch
   value={enableNotifications}
@@ -240,7 +240,7 @@ import { Switch } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Slider } from "@warp-ui/react-native";
+import { Slider } from "@morph-ui/react-native";
 
 <Slider
   value={volume}
@@ -265,7 +265,7 @@ import { Slider } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Button } from "@warp-ui/react-native";
+import { Button } from "@morph-ui/react-native";
 
 <Button variant="primary" onPress={handleSubmit}>
   Sign Up
@@ -357,7 +357,7 @@ import { Button } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { FAB } from "@warp-ui/react-native";
+import { FAB } from "@morph-ui/react-native";
 
 <FAB
   icon="plus"
@@ -380,7 +380,7 @@ import { FAB } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Container } from "@warp-ui/react-native";
+import { Container } from "@morph-ui/react-native";
 
 <Container>
   {/* Screen content */}
@@ -399,7 +399,7 @@ import { Container } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Card } from "@warp-ui/react-native";
+import { Card } from "@morph-ui/react-native";
 
 <Card>
   <Typography variant="heading">Card Title</Typography>
@@ -418,9 +418,9 @@ import { Card } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Box } from "@warp-ui/react-native";
+import { Box } from "@morph-ui/react-native";
 
-<Box padding={4} gap={2}>
+<Box padding={4} gap="xs">
   {/* Children with consistent spacing */}
 </Box>
 ```
@@ -436,7 +436,7 @@ import { Box } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Stack } from "@warp-ui/react-native";
+import { Stack } from "@morph-ui/react-native";
 
 <Stack direction="vertical" spacing={16} align="center">
   <Typography variant="title-1">Title</Typography>
@@ -458,7 +458,7 @@ import { Stack } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Avatar } from "@warp-ui/react-native";
+import { Avatar } from "@morph-ui/react-native";
 
 <Avatar source={{ uri: "https://..." }} size="md" />
 
@@ -477,7 +477,7 @@ import { Avatar } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Badge } from "@warp-ui/react-native";
+import { Badge } from "@morph-ui/react-native";
 
 <Badge count={5} variant="red">
   <IconComponent />
@@ -496,7 +496,7 @@ import { Badge } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Tag } from "@warp-ui/react-native";
+import { Tag } from "@morph-ui/react-native";
 
 <Tag variant="primary" size="sm">
   New
@@ -518,7 +518,7 @@ import { Tag } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Divider } from "@warp-ui/react-native";
+import { Divider } from "@morph-ui/react-native";
 
 <Divider orientation="horizontal" />
 <Divider orientation="vertical" />
@@ -538,7 +538,7 @@ import { Divider } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Spinner } from "@warp-ui/react-native";
+import { Spinner } from "@morph-ui/react-native";
 
 <Spinner size="md" />
 <Spinner size="lg" />
@@ -556,7 +556,7 @@ import { Spinner } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Progress } from "@warp-ui/react-native";
+import { Progress } from "@morph-ui/react-native";
 
 <Progress variant="bar" value={75} max={100} />
 <Progress variant="circle" value={50} max={100} />
@@ -573,7 +573,7 @@ import { Progress } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Skeleton } from "@warp-ui/react-native";
+import { Skeleton } from "@morph-ui/react-native";
 
 <Skeleton variant="text" width={200} />
 <Skeleton variant="rectangle" width={300} height={200} />
@@ -592,7 +592,7 @@ import { Skeleton } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Alert } from "@warp-ui/react-native";
+import { Alert } from "@morph-ui/react-native";
 
 <Alert variant="success" dismissible>
   Your profile has been updated successfully
@@ -615,7 +615,7 @@ import { Alert } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Toast } from "@warp-ui/react-native";
+import { Toast } from "@morph-ui/react-native";
 
 <Toast
   variant="success"
@@ -641,7 +641,7 @@ import { Toast } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Accordion } from "@warp-ui/react-native";
+import { Accordion } from "@morph-ui/react-native";
 
 <Accordion title="Frequently Asked Questions">
   <Typography variant="body">Answer content here...</Typography>
@@ -660,7 +660,7 @@ import { Accordion } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Tabs } from "@warp-ui/react-native";
+import { Tabs } from "@morph-ui/react-native";
 
 <Tabs
   tabs={[
@@ -685,7 +685,7 @@ import { Tabs } from "@warp-ui/react-native";
 **Code Example**:
 
 ```typescript
-import { Label } from "@warp-ui/react-native";
+import { Label } from "@morph-ui/react-native";
 
 <Label required error={emailError}>
   Email Address

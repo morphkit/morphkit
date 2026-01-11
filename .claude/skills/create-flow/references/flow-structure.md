@@ -33,7 +33,7 @@ If the `packages/react-native-flows/` package doesn't exist, create it with thes
 
 ```json
 {
-  "name": "@repo/react-native-flows",
+  "name": "@morph-ui/react-native-flows",
   "version": "0.1.0",
   "private": true,
   "main": "src/index.ts",
@@ -44,14 +44,14 @@ If the `packages/react-native-flows/` package doesn't exist, create it with thes
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
-    "@warp-ui/react-native": "workspace:*",
+    "@morph-ui/react-native": "workspace:*",
     "expo-router": "~6.0.21",
     "react": "^18.3.1",
     "react-native": "^0.76.6"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@morph-ui/eslint-config": "workspace:*",
+    "@morph-ui/typescript-config": "workspace:*",
     "@types/react": "^18.3.1",
     "typescript": "^5.9.2"
   }
@@ -62,7 +62,7 @@ If the `packages/react-native-flows/` package doesn't exist, create it with thes
 
 ```json
 {
-  "extends": "@repo/typescript-config/react-native.json",
+  "extends": "@morph-ui/typescript-config/react-native.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src"
@@ -75,7 +75,7 @@ If the `packages/react-native-flows/` package doesn't exist, create it with thes
 ### eslint.config.mjs
 
 ```javascript
-import reactNativeConfig from "@repo/eslint-config/react-native";
+import reactNativeConfig from "@morph-ui/eslint-config/react-native";
 
 export default [...reactNativeConfig];
 ```
@@ -256,7 +256,7 @@ Each screen is a separate `.tsx` file in the variant directory.
 ```typescript
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Input, Button, Container, Stack } from "@warp-ui/react-native";
+import { Typography, Input, Button, Container, Stack } from "@morph-ui/react-native";
 
 export default function Login() {
   const router = useRouter();
@@ -602,7 +602,7 @@ router.replace("/your-custom-path");
 
 ## Dependencies
 
-- \`@warp-ui/react-native\` - Component library
+- \`@morph-ui/react-native\` - Component library
 - \`expo-router\` ~6.0.0 - File-based routing
 - \`react-native\` - React Native framework
 - \`react\` - React library

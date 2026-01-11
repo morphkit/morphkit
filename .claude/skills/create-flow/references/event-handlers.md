@@ -122,7 +122,7 @@ Handlers are defined within screen components:
 ```typescript
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { Typography, Input, Button, Container, Stack } from "@warp-ui/react-native";
+import { Typography, Input, Button, Container, Stack } from "@morph-ui/react-native";
 
 export default function LoginScreen() {
   const router = useRouter();

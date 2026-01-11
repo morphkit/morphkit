@@ -368,7 +368,7 @@ Variants use Expo Router group syntax with parentheses:
 
 - Each screen is a separate file
 - Use Expo Router for navigation
-- Leverage existing components from `@warp-ui/react-native`
+- Leverage existing components from `@morph-ui/react-native`
 - Follow theme system for consistency
 - No custom components in flows (extract to library instead)
 - Type-safe navigation with `useRouter()` and `useLocalSearchParams()`
@@ -381,10 +381,10 @@ Variants use Expo Router group syntax with parentheses:
 
 **Active scopes**:
 
-- `@warp-ui/` - Published packages (react-native, cli)
-- `@repo/` - Internal packages (configs, flows)
+- `@morph-ui/` - Published packages (react-native, cli)
+- `@morph-ui/` - Internal packages (configs, flows)
 
-**Decision Pending**: Standardize on `@morph-ui/` or keep `@warp-ui/`
+**Decision Pending**: Standardize on `@morph-ui/` or keep `@morph-ui/`
 
 ### Package Naming Rules
 
@@ -399,7 +399,7 @@ Variants use Expo Router group syntax with parentheses:
 - `@morph-ui/react-native`
 - `@morph-ui/react-native-flows`
 - `@morph-ui/cli`
-- `@repo/eslint-config` (internal)
+- `@morph-ui/eslint-config` (internal)
 
 ---
 
@@ -555,7 +555,7 @@ Wildcard pattern for tree-shaking:
 This allows:
 
 ```ts
-import { Button } from "@warp-ui/react-native/src/button";
+import { Button } from "@morph-ui/react-native/src/button";
 ```
 
 ### Component Exports
@@ -653,7 +653,7 @@ A themeable button component following the three-tier theme system.
 ## Import
 
 \`\`\`tsx
-import { Button } from "@warp-ui/react-native/src/button";
+import { Button } from "@morph-ui/react-native/src/button";
 \`\`\`
 
 ## Usage
@@ -697,14 +697,14 @@ Defined in `turbo.json`:
 ### ESLint Configuration
 
 - ESLint v9 with flat config
-- Shared configs in `@repo/eslint-config`
+- Shared configs in `@morph-ui/eslint-config`
 - Zero warnings enforced: `--max-warnings 0`
 - React Native config includes `__DEV__` global
 
 ### TypeScript Configuration
 
 - Strict mode enabled
-- Shared configs in `@repo/typescript-config`
+- Shared configs in `@morph-ui/typescript-config`
 - React Native config uses `jsx: "react-native"`
 - No `any` type allowed
 

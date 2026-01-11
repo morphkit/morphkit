@@ -255,7 +255,7 @@ both humans and AI coding assistants.
 ### Basic Component
 
 \`\`\`tsx
-import { Component } from "@repo/react-native";
+import { Component } from "@morph-ui/react-native";
 
 <Component variant="primary">Click Me</Component>
 \`\`\`

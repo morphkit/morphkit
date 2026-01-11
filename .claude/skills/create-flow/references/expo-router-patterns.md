@@ -403,7 +403,7 @@ export default function Profile() {
 ```typescript
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { Typography, Button, Container } from "@warp-ui/react-native";
+import { Typography, Button, Container } from "@morph-ui/react-native";
 
 export default function Screen() {
   const router = useRouter();
@@ -439,7 +439,7 @@ const styles = StyleSheet.create({
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Typography, Input, Button, Container } from "@warp-ui/react-native";
+import { Typography, Input, Button, Container } from "@morph-ui/react-native";
 
 export default function FormScreen() {
   const router = useRouter();
@@ -481,7 +481,7 @@ const styles = StyleSheet.create({
 ```typescript
 import { View, StyleSheet, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
-import { Typography, Spinner, Container } from "@warp-ui/react-native";
+import { Typography, Spinner, Container } from "@morph-ui/react-native";
 
 export default function DataScreen() {
   const [loading, setLoading] = useState(true);

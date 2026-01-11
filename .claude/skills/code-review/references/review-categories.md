@@ -8,8 +8,8 @@ This document provides comprehensive checklists for each review category. Use th
 
 **Check for**:
 
-- [ ] All public packages use the same npm scope (`@morph-ui/` or `@warp-ui/`)
-- [ ] Internal-only packages use `@repo/` prefix
+- [ ] All public packages use the same npm scope (`@morph-ui/` or `@morph-ui/`)
+- [ ] Internal-only packages use `@morph-ui/` prefix
 - [ ] Scope matches the primary branding (repo name or product name)
 - [ ] No mixing of scopes for similar packages (e.g., components vs flows)
 
@@ -20,8 +20,8 @@ This document provides comprehensive checklists for each review category. Use th
 
 **Common Issues**:
 
-- Mixed `@warp-ui/` and `@morph-ui/` usage
-- Public packages using `@repo/` prefix
+- Mixed `@morph-ui/` and `@morph-ui/` usage
+- Public packages using `@morph-ui/` prefix
 - Inconsistent scope for related packages (components, flows, CLI)
 
 **Best Practice**:
@@ -35,7 +35,7 @@ This document provides comprehensive checklists for each review category. Use th
 
 // Internal tooling
 {
-  "name": "@repo/eslint-config",
+  "name": "@morph-ui/eslint-config",
   "private": true
 }
 ```
