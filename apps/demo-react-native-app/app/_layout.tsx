@@ -10,6 +10,8 @@ import { ThemeProvider, createTheme } from "@warp-ui/react-native";
 import {
   Inter_400Regular,
   Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
   useFonts,
 } from "@expo-google-fonts/inter";
 import * as SplashScreen from "expo-splash-screen";
@@ -19,9 +21,17 @@ SplashScreen.preventAutoHideAsync();
 
 const customTheme = createTheme({
   fonts: {
-    display: "Inter_500Medium",
+    largeTitle: "Inter_700Bold",
+    title1: "Inter_600SemiBold",
+    title2: "Inter_600SemiBold",
+    title3: "Inter_500Medium",
+    heading: "Inter_600SemiBold",
     body: "Inter_400Regular",
-    mono: "monospace",
+    callout: "Inter_500Medium",
+    subhead: "Inter_400Regular",
+    footnote: "Inter_400Regular",
+    caption1: "Inter_500Medium",
+    caption2: "Inter_500Medium",
   },
 });
 
@@ -31,6 +41,8 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
   });
 
   useEffect(() => {

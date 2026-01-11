@@ -173,25 +173,28 @@ describe("<Button />", () => {
     expect(onPressMock).not.toHaveBeenCalled();
   });
 
-  test("shows ActivityIndicator when loading", () => {
-    const { queryByText, UNSAFE_getByType } = render(
-      <Button loading>Loading</Button>,
-    );
-    expect(queryByText("Loading")).toBeNull();
-    expect(UNSAFE_getByType("ActivityIndicator")).toBeTruthy();
+  test("shows Spinner when loading", () => {
+    const { getByLabelText } = render(<Button loading>Loading</Button>);
+    expect(getByLabelText("Loading")).toBeTruthy();
   });
 
-  test("hides icons when loading", () => {
+  test("hides content when loading", () => {
     const IconLeft = <View testID="icon-left" />;
     const IconRight = <View testID="icon-right" />;
-    const { queryByTestId, UNSAFE_getByType } = render(
+    const { getByTestId, getByLabelText, UNSAFE_getAllByType } = render(
       <Button iconLeft={IconLeft} iconRight={IconRight} loading>
         Loading
       </Button>,
     );
-    expect(queryByTestId("icon-left")).toBeNull();
-    expect(queryByTestId("icon-right")).toBeNull();
-    expect(UNSAFE_getByType("ActivityIndicator")).toBeTruthy();
+    const views = UNSAFE_getAllByType(View);
+    const hiddenContent = views.find((v) => {
+      const style = StyleSheet.flatten(v.props.style);
+      return style && style.opacity === 0;
+    });
+    expect(hiddenContent).toBeTruthy();
+    expect(getByTestId("icon-left")).toBeTruthy();
+    expect(getByTestId("icon-right")).toBeTruthy();
+    expect(getByLabelText("Loading")).toBeTruthy();
   });
 
   test("applies disabled styles", () => {

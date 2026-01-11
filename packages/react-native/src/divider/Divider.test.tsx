@@ -16,7 +16,7 @@ describe("<Divider />", () => {
     const flatStyle = StyleSheet.flatten(dividerView.props.style);
     expect(flatStyle).toMatchObject({
       width: "100%",
-      height: 1,
+      height: StyleSheet.hairlineWidth,
     });
   });
 
@@ -26,18 +26,18 @@ describe("<Divider />", () => {
     const dividerView = views[0];
     const flatStyle = StyleSheet.flatten(dividerView.props.style);
     expect(flatStyle).toMatchObject({
-      width: 1,
+      width: StyleSheet.hairlineWidth,
       height: "100%",
     });
   });
 
-  test("applies default thickness of 1", () => {
+  test("applies default thickness of hairline", () => {
     const { UNSAFE_getAllByType } = render(<Divider />);
     const views = UNSAFE_getAllByType(View);
     const dividerView = views[0];
     const flatStyle = StyleSheet.flatten(dividerView.props.style);
     expect(flatStyle).toMatchObject({
-      height: 1,
+      height: StyleSheet.hairlineWidth,
     });
   });
 
