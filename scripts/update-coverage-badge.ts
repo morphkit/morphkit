@@ -24,7 +24,16 @@ function getCoverageColor(percentage: number): string {
 
 async function updateCoverageBadge() {
   const coveragePath = "./packages/react-native/coverage/coverage-summary.json";
-  const coverage: CoverageSummary = await Bun.file(coveragePath).json();
+
+  const file = Bun.file(coveragePath);
+  const exists = await file.exists();
+
+  if (!exists) {
+    console.error(`Coverage file not found: ${coveragePath}`);
+    process.exit(1);
+  }
+
+  const coverage: CoverageSummary = await file.json();
 
   const percentage = coverage.total.lines.pct;
   const color = getCoverageColor(percentage);
