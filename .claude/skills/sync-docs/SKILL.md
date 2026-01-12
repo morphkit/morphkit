@@ -147,15 +147,15 @@ find packages/react-native/src -maxdepth 1 -type d | wc -l
 
 **Sync workflow:**
 
-1. Update `packages/react-native/registry.json` with new component
-2. Update component count in `openspec/project.md` (line ~9)
-3. Update component count in `CLAUDE.md` (lines ~93, ~102)
-4. Update component categories list in `CLAUDE.md` (lines ~100-108)
-5. Update `README.md` if component count is mentioned
+1. Component added/modified (already done)
+2. Run `bun run generate` to regenerate registries
+3. Update component count in `openspec/project.md` (line ~9)
+4. Update component count in `CLAUDE.md` (lines ~93, ~102)
+5. Update component categories list in `CLAUDE.md` (lines ~100-108)
+6. Update `README.md` if component count is mentioned
 
 **Files to edit:**
 
-- `packages/react-native/registry.json`
 - `openspec/project.md`
 - `CLAUDE.md`
 - `README.md` (if applicable)
@@ -246,8 +246,9 @@ grep -n "official starter Turborepo" README.md
 # Count actual component directories
 find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l
 
-# Compare with registry.json
-grep -c '"' packages/react-native/registry.json
+# Regenerate and check for changes
+bun run generate
+git diff packages/react-native/src/registry.json
 
 # Grep for old count in all documentation and skills
 grep -r "27 components" CLAUDE.md openspec/project.md .claude/skills/
@@ -256,7 +257,7 @@ grep -r "27 total" .claude/skills/
 
 **Sync workflow:**
 
-1. Update `registry.json` (already done)
+1. Run `bun run generate` to regenerate registries (already done)
 2. Update `openspec/project.md` - Component count (line 9)
 3. Update `CLAUDE.md` - Component count (lines 93, 102) and categories list (lines 100-108)
 4. **Update `.claude/skills/code-review/SKILL.md`** - Component categories if mentioned
@@ -268,7 +269,6 @@ grep -r "27 total" .claude/skills/
 
 **Files to edit:**
 
-- `registry.json`
 - `openspec/project.md`
 - `CLAUDE.md`
 - `.claude/skills/code-review/SKILL.md`
@@ -278,7 +278,7 @@ grep -r "27 total" .claude/skills/
 - `.claude/skills/create-flow/references/component-detection.md`
 - `README.md`
 
-**Total:** 9 files
+**Total:** 8 files
 
 ### Scenario 6: Tech Stack Version Upgrade
 

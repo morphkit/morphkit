@@ -457,8 +457,10 @@ The monorepo has comprehensive testing setup:
 
 Components use MDX for rich documentation:
 
-- **Registry**: `registry.json` contains component metadata
-- **Docs Registry**: `docs-registry.ts` provides MDX documentation loader
+- **Registry**: `registry.json` contains component metadata (auto-generated from `meta.json` files)
+- **Docs Registry**: `docs-registry.ts` provides MDX documentation loader (auto-generated from `README.mdx` files)
+- **Generation**: Run `bun run generate` to regenerate all registries after adding/modifying components
+- **CI Validation**: `.github/workflows/ci.yml` ensures registries stay up-to-date
 - **MDX Provider**: Maps MDX elements to Warp UI components
 - **Demo App**: Renders documentation dynamically at `/docs/[component]` route
 
@@ -538,6 +540,43 @@ Similar to shadcn/ui, consider:
 - Clear, documented component APIs
 - Export pattern that allows selective imports (e.g., wildcard pattern `"./*": "./src/*.tsx"`)
 
+### Automatic Registry Generation
+
+The component library uses automated scripts to maintain consistency:
+
+**Generation Scripts:**
+
+- `bun run generate` - Regenerate all registries and exports
+- `bun run generate:registry` - Regenerate `registry.json` from `meta.json` files
+- `bun run generate:docs` - Regenerate `docs-registry.ts` from `README.mdx` files
+- `bun run generate:exports` - Regenerate barrel exports in `index.ts`
+
+**When to Run:**
+
+- After adding a new component
+- After modifying `meta.json` or `README.mdx`
+- After removing a component
+- Before committing component changes
+
+**How It Works:**
+
+1. Scans `packages/react-native/src/` for component directories
+2. Reads `meta.json` files for component metadata
+3. Generates `registry.json` with alphabetically sorted components
+4. Generates `docs-registry.ts` by importing all `README.mdx` files
+5. Generates `index.ts` with `export * from "./{component}"` pattern
+
+**CI Enforcement:**
+The `.github/workflows/ci.yml` workflow validates that registries are up-to-date. If you forget to run `bun run generate`, the CI will fail with a helpful message.
+
+**DO NOT manually edit:**
+
+- `packages/react-native/src/registry.json`
+- `packages/react-native/src/docs-registry.ts`
+- `packages/react-native/src/index.ts`
+
+These files are auto-generated and manual changes will be overwritten.
+
 ## CLI Usage
 
 The `@warp-ui/cli` package provides scaffolding and management commands:
@@ -573,7 +612,7 @@ Use the `create-component` skill for all component development work. This skill 
 2. **Phase 2: Implementation**
    - Follow tasks.md checklist sequentially
    - Create all 7 required files (Component.tsx, .theme.ts, .test.tsx, index.ts, meta.json, README.mdx, examples/)
-   - Update 4 registries (theme export, package export, docs registry, component registry)
+   - Run `bun run generate` to automatically update all registries
    - Run verification (format, type-check, lint, test)
 
 3. **Phase 3: Archiving**

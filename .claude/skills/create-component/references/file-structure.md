@@ -458,78 +458,55 @@ export * from "./VariantsExample";
 export * from "./InteractiveExample";
 ```
 
-## Registry Updates
+## Registry Generation
 
-After creating all component files, you MUST update these 4 registry files:
+After creating all component files, registries are automatically updated via generation scripts.
 
-### 1. Component Theme Export
+**Run Generation:**
 
-**File**: `packages/react-native/src/theme/tokens/components.ts`
-
-**Action**: Add export for your component's theme file
-
-```typescript
-// ... existing exports ...
-export * from "../../component-name/ComponentName.theme";
+```bash
+cd /path/to/morph-ui
+bun run generate
 ```
 
-**Location**: Add at the end of the file in alphabetical order
+**What Gets Generated:**
 
-**Critical**: This MUST be done for the theme system to recognize your component tokens. Without this, TypeScript will not find your theme tokens.
+1. **Component Registry** (`src/registry.json`)
+   - Reads all `{component}/meta.json` files
+   - Alphabetically sorted component list
+   - Includes: name, description, dependencies
 
-### 2. Main Package Export
+2. **Docs Registry** (`src/docs-registry.ts`)
+   - Imports all `{component}/README.mdx` files
+   - Maps component names to documentation components
+   - Alphabetically sorted imports
 
-**File**: `packages/react-native/src/index.ts`
+3. **Barrel Exports** (`src/index.ts`)
+   - Simple `export * from "./{component}"` pattern
+   - Alphabetically sorted
+   - Includes theme exports
 
-**Action**: Export component and props interface
+**Verification:**
 
-```typescript
-// ... existing exports ...
-export { ComponentName, type ComponentNameProps } from "./component-name";
+Check generated files:
+
+```bash
+# Component in registry.json
+grep -A 4 '"name": "button"' packages/react-native/src/registry.json
+
+# Docs in docs-registry.ts
+grep "ButtonDocs" packages/react-native/src/docs-registry.ts
+
+# Exports in index.ts
+grep 'from "./button"' packages/react-native/src/index.ts
 ```
 
-**Location**: Add in alphabetical order with other component exports
+**Important:**
 
-### 3. Documentation Registry
-
-**File**: `packages/react-native/src/docs-registry.ts`
-
-**Action**: Import and register component documentation
-
-```typescript
-// ... existing imports ...
-import ComponentNameDocs from "./component-name/README.mdx";
-
-export const docsRegistry: Record<string, React.FC> = {
-  // ... existing entries ...
-  "component-name": ComponentNameDocs,
-};
-```
-
-**Location**: Add import at top (alphabetical), add registry entry (alphabetical)
-
-### 4. Component Registry
-
-**File**: `packages/react-native/src/registry.json`
-
-**Action**: Add component metadata to components array
-
-```json
-{
-  "version": "1.0.0",
-  "components": [
-    // ... existing components ...
-    {
-      "type": "react-native",
-      "name": "component-name",
-      "description": "Brief description",
-      "dependencies": []
-    }
-  ]
-}
-```
-
-**Location**: Add to components array in alphabetical order by name
+- DO NOT manually edit `registry.json`, `docs-registry.ts`, or `index.ts`
+- These files are auto-generated and will be overwritten
+- The CI will fail if registries are stale
+- Always run `bun run generate` after component changes
 
 ## Verification Steps
 

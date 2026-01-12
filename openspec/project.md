@@ -185,6 +185,29 @@ All new components follow a spec-driven development workflow using OpenSpec:
 
 See `.claude/skills/create-component/SKILL.md` for the complete three-phase workflow and OpenSpec proposal templates.
 
+### Automatic Registry Generation
+
+Registry files are auto-generated to ensure consistency and eliminate manual maintenance.
+
+**Scripts:**
+
+- Location: `scripts/` directory
+- Command: `bun run generate`
+- Generates: `registry.json`, `docs-registry.ts`, `index.ts`
+
+**Workflow:**
+
+1. Developer adds/modifies component
+2. Developer runs `bun run generate`
+3. Developer commits both component and registry changes
+4. CI validates registries are up-to-date
+
+**Sources of Truth:**
+
+- Component metadata: `{component}/meta.json`
+- Documentation: `{component}/README.mdx`
+- Registries are derived from these sources
+
 ### Flows System
 
 **Concept:**

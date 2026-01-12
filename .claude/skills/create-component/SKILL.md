@@ -80,7 +80,7 @@ To create a new component:
    - Component.test.tsx
    - index.ts, meta.json, README.mdx
    - examples/ directory
-4. **I'll update registries**: Theme export, package export, docs registry, component registry
+4. **I'll run `bun run generate`** to automatically update all registries
 5. **I'll run verification**: Format, type-check, lint, test
 
 ## Component Creation Workflow
@@ -261,22 +261,27 @@ See [file-structure.md](references/file-structure.md) for complete file specific
 
 **Step 2.5: Update Registries**
 
-Follow tasks.md sections 7 to update 4 registry files:
+**Command:** `bun run generate`
 
-1. **`src/theme/tokens/components.ts`** - Export component theme
+After creating all component files (including `meta.json` and `README.mdx`), run the automatic registry generation script:
 
-   ```typescript
-   export * from "../../component-name/ComponentName.theme";
-   ```
+```bash
+bun run generate
+```
 
-2. **`src/index.ts`** - Export component
+This regenerates:
 
-   ```typescript
-   export { ComponentName, type ComponentNameProps } from "./component-name";
-   ```
+- `src/registry.json` - Component metadata from `meta.json` files
+- `src/docs-registry.ts` - Documentation registry from `README.mdx` files
+- `src/index.ts` - Barrel exports using `export * from "./{component}"`
 
-3. **`src/docs-registry.ts`** - Register documentation
-4. **`src/registry.json`** - Add metadata entry
+**Verification:**
+
+- Check that component appears in `registry.json`
+- Verify `docs-registry.ts` imports the `README.mdx`
+- Ensure `index.ts` exports the component
+
+**DO NOT manually edit registry files** - they are auto-generated.
 
 **Step 2.6: Update tasks.md Checkboxes**
 
@@ -599,12 +604,10 @@ Complete implementation checklist (8 sections):
 
 - [ ] 6.1 Create meta.json with name, category, dependencies
 - [ ] 6.2 Create index.ts barrel export (export component and types)
-- [ ] 6.3 Update src/registry.json with component entry
-- [ ] 6.4 Update src/docs-registry.ts with MDX import
 
-## 7. Package Integration
+## 7. Registry Generation
 
-- [ ] 7.1 Update src/index.ts with component and type exports
+- [ ] 7.1 Run `bun run generate` to update all registries (registry.json, docs-registry.ts, index.ts)
 
 ## 8. Verification
 

@@ -67,13 +67,23 @@ If Bun upgrades from 1.2.2 to 1.2.3:
    grep "1.2.3" package.json openspec/project.md CLAUDE.md
    ```
 
+## Registry Consistency
+
+After making changes to components:
+
+- [ ] Run `bun run generate` to regenerate registries
+- [ ] Verify `registry.json` has correct component count
+- [ ] Verify `docs-registry.ts` imports all README.mdx files
+- [ ] Verify `index.ts` exports all components
+- [ ] Check `git diff` shows only expected changes
+- [ ] Commit registry changes along with component changes
+
 ## Component Changes
 
 Use this checklist when components are added or removed:
 
 - [ ] **Component added/removed** from `packages/react-native/src/`
-- [ ] **registry.json updated** with new component count
-  - Add/remove component entry in `components` object
+- [ ] **Run `bun run generate`** to regenerate registries
 - [ ] **openspec/project.md component count updated**
   - Line 9: Core Features section ("26 Production-Ready Components")
 - [ ] **CLAUDE.md component count updated**
@@ -88,20 +98,9 @@ Use this checklist when components are added or removed:
 
 If adding a new "Tooltip" component in the "Feedback" category:
 
-1. Create component in `packages/react-native/src/tooltip/`
+1. Create component in `packages/react-native/src/tooltip/` with `meta.json` and `README.mdx`
 
-2. Update `packages/react-native/registry.json`:
-
-   ```json
-   "components": {
-     ...existing components,
-     "tooltip": {
-       "name": "Tooltip",
-       "category": "feedback",
-       ...
-     }
-   }
-   ```
+2. Run `bun run generate` to regenerate registries
 
 3. Update `openspec/project.md` line 9:
 
