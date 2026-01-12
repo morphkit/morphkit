@@ -5,7 +5,7 @@
 <div align="center">
 
 ![Tests](https://github.com/warp-ui/warp-ui/actions/workflows/ci.yml/badge.svg)
-![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jaksamalisic/b03e443032a9a1ccbe2811be5d8ee83d/raw/morph-ui-coverage.json)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jaksm/b03e443032a9a1ccbe2811be5d8ee83d/raw/morph-ui-coverage.json)
 ![TypeScript](https://img.shields.io/badge/typescript-5.9.2-blue)
 ![React Native](https://img.shields.io/badge/react%20native-0.81.5-61dafb)
 ![Jest](https://img.shields.io/badge/jest-30.2.0-green)
