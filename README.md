@@ -5,11 +5,12 @@
 <div align="center">
 
 ![Tests](https://github.com/warp-ui/warp-ui/actions/workflows/ci.yml/badge.svg)
-![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jaksm/b03e443032a9a1ccbe2811be5d8ee83d/raw/morph-ui-coverage.json)
-![TypeScript](https://img.shields.io/badge/typescript-5.9.2-blue)
-![React Native](https://img.shields.io/badge/react%20native-0.81.5-61dafb)
-![Jest](https://img.shields.io/badge/jest-30.2.0-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jaksm/b03e443032a9a1ccbe2811be5d8ee83d/raw/morph-ui-coverage.json&logo=codecov&logoColor=white)
+![Expo](https://img.shields.io/badge/expo-54.0-000020?logo=expo&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-5.9.2-3178c6?logo=typescript&logoColor=white)
+![React Native](https://img.shields.io/badge/react%20native-0.81.5-61dafb?logo=react&logoColor=white)
+![Jest](https://img.shields.io/badge/jest-30.2.0-c21325?logo=jest&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue?logo=opensourceinitiative&logoColor=white)
 
 </div>
 
