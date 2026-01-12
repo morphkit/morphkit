@@ -308,6 +308,7 @@ These rules are **non-negotiable** and must be followed strictly:
   - **CRITICAL**: Even if failing tests are unrelated to your current change, ALL tests must pass before marking work as complete
   - Never ignore or skip failing tests - fix them before proceeding
   - Zero tolerance for test failures
+- 📊 Coverage is automatically reported via GitHub Actions but does not block completion
 
 **Never say something is "done" or "complete" until all checks pass.**
 

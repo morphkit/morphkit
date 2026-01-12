@@ -70,7 +70,7 @@ jobs:
         run: bun run check-types
 
   test:
-    name: Test
+    name: Test with Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -84,5 +84,26 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: bun run test
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: packages/react-native/coverage/
+          retention-days: 30
+
+      - name: Display coverage summary
+        run: |
+          echo "## Test Coverage Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat packages/react-native/coverage/coverage-summary.json | \
+            jq -r '.total | "- **Lines:** \(.lines.pct)%\n- **Statements:** \(.statements.pct)%\n- **Functions:** \(.functions.pct)%\n- **Branches:** \(.branches.pct)%"' >> $GITHUB_STEP_SUMMARY
+
+      - name: Update coverage badge
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GIST_ID: ${{ secrets.GIST_ID }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+        run: bun run scripts/update-coverage-badge.ts

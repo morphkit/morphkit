@@ -4,8 +4,8 @@
 
 <div align="center">
 
-![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
-![Test Coverage](https://img.shields.io/badge/coverage-84%25-brightgreen)
+![Tests](https://github.com/jaksamalisic/morph-ui/actions/workflows/ci.yml/badge.svg)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jaksamalisic/b03e443032a9a1ccbe2811be5d8ee83d/raw/morph-ui-coverage.json)
 ![TypeScript](https://img.shields.io/badge/typescript-5.9.2-blue)
 ![React Native](https://img.shields.io/badge/react%20native-0.81.5-61dafb)
 ![Jest](https://img.shields.io/badge/jest-30.2.0-green)
@@ -256,7 +256,14 @@ We welcome contributions! Before submitting a pull request:
    bun run test
    ```
 
-3. **Review the development guide**: See [CLAUDE.md](./CLAUDE.md) for complete coding standards, architecture patterns, and theming guidelines
+3. **Coverage Reporting**:
+   - Coverage is automatically collected and displayed in README badges
+   - Coverage artifacts are stored for 30 days in GitHub Actions
+   - Coverage does not block PR merging but is tracked for quality
+   - Aim to maintain or improve coverage with new code
+   - View detailed coverage in CI artifacts or coverage-summary.json
+
+4. **Review the development guide**: See [CLAUDE.md](./CLAUDE.md) for complete coding standards, architecture patterns, and theming guidelines
 
 ### Development Philosophy
 

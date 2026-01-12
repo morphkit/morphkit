@@ -14,5 +14,6 @@ module.exports = {
     "!**/README.mdx",
     "!**/eslint.config.js",
   ],
+  coverageReporters: ["text", "lcov", "json-summary"],
   testMatch: ["**/__tests__/**/*.{ts,tsx}", "**/*.test.{ts,tsx}"],
 };
