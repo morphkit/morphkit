@@ -7,7 +7,11 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "generate": "bun run scripts/generate-all.ts",
+    "generate:registry": "bun run scripts/generate-component-registry.ts",
+    "generate:docs": "bun run scripts/generate-docs-registry.ts",
+    "generate:exports": "bun run scripts/generate-barrel-exports.ts"
   },
   "devDependencies": {
     "@swc/core": "^1.15.7",

@@ -10,10 +10,10 @@ import CardDocs from "./card/README.mdx";
 import CheckboxDocs from "./checkbox/README.mdx";
 import ContainerDocs from "./container/README.mdx";
 import DividerDocs from "./divider/README.mdx";
-import FABDocs from "./fab/README.mdx";
+import FabDocs from "./fab/README.mdx";
 import InputDocs from "./input/README.mdx";
 import LabelDocs from "./label/README.mdx";
-import OTPInputDocs from "./otp-input/README.mdx";
+import OtpInputDocs from "./otp-input/README.mdx";
 import ProgressDocs from "./progress/README.mdx";
 import RadioDocs from "./radio/README.mdx";
 import SelectDocs from "./select/README.mdx";
@@ -22,38 +22,38 @@ import SliderDocs from "./slider/README.mdx";
 import SpinnerDocs from "./spinner/README.mdx";
 import StackDocs from "./stack/README.mdx";
 import SwitchDocs from "./switch/README.mdx";
-import TagDocs from "./tag/README.mdx";
 import TabsDocs from "./tabs/README.mdx";
+import TagDocs from "./tag/README.mdx";
 import TextareaDocs from "./textarea/README.mdx";
 import ToastDocs from "./toast/README.mdx";
 import TypographyDocs from "./typography/README.mdx";
 
 export const docsRegistry: Record<string, React.FC> = {
-  accordion: AccordionDocs,
-  alert: AlertDocs,
-  avatar: AvatarDocs,
-  badge: BadgeDocs,
-  box: BoxDocs,
-  button: ButtonDocs,
-  card: CardDocs,
-  checkbox: CheckboxDocs,
-  container: ContainerDocs,
-  divider: DividerDocs,
-  fab: FABDocs,
-  input: InputDocs,
-  label: LabelDocs,
-  "otp-input": OTPInputDocs,
-  progress: ProgressDocs,
-  radio: RadioDocs,
-  select: SelectDocs,
-  skeleton: SkeletonDocs,
-  slider: SliderDocs,
-  spinner: SpinnerDocs,
-  stack: StackDocs,
-  switch: SwitchDocs,
-  tag: TagDocs,
-  tabs: TabsDocs,
-  textarea: TextareaDocs,
-  toast: ToastDocs,
-  typography: TypographyDocs,
+  "accordion": AccordionDocs,
+  "alert": AlertDocs,
+  "avatar": AvatarDocs,
+  "badge": BadgeDocs,
+  "box": BoxDocs,
+  "button": ButtonDocs,
+  "card": CardDocs,
+  "checkbox": CheckboxDocs,
+  "container": ContainerDocs,
+  "divider": DividerDocs,
+  "fab": FabDocs,
+  "input": InputDocs,
+  "label": LabelDocs,
+  "otp-input": OtpInputDocs,
+  "progress": ProgressDocs,
+  "radio": RadioDocs,
+  "select": SelectDocs,
+  "skeleton": SkeletonDocs,
+  "slider": SliderDocs,
+  "spinner": SpinnerDocs,
+  "stack": StackDocs,
+  "switch": SwitchDocs,
+  "tabs": TabsDocs,
+  "tag": TagDocs,
+  "textarea": TextareaDocs,
+  "toast": ToastDocs,
+  "typography": TypographyDocs,
 };

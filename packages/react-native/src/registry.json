@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2025-12-29T00:00:00.000Z",
+  "generatedAt": "2026-01-12T19:07:55.417Z",
   "components": [
     {
       "type": "react-native",
@@ -84,7 +84,9 @@
       "type": "react-native",
       "name": "otp-input",
       "description": "One-time password input with multiple fields for verification codes",
-      "dependencies": ["input"]
+      "dependencies": [
+        "input"
+      ]
     },
     {
       "type": "react-native",
@@ -101,7 +103,7 @@
     {
       "type": "react-native",
       "name": "select",
-      "description": "Dropdown picker component with search and multi-select support for selecting from a list of options",
+      "description": "Flexible inline selection component for choosing one or more options with custom styling",
       "dependencies": []
     },
     {
@@ -136,14 +138,14 @@
     },
     {
       "type": "react-native",
-      "name": "tag",
-      "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
+      "name": "tabs",
+      "description": "Tabbed navigation with multiple variants and orientations",
       "dependencies": []
     },
     {
       "type": "react-native",
-      "name": "tabs",
-      "description": "Tabbed navigation with multiple variants and orientations",
+      "name": "tag",
+      "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
       "dependencies": []
     },
     {
