@@ -1,7 +1,7 @@
 module.exports = {
   preset: '@morph-ui/jest-config',
   testEnvironment: 'node',
-  roots: ['<rootDir>/src', '<rootDir>/tests'],
+  roots: ['<rootDir>/src'],
   testMatch: ['**/*.test.ts'],
   collectCoverageFrom: [
     'src/**/*.ts',

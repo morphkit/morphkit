@@ -25,11 +25,14 @@ jobs:
       - name: Regenerate registries and exports
         run: bun run generate
 
+      - name: Format generated files
+        run: bun run format
+
       - name: Check if files are up-to-date
         run: |
           if ! git diff --exit-code packages/react-native/src/registry.json packages/react-native/src/docs-registry.ts packages/react-native/src/index.ts; then
             echo "Error: Registry files are not up-to-date!"
-            echo "Please run 'bun run generate' locally and commit the changes."
+            echo "Please run 'bun run generate' and 'bun run format' locally and commit the changes."
             exit 1
           fi
 
