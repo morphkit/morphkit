@@ -73,15 +73,295 @@ This skill creates complete React Native components for the morph-ui component l
 To create a new component:
 
 1. **Ask**: "Create a [ComponentName] component"
-2. **I'll ask about**: Variants, sizes, and features needed
-3. **I'll create all required files**:
-   - Component.tsx
-   - Component.theme.ts
-   - Component.test.tsx
-   - index.ts, meta.json, README.mdx
-   - examples/ directory
-4. **I'll run `bun run generate`** to automatically update all registries
-5. **I'll run verification**: Format, type-check, lint, test
+2. **I'll create OpenSpec proposal** with requirements and scenarios
+3. **I'll wait for your approval** before implementation
+4. **I'll use scaffdog** to automatically generate all 7 required files:
+   - Component.tsx, Component.theme.ts, Component.test.tsx
+   - index.ts, meta.json, README.mdx, examples/
+5. **I'll refine the generated code** with real implementation
+6. **I'll run verification**: Format, type-check, lint, test
+
+## Scaffdog Integration
+
+### Overview
+
+Scaffdog automates the creation of boilerplate files during Phase 2 (Implementation). It generates all 7 required files based on the approved OpenSpec proposal, significantly reducing manual work and ensuring consistency.
+
+### When to Use Scaffdog
+
+Use scaffdog in **Phase 2: Implementation** after:
+
+- OpenSpec proposal is approved by user
+- Spec.md defines requirements clearly
+- Component variants, sizes, and features are known
+
+**Time savings**: ~70% reduction in boilerplate creation time.
+
+### Extracting Requirements from Spec
+
+Read the approved `openspec/changes/add-[component-name]-component/specs/[component-name]/spec.md` file to extract configuration:
+
+**Component Name**: From spec filename and title
+
+**Description**: From "Why" section in proposal.md
+
+**Variants**: Parse "Requirement: Variants" section
+
+- Example: "Button SHALL provide 4 visual style variants: primary, secondary, tonal, plain."
+- Extract: `primary, secondary, tonal, plain`
+
+**Sizes**: Parse "Requirement: Sizes" section
+
+- Example: "Button SHALL support 3 sizes: sm (small), md (medium), lg (large)."
+- Extract: `sm, md, lg`
+
+**Base Component**: Infer from requirements:
+
+- Interactive behavior (onPress, tappable) → `Pressable`
+- Text input (keyboard, validation) → `TextInput`
+- Scrollable content → `ScrollView`
+- Default container → `View`
+
+**Feature Flags**:
+
+- `hasIcons`: Check for "icon" in requirements
+- `hasLoading`: Check for "loading state" in requirements
+- `hasDisabled`: Check for "disabled state" in requirements
+- `needsForwardRef`: Check for "ref" or "imperative" in requirements
+
+### Scaffolding Command
+
+**Programmatic Mode** (recommended for agents):
+
+```bash
+bun run scaffold:component '{
+  "name": "ComponentName",
+  "description": "Brief description from spec",
+  "baseComponent": "View",
+  "hasVariants": true,
+  "variants": "primary, secondary",
+  "hasSizes": true,
+  "sizes": "sm, md, lg",
+  "needsForwardRef": false,
+  "hasIcons": true,
+  "hasLoading": false,
+  "hasDisabled": true
+}'
+```
+
+**JSON Structure**:
+
+```typescript
+interface ComponentConfig {
+  name: string; // Required: Component name (any case)
+  description: string; // Required: Brief description
+  baseComponent: "View" | "Pressable" | "TextInput" | "ScrollView"; // Required
+  hasVariants: boolean; // Required: Does component have variants?
+  variants?: string; // Optional: Only if hasVariants=true
+  hasSizes: boolean; // Required: Does component have sizes?
+  sizes?: string; // Optional: Only if hasSizes=true
+  needsForwardRef: boolean; // Required: Use forwardRef pattern?
+  hasIcons: boolean; // Required: Support icons?
+  hasLoading: boolean; // Required: Has loading state?
+  hasDisabled: boolean; // Required: Has disabled state?
+  dependencies?: string; // Optional: Comma-separated deps
+}
+```
+
+**Conditional Properties Rule**: Only include `variants` property if `hasVariants: true`, only include `sizes` if `hasSizes: true`.
+
+### What Scaffdog Generates
+
+Running the command automatically creates all 7 required files:
+
+1. `ComponentName.tsx` - React component with useTheme hook
+2. `ComponentName.theme.ts` - Theme tokens with `as const`
+3. `ComponentName.test.tsx` - Jest test structure
+4. `index.ts` - Module exports
+5. `meta.json` - Component metadata
+6. `README.mdx` - MDX documentation structure
+7. `examples/BasicExample.tsx` - Basic usage example
+
+**Plus automatic post-processing**:
+
+- Updates `src/theme/tokens/components.ts` with theme export
+- Regenerates all registries (registry.json, docs-registry.ts, index.ts)
+- Formats all generated code with Prettier
+
+### Post-Scaffolding Steps
+
+After scaffold generation completes:
+
+1. **Refine generated code**:
+   - **Theme tokens**: Adjust colors, sizes, spacing to match design system
+   - **Component logic**: Implement spec requirements (animations, complex state)
+   - **Tests**: Add scenario-based tests from spec.md (scaffdog only creates structure)
+   - **README**: Enhance examples with realistic use cases
+   - **Accessibility**: Add proper ARIA props beyond basic scaffolding
+
+2. **Update tasks.md**:
+   Mark scaffolded tasks complete:
+
+   ```markdown
+   - [x] 1.1 Create ComponentName.theme.ts
+   - [x] 1.2 Define size tokens
+   - [x] 1.3 Define variant tokens (light)
+   - [x] 1.4 Define variant tokens (dark)
+   - [x] 1.5 Export theme with as const
+   - [x] 2.1 Create ComponentName.tsx
+   - [x] 2.2 Define Props interface
+   - [x] 2.3 Implement component function
+   - [ ] 2.4 Add animations (manual refinement needed)
+   - [ ] 2.5 Add gesture handling (manual refinement needed)
+         ...
+   ```
+
+3. **Run verification**:
+   ```bash
+   bun run check-types  # Must pass
+   bun run lint         # Must pass
+   bun run format       # Auto-fix
+   bun run test         # Must pass
+   ```
+
+### Scaffolding Examples
+
+**Example 1: Simple Component (No Variants, No Sizes)**
+
+Component: Divider (horizontal line)
+
+```bash
+bun run scaffold:component '{
+  "name": "Divider",
+  "description": "Visual separator line between content sections",
+  "baseComponent": "View",
+  "hasVariants": false,
+  "hasSizes": false,
+  "needsForwardRef": false,
+  "hasIcons": false,
+  "hasLoading": false,
+  "hasDisabled": false
+}'
+```
+
+**Example 2: Interactive Component (Variants + Sizes + Icons + Loading)**
+
+Component: Button
+
+```bash
+bun run scaffold:component '{
+  "name": "Button",
+  "description": "Pressable button with variants, sizes, icons, and loading states",
+  "baseComponent": "Pressable",
+  "hasVariants": true,
+  "variants": "primary, secondary, tonal, plain",
+  "hasSizes": true,
+  "sizes": "sm, md, lg",
+  "needsForwardRef": false,
+  "hasIcons": true,
+  "hasLoading": true,
+  "hasDisabled": true
+}'
+```
+
+**Example 3: Input Component (ForwardRef + TextInput)**
+
+Component: Input
+
+```bash
+bun run scaffold:component '{
+  "name": "Input",
+  "description": "Text input field with label, error states, and validation",
+  "baseComponent": "TextInput",
+  "hasVariants": true,
+  "variants": "outline, filled",
+  "hasSizes": true,
+  "sizes": "sm, md, lg",
+  "needsForwardRef": true,
+  "hasIcons": true,
+  "hasLoading": false,
+  "hasDisabled": true
+}'
+```
+
+### Scaffdog Limitations
+
+Scaffdog generates **structure**, not **complete implementation**. You MUST:
+
+✅ **Scaffdog provides**: File structure, imports, basic types, theme skeleton, test structure
+
+❌ **You must add**: Complex logic, animations, gestures, comprehensive tests, WCAG compliance
+
+**Common manual refinements**:
+
+1. Theme tokens accuracy (scaffdog uses generic mappings)
+2. Complex interactions (drag, swipe, animations)
+3. Compound components (Accordion.Item, Tabs.Tab)
+4. Comprehensive test scenarios (scaffdog only creates render test)
+5. Real README examples (scaffdog creates placeholders)
+6. Accessibility enhancements (ARIA labels, roles, state)
+
+### Updated Phase 2 Workflow
+
+**Old (Manual)**:
+
+1. Create ComponentName.tsx manually
+2. Create ComponentName.theme.ts manually
+3. Create ComponentName.test.tsx manually
+4. Create index.ts, meta.json, README.mdx manually
+5. Create examples/ manually
+6. Run `bun run generate`
+
+**New (With Scaffdog)**:
+
+1. Extract requirements from approved spec.md
+2. Construct scaffdog JSON configuration from requirements
+3. Run: `bun run scaffold:component '<json>'` (auto-generates 7 files + runs registry generation + formats code)
+4. Refine generated code (theme, logic, tests, docs)
+5. Run verification (type-check, lint, format, test)
+
+**Time savings**: ~70% reduction in boilerplate creation time.
+
+### Programmatic Usage for Agents
+
+All coding agents should construct the JSON configuration programmatically:
+
+```typescript
+// Build configuration from spec.md
+const config = {
+  name: extractComponentName(spec),
+  description: extractDescription(spec),
+  baseComponent: inferBaseComponent(spec),
+  hasVariants: hasRequirement(spec, "Variants"),
+  variants: hasRequirement(spec, "Variants")
+    ? extractVariants(spec)
+    : undefined,
+  hasSizes: hasRequirement(spec, "Sizes"),
+  sizes: hasRequirement(spec, "Sizes") ? extractSizes(spec) : undefined,
+  needsForwardRef:
+    hasRequirement(spec, "ref") || hasRequirement(spec, "imperative"),
+  hasIcons: hasRequirement(spec, "icon"),
+  hasLoading: hasRequirement(spec, "loading"),
+  hasDisabled: hasRequirement(spec, "disabled"),
+};
+
+// Remove undefined properties
+Object.keys(config).forEach(
+  (key) => config[key] === undefined && delete config[key],
+);
+
+// Execute scaffolding
+execSync(`bun run scaffold:component '${JSON.stringify(config)}'`, {
+  stdio: "inherit",
+});
+```
+
+**Benefits**:
+
+- Single command runs scaffdog + registry generation + formatting
+- JSON is easier to construct programmatically than CLI flags
+- No need to escape quotes or handle shell parsing
+- Built-in error handling and validation
 
 ## Component Creation Workflow
 
@@ -163,9 +443,20 @@ Fix any errors (common issues: missing scenarios, wrong format).
 - Read spec.md to understand what must be built
 - Read tasks.md to get implementation roadmap
 
-\*\*Step 2.2: Create Theme Tokens First
+**Step 2.2: Generate Component Scaffolding**
 
-Before implementation, I create `Component.theme.ts` with the three-tier system:
+Use scaffdog to automatically generate all 7 required files (see "Scaffdog Integration" section above):
+
+1. Extract requirements from spec.md (variants, sizes, features)
+2. Construct JSON configuration
+3. Run: `bun run scaffold:component '<json>'`
+4. Verify all files generated successfully
+
+This creates the component structure, theme file, test file, documentation, and automatically updates all registries.
+
+**Step 2.3: Refine Theme Tokens**
+
+After scaffolding, customize `Component.theme.ts` with the three-tier system:
 
 ```typescript
 import * as primitive from "../theme/tokens/primitive";
@@ -201,9 +492,9 @@ export const componentName = {
 
 See [theme-system.md](references/theme-system.md) for complete theme patterns.
 
-**Step 2.3: Implement Component**
+**Step 2.4: Refine Component Implementation**
 
-Components follow this pattern:
+Scaffdog generates the basic component structure. Enhance it with spec requirements:
 
 ```typescript
 import { useTheme } from "../theme";
@@ -237,55 +528,45 @@ export const Component = ({ variant = "primary", size = "md", style }) => {
 
 See [component-patterns.md](references/component-patterns.md) for detailed patterns.
 
-**Step 2.4: Create Supporting Files**
+**Step 2.5: Enhance Supporting Files**
 
-Follow tasks.md sections 3-6 to create:
+Scaffdog generates all required files. Enhance them with real content:
 
-**Required files**:
+**Component.test.tsx** - Add comprehensive tests:
 
-- `Component.tsx` - Main implementation
-- `Component.theme.ts` - Theme tokens
-- `Component.test.tsx` - Jest tests
-- `index.ts` - Barrel export
-- `meta.json` - Component metadata
-- `README.mdx` - Documentation
+- Test all variants with correct tokens
+- Test all sizes with correct tokens
+- Test event handlers (onPress, onChange, etc.)
+- Test disabled state behavior
+- Test style merging (user overrides work)
+- Test accessibility props
 
-**Examples directory**:
+**README.mdx** - Enhance documentation:
 
-- `examples/BasicExample.tsx`
-- `examples/VariantsExample.tsx` (if applicable)
-- `examples/InteractiveExample.tsx` (if stateful)
-- `examples/index.ts` - Barrel export
+- Add realistic usage examples
+- Document all props with descriptions
+- Add accessibility guidance
+- Add theme customization examples
+- Link to related components
+
+**examples/** - Create additional examples:
+
+- `VariantsExample.tsx` (if component has variants)
+- `SizesExample.tsx` (if component has sizes)
+- `InteractiveExample.tsx` (if component is stateful)
+- Update `examples/index.ts` to export all examples
 
 See [file-structure.md](references/file-structure.md) for complete file specifications.
 
-**Step 2.5: Update Registries**
+**Note**: Registries are already updated by scaffdog. DO NOT manually edit:
 
-**Command:** `bun run generate`
-
-After creating all component files (including `meta.json` and `README.mdx`), run the automatic registry generation script:
-
-```bash
-bun run generate
-```
-
-This regenerates:
-
-- `src/registry.json` - Component metadata from `meta.json` files
-- `src/docs-registry.ts` - Documentation registry from `README.mdx` files
-- `src/index.ts` - Barrel exports using `export * from "./{component}"`
-
-**Verification:**
-
-- Check that component appears in `registry.json`
-- Verify `docs-registry.ts` imports the `README.mdx`
-- Ensure `index.ts` exports the component
-
-**DO NOT manually edit registry files** - they are auto-generated.
+- `src/registry.json`
+- `src/docs-registry.ts`
+- `src/index.ts`
 
 **Step 2.6: Update tasks.md Checkboxes**
 
-Mark tasks as complete `- [x]` as you finish each one. Track progress through all 8 sections.
+Mark tasks as complete `- [x]` as you finish each one. Many tasks will be marked complete after scaffolding. Track progress through all 8 sections.
 
 **Step 2.7: Verification**
 
