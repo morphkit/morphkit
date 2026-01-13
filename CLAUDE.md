@@ -596,6 +596,8 @@ warp-ui config              # Manage CLI configuration
 
 **Note**: CLI is published to GitHub Packages and requires authentication.
 
+**Note**: For component creation, use the OpenSpec workflow with scaffdog automation (`bun run scaffold:component`). The CLI is primarily for project initialization.
+
 ## Component Creation Workflow
 
 **All new components must follow the spec-driven OpenSpec workflow.**
@@ -611,10 +613,12 @@ Use the `create-component` skill for all component development work. This skill 
    - **Wait for user approval before proceeding**
 
 2. **Phase 2: Implementation**
-   - Follow tasks.md checklist sequentially
-   - Create all 7 required files (Component.tsx, .theme.ts, .test.tsx, index.ts, meta.json, README.mdx, examples/)
-   - Run `bun run generate` to automatically update all registries
+   - Use `bun run scaffold:component '<json>'` to automatically generate all 7 required files (~70% time savings)
+   - Follow tasks.md checklist to refine generated code
+   - Files auto-generated: Component.tsx, .theme.ts, .test.tsx, index.ts, meta.json, README.mdx, examples/
+   - Registries automatically updated during scaffolding
    - Run verification (format, type-check, lint, test)
+   - See `.claude/skills/create-component/SKILL.md` for complete scaffdog documentation
 
 3. **Phase 3: Archiving**
    - After merge, user runs: `openspec archive add-[component-name]-component --yes`
