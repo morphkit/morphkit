@@ -122,7 +122,9 @@ export { {{ inputs.name | pascal }}, type {{ inputs.name | pascal }}Props } from
   "type": "react-native",
   "name": "{{ inputs.name | kebab }}",
   "description": "{{ inputs.description }}",
-  "dependencies": []
+  "category": "{{ inputs.category }}",
+  "tags": [{{ inputs.tagsJson }}],
+  "dependencies": [{{ inputs.dependenciesJson }}]
 }
 ```
 
@@ -131,31 +133,153 @@ export { {{ inputs.name | pascal }}, type {{ inputs.name | pascal }}Props } from
 ```markdown
 import { {{ inputs.name | pascal }} } from "./{{ inputs.name | pascal }}";
 import { View } from "react-native";
+import { BasicExample } from "./examples";
 
 # {{ inputs.name | pascal }}
 
 {{ inputs.description }}
 
-## Basic Usage
+## Overview
 
-<View style={{ "{{" }} padding: 16, marginVertical: 12 {{ "}}" }}>
-<{{ inputs.name | pascal }}>Basic {{ inputs.name | pascal }}</{{ inputs.name | pascal }}>
+This component provides [describe primary use case]. Key characteristics:
+
+- Minimum touch target: 44pt × 44pt (Apple HIG requirement)
+- WCAG compliance: Level AA
+- Theme-aware: Supports light and dark modes
+- Typography integration: Uses Typography component for text
+
+**When to use this component:**
+
+- [Scenario 1]
+- [Scenario 2]
+- [Scenario 3]
+
+## When NOT to Use
+
+- **Don't use** for [alternative scenario] - use [alternative component] instead
+- **Alternative**: For [specific use case], consider [other approach]
+
+## Examples
+
+### Basic Usage
+
+<View style={{ "{{" }} marginVertical: 12 {{ "}}" }}>
+<BasicExample />
 </View>
 
-## Props
-
-| Prop     | Type                   | Default |
-| -------- | ---------------------- | ------- |
-| children | `ReactNode`            | -       |
-| style    | `StyleProp<ViewStyle>` | -       |
-
-## Usage Examples
-
-### Basic
-
 \`\`\`tsx
+import { {{ inputs.name | pascal }} } from "@warp-ui/react-native";
+
 <{{ inputs.name | pascal }}>Content</{{ inputs.name | pascal }}>
 \`\`\`
+
+### Real-World Use Cases
+
+\`\`\`tsx
+// TODO: Add practical examples showing composition with other components
+\`\`\`
+
+## API Reference
+
+### Behavior Props
+
+| Prop     | Type        | Default | Required | Description       |
+| -------- | ----------- | ------- | -------- | ----------------- |
+| children | `ReactNode` | -       | -        | Component content |
+
+### Styling Props
+
+| Prop  | Type                   | Default | Required | Description            |
+| ----- | ---------------------- | ------- | -------- | ---------------------- |
+| style | `StyleProp<ViewStyle>` | -       | -        | Custom style overrides |
+
+### Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+#### Color Tokens
+
+| Token Path                      | Purpose                      | Light Mode       | Dark Mode |
+| ------------------------------- | ---------------------------- | ---------------- | --------- | ----- |
+| `theme.component.{{ inputs.name | camel }}.variant.background` | Background color | [TBD]     | [TBD] |
+| `theme.component.{{ inputs.name | camel }}.variant.text`       | Text color       | [TBD]     | [TBD] |
+
+#### Spacing Tokens
+
+| Token Path                      | Purpose           | Value   | Primitive Source |
+| ------------------------------- | ----------------- | ------- | ---------------- | ---------------------------- |
+| `theme.component.{{ inputs.name | camel }}.padding` | Padding | [TBD]            | `theme.primitive.spacing[?]` |
+
+#### Customization Example
+
+\`\`\`tsx
+import { createTheme } from "@warp-ui/react-native";
+
+const customTheme = createTheme({
+component: {
+{{ inputs.name | camel }}: {
+// Override component tokens here
+},
+},
+});
+\`\`\`
+
+## Accessibility
+
+### WCAG Compliance
+
+This component meets WCAG 2.1 Level AA standards.
+
+### Keyboard Navigation
+
+- **Tab**: Move focus to component
+- **Shift + Tab**: Move focus to previous element
+
+### Screen Reader Support
+
+- Component role announced automatically
+- Label read from `children` or `accessibilityLabel`
+- State changes announced appropriately
+
+### Visual Requirements
+
+- **Contrast Ratio**: 4.5:1 minimum (WCAG AA)
+- **Focus Indicator**: 2px solid outline with 2px offset
+- **Touch Target**: 44pt × 44pt minimum (Apple HIG)
+
+### Implementation
+
+\`\`\`tsx
+<{{ inputs.name | pascal }}
+accessibilityLabel="Descriptive label"
+accessibilityHint="What happens when activated"
+accessibilityRole="[appropriate role]"
+
+> Content
+> </{{ inputs.name | pascal }}>
+> \`\`\`
+
+### Testing with Screen Readers
+
+- **iOS**: VoiceOver
+- **Android**: TalkBack
+- Verify all states are announced correctly
+
+## Related Components
+
+- [RelatedComponent](../related/README.mdx) - Description
+
+## Troubleshooting
+
+### Common Issue 1
+
+- Check [solution]
+- Verify [requirement]
+
+### Common Issue 2
+
+- Ensure [condition]
+- Confirm [setup]
 ```
 
 # `{{ inputs.name | kebab }}/examples/BasicExample.tsx`

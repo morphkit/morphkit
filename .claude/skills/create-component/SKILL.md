@@ -136,7 +136,7 @@ Read the approved `openspec/changes/add-[component-name]-component/specs/[compon
 ```bash
 bun run scaffold:component '{
   "name": "ComponentName",
-  "description": "Brief description from spec",
+  "description": "Brief description from spec (Apple HIG style)",
   "baseComponent": "View",
   "hasVariants": true,
   "variants": "primary, secondary",
@@ -145,7 +145,31 @@ bun run scaffold:component '{
   "needsForwardRef": false,
   "hasIcons": true,
   "hasLoading": false,
-  "hasDisabled": true
+  "hasDisabled": true,
+  "dependencies": "typography",
+  "category": "interactive",
+  "tags": "action,form"
+}'
+```
+
+**Complete Example (Button)**:
+
+```bash
+bun run scaffold:component '{
+  "name": "Button",
+  "description": "Buttons initiate actions. They support multiple variants, sizes, and can include icons or loading states.",
+  "baseComponent": "Pressable",
+  "hasVariants": true,
+  "variants": "primary, secondary, outline, ghost",
+  "hasSizes": true,
+  "sizes": "sm, md, lg",
+  "needsForwardRef": false,
+  "hasIcons": true,
+  "hasLoading": true,
+  "hasDisabled": true,
+  "dependencies": "typography",
+  "category": "interactive",
+  "tags": "action,form,navigation,cta"
 }'
 ```
 
@@ -154,7 +178,7 @@ bun run scaffold:component '{
 ```typescript
 interface ComponentConfig {
   name: string; // Required: Component name (any case)
-  description: string; // Required: Brief description
+  description: string; // Required: Brief description (Apple HIG style)
   baseComponent: "View" | "Pressable" | "TextInput" | "ScrollView"; // Required
   hasVariants: boolean; // Required: Does component have variants?
   variants?: string; // Optional: Only if hasVariants=true
@@ -164,11 +188,18 @@ interface ComponentConfig {
   hasIcons: boolean; // Required: Support icons?
   hasLoading: boolean; // Required: Has loading state?
   hasDisabled: boolean; // Required: Has disabled state?
-  dependencies?: string; // Optional: Comma-separated deps
+  dependencies?: string; // Optional: Comma-separated component deps (e.g., "typography,icon")
+  category?: string; // Optional: Component category (layout, input, display, interactive, feedback, navigation, surfaces)
+  tags?: string; // Optional: Comma-separated tags (e.g., "action,form,cta")
 }
 ```
 
 **Conditional Properties Rule**: Only include `variants` property if `hasVariants: true`, only include `sizes` if `hasSizes: true`.
+
+**Enhanced meta.json Fields** (new in this version):
+
+- `category`: Groups components by type for better organization
+- `tags`: Improves searchability and discoverability
 
 ### What Scaffdog Generates
 
@@ -870,21 +901,25 @@ Complete implementation checklist (8 sections):
 
 ## 5. Documentation
 
-- [ ] 5.1 Create README.mdx with component description
+- [ ] 5.1 Create README.mdx with brief description (1-2 sentences, Apple HIG style)
 - [ ] 5.2 Import all examples at top of README.mdx
-- [ ] 5.3 Add Installation section
-- [ ] 5.4 Add Usage section with BasicExample
-- [ ] 5.5 Create props table with all component props
-- [ ] 5.6 Add Variants section with VariantsExample (if applicable)
-- [ ] 5.7 Add Sizes section with SizesExample (if applicable)
-- [ ] 5.8 Add Accessibility section explaining WCAG compliance
-- [ ] 5.9 Add Theme Customization section with override example
+- [ ] 5.3 Add Overview section (key characteristics, when to use)
+- [ ] 5.4 Add When NOT to Use section (anti-patterns, alternatives)
+- [ ] 5.5 Add Variants section with real-world use cases
+- [ ] 5.6 Add Examples section (Basic Usage, Real-World Use Cases, Composition)
+- [ ] 5.7 Add API Reference with grouped prop tables (Behavior, Styling, Content, Accessibility)
+- [ ] 5.8 Add Theme Tokens section (Color, Spacing, Typography, Border, Shadow, Animation tokens)
+- [ ] 5.9 Add comprehensive Accessibility section (WCAG level, keyboard nav, screen reader, visual requirements, testing)
 - [ ] 5.10 Add Related Components section
+- [ ] 5.11 Add Troubleshooting section with common issues
 
 ## 6. Metadata
 
-- [ ] 6.1 Create meta.json with name, category, dependencies
-- [ ] 6.2 Create index.ts barrel export (export component and types)
+- [ ] 6.1 Create meta.json with type, name, description (Apple HIG style)
+- [ ] 6.2 Add category field (layout, input, display, interactive, feedback, navigation, surfaces)
+- [ ] 6.3 Add tags array for searchability
+- [ ] 6.4 Add dependencies array (list all components used)
+- [ ] 6.5 Create index.ts barrel export (export component and types)
 
 ## 7. Registry Generation
 

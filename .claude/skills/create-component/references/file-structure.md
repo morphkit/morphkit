@@ -280,97 +280,142 @@ export { ComponentName, type ComponentNameProps } from "./ComponentName";
 
 ### 5. meta.json
 
-Component metadata file.
+Component metadata file with enhanced fields for discoverability and organization.
 
-**Requirements**:
+**Required Fields**:
 
 - `type`: Always `"react-native"`
 - `name`: kebab-case, matches directory name
-- `description`: Brief one-line description
-- `dependencies`: Array of other component names used
+- `description`: Brief one-line description (Apple HIG style: direct, action-focused)
+- `category`: Component category for grouping
+- `dependencies`: Array of other component names used within this component
 
-**Template**:
+**Optional Fields**:
+
+- `tags`: Array of keywords for searchability
+
+**Category Values**:
+
+- `layout` - Box, Container, Stack, Divider
+- `input` - Input, Textarea, Checkbox, Radio, Select, Switch, Slider, OTP Input
+- `display` - Typography, Badge, Tag, Avatar, Progress, Skeleton, Spinner
+- `interactive` - Button, Accordion, Tabs
+- `feedback` - Alert, Toast
+- `navigation` - FAB, Tab Bars, Breadcrumb
+- `surfaces` - Card, Sheet, Modal
+
+**Basic Template**:
 
 ```json
 {
   "type": "react-native",
   "name": "component-name",
-  "description": "Brief description of what this component does",
+  "description": "Brief description following Apple HIG style",
+  "category": "interactive",
+  "tags": ["action", "form"],
   "dependencies": []
 }
 ```
 
-**Example with dependencies**:
+**Complete Example**:
 
 ```json
 {
   "type": "react-native",
-  "name": "input",
-  "description": "Single-line text input field with variants and error states",
+  "name": "button",
+  "description": "Buttons initiate actions. They support multiple variants, sizes, and can include icons or loading states.",
+  "category": "interactive",
+  "tags": ["action", "form", "navigation", "cta"],
   "dependencies": ["typography"]
+}
+```
+
+**Example with Multiple Dependencies**:
+
+```json
+{
+  "type": "react-native",
+  "name": "select",
+  "description": "Selects let users choose one option from a list. They support search, grouping, and custom rendering.",
+  "category": "input",
+  "tags": ["form", "dropdown", "picker", "menu"],
+  "dependencies": ["typography", "icon", "checkbox"]
 }
 ```
 
 ### 6. README.mdx
 
-Component documentation with examples.
+Component documentation following Apple HIG writing style with comprehensive examples and specifications.
 
 **Requirements**:
 
+- **Apple HIG tone**: Brief (1-2 sentences), direct language, user-focused
 - Import component and examples at top
-- Single paragraph description
-- Multiple example sections
-- Complete props table
-- Usage examples (code blocks)
-- Accessibility section
-- Theme customization section
-- Related components section
+- Overview section with key characteristics
+- When NOT to Use section with anti-patterns
+- Variants with real-world use cases
+- Examples: Basic, Real-World, Composition
+- API Reference with grouped prop tables
+- Theme Tokens section (comprehensive)
+- Enhanced Accessibility section
+- Related Components
+- Troubleshooting section
 
-**Template**:
+**Enhanced Template**:
 
 ```mdx
 import { ComponentName } from "./ComponentName";
 import { View } from "react-native";
-import { BasicExample, VariantsExample, InteractiveExample } from "./examples";
+import {
+  BasicExample,
+  VariantsExample,
+  RealWorldExample,
+  CompositionExample,
+} from "./examples";
 
 # Component Name
 
-Single paragraph describing what this component is and how to use it.
-Mention key features and intended use cases. This documentation is for
-both humans and AI coding assistants.
+Brief description (1-2 sentences, Apple HIG style). Mention core functionality.
 
-## Basic Usage
+## Overview
 
-<View style={{ marginVertical: 12 }}>
-  <BasicExample />
-</View>
+What this component is and its primary use case:
+
+- Minimum touch target: 44pt × 44pt (Apple HIG requirement)
+- WCAG compliance: Level AA
+- Theme-aware: Supports light and dark modes
+- Typography integration: Uses Typography component for text
+
+**When to use this component:**
+
+- Scenario 1
+- Scenario 2
+- Scenario 3
+
+## When NOT to Use
+
+- **Don't use** for X - use Y instead
+- **Don't use** for Z - use W instead
+- **Alternative**: For subtle actions, consider A
 
 ## Variants
+
+### Variant Name
 
 <View style={{ marginVertical: 12 }}>
   <VariantsExample />
 </View>
 
-## Interactive
+**Use for**: Primary actions
+**Real-world example**: Login button, Save button
+
+## Examples
+
+### Basic Usage
 
 <View style={{ marginVertical: 12 }}>
-  <InteractiveExample />
+  <BasicExample />
 </View>
-
-## Props
-
-| Prop     | Type                         | Default     | Description            |
-| -------- | ---------------------------- | ----------- | ---------------------- |
-| variant  | `"primary"` \| `"secondary"` | `"primary"` | Visual style variant   |
-| size     | `"sm"` \| `"md"` \| `"lg"`   | `"md"`      | Component size         |
-| disabled | `boolean`                    | `false`     | Disable interaction    |
-| children | `ReactNode`                  | -           | Content to display     |
-| style    | `StyleProp<ViewStyle>`       | -           | Custom style overrides |
-| ...props | `ViewProps`                  | -           | All View props         |
-
-## Usage Examples
-
-### Basic Component
 
 \`\`\`tsx
 import { ComponentName } from "@morph-ui/react-native";
@@ -378,48 +423,164 @@ import { ComponentName } from "@morph-ui/react-native";
 <ComponentName variant="primary">Content</ComponentName>
 \`\`\`
 
-### With Custom Styling
+### Real-World Use Cases
+
+#### Use Case 1
+
+<View style={{ marginVertical: 12 }}>
+  <RealWorldExample variant="useCase1" />
+</View>
 
 \`\`\`tsx
-
-<ComponentName variant="secondary" size="lg" style={{ marginVertical: 8 }}>
-  Custom Styled
-</ComponentName>
+// Real-world example code showing composition with other components
 \`\`\`
 
-## Accessibility
+### Composition
 
-This component follows WCAG AA guidelines:
-
-- Provides appropriate `accessibilityRole`
-- Includes `accessibilityLabel` for screen readers
-- Uses `accessibilityState` to communicate state
-- Maintains sufficient color contrast (4.5:1 for text)
-
-## Theme Customization
-
-Customize via theme tokens in your ThemeProvider:
+<View style={{ marginVertical: 12 }}>
+  <CompositionExample />
+</View>
 
 \`\`\`tsx
-const customTheme = {
+// How this component works with others
+\`\`\`
+
+## API Reference
+
+### Behavior Props
+
+| Prop    | Type         | Default | Required | Description         |
+| ------- | ------------ | ------- | -------- | ------------------- |
+| onPress | `() => void` | -       | ✓        | Called when pressed |
+
+### Styling Props
+
+| Prop    | Type                         | Default     | Required | Description          |
+| ------- | ---------------------------- | ----------- | -------- | -------------------- |
+| variant | `"primary"` \| `"secondary"` | `"primary"` | -        | Visual style variant |
+| size    | `"sm"` \| `"md"` \| `"lg"`   | `"md"`      | -        | Component size       |
+
+### Content Props
+
+| Prop     | Type        | Default | Required | Description        |
+| -------- | ----------- | ------- | -------- | ------------------ |
+| children | `ReactNode` | -       | -        | Content to display |
+
+### Accessibility Props
+
+| Prop               | Type                   | Default | Required | Description            |
+| ------------------ | ---------------------- | ------- | -------- | ---------------------- |
+| accessibilityLabel | `string`               | -       | -        | Screen reader label    |
+| style              | `StyleProp<ViewStyle>` | -       | -        | Custom style overrides |
+
+### Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+#### Color Tokens
+
+| Token Path                                         | Purpose    | Light Mode | Dark Mode |
+| -------------------------------------------------- | ---------- | ---------- | --------- |
+| `theme.component.name.variant[variant].background` | Background | `#007AFF`  | `#0A84FF` |
+| `theme.component.name.variant[variant].text`       | Text color | `#FFFFFF`  | `#FFFFFF` |
+
+#### Spacing Tokens
+
+| Token Path                                | Purpose | Value | Primitive Source             |
+| ----------------------------------------- | ------- | ----- | ---------------------------- |
+| `theme.component.name.size[size].padding` | Padding | `16`  | `theme.primitive.spacing[4]` |
+
+#### Typography Tokens
+
+| Token Path                       | Purpose    | Value            | Semantic Source                  |
+| -------------------------------- | ---------- | ---------------- | -------------------------------- |
+| `theme.component.name.textStyle` | Text style | `{fontSize: 16}` | `theme.semantic.textStyles.body` |
+
+#### Border & Shape Tokens
+
+| Token Path                          | Purpose       | Value | Primitive Source                  |
+| ----------------------------------- | ------------- | ----- | --------------------------------- |
+| `theme.component.name.borderRadius` | Corner radius | `8`   | `theme.primitive.borderRadius.md` |
+
+#### Customization Example
+
+\`\`\`tsx
+import { createTheme } from "@morph-ui/react-native";
+
+const customTheme = createTheme({
 component: {
 componentName: {
+borderRadius: 16,
 variant: {
-light: {
 primary: {
-background: "#FF6B6B",
+background: "#FF3B30",
 text: "#FFFFFF",
 },
 },
 },
 },
-},
-};
+});
 \`\`\`
+
+## Accessibility
+
+### WCAG Compliance
+
+This component meets WCAG 2.1 Level AA standards.
+
+### Keyboard Navigation
+
+- **Tab**: Move focus to component
+- **Enter**: Activate component
+
+### Screen Reader Support
+
+- Role announced automatically
+- Label read from `children` or `accessibilityLabel`
+- Disabled state announced via `aria-disabled`
+
+### Visual Requirements
+
+- **Contrast Ratio**: 4.5:1 minimum (WCAG AA)
+- **Focus Indicator**: 2px solid outline with 2px offset
+- **Touch Target**: 44pt × 44pt minimum (Apple HIG)
+
+### Implementation
+
+\`\`\`tsx
+
+<ComponentName
+  accessibilityLabel="Submit form"
+  accessibilityHint="Submits the form"
+  accessibilityRole="button"
+  accessibilityState={{ disabled: false }}
+>
+  Submit
+</ComponentName>
+\`\`\`
+
+### Testing with Screen Readers
+
+- **iOS**: VoiceOver
+- **Android**: TalkBack
+- Verify all states are announced correctly
 
 ## Related Components
 
-- [RelatedComponent](../related/README.mdx) - Similar functionality
+- [RelatedComponent](../related/README.mdx) - Description
+- [AnotherComponent](../another/README.mdx) - Description
+
+## Troubleshooting
+
+### Issue 1
+
+- Check X
+- Verify Y
+
+### Issue 2
+
+- Ensure Z
+- Confirm W
 ```
 
 ### 7. examples/ Directory
@@ -628,14 +789,33 @@ Runs Jest tests. All tests must pass.
 
 ### Documentation
 
+- [ ] README follows Apple HIG writing style (brief, direct, user-focused)
+- [ ] Brief description (1-2 sentences maximum)
+- [ ] Overview section with key characteristics (touch target, WCAG level, theme-aware)
+- [ ] When NOT to Use section with anti-patterns
 - [ ] README imports examples from `./examples`
 - [ ] README wraps examples in `<View style={{ marginVertical: 12 }}>`
 - [ ] NO inline JSX examples in README (all extracted to .tsx)
 - [ ] Code blocks (in backticks) kept for documentation
-- [ ] Props table complete and accurate
-- [ ] Accessibility section included
-- [ ] Theme customization example included
+- [ ] Real-world use case examples (not just prop demos)
+- [ ] Composition examples showing interaction with other components
+- [ ] Props tables grouped by category (Behavior, Styling, Content, Accessibility)
+- [ ] Theme Tokens section with comprehensive tables (Color, Spacing, Typography, Border, Shadow, Animation)
+- [ ] Theme tokens show light/dark mode values
+- [ ] Theme tokens reference primitive sources
+- [ ] Enhanced Accessibility section with WCAG level, keyboard nav, screen reader, visual requirements
+- [ ] Accessibility testing guide (VoiceOver, TalkBack)
 - [ ] Related components linked
+- [ ] Troubleshooting section with common issues
+
+### Metadata
+
+- [ ] meta.json includes all required fields (type, name, description, category, dependencies)
+- [ ] meta.json includes optional fields (tags)
+- [ ] Description follows Apple HIG style (direct, action-focused)
+- [ ] Category value is valid (layout, input, display, interactive, feedback, navigation, surfaces)
+- [ ] Tags are relevant and improve searchability
+- [ ] Dependencies list all components used within this component
 
 ### Testing
 

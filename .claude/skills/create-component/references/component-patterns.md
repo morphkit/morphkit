@@ -198,6 +198,19 @@ export * from "./InteractiveExample";
 
 ## README.mdx Structure
 
+### Apple HIG Writing Style Guidelines
+
+When writing component documentation:
+
+- **Brief, purpose-focused opening**: 1-2 sentences maximum
+- **Direct, imperative language**: "Use when...", "Avoid...", not "You can use..."
+- **Present tense, active voice**: "Buttons initiate actions" not "A button can be used to initiate actions"
+- **User-centered framing**: Focus on user experience and outcomes
+- **Short sentences**: Avoid jargon without explanation
+- **Conversational but professional**: Clear and accessible tone
+
+### Enhanced README.mdx Template
+
 ```mdx
 import { Component } from "./Component";
 import { View } from "react-native";
@@ -206,125 +219,305 @@ import {
   VariantsExample,
   SizesExample,
   InteractiveExample,
+  RealWorldExample,
+  CompositionExample,
 } from "./examples";
 
 # Component Name
 
-Single paragraph describing what this component is and how to use it.
-Mention key features and intended use cases. This documentation is for
-both humans and AI coding assistants.
+Buttons initiate actions. They support multiple variants, sizes, and can include icons or loading states.
 
-## Basic Usage
+## Overview
 
-<View style={{ marginVertical: 12 }}>
-  <BasicExample />
-</View>
+Brief description of what this component is and its primary use case. Mention key characteristics:
+
+- Minimum touch target: 44pt × 44pt (Apple HIG requirement)
+- WCAG compliance: Level AA
+- Theme-aware: Supports light and dark modes
+- Typography integration: Uses Typography component for text
+
+**When to use this component:**
+
+- When users need to trigger an action
+- For form submissions and confirmations
+- In navigation flows requiring explicit actions
+
+## When NOT to Use
+
+- **Don't use** for navigation between screens - use navigation components instead
+- **Don't use** for toggling states - use Switch or Checkbox instead
+- **Don't use** for selecting from options - use Radio or Select instead
+- **Alternative**: For subtle actions, consider using a link or icon button
 
 ## Variants
+
+Each variant serves a specific purpose in the interface hierarchy.
+
+### Primary Variant
 
 <View style={{ marginVertical: 12 }}>
   <VariantsExample />
 </View>
 
-## Sizes
+**Use for**: Primary actions (form submit, confirm dialog)
+**Real-world example**: "Sign In" button on login form, "Save" in settings
+
+## Examples
+
+### Basic Usage
 
 <View style={{ marginVertical: 12 }}>
-  <SizesExample />
+  <BasicExample />
 </View>
-
-## Interactive Example
-
-<View style={{ marginVertical: 12 }}>
-  <InteractiveExample />
-</View>
-
-## Props
-
-| Prop     | Type                                      | Default     | Description            |
-| -------- | ----------------------------------------- | ----------- | ---------------------- |
-| variant  | `"primary"` \| `"secondary"` \| `"tonal"` | `"primary"` | Visual style variant   |
-| size     | `"sm"` \| `"md"` \| `"lg"`                | `"md"`      | Component size         |
-| disabled | `boolean`                                 | `false`     | Disable interaction    |
-| children | `ReactNode`                               | -           | Content to display     |
-| onPress  | `() => void`                              | -           | Press event handler    |
-| style    | `StyleProp<ViewStyle>`                    | -           | Custom style overrides |
-| ...props | `ComponentProps`                          | -           | All View props         |
-
-## Usage Examples
-
-### Basic Component
 
 \`\`\`tsx
 import { Component } from "@morph-ui/react-native";
 
-<Component variant="primary">Click Me</Component>
+<Component onPress={() => console.log("Pressed")}>Click Me</Component>
 \`\`\`
 
-### With Custom Styling
+### Real-World Use Cases
+
+#### Login Form Actions
+
+<View style={{ marginVertical: 12 }}>
+  <RealWorldExample variant="loginForm" />
+</View>
+
+\`\`\`tsx
+import { Component, Input, Stack } from "@morph-ui/react-native";
+
+<View>
+  <Input placeholder="Email" />
+  <Input placeholder="Password" secureTextEntry />
+  <Component variant="primary" onPress={handleLogin}>
+    Sign In
+  </Component>
+  <Component variant="ghost" onPress={handleForgotPassword}>
+    Forgot Password?
+  </Component>
+</View>
+\`\`\`
+
+#### Confirmation Dialog
 
 \`\`\`tsx
 
-<Component variant="secondary" size="lg" style={{ marginVertical: 8 }}>
-  Custom Styled
-</Component>
+<View>
+  <Typography variant="body">
+    Are you sure you want to delete this item?
+  </Typography>
+  <Stack direction="row" spacing={2}>
+    <Component variant="outline" onPress={handleCancel}>
+      Cancel
+    </Component>
+    <Component variant="primary" colorScheme="error" onPress={handleDelete}>
+      Delete
+    </Component>
+  </Stack>
+</View>
 \`\`\`
 
-### With Event Handler
+### Composition
+
+How this component works with other components:
+
+<View style={{ marginVertical: 12 }}>
+  <CompositionExample />
+</View>
 
 \`\`\`tsx
 
-<Component variant="primary" onPress={() => console.log("Pressed!")}>
-  Press Me
-</Component>
+<Card>
+  <Typography variant="heading">Upgrade Plan</Typography>
+  <Typography variant="body">Get access to premium features</Typography>
+  <Component variant="primary" onPress={handleUpgrade}>
+    Upgrade Now
+  </Component>
+</Card>
 \`\`\`
 
-## Accessibility
+## API Reference
 
-This component follows WCAG AA guidelines:
+### Behavior Props
 
-- Provides appropriate `accessibilityRole`
-- Includes `accessibilityLabel` for screen readers
-- Uses `accessibilityState` to communicate state
-- Maintains sufficient color contrast (4.5:1 for text)
-- Supports keyboard navigation (web)
+| Prop     | Type         | Default | Required | Description                   |
+| -------- | ------------ | ------- | -------- | ----------------------------- |
+| onPress  | `() => void` | -       | ✓        | Called when button is pressed |
+| disabled | `boolean`    | `false` | -        | Disables all interactions     |
+| loading  | `boolean`    | `false` | -        | Shows loading spinner         |
 
-## Theme Customization
+### Styling Props
 
-Customize via theme tokens in your ThemeProvider:
+| Prop        | Type                                                     | Default     | Required | Description          |
+| ----------- | -------------------------------------------------------- | ----------- | -------- | -------------------- |
+| variant     | `"primary"` \| `"secondary"` \| `"outline"` \| `"ghost"` | `"primary"` | -        | Visual style variant |
+| size        | `"sm"` \| `"md"` \| `"lg"`                               | `"md"`      | -        | Component size       |
+| colorScheme | `"default"` \| `"error"` \| `"success"`                  | `"default"` | -        | Color theme          |
+
+### Content Props
+
+| Prop         | Type                  | Default  | Required | Description       |
+| ------------ | --------------------- | -------- | -------- | ----------------- |
+| children     | `ReactNode`           | -        | -        | Button label text |
+| icon         | `ReactNode`           | -        | -        | Icon element      |
+| iconPosition | `"left"` \| `"right"` | `"left"` | -        | Icon placement    |
+
+### Accessibility Props
+
+| Prop               | Type                   | Default | Required | Description            |
+| ------------------ | ---------------------- | ------- | -------- | ---------------------- |
+| accessibilityLabel | `string`               | -       | -        | Screen reader label    |
+| accessibilityHint  | `string`               | -       | -        | Screen reader hint     |
+| style              | `StyleProp<ViewStyle>` | -       | -        | Custom style overrides |
+
+### Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+#### Color Tokens
+
+| Token Path                                                  | Purpose                  | Light Mode | Dark Mode |
+| ----------------------------------------------------------- | ------------------------ | ---------- | --------- |
+| `theme.component.button.variant[variant].background`        | Background color         | `#007AFF`  | `#0A84FF` |
+| `theme.component.button.variant[variant].text`              | Text color               | `#FFFFFF`  | `#FFFFFF` |
+| `theme.component.button.variant[variant].border`            | Border color             | `#007AFF`  | `#0A84FF` |
+| `theme.component.button.variant[variant].backgroundPressed` | Pressed state background | `#0051D5`  | `#0768D0` |
+
+#### Spacing Tokens
+
+| Token Path                                            | Purpose              | Value | Primitive Source             |
+| ----------------------------------------------------- | -------------------- | ----- | ---------------------------- |
+| `theme.component.button.size[size].paddingHorizontal` | Horizontal padding   | `16`  | `theme.primitive.spacing[4]` |
+| `theme.component.button.size[size].paddingVertical`   | Vertical padding     | `12`  | `theme.primitive.spacing[3]` |
+| `theme.component.button.size[size].gap`               | Icon-text gap        | `8`   | `theme.primitive.spacing[2]` |
+| `theme.component.button.size[size].minHeight`         | Minimum touch target | `44`  | Apple HIG requirement        |
+
+#### Typography Tokens
+
+| Token Path                                    | Purpose           | Value                                               | Semantic Source                  |
+| --------------------------------------------- | ----------------- | --------------------------------------------------- | -------------------------------- |
+| `theme.component.button.size[size].textStyle` | Button text style | `{fontSize: 16, lineHeight: 24, fontWeight: '600'}` | `theme.semantic.textStyles.body` |
+
+#### Border & Shape Tokens
+
+| Token Path                            | Purpose          | Value | Primitive Source                      |
+| ------------------------------------- | ---------------- | ----- | ------------------------------------- |
+| `theme.component.button.borderRadius` | Corner radius    | `8`   | `theme.primitive.borderRadius.md`     |
+| `theme.component.button.borderWidth`  | Border thickness | `1`   | `theme.primitive.borderWidth.default` |
+
+#### Shadow Tokens (if applicable)
+
+| Token Path                      | Purpose          | Value                                                                        | Primitive Source             |
+| ------------------------------- | ---------------- | ---------------------------------------------------------------------------- | ---------------------------- |
+| `theme.component.button.shadow` | Button elevation | `{shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.1, shadowRadius: 4}` | `theme.primitive.shadows.sm` |
+
+#### Animation Tokens
+
+| Token Path                          | Purpose                  | Value | Primitive Source                          |
+| ----------------------------------- | ------------------------ | ----- | ----------------------------------------- |
+| `theme.component.button.transition` | Press animation duration | `150` | `theme.primitive.animation.duration.fast` |
+
+#### Customization Example
 
 \`\`\`tsx
-const customTheme = {
+import { createTheme } from "@morph-ui/react-native";
+
+const customTheme = createTheme({
 component: {
-componentName: {
+button: {
+borderRadius: 16, // Rounder corners
 variant: {
-light: {
 primary: {
-background: "#FF6B6B",
+background: "#FF3B30", // Custom red primary
 text: "#FFFFFF",
 },
 },
 },
 },
-},
-};
+});
 \`\`\`
+
+## Accessibility
+
+### WCAG Compliance
+
+This component meets WCAG 2.1 Level AA standards.
+
+### Keyboard Navigation
+
+- **Tab**: Move focus to button
+- **Shift + Tab**: Move focus to previous element
+- **Enter**: Activate button
+- **Space**: Activate button
+
+### Screen Reader Support
+
+- Button role announced automatically
+- Label read from `children` or `accessibilityLabel`
+- Disabled state announced via `aria-disabled`
+- Loading state announced via `aria-busy`
+
+### Visual Requirements
+
+- **Contrast Ratio**: 4.5:1 minimum (WCAG AA)
+- **Focus Indicator**: 2px solid outline with 2px offset
+- **Touch Target**: 44pt × 44pt minimum (Apple HIG)
+
+### Implementation
+
+\`\`\`tsx
+
+<Component
+  accessibilityLabel="Submit form"
+  accessibilityHint="Submits the registration form"
+  accessibilityRole="button"
+  accessibilityState={{ disabled: isDisabled }}
+>
+  Submit
+</Component>
+\`\`\`
+
+### Testing with Screen Readers
+
+- **iOS**: VoiceOver
+- **Android**: TalkBack
+- Verify all states are announced correctly (enabled, disabled, loading)
 
 ## Related Components
 
-- [OtherComponent](../other-component/README.mdx) - Related functionality
-- [RelatedComponent](../related/README.mdx) - Similar use case
+- [IconButton](../icon-button/README.mdx) - Button with icon only
+- [Link](../link/README.mdx) - Text-based navigation
+- [FAB](../fab/README.mdx) - Floating action button
+
+## Troubleshooting
+
+### Button not responding to press
+
+- Verify `onPress` prop is provided
+- Check if `disabled={true}` is set
+- Ensure button is not covered by another view
+
+### Styles not applying
+
+- Check style merge order: base styles → theme styles → custom `style` prop
+- Verify theme tokens are properly defined
+- Confirm ThemeProvider wraps your app
 ```
 
 **Important README Rules**:
 
-- Extract ALL interactive JSX to example files
-- Import examples at top
-- Wrap examples in `<View style={{ marginVertical: 12 }}>`
-- Never use `backgroundColor` or `borderRadius` in View wrapper
-- Code blocks (in backticks) stay in README (don't extract)
-- Include comprehensive prop table
-- Document accessibility features
-- Show customization examples
+- **Apple HIG tone**: Brief descriptions (1-2 sentences), direct language, user-focused
+- **Extract ALL interactive JSX** to example files
+- **Import examples** at top of README.mdx
+- **Wrap examples** in `<View style={{ marginVertical: 12 }}>`
+- **Code blocks** (in backticks) stay in README (don't extract)
+- **Grouped prop tables**: Behavior, Styling, Content, Accessibility
+- **Comprehensive theme tokens**: All token categories with light/dark values
+- **Enhanced accessibility**: WCAG level, keyboard nav, screen reader, visual requirements, testing
+- **Real-world examples**: Login forms, dialogs, not just prop demonstrations
+- **When NOT to Use**: Anti-patterns and alternatives
+- **Troubleshooting**: Common issues and solutions
 
 ## Testing Patterns
 

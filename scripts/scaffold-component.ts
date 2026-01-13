@@ -17,6 +17,8 @@ interface ComponentConfig {
   hasLoading: boolean;
   hasDisabled: boolean;
   dependencies?: string;
+  category?: string;
+  tags?: string;
 }
 
 function toKebabCase(str: string): string {
@@ -46,6 +48,13 @@ async function scaffoldComponent(config: ComponentConfig): Promise<void> {
 
   console.log(`\n📦 Scaffolding component: ${pascalName} (${kebabName})...\n`);
 
+  const tagsArray = config.tags
+    ? config.tags.split(",").map((t) => `"${t.trim()}"`)
+    : [];
+  const depsArray = config.dependencies
+    ? config.dependencies.split(",").map((d) => `"${d.trim()}"`)
+    : [];
+
   try {
     const scaffdog = await loadScaffdog(process.cwd());
 
@@ -70,6 +79,10 @@ async function scaffoldComponent(config: ComponentConfig): Promise<void> {
         hasLoading: config.hasLoading,
         hasDisabled: config.hasDisabled,
         dependencies: config.dependencies || "",
+        category: config.category || "display",
+        tags: config.tags || "",
+        tagsJson: tagsArray.join(", "),
+        dependenciesJson: depsArray.join(", "),
       },
     });
 
