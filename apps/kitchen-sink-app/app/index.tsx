@@ -1,17 +1,20 @@
-import { View, StyleSheet, useColorScheme } from "react-native";
-import { Typography } from "@morph-ui/react-native";
+import { View, StyleSheet } from "react-native";
+import { Typography, useTheme } from "@morph-ui/react-native";
 
 export default function HomeScreen() {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme } = useTheme();
+  const colors = theme.semantic.colors;
 
   return (
-    <View style={[styles.container, themeStyles[colorScheme]]}>
+    <View
+      style={[styles.container, { backgroundColor: colors.surface.primary }]}
+    >
       <Typography variant="title-1" style={styles.title}>
         Warp UI Components
       </Typography>
       <Typography
         variant="body"
-        style={[styles.description, textTheme[colorScheme]]}
+        style={[styles.description, { color: colors.text.secondary }]}
       >
         Select a component from the sidebar
       </Typography>
@@ -31,23 +34,5 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: "center",
-  },
-});
-
-const themeStyles = StyleSheet.create({
-  light: {
-    backgroundColor: "#ffffff",
-  },
-  dark: {
-    backgroundColor: "#000000",
-  },
-});
-
-const textTheme = StyleSheet.create({
-  light: {
-    color: "#666666",
-  },
-  dark: {
-    color: "#9CA3AF",
   },
 });

@@ -1,19 +1,25 @@
-import { View, ScrollView, StyleSheet, useColorScheme } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { Typography } from "@morph-ui/react-native";
+import { Typography, useTheme } from "@morph-ui/react-native";
 import registry from "@morph-ui/react-native/src/registry.json";
 import { docsRegistry } from "@morph-ui/react-native/src/docs-registry";
 
 export default function ComponentDocPage() {
-  const colorScheme = useColorScheme() ?? "light";
+  const { theme } = useTheme();
+  const colors = theme.semantic.colors;
   const { component } = useLocalSearchParams<{ component: string }>();
 
   const componentMeta = registry.components.find((c) => c.name === component);
 
   if (!componentMeta) {
     return (
-      <View style={[styles.notFoundContainer, containerTheme[colorScheme]]}>
-        <Typography variant="heading" style={textTheme[colorScheme]}>
+      <View
+        style={[
+          styles.notFoundContainer,
+          { backgroundColor: colors.surface.primary },
+        ]}
+      >
+        <Typography variant="heading" style={{ color: colors.text.secondary }}>
           Component &ldquo;{component}&rdquo; not found
         </Typography>
       </View>
@@ -24,8 +30,13 @@ export default function ComponentDocPage() {
 
   if (!ComponentDocs) {
     return (
-      <View style={[styles.notFoundContainer, containerTheme[colorScheme]]}>
-        <Typography variant="heading" style={textTheme[colorScheme]}>
+      <View
+        style={[
+          styles.notFoundContainer,
+          { backgroundColor: colors.surface.primary },
+        ]}
+      >
+        <Typography variant="heading" style={{ color: colors.text.secondary }}>
           Documentation not available for &ldquo;{component}&rdquo;
         </Typography>
       </View>
@@ -33,7 +44,9 @@ export default function ComponentDocPage() {
   }
 
   return (
-    <ScrollView style={[styles.scrollView, containerTheme[colorScheme]]}>
+    <ScrollView
+      style={[styles.scrollView, { backgroundColor: colors.surface.primary }]}
+    >
       <View style={styles.content}>
         <ComponentDocs />
       </View>
@@ -53,23 +66,5 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 24,
-  },
-});
-
-const containerTheme = StyleSheet.create({
-  light: {
-    backgroundColor: "#ffffff",
-  },
-  dark: {
-    backgroundColor: "#000000",
-  },
-});
-
-const textTheme = StyleSheet.create({
-  light: {
-    color: "#6b7280",
-  },
-  dark: {
-    color: "#9CA3AF",
   },
 });

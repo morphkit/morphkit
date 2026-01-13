@@ -1,11 +1,10 @@
 import "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useColorScheme } from "react-native";
 import { ComponentSidebar } from "../components/ComponentSidebar";
 import { MDXProvider } from "../components/MDXProvider";
 import type { DrawerContentComponentProps } from "@react-navigation/drawer";
-import { ThemeProvider, createTheme } from "@morph-ui/react-native";
+import { ThemeProvider, createTheme, useTheme } from "@morph-ui/react-native";
 
 import {
   Inter_400Regular,
@@ -14,6 +13,11 @@ import {
   Inter_700Bold,
   useFonts,
 } from "@expo-google-fonts/inter";
+import {
+  JetBrainsMono_400Regular,
+  JetBrainsMono_500Medium,
+  JetBrainsMono_700Bold,
+} from "@expo-google-fonts/jetbrains-mono";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
@@ -35,14 +39,62 @@ const customTheme = createTheme({
   },
 });
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme() ?? "light";
+function ThemedDrawer() {
+  const { theme } = useTheme();
+  const colors = theme.semantic.colors;
 
+  return (
+    <Drawer
+      drawerContent={(props: DrawerContentComponentProps) => (
+        <ComponentSidebar {...props} />
+      )}
+      screenOptions={{
+        headerShown: true,
+        headerTitle: "Warp UI Components",
+        headerStyle: {
+          backgroundColor: colors.surface.primary,
+        },
+        headerTitleStyle: {
+          color: colors.text.primary,
+        },
+        headerTintColor: colors.text.primary,
+      }}
+    >
+      <Drawer.Screen
+        name="index"
+        options={{
+          drawerLabel: "Home",
+          title: "Warp UI Components",
+        }}
+      />
+      <Drawer.Screen
+        name="docs/[component]"
+        options={{
+          drawerItemStyle: { display: "none" },
+          title: "Component Docs",
+        }}
+      />
+      <Drawer.Screen
+        name="flows"
+        options={{
+          drawerItemStyle: { display: "none" },
+          headerShown: false,
+          title: "Flows",
+        }}
+      />
+    </Drawer>
+  );
+}
+
+export default function RootLayout() {
   const [loaded, error] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
     Inter_600SemiBold,
     Inter_700Bold,
+    JetBrainsMono_400Regular,
+    JetBrainsMono_500Medium,
+    JetBrainsMono_700Bold,
   });
 
   useEffect(() => {
@@ -59,45 +111,7 @@ export default function RootLayout() {
     <ThemeProvider theme={customTheme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <MDXProvider>
-          <Drawer
-            drawerContent={(props: DrawerContentComponentProps) => (
-              <ComponentSidebar {...props} />
-            )}
-            screenOptions={{
-              headerShown: true,
-              headerTitle: "Warp UI Components",
-              headerStyle: {
-                backgroundColor: colorScheme === "dark" ? "#000000" : "#ffffff",
-              },
-              headerTitleStyle: {
-                color: colorScheme === "dark" ? "#ffffff" : "#000000",
-              },
-              headerTintColor: colorScheme === "dark" ? "#ffffff" : "#000000",
-            }}
-          >
-            <Drawer.Screen
-              name="index"
-              options={{
-                drawerLabel: "Home",
-                title: "Warp UI Components",
-              }}
-            />
-            <Drawer.Screen
-              name="docs/[component]"
-              options={{
-                drawerItemStyle: { display: "none" },
-                title: "Component Docs",
-              }}
-            />
-            <Drawer.Screen
-              name="flows"
-              options={{
-                drawerItemStyle: { display: "none" },
-                headerShown: false,
-                title: "Flows",
-              }}
-            />
-          </Drawer>
+          <ThemedDrawer />
         </MDXProvider>
       </GestureHandlerRootView>
     </ThemeProvider>

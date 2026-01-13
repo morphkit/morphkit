@@ -1,175 +1,354 @@
 import { MDXComponents, MDXStyles } from "@bacons/mdx";
-import { View, StyleSheet, useColorScheme } from "react-native";
-import { Typography } from "@morph-ui/react-native";
+import { View } from "react-native";
+import {
+  Typography,
+  useTheme,
+  Accordion,
+  AccordionItem,
+} from "@morph-ui/react-native";
+import { CodeHighlighter } from "./CodeHighlighter";
+import type { ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  isValidElement,
+} from "react";
 
-const styles = StyleSheet.create({
-  h1: {
-    marginBottom: 16,
-    marginTop: 24,
-  },
-  h2: {
-    marginBottom: 12,
-    marginTop: 20,
-  },
-  h3: {
-    marginBottom: 8,
-    marginTop: 16,
-  },
-  p: {
-    marginBottom: 12,
-  },
-  code: {
-    fontFamily: "monospace",
-    paddingHorizontal: 4,
-    borderRadius: 4,
-  },
-  pre: {
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  strong: {
-    fontWeight: "bold",
-  },
-  em: {
-    fontStyle: "italic",
-  },
-  table: {
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  thead: {},
-  tr: {
-    flexDirection: "row",
-    borderBottomWidth: 1,
-  },
-  th: {
-    flex: 1,
-    padding: 12,
-    fontWeight: "bold",
-  },
-  td: {
-    flex: 1,
-    padding: 12,
-  },
+const extractTextFromChildren = (node: ReactNode): string => {
+  if (node === null || node === undefined || typeof node === "boolean") {
+    return "";
+  }
+
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    return node.map(extractTextFromChildren).join("");
+  }
+
+  if (isValidElement(node)) {
+    const props = node.props as { children?: ReactNode };
+    if (props.children) {
+      return extractTextFromChildren(props.children);
+    }
+  }
+
+  return "";
+};
+
+interface TableContextType {
+  headers: string[];
+  setHeaders: (headers: string[]) => void;
+  isHeaderRow: boolean;
+}
+
+const TableContext = createContext<TableContextType>({
+  headers: [],
+  setHeaders: () => {},
+  isHeaderRow: false,
 });
 
-const codeTheme = StyleSheet.create({
-  light: {
-    backgroundColor: "#f3f4f6",
-  },
-  dark: {
-    backgroundColor: "#374151",
-  },
-});
+const useTableContext = () => useContext(TableContext);
 
-const preTheme = StyleSheet.create({
-  light: {
-    backgroundColor: "#f3f4f6",
-  },
-  dark: {
-    backgroundColor: "#1F2937",
-  },
-});
+const InlineCode = ({ children }: { children: ReactNode }) => {
+  const { theme } = useTheme();
+  const colors = theme.semantic.colors;
 
-const tableTheme = StyleSheet.create({
-  light: {
-    borderColor: "#d1d5db",
-  },
-  dark: {
-    borderColor: "#4B5563",
-  },
-});
+  return (
+    <Typography
+      variant="body"
+      style={{
+        fontFamily: "JetBrainsMono_400Regular",
+        paddingHorizontal: theme.primitive.spacing[1],
+        borderRadius: theme.primitive.borderRadius.sm,
+        backgroundColor: colors.surface.secondary,
+        color: colors.text.primary,
+      }}
+    >
+      {children}
+    </Typography>
+  );
+};
 
-const theadTheme = StyleSheet.create({
-  light: {
-    backgroundColor: "#f3f4f6",
-  },
-  dark: {
-    backgroundColor: "#374151",
-  },
-});
+const CodeBlock = ({ children }: { children: ReactNode }) => {
+  const { theme } = useTheme();
+  const colors = theme.semantic.colors;
 
-const trTheme = StyleSheet.create({
-  light: {
-    borderBottomColor: "#e5e7eb",
-  },
-  dark: {
-    borderBottomColor: "#4B5563",
-  },
-});
+  return (
+    <View
+      style={{
+        overflow: "hidden",
+        borderRadius: theme.primitive.borderRadius.md,
+        marginBottom: theme.primitive.spacing[4],
+        backgroundColor: colors.surface.primary,
+      }}
+    >
+      <CodeHighlighter>{children}</CodeHighlighter>
+    </View>
+  );
+};
 
-export const MDXProvider = ({ children }: { children: React.ReactNode }) => {
-  const colorScheme = useColorScheme() ?? "light";
+const Table = ({ children }: { children: ReactNode }) => {
+  const { theme } = useTheme();
+  const [headers, setHeaders] = useState<string[]>([]);
+  const [accordionValue, setAccordionValue] = useState<string[]>([]);
+
+  const handleValueChange = (value: string | string[]) => {
+    setAccordionValue(Array.isArray(value) ? value : [value]);
+  };
+
+  return (
+    <TableContext.Provider value={{ headers, setHeaders, isHeaderRow: false }}>
+      <View style={{ marginBottom: theme.primitive.spacing[4] }}>
+        <Accordion
+          type="multiple"
+          value={accordionValue}
+          onValueChange={handleValueChange}
+        >
+          {children}
+        </Accordion>
+      </View>
+    </TableContext.Provider>
+  );
+};
+
+const TableHeader = ({ children }: { children: ReactNode }) => {
+  const { headers, setHeaders } = useTableContext();
+
+  useEffect(() => {
+    const headerTexts: string[] = [];
+
+    if (Array.isArray(children)) {
+      children.forEach((child) => {
+        if (isValidElement(child)) {
+          const childProps = child.props as { children?: ReactNode };
+          if (Array.isArray(childProps.children)) {
+            childProps.children.forEach((th) => {
+              if (isValidElement(th)) {
+                const thProps = th.props as { children?: ReactNode };
+                const text = extractTextFromChildren(thProps.children);
+                headerTexts.push(text);
+              }
+            });
+          }
+        }
+      });
+    } else if (isValidElement(children)) {
+      const childProps = children.props as { children?: ReactNode };
+      if (Array.isArray(childProps.children)) {
+        childProps.children.forEach((th) => {
+          if (isValidElement(th)) {
+            const thProps = th.props as { children?: ReactNode };
+            const text = extractTextFromChildren(thProps.children);
+            headerTexts.push(text);
+          }
+        });
+      }
+    }
+
+    if (headerTexts.length > 0 && headers.length === 0) {
+      setHeaders(headerTexts);
+    }
+  }, [children, headers.length, setHeaders]);
+
+  return (
+    <TableContext.Provider value={{ headers, setHeaders, isHeaderRow: true }}>
+      {children}
+    </TableContext.Provider>
+  );
+};
+
+const TableBody = ({ children }: { children: ReactNode }) => {
+  return <>{children}</>;
+};
+
+const TableRow = ({ children }: { children: ReactNode }) => {
+  const { headers, isHeaderRow } = useTableContext();
+  const { theme } = useTheme();
+  const colors = theme.semantic.colors;
+
+  if (isHeaderRow) {
+    return null;
+  }
+
+  if (headers.length === 0) {
+    return null;
+  }
+
+  const cellValues: string[] = [];
+
+  if (Array.isArray(children)) {
+    children.forEach((cell) => {
+      if (isValidElement(cell)) {
+        const cellProps = cell.props as { children?: ReactNode };
+        const text = extractTextFromChildren(cellProps.children);
+        cellValues.push(text);
+      }
+    });
+  } else if (isValidElement(children)) {
+    const cellProps = children.props as { children?: ReactNode };
+    const text = extractTextFromChildren(cellProps.children);
+    cellValues.push(text);
+  }
+
+  const propName = cellValues[0] || "Unknown";
+
+  const title = propName;
+
+  const fieldsToShow = headers
+    .map((header, index) => ({ header, value: cellValues[index], index }))
+    .filter((field) => field.index !== 0);
+
+  return (
+    <AccordionItem value={propName} title={title}>
+      <View style={{ gap: theme.primitive.spacing[3] }}>
+        {fieldsToShow.map((field, idx) => (
+          <View key={idx}>
+            <Typography
+              variant="footnote"
+              style={{
+                color: colors.text.tertiary,
+                marginBottom: theme.primitive.spacing[1],
+              }}
+            >
+              {field.header}
+            </Typography>
+            <Typography
+              variant="body"
+              style={{
+                color: colors.text.primary,
+                fontFamily:
+                  field.header.toLowerCase() === "type"
+                    ? "JetBrainsMono_400Regular"
+                    : undefined,
+              }}
+            >
+              {field.value || "—"}
+            </Typography>
+          </View>
+        ))}
+      </View>
+    </AccordionItem>
+  );
+};
+
+const TableHeaderCell = () => {
+  return null;
+};
+
+const TableCell = () => {
+  return null;
+};
+
+export const MDXProvider = ({ children }: { children: ReactNode }) => {
+  const { theme } = useTheme();
+  const colors = theme.semantic.colors;
+  const spacing = theme.primitive.spacing;
+
   return (
     <MDXComponents
       components={{
         h1: (props) => (
-          <Typography {...props} variant="title-1" style={styles.h1} />
+          <Typography
+            {...props}
+            variant="title-1"
+            style={{
+              marginBottom: spacing[4],
+              marginTop: spacing[6],
+              color: colors.text.primary,
+            }}
+          />
         ),
         h2: (props) => (
-          <Typography {...props} variant="title-2" style={styles.h2} />
+          <Typography
+            {...props}
+            variant="title-2"
+            style={{
+              marginBottom: spacing[3],
+              marginTop: spacing[5],
+              color: colors.text.primary,
+            }}
+          />
         ),
         h3: (props) => (
-          <Typography {...props} variant="title-3" style={styles.h3} />
+          <Typography
+            {...props}
+            variant="title-3"
+            style={{
+              marginBottom: spacing[2],
+              marginTop: spacing[4],
+              color: colors.text.primary,
+            }}
+          />
         ),
-        p: (props) => <Typography {...props} variant="body" style={styles.p} />,
-        code: (props) => (
+        p: (props) => (
           <Typography
             {...props}
             variant="body"
-            style={[styles.code, codeTheme[colorScheme]]}
+            style={{
+              marginBottom: spacing[3],
+              color: colors.text.primary,
+            }}
           />
         ),
-        pre: (props) => (
-          <View {...props} style={[styles.pre, preTheme[colorScheme]]} />
-        ),
+        code: InlineCode,
+        pre: CodeBlock,
         strong: (props) => (
-          <Typography {...props} variant="body" style={styles.strong} />
+          <Typography
+            {...props}
+            variant="body"
+            style={{
+              fontWeight: "bold",
+              color: colors.text.primary,
+            }}
+          />
         ),
         em: (props) => (
-          <Typography {...props} variant="body" style={styles.em} />
+          <Typography
+            {...props}
+            variant="body"
+            style={{
+              fontStyle: "italic",
+              color: colors.text.primary,
+            }}
+          />
         ),
-        table: (props) => (
-          <View {...props} style={[styles.table, tableTheme[colorScheme]]} />
-        ),
-        thead: (props) => (
-          <View {...props} style={[styles.thead, theadTheme[colorScheme]]} />
-        ),
-        tbody: (props) => <View {...props} />,
-        tr: (props) => (
-          <View {...props} style={[styles.tr, trTheme[colorScheme]]} />
-        ),
-        th: (props) => (
-          <Typography {...props} variant="footnote" style={styles.th} />
-        ),
-        td: (props) => (
-          <Typography {...props} variant="footnote" style={styles.td} />
-        ),
+        table: Table,
+        thead: TableHeader,
+        tbody: TableBody,
+        tr: TableRow,
+        th: TableHeaderCell,
+        td: TableCell,
         Typography,
       }}
     >
       <MDXStyles
         h1={{
-          fontSize: 28,
+          fontSize: theme.semantic.textStyles.title1.fontSize,
           fontWeight: "bold",
-          marginBottom: 16,
-          marginTop: 24,
+          marginBottom: spacing[4],
+          marginTop: spacing[6],
         }}
         h2={{
-          fontSize: 24,
+          fontSize: theme.semantic.textStyles.title2.fontSize,
           fontWeight: "bold",
-          marginBottom: 12,
-          marginTop: 20,
+          marginBottom: spacing[3],
+          marginTop: spacing[5],
         }}
         h3={{
-          fontSize: 20,
+          fontSize: theme.semantic.textStyles.title3.fontSize,
           fontWeight: "bold",
-          marginBottom: 8,
-          marginTop: 16,
+          marginBottom: spacing[2],
+          marginTop: spacing[4],
         }}
-        p={{ fontSize: 16, marginBottom: 12, lineHeight: 24 }}
+        p={{
+          fontSize: theme.semantic.textStyles.body.fontSize,
+          marginBottom: spacing[3],
+          lineHeight: theme.semantic.textStyles.body.lineHeight,
+        }}
       >
         {children}
       </MDXStyles>
