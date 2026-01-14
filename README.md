@@ -168,7 +168,7 @@ For comprehensive development guidelines, see:
 
 - **[CLAUDE.md](./CLAUDE.md)**: Complete development guide with architecture patterns, theming system, and coding standards
 - **[openspec/AGENTS.md](./openspec/AGENTS.md)**: OpenSpec workflow for change proposals and specifications
-- **[.claude/skills/create-component/SKILL.md](./.claude/skills/create-component/SKILL.md)**: Spec-driven component creation workflow
+- **[.claude/agents/README.md](./.claude/agents/README.md)**: Component creation agents and skills usage guide
 
 ### Non-Negotiable Rules
 

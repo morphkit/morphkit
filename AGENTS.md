@@ -44,14 +44,19 @@ This is non-negotiable. The test suite must always be green.
 
 ## Component Creation
 
-When users request component creation (e.g., "create a Button component", "add a new Input component"), use the `create-component` skill. This implements a spec-driven workflow:
+Component creation uses a split workflow with specialized skills and agents:
 
-- Every component requires an OpenSpec proposal before implementation
-- Proposal must be validated and approved before coding begins
-- Implementation follows a structured tasks.md checklist
-- See `.claude/skills/create-component/SKILL.md` for the three-phase workflow
+### Skills (Main Conversation)
+- **`spec-component`**: Creates OpenSpec proposals with Figma integration
+- **`develop-component`**: Implements components from approved proposals
 
-This ensures architectural consistency and proper documentation for all components.
+### Agents (Isolated Context)
+- **`component-spec-writer`**: Autonomous proposal creation (parallel execution: 10+ agents)
+- **`component-developer`**: Autonomous component implementation (parallel execution: 10+ agents)
+
+**Use skills** for sequential work on 1-2 components. **Use agents** for parallel work on 5-10+ components.
+
+Every component requires an OpenSpec proposal before implementation. See `.claude/agents/README.md` for complete usage guide, workflow examples, and when to use skills vs agents.
 
 ## Additional Requirements
 

@@ -602,7 +602,48 @@ warp-ui config              # Manage CLI configuration
 
 **All new components must follow the spec-driven OpenSpec workflow.**
 
-Use the `create-component` skill for all component development work. This skill implements a three-phase process:
+The component creation workflow is split into two specialized skills and corresponding agents for maximum flexibility and parallel execution:
+
+### Skills (Main Conversation Context)
+
+**For sequential work on 1-2 components:**
+
+1. **`spec-component` skill** - Creates OpenSpec proposals
+   - Gathers requirements (variants, sizes, features, Figma URL)
+   - Researches existing patterns
+   - Extracts Figma specifications using `figma-desktop` MCP (if URL provided)
+   - Creates 3 OpenSpec files (proposal.md, spec.md, tasks.md)
+   - Validates with `openspec validate --strict`
+   - **Wait for user approval before proceeding**
+
+2. **`develop-component` skill** - Implements components from approved proposals
+   - Reads proposal files
+   - Uses `bun run scaffold:component '<json>'` to automatically generate all 7 required files (~70% time savings)
+   - Follows tasks.md checklist to refine generated code
+   - Files auto-generated: Component.tsx, .theme.ts, .test.tsx, index.ts, meta.json, README.mdx, examples/
+   - Registries automatically updated during scaffolding
+   - Runs verification (format, type-check, lint, test)
+
+### Agents (Isolated Context)
+
+**For parallel work on 5-10+ components:**
+
+1. **`component-spec-writer` agent** - Creates proposals autonomously in isolated context
+   - Can run 10+ agents in parallel for concurrent proposal creation
+   - Same capabilities as spec-component skill
+   - Keeps verbose output separate from main conversation
+
+2. **`component-developer` agent** - Implements components autonomously in isolated context
+   - Can run 10+ agents in parallel for concurrent implementation
+   - Same capabilities as develop-component skill
+   - Each agent runs scaffdog and verification independently
+
+### When to Use What
+
+- **Skills**: Working on 1-2 components sequentially, want shared context with main conversation, prefer interactive Q&A
+- **Agents**: Creating/implementing 5-10+ components simultaneously, want isolated context, fully autonomous execution
+
+### Workflow Phases
 
 1. **Phase 1: Proposal Creation**
    - Create OpenSpec proposal in `openspec/changes/add-[component-name]-component/`
@@ -613,17 +654,18 @@ Use the `create-component` skill for all component development work. This skill 
    - **Wait for user approval before proceeding**
 
 2. **Phase 2: Implementation**
-   - Use `bun run scaffold:component '<json>'` to automatically generate all 7 required files (~70% time savings)
+   - Use scaffdog for automated component generation
    - Follow tasks.md checklist to refine generated code
-   - Files auto-generated: Component.tsx, .theme.ts, .test.tsx, index.ts, meta.json, README.mdx, examples/
-   - Registries automatically updated during scaffolding
    - Run verification (format, type-check, lint, test)
-   - See `.claude/skills/create-component/SKILL.md` for complete scaffdog documentation
 
 3. **Phase 3: Archiving**
    - After merge, user runs: `openspec archive add-[component-name]-component --yes`
    - Creates final spec at `openspec/specs/[component-name]/spec.md`
 
+### Figma Integration
+
+Both proposal creation tools support Figma MCP integration via `figma-desktop`. When a Figma URL is provided, design specifications are extracted and mapped to theme tokens.
+
 **Important:** Never implement components without an approved OpenSpec proposal. This ensures architectural consistency and creates a documentation trail.
 
-See `.claude/skills/create-component/SKILL.md` for complete details, templates, and requirement patterns.
+See `.claude/skills/spec-component/SKILL.md`, `.claude/skills/develop-component/SKILL.md`, and `.claude/agents/README.md` for complete details, templates, and usage examples.
