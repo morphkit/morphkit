@@ -2,85 +2,100 @@
   "version": "1.0.0",
   "components": [
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "accordion",
-      "description": "Collapsible content sections with expand/collapse animation",
-      "dependencies": []
+      "description": "Collapsible content sections with expand/collapse animations supporting both single and multiple expansion modes for organizing complex information",
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "alert",
       "description": "Inline notification component with 4 variants (info, success, warning, error), optional dismiss button, and customizable icons",
-      "dependencies": []
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "avatar",
       "description": "Circular avatar component with image support and fallback text for initials",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "badge",
-      "description": "Notification badge overlay component that displays count on top of children with red/blue variants",
-      "dependencies": []
+      "description": "Notification count overlay component that displays indicators on top of children with automatic visibility management and color variants",
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "box",
-      "description": "Flexible container component for layouts with spacing, sizing, and flexbox props",
+      "description": "Flexible layout container with declarative spacing, sizing, and flexbox properties",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "button",
-      "description": "Pressable button component with 4 variants, 5 sizes, icon support, and loading states",
-      "dependencies": []
+      "description": "Pressable action trigger with multiple visual variants, size options, icon support, and loading states for primary user interactions",
+      "dependencies": [
+        "typography",
+        "spinner"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "card",
-      "description": "Content container with elevation, borders, and padding for grouping information",
+      "description": "Content container with elevation, borders, and padding for grouping related information into visually distinct sections",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "checkbox",
       "description": "Selectable checkbox control for boolean inputs with support for checked, unchecked, and indeterminate states",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "container",
       "description": "Centered max-width wrapper for page content with responsive width constraints",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "divider",
-      "description": "Visual separator line with horizontal or vertical orientation",
+      "description": "Visual separator line with horizontal or vertical orientation for creating clear boundaries between content sections",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "fab",
-      "description": "Floating action button with placement options and extended variant",
-      "dependencies": []
+      "description": "Floating action button with placement options and extended variant for primary screen-level actions",
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "input",
-      "description": "Single-line text input field with label, error state, and prefix/suffix icon support",
-      "dependencies": []
+      "description": "Single-line text input field with label, error state, and prefix/suffix icon support for collecting user text input in forms and interfaces",
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "label",
       "description": "Form label component with optional required indicator and error state for describing input fields",
-      "dependencies": []
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "otp-input",
       "description": "One-time password input with multiple fields for verification codes",
       "dependencies": [
@@ -88,7 +103,7 @@
       ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "progress",
       "description": "Visual progress indicator with bar and circle variants, determinate and indeterminate modes, and optional value display",
       "dependencies": []
@@ -100,13 +115,13 @@
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "select",
       "description": "Flexible inline selection component for choosing one or more options with custom styling",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "skeleton",
       "description": "Placeholder loading component with shimmer animation, supports rectangle, circle, and text line shapes with customizable dimensions",
       "dependencies": []
@@ -115,7 +130,9 @@
       "type": "react-native",
       "name": "slider",
       "description": "Range slider control for selecting numeric values with single or dual thumb support",
-      "dependencies": []
+      "dependencies": [
+        "typography"
+      ]
     },
     {
       "type": "react-native",
@@ -124,43 +141,49 @@
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "stack",
       "description": "Layout component for arranging children with consistent spacing and alignment",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "switch",
       "description": "Toggle switch for binary on/off states with animated transitions",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "tabs",
-      "description": "Tabbed navigation with multiple variants and orientations",
-      "dependencies": []
+      "description": "Tabbed navigation with multiple variants and orientations for organizing content into selectable sections",
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "tag",
       "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
-      "dependencies": []
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "textarea",
       "description": "Multi-line text input field with auto-resize capability and character count display",
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "toast",
       "description": "Temporary notification component with slide-in animation, 4 variants, top or bottom positioning, and auto-dismiss capability",
-      "dependencies": []
+      "dependencies": [
+        "typography"
+      ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "typography",
       "description": "Text component with 11 iOS-inspired typography variants using StyleSheet",
       "dependencies": []

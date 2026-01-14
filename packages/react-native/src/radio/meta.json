@@ -2,5 +2,7 @@
   "type": "react-native",
   "name": "radio",
   "description": "Single-selection radio button control with group management for choosing one option from a set",
+  "category": "input",
+  "tags": ["form", "selection", "choice"],
   "dependencies": []
 }

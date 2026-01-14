@@ -1,3 +1,3 @@
-export * from "./BasicExample";
-export * from "./MultipleExample";
-export * from "./FAQExample";
+export { BasicExample } from "./BasicExample";
+export { ModesExample } from "./ModesExample";
+export { InteractiveExample } from "./InteractiveExample";

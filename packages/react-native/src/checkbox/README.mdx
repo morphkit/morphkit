@@ -1,212 +1,165 @@
----
-title: Checkbox
-description: Selectable checkbox control for boolean inputs supporting checked, unchecked, and indeterminate states with label integration.
----
-
-import { Checkbox } from "./Checkbox";
-import { View } from "react-native";
-import { Stack } from "../stack";
-import { Typography } from "../typography";
-
 # Checkbox
 
-Selectable checkbox control for boolean inputs supporting checked, unchecked, and indeterminate states with label integration. Provides clear visual feedback for selection state with accessibility support and themeable styling.
+**Category**: input | **Tags**: form, selection, toggle, boolean
 
-## Import
+The Checkbox component provides a selectable control for boolean inputs with support for checked, unchecked, and indeterminate states. It enables multi-selection and mixed-state scenarios in forms and lists, following platform conventions for touch interaction and accessibility.
 
-```tsx
-import { Checkbox } from "@repo/react-native";
-```
+## Basic Usage
 
-## Usage
+The default configuration for common use cases.
 
-### Basic
+<BasicExample />
 
-<View style={{ padding: 20 }}>
-  <Checkbox checked={false} onCheckedChange={() => {}}>
-    <Typography variant="body">I accept the terms and conditions</Typography>
-  </Checkbox>
-</View>
+## States
 
-```tsx
-<Checkbox checked={isAccepted} onCheckedChange={setIsAccepted}>
-  <Typography variant="body">I accept the terms and conditions</Typography>
-</Checkbox>
-```
+All available visual states for different selection contexts.
 
-### Checked State
+<StatesExample />
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Checkbox checked={false} onCheckedChange={() => {}}>
-      <Typography variant="body">Unchecked</Typography>
-    </Checkbox>
-    <Checkbox checked={true} onCheckedChange={() => {}}>
-      <Typography variant="body">Checked</Typography>
-    </Checkbox>
-  </Stack>
-</View>
+- **Unchecked**: Default empty state with transparent background
+- **Checked**: Selected state with primary background and checkmark icon
+- **Indeterminate**: Mixed selection state with minus icon for partial selections
 
-```tsx
-<Checkbox checked={false} onCheckedChange={handleChange}>
-  <Typography variant="body">Unchecked</Typography>
-</Checkbox>
-<Checkbox checked={true} onCheckedChange={handleChange}>
-  <Typography variant="body">Checked</Typography>
-</Checkbox>
-```
+## Sizes
 
-### Indeterminate State
+Available size options for different screen contexts.
 
-Useful for "select all" checkboxes where only some items are selected.
+<SizesExample />
 
-<View style={{ padding: 20 }}>
-  <Checkbox checked={false} indeterminate={true} onCheckedChange={() => {}}>
-    <Typography variant="body">Select All (partial)</Typography>
-  </Checkbox>
-</View>
+- **sm**: Compact 16px box for dense layouts
+- **md**: Default 20px box for standard forms
+- **lg**: Large 24px box for prominent selections
 
-```tsx
-<Checkbox
-  checked={allSelected}
-  indeterminate={someSelected}
-  onCheckedChange={handleSelectAll}
->
-  <Typography variant="body">Select All</Typography>
-</Checkbox>
-```
+## Interactive States
 
-### Sizes
+Disabled and custom color states for user feedback and branding.
 
-Available in three sizes: `sm`, `md` (default), and `lg`.
+<InteractiveExample />
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Checkbox checked={true} onCheckedChange={() => {}} size="sm">
-      <Typography variant="body">Small checkbox</Typography>
-    </Checkbox>
-    <Checkbox checked={true} onCheckedChange={() => {}} size="md">
-      <Typography variant="body">Medium checkbox (default)</Typography>
-    </Checkbox>
-    <Checkbox checked={true} onCheckedChange={() => {}} size="lg">
-      <Typography variant="body">Large checkbox</Typography>
-    </Checkbox>
-  </Stack>
-</View>
+## Theme Tokens
 
-```tsx
-<Checkbox checked={true} onCheckedChange={handleChange} size="sm">
-  <Typography variant="body">Small</Typography>
-</Checkbox>
-<Checkbox checked={true} onCheckedChange={handleChange} size="md">
-  <Typography variant="body">Medium</Typography>
-</Checkbox>
-<Checkbox checked={true} onCheckedChange={handleChange} size="lg">
-  <Typography variant="body">Large</Typography>
-</Checkbox>
-```
+This component uses the following design tokens from the three-tier theme system:
 
-### Custom Color
+### Size Tokens
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Checkbox checked={true} onCheckedChange={() => {}} color="#9333EA">
-      <Typography variant="body">Purple checkbox</Typography>
-    </Checkbox>
-    <Checkbox checked={true} onCheckedChange={() => {}} color="#EF4444">
-      <Typography variant="body">Red checkbox</Typography>
-    </Checkbox>
-    <Checkbox checked={true} onCheckedChange={() => {}} color="#10B981">
-      <Typography variant="body">Green checkbox</Typography>
-    </Checkbox>
-  </Stack>
-</View>
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.checkbox.size[size] | Box dimensions | 16 | 20 | 24 |
 
-```tsx
-<Checkbox checked={true} onCheckedChange={handleChange} color="#9333EA">
-  <Typography variant="body">Purple</Typography>
-</Checkbox>
-<Checkbox checked={true} onCheckedChange={handleChange} color="#EF4444">
-  <Typography variant="body">Red</Typography>
-</Checkbox>
-<Checkbox checked={true} onCheckedChange={handleChange} color="#10B981">
-  <Typography variant="body">Green</Typography>
-</Checkbox>
-```
+### Checked State Tokens (Light Mode)
 
-### Disabled State
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.checkbox.variant.light.checked.background | Checked background | #4A90E2 | light.action.primary |
+| theme.component.checkbox.variant.light.checked.border | Checked border | #4A90E2 | light.action.primary |
+| theme.component.checkbox.variant.light.checked.icon | Checkmark icon color | #FFFFFF | light.text.inverse |
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Checkbox checked={false} onCheckedChange={() => {}} disabled>
-      <Typography variant="body">Disabled unchecked</Typography>
-    </Checkbox>
-    <Checkbox checked={true} onCheckedChange={() => {}} disabled>
-      <Typography variant="body">Disabled checked</Typography>
-    </Checkbox>
-  </Stack>
-</View>
+### Unchecked State Tokens (Light Mode)
 
-```tsx
-<Checkbox checked={false} onCheckedChange={handleChange} disabled>
-  <Typography variant="body">Disabled</Typography>
-</Checkbox>
-<Checkbox checked={true} onCheckedChange={handleChange} disabled>
-  <Typography variant="body">Disabled Checked</Typography>
-</Checkbox>
-```
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.checkbox.variant.light.unchecked.background | Unchecked background | transparent | - |
+| theme.component.checkbox.variant.light.unchecked.border | Unchecked border | #D1D5DB | light.border.secondary |
+| theme.component.checkbox.variant.light.unchecked.icon | No icon visible | transparent | - |
 
-### Without Children
+### Disabled State Tokens (Light Mode)
 
-Ensure you provide an `accessibilityLabel` for screen readers when omitting children.
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.checkbox.variant.light.disabled.background | Disabled background | #F3F4F6 | light.surface.tertiary |
+| theme.component.checkbox.variant.light.disabled.border | Disabled border | #E5E7EB | light.border.primary |
+| theme.component.checkbox.variant.light.disabled.icon | Disabled icon color | #9CA3AF | light.text.disabled |
 
-<View style={{ padding: 20 }}>
-  <Checkbox
-    checked={true}
-    onCheckedChange={() => {}}
-    accessibilityLabel="Accept terms"
-  />
-</View>
+### Checked State Tokens (Dark Mode)
 
-```tsx
-<Checkbox
-  checked={isAccepted}
-  onCheckedChange={setIsAccepted}
-  accessibilityLabel="Accept terms"
-/>
-```
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.checkbox.variant.dark.checked.background | Checked background | #60A5FA | dark.action.primary |
+| theme.component.checkbox.variant.dark.checked.border | Checked border | #60A5FA | dark.action.primary |
+| theme.component.checkbox.variant.dark.checked.icon | Checkmark icon color | #111827 | dark.text.inverse |
+
+### Unchecked State Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.checkbox.variant.dark.unchecked.background | Unchecked background | transparent | - |
+| theme.component.checkbox.variant.dark.unchecked.border | Unchecked border | #4B5563 | dark.border.secondary |
+| theme.component.checkbox.variant.dark.unchecked.icon | No icon visible | transparent | - |
+
+### Disabled State Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.checkbox.variant.dark.disabled.background | Disabled background | #374151 | dark.surface.tertiary |
+| theme.component.checkbox.variant.dark.disabled.border | Disabled border | #374151 | dark.border.primary |
+| theme.component.checkbox.variant.dark.disabled.icon | Disabled icon color | #4B5563 | dark.text.disabled |
+
+### Other Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.checkbox.borderRadius | Corner radius | 4 | primitive.borderRadius.sm |
+| theme.component.checkbox.borderWidth | Border thickness | 2 | - |
+| theme.primitive.spacing[2] | Label gap | 8 | primitive.spacing[2] |
+| theme.primitive.spacing[12] | Min touch target | 48 | primitive.spacing[12] |
+| theme.semantic.state.disabled.opacity | Disabled opacity | 0.5 | primitive.opacity.disabled |
 
 ## Props
 
-### Checkbox Props
+### State Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `checked` | `boolean` | - | Current checked state (controlled) |
-| `onCheckedChange` | `(checked: boolean) => void` | - | Callback when user toggles checkbox |
-| `children` | `ReactNode` | `undefined` | Content displayed next to checkbox (typically Typography) |
-| `indeterminate` | `boolean` | `false` | Shows minus icon instead of checkmark |
-| `disabled` | `boolean` | `false` | Prevents interaction and reduces opacity |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of checkbox box and icon |
-| `color` | `string` | theme primary | Color of checkbox when checked |
-| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for wrapper |
+| checked | boolean | required | Current checked state (controlled) |
+| indeterminate | boolean | false | Shows minus icon for partial selection |
+| disabled | boolean | false | Disables interaction and applies disabled styling |
 
-The component also accepts all standard React Native `ViewProps`.
+### Event Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| onChange | (checked: boolean) => void | required | Called when checkbox is toggled |
+| onBlur | () => void | undefined | Called when press is released |
+
+### Appearance Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| size | "sm" \| "md" \| "lg" | "md" | Size preset for checkbox box |
+| color | string | undefined | Custom color override for checked state |
+
+### Content Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | undefined | Label content (typically Typography) |
+| name | string | undefined | Form field name for identification |
+
+### Styling Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
 ## Accessibility
 
-The Checkbox component follows accessibility best practices:
+**WCAG Level:** AA compliant
 
-- Uses `accessibilityRole="checkbox"` for proper screen reader identification
-- Provides `accessibilityState` with `checked` and `disabled` states
-- Supports custom `accessibilityLabel` prop for screen readers
-- Maintains minimum 44x44 point touch target
-- Keyboard support on web (Space to toggle)
+**Screen Reader:**
 
-## Theme Support
+- Announces role as "checkbox"
+- Announces checked state (checked, unchecked)
+- Announces disabled state when disabled
+- Custom labels supported via accessibilityLabel prop
 
-The component automatically adapts to light and dark modes:
+**Touch Target:**
 
-- **Light mode**: Gray border (#9CA3AF) when unchecked, primary blue (#4A90E2) when checked
-- **Dark mode**: Lighter gray border (#6B7280) when unchecked, lighter blue (#5AA2F5) when checked
-- Override with the `color` prop for custom branding
+- Minimum touch target: 48pt x 48pt (Apple HIG)
+- Touch area includes both box and label
+
+**Visual Requirements:**
+
+- Color contrast meets 4.5:1 for checkmark icon
+- Disabled state indicated by opacity (0.5)
+- Border provides clear boundary in unchecked state
+- Indeterminate state visually distinct with minus icon

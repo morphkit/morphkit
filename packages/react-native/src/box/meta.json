@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "box",
-  "description": "Flexible container component for layouts with spacing, sizing, and flexbox props",
+  "description": "Flexible layout container with declarative spacing, sizing, and flexbox properties",
+  "category": "layout",
+  "tags": ["container", "layout", "wrapper"],
   "dependencies": []
 }

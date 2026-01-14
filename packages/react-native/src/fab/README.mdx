@@ -1,169 +1,173 @@
-import { FAB } from "./FAB";
-import { View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  BasicExample,
+  VariantsExample,
+  SizesExample,
+  PlacementsExample,
+  ExtendedExample,
+  InteractiveExample,
+} from "./examples";
 
-# FAB (Floating Action Button)
+# FAB
 
-A floating action button for primary actions, positioned at screen corners with icon, extended label variant, and customizable placement.
+**Category**: navigation | **Tags**: action, floating, primary-action
+
+The Floating Action Button (FAB) provides a prominent circular action button for primary screen-level actions. It supports multiple placements, an extended variant with label text, and animated press feedback for engaging user interactions.
 
 ## Basic Usage
 
-<View style={{ position: "relative", height: 200 }}>
-  <FAB
-    icon={<Ionicons name="add" size={24} color="#FFFFFF" />}
-    onPress={() => console.log("FAB pressed")}
-    accessibilityLabel="Create new item"
-  />
-</View>
+The default configuration for common use cases.
 
-## Extended FAB
-
-<View style={{ position: "relative", height: 200 }}>
-  <FAB
-    icon={<Ionicons name="create" size={20} color="#FFFFFF" />}
-    label="Compose"
-    onPress={() => console.log("Compose pressed")}
-  />
-</View>
-
-## Sizes
-
-<View style={{ gap: 20 }}>
-  <View style={{ position: "relative", height: 120 }}>
-    <FAB
-      icon={<Ionicons name="add" size={16} color="#FFFFFF" />}
-      size="sm"
-      placement="bottom-left"
-      onPress={() => {}}
-    />
-    <FAB
-      icon={<Ionicons name="add" size={20} color="#FFFFFF" />}
-      size="md"
-      onPress={() => {}}
-    />
-  </View>
-  <View style={{ position: "relative", height: 120 }}>
-    <FAB
-      icon={<Ionicons name="add" size={24} color="#FFFFFF" />}
-      size="lg"
-      onPress={() => {}}
-    />
-  </View>
-</View>
+<BasicExample />
 
 ## Variants
 
-<View style={{ gap: 20 }}>
-  <View style={{ position: "relative", height: 120 }}>
-    <FAB
-      icon={<Ionicons name="add" size={20} color="#FFFFFF" />}
-      variant="primary"
-      placement="bottom-left"
-      onPress={() => {}}
-    />
-    <FAB
-      icon={<Ionicons name="add" size={20} color="#333333" />}
-      variant="secondary"
-      onPress={() => {}}
-    />
-  </View>
-</View>
+All available visual styles for different contexts.
+
+<VariantsExample />
+
+- **Primary**: High-emphasis actions with filled background and prominent shadow
+- **Secondary**: Medium-emphasis actions using elevated surface colors
+
+## Sizes
+
+Available size options for different screen contexts.
+
+<SizesExample />
+
+- **sm**: Compact 40px circular button for tight spaces
+- **md**: Default 56px circular button for standard use
+- **lg**: Prominent 64px circular button for important actions
 
 ## Placements
 
-<View style={{ gap: 20 }}>
-  <View style={{ position: "relative", height: 140 }}>
-    <FAB
-      icon={<Ionicons name="arrow-up" size={16} color="#FFFFFF" />}
-      size="sm"
-      placement="top-left"
-      onPress={() => {}}
-    />
-    <FAB
-      icon={<Ionicons name="arrow-up" size={16} color="#FFFFFF" />}
-      size="sm"
-      placement="top-center"
-      onPress={() => {}}
-    />
-    <FAB
-      icon={<Ionicons name="arrow-up" size={16} color="#FFFFFF" />}
-      size="sm"
-      placement="top-right"
-      onPress={() => {}}
-    />
-  </View>
-  <View style={{ position: "relative", height: 140 }}>
-    <FAB
-      icon={<Ionicons name="arrow-down" size={16} color="#FFFFFF" />}
-      size="sm"
-      placement="bottom-left"
-      onPress={() => {}}
-    />
-    <FAB
-      icon={<Ionicons name="arrow-down" size={16} color="#FFFFFF" />}
-      size="sm"
-      placement="bottom-center"
-      onPress={() => {}}
-    />
-    <FAB
-      icon={<Ionicons name="arrow-down" size={16} color="#FFFFFF" />}
-      size="sm"
-      placement="bottom-right"
-      onPress={() => {}}
-    />
-  </View>
-</View>
+Screen positioning options for flexible layout integration.
 
-## Disabled State
+<PlacementsExample />
 
-<View style={{ position: "relative", height: 200 }}>
-  <FAB
-    icon={<Ionicons name="add" size={24} color="#FFFFFF" />}
-    onPress={() => {}}
-    disabled
-  />
-</View>
+- **bottom-right**: Default placement for primary actions (Material Design standard)
+- **bottom-left**: Alternative bottom placement
+- **bottom-center**: Centered at screen bottom
+- **top-right**: Top corner placement
+- **top-left**: Alternative top placement
+- **top-center**: Centered at screen top
+
+## Extended Variant
+
+FAB with icon and label text for clearer action indication.
+
+<ExtendedExample />
+
+## Interactive States
+
+Disabled state for user feedback.
+
+<InteractiveExample />
+
+## Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+### Size Tokens
+
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.fab.size[size].width | Container width | 40 | 56 | 64 |
+| theme.component.fab.size[size].height | Container height | 40 | 56 | 64 |
+| theme.component.fab.size[size].borderRadius | Corner radius | 20 | 28 | 32 |
+| theme.component.fab.size[size].iconSize | Icon dimensions | 20 | 24 | 28 |
+
+### Extended Tokens
+
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.fab.extended.minWidth[size] | Minimum extended width | 80 | 96 | 112 |
+| theme.component.fab.extended.gap | Icon-label spacing | 8 | 8 | 8 |
+| theme.component.fab.extended.paddingHorizontal | Horizontal padding | 16 | 16 | 16 |
+| theme.component.fab.extended.fontWeight | Label font weight | 600 | 600 | 600 |
+
+### Variant Tokens (Light Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.fab.variant.light.primary.background | Primary background | #4A90E2 | light.action.primary |
+| theme.component.fab.variant.light.primary.icon | Primary icon color | #FFFFFF | light.text.inverse |
+| theme.component.fab.variant.light.secondary.background | Secondary background | #FFFFFF | light.surface.elevated |
+| theme.component.fab.variant.light.secondary.icon | Secondary icon color | #111827 | light.text.primary |
+
+### Variant Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.fab.variant.dark.primary.background | Primary background | #60A5FA | dark.action.primary |
+| theme.component.fab.variant.dark.primary.icon | Primary icon color | #111827 | dark.text.inverse |
+| theme.component.fab.variant.dark.secondary.background | Secondary background | #1F2937 | dark.surface.elevated |
+| theme.component.fab.variant.dark.secondary.icon | Secondary icon color | #111827 | dark.text.inverse |
+
+### Animation Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.fab.animation.duration | Press animation duration | 100 | primitive.duration.fast |
+| theme.component.fab.animation.spring | Spring animation config | { friction: 3 } | primitive.spring.default |
+
+### State Tokens
+
+| Token Path | Purpose | Light Value | Dark Value |
+| --- | --- | --- | --- |
+| theme.component.fab.variant[colorScheme].disabled.opacity | Disabled opacity | 0.5 | 0.5 |
+| theme.component.fab.variant[colorScheme].hover.opacity | Hover opacity | 0.9 | 0.9 |
+| theme.component.fab.offset | Screen edge offset | 16 | 16 |
 
 ## Props
 
-| Prop         | Type                                                                                              | Default          | Description                       |
-| ------------ | ------------------------------------------------------------------------------------------------- | ---------------- | --------------------------------- |
-| icon         | ReactNode                                                                                         | -                | Icon component (required)         |
-| onPress      | () => void                                                                                        | -                | Press handler (required)          |
-| label        | string                                                                                            | -                | Extended FAB label text           |
-| size         | "sm" \\| "md" \\| "lg"                                                                            | "md"             | Button size                       |
-| placement    | "top-left" \\| "top-right" \\| "top-center" \\| "bottom-left" \\| "bottom-right" \\| "bottom-center" | "bottom-right"   | Screen position                   |
-| variant      | "primary" \\| "secondary"                                                                         | "primary"        | Color variant                     |
-| disabled     | boolean                                                                                           | false            | Disables interaction              |
-| style        | StyleProp\<ViewStyle\>                                                                            | -                | Custom container styles           |
+### Required Props
 
-## Usage Example
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| icon | ReactNode | required | Icon content rendered in the FAB center |
+| onPress | () => void | required | Press handler callback |
 
-```tsx
-import { FAB } from "@warp-ui/react-native";
+### Behavior Props
 
-function CreateButton() {
-  return (
-    <FAB
-      icon={<PlusIcon />}
-      onPress={handleCreate}
-      accessibilityLabel="Create new item"
-    />
-  );
-}
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| variant | "primary" \| "secondary" | "primary" | Visual style variant |
+| size | "sm" \| "md" \| "lg" | "md" | Size preset |
+| placement | "bottom-right" \| "bottom-left" \| "bottom-center" \| "top-right" \| "top-left" \| "top-center" | "bottom-right" | Screen position |
+| disabled | boolean | false | Disables interaction and applies disabled styling |
 
-function ComposeButton() {
-  return (
-    <FAB
-      icon={<EditIcon />}
-      label="Compose"
-      size="lg"
-      placement="bottom-center"
-      variant="secondary"
-      onPress={handleCompose}
-      accessibilityLabel="Compose new message"
-      accessibilityHint="Opens message composer"
-    />
-  );
-}
-```
+### Content Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| label | string | undefined | Extended variant label text |
+
+### Styling Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
+
+## Accessibility
+
+**WCAG Level:** AA compliant
+
+**Screen Reader:**
+
+- Announces role as "button"
+- Announces label text when provided
+- Announces disabled state when disabled
+- Custom labels supported via accessibilityLabel prop
+
+**Touch Target:**
+
+- Small: 40pt x 40pt (minimum touch target)
+- Medium: 56pt x 56pt (recommended size)
+- Large: 64pt x 64pt (prominent touch target)
+
+**Visual Requirements:**
+
+- Color contrast meets 4.5:1 for icon content
+- Disabled state indicated by opacity (0.5) and removed shadow
+- Press feedback via scale and opacity animation
+- Shadow provides elevation indication

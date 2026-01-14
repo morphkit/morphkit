@@ -1,272 +1,128 @@
-import { Alert } from "./Alert";
-import { Box, Stack, Typography, Card } from "../";
-import { DismissibleAlertsExample } from "./examples";
+import { BasicExample, VariantsExample, DismissibleExample } from "./examples";
 
 # Alert
 
-An inline notification component for displaying important messages, warnings, errors, and success states. Provides clear visual feedback with semantic color variants, optional icons, and dismissible functionality for temporary notifications.
+**Category**: feedback | **Tags**: notification, message, banner
+
+The Alert component displays inline notifications with semantic variants to communicate important information, status updates, or warnings to users. It supports four semantic variants (info, success, warning, error), optional dismiss functionality, and customizable icons.
 
 ## Basic Usage
 
-The default info variant for general informational messages.
+The default configuration for common use cases.
 
-<Box marginVertical={12}>
-  <Alert title="Your changes have been saved" />
-</Box>
+<BasicExample />
 
 ## Variants
 
-Four semantic variants to convey different message types: info for general notices, success for positive outcomes, warning for caution, and error for critical issues.
+All available visual styles for different contexts.
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Alert variant="info" title="New features are available" />
-    <Alert variant="success" title="Payment processed successfully" />
-    <Alert variant="warning" title="Your session will expire soon" />
-    <Alert variant="error" title="Failed to connect to server" />
-  </Stack>
-</Box>
+<VariantsExample />
 
-## With Description
-
-Add a description to provide additional context or instructions alongside the title.
-
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Alert
-      variant="success"
-      title="Account created successfully"
-      description="Welcome to our platform! You can now access all features."
-    />
-    <Alert
-      variant="warning"
-      title="Storage almost full"
-      description="Consider deleting old files to free up space."
-    />
-  </Stack>
-</Box>
+- **Info**: General informational messages, uses blue color scheme
+- **Success**: Positive confirmations and completed actions, uses green color scheme
+- **Warning**: Cautionary messages requiring attention, uses amber color scheme
+- **Error**: Critical errors and failures, uses red color scheme
 
 ## Dismissible Alerts
 
-Add an × button to allow users to dismiss temporary notifications.
+Alerts with dismiss button for user-controlled removal.
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Alert
-      title="Cookie preferences updated"
-      dismissible
-      onDismiss={() => console.log("Dismissed")}
-    />
-    <Alert
-      variant="info"
-      title="New update available"
-      description="Version 2.0 is ready to install."
-      dismissible
-      onDismiss={() => console.log("Dismissed")}
-    />
-  </Stack>
-</Box>
+<DismissibleExample />
 
-## Form Validation Alerts
+## Theme Tokens
 
-Alerts used to show form submission results with success and error states.
+This component uses the following design tokens from the three-tier theme system:
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16}>
-      <Typography variant="title-3">Contact Form</Typography>
-      <Alert
-        variant="success"
-        title="Message sent successfully"
-        description="We'll get back to you within 24 hours."
-      />
-      <Typography variant="callout" style={{ color: "#6B7280" }}>
-        Your message has been received and our team will respond soon.
-      </Typography>
-    </Stack>
-  </Card>
-</Box>
+### Layout Tokens
 
-## Dashboard Notifications
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.alert.padding | Container padding | 16 | primitive.spacing[4] |
+| theme.component.alert.borderRadius | Corner radius | 8 | primitive.borderRadius.md |
+| theme.component.alert.gap | Icon-content spacing | 8 | primitive.spacing[2] |
+| theme.component.alert.contentGap | Title-description spacing | 4 | primitive.spacing[1] |
+| theme.component.alert.iconSize | Icon dimensions | 20 | - |
+| theme.component.alert.dismissHitSlop | Touch target extension | 8 | primitive.spacing[2] |
 
-Alerts in a dashboard context showing system status and important updates.
+### Variant Tokens (Light Mode)
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={12}>
-      <Typography variant="heading">System Status</Typography>
-      <Alert
-        variant="success"
-        title="All systems operational"
-        description="No issues detected in the past 24 hours."
-      />
-      <Alert
-        variant="warning"
-        title="Scheduled maintenance"
-        description="System will be down for maintenance on Saturday at 2 AM."
-      />
-    </Stack>
-  </Card>
-</Box>
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.alert.variant.light.info.background | Info background | #F0F9FF | light.status.info.surface |
+| theme.component.alert.variant.light.info.border | Info border | #BAE6FD | light.status.info.border |
+| theme.component.alert.variant.light.info.text | Info text | #0C4A6E | light.status.info.text |
+| theme.component.alert.variant.light.info.icon | Info icon | #0284C7 | light.status.info.main |
+| theme.component.alert.variant.light.success.background | Success background | #F0FDF4 | light.status.success.surface |
+| theme.component.alert.variant.light.success.border | Success border | #BBF7D0 | light.status.success.border |
+| theme.component.alert.variant.light.success.text | Success text | #14532D | light.status.success.text |
+| theme.component.alert.variant.light.success.icon | Success icon | #16A34A | light.status.success.main |
+| theme.component.alert.variant.light.warning.background | Warning background | #FFFBEB | light.status.warning.surface |
+| theme.component.alert.variant.light.warning.border | Warning border | #FDE68A | light.status.warning.border |
+| theme.component.alert.variant.light.warning.text | Warning text | #78350F | light.status.warning.text |
+| theme.component.alert.variant.light.warning.icon | Warning icon | #F59E0B | light.status.warning.main |
+| theme.component.alert.variant.light.error.background | Error background | #FEF2F2 | light.status.error.surface |
+| theme.component.alert.variant.light.error.border | Error border | #FECACA | light.status.error.border |
+| theme.component.alert.variant.light.error.text | Error text | #7F1D1D | light.status.error.text |
+| theme.component.alert.variant.light.error.icon | Error icon | #DC2626 | light.status.error.main |
 
-## Error Recovery Flow
+### Variant Tokens (Dark Mode)
 
-Alert showing an error with action guidance in an application flow.
-
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16}>
-      <Typography variant="title-3">Payment Error</Typography>
-      <Alert
-        variant="error"
-        title="Payment failed"
-        description="Your card was declined. Please try a different payment method."
-      />
-      <Stack gap={8}>
-        <Typography variant="callout" style={{ fontWeight: "600" }}>
-          What you can do:
-        </Typography>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>
-          • Check your card details are correct
-        </Typography>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>
-          • Ensure you have sufficient funds
-        </Typography>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>
-          • Try a different payment method
-        </Typography>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
-
-## Dismissible Alerts Example
-
-Interactive example showing alerts that can be dismissed, with state management.
-
-<Box marginVertical={12}>
-  <DismissibleAlertsExample />
-</Box>
-
-## Security Alerts
-
-Alerts for security-related messages in account settings.
-
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={12}>
-      <Typography variant="heading">Security Center</Typography>
-      <Alert
-        variant="error"
-        title="Unusual login detected"
-        description="A login from an unrecognized device was detected in New York."
-      />
-      <Alert
-        variant="warning"
-        title="Two-factor authentication disabled"
-        description="Enable 2FA to add an extra layer of security to your account."
-      />
-      <Alert
-        variant="success"
-        title="Password updated successfully"
-        description="Your password was changed 2 hours ago."
-      />
-    </Stack>
-  </Card>
-</Box>
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.alert.variant.dark.info.background | Info background | #082F49 | dark.status.info.surface |
+| theme.component.alert.variant.dark.info.border | Info border | #075985 | dark.status.info.border |
+| theme.component.alert.variant.dark.info.text | Info text | #BAE6FD | dark.status.info.text |
+| theme.component.alert.variant.dark.info.icon | Info icon | #38BDF8 | dark.status.info.main |
+| theme.component.alert.variant.dark.success.background | Success background | #052E16 | dark.status.success.surface |
+| theme.component.alert.variant.dark.success.border | Success border | #166534 | dark.status.success.border |
+| theme.component.alert.variant.dark.success.text | Success text | #BBF7D0 | dark.status.success.text |
+| theme.component.alert.variant.dark.success.icon | Success icon | #4ADE80 | dark.status.success.main |
+| theme.component.alert.variant.dark.warning.background | Warning background | #451A03 | dark.status.warning.surface |
+| theme.component.alert.variant.dark.warning.border | Warning border | #92400E | dark.status.warning.border |
+| theme.component.alert.variant.dark.warning.text | Warning text | #FDE68A | dark.status.warning.text |
+| theme.component.alert.variant.dark.warning.icon | Warning icon | #FBBF24 | dark.status.warning.main |
+| theme.component.alert.variant.dark.error.background | Error background | #450A0A | dark.status.error.surface |
+| theme.component.alert.variant.dark.error.border | Error border | #991B1B | dark.status.error.border |
+| theme.component.alert.variant.dark.error.text | Error text | #FECACA | dark.status.error.text |
+| theme.component.alert.variant.dark.error.icon | Error icon | #F87171 | dark.status.error.main |
 
 ## Props
 
+### Behavior Props
+
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | `string` | - | Alert heading (required) |
-| variant | `"info"` \| `"success"` \| `"warning"` \| `"error"` | `"info"` | Color theme for semantic meaning |
-| description | `string` | - | Additional context or instructions |
-| dismissible | `boolean` | `false` | Show dismiss × button for removable alerts |
-| onDismiss | `() => void` | - | Callback when dismiss button is pressed |
-| icon | `ReactNode` | Variant icon | Custom icon override (auto-selected by variant) |
-| style | `StyleProp<ViewStyle>` | - | Custom container styles |
+| --- | --- | --- | --- |
+| variant | "info" \| "success" \| "warning" \| "error" | "info" | Semantic variant for visual style |
+| dismissible | boolean | false | Shows dismiss button when true |
+| onDismiss | () => void | undefined | Callback when dismiss button pressed |
 
-## Usage Examples
+### Content Props
 
-### Basic Alert
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| title | string | required | Primary alert message |
+| description | string | undefined | Secondary supporting text |
+| icon | ReactNode | undefined | Custom icon override |
 
-```tsx
-import { Alert } from "@repo/react-native";
+### Styling Props
 
-<Alert variant="success" title="Changes saved" />
-```
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
-### Alert with Description
+## Accessibility
 
-```tsx
-import { Alert, Stack } from "@repo/react-native";
+**WCAG Level:** AA compliant
 
-<Stack gap={12}>
-  <Alert
-    variant="error"
-    title="Connection failed"
-    description="Please check your internet connection and try again."
-  />
-</Stack>
-```
+**Screen Reader:**
 
-### Dismissible Alert with State
+- Container has accessibilityRole="alert"
+- Screen readers announce content immediately as alert
+- Dismiss button has accessibilityRole="button"
+- Dismiss button has accessibilityLabel="Dismiss alert"
 
-```tsx
-import { Alert } from "@repo/react-native";
-import { useState } from "react";
+**Visual Requirements:**
 
-function NotificationAlert() {
-  const [visible, setVisible] = useState(true);
-
-  if (!visible) return null;
-
-  return (
-    <Alert
-      variant="info"
-      title="New message received"
-      description="You have 3 unread messages"
-      dismissible
-      onDismiss={() => setVisible(false)}
-    />
-  );
-}
-```
-
-### Form Validation
-
-```tsx
-import { Alert, Card, Stack, Typography } from "@repo/react-native";
-
-function FormWithValidation() {
-  return (
-    <Card>
-      <Stack gap={16}>
-        <Typography variant="heading">Submit Form</Typography>
-        <Alert
-          variant="error"
-          title="Please fix the following errors"
-          description="Email address is required and password must be at least 8 characters."
-        />
-      </Stack>
-    </Card>
-  );
-}
-```
-
-### Multi-Alert Dashboard
-
-```tsx
-import { Alert, Stack } from "@repo/react-native";
-
-function DashboardAlerts() {
-  return (
-    <Stack gap={12}>
-      <Alert variant="success" title="System operational" />
-      <Alert variant="warning" title="Maintenance scheduled" description="Saturday 2 AM - 4 AM" />
-      <Alert variant="info" title="New features" description="Check out our latest updates" />
-    </Stack>
-  );
-}
-```
+- Color contrast meets 4.5:1 for text on variant backgrounds
+- Icons use semantic colors for visual reinforcement
+- Dismiss button has extended hitSlop for easier touch targeting

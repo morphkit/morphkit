@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "textarea",
   "description": "Multi-line text input field with auto-resize capability and character count display",
+  "category": "input",
+  "tags": ["form", "multiline", "text-input"],
   "dependencies": []
 }

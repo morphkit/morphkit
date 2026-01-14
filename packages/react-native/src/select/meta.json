@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "select",
   "description": "Flexible inline selection component for choosing one or more options with custom styling",
+  "category": "input",
+  "tags": ["form", "dropdown", "picker", "selection"],
   "dependencies": []
 }

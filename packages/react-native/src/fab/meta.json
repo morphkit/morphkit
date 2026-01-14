@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "fab",
-  "description": "Floating action button with placement options and extended variant",
-  "dependencies": []
+  "description": "Floating action button with placement options and extended variant for primary screen-level actions",
+  "category": "navigation",
+  "tags": ["action", "floating", "primary-action"],
+  "dependencies": ["typography"]
 }

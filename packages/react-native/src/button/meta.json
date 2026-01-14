@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "button",
-  "description": "Pressable button component with 4 variants, 5 sizes, icon support, and loading states",
-  "dependencies": []
+  "description": "Pressable action trigger with multiple visual variants, size options, icon support, and loading states for primary user interactions",
+  "category": "interactive",
+  "tags": ["action", "pressable", "cta"],
+  "dependencies": ["typography", "spinner"]
 }

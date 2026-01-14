@@ -1,291 +1,105 @@
-import { Container } from "./Container";
-import { Box, Typography, Stack, Card } from "../";
-import { DashboardLayoutExample, FormContainerExample, FullPageLayoutExample } from "./examples";
+import {
+  BasicExample,
+  MaxWidthPresetsExample,
+  AlignmentExample,
+  InsetsExample,
+} from "./examples";
 
 # Container
 
-A centered, max-width wrapper for page content providing consistent horizontal margins and responsive width constraints. Prevents content from stretching too wide on large screens, maintaining optimal readability and visual hierarchy across device sizes.
+**Category**: layout | **Tags**: layout, responsive, max-width
+
+The Container component provides a centered max-width wrapper for page content with responsive width constraints. It ensures consistent content boundaries across different screen sizes and supports safe area insets for edge-to-edge layouts.
 
 ## Basic Usage
 
-Container with default settings: large max-width (1024px) and automatic horizontal centering.
+The default configuration for common use cases.
 
-<Box marginVertical={12}>
-  <Container>
-    <Box backgroundColor="#EEF2FF" padding={16} borderRadius={8}>
-      <Typography variant="heading">Container Content</Typography>
-      <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-        This content is constrained to a maximum width and centered
-      </Typography>
-    </Box>
-  </Container>
-</Box>
+<BasicExample />
 
 ## Max Width Presets
 
-Four preset sizes for different content types: small for forms, medium for articles, large for standard layouts, and extra large for dashboards.
+All available max-width options for different content types.
 
-<Box marginVertical={12}>
-  <Stack gap={16}>
-    <Container maxWidth="sm">
-      <Box backgroundColor="#DBEAFE" padding={12} borderRadius={6}>
-        <Typography variant="callout" style={{ fontWeight: "600" }}>Small Container (640px max)</Typography>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          Ideal for forms and narrow content
-        </Typography>
-      </Box>
-    </Container>
+<MaxWidthPresetsExample />
 
-    <Container maxWidth="md">
-      <Box backgroundColor="#FEE2E2" padding={12} borderRadius={6}>
-        <Typography variant="callout" style={{ fontWeight: "600" }}>Medium Container (768px max)</Typography>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          Good for articles and reading content
-        </Typography>
-      </Box>
-    </Container>
+- **sm (640px)**: Ideal for forms and narrow content that benefits from focused reading
+- **md (768px)**: Best for articles and reading content with optimal line length
+- **lg (1024px)**: Default preset suitable for most standard page layouts
+- **xl (1280px)**: Wide preset for dashboards, data tables, and complex displays
 
-    <Container maxWidth="lg">
-      <Box backgroundColor="#D1FAE5" padding={12} borderRadius={6}>
-        <Typography variant="callout" style={{ fontWeight: "600" }}>Large Container (1024px max)</Typography>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          Default size, suitable for most layouts
-        </Typography>
-      </Box>
-    </Container>
+## Alignment
 
-    <Container maxWidth="xl">
-      <Box backgroundColor="#FEF3C7" padding={12} borderRadius={6}>
-        <Typography variant="callout" style={{ fontWeight: "600" }}>Extra Large Container (1280px max)</Typography>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          For wide dashboards and data displays
-        </Typography>
-      </Box>
-    </Container>
-  </Stack>
-</Box>
+Control whether the container is centered within its parent.
 
-## Custom Max Width
+<AlignmentExample />
 
-Specify exact pixel width for precise control over content constraints.
+## Safe Area Insets
 
-<Box marginVertical={12}>
-  <Container maxWidth={500}>
-    <Box backgroundColor="#E0E7FF" padding={12} borderRadius={6}>
-      <Typography variant="callout" style={{ fontWeight: "600" }}>Custom Width (500px)</Typography>
-      <Typography variant="footnote" style={{ color: "#6B7280" }}>
-        Specify exact pixel width as needed
-      </Typography>
-    </Box>
-  </Container>
-</Box>
+Support for device-specific safe areas (notch, home indicator).
 
-## Padding Customization
+<InsetsExample />
 
-Adjust horizontal padding to control content spacing from edges.
+## Theme Tokens
 
-<Box marginVertical={12}>
-  <Stack gap={16}>
-    <Container padding={8}>
-      <Box backgroundColor="#F3F4F6" padding={12} borderRadius={6}>
-        <Typography variant="body">8px horizontal padding</Typography>
-      </Box>
-    </Container>
+This component uses the following design tokens from the three-tier theme system:
 
-    <Container padding={24}>
-      <Box backgroundColor="#F3F4F6" padding={12} borderRadius={6}>
-        <Typography variant="body">24px horizontal padding</Typography>
-      </Box>
-    </Container>
+### Max Width Tokens
 
-    <Container padding={40}>
-      <Box backgroundColor="#F3F4F6" padding={12} borderRadius={6}>
-        <Typography variant="body">40px horizontal padding</Typography>
-      </Box>
-    </Container>
-  </Stack>
-</Box>
+| Token Path | Purpose | Value |
+| --- | --- | --- |
+| theme.component.container.maxWidth.sm | Small max-width | 640 |
+| theme.component.container.maxWidth.md | Medium max-width | 768 |
+| theme.component.container.maxWidth.lg | Large max-width (default) | 1024 |
+| theme.component.container.maxWidth.xl | Extra large max-width | 1280 |
 
-## Alignment Control
+### Spacing Tokens
 
-Toggle horizontal centering with the centered prop.
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.container.padding | Default horizontal padding | 16 | primitive.spacing[4] |
 
-<Box marginVertical={12}>
-  <Stack gap={16}>
-    <Container centered={true}>
-      <Box backgroundColor="#ECFDF5" padding={12} borderRadius={6}>
-        <Typography variant="callout" style={{ fontWeight: "600" }}>Centered Container</Typography>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          Uses alignSelf: center
-        </Typography>
-      </Box>
-    </Container>
+### Color Tokens
 
-    <Container centered={false}>
-      <Box backgroundColor="#FEF2F2" padding={12} borderRadius={6}>
-        <Typography variant="callout" style={{ fontWeight: "600" }}>Left-Aligned Container</Typography>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          No horizontal centering applied
-        </Typography>
-      </Box>
-    </Container>
-  </Stack>
-</Box>
-
-## Nested Containers
-
-Combine multiple containers for complex, layered layouts with different width constraints.
-
-<Box marginVertical={12}>
-  <Container maxWidth="xl" padding={24}>
-    <Box backgroundColor="#F9FAFB" padding={16} borderRadius={8}>
-      <Typography variant="title-3" style={{ marginBottom: 12 }}>
-        Outer Container (XL)
-      </Typography>
-      <Container maxWidth="md" padding={0}>
-        <Box backgroundColor="#FFFFFF" padding={12} borderRadius={6} borderWidth={1} borderColor="#E5E7EB">
-          <Typography variant="callout" style={{ fontWeight: "600" }}>Inner Container (MD)</Typography>
-          <Typography variant="footnote" style={{ color: "#6B7280" }}>
-            Nested containers for complex layouts
-          </Typography>
-        </Box>
-      </Container>
-    </Box>
-  </Container>
-</Box>
-
-## Article Layout Example
-
-Container used for a readable article layout with optimal line length.
-
-<Box marginVertical={12}>
-  <Container maxWidth="md" padding={20}>
-    <Card>
-      <Stack gap={16}>
-        <Typography variant="title-2">Understanding Container Components</Typography>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>
-          Published on December 28, 2025
-        </Typography>
-        <Typography variant="body" style={{ lineHeight: 24 }}>
-          Container components are essential for creating readable layouts on large screens. By constraining content width, they prevent text from stretching too wide, which can harm readability. The optimal line length for reading is typically between 50-75 characters.
-        </Typography>
-        <Typography variant="body" style={{ lineHeight: 24 }}>
-          Using a medium container (768px) for article content ensures comfortable reading across all device sizes while maintaining visual hierarchy and focus.
-        </Typography>
-      </Stack>
-    </Card>
-  </Container>
-</Box>
-
-## Dashboard Layout Example
-
-Wide container for data-rich dashboard interfaces with multiple columns.
-
-<Box marginVertical={12}>
-  <DashboardLayoutExample />
-</Box>
-
-## Form Container Example
-
-Narrow container for focused form input with optimal field width.
-
-<Box marginVertical={12}>
-  <FormContainerExample />
-</Box>
-
-## Full Page Layout
-
-Container used to wrap entire page content with consistent margins and max-width.
-
-<Box marginVertical={12}>
-  <FullPageLayoutExample />
-</Box>
+| Token Path | Purpose | Light Mode | Dark Mode |
+| --- | --- | --- | --- |
+| theme.semantic.colors.surface.primary | Background color | neutral[0] (#FFFFFF) | neutral[1000] (#000000) |
 
 ## Props
 
+### Layout Props
+
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `ReactNode` | - | Container content |
-| maxWidth | `number` \| `"sm"` \| `"md"` \| `"lg"` \| `"xl"` | `"lg"` | Maximum width (640/768/1024/1280px) |
-| padding | `number` | `16` | Horizontal padding in pixels |
-| centered | `boolean` | `true` | Center container horizontally |
-| style | `StyleProp<ViewStyle>` | - | Custom styles merged last |
+| --- | --- | --- | --- |
+| maxWidth | "sm" \| "md" \| "lg" \| "xl" \| number | "lg" | Maximum width constraint |
+| padding | number | 16 | Horizontal padding in pixels |
+| centered | boolean | true | Whether to center horizontally |
+| insets | ("top" \| "right" \| "bottom" \| "left")[] | [] | Safe area insets to apply |
 
-Container extends View, so all View props are supported (testID, accessibilityLabel, etc.). Container is 100% width up to the specified maxWidth, with horizontal padding preventing content from touching screen edges.
+### Content Props
 
-## Usage Examples
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | undefined | Container content |
 
-### Basic Container
+### Styling Props
 
-```tsx
-import { Container, Typography, Box } from "@repo/react-native";
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
-<Container>
-  <Box padding={16}>
-    <Typography variant="body">Centered content with default settings</Typography>
-  </Box>
-</Container>
-```
+## Accessibility
 
-### Small Container for Forms
+**WCAG Level:** AA compliant
 
-```tsx
-import { Container, Card, Stack, Typography } from "@repo/react-native";
+**Screen Reader:**
 
-<Container maxWidth="sm" padding={20}>
-  <Card>
-    <Stack gap={12}>
-      <Typography variant="title-3">Login Form</Typography>
-      {/* Form fields */}
-    </Stack>
-  </Card>
-</Container>
-```
+- Supports accessibilityLabel for landmark identification
+- Content within Container remains fully accessible
+- No specific role applied (inherits View semantics)
 
-### Wide Dashboard Container
+**Layout Behavior:**
 
-```tsx
-import { Container, Stack, Card } from "@repo/react-native";
-
-<Container maxWidth="xl" centered={false}>
-  <Stack gap={16}>
-    <Card>{/* Dashboard widgets */}</Card>
-    <Card>{/* Data tables */}</Card>
-  </Stack>
-</Container>
-```
-
-### Custom Width Container
-
-```tsx
-import { Container, Card, Typography } from "@repo/react-native";
-
-<Container maxWidth={850} padding={32}>
-  <Card>
-    <Typography variant="body">Article content</Typography>
-  </Card>
-</Container>
-```
-
-### Full Page Layout
-
-```tsx
-import { Container, Stack, Card, Typography, Box } from "@repo/react-native";
-
-function PageLayout() {
-  return (
-    <Container maxWidth="lg" padding={20}>
-      <Stack gap={20}>
-        <Box backgroundColor="#4A90E2" padding={20} borderRadius={8}>
-          <Typography variant="large-title" style={{ color: "#FFFFFF" }}>
-            Page Title
-          </Typography>
-        </Box>
-        <Card>
-          <Typography variant="body">Main content</Typography>
-        </Card>
-      </Stack>
-    </Container>
-  );
-}
-```
+- Uses flex: 1 for proper layout participation
+- Width constrained to 100% with maxWidth limit
+- Safe area insets ensure content avoids device obstructions

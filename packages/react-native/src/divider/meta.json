@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "divider",
-  "description": "Visual separator line with horizontal or vertical orientation",
+  "description": "Visual separator line with horizontal or vertical orientation for creating clear boundaries between content sections",
+  "category": "layout",
+  "tags": ["separator", "line", "visual-hierarchy"],
   "dependencies": []
 }

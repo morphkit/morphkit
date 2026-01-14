@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "card",
-  "description": "Content container with elevation, borders, and padding for grouping information",
+  "description": "Content container with elevation, borders, and padding for grouping related information into visually distinct sections",
+  "category": "surfaces",
+  "tags": ["container", "content", "elevation"],
   "dependencies": []
 }

@@ -1,167 +1,123 @@
-import { Avatar } from "./Avatar";
-import { Box, Stack, Typography, Card } from "../";
-import { InteractiveProfileExample } from "./examples";
+import {
+  BasicExample,
+  SizesExample,
+  ImageAvatarExample,
+  FallbackExample,
+} from "./examples";
 
 # Avatar
 
-A circular avatar component that displays user profile images with automatic fallback to initials when no image is provided. Always pressable for interaction and fully theme-aware for light and dark modes.
+**Category**: display | **Tags**: profile, image, user
+
+The Avatar component displays circular user profile images with fallback text initials. It provides visual representation of users across multiple size options for various UI contexts, supporting both image sources and text-based fallbacks.
+
+## Basic Usage
+
+The default configuration for common use cases.
+
+<BasicExample />
 
 ## Sizes
 
-Three preset sizes for different contexts: small for compact lists, medium for standard use, and large for profile headers.
+Available size options for different screen contexts.
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={12} align="center">
-    <Avatar size="sm" fallback="AB" />
-    <Avatar size="md" fallback="CD" />
-    <Avatar size="lg" fallback="EF" />
-  </Stack>
-</Box>
+<SizesExample />
 
-## With Images
+- **sm**: Compact 32px for lists and dense layouts
+- **md**: Default 40px for standard use
+- **lg**: Prominent 48px for profile sections
+- **xl**: Large 64px for hero displays
 
-When an image source is provided, it displays the image; otherwise falls back to the initials.
+## Image Avatar
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={12} align="center">
-    <Avatar size="sm" source={{ uri: "https://i.pravatar.cc/32" }} />
-    <Avatar size="md" source={{ uri: "https://i.pravatar.cc/40" }} />
-    <Avatar size="lg" source={{ uri: "https://i.pravatar.cc/48" }} />
-  </Stack>
-</Box>
+Display user profile images with fallback support.
 
-## Fallback Text (Initials)
+<ImageAvatarExample />
 
-Use initials or any short text as a fallback when images aren't available.
+## Fallback Text
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={12} align="center">
-    <Avatar fallback="JD" />
-    <Avatar fallback="SM" />
-    <Avatar fallback="KL" />
-  </Stack>
-</Box>
+Text initials displayed when no image source is provided.
 
-## Profile Card Example
+<FallbackExample />
 
-Avatar combined with user information in a card layout - a common pattern for profile displays.
+## Theme Tokens
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16}>
-      <Stack direction="horizontal" gap={12} align="center">
-        <Avatar
-          size="lg"
-          source={{ uri: "https://i.pravatar.cc/48" }}
-        />
-        <Stack gap={4}>
-          <Typography variant="heading">Jane Doe</Typography>
-          <Typography variant="callout" style={{ color: "#6B7280" }}>
-            Product Designer
-          </Typography>
-        </Stack>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
+This component uses the following design tokens from the three-tier theme system:
 
-## User List with Avatars
+### Size Tokens
 
-Common list pattern showing multiple users with avatars and names.
+| Token Path | Purpose | sm | md | lg | xl |
+| --- | --- | --- | --- | --- | --- |
+| theme.component.avatar.size[size] | Width and height | 32 | 40 | 48 | 64 |
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={12}>
-      <Stack direction="horizontal" gap={12} align="center">
-        <Avatar source={{ uri: "https://i.pravatar.cc/40?img=1" }} />
-        <Stack gap={2} style={{ flex: 1 }}>
-          <Typography variant="body">Alice Johnson</Typography>
-          <Typography variant="caption-1" style={{ color: "#6B7280" }}>
-            Online
-          </Typography>
-        </Stack>
-      </Stack>
-      <Stack direction="horizontal" gap={12} align="center">
-        <Avatar source={{ uri: "https://i.pravatar.cc/40?img=2" }} />
-        <Stack gap={2} style={{ flex: 1 }}>
-          <Typography variant="body">Bob Smith</Typography>
-          <Typography variant="caption-1" style={{ color: "#6B7280" }}>
-            Away
-          </Typography>
-        </Stack>
-      </Stack>
-      <Stack direction="horizontal" gap={12} align="center">
-        <Avatar fallback="CD" />
-        <Stack gap={2} style={{ flex: 1 }}>
-          <Typography variant="body">Charlie Davis</Typography>
-          <Typography variant="caption-1" style={{ color: "#6B7280" }}>
-            Offline
-          </Typography>
-        </Stack>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
+### Typography Tokens
 
-## Interactive Profile Example
+| Token Path | Purpose | sm | md | lg | xl | Primitive Source |
+| --- | --- | --- | --- | --- | --- | --- |
+| primitive.fontSize.xs | Small text | 11 | - | - | - | primitive.fontSize.xs |
+| primitive.fontSize.lg | Medium text | - | 16 | - | - | primitive.fontSize.lg |
+| primitive.fontSize.2xl | Large text | - | - | 20 | - | primitive.fontSize.2xl |
+| primitive.fontSize.3xl | Extra large text | - | - | - | 22 | primitive.fontSize.3xl |
 
-Avatar with press handling to show profile actions.
+### Color Tokens (Light Mode)
 
-<Box marginVertical={12}>
-  <InteractiveProfileExample />
-</Box>
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.avatar.variant.light.background | Background color | #4A90E2 | light.action.primary |
+| theme.component.avatar.variant.light.text | Text color | #FFFFFF | light.text.inverse |
+| theme.component.avatar.variant.light.border | Border color | #E5E7EB | light.border.primary |
+
+### Color Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.avatar.variant.dark.background | Background color | #60A5FA | dark.action.primary |
+| theme.component.avatar.variant.dark.text | Text color | #111827 | dark.text.inverse |
+| theme.component.avatar.variant.dark.border | Border color | #374151 | dark.border.primary |
+
+### Border Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.avatar.borderRadius | Circular shape | 999 | primitive.borderRadius.full |
 
 ## Props
 
+### Content Props
+
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| source | `ImageSourcePropType` | - | Image source for avatar |
-| fallback | `string` | `""` | Text to display when no image (typically initials) |
-| size | `"sm"` \| `"md"` \| `"lg"` | `"md"` | Avatar size (32px, 40px, 48px) |
-| onPress | `() => void` | - | Press handler (avatar is always Pressable) |
-| style | `StyleProp<ViewStyle>` | - | Custom container styles |
+| --- | --- | --- | --- |
+| source | ImageSourcePropType | undefined | Image source for the avatar |
+| fallback | string | "" | Text initials shown when no image |
 
-## Usage Examples
+### Behavior Props
 
-### Basic Avatar with Image
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| size | "sm" \| "md" \| "lg" \| "xl" | "md" | Size preset |
+| onPress | () => void | undefined | Press handler callback |
 
-```tsx
-import { Avatar } from "@repo/react-native";
+### Styling Props
 
-<Avatar source={{ uri: "https://example.com/avatar.jpg" }} />
-```
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
-### Fallback Initials
+## Accessibility
 
-```tsx
-import { Avatar } from "@repo/react-native";
+**WCAG Level:** AA compliant
 
-<Avatar fallback="JD" />
-```
+**Screen Reader:**
 
-### Profile Card with Avatar
+- Announces role as "imagebutton"
+- Custom labels supported via accessibilityLabel prop
 
-```tsx
-import { Avatar, Card, Stack, Typography } from "@repo/react-native";
+**Touch Target:**
 
-<Card>
-  <Stack direction="horizontal" gap={12} align="center">
-    <Avatar size="lg" source={{ uri: "https://..." }} />
-    <Stack gap={4}>
-      <Typography variant="heading">John Doe</Typography>
-      <Typography variant="callout">Software Engineer</Typography>
-    </Stack>
-  </Stack>
-</Card>
-```
+- Minimum touch target: 32pt (sm), 40pt (md), 48pt (lg), 64pt (xl)
 
-### Pressable Avatar
+**Visual Requirements:**
 
-```tsx
-import { Avatar } from "@repo/react-native";
-
-<Avatar
-  source={{ uri: "https://example.com/avatar.jpg" }}
-  onPress={() => console.log("Avatar pressed")}
-/>
-```
+- Color contrast meets 4.5:1 for fallback text
+- Press feedback via opacity change
+- Circular shape provides clear visual boundary

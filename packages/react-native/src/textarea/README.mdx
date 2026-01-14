@@ -1,299 +1,173 @@
----
-title: Textarea
-description: Multi-line text input field with auto-resize capability and character count display for longer text entry.
----
-
-import { Textarea } from "./Textarea";
-import { View } from "react-native";
-import { Stack } from "../stack";
-
 # Textarea
 
-Multi-line text input field with auto-resize capability and character count display for longer text entry. Provides expanded input area for paragraphs, descriptions, comments, and other lengthy text content.
+**Category**: input | **Tags**: form, multiline, text-input
 
-## Import
+The Textarea component provides a multi-line text input field for collecting longer text content such as comments, descriptions, or messages. It supports auto-resize capability, character count display, configurable rows, and validation states with built-in accessibility.
 
-```tsx
-import { Textarea } from "@repo/react-native";
-```
+## Basic Usage
 
-## Usage
+The default configuration for common use cases.
 
-### Basic
+<BasicExample />
 
-<View style={{ padding: 20 }}>
-  <Textarea
-    label="Description"
-    value=""
-    onChangeText={() => {}}
-    placeholder="Enter a detailed description..."
-  />
-</View>
+## Sizes
 
-```tsx
-<Textarea
-  label="Description"
-  value={description}
-  onChangeText={setDescription}
-  placeholder="Enter a detailed description..."
-  rows={6}
-/>
-```
+Available size options for different screen contexts.
 
-### With Character Count
+<SizesExample />
 
-Display current character count or progress toward maximum length.
+- **sm**: Compact size with 12px font for tight spaces
+- **md**: Default size with 14px font for standard forms
+- **lg**: Prominent size with 16px font for important fields
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Textarea
-      label="Bio"
-      value=""
-      onChangeText={() => {}}
-      showCount
-      rows={4}
-    />
-    <Textarea
-      label="Comment"
-      value=""
-      onChangeText={() => {}}
-      maxLength={500}
-      showCount
-      rows={4}
-    />
-  </Stack>
-</View>
+## Character Count
 
-```tsx
-<Textarea
-  label="Bio"
-  value={bio}
-  onChangeText={setBio}
-  showCount
-/>
+Display character count with optional maximum limit.
 
-<Textarea
-  label="Comment"
-  value={comment}
-  onChangeText={setComment}
-  maxLength={500}
-  showCount
-/>
-```
+<CharacterCountExample />
 
-### Auto Resize
+## Auto Resize
 
-Automatically expand height as content grows.
+Automatic height adjustment as content grows.
 
-<View style={{ padding: 20 }}>
-  <Textarea
-    label="Notes"
-    value=""
-    onChangeText={() => {}}
-    placeholder="Start typing..."
-    autoResize
-    rows={3}
-  />
-</View>
+<AutoResizeExample />
 
-```tsx
-<Textarea
-  label="Notes"
-  value={notes}
-  onChangeText={setNotes}
-  autoResize
-  rows={3}
-/>
-```
+## Rows Configuration
 
-### Rows
+Configure initial height via rows prop.
 
-Control the initial visible height with the `rows` prop.
+<RowsExample />
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Textarea
-      label="Short note (2 rows)"
-      value=""
-      onChangeText={() => {}}
-      rows={2}
-    />
-    <Textarea
-      label="Medium note (4 rows, default)"
-      value=""
-      onChangeText={() => {}}
-      rows={4}
-    />
-    <Textarea
-      label="Long note (8 rows)"
-      value=""
-      onChangeText={() => {}}
-      rows={8}
-    />
-  </Stack>
-</View>
+## States
 
-```tsx
-<Textarea label="Short" value={value} onChangeText={setValue} rows={2} />
-<Textarea label="Medium" value={value} onChangeText={setValue} rows={4} />
-<Textarea label="Long" value={value} onChangeText={setValue} rows={8} />
-```
+Error and disabled states for validation feedback.
 
-### Sizes
+<StatesExample />
 
-Available in three sizes: `sm`, `md` (default), and `lg`.
+## Combined Features
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Textarea
-      label="Small textarea"
-      value=""
-      onChangeText={() => {}}
-      size="sm"
-      rows={3}
-    />
-    <Textarea
-      label="Medium textarea (default)"
-      value=""
-      onChangeText={() => {}}
-      size="md"
-      rows={3}
-    />
-    <Textarea
-      label="Large textarea"
-      value=""
-      onChangeText={() => {}}
-      size="lg"
-      rows={3}
-    />
-  </Stack>
-</View>
+Multiple features working together.
 
-```tsx
-<Textarea label="Compact" value={value} onChangeText={setValue} size="sm" />
-<Textarea label="Standard" value={value} onChangeText={setValue} size="md" />
-<Textarea label="Prominent" value={value} onChangeText={setValue} size="lg" />
-```
+<CombinedExample />
 
-### Error State
+## Theme Tokens
 
-Display validation errors below the textarea.
+This component uses the following design tokens from the three-tier theme system:
 
-<View style={{ padding: 20 }}>
-  <Textarea
-    label="Message"
-    value="Hi"
-    onChangeText={() => {}}
-    error="Message must be at least 10 characters"
-    rows={4}
-  />
-</View>
+### Size Tokens
 
-```tsx
-<Textarea
-  label="Message"
-  value={message}
-  onChangeText={setMessage}
-  error={messageError}
-/>
-```
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.textarea.size[size].fontSize | Text size | 12 | 14 | 16 |
+| theme.component.textarea.size[size].padding | Container padding | 8 | 12 | 16 |
+| theme.component.textarea.size[size].borderRadius | Corner radius | 8 | 8 | 8 |
+| theme.component.textarea.size[size].lineHeight | Line height multiplier | 1.5 | 1.5 | 1.5 |
 
-### Disabled State
+### Color Tokens (Light Mode)
 
-<View style={{ padding: 20 }}>
-  <Textarea
-    label="Read-only content"
-    value="This content cannot be edited"
-    onChangeText={() => {}}
-    disabled
-    rows={3}
-  />
-</View>
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.textarea.variant.light.default.background | Default background | #FFFFFF | light.surface.primary |
+| theme.component.textarea.variant.light.default.text | Input text color | #111827 | light.text.primary |
+| theme.component.textarea.variant.light.default.placeholder | Placeholder color | #6B7280 | light.text.tertiary |
+| theme.component.textarea.variant.light.default.border | Default border | #E5E7EB | light.border.primary |
+| theme.component.textarea.variant.light.focus.border | Focus border | #3B82F6 | light.border.focus |
+| theme.component.textarea.variant.light.error.border | Error border | #EF4444 | light.border.error |
+| theme.component.textarea.variant.light.error.text | Error text | #DC2626 | light.status.error.main |
+| theme.component.textarea.variant.light.label.text | Label text | #374151 | light.text.secondary |
+| theme.component.textarea.variant.light.count.text | Count text | #374151 | light.text.secondary |
 
-```tsx
-<Textarea
-  label="Readonly Field"
-  value={value}
-  onChangeText={setValue}
-  disabled
-/>
-```
+### Color Tokens (Dark Mode)
 
-### Combined Features
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.textarea.variant.dark.default.background | Default background | #000000 | dark.surface.primary |
+| theme.component.textarea.variant.dark.default.text | Input text color | #F9FAFB | dark.text.primary |
+| theme.component.textarea.variant.dark.default.placeholder | Placeholder color | #9CA3AF | dark.text.tertiary |
+| theme.component.textarea.variant.dark.default.border | Default border | #374151 | dark.border.primary |
+| theme.component.textarea.variant.dark.focus.border | Focus border | #60A5FA | dark.border.focus |
+| theme.component.textarea.variant.dark.error.border | Error border | #F87171 | dark.border.error |
+| theme.component.textarea.variant.dark.error.text | Error text | #F87171 | dark.status.error.main |
+| theme.component.textarea.variant.dark.label.text | Label text | #E5E7EB | dark.text.secondary |
+| theme.component.textarea.variant.dark.count.text | Count text | #E5E7EB | dark.text.secondary |
 
-<View style={{ padding: 20 }}>
-  <Textarea
-    label="Product Review"
-    value=""
-    onChangeText={() => {}}
-    placeholder="Share your thoughts about this product..."
-    maxLength={1000}
-    showCount
-    autoResize
-    rows={4}
-    size="lg"
-  />
-</View>
+### Disabled Tokens
 
-```tsx
-<Textarea
-  label="Product Review"
-  value={review}
-  onChangeText={setReview}
-  placeholder="Share your thoughts..."
-  maxLength={1000}
-  showCount
-  autoResize
-  rows={4}
-  size="lg"
-/>
-```
+| Token Path | Purpose | Light Value | Dark Value |
+| --- | --- | --- | --- |
+| theme.component.textarea.variant[colorScheme].disabled.background | Disabled background | #F9FAFB | #1F2937 |
+| theme.component.textarea.variant[colorScheme].disabled.text | Disabled text | #9CA3AF | #4B5563 |
+| theme.component.textarea.variant[colorScheme].disabled.opacity | Disabled opacity | 0.5 | 0.5 |
+
+### Static Tokens
+
+| Token Path | Purpose | Value |
+| --- | --- | --- |
+| theme.component.textarea.borderWidth | Border width | 1 |
+| theme.component.textarea.footer.gap | Footer spacing | 4 |
+| theme.component.textarea.characterCount.fontSize | Count font size | 11 |
+| theme.component.textarea.characterCount.marginLeft | Count left margin | 8 |
+| theme.component.textarea.errorText.fontSize | Error font size | 11 |
 
 ## Props
 
-### Textarea Props
+### Required Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string` | - | Current text content (controlled) |
-| `onChangeText` | `(text: string) => void` | - | Callback when text changes |
-| `label` | `string` | `undefined` | Text label above textarea |
-| `placeholder` | `string` | `undefined` | Placeholder text when empty |
-| `error` | `string` | `undefined` | Error message shown below textarea |
-| `disabled` | `boolean` | `false` | Disables textarea interaction |
-| `rows` | `number` | `4` | Initial number of visible text rows |
-| `maxLength` | `number` | `undefined` | Maximum number of characters allowed |
-| `showCount` | `boolean` | `false` | Display character count below textarea |
-| `autoResize` | `boolean` | `false` | Automatically expand height to fit content |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset for fontSize and padding |
-| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for wrapper |
+| value | string | required | Current text value |
+| onChange | (text: string) => void | required | Text change handler |
 
-The component also accepts all standard React Native `TextInputProps` (except `multiline` and `numberOfLines`).
+### Behavior Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| size | "sm" \| "md" \| "lg" | "md" | Size preset |
+| rows | number | 4 | Number of visible rows |
+| maxLength | number | undefined | Maximum character limit |
+| showCount | boolean | false | Show character count |
+| autoResize | boolean | false | Auto-expand height |
+| disabled | boolean | false | Disables interaction |
+
+### Content Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| label | string | undefined | Label text above input |
+| placeholder | string | undefined | Placeholder text |
+| error | string | undefined | Error message below input |
+| name | string | undefined | Form field name |
+
+### Event Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| onBlur | () => void | undefined | Blur event handler |
+
+### Styling Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom wrapper styles |
 
 ## Accessibility
 
-The Textarea component follows accessibility best practices:
+**WCAG Level:** AA compliant
 
-- Uses `accessibilityLabel` from the `label` prop
-- Sets `accessibilityInvalid` when an error is present
-- Error text has `accessibilityLiveRegion="polite"` for announcements
-- Supports keyboard navigation and focus management
-- Maintains sufficient color contrast (WCAG AA compliant)
+**Screen Reader:**
 
-## Theme Support
+- Announces label as accessibility label
+- Falls back to name prop if label not provided
+- Error messages announced with accessibilityLiveRegion="polite"
 
-The component automatically adapts to light and dark modes:
+**Touch Target:**
 
-- **Light mode**: White background, gray border (#E5E7EB)
-- **Dark mode**: Dark background (#374151), lighter border (#4B5563)
-- **Focus**: Primary blue border (#4A90E2 light, #5AA2F5 dark)
-- **Error**: Red border and text (#EF4444 light, #F87171 dark)
+- Full width touch target for easy interaction
+- Minimum height based on rows configuration
 
-## Best Practices
+**Visual Requirements:**
 
-1. **Initial Height**: Use `rows` prop to set appropriate initial height
-2. **Character Limits**: Use `maxLength` with `showCount` for user guidance
-3. **Auto Resize**: Enable `autoResize` for dynamic content without scrolling
-4. **Placeholders**: Provide helpful examples in placeholder text
-5. **Validation**: Show errors only after user interaction or form submission
-6. **Long Content**: For very long text, consider fixed height with scrolling instead of autoResize
+- Color contrast meets 4.5:1 for text
+- Focus state indicated by border color change
+- Error state indicated by red border and error text
+- Disabled state indicated by opacity (0.5)

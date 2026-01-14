@@ -1,147 +1,116 @@
-import { Skeleton } from "./Skeleton";
-import { Box, Stack, Typography, Card } from "../";
+import {
+  BasicExample,
+  VariantsExample,
+  CustomDimensionsExample,
+  ContentPlaceholderExample,
+} from "./examples";
 
 # Skeleton
 
-A placeholder loading component with shimmer animation, ideal for showing content structure while data is being fetched. Creates a better loading experience than blank screens or generic spinners.
+**Category**: display | **Tags**: loading, placeholder, shimmer
+
+The Skeleton component provides placeholder loading states with animated shimmer effects to improve perceived performance during content loading. It supports three shape variants for different content types and customizable dimensions for flexible placeholder sizing.
 
 ## Basic Usage
 
-The default rectangular skeleton with automatic width and height.
+The default configuration displays a rectangular placeholder with full width.
 
-<Box marginVertical={12}>
-  <Skeleton />
-</Box>
+<BasicExample />
 
 ## Variants
 
-Three shape variants for different content types: rectangles for images/blocks, circles for avatars, and text for single lines.
+All available shape variants for different content types.
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Skeleton variant="rect" />
-    <Skeleton variant="circle" width={48} height={48} />
-    <Skeleton variant="text" />
-  </Stack>
-</Box>
+<VariantsExample />
+
+- **rect**: Default rectangular placeholder for general content blocks
+- **circle**: Circular placeholder for avatars and profile images
+- **text**: Narrow text-line placeholder for simulating text content
 
 ## Custom Dimensions
 
-Control width and height with pixel values or percentage strings.
+Flexible width and height options using numbers or percentage strings.
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Skeleton width={200} height={100} />
-    <Skeleton variant="circle" width={60} height={60} />
-    <Skeleton width="80%" height={15} />
-  </Stack>
-</Box>
+<CustomDimensionsExample />
 
-## Profile Card Loading State
+## Content Placeholder
 
-Realistic example showing avatar, name, and description placeholders.
+Compose multiple skeletons to create realistic loading states.
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={12}>
-      <Stack direction="horizontal" gap={12} align="center">
-        <Skeleton variant="circle" width={48} height={48} />
-        <Stack gap={8} style={{ flex: 1 }}>
-          <Skeleton variant="text" width="60%" />
-          <Skeleton variant="text" width="40%" />
-        </Stack>
-      </Stack>
-      <Skeleton width="100%" height={200} />
-    </Stack>
-  </Card>
-</Box>
+<ContentPlaceholderExample />
 
-## Content Feed Loading
+## Theme Tokens
 
-Multiple skeleton cards showing a list loading state.
+This component uses the following design tokens from the three-tier theme system:
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Card>
-      <Stack gap={8}>
-        <Skeleton variant="text" width="80%" />
-        <Skeleton variant="text" width="60%" />
-        <Skeleton width="100%" height={150} />
-      </Stack>
-    </Card>
-    <Card>
-      <Stack gap={8}>
-        <Skeleton variant="text" width="70%" />
-        <Skeleton variant="text" width="50%" />
-        <Skeleton width="100%" height={150} />
-      </Stack>
-    </Card>
-  </Stack>
-</Box>
+### Shape Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.skeleton.borderRadius | Corner radius for rect/text | 8 | primitive.borderRadius.md |
+
+### Default Dimension Tokens
+
+| Token Path | Variant | Width | Height |
+| --- | --- | --- | --- |
+| theme.component.skeleton.defaultDimensions.rect | Rectangle | "100%" | 20 |
+| theme.component.skeleton.defaultDimensions.circle | Circle | 40 | 40 |
+| theme.component.skeleton.defaultDimensions.text | Text line | "100%" | 12 |
+
+### Animation Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.skeleton.duration | Shimmer animation duration | 1500 | primitive.duration.verySlow |
+| theme.primitive.opacity.shimmer | Shimmer overlay opacity | 0.5 | primitive.opacity.shimmer |
+
+### Color Tokens (Light Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.skeleton.variant.light.background | Placeholder background | #F3F4F6 | light.surface.tertiary |
+| theme.component.skeleton.variant.light.shimmer | Shimmer overlay color | #F9FAFB | light.surface.secondary |
+
+### Color Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.skeleton.variant.dark.background | Placeholder background | #374151 | dark.surface.tertiary |
+| theme.component.skeleton.variant.dark.shimmer | Shimmer overlay color | #1F2937 | dark.surface.secondary |
 
 ## Props
 
+### Shape Props
+
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | `"rect"` \| `"circle"` \| `"text"` | `"rect"` | Shape type for different content placeholders |
-| width | `number` \| `string` | Variant default | Custom width in pixels or percentage |
-| height | `number` \| `string` | Variant default | Custom height in pixels or percentage |
-| style | `StyleProp<ViewStyle>` | - | Custom container styles |
+| --- | --- | --- | --- |
+| variant | "rect" \| "circle" \| "text" | "rect" | Shape variant for the placeholder |
 
-## Usage Examples
+### Dimension Props
 
-### Profile Loading
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| width | number \| string | variant default | Custom width (pixels or percentage) |
+| height | number \| string | variant default | Custom height (pixels or percentage) |
 
-```tsx
-import { Skeleton, Card, Stack } from "@repo/react-native";
+### Styling Props
 
-function ProfileLoading() {
-  return (
-    <Card>
-      <Stack gap={12}>
-        <Stack direction="horizontal" gap={12} align="center">
-          <Skeleton variant="circle" width={48} height={48} />
-          <Stack gap={8} style={{ flex: 1 }}>
-            <Skeleton variant="text" width="60%" />
-            <Skeleton variant="text" width="40%" />
-          </Stack>
-        </Stack>
-      </Stack>
-    </Card>
-  );
-}
-```
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
-### Article Loading
+## Accessibility
 
-```tsx
-import { Skeleton, Stack } from "@repo/react-native";
+**WCAG Level:** AA compliant
 
-function ArticleLoading() {
-  return (
-    <Stack gap={12}>
-      <Skeleton variant="text" width="80%" />
-      <Skeleton variant="text" width="60%" />
-      <Skeleton width="100%" height={200} />
-    </Stack>
-  );
-}
-```
+**Screen Reader:**
 
-### List Item Loading
+- Skeleton is a decorative element during loading
+- Use accessibilityLabel on parent container to announce loading state
+- Consider announcing when content has loaded
 
-```tsx
-import { Skeleton, Stack } from "@repo/react-native";
+**Visual Requirements:**
 
-function ListItemLoading() {
-  return (
-    <Stack direction="horizontal" gap={12}>
-      <Skeleton variant="circle" width={40} height={40} />
-      <Stack gap={6} style={{ flex: 1 }}>
-        <Skeleton variant="text" />
-        <Skeleton variant="text" width="70%" />
-      </Stack>
-    </Stack>
-  );
-}
-```
+- Subtle background color difference from page background
+- Smooth shimmer animation indicates activity
+- Animation uses native driver for 60fps performance

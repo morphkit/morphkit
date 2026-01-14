@@ -2,5 +2,7 @@
   "type": "react-native",
   "name": "spinner",
   "description": "Animated loading indicator with continuous rotation, size presets (sm, md, lg) or custom pixel size, and color customization",
+  "category": "display",
+  "tags": ["loading", "indicator", "animated"],
   "dependencies": []
 }

@@ -1,242 +1,77 @@
----
-title: Radio
-description: Single-selection radio button control with group management for choosing one option from a set.
----
-
-import { RadioGroup, RadioButton } from "./Radio";
-import { View } from "react-native";
-import { Stack } from "../stack";
-import { Typography } from "../typography";
-
 # Radio
 
-Single-selection radio button control with group management for choosing one option from a set. Ensures only one option can be selected at a time within a group with clear visual indication of selection state.
+**Category**: input | **Tags**: form, selection, choice
 
-## Import
+The Radio component provides a single-selection control with group management for choosing one option from a set. It uses a compound component pattern with RadioGroup and RadioButton, ensuring mutually exclusive selections with built-in accessibility support.
 
-```tsx
-import { RadioGroup, RadioButton } from "@repo/react-native";
-```
+## Basic Usage
 
-## Usage
+The default configuration for common use cases.
 
-### Basic
+<BasicExample />
 
-<View style={{ padding: 20 }}>
-  <RadioGroup value="option1" onValueChange={() => {}}>
-    <Stack gap={12}>
-      <RadioButton value="option1">
-        <Typography variant="body">Option 1</Typography>
-      </RadioButton>
-      <RadioButton value="option2">
-        <Typography variant="body">Option 2</Typography>
-      </RadioButton>
-      <RadioButton value="option3">
-        <Typography variant="body">Option 3</Typography>
-      </RadioButton>
-    </Stack>
-  </RadioGroup>
-</View>
+## Sizes
 
-```tsx
-<RadioGroup value={selected} onValueChange={setSelected}>
-  <RadioButton value="option1">
-    <Typography variant="body">Option 1</Typography>
-  </RadioButton>
-  <RadioButton value="option2">
-    <Typography variant="body">Option 2</Typography>
-  </RadioButton>
-  <RadioButton value="option3">
-    <Typography variant="body">Option 3</Typography>
-  </RadioButton>
-</RadioGroup>
-```
+Available size options for different screen contexts.
 
-### Sizes
+<SizesExample />
 
-Available in three sizes: `sm`, `md` (default), and `lg`.
+- **sm**: Compact 16px radio circle for tight spaces
+- **md**: Default 20px radio circle for standard use
+- **lg**: Prominent 24px radio circle for better visibility
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <RadioGroup value="small" onValueChange={() => {}}>
-      <RadioButton value="small" size="sm">
-        <Typography variant="body">Small radio button</Typography>
-      </RadioButton>
-    </RadioGroup>
-    <RadioGroup value="medium" onValueChange={() => {}}>
-      <RadioButton value="medium" size="md">
-        <Typography variant="body">Medium radio button (default)</Typography>
-      </RadioButton>
-    </RadioGroup>
-    <RadioGroup value="large" onValueChange={() => {}}>
-      <RadioButton value="large" size="lg">
-        <Typography variant="body">Large radio button</Typography>
-      </RadioButton>
-    </RadioGroup>
-  </Stack>
-</View>
+## Disabled States
 
-```tsx
-<RadioGroup value={size} onValueChange={setSize}>
-  <RadioButton value="sm" size="sm">
-    <Typography variant="body">Small</Typography>
-  </RadioButton>
-  <RadioButton value="md" size="md">
-    <Typography variant="body">Medium</Typography>
-  </RadioButton>
-  <RadioButton value="lg" size="lg">
-    <Typography variant="body">Large</Typography>
-  </RadioButton>
-</RadioGroup>
-```
+Individual and group-level disabled states.
 
-### Disabled Group
+<DisabledExample />
 
-Disable all options in a group.
+## Theme Tokens
 
-<View style={{ padding: 20 }}>
-  <RadioGroup value="option1" onValueChange={() => {}} disabled>
-    <Stack gap={12}>
-      <RadioButton value="option1">
-        <Typography variant="body">Disabled Option 1</Typography>
-      </RadioButton>
-      <RadioButton value="option2">
-        <Typography variant="body">Disabled Option 2</Typography>
-      </RadioButton>
-      <RadioButton value="option3">
-        <Typography variant="body">Disabled Option 3</Typography>
-      </RadioButton>
-    </Stack>
-  </RadioGroup>
-</View>
+This component uses the following design tokens from the three-tier theme system:
 
-```tsx
-<RadioGroup value={selected} onValueChange={setSelected} disabled={isProcessing}>
-  <RadioButton value="option1">
-    <Typography variant="body">Option 1</Typography>
-  </RadioButton>
-  <RadioButton value="option2">
-    <Typography variant="body">Option 2</Typography>
-  </RadioButton>
-</RadioGroup>
-```
+### Size Tokens
 
-### Individual Disabled Options
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.radio.size[size] | Radio circle diameter | 16 | 20 | 24 |
+| Inner dot size | Half of circle size | 8 | 10 | 12 |
 
-Disable specific options while keeping others enabled.
+### Variant Tokens (Light Mode)
 
-<View style={{ padding: 20 }}>
-  <RadioGroup value="card" onValueChange={() => {}}>
-    <Stack gap={12}>
-      <RadioButton value="card">
-        <Typography variant="body">Credit Card</Typography>
-      </RadioButton>
-      <RadioButton value="paypal">
-        <Typography variant="body">PayPal</Typography>
-      </RadioButton>
-      <RadioButton value="crypto" disabled>
-        <Typography variant="body">Cryptocurrency (unavailable)</Typography>
-      </RadioButton>
-    </Stack>
-  </RadioGroup>
-</View>
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.radio.variant.light.checked.border | Checked border | #4A90E2 | light.action.primary |
+| theme.component.radio.variant.light.checked.dot | Checked dot | #4A90E2 | light.action.primary |
+| theme.component.radio.variant.light.unchecked.border | Unchecked border | #D1D5DB | light.border.secondary |
+| theme.component.radio.variant.light.unchecked.dot | Unchecked dot | transparent | - |
+| theme.component.radio.variant.light.disabled.border | Disabled border | #E5E7EB | light.border.primary |
+| theme.component.radio.variant.light.disabled.dot | Disabled dot | #9CA3AF | light.text.disabled |
 
-```tsx
-<RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
-  <RadioButton value="card">
-    <Typography variant="body">Credit Card</Typography>
-  </RadioButton>
-  <RadioButton value="paypal">
-    <Typography variant="body">PayPal</Typography>
-  </RadioButton>
-  <RadioButton value="crypto" disabled>
-    <Typography variant="body">Cryptocurrency</Typography>
-  </RadioButton>
-</RadioGroup>
-```
+### Variant Tokens (Dark Mode)
 
-### Without Children
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.radio.variant.dark.checked.border | Checked border | #60A5FA | dark.action.primary |
+| theme.component.radio.variant.dark.checked.dot | Checked dot | #60A5FA | dark.action.primary |
+| theme.component.radio.variant.dark.unchecked.border | Unchecked border | #4B5563 | dark.border.secondary |
+| theme.component.radio.variant.dark.unchecked.dot | Unchecked dot | transparent | - |
+| theme.component.radio.variant.dark.disabled.border | Disabled border | #374151 | dark.border.primary |
+| theme.component.radio.variant.dark.disabled.dot | Disabled dot | #4B5563 | dark.text.disabled |
 
-Ensure you provide `accessibilityLabel` for screen readers when omitting children.
+### Spacing Tokens
 
-<View style={{ padding: 20 }}>
-  <RadioGroup value="1" onValueChange={() => {}}>
-    <Stack gap={12} direction="horizontal">
-      <RadioButton value="1" accessibilityLabel="Rating 1" />
-      <RadioButton value="2" accessibilityLabel="Rating 2" />
-      <RadioButton value="3" accessibilityLabel="Rating 3" />
-      <RadioButton value="4" accessibilityLabel="Rating 4" />
-      <RadioButton value="5" accessibilityLabel="Rating 5" />
-    </Stack>
-  </RadioGroup>
-</View>
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.primitive.spacing[2] | Gap between circle and label | 8 | primitive.spacing[2] |
+| theme.primitive.spacing[12] | Minimum touch target size | 48 | primitive.spacing[12] |
 
-```tsx
-<RadioGroup value={rating} onValueChange={setRating}>
-  <View style={{ flexDirection: "row" }}>
-    <RadioButton value="1" accessibilityLabel="1 star" />
-    <RadioButton value="2" accessibilityLabel="2 stars" />
-    <RadioButton value="3" accessibilityLabel="3 stars" />
-  </View>
-</RadioGroup>
-```
+### Border Tokens
 
-### Use Cases
-
-<View style={{ padding: 20 }}>
-  <Stack gap={24}>
-    <View>
-      <RadioGroup value="male" onValueChange={() => {}}>
-        <Stack gap={12}>
-          <RadioButton value="male">
-            <Typography variant="body">Male</Typography>
-          </RadioButton>
-          <RadioButton value="female">
-            <Typography variant="body">Female</Typography>
-          </RadioButton>
-          <RadioButton value="other">
-            <Typography variant="body">Other</Typography>
-          </RadioButton>
-        </Stack>
-      </RadioGroup>
-    </View>
-    <View>
-      <RadioGroup value="delivery" onValueChange={() => {}}>
-        <Stack gap={12}>
-          <RadioButton value="delivery">
-            <Typography variant="body">Delivery ($5.00)</Typography>
-          </RadioButton>
-          <RadioButton value="pickup">
-            <Typography variant="body">Pickup (Free)</Typography>
-          </RadioButton>
-        </Stack>
-      </RadioGroup>
-    </View>
-  </Stack>
-</View>
-
-```tsx
-<RadioGroup value={gender} onValueChange={setGender}>
-  <RadioButton value="male">
-    <Typography variant="body">Male</Typography>
-  </RadioButton>
-  <RadioButton value="female">
-    <Typography variant="body">Female</Typography>
-  </RadioButton>
-  <RadioButton value="other">
-    <Typography variant="body">Other</Typography>
-  </RadioButton>
-</RadioGroup>
-
-<RadioGroup value={shipping} onValueChange={setShipping}>
-  <RadioButton value="delivery">
-    <Typography variant="body">Delivery ($5.00)</Typography>
-  </RadioButton>
-  <RadioButton value="pickup">
-    <Typography variant="body">Pickup (Free)</Typography>
-  </RadioButton>
-</RadioGroup>
-```
+| Token Path | Purpose | Value |
+| --- | --- | --- |
+| theme.component.radio.borderRadius | Circle border radius | 999 (full) |
+| theme.component.radio.borderWidth | Circle border width | 2 |
 
 ## Props
 
@@ -244,48 +79,44 @@ Ensure you provide `accessibilityLabel` for screen readers when omitting childre
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string` | - | Currently selected RadioButton value (controlled) |
-| `onValueChange` | `(value: string) => void` | - | Callback when selection changes |
-| `children` | `ReactNode` | - | RadioButton components |
-| `disabled` | `boolean` | `false` | Disables all radio buttons in group |
-| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for group container |
-
-The component also accepts all standard React Native `ViewProps`.
+| value | string | required | Currently selected value |
+| onChange | (value: string) => void | required | Selection change handler |
+| onBlur | () => void | undefined | Blur event handler |
+| disabled | boolean | false | Disables all RadioButtons in group |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
+| children | ReactNode | required | RadioButton components |
 
 ### RadioButton Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string` | - | Unique identifier for this radio button option |
-| `children` | `ReactNode` | `undefined` | Content displayed next to radio button (typically Typography) |
-| `disabled` | `boolean` | `false` | Disables this specific radio button |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of radio circle |
-| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for button wrapper |
-
-The component also accepts all standard React Native `ViewProps`.
+| value | string | required | Unique value for this option |
+| size | "sm" \| "md" \| "lg" | "md" | Size preset for radio circle |
+| disabled | boolean | false | Disables this specific button |
+| onBlur | () => void | undefined | Blur event handler |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
+| children | ReactNode | undefined | Optional label content |
 
 ## Accessibility
 
-The Radio components follow accessibility best practices:
+**WCAG Level:** AA compliant
 
-- **RadioGroup**: Uses `accessibilityRole="radiogroup"` for proper grouping
-- **RadioButton**: Uses `accessibilityRole="radio"` for screen reader identification
-- Provides `accessibilityState` with `checked` and `disabled` states
-- Supports custom `accessibilityLabel` prop for screen readers
-- Maintains minimum 44x44 point touch target
-- Keyboard support on web (Arrow keys navigate, Space selects)
+**Screen Reader:**
 
-## Theme Support
+- RadioGroup announces role as "radiogroup"
+- RadioButton announces role as "radio"
+- Announces checked state when selected
+- Announces disabled state when disabled
+- Use accessibilityLabel for icon-only RadioButtons
 
-The component automatically adapts to light and dark modes:
+**Touch Target:**
 
-- **Light mode**: Gray border (#9CA3AF) when unselected, primary blue (#4A90E2) when selected
-- **Dark mode**: Lighter gray border (#6B7280) when unselected, lighter blue (#5AA2F5) when selected
+- Minimum touch target: 48pt x 48pt (meets Apple HIG guidelines)
+- Enforced via minHeight and minWidth from theme.primitive.spacing[12]
 
-## Best Practices
+**Visual Requirements:**
 
-1. **Single Selection**: Use radio buttons when only one option can be selected
-2. **Labels**: Always provide clear labels for better UX
-3. **Default Selection**: Consider setting a default selected value
-4. **Grouping**: Use Stack component for consistent spacing between options
-5. **Multiple Choice**: Use Checkbox component instead if multiple selections are allowed
+- Color contrast meets 4.5:1 for borders and indicators
+- Disabled state indicated by reduced opacity
+- Selected state clearly visible with filled inner dot
+- Focus indicator inherits from Pressable

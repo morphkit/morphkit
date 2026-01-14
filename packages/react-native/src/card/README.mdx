@@ -1,216 +1,138 @@
-import { Card } from "./Card";
-import { Typography } from "../typography";
-import { View } from "react-native";
+import {
+  BasicExample,
+  VariantsExample,
+  SizesExample,
+  InteractiveExample,
+} from "./examples";
 
-# Card Component
+# Card
 
-A versatile content container component with elevation, borders, and padding for grouping related information and actions. Supports four visual variants and three sizes with optional press interaction.
+**Category**: surfaces | **Tags**: container, content, elevation
+
+The Card component provides a content container with elevation, borders, and padding for grouping related information into visually distinct sections. It supports multiple visual variants for different hierarchy levels and optional press behavior for interactive cards.
 
 ## Basic Usage
 
-<Card>
-  <Typography variant="heading" style={{ marginBottom: 8 }}>
-    Card Title
-  </Typography>
-  <Typography variant="callout" style={{ color: "#6B7280" }}>
-    This is a basic card with default elevated variant and medium size.
-  </Typography>
-</Card>
+The default configuration for common use cases.
+
+<BasicExample />
 
 ## Variants
 
-### Elevated (Default)
+All available visual styles for different contexts.
 
-<View style={{ gap: 16, paddingVertical: 16 }}>
-  <Card variant="elevated">
-    <Typography variant="heading">Elevated Card</Typography>
-    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-      White background with shadow elevation
-    </Typography>
-  </Card>
-</View>
+<VariantsExample />
 
-### Outline
-
-<View style={{ gap: 16, paddingVertical: 16 }}>
-  <Card variant="outline">
-    <Typography variant="heading">Outline Card</Typography>
-    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-      Border with transparent background
-    </Typography>
-  </Card>
-</View>
-
-### Ghost
-
-<View style={{ gap: 16, paddingVertical: 16 }}>
-  <Card variant="ghost">
-    <Typography variant="heading">Ghost Card</Typography>
-    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-      Subtle background, no border or shadow
-    </Typography>
-  </Card>
-</View>
-
-### Filled
-
-<View style={{ gap: 16, paddingVertical: 16 }}>
-  <Card variant="filled">
-    <Typography variant="heading">Filled Card</Typography>
-    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-      Solid gray background color
-    </Typography>
-  </Card>
-</View>
+- **Elevated**: Default style with prominent shadow for floating appearance
+- **Outline**: Bordered container with subtle depth for defined boundaries
+- **Ghost**: Secondary surface background for subtle grouping
+- **Filled**: Tertiary surface background for distinct sections
 
 ## Sizes
 
-<View style={{ gap: 16, paddingVertical: 16 }}>
-  <Card size="sm" variant="outline">
-    <Typography variant="footnote">Small card (12px padding, 8px radius)</Typography>
-  </Card>
-  <Card size="md" variant="outline">
-    <Typography variant="callout">Medium card (16px padding, 12px radius)</Typography>
-  </Card>
-  <Card size="lg" variant="outline">
-    <Typography variant="body">Large card (20px padding, 16px radius)</Typography>
-  </Card>
-</View>
+Available size options for different padding contexts.
 
-## Pressable Card
+<SizesExample />
 
-Cards become pressable when `onPress` is provided, with opacity feedback on press.
+- **sm**: Compact padding for dense layouts
+- **md**: Default padding for standard use
+- **lg**: Spacious padding for prominent content
 
-<View style={{ gap: 16, paddingVertical: 16 }}>
-  <Card onPress={() => console.log("Card pressed")}>
-    <Typography variant="heading">Pressable Card</Typography>
-    <Typography variant="callout" style={{ color: "#6B7280", marginTop: 4 }}>
-      Tap this card to trigger action
-    </Typography>
-  </Card>
-</View>
+## Interactive Cards
 
-## Complex Card Example
+Cards with press behavior for navigation or actions.
 
-<Card variant="elevated" size="lg">
-  <View style={{ marginBottom: 12 }}>
-    <Typography variant="title-3">Product Card</Typography>
-    <Typography variant="footnote" style={{ color: "#6B7280", marginTop: 4 }}>
-      Premium subscription plan
-    </Typography>
-  </View>
-  <View
-    style={{
-      backgroundColor: "#EEF2FF",
-      padding: 12,
-      borderRadius: 8,
-      marginBottom: 12,
-    }}
-  >
-    <Typography variant="large-title" style={{ color: "#4A90E2" }}>
-      $29
-      <Typography variant="callout" style={{ color: "#6B7280" }}>
-        /month
-      </Typography>
-    </Typography>
-  </View>
-  <View style={{ gap: 8, marginBottom: 16 }}>
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <Typography style={{ marginRight: 8 }}>✓</Typography>
-      <Typography variant="callout">Unlimited access</Typography>
-    </View>
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <Typography style={{ marginRight: 8 }}>✓</Typography>
-      <Typography variant="callout">Priority support</Typography>
-    </View>
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <Typography style={{ marginRight: 8 }}>✓</Typography>
-      <Typography variant="callout">Advanced features</Typography>
-    </View>
-  </View>
-  <View
-    style={{
-      backgroundColor: "#4A90E2",
-      padding: 14,
-      borderRadius: 8,
-      alignItems: "center",
-    }}
-  >
-    <Typography variant="heading" style={{ color: "#FFFFFF" }}>Get Started</Typography>
-  </View>
-</Card>
+<InteractiveExample />
 
-## Gallery of Combinations
+## Theme Tokens
 
-<View style={{ gap: 16, paddingVertical: 16 }}>
-  <Card variant="elevated" size="sm" onPress={() => {}}>
-    <Typography variant="footnote" style={{ fontWeight: "600" }}>Small Elevated Pressable</Typography>
-  </Card>
-  <Card variant="outline" size="md">
-    <Typography variant="heading">Medium Outline Static</Typography>
-  </Card>
-  <Card variant="ghost" size="lg" onPress={() => {}}>
-    <Typography variant="body" style={{ fontWeight: "600" }}>Large Ghost Pressable</Typography>
-  </Card>
-  <Card variant="filled" size="md">
-    <Typography variant="heading">Medium Filled Static</Typography>
-  </Card>
-</View>
+This component uses the following design tokens from the three-tier theme system:
+
+### Layout Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.card.padding | Content padding | 16 | primitive.spacing[4] |
+| theme.component.card.borderRadius | Corner radius | 12 | primitive.borderRadius.lg |
+| theme.component.card.gap | Internal spacing | 12 | primitive.spacing[3] |
+
+### Variant Tokens (Light Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.card.variant.light.elevated.background | Elevated background | #FFFFFF | light.surface.elevated |
+| theme.component.card.variant.light.elevated.shadow | Elevated shadow | lg preset | primitive.shadowPresets.lg |
+| theme.component.card.variant.light.outlined.background | Outline background | #FFFFFF | light.surface.primary |
+| theme.component.card.variant.light.outlined.border | Outline border | #E5E7EB | light.border.primary |
+| theme.component.card.variant.light.outlined.shadow | Outline shadow | sm preset | primitive.shadowPresets.sm |
+| theme.component.card.variant.light.ghost.background | Ghost background | #F9FAFB | light.surface.secondary |
+| theme.component.card.variant.light.ghost.shadow | Ghost shadow | sm preset | primitive.shadowPresets.sm |
+| theme.component.card.variant.light.filled.background | Filled background | #F3F4F6 | light.surface.tertiary |
+| theme.component.card.variant.light.filled.shadow | Filled shadow | md preset | primitive.shadowPresets.md |
+
+### Variant Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.card.variant.dark.elevated.background | Elevated background | #1F2937 | dark.surface.elevated |
+| theme.component.card.variant.dark.elevated.shadow | Elevated shadow | lg preset | primitive.shadowPresets.lg |
+| theme.component.card.variant.dark.outlined.background | Outline background | #000000 | dark.surface.primary |
+| theme.component.card.variant.dark.outlined.border | Outline border | #374151 | dark.border.primary |
+| theme.component.card.variant.dark.outlined.shadow | Outline shadow | sm preset | primitive.shadowPresets.sm |
+| theme.component.card.variant.dark.ghost.background | Ghost background | #1F2937 | dark.surface.secondary |
+| theme.component.card.variant.dark.ghost.shadow | Ghost shadow | sm preset | primitive.shadowPresets.sm |
+| theme.component.card.variant.dark.filled.background | Filled background | #374151 | dark.surface.tertiary |
+| theme.component.card.variant.dark.filled.shadow | Filled shadow | md preset | primitive.shadowPresets.md |
+
+### Press State Tokens
+
+| Token Path | Purpose | Light Value | Dark Value |
+| --- | --- | --- | --- |
+| theme.component.card.variant[colorScheme].pressed.opacity | Press feedback | 0.8 | 0.8 |
 
 ## Props
 
-| Prop     | Type                                           | Default      | Description                          |
-| -------- | ---------------------------------------------- | ------------ | ------------------------------------ |
-| children | `ReactNode`                                    | -            | Card content                         |
-| variant  | `"elevated"` \| `"outline"` \| `"ghost"` \| `"filled"` | `"elevated"` | Visual style variant                 |
-| size     | `"sm"` \| `"md"` \| `"lg"`                     | `"md"`       | Padding and border radius size       |
-| onPress  | `() => void`                                   | `undefined`  | Makes card pressable                 |
-| style    | `StyleProp<ViewStyle>`                         | `undefined`  | Custom styles                        |
-| ...props | `ViewProps`                                    | -            | All other View props                 |
+### Behavior Props
 
-## Usage Examples
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| variant | "elevated" \| "outline" \| "ghost" \| "filled" | "elevated" | Visual style variant |
+| size | "sm" \| "md" \| "lg" | "md" | Padding size preset |
+| onPress | () => void | undefined | Press handler, enables pressable behavior |
 
-### Simple Card
+### Content Props
 
-```tsx
-import { Card } from "@warp-ui/react-native";
-import { Typography } from "@warp-ui/react-native";
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | undefined | Card content |
 
-<Card>
-  <Typography>Simple card content</Typography>
-</Card>
-```
+### Styling Props
 
-### Interactive Card with Outline
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
-```tsx
-<Card variant="outline" onPress={handlePress}>
-  <Typography>Tap me</Typography>
-</Card>
-```
+### ViewProps
 
-### Large Filled Card
+Card extends ViewProps and forwards all additional props to the root element.
 
-```tsx
-<Card variant="filled" size="lg">
-  <Typography>Large card with solid background</Typography>
-</Card>
-```
+## Accessibility
 
-### Card with Custom Styling
+**WCAG Level:** AA compliant
 
-```tsx
-<Card style={{ marginTop: 20, marginHorizontal: 16 }}>
-  <Typography>Custom margin card</Typography>
-</Card>
-```
+**Screen Reader:**
 
-## Behavior Notes
+- Announces role as "button" when onPress is provided
+- Static cards do not announce button role
+- Content is accessible to screen readers
 
-- Cards without `onPress` render as static `View` components
-- Cards with `onPress` render as `Pressable` with `accessibilityRole="button"`
-- Press feedback applies 0.8 opacity to the entire card
-- Elevated variant uses platform-specific shadows (shadowColor on iOS, elevation on Android)
-- Dark mode automatically adjusts background colors and shadow opacity
-- All variants support all sizes
-- Custom styles are merged last, allowing full override capability
+**Touch Target:**
+
+- Pressable cards respond to touch input
+- Visual feedback via opacity change on press
+
+**Visual Requirements:**
+
+- Color contrast meets 4.5:1 for text content
+- Press feedback visible via opacity change (0.8)
+- Elevation provides visual hierarchy through shadows

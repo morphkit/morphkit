@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "toast",
   "description": "Temporary notification component with slide-in animation, 4 variants, top or bottom positioning, and auto-dismiss capability",
-  "dependencies": []
+  "category": "feedback",
+  "tags": ["notification", "snackbar", "temporary"],
+  "dependencies": ["typography"]
 }

@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "otp-input",
   "description": "One-time password input with multiple fields for verification codes",
+  "category": "input",
+  "tags": ["form", "verification", "security"],
   "dependencies": ["input"]
 }

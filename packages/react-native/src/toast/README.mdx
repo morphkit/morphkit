@@ -1,72 +1,156 @@
-import { Toast } from "./Toast";
-import { View } from "react-native";
+import {
+  BasicExample,
+  VariantsExample,
+  PositionsExample,
+  InteractiveExample,
+} from "./examples";
 
 # Toast
 
-A temporary notification component with slide animation and auto-dismiss.
+**Category**: feedback | **Tags**: notification, snackbar, temporary
+
+The Toast component provides temporary notification messages with slide-in animation. It supports 4 semantic variants for different message types, top or bottom positioning, and configurable auto-dismiss behavior for non-intrusive user feedback.
 
 ## Basic Usage
 
-<View style={{ padding: 16, position: "relative", height: 120 }}>
-  <Toast
-    visible={true}
-    message="Changes saved successfully"
-    duration={0}
-  />
-</View>
+The default configuration with state management for visibility control.
+
+<BasicExample />
 
 ## Variants
 
-<View style={{ padding: 16, gap: 100, position: "relative", height: 400 }}>
-  <Toast visible={true} variant="info" message="New features are available" duration={0} />
-  <Toast visible={true} variant="success" message="Payment processed successfully" duration={0} />
-  <Toast visible={true} variant="warning" message="Your session will expire soon" duration={0} />
-  <Toast visible={true} variant="error" message="Failed to connect to server" duration={0} />
-</View>
+All available semantic styles for different notification types.
+
+<VariantsExample />
+
+- **Info**: General information and neutral updates (default)
+- **Success**: Confirmation of completed actions
+- **Warning**: Caution messages requiring attention
+- **Error**: Error states and failure notifications
 
 ## Positions
 
-<View style={{ padding: 16, gap: 100, position: "relative", height: 200 }}>
-  <Toast visible={true} position="top" message="This toast appears at the top" duration={0} />
-  <Toast visible={true} position="bottom" message="This toast appears at the bottom" duration={0} />
-</View>
+Configure where the toast appears on screen.
+
+<PositionsExample />
+
+- **Bottom**: Default position, slides up from the bottom
+- **Top**: Alternative position, slides down from the top
+
+## Auto-Dismiss Behavior
+
+Configure duration or use manual dismiss mode.
+
+<InteractiveExample />
+
+## Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+### Layout Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.toast.padding | Container padding | 16 | primitive.spacing[4] |
+| theme.component.toast.borderRadius | Corner radius | 12 | primitive.borderRadius.lg |
+| theme.component.toast.gap | Icon-text spacing | 8 | primitive.spacing[2] |
+| theme.component.toast.iconSize | Icon dimensions | 20 | - |
+| theme.component.toast.position.offset | Edge offset | 48 | primitive.spacing[12] |
+| theme.component.toast.position.horizontal | Horizontal margins | 16 | primitive.spacing[4] |
+
+### Animation Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.toast.animation.spring | Entrance animation | gentle | primitive.spring.gentle |
+| theme.component.toast.animation.duration | Exit animation | 200 | primitive.duration.normal |
+
+### Variant Tokens (Light Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.toast.variant.light.info.background | Info background | sky[50] | light.status.info.surface |
+| theme.component.toast.variant.light.info.text | Info text | sky[900] | light.status.info.text |
+| theme.component.toast.variant.light.info.border | Info border | sky[200] | light.status.info.border |
+| theme.component.toast.variant.light.info.icon | Info icon | sky[600] | light.status.info.main |
+| theme.component.toast.variant.light.success.background | Success background | green[50] | light.status.success.surface |
+| theme.component.toast.variant.light.success.text | Success text | green[900] | light.status.success.text |
+| theme.component.toast.variant.light.success.border | Success border | green[200] | light.status.success.border |
+| theme.component.toast.variant.light.success.icon | Success icon | green[600] | light.status.success.main |
+| theme.component.toast.variant.light.warning.background | Warning background | amber[50] | light.status.warning.surface |
+| theme.component.toast.variant.light.warning.text | Warning text | amber[900] | light.status.warning.text |
+| theme.component.toast.variant.light.warning.border | Warning border | amber[200] | light.status.warning.border |
+| theme.component.toast.variant.light.warning.icon | Warning icon | amber[500] | light.status.warning.main |
+| theme.component.toast.variant.light.error.background | Error background | red[50] | light.status.error.surface |
+| theme.component.toast.variant.light.error.text | Error text | red[900] | light.status.error.text |
+| theme.component.toast.variant.light.error.border | Error border | red[200] | light.status.error.border |
+| theme.component.toast.variant.light.error.icon | Error icon | red[600] | light.status.error.main |
+
+### Variant Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.toast.variant.dark.info.background | Info background | sky[950] | dark.status.info.surface |
+| theme.component.toast.variant.dark.info.text | Info text | sky[200] | dark.status.info.text |
+| theme.component.toast.variant.dark.info.border | Info border | sky[800] | dark.status.info.border |
+| theme.component.toast.variant.dark.info.icon | Info icon | sky[400] | dark.status.info.main |
+| theme.component.toast.variant.dark.success.background | Success background | green[950] | dark.status.success.surface |
+| theme.component.toast.variant.dark.success.text | Success text | green[200] | dark.status.success.text |
+| theme.component.toast.variant.dark.success.border | Success border | green[800] | dark.status.success.border |
+| theme.component.toast.variant.dark.success.icon | Success icon | green[400] | dark.status.success.main |
+| theme.component.toast.variant.dark.warning.background | Warning background | amber[950] | dark.status.warning.surface |
+| theme.component.toast.variant.dark.warning.text | Warning text | amber[200] | dark.status.warning.text |
+| theme.component.toast.variant.dark.warning.border | Warning border | amber[800] | dark.status.warning.border |
+| theme.component.toast.variant.dark.warning.icon | Warning icon | amber[400] | dark.status.warning.main |
+| theme.component.toast.variant.dark.error.background | Error background | red[950] | dark.status.error.surface |
+| theme.component.toast.variant.dark.error.text | Error text | red[200] | dark.status.error.text |
+| theme.component.toast.variant.dark.error.border | Error border | red[800] | dark.status.error.border |
+| theme.component.toast.variant.dark.error.icon | Error icon | red[400] | dark.status.error.main |
 
 ## Props
 
-| Prop      | Type                                          | Default    | Description                    |
-| --------- | --------------------------------------------- | ---------- | ------------------------------ |
-| visible   | boolean                                       | -          | Controls visibility            |
-| message   | string                                        | -          | Notification text              |
-| variant   | "info" \\| "success" \\| "warning" \\| "error" | "info"     | Color theme                    |
-| duration  | number                                        | 3000       | Auto-dismiss ms (0 = manual)   |
-| position  | "top" \\| "bottom"                            | "bottom"   | Screen position                |
-| onDismiss | () => void                                    | -          | Dismiss callback               |
-| style     | StyleProp\<ViewStyle\>                        | -          | Custom container styles        |
+### Required Props
 
-## Usage Example
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| visible | boolean | required | Controls toast visibility |
+| message | string | required | Notification text content |
 
-```tsx
-import { Toast } from "@warp-ui/react-native";
-import { useState } from "react";
+### Behavior Props
 
-function SaveButton() {
-  const [toastVisible, setToastVisible] = useState(false);
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| variant | "info" \| "success" \| "warning" \| "error" | "info" | Semantic visual style |
+| position | "top" \| "bottom" | "bottom" | Screen placement |
+| duration | number | 3000 | Auto-dismiss delay in ms (0 for manual) |
+| onDismiss | () => void | undefined | Callback when toast should hide |
 
-  const handleSave = async () => {
-    await saveData();
-    setToastVisible(true);
-  };
+### Styling Props
 
-  return (
-    <>
-      <Button title="Save" onPress={handleSave} />
-      <Toast
-        visible={toastVisible}
-        variant="success"
-        message="Data saved successfully"
-        onDismiss={() => setToastVisible(false)}
-      />
-    </>
-  );
-}
-```
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
+
+## Accessibility
+
+**WCAG Level:** AA compliant
+
+**Screen Reader:**
+
+- Role set to "alert" for immediate announcement
+- Live region set to "polite" to avoid interrupting current task
+- Message content read automatically when visible
+
+**Visual Requirements:**
+
+- Color contrast meets 4.5:1 for text on all variant backgrounds
+- Icon provides additional semantic context alongside color
+- Shadow provides elevation distinction from content below
+- Animation duration respects reduced motion preferences
+
+**Best Practices:**
+
+- Keep messages brief and actionable
+- Use appropriate variants for message semantics
+- Ensure sufficient duration for users to read content
+- Provide manual dismiss option for important messages

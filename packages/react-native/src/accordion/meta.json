@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "accordion",
-  "description": "Collapsible content sections with expand/collapse animation",
-  "dependencies": []
+  "description": "Collapsible content sections with expand/collapse animations supporting both single and multiple expansion modes for organizing complex information",
+  "category": "interactive",
+  "tags": ["collapse", "expandable", "disclosure"],
+  "dependencies": ["typography"]
 }

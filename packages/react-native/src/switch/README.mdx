@@ -1,254 +1,127 @@
----
-title: Switch
-description: Toggle switch for binary on/off states with iOS and Android platform-specific styling.
----
-
-import { Switch } from "./Switch";
-import { View } from "react-native";
-import { Stack } from "../stack";
-
 # Switch
 
-Toggle switch for binary on/off states with iOS and Android platform-specific styling. Provides familiar toggle interaction for boolean settings with clear visual indication of current state.
+**Category**: input | **Tags**: form, toggle, binary
 
-## Import
+The Switch component provides a toggle control for binary on/off states with smooth animated transitions. It offers an alternative to checkboxes for settings and preference controls, featuring native-driven animations and comprehensive accessibility support.
 
-```tsx
-import { Switch } from "@repo/react-native";
-```
+## Basic Usage
 
-## Usage
+The default configuration for common use cases.
 
-### Basic
+<BasicExample />
 
-<View style={{ padding: 20 }}>
-  <Switch
-    checked={false}
-    onCheckedChange={() => {}}
-    label="Enable Notifications"
-  />
-</View>
+## States
 
-```tsx
-<Switch
-  checked={notificationsEnabled}
-  onCheckedChange={setNotificationsEnabled}
-  label="Enable Notifications"
-/>
-```
+Both off and on states with animated transitions between them.
 
-### States
+<StatesExample />
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Switch
-      checked={false}
-      onCheckedChange={() => {}}
-      label="Off State"
-    />
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="On State"
-    />
-  </Stack>
-</View>
+- **Off state**: Track displays in secondary border color, thumb positioned left
+- **On state**: Track displays in primary action color, thumb positioned right
 
-```tsx
-<Switch checked={false} onCheckedChange={handleChange} label="Off" />
-<Switch checked={true} onCheckedChange={handleChange} label="On" />
-```
+## Sizes
 
-### Sizes
+Available size options for different screen contexts.
 
-Available in three sizes: `sm`, `md` (default), and `lg`.
+<SizesExample />
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Small switch"
-      size="sm"
-    />
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Medium switch (default)"
-      size="md"
-    />
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Large switch"
-      size="lg"
-    />
-  </Stack>
-</View>
+- **sm**: Compact 32x20px track for tight spaces
+- **md**: Default 40x24px track for standard use
+- **lg**: Prominent 48x28px track for important settings
 
-```tsx
-<Switch checked={value} onCheckedChange={setValue} label="Small" size="sm" />
-<Switch checked={value} onCheckedChange={setValue} label="Medium" size="md" />
-<Switch checked={value} onCheckedChange={setValue} label="Large" size="lg" />
-```
+## Disabled States
 
-### Custom Color
+Disabled state prevents interaction and shows reduced opacity.
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Purple switch"
-      color="#9333EA"
-    />
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Green switch"
-      color="#10B981"
-    />
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Red switch"
-      color="#EF4444"
-    />
-  </Stack>
-</View>
+<DisabledExample />
 
-```tsx
-<Switch checked={value} onCheckedChange={setValue} label="Purple" color="#9333EA" />
-<Switch checked={value} onCheckedChange={setValue} label="Green" color="#10B981" />
-<Switch checked={value} onCheckedChange={setValue} label="Red" color="#EF4444" />
-```
+## Theme Tokens
 
-### Disabled State
+This component uses the following design tokens from the three-tier theme system:
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Switch
-      checked={false}
-      onCheckedChange={() => {}}
-      label="Disabled (off)"
-      disabled
-    />
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Disabled (on)"
-      disabled
-    />
-  </Stack>
-</View>
+### Size Tokens
 
-```tsx
-<Switch checked={false} onCheckedChange={handleChange} label="Disabled Off" disabled />
-<Switch checked={true} onCheckedChange={handleChange} label="Disabled On" disabled />
-```
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.switchComponent.size[size].trackWidth | Track width | 32 | 40 | 48 |
+| theme.component.switchComponent.size[size].trackHeight | Track height | 20 | 24 | 28 |
+| theme.component.switchComponent.size[size].thumbSize | Thumb diameter | 16 | 20 | 24 |
+| theme.component.switchComponent.size[size].thumbPadding | Thumb offset | 2 | 2 | 2 |
 
-### Without Label
+### Color Tokens (Light Mode)
 
-Ensure you provide an `accessibilityLabel` for screen readers when omitting the label.
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.switchComponent.variant.light.on.track | On track color | #4A90E2 | light.action.primary |
+| theme.component.switchComponent.variant.light.on.thumb | On thumb color | #FFFFFF | light.text.inverse |
+| theme.component.switchComponent.variant.light.off.track | Off track color | #D1D5DB | light.border.secondary |
+| theme.component.switchComponent.variant.light.off.thumb | Off thumb color | #FFFFFF | light.text.inverse |
+| theme.component.switchComponent.variant.light.disabled.track | Disabled track | #F3F4F6 | light.surface.tertiary |
+| theme.component.switchComponent.variant.light.disabled.thumb | Disabled thumb | #F9FAFB | light.surface.secondary |
 
-<View style={{ padding: 20 }}>
-  <Switch
-    checked={true}
-    onCheckedChange={() => {}}
-    accessibilityLabel="Toggle notifications"
-  />
-</View>
+### Color Tokens (Dark Mode)
 
-```tsx
-<Switch
-  checked={value}
-  onCheckedChange={setValue}
-  accessibilityLabel="Toggle feature"
-/>
-```
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.switchComponent.variant.dark.on.track | On track color | #60A5FA | dark.action.primary |
+| theme.component.switchComponent.variant.dark.on.thumb | On thumb color | #111827 | dark.text.inverse |
+| theme.component.switchComponent.variant.dark.off.track | Off track color | #4B5563 | dark.border.secondary |
+| theme.component.switchComponent.variant.dark.off.thumb | Off thumb color | #111827 | dark.text.inverse |
+| theme.component.switchComponent.variant.dark.disabled.track | Disabled track | #374151 | dark.surface.tertiary |
+| theme.component.switchComponent.variant.dark.disabled.thumb | Disabled thumb | #1F2937 | dark.surface.secondary |
 
-### Use Cases
+### Animation Tokens
 
-<View style={{ padding: 20 }}>
-  <Stack gap={16}>
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Dark Mode"
-    />
-    <Switch
-      checked={false}
-      onCheckedChange={() => {}}
-      label="Email Notifications"
-    />
-    <Switch
-      checked={true}
-      onCheckedChange={() => {}}
-      label="Auto-save"
-    />
-    <Switch
-      checked={false}
-      onCheckedChange={() => {}}
-      label="Location Services"
-    />
-  </Stack>
-</View>
-
-```tsx
-<Switch checked={isDarkMode} onCheckedChange={setIsDarkMode} label="Dark Mode" />
-<Switch checked={emailNotifs} onCheckedChange={setEmailNotifs} label="Email Notifications" />
-<Switch checked={autoSave} onCheckedChange={setAutoSave} label="Auto-save" />
-<Switch checked={location} onCheckedChange={setLocation} label="Location Services" />
-```
+| Token Path | Purpose | Value |
+| --- | --- | --- |
+| theme.primitive.duration.normal | Animation duration | 200ms |
+| theme.primitive.shadowPresets.sm | Thumb shadow | Small shadow preset |
 
 ## Props
 
-### Switch Props
+### Behavior Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `checked` | `boolean` | - | Current on/off state (controlled) |
-| `onCheckedChange` | `(checked: boolean) => void` | - | Callback when user toggles switch |
-| `label` | `string` | `undefined` | Text label displayed next to switch |
-| `disabled` | `boolean` | `false` | Disables switch interaction |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of switch track and thumb |
-| `color` | `string` | theme primary | Color of track when checked |
-| `style` | `StyleProp<ViewStyle>` | `undefined` | Additional custom styles for wrapper |
+| checked | boolean | required | Current toggle state |
+| onChange | (checked: boolean) => void | required | State change callback |
+| onBlur | () => void | undefined | Callback on press end |
+| disabled | boolean | false | Disables interaction and applies disabled styling |
+| size | "sm" \| "md" \| "lg" | "md" | Size preset |
+| color | string | undefined | Custom track color when checked |
 
-The component also accepts all standard React Native `ViewProps`.
+### Content Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| label | string | undefined | Label text displayed next to switch |
+| name | string | undefined | Form field name (fallback for accessibility) |
+
+### Styling Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
 ## Accessibility
 
-The Switch component follows accessibility best practices:
+**WCAG Level:** AA compliant
 
-- Uses `accessibilityRole="switch"` for proper screen reader identification
-- Provides `accessibilityState` with `checked` status
-- Supports `accessibilityLabel` from the `label` prop or custom prop
-- Maintains minimum 44x44 point touch target
-- Keyboard support on web (Space to toggle)
-- Announces state changes to screen readers
+**Screen Reader:**
 
-## Theme Support
+- Announces role as "switch"
+- Announces checked state changes
+- Reads label from label prop or name prop fallback
+- Custom labels supported via accessibilityLabel prop
 
-The component automatically adapts to light and dark modes:
+**Touch Target:**
 
-- **Light mode**: Gray track (#D1D5DB) when off, primary blue (#4A90E2) when on
-- **Dark mode**: Darker gray track (#6B7280) when off, lighter blue (#5AA2F5) when on
-- White thumb in both themes
-- Override with the `color` prop for custom branding
+- Minimum touch target: 48pt height (spacing[12])
+- All sizes meet accessibility guidelines
 
-## Animation
+**Visual Requirements:**
 
-The Switch component uses React Native's Animated API for smooth transitions:
-
-- Thumb slides smoothly between on and off positions
-- 200ms animation duration
-- Uses native driver for optimal performance (60fps)
-
-## Best Practices
-
-1. **Binary Choices**: Use switches for on/off states, not multiple options
-2. **Immediate Effect**: Switches should take effect immediately without requiring a save action
-3. **Labels**: Provide clear labels that describe what the switch controls
-4. **Settings**: Ideal for settings and preferences screens
-5. **State Clarity**: The label should make it clear what "on" means
+- Color contrast meets 4.5:1 for interactive elements
+- Disabled state indicated by opacity (0.5)
+- State change feedback via smooth animated transition
+- Thumb shadow provides depth perception

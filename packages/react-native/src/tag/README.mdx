@@ -1,224 +1,152 @@
-import { Tag } from "./Tag";
-import { Box, Stack, Typography, Card } from "../";
-import { FilterTagsExample } from "./examples";
+import {
+  BasicExample,
+  VariantsExample,
+  SizesExample,
+  InteractiveExample,
+} from "./examples";
 
 # Tag
 
-A compact pill-shaped label for categorization, status indication, and filtering. Perfect for product attributes, user roles, content tags, or any metadata that needs visual distinction.
+**Category**: display | **Tags**: chip, label, removable
+
+The Tag component provides small pill-shaped labels for categorization and metadata display. It supports semantic color variants for status indication, three size options, and optional dismiss functionality for removable tags.
 
 ## Basic Usage
 
-The default tag with neutral styling for general categorization.
+The default configuration for common use cases.
 
-<Box marginVertical={12}>
-  <Tag>Default Tag</Tag>
-</Box>
+<BasicExample />
 
 ## Variants
 
-Five color variants to convey different semantic meanings: default for neutral, primary for emphasis, success for positive status, warning for caution, and error for critical states.
+All available visual styles for different contexts.
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={8} style={{ flexWrap: "wrap" }}>
-    <Tag variant="default">Default</Tag>
-    <Tag variant="primary">Primary</Tag>
-    <Tag variant="success">Success</Tag>
-    <Tag variant="warning">Warning</Tag>
-    <Tag variant="error">Error</Tag>
-  </Stack>
-</Box>
+<VariantsExample />
+
+- **Default**: Neutral styling for general categorization
+- **Primary**: High-emphasis blue styling for featured tags
+- **Success**: Green styling for positive status or completion
+- **Warning**: Amber styling for caution or pending states
+- **Error**: Red styling for errors or critical status
 
 ## Sizes
 
-Three preset sizes for different contexts: small for compact lists, medium for standard use, and large for prominent displays.
+Available size options for different screen contexts.
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={8} align="center">
-    <Tag size="sm">Small</Tag>
-    <Tag size="md">Medium</Tag>
-    <Tag size="lg">Large</Tag>
-  </Stack>
-</Box>
+<SizesExample />
+
+- **sm**: Compact 20px height for dense layouts
+- **md**: Default 24px height for standard use
+- **lg**: Prominent 32px height for emphasis
 
 ## Dismissible Tags
 
-Add an × button for removable tags - perfect for filter chips, selected items, or temporary labels.
+Tags with dismiss functionality for removable items.
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={8} style={{ flexWrap: "wrap" }}>
-    <Tag dismissible onDismiss={() => console.log("Dismissed")}>
-      Dismissible Tag
-    </Tag>
-    <Tag variant="primary" dismissible onDismiss={() => console.log("Dismissed")}>
-      Primary Dismissible
-    </Tag>
-    <Tag variant="success" dismissible onDismiss={() => console.log("Dismissed")}>
-      Success Dismissible
-    </Tag>
-  </Stack>
-</Box>
+<InteractiveExample />
 
-## Product Card with Tags
+## Theme Tokens
 
-Realistic example showing tags used to highlight product features and status.
+This component uses the following design tokens from the three-tier theme system:
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={12}>
-      <Typography variant="heading">Premium Wireless Headphones</Typography>
-      <Stack direction="horizontal" gap={8} style={{ flexWrap: "wrap" }}>
-        <Tag variant="success">In Stock</Tag>
-        <Tag variant="primary">New Arrival</Tag>
-        <Tag variant="default">Free Shipping</Tag>
-      </Stack>
-      <Typography variant="callout" style={{ color: "#6B7280" }}>
-        High-fidelity audio with active noise cancellation and 30-hour battery life.
-      </Typography>
-      <Typography variant="heading">$299.99</Typography>
-    </Stack>
-  </Card>
-</Box>
+### Size Tokens
 
-## User Profile with Role Tags
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.tag.size[size].paddingHorizontal | Horizontal padding | 6 | 12 | 10 |
+| theme.component.tag.size[size].paddingVertical | Vertical padding | 2 | 6 | 6 |
+| theme.component.tag.size[size].minHeight | Minimum height | 20 | 24 | 32 |
+| theme.component.tag.size[size].fontSize | Text size | 11 | 12 | 13 |
+| theme.component.tag.size[size].gap | Icon spacing | 4 | 4 | 8 |
 
-Tags displaying user roles and permissions in a profile card.
+### Variant Tokens (Light Mode)
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={12}>
-      <Typography variant="heading">Sarah Mitchell</Typography>
-      <Stack direction="horizontal" gap={8} style={{ flexWrap: "wrap" }}>
-        <Tag variant="primary" size="sm">Admin</Tag>
-        <Tag variant="success" size="sm">Verified</Tag>
-        <Tag variant="default" size="sm">Premium Member</Tag>
-      </Stack>
-      <Typography variant="callout" style={{ color: "#6B7280" }}>
-        Product Manager at TechCorp
-      </Typography>
-    </Stack>
-  </Card>
-</Box>
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.tag.variant.light.primary.background | Primary background | #4A90E2 | light.action.primary |
+| theme.component.tag.variant.light.primary.text | Primary text | #FFFFFF | light.text.inverse |
+| theme.component.tag.variant.light.primary.border | Primary border | #4A90E2 | light.action.primary |
+| theme.component.tag.variant.light.secondary.background | Default background | #F3F4F6 | light.surface.tertiary |
+| theme.component.tag.variant.light.secondary.text | Default text | #111827 | light.text.primary |
+| theme.component.tag.variant.light.secondary.border | Default border | #E5E7EB | light.border.primary |
+| theme.component.tag.variant.light.success.background | Success background | #F0FDF4 | light.status.success.surface |
+| theme.component.tag.variant.light.success.text | Success text | #14532D | light.status.success.text |
+| theme.component.tag.variant.light.success.border | Success border | #BBF7D0 | light.status.success.border |
+| theme.component.tag.variant.light.warning.background | Warning background | #FFFBEB | light.status.warning.surface |
+| theme.component.tag.variant.light.warning.text | Warning text | #78350F | light.status.warning.text |
+| theme.component.tag.variant.light.warning.border | Warning border | #FDE68A | light.status.warning.border |
+| theme.component.tag.variant.light.error.background | Error background | #FEF2F2 | light.status.error.surface |
+| theme.component.tag.variant.light.error.text | Error text | #7F1D1D | light.status.error.text |
+| theme.component.tag.variant.light.error.border | Error border | #FECACA | light.status.error.border |
 
-## Filter Tags Example
+### Variant Tokens (Dark Mode)
 
-Interactive example showing dismissible filter tags that can be removed.
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.tag.variant.dark.primary.background | Primary background | #60A5FA | dark.action.primary |
+| theme.component.tag.variant.dark.primary.text | Primary text | #111827 | dark.text.inverse |
+| theme.component.tag.variant.dark.primary.border | Primary border | #60A5FA | dark.action.primary |
+| theme.component.tag.variant.dark.secondary.background | Default background | #374151 | dark.surface.tertiary |
+| theme.component.tag.variant.dark.secondary.text | Default text | #F9FAFB | dark.text.primary |
+| theme.component.tag.variant.dark.secondary.border | Default border | #374151 | dark.border.primary |
+| theme.component.tag.variant.dark.success.background | Success background | #052E16 | dark.status.success.surface |
+| theme.component.tag.variant.dark.success.text | Success text | #BBF7D0 | dark.status.success.text |
+| theme.component.tag.variant.dark.success.border | Success border | #166534 | dark.status.success.border |
+| theme.component.tag.variant.dark.warning.background | Warning background | #451A03 | dark.status.warning.surface |
+| theme.component.tag.variant.dark.warning.text | Warning text | #FDE68A | dark.status.warning.text |
+| theme.component.tag.variant.dark.warning.border | Warning border | #92400E | dark.status.warning.border |
+| theme.component.tag.variant.dark.error.background | Error background | #450A0A | dark.status.error.surface |
+| theme.component.tag.variant.dark.error.text | Error text | #FECACA | dark.status.error.text |
+| theme.component.tag.variant.dark.error.border | Error border | #991B1B | dark.status.error.border |
 
-<Box marginVertical={12}>
-  <FilterTagsExample />
-</Box>
+### Additional Tokens
 
-## Status Dashboard
-
-Tags used to indicate different system states and alerts.
-
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16}>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Typography variant="body">Server Status</Typography>
-        <Tag variant="success">Online</Tag>
-      </Stack>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Typography variant="body">Database Connection</Typography>
-        <Tag variant="warning">Slow</Tag>
-      </Stack>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Typography variant="body">API Gateway</Typography>
-        <Tag variant="error">Error</Tag>
-      </Stack>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Typography variant="body">Cache Service</Typography>
-        <Tag variant="success">Optimal</Tag>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.tag.borderRadius | Corner radius | 8 | primitive.borderRadius.md |
+| theme.component.tag.fontWeight | Text weight | 600 | primitive.fontWeight.semibold |
 
 ## Props
 
+### Behavior Props
+
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `ReactNode` | - | Tag content (text or elements) |
-| variant | `"default"` \| `"primary"` \| `"success"` \| `"warning"` \| `"error"` | `"default"` | Color theme for semantic meaning |
-| size | `"sm"` \| `"md"` \| `"lg"` | `"md"` | Size preset for different contexts |
-| dismissible | `boolean` | `false` | Show dismiss × button for removable tags |
-| onDismiss | `() => void` | - | Callback when dismiss button is pressed |
-| style | `StyleProp<ViewStyle>` | - | Custom container styles |
+| --- | --- | --- | --- |
+| variant | "default" \| "primary" \| "success" \| "warning" \| "error" | "default" | Visual style variant |
+| size | "sm" \| "md" \| "lg" | "md" | Size preset |
+| dismissible | boolean | false | Shows dismiss button when true |
+| onDismiss | () => void | undefined | Callback when dismiss button is pressed |
 
-## Usage Examples
+### Content Props
 
-### Product Status Tags
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | required | Tag label content |
 
-```tsx
-import { Tag, Stack } from "@repo/react-native";
+### Styling Props
 
-function ProductStatus() {
-  return (
-    <Stack direction="horizontal" gap={8}>
-      <Tag variant="success">In Stock</Tag>
-      <Tag variant="primary">New</Tag>
-      <Tag variant="warning">Low Stock</Tag>
-    </Stack>
-  );
-}
-```
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
-### User Role Badge
+## Accessibility
 
-```tsx
-import { Tag, Stack, Typography } from "@repo/react-native";
+**WCAG Level:** AA compliant
 
-function UserProfile() {
-  return (
-    <Stack gap={8}>
-      <Typography variant="heading">John Doe</Typography>
-      <Stack direction="horizontal" gap={6}>
-        <Tag variant="primary" size="sm">Admin</Tag>
-        <Tag variant="success" size="sm">Verified</Tag>
-      </Stack>
-    </Stack>
-  );
-}
-```
+**Screen Reader:**
 
-### Dismissible Filter Chips
+- Non-dismissible tags have accessibilityRole="text"
+- Dismiss button has accessibilityRole="button"
+- Dismiss button has accessibilityLabel="Dismiss"
+- Content is announced to screen readers
 
-```tsx
-import { Tag, Stack } from "@repo/react-native";
-import { useState } from "react";
+**Touch Target:**
 
-function FilterChips() {
-  const [filters, setFilters] = useState(["Electronics", "In Stock", "Under $100"]);
+- Dismiss button uses hitSlop for enlarged touch area
+- Minimum touch target of 44x44pt maintained via hitSlop
 
-  return (
-    <Stack direction="horizontal" gap={8} style={{ flexWrap: "wrap" }}>
-      {filters.map((filter, index) => (
-        <Tag
-          key={index}
-          variant="primary"
-          dismissible
-          onDismiss={() => setFilters(filters.filter((_, i) => i !== index))}
-        >
-          {filter}
-        </Tag>
-      ))}
-    </Stack>
-  );
-}
-```
+**Visual Requirements:**
 
-### Status Indicator
-
-```tsx
-import { Tag } from "@repo/react-native";
-
-function ServerStatus({ status }: { status: "online" | "offline" | "maintenance" }) {
-  const variantMap = {
-    online: "success",
-    offline: "error",
-    maintenance: "warning",
-  };
-
-  return <Tag variant={variantMap[status]}>{status.toUpperCase()}</Tag>;
-}
-```
+- Color contrast meets 4.5:1 for text on all variant backgrounds
+- Border provides additional visual boundary
+- Dismiss icon matches text color for visibility

@@ -1,308 +1,166 @@
 import {
-  TabsContainer,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "./Tabs";
-import { View, Text } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { BasicExample, SwipeExample, AdvancedExample } from "./examples";
+  BasicExample,
+  VariantsExample,
+  OrientationsExample,
+  InteractiveExample,
+} from "./examples";
 
-# Tabs Component
+# Tabs
 
-Tabbed navigation component for organizing content into switchable panels with horizontal or vertical layout and multiple visual variants. Tabs consist of four sub-components working together: TabsContainer (root), TabsList (tab buttons container), TabsTrigger (individual tab button), and TabsContent (panel content).
+**Category**: interactive | **Tags**: navigation, segmented-control, panels
 
-**Horizontal tabs are swipeable!** Swipe left or right to navigate between tabs with smooth transitions.
+The Tabs component provides tabbed navigation with multiple variants and orientations for organizing content into selectable sections. It uses a compound component architecture with context-based state management, supports swipe gestures on horizontal orientation, and includes built-in accessibility features.
 
 ## Basic Usage
 
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <BasicExample />
-</View>
+The default configuration with controlled state for common use cases.
 
-## Swipeable Tabs
-
-Horizontal tabs support swipe gestures! Swipe left or right to navigate between tabs.
-
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <SwipeExample />
-</View>
+<BasicExample />
 
 ## Variants
 
-### Line Variant
+All available visual styles for different contexts.
 
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <TabsContainer value="tab1" onValueChange={() => {}} variant="line">
-    <TabsList>
-      <TabsTrigger value="tab1" label="Tab 1" />
-      <TabsTrigger value="tab2" label="Tab 2" />
-      <TabsTrigger value="tab3" label="Tab 3" />
-    </TabsList>
-    <TabsContent value="tab1">
-      <View style={{ padding: 12 }}>
-        <Text style={{ color: "#6B7280" }}>
-          Line variant with clean underline indicator
-        </Text>
-      </View>
-    </TabsContent>
-  </TabsContainer>
-</View>
+<VariantsExample />
 
-### Filled Variant
-
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <TabsContainer value="tab1" onValueChange={() => {}} variant="filled">
-    <TabsList>
-      <TabsTrigger value="tab1" label="Tab 1" />
-      <TabsTrigger value="tab2" label="Tab 2" />
-      <TabsTrigger value="tab3" label="Tab 3" />
-    </TabsList>
-    <TabsContent value="tab1">
-      <View style={{ padding: 12 }}>
-        <Text style={{ color: "#6B7280" }}>
-          Filled variant with solid background color
-        </Text>
-      </View>
-    </TabsContent>
-  </TabsContainer>
-</View>
-
-### Pills Variant
-
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <TabsContainer value="tab1" onValueChange={() => {}} variant="pills">
-    <TabsList>
-      <TabsTrigger value="tab1" label="Tab 1" />
-      <TabsTrigger value="tab2" label="Tab 2" />
-      <TabsTrigger value="tab3" label="Tab 3" />
-    </TabsList>
-    <TabsContent value="tab1">
-      <View style={{ padding: 12 }}>
-        <Text style={{ color: "#6B7280" }}>
-          Pills variant with rounded, pill-shaped backgrounds
-        </Text>
-      </View>
-    </TabsContent>
-  </TabsContainer>
-</View>
+- **Line**: Default variant with underline indicator for selected tab
+- **Filled**: Uses background color to indicate active tab selection
+- **Pills**: Rounded pill-shaped backgrounds for all tabs
 
 ## Orientations
 
-### Horizontal (Default)
+Available layout directions for different UI contexts.
 
-Swipe to navigate between tabs!
+<OrientationsExample />
 
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <TabsContainer value="tab1" onValueChange={() => {}} orientation="horizontal">
-    <TabsList>
-      <TabsTrigger value="tab1" label="Tab 1" />
-      <TabsTrigger value="tab2" label="Tab 2" />
-    </TabsList>
-    <TabsContent value="tab1">
-      <View style={{ padding: 12 }}>
-        <Text style={{ color: "#6B7280" }}>
-          Horizontal tabs with content below. Swipe left to see Tab 2!
-        </Text>
-      </View>
-    </TabsContent>
-    <TabsContent value="tab2">
-      <View style={{ padding: 12 }}>
-        <Text style={{ color: "#6B7280" }}>
-          You swiped! Swipe right to go back to Tab 1.
-        </Text>
-      </View>
-    </TabsContent>
-  </TabsContainer>
-</View>
+- **Horizontal**: Default orientation with tabs arranged side by side, supports swipe gestures
+- **Vertical**: Tabs stacked vertically with content displayed beside the tab list
 
-### Vertical
+## Interactive States
 
-Vertical tabs are not swipeable (click to switch).
+Disabled states for user feedback at individual and container levels.
 
-<View style={{ padding: 16, marginVertical: 12, minHeight: 200 }}>
-  <TabsContainer value="tab1" onValueChange={() => {}} orientation="vertical">
-    <TabsList>
-      <TabsTrigger value="tab1" label="Account" />
-      <TabsTrigger value="tab2" label="Security" />
-      <TabsTrigger value="tab3" label="Settings" />
-    </TabsList>
-    <TabsContent value="tab1">
-      <View style={{ padding: 12 }}>
-        <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 4 }}>
-          Account Settings
-        </Text>
-        <Text style={{ color: "#6B7280" }}>
-          Manage your account information and preferences
-        </Text>
-      </View>
-    </TabsContent>
-    <TabsContent value="tab2">
-      <View style={{ padding: 12 }}>
-        <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 4 }}>
-          Security Settings
-        </Text>
-        <Text style={{ color: "#6B7280" }}>
-          Configure your security and privacy options
-        </Text>
-      </View>
-    </TabsContent>
-    <TabsContent value="tab3">
-      <View style={{ padding: 12 }}>
-        <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 4 }}>
-          General Settings
-        </Text>
-        <Text style={{ color: "#6B7280" }}>
-          Customize your application preferences
-        </Text>
-      </View>
-    </TabsContent>
-  </TabsContainer>
-</View>
+<InteractiveExample />
 
-## With Icons
+## Theme Tokens
 
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <TabsContainer value="tab1" onValueChange={() => {}} variant="pills">
-    <TabsList>
-      <TabsTrigger
-        value="tab1"
-        label="Account"
-        icon={<Ionicons name="person" size={16} color="#FFFFFF" />}
-      />
-      <TabsTrigger
-        value="tab2"
-        label="Security"
-        icon={<Ionicons name="lock-closed" size={16} color="#6B7280" />}
-      />
-      <TabsTrigger
-        value="tab3"
-        label="Notifications"
-        icon={<Ionicons name="notifications" size={16} color="#6B7280" />}
-      />
-    </TabsList>
-    <TabsContent value="tab1">
-      <Text>Account settings with icon tabs</Text>
-    </TabsContent>
-  </TabsContainer>
-</View>
+This component uses the following design tokens from the three-tier theme system:
 
-## Disabled State
+### Spacing Tokens
 
-### Individual Tab Disabled
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.tabs.padding | Base padding | 12 | primitive.spacing[3] |
+| theme.component.tabs.gap | Vertical gap | 8 | primitive.spacing[2] |
+| theme.component.tabs.horizontal.gap | Horizontal gap | 16 | primitive.spacing[4] |
+| theme.component.tabs.horizontal.paddingHorizontal | Horizontal tab padding | 16 | primitive.spacing[4] |
+| theme.component.tabs.vertical.paddingVertical | Vertical tab padding | 10 | primitive.spacing[2.5] |
+| theme.component.tabs.pill.paddingHorizontal | Pill horizontal padding | 12 | primitive.spacing[3] |
+| theme.component.tabs.pill.paddingVertical | Pill vertical padding | 8 | primitive.spacing[2] |
+| theme.component.tabs.content.paddingTop | Content top padding | 16 | primitive.spacing[4] |
+| theme.component.tabs.iconMargin | Icon margin right | 8 | primitive.spacing[2] |
 
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <TabsContainer value="tab1" onValueChange={() => {}}>
-    <TabsList>
-      <TabsTrigger value="tab1" label="Enabled" />
-      <TabsTrigger value="tab2" label="Disabled" disabled />
-      <TabsTrigger value="tab3" label="Enabled" />
-    </TabsList>
-    <TabsContent value="tab1">
-      <Text>Only the middle tab is disabled</Text>
-    </TabsContent>
-  </TabsContainer>
-</View>
+### Size Tokens
 
-### All Tabs Disabled
+| Token Path | Purpose | Value |
+| --- | --- | --- |
+| theme.component.tabs.width.vertical | Vertical tab list width | 200 |
+| theme.component.tabs.borderWidth.line | Horizontal line border | 2 |
+| theme.component.tabs.borderWidth.lineVertical | Vertical line border | 3 |
+| theme.component.tabs.borderRadius | Pills border radius | 8 |
 
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <TabsContainer value="tab1" onValueChange={() => {}} disabled>
-    <TabsList>
-      <TabsTrigger value="tab1" label="Tab 1" />
-      <TabsTrigger value="tab2" label="Tab 2" />
-      <TabsTrigger value="tab3" label="Tab 3" />
-    </TabsList>
-    <TabsContent value="tab1">
-      <Text>All tabs disabled via container prop</Text>
-    </TabsContent>
-  </TabsContainer>
-</View>
+### Typography Tokens
 
-## Advanced Example
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.tabs.label.fontSize | Label font size | 16 | primitive.fontSize.base |
+| theme.component.tabs.label.fontWeight | Label font weight | 500 | primitive.fontWeight.medium |
 
-<View style={{ padding: 16, marginVertical: 12, minHeight: 200 }}>
-  <AdvancedExample />
-</View>
+### Color Tokens (Light Mode)
+
+| Token Path | Purpose | Semantic Source |
+| --- | --- | --- |
+| theme.component.tabs.variant.light.container.background | Container background | light.surface.secondary |
+| theme.component.tabs.variant.light.container.border | Container border | light.border.primary |
+| theme.component.tabs.variant.light.tab.active.background | Active tab background | light.surface.primary |
+| theme.component.tabs.variant.light.tab.active.text | Active tab text | light.text.primary |
+| theme.component.tabs.variant.light.tab.active.border | Active tab border | light.border.secondary |
+| theme.component.tabs.variant.light.tab.inactive.text | Inactive tab text | light.text.tertiary |
+| theme.component.tabs.variant.light.filled.text | Filled variant text | light.text.inverse |
+| theme.component.tabs.variant.light.pills.text | Pills variant text | light.text.inverse |
+| theme.component.tabs.variant.light.disabled.opacity | Disabled opacity | 0.5 |
+
+### Color Tokens (Dark Mode)
+
+| Token Path | Purpose | Semantic Source |
+| --- | --- | --- |
+| theme.component.tabs.variant.dark.container.background | Container background | dark.surface.secondary |
+| theme.component.tabs.variant.dark.container.border | Container border | dark.border.primary |
+| theme.component.tabs.variant.dark.tab.active.background | Active tab background | dark.surface.primary |
+| theme.component.tabs.variant.dark.tab.active.text | Active tab text | dark.text.primary |
+| theme.component.tabs.variant.dark.tab.active.border | Active tab border | dark.border.secondary |
+| theme.component.tabs.variant.dark.tab.inactive.text | Inactive tab text | dark.text.tertiary |
+| theme.component.tabs.variant.dark.filled.text | Filled variant text | dark.text.primary |
+| theme.component.tabs.variant.dark.pills.text | Pills variant text | dark.text.primary |
+| theme.component.tabs.variant.dark.disabled.opacity | Disabled opacity | 0.5 |
 
 ## Props
 
 ### TabsContainer Props
 
-| Prop          | Type                                   | Default        | Description                    |
-| ------------- | -------------------------------------- | -------------- | ------------------------------ |
-| value         | `string`                               | required       | Active tab value (controlled)  |
-| onValueChange | `(value: string) => void`              | required       | Tab change callback            |
-| orientation   | `"horizontal" \| "vertical"`           | `"horizontal"` | Layout direction               |
-| variant       | `"line" \| "filled" \| "pills"`        | `"line"`       | Visual style variant           |
-| disabled      | `boolean`                              | `false`        | Disables all tabs              |
-| children      | `ReactNode`                            | required       | TabsList and TabsContent       |
-| style         | `StyleProp<ViewStyle>`                 | `undefined`    | Custom styles                  |
-| ...ViewProps  | All other View props are supported     |                |                                |
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | string | required | Currently active tab value |
+| onValueChange | (value: string) => void | required | Callback when tab changes |
+| variant | "line" \| "filled" \| "pills" | "line" | Visual style variant |
+| orientation | "horizontal" \| "vertical" | "horizontal" | Layout direction |
+| disabled | boolean | false | Disables all tabs |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
 ### TabsList Props
 
-| Prop         | Type                               | Default     | Description            |
-| ------------ | ---------------------------------- | ----------- | ---------------------- |
-| children     | `ReactNode`                        | required    | TabsTrigger components |
-| style        | `StyleProp<ViewStyle>`             | `undefined` | Custom styles          |
-| ...ViewProps | All other View props are supported |             |                        |
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | required | TabsTrigger components |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
 ### TabsTrigger Props
 
-| Prop         | Type                               | Default     | Description              |
-| ------------ | ---------------------------------- | ----------- | ------------------------ |
-| value        | `string`                           | required    | Unique tab identifier    |
-| label        | `string`                           | required    | Tab button text          |
-| icon         | `ReactNode`                        | `undefined` | Leading icon             |
-| disabled     | `boolean`                          | `false`     | Disables tab interaction |
-| style        | `StyleProp<ViewStyle>`             | `undefined` | Custom styles            |
-| ...ViewProps | All other View props are supported |             |                          |
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | string | required | Unique identifier for this tab |
+| label | string | required | Text label displayed |
+| icon | ReactNode | undefined | Optional icon before label |
+| disabled | boolean | false | Disables this trigger |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
 ### TabsContent Props
 
-| Prop         | Type                               | Default     | Description                |
-| ------------ | ---------------------------------- | ----------- | -------------------------- |
-| value        | `string`                           | required    | Tab identifier to show for |
-| children     | `ReactNode`                        | required    | Panel content              |
-| style        | `StyleProp<ViewStyle>`             | `undefined` | Custom styles              |
-| ...ViewProps | All other View props are supported |             |                            |
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | string | required | Tab value this content belongs to |
+| children | ReactNode | required | Content to display when active |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
-## Usage Examples
+## Accessibility
 
-```tsx
-import {
-  TabsContainer,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@repo/react-native/tabs";
-import { useState } from "react";
-import { Text } from "react-native";
+**WCAG Level:** AA compliant
 
-function MyComponent() {
-  const [activeTab, setActiveTab] = useState("overview");
+**Roles:**
 
-  return (
-    <TabsContainer value={activeTab} onValueChange={setActiveTab}>
-      <TabsList>
-        <TabsTrigger value="overview" label="Overview" />
-        <TabsTrigger value="details" label="Details" />
-        <TabsTrigger value="reviews" label="Reviews" />
-      </TabsList>
+- TabsList has accessibilityRole="tablist"
+- TabsTrigger has accessibilityRole="tab"
+- accessibilityState.selected reflects active state
+- accessibilityState.disabled reflects disabled state
 
-      <TabsContent value="overview">
-        <Text>Overview content here</Text>
-      </TabsContent>
+**Gestures:**
 
-      <TabsContent value="details">
-        <Text>Details content here</Text>
-      </TabsContent>
+- Horizontal tabs support swipe gestures (50px threshold)
+- Swipe left navigates to next tab
+- Swipe right navigates to previous tab
+- Swipe disabled when orientation is vertical or tabs are disabled
 
-      <TabsContent value="reviews">
-        <Text>Reviews content here</Text>
-      </TabsContent>
-    </TabsContainer>
-  );
-}
-```
+**Touch Target:**
+
+- Minimum touch target meets 44pt recommendation
+- Padding scales with orientation

@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "progress",
   "description": "Visual progress indicator with bar and circle variants, determinate and indeterminate modes, and optional value display",
+  "category": "display",
+  "tags": ["loading", "indicator", "status"],
   "dependencies": []
 }

@@ -1,370 +1,107 @@
-import { Stack } from "./Stack";
-import { View, Text } from "react-native";
+import {
+  BasicExample,
+  DirectionsExample,
+  GapsExample,
+  AlignmentExample,
+} from "./examples";
 
-# Stack Component
+# Stack
 
-A layout component for arranging children with consistent spacing in horizontal or vertical direction with alignment control. Uses CSS gap property for automatic spacing between children.
+**Category**: layout | **Tags**: layout, flexbox, spacing
+
+The Stack component provides a layout container for arranging children with consistent spacing and alignment. It simplifies vertical or horizontal layouts without manual flexbox configuration, making it ideal for creating evenly-spaced content sections.
 
 ## Basic Usage
 
-<Stack>
-  <View style={{ backgroundColor: "#4A90E2", padding: 12, borderRadius: 6 }}>
-    <Text style={{ color: "#FFFFFF" }}>Item 1</Text>
-  </View>
-  <View style={{ backgroundColor: "#10B981", padding: 12, borderRadius: 6 }}>
-    <Text style={{ color: "#FFFFFF" }}>Item 2</Text>
-  </View>
-  <View style={{ backgroundColor: "#F59E0B", padding: 12, borderRadius: 6 }}>
-    <Text style={{ color: "#FFFFFF" }}>Item 3</Text>
-  </View>
-</Stack>
+The default configuration arranges children vertically with medium spacing.
 
-## Direction
+<BasicExample />
 
-### Vertical (Default)
+## Directions
 
-<Stack direction="vertical">
-  <View style={{ backgroundColor: "#EEF2FF", padding: 12, borderRadius: 6 }}>
-    <Text>Vertical Stack Item 1</Text>
-  </View>
-  <View style={{ backgroundColor: "#DBEAFE", padding: 12, borderRadius: 6 }}>
-    <Text>Vertical Stack Item 2</Text>
-  </View>
-  <View style={{ backgroundColor: "#BFDBFE", padding: 12, borderRadius: 6 }}>
-    <Text>Vertical Stack Item 3</Text>
-  </View>
-</Stack>
+Stack supports two direction variants for arranging children along different axes.
 
-### Horizontal
+<DirectionsExample />
 
-<Stack direction="horizontal">
-  <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 6 }}>
-    <Text>Item 1</Text>
-  </View>
-  <View style={{ backgroundColor: "#FECACA", padding: 12, borderRadius: 6 }}>
-    <Text>Item 2</Text>
-  </View>
-  <View style={{ backgroundColor: "#FCA5A5", padding: 12, borderRadius: 6 }}>
-    <Text>Item 3</Text>
-  </View>
-</Stack>
+- **vertical**: Arranges children from top to bottom (default)
+- **horizontal**: Arranges children from left to right
 
-## Gap Spacing
+## Gap Sizes
 
-<View style={{ gap: 20 }}>
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Gap: 4px</Text>
-    <Stack direction="horizontal" gap={4}>
-      <View style={{ backgroundColor: "#D1FAE5", padding: 8, borderRadius: 4 }}>
-        <Text>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#D1FAE5", padding: 8, borderRadius: 4 }}>
-        <Text>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#D1FAE5", padding: 8, borderRadius: 4 }}>
-        <Text>C</Text>
-      </View>
-    </Stack>
-  </View>
+Six gap spacing options are available, mapped to primitive spacing tokens.
 
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Gap: 8px (Default)</Text>
-    <Stack direction="horizontal">
-      <View style={{ backgroundColor: "#FEF3C7", padding: 8, borderRadius: 4 }}>
-        <Text>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#FEF3C7", padding: 8, borderRadius: 4 }}>
-        <Text>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#FEF3C7", padding: 8, borderRadius: 4 }}>
-        <Text>C</Text>
-      </View>
-    </Stack>
-  </View>
+<GapsExample />
 
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Gap: 16px</Text>
-    <Stack direction="horizontal" gap={16}>
-      <View style={{ backgroundColor: "#E0E7FF", padding: 8, borderRadius: 4 }}>
-        <Text>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#E0E7FF", padding: 8, borderRadius: 4 }}>
-        <Text>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#E0E7FF", padding: 8, borderRadius: 4 }}>
-        <Text>C</Text>
-      </View>
-    </Stack>
-  </View>
+- **none**: No spacing between children (0px)
+- **xs**: Extra small spacing (4px)
+- **sm**: Small spacing (8px) - default
+- **md**: Medium spacing (16px)
+- **lg**: Large spacing (24px)
+- **xl**: Extra large spacing (32px)
 
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Gap: 24px</Text>
-    <Stack direction="horizontal" gap={24}>
-      <View style={{ backgroundColor: "#FCE7F3", padding: 8, borderRadius: 4 }}>
-        <Text>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#FCE7F3", padding: 8, borderRadius: 4 }}>
-        <Text>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#FCE7F3", padding: 8, borderRadius: 4 }}>
-        <Text>C</Text>
-      </View>
-    </Stack>
-  </View>
-</View>
+## Alignment
 
-## Alignment (Cross Axis)
+Four alignment options control how children are positioned on the cross axis.
 
-<View style={{ gap: 16 }}>
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Align: Start</Text>
-    <Stack direction="horizontal" align="start" gap={8}>
-      <View style={{ backgroundColor: "#4A90E2", padding: 12, height: 60, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Tall</Text>
-      </View>
-      <View style={{ backgroundColor: "#10B981", padding: 12, height: 40, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Med</Text>
-      </View>
-      <View style={{ backgroundColor: "#F59E0B", padding: 12, height: 30, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Sm</Text>
-      </View>
-    </Stack>
-  </View>
+<AlignmentExample />
 
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Align: Center</Text>
-    <Stack direction="horizontal" align="center" gap={8}>
-      <View style={{ backgroundColor: "#4A90E2", padding: 12, height: 60, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Tall</Text>
-      </View>
-      <View style={{ backgroundColor: "#10B981", padding: 12, height: 40, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Med</Text>
-      </View>
-      <View style={{ backgroundColor: "#F59E0B", padding: 12, height: 30, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Sm</Text>
-      </View>
-    </Stack>
-  </View>
+- **start**: Children align to the start of the cross axis
+- **center**: Children are centered on the cross axis
+- **end**: Children align to the end of the cross axis
+- **stretch**: Children stretch to fill the cross axis (default)
 
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Align: End</Text>
-    <Stack direction="horizontal" align="end" gap={8}>
-      <View style={{ backgroundColor: "#4A90E2", padding: 12, height: 60, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Tall</Text>
-      </View>
-      <View style={{ backgroundColor: "#10B981", padding: 12, height: 40, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Med</Text>
-      </View>
-      <View style={{ backgroundColor: "#F59E0B", padding: 12, height: 30, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>Sm</Text>
-      </View>
-    </Stack>
-  </View>
+## Theme Tokens
 
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Align: Stretch (Default)</Text>
-    <Stack direction="horizontal" align="stretch" gap={8}>
-      <View style={{ backgroundColor: "#4A90E2", padding: 12, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#10B981", padding: 12, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#F59E0B", padding: 12, borderRadius: 4 }}>
-        <Text style={{ color: "#FFFFFF" }}>C</Text>
-      </View>
-    </Stack>
-  </View>
-</View>
+This component uses the following design tokens from the three-tier theme system:
 
-## Justification (Main Axis)
+### Gap Tokens
 
-<View style={{ gap: 16 }}>
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Justify: Start (Default)</Text>
-    <Stack direction="horizontal" justify="start" gap={8}>
-      <View style={{ backgroundColor: "#EEF2FF", padding: 12, borderRadius: 4 }}>
-        <Text>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#EEF2FF", padding: 12, borderRadius: 4 }}>
-        <Text>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#EEF2FF", padding: 12, borderRadius: 4 }}>
-        <Text>C</Text>
-      </View>
-    </Stack>
-  </View>
-
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Justify: Center</Text>
-    <Stack direction="horizontal" justify="center" gap={8}>
-      <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 4 }}>
-        <Text>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 4 }}>
-        <Text>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#FEE2E2", padding: 12, borderRadius: 4 }}>
-        <Text>C</Text>
-      </View>
-    </Stack>
-  </View>
-
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Justify: End</Text>
-    <Stack direction="horizontal" justify="end" gap={8}>
-      <View style={{ backgroundColor: "#D1FAE5", padding: 12, borderRadius: 4 }}>
-        <Text>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#D1FAE5", padding: 12, borderRadius: 4 }}>
-        <Text>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#D1FAE5", padding: 12, borderRadius: 4 }}>
-        <Text>C</Text>
-      </View>
-    </Stack>
-  </View>
-
-  <View>
-    <Text style={{ marginBottom: 8, fontWeight: "600" }}>Justify: Space Between</Text>
-    <Stack direction="horizontal" justify="space-between" gap={0}>
-      <View style={{ backgroundColor: "#FEF3C7", padding: 12, borderRadius: 4 }}>
-        <Text>A</Text>
-      </View>
-      <View style={{ backgroundColor: "#FEF3C7", padding: 12, borderRadius: 4 }}>
-        <Text>B</Text>
-      </View>
-      <View style={{ backgroundColor: "#FEF3C7", padding: 12, borderRadius: 4 }}>
-        <Text>C</Text>
-      </View>
-    </Stack>
-  </View>
-</View>
-
-## Wrap
-
-<View>
-  <Text style={{ marginBottom: 8, fontWeight: "600" }}>Wrap: true</Text>
-  <Stack direction="horizontal" wrap={true} gap={8}>
-    <View style={{ backgroundColor: "#4A90E2", padding: 12, width: 100, borderRadius: 4 }}>
-      <Text style={{ color: "#FFFFFF" }}>Item 1</Text>
-    </View>
-    <View style={{ backgroundColor: "#10B981", padding: 12, width: 100, borderRadius: 4 }}>
-      <Text style={{ color: "#FFFFFF" }}>Item 2</Text>
-    </View>
-    <View style={{ backgroundColor: "#F59E0B", padding: 12, width: 100, borderRadius: 4 }}>
-      <Text style={{ color: "#FFFFFF" }}>Item 3</Text>
-    </View>
-    <View style={{ backgroundColor: "#EF4444", padding: 12, width: 100, borderRadius: 4 }}>
-      <Text style={{ color: "#FFFFFF" }}>Item 4</Text>
-    </View>
-    <View style={{ backgroundColor: "#8B5CF6", padding: 12, width: 100, borderRadius: 4 }}>
-      <Text style={{ color: "#FFFFFF" }}>Item 5</Text>
-    </View>
-  </Stack>
-</View>
-
-## Complex Layout Example
-
-<Stack gap={16} style={{ padding: 16, backgroundColor: "#F9FAFB", borderRadius: 8 }}>
-  <Text style={{ fontSize: 20, fontWeight: "700" }}>Profile Card</Text>
-
-  <Stack direction="horizontal" gap={12} align="center">
-    <View style={{ width: 60, height: 60, backgroundColor: "#4A90E2", borderRadius: 30 }} />
-    <Stack gap={4}>
-      <Text style={{ fontSize: 16, fontWeight: "600" }}>John Doe</Text>
-      <Text style={{ fontSize: 14, color: "#6B7280" }}>Software Engineer</Text>
-    </Stack>
-  </Stack>
-
-  <Stack gap={8}>
-    <Stack direction="horizontal" justify="space-between">
-      <Text style={{ color: "#6B7280" }}>Email</Text>
-      <Text style={{ fontWeight: "600" }}>john@example.com</Text>
-    </Stack>
-    <Stack direction="horizontal" justify="space-between">
-      <Text style={{ color: "#6B7280" }}>Location</Text>
-      <Text style={{ fontWeight: "600" }}>San Francisco, CA</Text>
-    </Stack>
-    <Stack direction="horizontal" justify="space-between">
-      <Text style={{ color: "#6B7280" }}>Member Since</Text>
-      <Text style={{ fontWeight: "600" }}>January 2024</Text>
-    </Stack>
-  </Stack>
-
-  <Stack direction="horizontal" gap={8}>
-    <View style={{ flex: 1, backgroundColor: "#4A90E2", padding: 12, borderRadius: 6, alignItems: "center" }}>
-      <Text style={{ color: "#FFFFFF", fontWeight: "600" }}>Follow</Text>
-    </View>
-    <View style={{ flex: 1, backgroundColor: "#E5E7EB", padding: 12, borderRadius: 6, alignItems: "center" }}>
-      <Text style={{ fontWeight: "600" }}>Message</Text>
-    </View>
-  </Stack>
-</Stack>
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.stack.gap.none | No spacing | 0 | - |
+| theme.component.stack.gap.xs | Extra small gap | 4 | primitive.spacing[1] |
+| theme.component.stack.gap.sm | Small gap (default) | 8 | primitive.spacing[2] |
+| theme.component.stack.gap.md | Medium gap | 16 | primitive.spacing[4] |
+| theme.component.stack.gap.lg | Large gap | 24 | primitive.spacing[6] |
+| theme.component.stack.gap.xl | Extra large gap | 32 | primitive.spacing[8] |
 
 ## Props
 
-| Prop      | Type                                                   | Default      | Description                          |
-| --------- | ------------------------------------------------------ | ------------ | ------------------------------------ |
-| children  | `ReactNode`                                            | -            | Child elements to stack              |
-| direction | `"horizontal"` \| `"vertical"`                         | `"vertical"` | Stack direction                      |
-| gap       | `number`                                               | `8`          | Space between children (pixels)      |
-| align     | `"start"` \| `"center"` \| `"end"` \| `"stretch"`      | `"stretch"`  | Cross-axis alignment                 |
-| justify   | `"start"` \| `"center"` \| `"end"` \| `"space-between"` | `"start"`    | Main-axis justification              |
-| wrap      | `boolean`                                              | `false`      | Allow wrapping to multiple lines     |
-| style     | `StyleProp<ViewStyle>`                                 | `undefined`  | Custom styles                        |
-| ...props  | `ViewProps`                                            | -            | All other View props                 |
+### Layout Props
 
-## Usage Examples
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| direction | "horizontal" \| "vertical" | "vertical" | Main axis direction for child arrangement |
+| gap | "none" \| "xs" \| "sm" \| "md" \| "lg" \| "xl" | "sm" | Spacing between children |
+| align | "start" \| "center" \| "end" \| "stretch" | "stretch" | Cross-axis alignment of children |
+| justify | "start" \| "center" \| "end" \| "space-between" | "start" | Main-axis distribution of children |
+| wrap | boolean | false | Whether children wrap to multiple lines |
 
-### Vertical Stack
+### Content Props
 
-```tsx
-import { Stack } from "@warp-ui/react-native";
-import { Text } from "react-native";
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | undefined | Child elements to arrange |
 
-<Stack gap={12}>
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-  <Text>Item 3</Text>
-</Stack>
-```
+### Styling Props
 
-### Horizontal Stack with Centered Items
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides |
 
-```tsx
-<Stack direction="horizontal" gap={16} align="center">
-  <Text>Left</Text>
-  <Text>Center</Text>
-  <Text>Right</Text>
-</Stack>
-```
+### ViewProps
 
-### Space Between Layout
+Stack extends ViewProps, so all standard View properties are supported including testID, accessibilityLabel, and other React Native View props.
 
-```tsx
-<Stack direction="horizontal" justify="space-between">
-  <Text>Start</Text>
-  <Text>End</Text>
-</Stack>
-```
+## Accessibility
 
-### Wrapping Stack
+**Screen Reader:**
 
-```tsx
-<Stack direction="horizontal" wrap={true} gap={8}>
-  <View style={{ width: 100 }}>Item 1</View>
-  <View style={{ width: 100 }}>Item 2</View>
-  <View style={{ width: 100 }}>Item 3</View>
-</Stack>
-```
+- Stack is a layout component without inherent accessibility semantics
+- Child components maintain their own accessibility properties
+- Use accessibilityLabel when the stack represents a logical grouping
 
-## Behavior Notes
+**Visual Requirements:**
 
-- Stack uses CSS gap property, which requires React Native 0.71 or higher
-- Default gap is 8px for comfortable spacing
-- Vertical direction (column) is default
-- Align controls cross-axis alignment (perpendicular to direction)
-- Justify controls main-axis alignment (parallel to direction)
-- Wrap allows children to flow to multiple lines when space is limited
-- Custom styles are merged last for full override capability
+- Consistent spacing helps users understand content relationships
+- Gap tokens ensure predictable visual hierarchy

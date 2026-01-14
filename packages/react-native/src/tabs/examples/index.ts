@@ -1,3 +1,4 @@
-export * from "./BasicExample";
-export * from "./SwipeExample";
-export * from "./AdvancedExample";
+export { BasicExample } from "./BasicExample";
+export { VariantsExample } from "./VariantsExample";
+export { OrientationsExample } from "./OrientationsExample";
+export { InteractiveExample } from "./InteractiveExample";

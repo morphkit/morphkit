@@ -1,262 +1,100 @@
-import { Label } from "./Label";
-import { Box, Stack, Typography, Card } from "../";
-
 # Label
 
-A form label component for describing input fields with optional required indicator and error states. Provides consistent typography, spacing, and semantic HTML association on web for accessible forms.
+**Category**: input | **Tags**: form, text, accessibility
+
+The Label component provides descriptive text for form inputs with optional required field indicators and error state styling. It ensures consistent form labeling across your application with built-in accessibility support and theme-aware colors.
 
 ## Basic Usage
 
-The default medium-sized label for standard form fields.
+The default configuration for common use cases.
 
-<Box marginVertical={12}>
-  <Label>Email Address</Label>
-</Box>
+<BasicExample />
 
-## Required Indicator
+## States
 
-Show a red asterisk for required fields, providing both visual and semantic indication.
+All available visual states for form contexts.
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Label required>Full Name</Label>
-    <Label required>Email Address</Label>
-    <Label>Phone Number (optional)</Label>
-  </Stack>
-</Box>
+<StatesExample />
 
-## Error State
+- **Normal**: Default state for optional form fields
+- **Required**: Shows red asterisk indicator for mandatory fields
+- **Error**: Red text color for validation error feedback
+- **Required with Error**: Combined state showing both indicators
 
-Display labels in error color to indicate invalid fields, matching input error states.
+## Form Integration
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Label error>Invalid Email</Label>
-    <Label error required>Password (too short)</Label>
-  </Stack>
-</Box>
+Practical usage with form inputs demonstrating label-input pairing.
 
-## Sizes
+<FormExample />
 
-Three size presets to match different form contexts: small for compact forms, medium for standard use, and large for prominent fields.
+## Theme Tokens
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Label size="sm">Small Label (12px)</Label>
-    <Label size="md">Medium Label (14px)</Label>
-    <Label size="lg">Large Label (16px)</Label>
-  </Stack>
-</Box>
+This component uses the following design tokens from the three-tier theme system:
 
-## Combined States
+### Typography Tokens
 
-Mix required, error, and size props to create the exact label state you need.
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.label.fontSize.sm | Small font size | 11 | primitive.fontSize.xs |
+| theme.component.label.fontSize.md | Medium font size | 12 | primitive.fontSize.sm |
+| theme.component.label.fontSize.lg | Large font size | 16 | primitive.fontSize.lg |
+| theme.component.label.fontWeight | Text weight | "500" | primitive.fontWeight.medium |
 
-<Box marginVertical={12}>
-  <Stack gap={12}>
-    <Label required size="lg">Full Name</Label>
-    <Label error required>Email Address</Label>
-    <Label error size="sm">Password</Label>
-  </Stack>
-</Box>
+### Spacing Tokens
 
-## Login Form Example
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.label.marginBottom | Bottom margin | 6 | primitive.spacing[1.5] |
 
-Realistic form showing labels paired with inputs in a card layout.
+### Color Tokens (Light Mode)
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16}>
-      <Typography variant="title-3">Sign In</Typography>
-      <Stack gap={8}>
-        <Label required>Email Address</Label>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>
-          We'll never share your email with anyone else.
-        </Typography>
-      </Stack>
-      <Stack gap={8}>
-        <Label required>Password</Label>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>
-          Must be at least 8 characters long.
-        </Typography>
-      </Stack>
-      <Stack gap={8}>
-        <Label>Remember Me</Label>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>
-          Stay signed in on this device.
-        </Typography>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.label.variant.light.text | Normal text color | #374151 | light.text.secondary |
+| theme.component.label.variant.light.required | Required/error color | #DC2626 | light.status.error.main |
 
-## Profile Settings Form
+### Color Tokens (Dark Mode)
 
-Labels with different sizes and states showing a complete settings form structure.
-
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16}>
-      <Typography variant="title-3">Profile Settings</Typography>
-      <Stack gap={8}>
-        <Label required size="lg">Display Name</Label>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          This is how others will see you on the platform.
-        </Typography>
-      </Stack>
-      <Stack gap={8}>
-        <Label required>Email Address</Label>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          Used for notifications and account recovery.
-        </Typography>
-      </Stack>
-      <Stack gap={8}>
-        <Label>Bio</Label>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          Tell us a little about yourself (optional).
-        </Typography>
-      </Stack>
-      <Stack gap={8}>
-        <Label size="sm">Notification Preferences</Label>
-        <Typography variant="footnote" style={{ color: "#6B7280" }}>
-          Choose how you want to be notified.
-        </Typography>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
-
-## Error State Form
-
-Labels in error state paired with error messages, showing validation feedback.
-
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16}>
-      <Typography variant="title-3">Form Validation</Typography>
-      <Stack gap={8}>
-        <Label error required>Email Address</Label>
-        <Typography variant="callout" style={{ color: "#EF4444" }}>
-          Please enter a valid email address.
-        </Typography>
-      </Stack>
-      <Stack gap={8}>
-        <Label error required>Password</Label>
-        <Typography variant="callout" style={{ color: "#EF4444" }}>
-          Password must be at least 8 characters.
-        </Typography>
-      </Stack>
-      <Stack gap={8}>
-        <Label error>Confirm Password</Label>
-        <Typography variant="callout" style={{ color: "#EF4444" }}>
-          Passwords do not match.
-        </Typography>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
-
-## Accessibility Features
-
-Labels automatically adapt for accessibility with theme-aware colors, semantic HTML association via htmlFor on web, and clear visual indicators for required and error states maintaining WCAG AA contrast ratios.
-
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={12}>
-      <Typography variant="heading">Accessible Form Labels</Typography>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Typography variant="body">Required Indicator</Typography>
-        <Label required>Field Name</Label>
-      </Stack>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Typography variant="body">Error State</Typography>
-        <Label error>Field Name</Label>
-      </Stack>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Typography variant="body">Normal State</Typography>
-        <Label>Field Name</Label>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.label.variant.dark.text | Normal text color | #E5E7EB | dark.text.secondary |
+| theme.component.label.variant.dark.required | Required/error color | #F87171 | dark.status.error.main |
 
 ## Props
 
+### Form Props
+
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `ReactNode` | - | Label text content |
-| htmlFor | `string` | - | ID of associated input (web accessibility) |
-| required | `boolean` | `false` | Shows red asterisk indicator for required fields |
-| error | `boolean` | `false` | Changes text color to error red |
-| size | `"sm"` \| `"md"` \| `"lg"` | `"md"` | Font size preset (12px/14px/16px) |
-| style | `StyleProp<TextStyle>` | - | Additional custom text styles |
+| --- | --- | --- | --- |
+| required | boolean | false | Shows red asterisk indicator |
+| error | boolean | false | Applies error text color |
+| htmlFor | string | undefined | Web accessibility association ID |
 
-The component also accepts all standard React Native TextProps.
+### Content Props
 
-## Usage Examples
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | required | Label text content |
 
-### Basic Label with Input
+### Styling Props
 
-```tsx
-import { Label } from "@repo/react-native";
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<TextStyle\> | undefined | Custom style overrides |
 
-<Label>Email Address</Label>
-<Input value={email} onChangeText={setEmail} />
-```
+## Accessibility
 
-### Required Field
+**WCAG Level:** AA compliant
 
-```tsx
-import { Label, Stack } from "@repo/react-native";
+**Screen Reader:**
 
-<Stack gap={8}>
-  <Label required>Full Name</Label>
-  <Input value={name} onChangeText={setName} />
-</Stack>
-```
+- Uses Typography component for consistent text rendering
+- Announces label text content to screen readers
+- htmlFor prop enables web platform label-input association
 
-### Error State
+**Visual Requirements:**
 
-```tsx
-import { Label, Stack, Typography } from "@repo/react-native";
-
-<Stack gap={8}>
-  <Label error required>Email Address</Label>
-  <Input value={email} onChangeText={setEmail} />
-  <Typography variant="callout" style={{ color: "#EF4444" }}>
-    Invalid email format
-  </Typography>
-</Stack>
-```
-
-### Web Accessibility
-
-```tsx
-import { Label } from "@repo/react-native";
-
-<Label htmlFor="email-input" required>Email Address</Label>
-<Input id="email-input" value={email} onChangeText={setEmail} />
-```
-
-### Form with Multiple Labels
-
-```tsx
-import { Label, Stack, Card } from "@repo/react-native";
-
-<Card>
-  <Stack gap={16}>
-    <Stack gap={8}>
-      <Label required size="lg">Display Name</Label>
-      <Input value={name} onChangeText={setName} />
-    </Stack>
-    <Stack gap={8}>
-      <Label required>Email Address</Label>
-      <Input value={email} onChangeText={setEmail} />
-    </Stack>
-    <Stack gap={8}>
-      <Label>Bio (optional)</Label>
-      <Textarea value={bio} onChangeText={setBio} />
-    </Stack>
-  </Stack>
-</Card>
-```
+- Color contrast meets 4.5:1 ratio for normal text
+- Error/required color provides clear visual distinction
+- Required indicator (asterisk) uses bold weight for visibility
+- Colors adapt automatically for light and dark modes

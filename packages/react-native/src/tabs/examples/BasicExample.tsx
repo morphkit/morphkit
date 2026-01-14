@@ -1,52 +1,29 @@
-import { TabsContainer, TabsList, TabsTrigger, TabsContent } from "../Tabs";
-import { View } from "react-native";
 import { useState } from "react";
-import { Typography } from "../..";
+import { Typography } from "../../typography";
+import { TabsContainer, TabsList, TabsTrigger, TabsContent } from "../Tabs";
 
 export const BasicExample = () => {
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("account");
 
   return (
     <TabsContainer value={activeTab} onValueChange={setActiveTab}>
       <TabsList>
-        <TabsTrigger value="overview" label="Overview" />
-        <TabsTrigger value="details" label="Details" />
-        <TabsTrigger value="reviews" label="Reviews" />
+        <TabsTrigger value="account" label="Account" />
+        <TabsTrigger value="settings" label="Settings" />
+        <TabsTrigger value="notifications" label="Notifications" />
       </TabsList>
-      <TabsContent value="overview">
-        <View style={{ padding: 16 }}>
-          <Typography variant="heading" style={{ marginBottom: 8 }}>
-            Product Overview
-          </Typography>
-          <Typography variant="body">
-            This premium wireless headphones deliver exceptional sound quality
-            with active noise cancellation. Perfect for music lovers and
-            professionals alike.
-          </Typography>
-        </View>
+      <TabsContent value="account">
+        <Typography variant="body">
+          Manage your account details here.
+        </Typography>
       </TabsContent>
-      <TabsContent value="details">
-        <View style={{ padding: 16 }}>
-          <Typography variant="heading" style={{ marginBottom: 8 }}>
-            Specifications
-          </Typography>
-          <Typography variant="body">
-            • Battery Life: 30 hours{"\n"}• Bluetooth 5.0{"\n"}• Weight: 250g
-            {"\n"}• Charging: USB-C fast charging
-          </Typography>
-        </View>
+      <TabsContent value="settings">
+        <Typography variant="body">Configure your preferences.</Typography>
       </TabsContent>
-      <TabsContent value="reviews">
-        <View style={{ padding: 16 }}>
-          <Typography variant="heading" style={{ marginBottom: 8 }}>
-            Customer Reviews
-          </Typography>
-          <Typography variant="body">
-            {`⭐⭐⭐⭐⭐ "Amazing sound quality!"
-⭐⭐⭐⭐ "Great for daily use"
-⭐⭐⭐⭐⭐ "Best purchase this year"`}
-          </Typography>
-        </View>
+      <TabsContent value="notifications">
+        <Typography variant="body">
+          Control your notification settings.
+        </Typography>
       </TabsContent>
     </TabsContainer>
   );

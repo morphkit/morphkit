@@ -1,166 +1,115 @@
-import { Badge } from "./Badge";
-import { Box, Stack, Typography, Card } from "../";
-import { Ionicons } from "@expo/vector-icons";
+import { BasicExample, VariantsExample, MaxCountExample } from "./examples";
 
 # Badge
 
-A notification badge overlay component that displays a count on top of child content, perfect for showing unread notifications, cart item counts, or any numeric indicators. Automatically hides when count reaches zero.
+**Category**: display | **Tags**: indicator, notification, count
+
+The Badge component displays notification count overlays on top of other UI elements. It automatically hides when the count reaches zero, supports configurable maximum thresholds with overflow formatting, and provides color variants for different notification contexts.
 
 ## Basic Usage
 
-Badge wraps any content and displays a count in the top-right corner.
+The default configuration for common use cases.
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={24}>
-    <Badge count={6}>
-      <Ionicons name="notifications-outline" size={32} color="#333333" />
-    </Badge>
-    <Badge count={99}>
-      <Ionicons name="mail-outline" size={32} color="#333333" />
-    </Badge>
-    <Badge count={150}>
-      <Ionicons name="chatbubbles-outline" size={32} color="#333333" />
-    </Badge>
-  </Stack>
-</Box>
+<BasicExample />
 
 ## Color Variants
 
-Choose between red (default) for urgent notifications or blue for informational counts.
+Available color options for different notification contexts.
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={24}>
-    <Badge count={6} color="red">
-      <Ionicons name="notifications-outline" size={32} color="#333333" />
-    </Badge>
-    <Badge count={9} color="blue">
-      <Ionicons name="mail-outline" size={32} color="#333333" />
-    </Badge>
-  </Stack>
-</Box>
+<VariantsExample />
+
+- **Red**: Default variant for urgent notifications, alerts, and unread counts
+- **Blue**: Alternative variant for informational badges and primary actions
 
 ## Max Count Threshold
 
-When count exceeds maxCount, displays "{maxCount}+" to keep the badge compact.
+Counts exceeding the threshold display as overflow format.
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={24} align="center">
-    <Badge count={50} maxCount={99}>
-      <Ionicons name="notifications-outline" size={32} color="#333333" />
-    </Badge>
-    <Badge count={150} maxCount={99}>
-      <Ionicons name="notifications-outline" size={32} color="#333333" />
-    </Badge>
-    <Badge count={1500} maxCount={999}>
-      <Ionicons name="mail-outline" size={32} color="#333333" />
-    </Badge>
-  </Stack>
-</Box>
+<MaxCountExample />
 
-## Hidden Badge
+The default maxCount is 99. Values exceeding this display as "99+". Custom thresholds can be set via the maxCount prop.
 
-Badge automatically hides when count is zero or negative - no manual control needed.
+## Theme Tokens
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={24}>
-    <Badge count={0}>
-      <Ionicons name="notifications-outline" size={32} color="#333333" />
-    </Badge>
-    <Badge count={-5}>
-      <Ionicons name="mail-outline" size={32} color="#333333" />
-    </Badge>
-  </Stack>
-</Box>
+This component uses the following design tokens from the three-tier theme system:
 
-## Shopping Cart Example
+### Dimension Tokens
 
-Realistic example showing Badge with cart icon in a toolbar context.
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.badge.dimensions.minWidth | Minimum badge width | 20 | - |
+| theme.component.badge.dimensions.height | Badge height | 20 | - |
+| theme.component.badge.paddingHorizontal | Horizontal padding | 8 | primitive.spacing[2] |
+| theme.component.badge.borderRadius | Corner radius | 9999 | primitive.borderRadius.full |
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack direction="horizontal" justify="space-between" align="center">
-      <Typography variant="heading">Shopping Cart</Typography>
-      <Badge count={12} color="blue">
-        <Ionicons name="cart-outline" size={32} color="#333333" />
-      </Badge>
-    </Stack>
-  </Card>
-</Box>
+### Position Tokens
 
-## Notification Panel
+| Token Path | Purpose | Value |
+| --- | --- | --- |
+| theme.component.badge.position.top | Top offset | -6 |
+| theme.component.badge.position.right.oneDigit | Right offset (1 digit) | -6 |
+| theme.component.badge.position.right.twoDigits | Right offset (2 digits) | -8 |
+| theme.component.badge.position.right.threeDigits | Right offset (3+ digits) | -14 |
 
-Multiple badges showing different notification types.
+### Typography Tokens
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16}>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Stack direction="horizontal" gap={12} align="center">
-          <Badge count={3}>
-            <Ionicons name="notifications-outline" size={24} color="#333333" />
-          </Badge>
-          <Typography variant="body">Alerts</Typography>
-        </Stack>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>3 new</Typography>
-      </Stack>
-      <Stack direction="horizontal" justify="space-between" align="center">
-        <Stack direction="horizontal" gap={12} align="center">
-          <Badge count={15} color="blue">
-            <Ionicons name="mail-outline" size={24} color="#333333" />
-          </Badge>
-          <Typography variant="body">Messages</Typography>
-        </Stack>
-        <Typography variant="callout" style={{ color: "#6B7280" }}>15 unread</Typography>
-      </Stack>
-    </Stack>
-  </Card>
-</Box>
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.badge.fontSize | Text size | 12 | primitive.fontSize.xs |
+| theme.component.badge.fontWeight | Text weight | 600 | primitive.fontWeight.semibold |
+
+### Variant Tokens (Light Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.badge.variant.light.error.background | Red background | #DC2626 | light.status.error.main |
+| theme.component.badge.variant.light.error.text | Red text | #FFFFFF | light.text.inverse |
+| theme.component.badge.variant.light.primary.background | Blue background | #4A90E2 | light.action.primary |
+| theme.component.badge.variant.light.primary.text | Blue text | #FFFFFF | light.text.inverse |
+
+### Variant Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.badge.variant.dark.error.background | Red background | #EF4444 | dark.status.error.main |
+| theme.component.badge.variant.dark.error.text | Red text | #111827 | dark.text.inverse |
+| theme.component.badge.variant.dark.primary.background | Blue background | #60A5FA | dark.action.primary |
+| theme.component.badge.variant.dark.primary.text | Blue text | #111827 | dark.text.inverse |
 
 ## Props
 
+### Behavior Props
+
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| count | `number` | - | The count to display (required) - hides when ≤ 0 |
-| maxCount | `number` | `99` | Maximum count before showing "{maxCount}+" |
-| color | `"red"` \| `"blue"` | `"red"` | Badge background color |
-| children | `ReactNode` | - | Content to wrap with badge (typically icon) |
-| style | `StyleProp<ViewStyle>` | - | Custom styles for the wrapper container |
+| --- | --- | --- | --- |
+| count | number | required | The notification count to display |
+| maxCount | number | 99 | Maximum count before showing overflow format |
+| color | "red" \| "blue" | "red" | Color variant for the badge |
 
-## Usage Examples
+### Content Props
 
-### Notification Badge
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | required | Content to display the badge over |
 
-```tsx
-import { Badge } from "@repo/react-native";
-import { Ionicons } from "@expo/vector-icons";
+### Styling Props
 
-<Badge count={notificationCount}>
-  <Ionicons name="notifications-outline" size={32} />
-</Badge>
-```
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom style overrides for wrapper |
 
-### Shopping Cart with Badge
+## Accessibility
 
-```tsx
-import { Badge, Card, Stack, Typography } from "@repo/react-native";
-import { Ionicons } from "@expo/vector-icons";
+**WCAG Level:** AA compliant
 
-<Card>
-  <Stack direction="horizontal" justify="space-between" align="center">
-    <Typography variant="heading">Cart</Typography>
-    <Badge count={cartItems} color="blue">
-      <Ionicons name="cart-outline" size={32} />
-    </Badge>
-  </Stack>
-</Card>
-```
+**Screen Reader:**
 
-### Custom Max Count
+- Announces count with "X notifications" format when badge is visible
+- No accessibility label when badge is hidden (count <= 0)
+- Wrapper View provides accessible context for screen readers
 
-```tsx
-import { Badge } from "@repo/react-native";
+**Visual Requirements:**
 
-<Badge count={messageCount} maxCount={999} color="blue">
-  <Ionicons name="mail-outline" size={32} />
-</Badge>
-```
+- High contrast badge colors for visibility
+- Automatic positioning based on digit count ensures readability
+- Minimum touch target maintained through wrapper children

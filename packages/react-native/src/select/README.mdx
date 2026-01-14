@@ -1,301 +1,79 @@
----
-title: Select
-description: Flexible inline selection component for choosing one or more options from visible choices with custom styling.
----
-
-import { Select, SelectOption } from "./Select";
-import { View, Text } from "react-native";
-import { Stack } from "../stack";
-import { Card } from "../card";
-import { Typography } from "../typography";
-
 # Select
 
-Flexible inline selection component for choosing one or more options from visible choices. Provides a composable API where you control the visual presentation of options through custom child components.
+**Category**: input | **Tags**: form, dropdown, picker, selection
 
-## Import
+The Select component provides a flexible inline selection interface using a compound component pattern. It supports both single and multiple selection modes with full accessibility, allowing custom visual implementations through SelectOption children. Unlike native pickers, it enables rich custom styling while maintaining proper ARIA semantics.
 
-```tsx
-import { Select, SelectOption } from "@repo/react-native";
-```
+## Basic Usage
 
-## Usage
+The default configuration for single selection with visual feedback via Card components.
 
-### Basic Single Selection
+<BasicExample />
 
-<View style={{ padding: 20 }}>
-  <Select value="opt1" onValueChange={() => {}}>
-    <Stack gap={12}>
-      <SelectOption value="opt1">
-        <Card>
-          <Typography variant="body">Option 1</Typography>
-        </Card>
-      </SelectOption>
-      <SelectOption value="opt2">
-        <Card>
-          <Typography variant="body">Option 2</Typography>
-        </Card>
-      </SelectOption>
-      <SelectOption value="opt3">
-        <Card>
-          <Typography variant="body">Option 3</Typography>
-        </Card>
-      </SelectOption>
-    </Stack>
-  </Select>
-</View>
+## Multiple Selection
 
-```tsx
-const [value, setValue] = useState("");
+Enable multiple selections by setting the multiple prop. Users can toggle individual options on and off.
 
-<Select value={value} onValueChange={setValue}>
-  <Stack gap={12}>
-    <SelectOption value="opt1">
-      <Card>
-        <Typography variant="body">Option 1</Typography>
-      </Card>
-    </SelectOption>
-    <SelectOption value="opt2">
-      <Card>
-        <Typography variant="body">Option 2</Typography>
-      </Card>
-    </SelectOption>
-  </Stack>
-</Select>
-```
+<MultipleSelectionExample />
 
-### Multiple Selection
+## Disabled State
 
-Enable selecting multiple options by setting the `multiple` prop.
+Selections can be disabled at both the parent Select level and individual SelectOption level.
 
-<View style={{ padding: 20 }}>
-  <Select value={["opt1", "opt2"]} onValueChange={() => {}} multiple>
-    <Stack gap={12}>
-      <SelectOption value="opt1">
-        <Card>
-          <Typography variant="body">Option 1</Typography>
-        </Card>
-      </SelectOption>
-      <SelectOption value="opt2">
-        <Card>
-          <Typography variant="body">Option 2</Typography>
-        </Card>
-      </SelectOption>
-      <SelectOption value="opt3">
-        <Card>
-          <Typography variant="body">Option 3</Typography>
-        </Card>
-      </SelectOption>
-    </Stack>
-  </Select>
-</View>
+<DisabledExample />
 
-```tsx
-const [values, setValues] = useState<string[]>([]);
+## Theme Tokens
 
-<Select value={values} onValueChange={setValues} multiple>
-  <Stack gap={12}>
-    <SelectOption value="opt1">
-      <Card>
-        <Typography variant="body">Option 1</Typography>
-      </Card>
-    </SelectOption>
-    <SelectOption value="opt2">
-      <Card>
-        <Typography variant="body">Option 2</Typography>
-      </Card>
-    </SelectOption>
-  </Stack>
-</Select>
-```
+This component uses the following design tokens from the three-tier theme system:
 
-### With Visual Selection State
+### Size Tokens
 
-**Important:** SelectOption does not apply selection styling. Your child components must handle visual feedback by checking the selection state.
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.select.size[size].height | Container height | 36 | 44 | 52 |
+| theme.component.select.size[size].fontSize | Text size | 12 | 14 | 16 |
+| theme.component.select.size[size].padding | Content padding | 8 | 12 | 16 |
+| theme.component.select.size[size].borderRadius | Corner radius | 12 | 12 | 12 |
 
-<View style={{ padding: 20 }}>
-  <Select value="tier-pro" onValueChange={() => {}}>
-    <Stack gap={16}>
-      <SelectOption value="tier-free">
-        <Card
-          variant={"tier-free" === "tier-pro" ? "elevated" : "default"}
-          style={{ borderWidth: "tier-free" === "tier-pro" ? 2 : 1 }}
-        >
-          <Typography variant="heading">Free Tier</Typography>
-          <Typography variant="body">Basic features</Typography>
-        </Card>
-      </SelectOption>
-      <SelectOption value="tier-pro">
-        <Card
-          variant="elevated"
-          style={{ borderWidth: 2 }}
-        >
-          <Typography variant="heading">Pro Tier</Typography>
-          <Typography variant="body">All features</Typography>
-        </Card>
-      </SelectOption>
-    </Stack>
-  </Select>
-</View>
+### Variant Tokens (Light Mode)
 
-```tsx
-const [tier, setTier] = useState("tier-pro");
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.select.variant.light.default.background | Default background | light.surface.primary | light.surface.primary |
+| theme.component.select.variant.light.default.text | Default text | light.text.primary | light.text.primary |
+| theme.component.select.variant.light.default.placeholder | Placeholder text | light.text.tertiary | light.text.tertiary |
+| theme.component.select.variant.light.default.border | Default border | light.border.primary | light.border.primary |
+| theme.component.select.variant.light.default.icon | Icon color | light.text.secondary | light.text.secondary |
+| theme.component.select.variant.light.filled.background | Filled background | light.surface.tertiary | light.surface.tertiary |
+| theme.component.select.variant.light.focus.border | Focus border | light.border.focus | light.border.focus |
+| theme.component.select.variant.light.error.border | Error border | light.border.error | light.border.error |
+| theme.component.select.variant.light.disabled.background | Disabled background | light.surface.secondary | light.surface.secondary |
+| theme.component.select.variant.light.disabled.text | Disabled text | light.text.disabled | light.text.disabled |
+| theme.component.select.variant.light.disabled.opacity | Disabled opacity | 0.5 | primitive.opacity.disabled |
 
-<Select value={tier} onValueChange={setTier}>
-  <Stack gap={16}>
-    <SelectOption value="tier-free">
-      <Card
-        variant={tier === "tier-free" ? "elevated" : "default"}
-        style={{
-          borderWidth: tier === "tier-free" ? 2 : 1,
-          borderColor: tier === "tier-free" ? "#4A90E2" : "#E5E7EB"
-        }}
-      >
-        <Typography variant="heading">Free Tier</Typography>
-        <Typography variant="body">Basic features</Typography>
-      </Card>
-    </SelectOption>
-    <SelectOption value="tier-pro">
-      <Card
-        variant={tier === "tier-pro" ? "elevated" : "default"}
-        style={{
-          borderWidth: tier === "tier-pro" ? 2 : 1,
-          borderColor: tier === "tier-pro" ? "#4A90E2" : "#E5E7EB"
-        }}
-      >
-        <Typography variant="heading">Pro Tier</Typography>
-        <Typography variant="body">All features</Typography>
-      </Card>
-    </SelectOption>
-  </Stack>
-</Select>
-```
+### Variant Tokens (Dark Mode)
 
-### Multiple Selection with Visual State
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.select.variant.dark.default.background | Default background | dark.surface.primary | dark.surface.primary |
+| theme.component.select.variant.dark.default.text | Default text | dark.text.primary | dark.text.primary |
+| theme.component.select.variant.dark.default.placeholder | Placeholder text | dark.text.tertiary | dark.text.tertiary |
+| theme.component.select.variant.dark.default.border | Default border | dark.border.primary | dark.border.primary |
+| theme.component.select.variant.dark.default.icon | Icon color | dark.text.secondary | dark.text.secondary |
+| theme.component.select.variant.dark.filled.background | Filled background | dark.surface.tertiary | dark.surface.tertiary |
+| theme.component.select.variant.dark.focus.border | Focus border | dark.border.focus | dark.border.focus |
+| theme.component.select.variant.dark.error.border | Error border | dark.border.error | dark.border.error |
+| theme.component.select.variant.dark.disabled.background | Disabled background | dark.surface.secondary | dark.surface.secondary |
+| theme.component.select.variant.dark.disabled.text | Disabled text | dark.text.disabled | dark.text.disabled |
+| theme.component.select.variant.dark.disabled.opacity | Disabled opacity | 0.5 | primitive.opacity.disabled |
 
-Show which items are selected in multi-select mode.
+### Spacing Tokens
 
-```tsx
-const [contacts, setContacts] = useState<string[]>([]);
-
-<Select value={contacts} onValueChange={setContacts} multiple>
-  <Stack gap={12}>
-    {allContacts.map(contact => (
-      <SelectOption key={contact.id} value={contact.id}>
-        <Card
-          variant={contacts.includes(contact.id) ? "elevated" : "default"}
-          style={{
-            borderWidth: contacts.includes(contact.id) ? 2 : 1,
-            borderColor: contacts.includes(contact.id) ? "#4A90E2" : "#E5E7EB"
-          }}
-        >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
-            <Typography variant="body">{contact.name}</Typography>
-            {contacts.includes(contact.id) && (
-              <Text style={{ color: "#4A90E2", fontSize: 18 }}>✓</Text>
-            )}
-          </View>
-        </Card>
-      </SelectOption>
-    ))}
-  </Stack>
-</Select>
-```
-
-### Disabled Options
-
-Disable specific options or the entire Select component.
-
-<View style={{ padding: 20 }}>
-  <Select value="opt1" onValueChange={() => {}}>
-    <Stack gap={12}>
-      <SelectOption value="opt1">
-        <Card>
-          <Typography variant="body">Enabled Option</Typography>
-        </Card>
-      </SelectOption>
-      <SelectOption value="opt2" disabled>
-        <Card style={{ opacity: 0.5 }}>
-          <Typography variant="body">Disabled Option</Typography>
-        </Card>
-      </SelectOption>
-    </Stack>
-  </Select>
-</View>
-
-```tsx
-<Select value={value} onValueChange={setValue}>
-  <Stack gap={12}>
-    <SelectOption value="opt1">
-      <Card>
-        <Typography variant="body">Enabled Option</Typography>
-      </Card>
-    </SelectOption>
-    <SelectOption value="opt2" disabled>
-      <Card style={{ opacity: 0.5 }}>
-        <Typography variant="body">Disabled Option</Typography>
-      </Card>
-    </SelectOption>
-  </Stack>
-</Select>
-```
-
-### Disabled Select
-
-When the Select component is disabled, all options become disabled.
-
-```tsx
-<Select value={value} onValueChange={setValue} disabled>
-  <Stack gap={12}>
-    <SelectOption value="opt1">
-      <Card style={{ opacity: 0.5 }}>
-        <Typography variant="body">Option 1</Typography>
-      </Card>
-    </SelectOption>
-    <SelectOption value="opt2">
-      <Card style={{ opacity: 0.5 }}>
-        <Typography variant="body">Option 2</Typography>
-      </Card>
-    </SelectOption>
-  </Stack>
-</Select>
-```
-
-### Dynamic Options from Data
-
-Map over data to create options dynamically.
-
-```tsx
-const tiers = [
-  { id: "free", name: "Free Tier", price: "$0/mo", features: "Basic features" },
-  { id: "pro", name: "Pro Tier", price: "$29/mo", features: "All features" },
-  { id: "enterprise", name: "Enterprise", price: "Custom", features: "Custom solutions" }
-];
-
-const [selectedTier, setSelectedTier] = useState("pro");
-
-<Select value={selectedTier} onValueChange={setSelectedTier}>
-  <Stack gap={16}>
-    {tiers.map(tier => (
-      <SelectOption key={tier.id} value={tier.id}>
-        <Card
-          variant={selectedTier === tier.id ? "elevated" : "default"}
-          style={{
-            borderWidth: selectedTier === tier.id ? 2 : 1,
-            borderColor: selectedTier === tier.id ? "#4A90E2" : "#E5E7EB"
-          }}
-        >
-          <View>
-            <Typography variant="heading">{tier.name}</Typography>
-            <Typography variant="body">{tier.price}</Typography>
-            <Typography variant="caption-1">{tier.features}</Typography>
-          </View>
-        </Card>
-      </SelectOption>
-    ))}
-  </Stack>
-</Select>
-```
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.select.gap | Gap between options | 8 | primitive.spacing[2] |
+| theme.component.select.borderWidth.outline | Outline border width | hairlineWidth | primitive.spacing.hairline |
+| theme.component.select.borderWidth.filled | Filled border width | 0 | - |
 
 ## Props
 
@@ -303,121 +81,46 @@ const [selectedTier, setSelectedTier] = useState("pro");
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string \| string[]` | - | Current selection (string for single mode, array for multiple mode) |
-| `onValueChange` | `(value: string \| string[]) => void` | - | Callback when selection changes |
-| `children` | `ReactNode` | - | SelectOption components and layout wrappers (e.g., Stack) |
-| `multiple` | `boolean` | `false` | Enable multiple selection mode |
-| `disabled` | `boolean` | `false` | Disable all options |
-| `style` | `StyleProp<ViewStyle>` | `undefined` | Custom styles for container View |
-
-The component also accepts all standard React Native `ViewProps`.
+| value | string \| string[] | required | Currently selected value(s) |
+| onChange | (value: string \| string[]) => void | required | Handler called when selection changes |
+| onBlur | () => void | undefined | Handler called when press completes |
+| multiple | boolean | false | Enable multiple selection mode |
+| disabled | boolean | false | Disable all options |
+| children | ReactNode | required | SelectOption children |
+| style | StyleProp\<ViewStyle\> | undefined | Custom container styles |
 
 ### SelectOption Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string` | - | Unique identifier for this option |
-| `children` | `ReactNode` | - | Custom content to display (typically Card, View, or custom component) |
-| `disabled` | `boolean` | `false` | Disable this specific option |
-| `style` | `StyleProp<ViewStyle>` | `undefined` | Custom styles for Pressable wrapper |
-
-The component also accepts all standard React Native `ViewProps`.
+| value | string | required | Unique value for this option |
+| onBlur | () => void | undefined | Handler called when press completes |
+| disabled | boolean | false | Disable this specific option |
+| children | ReactNode | required | Option content |
+| style | StyleProp\<ViewStyle\> | undefined | Custom option styles |
 
 ## Accessibility
 
-The Select components follow accessibility best practices:
+**WCAG Level:** AA compliant
 
-- **Select**: Uses `accessibilityRole="radiogroup"` for proper container identification
-- **SelectOption**: Uses `accessibilityRole="radio"` for screen reader identification
-- Provides `accessibilityState` with `checked` and `disabled` states
-- Selection state changes are automatically announced to screen readers
-- Supports custom `accessibilityLabel` props for enhanced accessibility
+**Semantic Roles:**
 
-## Best Practices
+- Select container uses accessibilityRole="radiogroup"
+- SelectOption uses accessibilityRole="radio"
 
-1. **Visual Feedback**: Always implement visual selection feedback in your child components
-   - Use border colors, background colors, or checkmarks to indicate selected state
-   - Ensure sufficient contrast for accessibility
+**Screen Reader:**
 
-2. **Unique Values**: Provide unique `value` props for each SelectOption
-   - Values are used to track selection state
-   - Duplicate values will cause unexpected behavior
+- Announces checked state via accessibilityState.checked
+- Announces disabled state via accessibilityState.disabled
+- Custom labels supported via accessibilityLabel prop
 
-3. **Layout Components**: Use Stack or View to organize options
-   - Stack provides consistent spacing between options
-   - Allows for responsive grid layouts if needed
+**Implementation Notes:**
 
-4. **Selection State**: Check selection state in child components
-   - Single mode: `value === optionValue`
-   - Multiple mode: `value.includes(optionValue)`
+- The SelectOption component does not apply visual selection styling automatically
+- Implement visual feedback in child components using the selection state
+- Use theme tokens for consistent selection indicators (e.g., border color changes)
 
-5. **Touch Targets**: Ensure options have sufficient size for touch interaction
-   - Minimum 44x44 points for accessibility
-   - Card components typically meet this requirement
+**Touch Target:**
 
-6. **Performance**: For long lists, consider virtualization
-   - FlatList can be used with SelectOption for better performance
-   - Map operations work well for moderate lists (< 50 items)
-
-## Common Patterns
-
-### Tier Selection (Single)
-
-```tsx
-<Select value={tier} onValueChange={setTier}>
-  <Stack gap={16}>
-    {tiers.map(t => (
-      <SelectOption key={t.id} value={t.id}>
-        <Card variant={tier === t.id ? "elevated" : "default"}>
-          <Typography variant="heading">{t.name}</Typography>
-          <Typography variant="body">{t.description}</Typography>
-        </Card>
-      </SelectOption>
-    ))}
-  </Stack>
-</Select>
-```
-
-### Contact Selection (Multiple)
-
-```tsx
-<Select value={selectedContacts} onValueChange={setSelectedContacts} multiple>
-  <Stack gap={12}>
-    {contacts.map(contact => (
-      <SelectOption key={contact.id} value={contact.id}>
-        <Card>
-          <View style={{ flexDirection: "row", gap: 12 }}>
-            <Typography>{contact.name}</Typography>
-            {selectedContacts.includes(contact.id) && <Text>✓</Text>}
-          </View>
-        </Card>
-      </SelectOption>
-    ))}
-  </Stack>
-</Select>
-```
-
-### Simple Text Options
-
-```tsx
-<Select value={option} onValueChange={setOption}>
-  <Stack gap={8}>
-    <SelectOption value="opt1">
-      <View style={{
-        padding: 12,
-        borderWidth: option === "opt1" ? 2 : 1,
-        borderColor: option === "opt1" ? "blue" : "gray"
-      }}>
-        <Text>Option 1</Text>
-      </View>
-    </SelectOption>
-  </Stack>
-</Select>
-```
-
-## Important Notes
-
-- **SelectOption does not apply selection styling** - you must implement visual feedback in your child components
-- **SelectOption can be nested anywhere** in the children tree - the Context API works at any depth
-- **Value prop type** - use `string` for single mode and `string[]` for multiple mode for proper type safety
-- **Empty values** - empty string `""` or empty array `[]` are valid and mean nothing is selected
+- Ensure SelectOption children meet minimum 44pt touch target (Apple HIG)
+- Use Card or similar components with adequate padding

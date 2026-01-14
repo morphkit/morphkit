@@ -1,31 +1,122 @@
-import { Typography } from './Typography'
-import { View } from 'react-native'
+import { BasicExample, VariantsExample } from "./examples";
 
-# Typography Component
+# Typography
 
-A text component with 11 iOS-inspired typography variants using React Native's StyleSheet API. Each variant follows the iOS Human Interface Guidelines typography scale, providing semantic text styles for building consistent and accessible mobile interfaces. Use the `variant` prop to select a text style, and the `style` prop to customize individual instances.
+**Category**: display | **Tags**: text, font, type-scale
+
+The Typography component provides a theme-aware text renderer with 11 iOS Human Interface Guidelines-inspired typography variants. It ensures consistent text styling across the application through semantic text styles, automatically adapting to light and dark color schemes without manual font configuration.
+
+## Basic Usage
+
+The default configuration for common use cases.
+
+<BasicExample />
 
 ## Variants
 
-<View style={{ padding: 16, marginVertical: 12 }}>
-  <Typography variant="large-title">Large Title (34pt)</Typography>
-  <Typography variant="title-1" style={{ marginTop: 16 }}>Title 1 (28pt)</Typography>
-  <Typography variant="title-2" style={{ marginTop: 12 }}>Title 2 (22pt)</Typography>
-  <Typography variant="title-3" style={{ marginTop: 12 }}>Title 3 (20pt)</Typography>
-  <Typography variant="heading" style={{ marginTop: 12 }}>Heading (17pt, semibold)</Typography>
-  <Typography variant="body" style={{ marginTop: 12 }}>Body (17pt)</Typography>
-  <Typography variant="callout" style={{ marginTop: 12 }}>Callout (16pt)</Typography>
-  <Typography variant="subhead" style={{ marginTop: 12 }}>Subhead (15pt)</Typography>
-  <Typography variant="footnote" style={{ marginTop: 12 }}>Footnote (13pt)</Typography>
-  <Typography variant="caption-1" style={{ marginTop: 12 }}>Caption 1 (12pt)</Typography>
-  <Typography variant="caption-2" style={{ marginTop: 12 }}>Caption 2 (11pt)</Typography>
-</View>
+All 11 iOS-inspired typography variants for building visual hierarchy.
+
+<VariantsExample />
+
+- **large-title**: Primary screen titles, 34pt regular
+- **title-1**: Major section headers, 28pt regular
+- **title-2**: Secondary section headers, 22pt regular
+- **title-3**: Tertiary section headers, 20pt regular
+- **heading**: Emphasized body text, 17pt semibold
+- **body**: Default reading text, 17pt regular (default variant)
+- **callout**: Highlighted information, 16pt regular
+- **subhead**: Supporting text, 14pt regular
+- **footnote**: Secondary information, 13pt regular
+- **caption-1**: Labels and timestamps, 12pt regular
+- **caption-2**: Smallest readable text, 11pt regular with wide letter spacing
+
+## Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+### Typography Tokens
+
+| Token Path | Variant | Font Size | Font Weight | Line Height | Letter Spacing |
+| --- | --- | --- | --- | --- | --- |
+| theme.semantic.textStyles.largeTitle | large-title | 34 | 400 | 40.8 | -0.34 |
+| theme.semantic.textStyles.title1 | title-1 | 28 | 400 | 33.6 | -0.224 |
+| theme.semantic.textStyles.title2 | title-2 | 22 | 400 | 30.8 | -0.224 |
+| theme.semantic.textStyles.title3 | title-3 | 20 | 400 | 28 | 0 |
+| theme.semantic.textStyles.heading | heading | 17 | 600 | 23.8 | 0 |
+| theme.semantic.textStyles.body | body | 17 | 400 | 25.5 | 0 |
+| theme.semantic.textStyles.callout | callout | 16 | 400 | 24 | 0 |
+| theme.semantic.textStyles.subhead | subhead | 14 | 400 | 21 | 0 |
+| theme.semantic.textStyles.footnote | footnote | 13 | 400 | 18.2 | 0 |
+| theme.semantic.textStyles.caption1 | caption-1 | 12 | 400 | 16.8 | 0 |
+| theme.semantic.textStyles.caption2 | caption-2 | 11 | 400 | 15.4 | 0.11 |
+
+### Color Tokens
+
+| Token Path | Purpose | Light Mode Value | Dark Mode Value |
+| --- | --- | --- | --- |
+| theme.component.typography.variant.light.text | Text color (light) | #111827 | - |
+| theme.component.typography.variant.dark.text | Text color (dark) | - | #F9FAFB |
+
+### Primitive Typography Sources
+
+| Token Path | Purpose | Value |
+| --- | --- | --- |
+| primitive.fontSize.xs | Caption 2 size | 11 |
+| primitive.fontSize.sm | Caption 1 size | 12 |
+| primitive.fontSize.md | Footnote size | 13 |
+| primitive.fontSize.base | Subhead size | 14 |
+| primitive.fontSize.lg | Callout size | 16 |
+| primitive.fontSize.xl | Body/Heading size | 17 |
+| primitive.fontSize["2xl"] | Title 3 size | 20 |
+| primitive.fontSize["3xl"] | Title 2 size | 22 |
+| primitive.fontSize["4xl"] | Title 1 size | 28 |
+| primitive.fontSize["5xl"] | Large Title size | 34 |
 
 ## Props
 
-| Prop | Type | Default |
-|------|------|---------|
-| variant | `"large-title"` \| `"title-1"` \| `"title-2"` \| `"title-3"` \| `"heading"` \| `"body"` \| `"callout"` \| `"subhead"` \| `"footnote"` \| `"caption-1"` \| `"caption-2"` | `"body"` |
-| children | `ReactNode` | - |
-| style | `StyleProp<TextStyle>` | - |
-| ...props | `TextProps` | - |
+### Behavior Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| variant | "large-title" \| "title-1" \| "title-2" \| "title-3" \| "heading" \| "body" \| "callout" \| "subhead" \| "footnote" \| "caption-1" \| "caption-2" | "body" | Typography variant determining font size, weight, and spacing |
+
+### Content Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | ReactNode | required | Text content to render |
+
+### Styling Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<TextStyle\> | undefined | Custom style overrides (applied last in merge order) |
+
+### Inherited Props
+
+Typography extends React Native TextProps, supporting all standard text properties:
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| numberOfLines | number | Maximum number of lines before truncation |
+| ellipsizeMode | "head" \| "middle" \| "tail" \| "clip" | Truncation mode when text exceeds numberOfLines |
+| selectable | boolean | Whether text can be selected by user |
+| accessibilityRole | AccessibilityRole | Accessibility role for screen readers |
+| accessibilityLabel | string | Custom label for screen readers |
+
+## Accessibility
+
+**WCAG Level:** AA compliant
+
+**Screen Reader:**
+
+- Supports accessibilityRole prop for semantic meaning (e.g., "header")
+- Supports accessibilityLabel for custom announcements
+- Text content automatically announced by screen readers
+
+**Visual Requirements:**
+
+- Color contrast meets WCAG AA minimum 4.5:1 ratio
+- Light mode uses #111827 (neutral[900]) on light backgrounds
+- Dark mode uses #F9FAFB (neutral[50]) on dark backgrounds
+- System font ensures optimal readability across platforms

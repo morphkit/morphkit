@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "switch",
   "description": "Toggle switch for binary on/off states with animated transitions",
+  "category": "input",
+  "tags": ["form", "toggle", "binary"],
   "dependencies": []
 }

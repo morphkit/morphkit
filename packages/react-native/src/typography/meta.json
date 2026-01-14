@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "typography",
   "description": "Text component with 11 iOS-inspired typography variants using StyleSheet",
+  "category": "display",
+  "tags": ["text", "font", "type-scale"],
   "dependencies": []
 }

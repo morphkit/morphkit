@@ -2,5 +2,7 @@
   "type": "react-native",
   "name": "slider",
   "description": "Range slider control for selecting numeric values with single or dual thumb support",
-  "dependencies": []
+  "category": "input",
+  "tags": ["form", "range", "adjustment"],
+  "dependencies": ["typography"]
 }

@@ -1,101 +1,89 @@
-import { Spinner } from "./Spinner";
-import { Box, Stack, Typography, Card } from "../";
+import { BasicExample, SizesExample, CustomExample } from "./examples";
 
 # Spinner
 
-An animated loading indicator with continuous 360° rotation, perfect for showing processing states, data fetching, or any indefinite wait time.
+**Category**: display | **Tags**: loading, indicator, animated
+
+The Spinner component provides an animated loading indicator with continuous rotation. It offers three size presets (sm, md, lg) or custom pixel sizing, with theme-aware colors that adapt to light and dark modes.
 
 ## Basic Usage
 
-The default medium-sized spinner with theme-aware colors.
+The default configuration displays a medium-sized spinner with the primary action color.
 
-<Box marginVertical={12}>
-  <Spinner />
-</Box>
+<BasicExample />
 
 ## Sizes
 
-Spinners come in three preset sizes (sm, md, lg) or accept a custom pixel value for precise control.
+Available size presets for different contexts.
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={16} align="center">
-    <Spinner size="sm" />
-    <Spinner size="md" />
-    <Spinner size="lg" />
-    <Spinner size={40} />
-  </Stack>
-</Box>
+<SizesExample />
 
-## Custom Colors
+- **sm**: Compact 16px diameter for inline indicators
+- **md**: Default 24px diameter for standard loading states
+- **lg**: Prominent 32px diameter for full-screen loading
 
-Override the default theme color to match your design needs.
+## Custom Styling
 
-<Box marginVertical={12}>
-  <Stack direction="horizontal" gap={16}>
-    <Spinner color="#FF6B6B" />
-    <Spinner color="#10B981" />
-    <Spinner color="#F59E0B" />
-  </Stack>
-</Box>
+Custom numeric sizes and colors for specialized loading states.
 
-## Loading State Example
+<CustomExample />
 
-Use Spinner to indicate loading within a Card or content area.
+## Theme Tokens
 
-<Box marginVertical={12}>
-  <Card>
-    <Stack gap={16} align="center">
-      <Spinner size="lg" />
-      <Typography variant="callout" style={{ color: "#6B7280" }}>
-        Loading your content...
-      </Typography>
-    </Stack>
-  </Card>
-</Box>
+This component uses the following design tokens from the three-tier theme system:
+
+### Size Tokens
+
+| Token Path | Purpose | sm | md | lg |
+| --- | --- | --- | --- | --- |
+| theme.component.spinner.size[size] | Spinner diameter | 16 | 24 | 32 |
+| theme.component.spinner.strokeWidth[size] | Border thickness | 2 | 3 | 4 |
+
+### Animation Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+| --- | --- | --- | --- |
+| theme.component.spinner.duration | Rotation cycle duration | 1000ms | primitive.duration.slow |
+
+### Color Tokens (Light Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.spinner.variant.light.color | Spinner stroke color | #4A90E2 | light.action.primary |
+
+### Color Tokens (Dark Mode)
+
+| Token Path | Purpose | Value | Semantic Source |
+| --- | --- | --- | --- |
+| theme.component.spinner.variant.dark.color | Spinner stroke color | #60A5FA | dark.action.primary |
 
 ## Props
 
+### Behavior Props
+
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| size | `"sm"` \| `"md"` \| `"lg"` \| `number` | `"md"` | Size preset (16/24/32px) or custom pixel value |
-| color | `string` | Theme primary | Spinner color override |
-| style | `StyleProp<ViewStyle>` | - | Custom container styles |
+| --- | --- | --- | --- |
+| size | "sm" \| "md" \| "lg" \| number | "md" | Size preset or custom pixel diameter |
+| color | string | undefined | Custom stroke color (overrides theme color) |
 
-## Usage Examples
+### Styling Props
 
-### Loading Screen
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | StyleProp\<ViewStyle\> | undefined | Custom container style overrides |
 
-```tsx
-import { Spinner } from "@repo/react-native";
+## Accessibility
 
-function LoadingScreen() {
-  return <Spinner size="lg" />;
-}
-```
+**WCAG Level:** AA compliant
 
-### Loading State in Card
+**Screen Reader:**
 
-```tsx
-import { Spinner, Card, Stack, Typography } from "@repo/react-native";
+- Role: progressbar
+- Announces "Loading" to assistive technologies
+- Provides clear indication of loading state
 
-function DataCard() {
-  return (
-    <Card>
-      <Stack gap={12} align="center">
-        <Spinner />
-        <Typography variant="body">Fetching data...</Typography>
-      </Stack>
-    </Card>
-  );
-}
-```
+**Visual Requirements:**
 
-### Custom Branded Spinner
-
-```tsx
-import { Spinner } from "@repo/react-native";
-
-function BrandedLoader() {
-  return <Spinner size={48} color="#4A90E2" />;
-}
-```
+- Continuous rotation animation for clear activity indication
+- Sufficient color contrast against backgrounds
+- Multiple size options for different visual hierarchies

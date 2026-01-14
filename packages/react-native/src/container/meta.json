@@ -1,6 +1,8 @@
 {
-  "type": "react-native",
+  "type": "components:ui",
   "name": "container",
   "description": "Centered max-width wrapper for page content with responsive width constraints",
+  "category": "layout",
+  "tags": ["layout", "responsive", "max-width"],
   "dependencies": []
 }
