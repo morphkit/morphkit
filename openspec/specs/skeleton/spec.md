@@ -1,8 +1,11 @@
 # skeleton Specification
 
 ## Purpose
+
 The Skeleton component provides a placeholder loading component with shimmer animation, supporting rectangle, circle, and text line shapes with customizable dimensions for improved perceived performance during content loading.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Skeleton SHALL be a View-based component that displays a placeholder with shimmer animation.
@@ -202,4 +205,3 @@ Skeleton SHALL have comprehensive MDX documentation.
 - **AND** real-world composition examples are included (profile card, content feed)
 - **AND** props table documents all available props
 - **AND** code examples show common usage patterns
-

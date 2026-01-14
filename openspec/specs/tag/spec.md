@@ -1,8 +1,11 @@
 # tag Specification
 
 ## Purpose
+
 The Tag component provides small pill-shaped labels for categorization with 5 color variants, 3 sizes, and optional dismiss functionality for displaying metadata, categories, or status indicators.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Tag SHALL be a View-based component that displays pill-shaped labels with text content.
@@ -240,4 +243,3 @@ Tag SHALL have comprehensive MDX documentation.
 - **AND** interactive filter example is provided
 - **AND** props table documents all available props
 - **AND** usage code examples are included
-

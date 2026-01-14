@@ -1,8 +1,11 @@
 # tabs Specification
 
 ## Purpose
+
 The Tabs component provides tabbed navigation with multiple variants and orientations for organizing content into selectable sections, enabling efficient content switching within a single view.
+
 ## Requirements
+
 ### Requirement: Compound Component Architecture
 
 Tabs SHALL provide a compound component system with four sub-components that work together via React Context.
@@ -164,13 +167,13 @@ Tabs SHALL use the three-tier theme token system exclusively with no hardcoded v
 #### Scenario: Semantic tokens for colors
 
 - **WHEN** component renders in light mode
-- **THEN** colors use light.surface.*, light.text.*, light.border.* semantic tokens
+- **THEN** colors use light.surface._, light.text._, light.border.\* semantic tokens
 - **AND** theme.component.tabs.variant.light is accessed for variant colors
 
 #### Scenario: Dark mode color adaptation
 
 - **WHEN** colorScheme is "dark"
-- **THEN** colors use dark.surface.*, dark.text.*, dark.border.* semantic tokens
+- **THEN** colors use dark.surface._, dark.text._, dark.border.\* semantic tokens
 - **AND** theme.component.tabs.variant.dark is accessed for variant colors
 
 ### Requirement: Typography Integration
@@ -291,4 +294,3 @@ Tabs SHALL have comprehensive MDX documentation with examples.
 - **THEN** BasicExample demonstrates controlled tabs with content switching
 - **AND** SwipeExample demonstrates pills variant with swipe navigation
 - **AND** AdvancedExample demonstrates vertical orientation with icons
-

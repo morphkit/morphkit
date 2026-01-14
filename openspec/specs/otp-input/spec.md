@@ -1,8 +1,11 @@
 # otp-input Specification
 
 ## Purpose
+
 The OTP Input component provides a one-time password input with multiple fields for verification codes, enabling secure code entry with automatic focus management and validation.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 OTPInput SHALL render a row of individual Input fields that collectively represent a verification code.
@@ -398,4 +401,3 @@ OTPInput SHALL have comprehensive MDX documentation.
 - **AND** backspace behavior is explained
 - **AND** paste handling is explained
 - **AND** auto-submit is explained
-

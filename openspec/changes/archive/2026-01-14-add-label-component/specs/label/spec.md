@@ -17,7 +17,7 @@ Label SHALL be a text-based component that wraps Typography for consistent text 
 #### Scenario: Label with required indicator
 
 - **WHEN** required prop is true
-- **THEN** a red asterisk (*) is appended after the label text
+- **THEN** a red asterisk (\*) is appended after the label text
 - **AND** asterisk uses Typography variant "caption-1"
 - **AND** asterisk has bold fontWeight
 

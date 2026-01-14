@@ -1,8 +1,11 @@
 # container Specification
 
 ## Purpose
+
 The Container component provides a centered max-width wrapper for page content with responsive width constraints, ensuring consistent content boundaries across different screen sizes.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Container SHALL be implemented as a View-based layout component for constraining content width.
@@ -317,4 +320,3 @@ Container SHALL include example components demonstrating real-world usage patter
 - **THEN** demonstrates lg maxWidth for standard pages
 - **AND** shows header, content, and footer sections
 - **AND** uses Card and Typography for content hierarchy
-

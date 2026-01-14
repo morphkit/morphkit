@@ -1,8 +1,11 @@
 # radio Specification
 
 ## Purpose
+
 The Radio component provides a single-selection control with group management for choosing one option from a set, ensuring mutually exclusive selections in forms and option lists.
+
 ## Requirements
+
 ### Requirement: Compound Component Structure
 
 Radio SHALL be implemented as a compound component with RadioGroup and RadioButton.
@@ -275,4 +278,3 @@ Radio SHALL have comprehensive MDX documentation.
 - **WHEN** documentation is viewed
 - **THEN** single selection use case is explained
 - **AND** comparison with Checkbox for multiple selection is noted
-

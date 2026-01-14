@@ -1,8 +1,11 @@
 # input Specification
 
 ## Purpose
+
 The Input component provides a single-line text input field with label, error state, and prefix/suffix icon support for collecting user text input in forms and interfaces.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Input SHALL be a controlled text input component built on React Native TextInput with forwardRef support.
@@ -339,4 +342,3 @@ Input SHALL have comprehensive MDX documentation with usage examples.
 - **WHEN** README.mdx is viewed
 - **THEN** light/dark mode behavior is documented
 - **AND** variant-specific colors are explained
-

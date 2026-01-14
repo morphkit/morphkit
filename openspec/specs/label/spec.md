@@ -1,8 +1,11 @@
 # label Specification
 
 ## Purpose
+
 The Label component provides a form label with optional required indicator and error state for describing input fields, ensuring consistent labeling across forms with accessibility support.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Label SHALL be a text-based component that wraps Typography for consistent text rendering.
@@ -16,7 +19,7 @@ Label SHALL be a text-based component that wraps Typography for consistent text 
 #### Scenario: Label with required indicator
 
 - **WHEN** required prop is true
-- **THEN** a red asterisk (*) is appended after the label text
+- **THEN** a red asterisk (\*) is appended after the label text
 - **AND** asterisk uses Typography variant "caption-1"
 - **AND** asterisk has bold fontWeight
 
@@ -220,4 +223,3 @@ Label SHALL have comprehensive MDX documentation with examples.
 - **THEN** complete props table is provided
 - **AND** each prop has type, default value, and description
 - **AND** TextProps inheritance is noted
-

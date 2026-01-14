@@ -88,7 +88,7 @@ Textarea SHALL support automatic height adjustment as content grows.
 #### Scenario: Auto-resize disabled (default)
 
 - **WHEN** autoResize is false or not provided
-- **THEN** textarea height is fixed based on rows * lineHeight + padding
+- **THEN** textarea height is fixed based on rows \* lineHeight + padding
 - **AND** content scrolls within the fixed height
 
 #### Scenario: Auto-resize enabled
@@ -97,7 +97,7 @@ Textarea SHALL support automatic height adjustment as content grows.
 - **THEN** textarea expands vertically as content grows
 - **AND** minHeight is set to initial height based on rows
 - **AND** onContentSizeChange handler updates height state
-- **AND** new height equals contentSize.height + padding * 2
+- **AND** new height equals contentSize.height + padding \* 2
 
 ### Requirement: Character Count Display
 
@@ -132,8 +132,8 @@ Textarea SHALL support configurable initial height via rows prop.
 #### Scenario: Custom rows
 
 - **WHEN** rows={N} is provided
-- **THEN** initial height is calculated as rows * lineHeight + padding * 2
-- **AND** lineHeight is sizeTokens.fontSize * sizeTokens.lineHeight
+- **THEN** initial height is calculated as rows _ lineHeight + padding _ 2
+- **AND** lineHeight is sizeTokens.fontSize \* sizeTokens.lineHeight
 
 ### Requirement: Label Display
 

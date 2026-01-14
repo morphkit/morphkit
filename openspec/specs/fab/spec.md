@@ -1,8 +1,11 @@
 # fab Specification
 
 ## Purpose
+
 The Floating Action Button (FAB) component provides a prominent circular action button with placement options and extended variant for primary screen-level actions that float above content.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 FAB SHALL be implemented as a Pressable-based component wrapped in Animated.View with TypeScript interface.
@@ -318,4 +321,3 @@ FAB SHALL include MDX documentation with usage examples.
 - **THEN** basic FAB example is provided with import statement
 - **AND** extended FAB example is provided
 - **AND** examples show realistic use cases (Create, Compose buttons)
-

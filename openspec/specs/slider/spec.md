@@ -1,8 +1,11 @@
 # slider Specification
 
 ## Purpose
+
 The Slider component provides a range slider control for selecting numeric values with single or dual thumb support, enabling intuitive selection of values or ranges within a defined minimum and maximum.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Slider SHALL be implemented as a forwardRef React component accepting SliderProps interface.
@@ -262,4 +265,3 @@ Slider SHALL include comprehensive MDX documentation.
 
 - **WHEN** documentation examples are reviewed
 - **THEN** basic, range, step, showValue, sizes, custom color, disabled, and continuous mode examples exist
-

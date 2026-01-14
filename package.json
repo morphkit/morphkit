@@ -8,7 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
     "test": "turbo run test",
-    "generate": "bun run scripts/generate-all.ts",
+    "generate": "bun run scripts/generate-all.ts && bun run format",
     "generate:registry": "bun run scripts/generate-component-registry.ts",
     "generate:docs": "bun run scripts/generate-docs-registry.ts",
     "generate:exports": "bun run scripts/generate-barrel-exports.ts",

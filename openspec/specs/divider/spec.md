@@ -1,8 +1,11 @@
 # divider Specification
 
 ## Purpose
+
 The Divider component provides a visual separator line with horizontal or vertical orientation for creating clear boundaries between content sections or UI elements.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Divider SHALL be implemented as a View-based component with configurable orientation, thickness, color, and length.
@@ -164,4 +167,3 @@ Divider SHALL include comprehensive MDX documentation with usage examples.
 - **THEN** it includes a props table with all props
 - **AND** each prop shows type, default value, and description
 - **AND** code examples demonstrate common use cases
-

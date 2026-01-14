@@ -1,8 +1,11 @@
 # checkbox Specification
 
 ## Purpose
+
 The Checkbox component provides a selectable control for boolean inputs with support for checked, unchecked, and indeterminate states, enabling multi-selection and mixed-state scenarios in forms and lists.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Checkbox SHALL be a controlled component accepting checked state and change handler.
@@ -234,4 +237,3 @@ Checkbox SHALL have comprehensive MDX documentation.
 - **AND** custom color usage is documented
 - **AND** disabled state is demonstrated
 - **AND** accessibility guidance is included
-

@@ -47,10 +47,12 @@ This is non-negotiable. The test suite must always be green.
 Component creation uses a split workflow with specialized skills and agents:
 
 ### Skills (Main Conversation)
+
 - **`spec-component`**: Creates OpenSpec proposals with Figma integration
 - **`develop-component`**: Implements components from approved proposals
 
 ### Agents (Isolated Context)
+
 - **`component-spec-writer`**: Autonomous proposal creation (parallel execution: 10+ agents)
 - **`component-developer`**: Autonomous component implementation (parallel execution: 10+ agents)
 

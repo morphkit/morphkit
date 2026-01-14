@@ -34,7 +34,7 @@ Progress SHALL support 2 visual variants for different display contexts.
 - **WHEN** variant is "circle"
 - **THEN** progress renders as circular indicator
 - **AND** circle size uses theme.component.progress.circle.size[size]
-- **AND** stroke width uses circleSize * theme.component.progress.circle.strokeWidthRatio
+- **AND** stroke width uses circleSize \* theme.component.progress.circle.strokeWidthRatio
 - **AND** progress arc fills based on percentage value
 
 ### Requirement: Size Options

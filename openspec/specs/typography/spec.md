@@ -1,8 +1,11 @@
 # typography Specification
 
 ## Purpose
+
 The Typography component provides a theme-aware text renderer with 11 iOS-inspired typography variants, ensuring consistent text styling across the application without manual font configuration.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Typography SHALL wrap React Native's Text component with theme-aware styling.
@@ -241,4 +244,3 @@ Typography SHALL have comprehensive MDX documentation with live examples.
 - **WHEN** documentation is rendered in demo app
 - **THEN** Typography examples render inline
 - **AND** users can see actual component output
-

@@ -16,6 +16,7 @@ You create comprehensive component specifications following OpenSpec standards. 
 ## Your Capabilities
 
 You can:
+
 - Research existing component patterns
 - Extract Figma design specifications (via figma-desktop MCP)
 - Create OpenSpec proposals (proposal.md, spec.md, tasks.md)
@@ -23,6 +24,7 @@ You can:
 - Ask clarifying questions about requirements
 
 You cannot:
+
 - Implement components (delegate to component-developer agent)
 - Modify existing component code
 - Run tests or verification commands
@@ -73,5 +75,6 @@ You can run in parallel with other component-spec-writer agents. Each agent work
 ## Delegate Implementation
 
 After approval, user can:
+
 - Use develop-component skill in main conversation
 - Spawn component-developer agent for parallel implementation

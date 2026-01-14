@@ -1,8 +1,11 @@
 # textarea Specification
 
 ## Purpose
+
 The Textarea component provides a multi-line text input field with auto-resize capability and character count display for collecting longer text input in forms such as comments, descriptions, or messages.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Textarea SHALL be implemented as a controlled multi-line text input component with ref forwarding.
@@ -91,7 +94,7 @@ Textarea SHALL support automatic height adjustment as content grows.
 #### Scenario: Auto-resize disabled (default)
 
 - **WHEN** autoResize is false or not provided
-- **THEN** textarea height is fixed based on rows * lineHeight + padding
+- **THEN** textarea height is fixed based on rows \* lineHeight + padding
 - **AND** content scrolls within the fixed height
 
 #### Scenario: Auto-resize enabled
@@ -100,7 +103,7 @@ Textarea SHALL support automatic height adjustment as content grows.
 - **THEN** textarea expands vertically as content grows
 - **AND** minHeight is set to initial height based on rows
 - **AND** onContentSizeChange handler updates height state
-- **AND** new height equals contentSize.height + padding * 2
+- **AND** new height equals contentSize.height + padding \* 2
 
 ### Requirement: Character Count Display
 
@@ -135,8 +138,8 @@ Textarea SHALL support configurable initial height via rows prop.
 #### Scenario: Custom rows
 
 - **WHEN** rows={N} is provided
-- **THEN** initial height is calculated as rows * lineHeight + padding * 2
-- **AND** lineHeight is sizeTokens.fontSize * sizeTokens.lineHeight
+- **THEN** initial height is calculated as rows _ lineHeight + padding _ 2
+- **AND** lineHeight is sizeTokens.fontSize \* sizeTokens.lineHeight
 
 ### Requirement: Label Display
 
@@ -338,4 +341,3 @@ Textarea SHALL have comprehensive MDX documentation with usage examples.
 - **WHEN** Theme Support section is viewed
 - **THEN** it documents light and dark mode colors
 - **AND** it documents focus and error state colors
-

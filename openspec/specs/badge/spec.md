@@ -1,8 +1,11 @@
 # badge Specification
 
 ## Purpose
+
 The Badge component displays notification count overlays on top of other UI elements, typically used to indicate unread messages, notifications, or pending items with automatic visibility management.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Badge SHALL be a wrapper component that positions a count indicator over its children.
@@ -194,4 +197,3 @@ Badge SHALL have comprehensive MDX documentation with examples.
 - **AND** hidden badge behavior is shown
 - **AND** real-world examples are included
 - **AND** props table documents all props
-

@@ -1,8 +1,11 @@
 # box Specification
 
 ## Purpose
+
 The Box component provides a flexible layout container with declarative spacing, sizing, and flexbox properties, eliminating the need for manual StyleSheet creation for common layout patterns.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Box SHALL be a View-based container component that accepts children and applies layout styles.
@@ -258,4 +261,3 @@ Box SHALL have comprehensive MDX documentation with usage examples.
 
 - **WHEN** documentation is viewed
 - **THEN** a complete props table lists all available props with types and descriptions
-

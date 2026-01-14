@@ -165,13 +165,13 @@ Tabs SHALL use the three-tier theme token system exclusively with no hardcoded v
 #### Scenario: Semantic tokens for colors
 
 - **WHEN** component renders in light mode
-- **THEN** colors use light.surface.*, light.text.*, light.border.* semantic tokens
+- **THEN** colors use light.surface._, light.text._, light.border.\* semantic tokens
 - **AND** theme.component.tabs.variant.light is accessed for variant colors
 
 #### Scenario: Dark mode color adaptation
 
 - **WHEN** colorScheme is "dark"
-- **THEN** colors use dark.surface.*, dark.text.*, dark.border.* semantic tokens
+- **THEN** colors use dark.surface._, dark.text._, dark.border.\* semantic tokens
 - **AND** theme.component.tabs.variant.dark is accessed for variant colors
 
 ### Requirement: Typography Integration

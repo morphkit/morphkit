@@ -1,8 +1,11 @@
 # toast Specification
 
 ## Purpose
+
 The Toast component provides temporary notification messages with slide-in animation, 4 semantic variants, top or bottom positioning, and auto-dismiss capability for non-intrusive user feedback.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Toast SHALL be implemented as an Animated.View-based component with TypeScript interface.
@@ -286,4 +289,3 @@ Toast SHALL include MDX documentation with usage examples.
 - **THEN** basic usage example with state management is provided
 - **AND** example shows integration with button press
 - **AND** example demonstrates onDismiss callback pattern
-

@@ -1,8 +1,11 @@
 # accordion Specification
 
 ## Purpose
+
 The Accordion component provides collapsible content sections with expand/collapse animations, supporting both single and multiple expansion modes for organizing and hiding complex information hierarchies.
+
 ## Requirements
+
 ### Requirement: Compound Component Structure
 
 Accordion SHALL be a compound component consisting of Accordion container and AccordionItem children.
@@ -295,4 +298,3 @@ Accordion SHALL have comprehensive MDX documentation.
 - **THEN** Accordion props table is provided
 - **AND** AccordionItem props table is provided
 - **AND** all props have type, default, and description
-

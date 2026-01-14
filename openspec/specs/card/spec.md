@@ -1,8 +1,11 @@
 # card Specification
 
 ## Purpose
+
 The Card component provides a content container with elevation, borders, and padding for grouping related information into visually distinct sections within the interface.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Card SHALL be implemented as a View-based container component with optional Pressable behavior.
@@ -99,7 +102,7 @@ Card SHALL use the three-tier theme token system for all styling.
 
 - **WHEN** colorScheme changes between "light" and "dark"
 - **THEN** all variant colors update from semantic tokens
-- **AND** background colors reflect the active scheme (light.surface.* or dark.surface.*)
+- **AND** background colors reflect the active scheme (light.surface._ or dark.surface._)
 - **AND** border colors reflect the active scheme
 - **AND** shadow presets remain consistent across schemes
 
@@ -232,4 +235,3 @@ Card SHALL include MDX documentation with usage examples.
 - **AND** onPress prop is documented for pressable behavior
 - **AND** style prop is documented for custom styles
 - **AND** ViewProps spreading is documented
-

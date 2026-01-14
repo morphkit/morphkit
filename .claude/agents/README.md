@@ -7,22 +7,26 @@ This directory contains specialized agents and skills for creating React Native 
 The component creation workflow is split into four pieces for maximum parallelization and flexibility:
 
 ### Skills (Main Conversation Context)
+
 - **spec-component**: Creates OpenSpec proposals with Figma integration
 - **develop-component**: Implements components from approved proposals
 
 ### Agents (Isolated Context)
+
 - **component-spec-writer**: Agent version of spec-component for autonomous operation
 - **component-developer**: Agent version of develop-component for autonomous operation
 
 ## When to Use What
 
 ### Use Skills (spec-component, develop-component) when:
+
 - Working on 1-2 components sequentially
 - Want shared context with main conversation
 - Prefer interactive Q&A during development
 - Quick iteration and feedback
 
 ### Use Agents (component-spec-writer, component-developer) when:
+
 - Creating 5-10+ proposals in parallel
 - Implementing 5-10+ components simultaneously
 - Want isolated context (keep verbose output separate)
@@ -125,6 +129,7 @@ Claude: [Extracts Figma specifications]
 **Tools**: spec-component skill OR component-spec-writer agent
 
 **Output**:
+
 - `openspec/changes/add-[component-name]-component/proposal.md`
 - `openspec/changes/add-[component-name]-component/specs/[component-name]/spec.md`
 - `openspec/changes/add-[component-name]-component/tasks.md`
@@ -138,6 +143,7 @@ Claude: [Extracts Figma specifications]
 **Prerequisites**: Approved OpenSpec proposal
 
 **Output**:
+
 - All 7 component files (Component.tsx, .theme.ts, .test.tsx, index.ts, meta.json, README.mdx, examples/)
 - Updated registries (automatic via scaffdog)
 - Passing verification (format, type-check, lint, test)
@@ -145,6 +151,7 @@ Claude: [Extracts Figma specifications]
 ### Phase 3: Archiving
 
 **User command** (after merge to main):
+
 ```bash
 openspec archive add-[component-name]-component --yes
 ```
@@ -171,6 +178,7 @@ For best performance when creating many components:
 ### Example: Creating 10 Components
 
 **Step 1**: Create all proposals in parallel (single message with 10 agent requests)
+
 ```
 Use component-spec-writer agent for Card
 Use component-spec-writer agent for Modal
@@ -187,6 +195,7 @@ Use component-spec-writer agent for Tag
 **Step 2**: Review all 10 proposals, approve them
 
 **Step 3**: Implement all in parallel (single message with 10 agent requests)
+
 ```
 Use component-developer agent to implement Card
 Use component-developer agent to implement Modal
@@ -203,6 +212,7 @@ Use component-developer agent to implement Tag
 ## Quality Guarantees
 
 ### Proposals (spec-component / component-spec-writer)
+
 - ✅ Pass `openspec validate --strict`
 - ✅ Include 6 core requirements minimum
 - ✅ Each requirement has ≥1 scenario
@@ -211,6 +221,7 @@ Use component-developer agent to implement Tag
 - ✅ Figma tokens documented (if URL provided)
 
 ### Implementations (develop-component / component-developer)
+
 - ✅ All 7 files created (10+ including examples)
 - ✅ Theme uses three-tier system (no hardcoded values)
 - ✅ Typography component used for all text
@@ -224,14 +235,17 @@ Use component-developer agent to implement Tag
 ## Reference
 
 ### Skills Documentation
+
 - `.claude/skills/spec-component/SKILL.md` - Proposal creation workflow
 - `.claude/skills/develop-component/SKILL.md` - Implementation workflow
 
 ### Agent Configuration
+
 - `.claude/agents/component-spec-writer/AGENT.md` - Proposal agent
 - `.claude/agents/component-developer/AGENT.md` - Implementation agent
 
 ### External Documentation
+
 - **Figma MCP**: https://help.figma.com/hc/en-us/articles/32132100833559
 - **OpenSpec**: See `openspec/` directory for specs and changes
 
@@ -266,6 +280,7 @@ Use component-developer agent to implement Tag
 ## Next Steps
 
 After creating new components:
+
 1. Test in demo app (`bun run dev --filter=kitchen-sink-app`)
 2. Verify documentation loads at `/docs/[component-name]`
 3. When ready, archive proposal: `openspec archive add-[component-name]-component --yes`

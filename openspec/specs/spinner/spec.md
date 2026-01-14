@@ -1,8 +1,11 @@
 # spinner Specification
 
 ## Purpose
+
 The Spinner component provides an animated loading indicator with continuous rotation, offering size presets (sm, md, lg) or custom pixel sizing with color customization for displaying loading states.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Spinner SHALL be a View-based component that renders an animated circular loading indicator using React Native Animated API.
@@ -148,4 +151,3 @@ Spinner SHALL have MDX documentation with usage examples.
 - **AND** custom color examples are provided
 - **AND** loading state composition example is included
 - **AND** props table documents all props with types and defaults
-

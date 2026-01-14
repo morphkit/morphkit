@@ -1,8 +1,11 @@
 # progress Specification
 
 ## Purpose
+
 The Progress component provides a visual progress indicator with bar and circle variants, supporting both determinate and indeterminate modes with optional value display for tracking task completion.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Progress SHALL be implemented as a View-based component with TypeScript interface.
@@ -37,7 +40,7 @@ Progress SHALL support 2 visual variants for different display contexts.
 - **WHEN** variant is "circle"
 - **THEN** progress renders as circular indicator
 - **AND** circle size uses theme.component.progress.circle.size[size]
-- **AND** stroke width uses circleSize * theme.component.progress.circle.strokeWidthRatio
+- **AND** stroke width uses circleSize \* theme.component.progress.circle.strokeWidthRatio
 - **AND** progress arc fills based on percentage value
 
 ### Requirement: Size Options
@@ -299,4 +302,3 @@ Progress SHALL include MDX documentation with usage examples.
 - **AND** circular progress dashboard example is provided
 - **AND** animated progress example is provided
 - **AND** color-coded storage example is provided
-

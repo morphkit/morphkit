@@ -96,7 +96,7 @@ Card SHALL use the three-tier theme token system for all styling.
 
 - **WHEN** colorScheme changes between "light" and "dark"
 - **THEN** all variant colors update from semantic tokens
-- **AND** background colors reflect the active scheme (light.surface.* or dark.surface.*)
+- **AND** background colors reflect the active scheme (light.surface._ or dark.surface._)
 - **AND** border colors reflect the active scheme
 - **AND** shadow presets remain consistent across schemes
 

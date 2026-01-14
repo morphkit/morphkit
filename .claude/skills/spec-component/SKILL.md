@@ -11,6 +11,7 @@ Creates OpenSpec proposals for React Native components following morph-ui standa
 ## When to Use
 
 Automatically triggered when user says:
+
 - "Create a proposal for [component]"
 - "Spec a [component] component"
 - "Write an OpenSpec for [component]"
@@ -21,6 +22,7 @@ Automatically triggered when user says:
 ### 1. Gather Requirements
 
 Ask clarifying questions:
+
 - What are the variants? (primary, secondary, outline, etc.)
 - What sizes are needed? (sm, md, lg, xl, etc.)
 - What features? (icons, loading states, disabled state, etc.)
@@ -30,6 +32,7 @@ Ask clarifying questions:
 ### 2. Research Existing Patterns
 
 Read similar components:
+
 - Button (interactive, variants, sizes, icons, loading)
 - Input (TextInput-based, variants, sizes, states)
 - Typography (text-based, variants)
@@ -40,12 +43,14 @@ Extract patterns for requirements and scenarios.
 ### 3. Extract Figma Specifications (If URL Provided)
 
 Use Figma MCP (`figma-desktop`) to:
+
 - Extract design tokens (colors, spacing, typography, radii, shadows)
 - Document component structure
 - Note interaction states
 - Capture animations
 
 Map Figma values to theme tokens:
+
 - Figma colors → semantic tokens (light.action.primary, dark.action.primary)
 - Figma spacing → primitive.spacing[N]
 - Figma typography → primitive.fontSize/textStyles
@@ -54,6 +59,7 @@ Map Figma values to theme tokens:
 ### 4. Create OpenSpec Proposal
 
 Create directory:
+
 ```
 openspec/changes/add-[component-name]-component/
 ```
@@ -89,6 +95,7 @@ openspec/changes/add-[component-name]-component/
 #### Write specs/[component-name]/spec.md
 
 Include 6 core requirements (ALWAYS):
+
 1. Component Structure
 2. Three-Tier Theme Integration
 3. Typography Integration (if component displays text)
@@ -97,6 +104,7 @@ Include 6 core requirements (ALWAYS):
 6. Documentation
 
 Add component-specific requirements based on type:
+
 - **Variants**: If component has visual style variations
 - **Sizes**: If component has size options
 - **Interactive Behavior**: If Pressable-based
@@ -213,11 +221,13 @@ Button SHALL respond to user interaction with visual feedback.
 ### 5. Validate Proposal
 
 Run:
+
 ```bash
 openspec validate add-[component-name]-component --strict
 ```
 
 Fix any errors:
+
 - "Change must have at least one delta" → Check spec.md has `## ADDED Requirements`
 - "Requirement must have at least one scenario" → Add `#### Scenario:` (4 hashtags)
 - Silent parsing failures → Verify exact format (no bullets for scenario headers)
@@ -225,6 +235,7 @@ Fix any errors:
 ### 6. Present to User
 
 Output summary:
+
 ```
 ✅ OpenSpec Proposal Created
 
@@ -248,6 +259,7 @@ Ready for review. Say "approved" to proceed with implementation using develop-co
 ## Reference Documentation
 
 See `.claude/skills/create-component/SKILL.md` for:
+
 - Complete requirement patterns
 - Scenario templates
 - Example proposals
@@ -256,6 +268,7 @@ See `.claude/skills/create-component/SKILL.md` for:
 ## Quality Checklist
 
 Before presenting proposal:
+
 - [ ] All 3 files created (proposal.md, spec.md, tasks.md)
 - [ ] Spec has 6 core requirements minimum
 - [ ] Each requirement has ≥1 scenario
