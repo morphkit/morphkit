@@ -14,37 +14,79 @@ questions:
 # `{{ inputs.name | kebab }}/{{ inputs.name | pascal }}.tsx`
 
 ```typescript
-import { View, ViewProps, StyleSheet, StyleProp, ViewStyle } from "react-native";
-import { ReactNode } from "react";
-import { useTheme } from "../theme";
-import { Typography } from "../typography";
+{{ if inputs.baseComponent == "Pressable" }}import { Pressable, PressableProps, StyleSheet, StyleProp, ViewStyle } from "react-native";
+{{ else if inputs.baseComponent == "TextInput" }}import { TextInput, TextInputProps, StyleSheet } from "react-native";
+{{ else if inputs.baseComponent == "ScrollView" }}import { ScrollView, ScrollViewProps, StyleSheet, StyleProp, ViewStyle } from "react-native";
+{{ else }}import { View, ViewProps, StyleSheet, StyleProp, ViewStyle } from "react-native";
+{{ end }}{{ if inputs.baseComponent != "TextInput" }}import { ReactNode{{ if inputs.needsForwardRef }}, forwardRef, ElementRef{{ end }} } from "react";
+{{ else }}{{ if inputs.needsForwardRef }}import { forwardRef, ElementRef } from "react";
+{{ end }}{{ end }}{{ if inputs.hasVariants || inputs.hasSizes }}import { useTheme } from "../theme";
+{{ end }}{{ if inputs.baseComponent != "TextInput" }}import { Typography } from "../typography";
+{{ end }}
 
-export interface {{ inputs.name | pascal }}Props extends Omit<ViewProps, "children"> {
+{{ if inputs.baseComponent == "TextInput" }}export interface {{ inputs.name | pascal }}Props extends Omit<TextInputProps, "style"> {
+{{ else if inputs.baseComponent == "Pressable" }}export interface {{ inputs.name | pascal }}Props extends Omit<PressableProps, "children" | "style"> {
   children?: ReactNode;
-  style?: StyleProp<ViewStyle>;
+{{ else if inputs.baseComponent == "ScrollView" }}export interface {{ inputs.name | pascal }}Props extends Omit<ScrollViewProps, "children"> {
+  children?: ReactNode;
+{{ else }}export interface {{ inputs.name | pascal }}Props extends Omit<ViewProps, "children"> {
+  children?: ReactNode;
+{{ end }}{{ if inputs.hasVariants }}  variant?: {{ inputs.variantsType }};
+{{ end }}{{ if inputs.hasSizes }}  size?: {{ inputs.sizesType }};
+{{ end }}{{ if inputs.hasDisabled }}  disabled?: boolean;
+{{ end }}{{ if inputs.hasLoading }}  loading?: boolean;
+{{ end }}{{ if inputs.baseComponent == "Pressable" }}  onPress?: () => void;
+{{ end }}  style?: StyleProp<ViewStyle>;
 }
 
-export const {{ inputs.name | pascal }} = ({
-  children,
-  style,
+{{ if inputs.needsForwardRef }}export const {{ inputs.name | pascal }} = forwardRef<ElementRef<typeof {{ inputs.baseComponent }}>, {{ inputs.name | pascal }}Props>(({
+{{ else }}export const {{ inputs.name | pascal }} = ({
+{{ end }}{{ if inputs.baseComponent != "TextInput" }}  children,
+{{ end }}{{ if inputs.hasVariants }}  variant = "{{ inputs.variantsArray[0] }}",
+{{ end }}{{ if inputs.hasSizes }}  size = "{{ inputs.sizesArray[0] }}",
+{{ end }}{{ if inputs.hasDisabled }}  disabled = false,
+{{ end }}{{ if inputs.hasLoading }}  loading = false,
+{{ end }}{{ if inputs.baseComponent == "Pressable" }}  onPress,
+{{ end }}  style,
   ...props
-}: {{ inputs.name | pascal }}Props) => {
-  const { theme, colorScheme } = useTheme();
+{{ if inputs.needsForwardRef }}}: {{ inputs.name | pascal }}Props, ref) => {
+{{ else }}}: {{ inputs.name | pascal }}Props) => {
+{{ end }}{{ if inputs.hasVariants || inputs.hasSizes }}  const { theme, colorScheme } = useTheme();
 
+  const componentTheme = theme.component.{{ inputs.name | camel }};
+{{ if inputs.hasVariants }}  const variantTokens = componentTheme.variant[colorScheme][variant];
+{{ end }}{{ if inputs.hasSizes }}  const sizeTokens = componentTheme.size[size];
+{{ end }}{{ end }}
   return (
-    <View
-      style={[
+    <{{ inputs.baseComponent }}
+{{ if inputs.needsForwardRef }}      ref={ref}
+{{ end }}{{ if inputs.baseComponent == "Pressable" }}      onPress={onPress}
+      disabled={disabled}
+{{ end }}      style={[
         baseStyles.container,
-        style,
+{{ if inputs.hasVariants }}        {
+          backgroundColor: variantTokens.background,
+          borderColor: variantTokens.border,
+        },
+{{ end }}{{ if inputs.hasSizes }}        {
+          padding: sizeTokens.padding,
+          height: sizeTokens.height,
+          borderRadius: sizeTokens.borderRadius,
+        },
+{{ end }}        style,
       ]}
       {...props}
     >
-      <Typography variant="body">
+{{ if inputs.baseComponent != "TextInput" }}      <Typography variant="body"{{ if inputs.hasVariants }} style={{ "{{" }} color: variantTokens.text {{ "}}" }}{{ end }}>
         {children}
       </Typography>
-    </View>
+{{ end }}    </{{ inputs.baseComponent }}>
   );
-};
+{{ if inputs.needsForwardRef }}});
+
+{{ inputs.name | pascal }}.displayName = "{{ inputs.name | pascal }}";
+{{ else }}};
+{{ end }}
 
 const baseStyles = StyleSheet.create({
   container: {
@@ -58,34 +100,39 @@ const baseStyles = StyleSheet.create({
 
 ```typescript
 import * as primitive from "../theme/tokens/primitive";
-import { light, dark } from "../theme/tokens/semantic/colors";
+{{ if inputs.hasVariants }}import { light, dark } from "../theme/tokens/semantic/colors";
+{{ end }}
 
 export const {{ inputs.name | camel }} = {
-  size: {
-    md: {
-      height: primitive.spacing[10],
-      padding: primitive.spacing[3],
-      fontSize: primitive.fontSize.base,
+{{ if inputs.hasSizes }}  size: {
+{{ for size in inputs.sizesArray }}    {{ size }}: {
+      height: primitive.spacing[{{ if size == "xs" }}6{{ else if size == "sm" }}8{{ else if size == "md" }}10{{ else if size == "lg" }}12{{ else if size == "xl" }}14{{ else if size == "2xl" }}16{{ else }}10{{ end }}],
+      padding: primitive.spacing[{{ if size == "xs" }}1{{ else if size == "sm" }}2{{ else if size == "md" }}3{{ else if size == "lg" }}4{{ else if size == "xl" }}5{{ else if size == "2xl" }}6{{ else }}3{{ end }}],
+      fontSize: primitive.fontSize.{{ if size == "xs" }}xs{{ else if size == "sm" }}sm{{ else if size == "md" }}base{{ else if size == "lg" }}lg{{ else if size == "xl" }}xl{{ else if size == "2xl" }}xl{{ else }}base{{ end }},
       borderRadius: primitive.borderRadius.md,
     },
-  },
-  variant: {
+{{ end }}  },
+{{ end }}{{ if inputs.hasVariants }}  variant: {
     light: {
-      primary: {
-        background: light.surface.primary,
-        text: light.text.primary,
-        border: light.border.primary,
+{{ for variant in inputs.variantsArray }}      {{ variant }}: {
+        background: light.{{ if variant == "primary" }}action.primary{{ else if variant == "secondary" }}surface.secondary{{ else if variant == "destructive" }}status.error.main{{ else if variant == "outline" }}surface.primary{{ else if variant == "ghost" }}surface.primary{{ else if variant == "solid" }}action.primary{{ else if variant == "error" }}status.error.main{{ else if variant == "success" }}status.success.main{{ else if variant == "default" }}surface.primary{{ else if variant == "elevated" }}surface.elevated{{ else if variant == "outlined" }}surface.primary{{ else if variant == "flat" }}surface.secondary{{ else }}surface.primary{{ end }},
+        text: light.text.{{ if variant == "primary" }}inverse{{ else if variant == "ghost" }}primary{{ else if variant == "outline" }}primary{{ else if variant == "outlined" }}primary{{ else if variant == "destructive" }}inverse{{ else if variant == "error" }}inverse{{ else if variant == "success" }}inverse{{ else }}primary{{ end }},
+        border: light.border.{{ if variant == "outline" }}primary{{ else if variant == "outlined" }}primary{{ else if variant == "destructive" }}error{{ else if variant == "error" }}error{{ else }}primary{{ end }},
       },
-    },
+{{ end }}    },
     dark: {
-      primary: {
-        background: dark.surface.primary,
-        text: dark.text.primary,
-        border: dark.border.primary,
+{{ for variant in inputs.variantsArray }}      {{ variant }}: {
+        background: dark.{{ if variant == "primary" }}action.primary{{ else if variant == "secondary" }}surface.secondary{{ else if variant == "destructive" }}status.error.main{{ else if variant == "outline" }}surface.primary{{ else if variant == "ghost" }}surface.primary{{ else if variant == "solid" }}action.primary{{ else if variant == "error" }}status.error.main{{ else if variant == "success" }}status.success.main{{ else if variant == "default" }}surface.primary{{ else if variant == "elevated" }}surface.elevated{{ else if variant == "outlined" }}surface.primary{{ else if variant == "flat" }}surface.secondary{{ else }}surface.primary{{ end }},
+        text: dark.text.{{ if variant == "primary" }}inverse{{ else if variant == "ghost" }}primary{{ else if variant == "outline" }}primary{{ else if variant == "outlined" }}primary{{ else if variant == "destructive" }}primary{{ else if variant == "error" }}primary{{ else if variant == "success" }}primary{{ else }}primary{{ end }},
+        border: dark.border.{{ if variant == "outline" }}primary{{ else if variant == "outlined" }}primary{{ else if variant == "destructive" }}error{{ else if variant == "error" }}error{{ else }}primary{{ end }},
       },
-    },
+{{ end }}    },
   },
-} as const;
+{{ end }}{{ if !inputs.hasSizes && !inputs.hasVariants }}  base: {
+    padding: primitive.spacing[3],
+    borderRadius: primitive.borderRadius.md,
+  },
+{{ end }}} as const;
 ```
 
 # `{{ inputs.name | kebab }}/{{ inputs.name | pascal }}.test.tsx`
@@ -101,12 +148,36 @@ describe("<{{ inputs.name | pascal }} />", () => {
   });
 
   test("merges custom style prop", () => {
+    const customStyle = { marginTop: 10 };
     const { getByText } = render(
-      <{{ inputs.name | pascal }} style={{ "{{" }} marginTop: 10 {{ "}}" }}>Custom</{{ inputs.name | pascal }}>,
+      <{{ inputs.name | pascal }} style={customStyle}>Custom</{{ inputs.name | pascal }}>,
     );
     expect(getByText("Custom")).toBeTruthy();
   });
-});
+{{ if inputs.hasVariants }}
+{{ for variant in inputs.variantsArray }}
+  test("renders {{ variant }} variant", () => {
+    const { getByText } = render(
+      <{{ inputs.name | pascal }} variant="{{ variant }}">{{ variant | pascal }}</{{ inputs.name | pascal }}>,
+    );
+    expect(getByText("{{ variant | pascal }}")).toBeTruthy();
+  });
+{{ end }}{{ end }}{{ if inputs.hasSizes }}
+{{ for size in inputs.sizesArray }}
+  test("renders {{ size }} size", () => {
+    const { getByText } = render(
+      <{{ inputs.name | pascal }} size="{{ size }}">{{ size | upper }}</{{ inputs.name | pascal }}>,
+    );
+    expect(getByText("{{ size | upper }}")).toBeTruthy();
+  });
+{{ end }}{{ end }}{{ if inputs.hasDisabled }}
+  test("handles disabled state", () => {
+    const { getByText } = render(
+      <{{ inputs.name | pascal }} disabled>Disabled</{{ inputs.name | pascal }}>,
+    );
+    expect(getByText("Disabled")).toBeTruthy();
+  });
+{{ end }}});
 ```
 
 # `{{ inputs.name | kebab }}/index.ts`
@@ -176,9 +247,16 @@ This component uses the following design tokens from the three-tier theme system
 
 ### Behavior Props
 
-| Prop     | Type        | Default | Description       |
-| -------- | ----------- | ------- | ----------------- |
-| children | `ReactNode` | -       | Component content |
+| Prop                                                  | Type     | Default                     | Description                       |
+| ----------------------------------------------------- | -------- | --------------------------- | --------------------------------- | -------------------- |
+| {{ if inputs.baseComponent != "TextInput" }}          | children | `ReactNode`                 | -                                 | Component content    |
+| {{ end }}{{ if inputs.hasVariants }}                  | variant  | `{{ inputs.variantsType }}` | `"{{ inputs.variantsArray[0] }}"` | Visual style variant |
+| {{ end }}{{ if inputs.hasSizes }}                     | size     | `{{ inputs.sizesType }}`    | `"{{ inputs.sizesArray[0] }}"`    | Size preset          |
+| {{ end }}{{ if inputs.hasDisabled }}                  | disabled | `boolean`                   | `false`                           | Disabled state       |
+| {{ end }}{{ if inputs.hasLoading }}                   | loading  | `boolean`                   | `false`                           | Loading state        |
+| {{ end }}{{ if inputs.baseComponent == "Pressable" }} | onPress  | `() => void`                | -                                 | Press handler        |
+
+{{ end }}
 
 ### Styling Props
 
@@ -218,18 +296,6 @@ This component meets WCAG 2.1 Level AA standards.
 ## Related Components
 
 - [RelatedComponent](../related/README.mdx) - Description
-
-## Troubleshooting
-
-### Common Issue 1
-
-- Check [solution]
-- Verify [requirement]
-
-### Common Issue 2
-
-- Ensure [condition]
-- Confirm [setup]
 ```
 
 # `{{ inputs.name | kebab }}/examples/BasicExample.tsx`

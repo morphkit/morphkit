@@ -55,6 +55,16 @@ async function scaffoldComponent(config: ComponentConfig): Promise<void> {
     ? config.dependencies.split(",").map((d) => `"${d.trim()}"`)
     : [];
 
+  const variantsArray = config.variants
+    ? config.variants.split(",").map((v) => v.trim())
+    : [];
+  const sizesArray = config.sizes
+    ? config.sizes.split(",").map((s) => s.trim())
+    : [];
+
+  const variantsType = variantsArray.map((v) => `"${v}"`).join(" | ");
+  const sizesType = sizesArray.map((s) => `"${s}"`).join(" | ");
+
   try {
     const scaffdog = await loadScaffdog(process.cwd());
 
@@ -67,13 +77,17 @@ async function scaffoldComponent(config: ComponentConfig): Promise<void> {
 
     const files = await scaffdog.generate(componentDoc, outputDir, {
       inputs: {
-        name: config.name,
+        name: kebabName,
         description: config.description,
         baseComponent: config.baseComponent,
         hasVariants: config.hasVariants,
         variants: config.variants || "",
+        variantsArray,
+        variantsType,
         hasSizes: config.hasSizes,
         sizes: config.sizes || "",
+        sizesArray,
+        sizesType,
         needsForwardRef: config.needsForwardRef,
         hasIcons: config.hasIcons,
         hasLoading: config.hasLoading,
