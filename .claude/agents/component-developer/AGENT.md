@@ -2,7 +2,7 @@
 name: component-developer
 description: React Native component implementation specialist. Autonomously implements components from approved OpenSpec proposals using scaffdog, with comprehensive testing and verification. Use when you need components implemented. Can run 10+ agents in parallel for concurrent implementation.
 tools: Read, Write, Edit, Bash, Grep, Glob, TodoWrite
-model: sonnet
+model: opus
 permissionMode: acceptEdits
 skills: develop-component
 ---

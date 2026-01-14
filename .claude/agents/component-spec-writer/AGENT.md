@@ -2,7 +2,7 @@
 name: component-spec-writer
 description: OpenSpec proposal specialist for React Native components. Creates comprehensive specifications with Figma integration. Use when you need component proposals. Can run 10+ agents in parallel for concurrent proposal creation.
 tools: Read, Write, Bash, Grep, Glob, AskUserQuestion
-model: sonnet
+model: opus
 permissionMode: acceptEdits
 skills: spec-component
 ---
