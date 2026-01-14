@@ -11,6 +11,7 @@ Implements React Native components from approved OpenSpec proposals.
 ## When to Use
 
 Automatically triggered when user says:
+
 - "Implement the [component] proposal"
 - "Develop [component] from the approved spec"
 - "Build the [component] component"
@@ -34,6 +35,7 @@ Read:
 ```
 
 Extract:
+
 - Component name
 - Description
 - Variants (from spec.md "Requirement: Variants")
@@ -83,6 +85,7 @@ Build JSON configuration from spec requirements:
 ```
 
 Execute scaffolding:
+
 ```bash
 bun run scaffold:component '<json>'
 ```
@@ -331,144 +334,195 @@ Mark testing tasks complete in TodoWrite.
 
 ### 7. Enhance Documentation
 
-Edit `README.mdx`:
+**CRITICAL RULES**:
+
+- ❌ NEVER include markdown code blocks showing usage examples
+- ❌ NEVER wrap examples with View or other non-morph-ui components in MDX
+- ✅ ONLY include renderable component examples from `./examples`
+- ✅ ONLY use morph-ui components (Stack, Box, Typography, etc.) in examples - NO React Native components
+- ✅ ALWAYS show ALL variants in VariantsExample
+- ✅ ALWAYS show ALL sizes in SizesExample
+- ❌ NEVER use literal colors (#FFFFFF, rgb(255,0,0)) in examples
+- ✅ ALWAYS use theme tokens from useTheme() hook in examples
+
+Edit `README.mdx` to follow this structure:
 
 ```mdx
 # [ComponentName]
 
-[Brief description - 1-2 sentences, Apple HIG style]
+**Category**: [category] | **Tags**: [tags from meta.json]
 
-## Overview
+[HIG-style 2-3 sentence paragraph explaining component purpose, key characteristics, and when to use it]
 
-[ComponentName] is [key characteristics]. Use it when [primary use cases].
+## Basic Usage
 
-**Key Features:**
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
-
-## When NOT to Use
-
-- [Anti-pattern 1] - Use [Alternative] instead
-- [Anti-pattern 2] - Consider [Alternative]
-
-## Variants
-
-### Primary
-[Description and when to use]
-
-### Secondary
-[Description and when to use]
-
-## Examples
-
-### Basic Usage
+The default configuration for common use cases.
 
 <BasicExample />
 
-### Real-World Use Cases
+## Variants
+
+All available visual styles for different contexts.
 
 <VariantsExample />
+
+[Brief 1-sentence explanation for each variant - when to use it]
+
+## Sizes
+
+Available size options for different screen contexts.
+
 <SizesExample />
-
-### Composition
-
-[Show how component works with others]
-
-## API Reference
-
-### Behavior Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | "primary" \| "secondary" | "primary" | Visual style variant |
-| size | "sm" \| "md" \| "lg" | "md" | Size option |
-| disabled | boolean | false | Disables interaction |
-| onPress | () => void | undefined | Press event handler |
-
-### Styling Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| style | StyleProp<ViewStyle> | undefined | Custom styles |
-
-### Content Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | ReactNode | required | Content to display |
-
-### Accessibility Props
-
-Inherited from View/Pressable.
 
 ## Theme Tokens
 
+This component uses the following design tokens from the three-tier theme system:
+
 ### Color Tokens
 
-```typescript
-theme.component.componentName.variant[colorScheme].primary.background
-theme.component.componentName.variant[colorScheme].primary.text
-theme.component.componentName.variant[colorScheme].primary.border
-```
+| Token Path                                                            | Purpose            | Light Mode Value     | Dark Mode Value     |
+| --------------------------------------------------------------------- | ------------------ | -------------------- | ------------------- |
+| theme.component.componentName.variant[colorScheme].primary.background | Primary background | light.action.primary | dark.action.primary |
+| theme.component.componentName.variant[colorScheme].primary.text       | Primary text color | light.text.inverse   | dark.text.inverse   |
 
 ### Spacing Tokens
 
-```typescript
-theme.component.componentName.size.md.height
-theme.component.componentName.size.md.padding
-```
+| Token Path                                    | Purpose        | Value | Primitive Source     |
+| --------------------------------------------- | -------------- | ----- | -------------------- |
+| theme.component.componentName.size.md.padding | Medium padding | 12    | primitive.spacing[3] |
+| theme.component.componentName.size.md.height  | Medium height  | 40    | -                    |
 
 ### Typography Tokens
 
-```typescript
-theme.component.componentName.size.md.fontSize
-```
+| Token Path                                     | Purpose          | Value | Primitive Source        |
+| ---------------------------------------------- | ---------------- | ----- | ----------------------- |
+| theme.component.componentName.size.md.fontSize | Medium font size | 16    | primitive.fontSize.base |
+
+## Props
+
+### Behavior Props
+
+| Prop    | Type                     | Default   | Description          |
+| ------- | ------------------------ | --------- | -------------------- |
+| variant | "primary" \| "secondary" | "primary" | Visual style variant |
+| size    | "sm" \| "md" \| "lg"     | "md"      | Size preset          |
+
+### Styling Props
+
+| Prop  | Type                 | Default   | Description            |
+| ----- | -------------------- | --------- | ---------------------- |
+| style | StyleProp<ViewStyle> | undefined | Custom style overrides |
+
+### Content Props
+
+| Prop     | Type      | Default  | Description       |
+| -------- | --------- | -------- | ----------------- |
+| children | ReactNode | required | Component content |
 
 ## Accessibility
 
 **WCAG Level:** AA compliant
 
 **Keyboard Navigation:**
+
 - Focusable via tab key
 - Activatable via Enter/Space
 
 **Screen Reader:**
-- Announces as "button"
-- Announces disabled state
-- Reads children as label
+
+- Announces role appropriately
+- Announces state changes
+- Reads label from children or accessibilityLabel
 
 **Visual Requirements:**
-- Minimum touch target: 44x44 (iOS), 48x48 (Android)
+
+- Minimum touch target: 44pt × 44pt (Apple HIG)
 - Color contrast: 4.5:1 for text, 3:1 for UI components
 - Focus indicator visible
+```
 
-**Testing:**
+Create/enhance examples in `examples/`:
+
+**BasicExample.tsx** - Default configuration:
+
 ```typescript
-// Test accessibility props
-expect(button.props.accessibilityRole).toBe("button");
-expect(button.props.accessibilityState.disabled).toBe(true);
+import { ComponentName } from "../ComponentName";
+
+export const BasicExample = () => {
+  return (
+    <ComponentName>
+      Basic example content
+    </ComponentName>
+  );
+};
 ```
 
-## Related Components
+**VariantsExample.tsx** - Show ALL variants side by side:
 
-- [RelatedComponent1] - [Relationship]
-- [RelatedComponent2] - [Relationship]
+```typescript
+import { Stack } from "../..";
+import { ComponentName } from "../ComponentName";
 
-## Troubleshooting
-
-### Issue: [Common problem]
-
-**Cause:** [Why it happens]
-
-**Solution:** [How to fix]
+export const VariantsExample = () => {
+  return (
+    <Stack gap={12}>
+      <ComponentName variant="primary">Primary variant</ComponentName>
+      <ComponentName variant="secondary">Secondary variant</ComponentName>
+      <ComponentName variant="tonal">Tonal variant</ComponentName>
+      {/* Include ALL variants from spec */}
+    </Stack>
+  );
+};
 ```
 
-Create additional examples in `examples/`:
-- VariantsExample.tsx
-- SizesExample.tsx
-- InteractiveExample.tsx (if stateful)
-- Update examples/index.ts
+**SizesExample.tsx** - Show ALL sizes:
+
+```typescript
+import { Stack } from "../..";
+import { ComponentName } from "../ComponentName";
+
+export const SizesExample = () => {
+  return (
+    <Stack gap={12}>
+      <ComponentName size="sm">Small size</ComponentName>
+      <ComponentName size="md">Medium size</ComponentName>
+      <ComponentName size="lg">Large size</ComponentName>
+      {/* Include ALL sizes from spec */}
+    </Stack>
+  );
+};
+```
+
+**InteractiveExample.tsx** - If component has interactive states (disabled, loading, etc.):
+
+```typescript
+import { useState } from "react";
+import { Stack } from "../..";
+import { ComponentName } from "../ComponentName";
+
+export const InteractiveExample = () => {
+  const [loading, setLoading] = useState(false);
+
+  return (
+    <Stack gap={12}>
+      <ComponentName disabled>Disabled state</ComponentName>
+      <ComponentName loading={loading}>Loading state</ComponentName>
+    </Stack>
+  );
+};
+```
+
+Update `examples/index.ts` to export all examples.
+
+**Validation Checklist** - Before marking complete:
+
+- [ ] README.mdx has NO markdown code blocks
+- [ ] All variants shown in VariantsExample (verify count matches spec)
+- [ ] All sizes shown in SizesExample (verify count matches spec)
+- [ ] NO literal colors in any examples (#..., rgb(...), named colors)
+- [ ] All examples use theme tokens or default props
+- [ ] Theme tokens table populated with actual values from .theme.ts
+- [ ] Category and tags subtitle matches meta.json
 
 Mark documentation tasks complete in TodoWrite.
 
@@ -510,6 +564,7 @@ bun run test --filter=@warp-ui/react-native
 **CRITICAL**: ALL checks must pass (zero errors, zero warnings, zero test failures).
 
 If any check fails:
+
 - Read error output carefully
 - Fix the specific issue
 - Re-run failed check
@@ -569,6 +624,7 @@ Next Steps:
 ## Quality Gates
 
 Before marking complete, ALL must pass:
+
 - [ ] All 7 component files created
 - [ ] Theme uses three-tier system (no hardcoded values)
 - [ ] Typography component used for all text (never Text)
@@ -583,6 +639,7 @@ Before marking complete, ALL must pass:
 ## Reference Documentation
 
 See `.claude/skills/create-component/SKILL.md` for:
+
 - Theme system patterns
 - Component implementation patterns
 - Test patterns

@@ -132,97 +132,59 @@ export { {{ inputs.name | pascal }}, type {{ inputs.name | pascal }}Props } from
 
 ```markdown
 import { {{ inputs.name | pascal }} } from "./{{ inputs.name | pascal }}";
-import { View } from "react-native";
 import { BasicExample } from "./examples";
 
 # {{ inputs.name | pascal }}
 
+**Category**: {{ inputs.category }} | **Tags**: {{ inputs.tags }}
+
 {{ inputs.description }}
 
-## Overview
+[Brief 2-3 sentence paragraph explaining when and why to use this component, written in Apple HIG style. Focus on the component's purpose, key characteristics, and primary use cases.]
 
-This component provides [describe primary use case]. Key characteristics:
+## Basic Usage
 
-- Minimum touch target: 44pt × 44pt (Apple HIG requirement)
-- WCAG compliance: Level AA
-- Theme-aware: Supports light and dark modes
-- Typography integration: Uses Typography component for text
+The default configuration for common use cases.
 
-**When to use this component:**
-
-- [Scenario 1]
-- [Scenario 2]
-- [Scenario 3]
-
-## When NOT to Use
-
-- **Don't use** for [alternative scenario] - use [alternative component] instead
-- **Alternative**: For [specific use case], consider [other approach]
-
-## Examples
-
-### Basic Usage
-
-<View style={{ "{{" }} marginVertical: 12 {{ "}}" }}>
 <BasicExample />
-</View>
 
-\`\`\`tsx
-import { {{ inputs.name | pascal }} } from "@warp-ui/react-native";
-
-<{{ inputs.name | pascal }}>Content</{{ inputs.name | pascal }}>
-\`\`\`
-
-### Real-World Use Cases
-
-\`\`\`tsx
-// TODO: Add practical examples showing composition with other components
-\`\`\`
-
-## API Reference
-
-### Behavior Props
-
-| Prop     | Type        | Default | Required | Description       |
-| -------- | ----------- | ------- | -------- | ----------------- |
-| children | `ReactNode` | -       | -        | Component content |
-
-### Styling Props
-
-| Prop  | Type                   | Default | Required | Description            |
-| ----- | ---------------------- | ------- | -------- | ---------------------- |
-| style | `StyleProp<ViewStyle>` | -       | -        | Custom style overrides |
-
-### Theme Tokens
+## Theme Tokens
 
 This component uses the following design tokens from the three-tier theme system:
 
-#### Color Tokens
+### Color Tokens
 
-| Token Path                      | Purpose                      | Light Mode       | Dark Mode |
-| ------------------------------- | ---------------------------- | ---------------- | --------- | ----- |
-| `theme.component.{{ inputs.name | camel }}.variant.background` | Background color | [TBD]     | [TBD] |
-| `theme.component.{{ inputs.name | camel }}.variant.text`       | Text color       | [TBD]     | [TBD] |
+| Token Path                      | Purpose                                           | Light Mode Value   | Dark Mode Value        |
+| ------------------------------- | ------------------------------------------------- | ------------------ | ---------------------- | --------------------- |
+| `theme.component.{{ inputs.name | camel }}.variant[colorScheme].primary.background` | Primary background | `light.action.primary` | `dark.action.primary` |
+| `theme.component.{{ inputs.name | camel }}.variant[colorScheme].primary.text`       | Primary text color | `light.text.primary`   | `dark.text.primary`   |
 
-#### Spacing Tokens
+### Spacing Tokens
 
-| Token Path                      | Purpose           | Value   | Primitive Source |
-| ------------------------------- | ----------------- | ------- | ---------------- | ---------------------------- |
-| `theme.component.{{ inputs.name | camel }}.padding` | Padding | [TBD]            | `theme.primitive.spacing[?]` |
+| Token Path                      | Purpose                   | Value          | Primitive Source |
+| ------------------------------- | ------------------------- | -------------- | ---------------- | ---------------------- |
+| `theme.component.{{ inputs.name | camel }}.size.md.padding` | Medium padding | [TBD]            | `primitive.spacing[?]` |
+| `theme.component.{{ inputs.name | camel }}.size.md.height`  | Medium height  | [TBD]            | -                      |
 
-#### Customization Example
+### Typography Tokens
 
-\`\`\`tsx
-import { createTheme } from "@warp-ui/react-native";
+| Token Path                      | Purpose                    | Value            | Primitive Source |
+| ------------------------------- | -------------------------- | ---------------- | ---------------- | ------------------------- |
+| `theme.component.{{ inputs.name | camel }}.size.md.fontSize` | Medium font size | [TBD]            | `primitive.fontSize.base` |
 
-const customTheme = createTheme({
-component: {
-{{ inputs.name | camel }}: {
-// Override component tokens here
-},
-},
-});
-\`\`\`
+## Props
+
+### Behavior Props
+
+| Prop     | Type        | Default | Description       |
+| -------- | ----------- | ------- | ----------------- |
+| children | `ReactNode` | -       | Component content |
+
+### Styling Props
+
+| Prop  | Type                   | Default | Description            |
+| ----- | ---------------------- | ------- | ---------------------- |
+| style | `StyleProp<ViewStyle>` | -       | Custom style overrides |
 
 ## Accessibility
 
@@ -246,18 +208,6 @@ This component meets WCAG 2.1 Level AA standards.
 - **Contrast Ratio**: 4.5:1 minimum (WCAG AA)
 - **Focus Indicator**: 2px solid outline with 2px offset
 - **Touch Target**: 44pt × 44pt minimum (Apple HIG)
-
-### Implementation
-
-\`\`\`tsx
-<{{ inputs.name | pascal }}
-accessibilityLabel="Descriptive label"
-accessibilityHint="What happens when activated"
-accessibilityRole="[appropriate role]"
-
-> Content
-> </{{ inputs.name | pascal }}>
-> \`\`\`
 
 ### Testing with Screen Readers
 
@@ -285,16 +235,13 @@ accessibilityRole="[appropriate role]"
 # `{{ inputs.name | kebab }}/examples/BasicExample.tsx`
 
 ```typescript
-import { View } from "react-native";
 import { {{ inputs.name | pascal }} } from "../{{ inputs.name | pascal }}";
 
 export const BasicExample = () => {
   return (
-    <View style={{ "{{" }} padding: 16 {{ "}}" }}>
-      <{{ inputs.name | pascal }}>
-        Basic {{ inputs.name | pascal }} Example
-      </{{ inputs.name | pascal }}>
-    </View>
+    <{{ inputs.name | pascal }}>
+      Basic {{ inputs.name | pascal }} Example
+    </{{ inputs.name | pascal }}>
   );
 };
 ```
