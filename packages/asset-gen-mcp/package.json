@@ -44,7 +44,7 @@
     "directory": "packages/asset-gen-mcp"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
+    "registry": "https://registry.npmjs.org",
     "access": "public"
   },
   "keywords": [
