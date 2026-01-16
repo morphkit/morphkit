@@ -1,6 +1,6 @@
 {
   "name": "@morphkit/asset-gen-mcp",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "AI-powered image asset generation MCP server with prompt engineering guidance and vectorization",
   "type": "module",
   "main": "./dist/index.js",
@@ -27,7 +27,8 @@
     "dotenv": "^16.4.5",
     "@google/genai": "latest",
     "@neplex/vectorizer": "latest",
-    "sharp": "latest"
+    "sharp": "latest",
+    "transparent-background": "^1.0.0"
   },
   "devDependencies": {
     "@morphkit/typescript-config": "*",

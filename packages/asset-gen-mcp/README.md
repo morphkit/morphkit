@@ -37,8 +37,19 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
 ## Features
 
 - **get-image-generation-prompt-instructions**: Returns asset-type-specific prompt engineering best practices and examples for Google Imagen
-- **generate-images**: Generates images using Google Imagen 3.0 with auto-vectorization for SVG outputs
+- **generate-images**: Generates images using Google Imagen 4.0 with auto-vectorization for SVG outputs
 - **vectorize-image**: Converts raster images to SVG using configurable vectorization options
+- **remove-background**: AI-powered background removal using [transparent-background](https://github.com/makinori/transparent-background-npm)
+
+## Requirements
+
+- **Node.js** >= 18
+- **Python** (for background removal) - Pre-installed on macOS and most Linux distributions
+- **Google API Key** - Get one at [Google AI Studio](https://aistudio.google.com/apikey)
+
+### First Run Notice
+
+On first use, the `remove-background` tool downloads an ML model (~150MB) and creates a Python virtual environment. This takes approximately 3 minutes. Subsequent runs are fast (~2-5 seconds).
 
 ## Installation
 
@@ -78,20 +89,6 @@ bun run build
 bun run start
 \`\`\`
 
-## Docker
-
-### Build Image
-
-\`\`\`bash
-docker build -t asset-gen-mcp .
-\`\`\`
-
-### Run with Docker Compose
-
-\`\`\`bash
-docker-compose up -d
-\`\`\`
-
 ## Tools
 
 ### get-image-generation-prompt-instructions
@@ -111,7 +108,7 @@ Returns asset-type-specific prompt engineering best practices and examples for G
 
 ### generate-images
 
-Generates images using Google Imagen 3.0 with auto-vectorization for SVG outputs
+Generates images using Google Imagen 4.0 with auto-vectorization for SVG outputs
 
 **Usage:**
 
@@ -138,6 +135,25 @@ Converts raster images to SVG using configurable vectorization options
 }
 }
 \`\`\`
+
+### remove-background
+
+AI-powered background removal using InSPyReNet model. Works with complex backgrounds, shadows, and lighting effects. Outputs transparent PNG.
+
+**Usage:**
+
+\`\`\`json
+{
+"name": "remove-background",
+"arguments": {
+"inputPath": "/path/to/image.png",
+"outputPath": "/path/to/output.png",
+"fast": false
+}
+}
+\`\`\`
+
+Set `fast: true` for quicker processing with slightly lower quality (384x384 model vs 1024x1024).
 
 ## Testing
 

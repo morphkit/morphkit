@@ -9,6 +9,7 @@ import {
   chunkArray,
   type ReferenceImage,
 } from "./imagen-client.js";
+import { removeBackgroundFromImage } from "../background-removal/remove-background.js";
 
 const BATCH_SIZE = 10;
 
@@ -25,6 +26,13 @@ const requestSchema = z.object({
     .optional()
     .describe(
       "Optional reference images as file paths or URLs. The tool handles base64 encoding internally.",
+    ),
+  removeBackground: z
+    .boolean()
+    .optional()
+    .default(false)
+    .describe(
+      "Remove solid background and output transparent PNG. Only works with png extension.",
     ),
 });
 
@@ -124,9 +132,13 @@ async function processImageRequest(
 
       switch (request.extension) {
         case "png":
-          outputBuffer = await sharp(imageData)
-            .png({ compressionLevel: 9 })
-            .toBuffer();
+          if (request.removeBackground) {
+            outputBuffer = await removeBackgroundFromImage(imageData);
+          } else {
+            outputBuffer = await sharp(imageData)
+              .png({ compressionLevel: 9 })
+              .toBuffer();
+          }
           break;
         case "webp":
           outputBuffer = await sharp(imageData)

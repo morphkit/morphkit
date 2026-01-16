@@ -15,6 +15,12 @@ interface AssetGuideline {
   textRenderingRules: string[];
   examplePrompts: string[];
   commonMistakes: string[];
+  svgOptimization?: {
+    recommended: boolean;
+    tips: string[];
+    optimizedPromptModifiers: string[];
+    exampleOptimizedPrompt: string;
+  };
 }
 
 const ASSET_GUIDELINES: Record<GeneratedAssetType, AssetGuideline> = {
@@ -66,6 +72,33 @@ const ASSET_GUIDELINES: Record<GeneratedAssetType, AssetGuideline> = {
       "Complex backgrounds - always request isolated backgrounds",
       "Realistic styles - logos work better with stylized/flat approaches",
     ],
+    svgOptimization: {
+      recommended: true,
+      tips: [
+        "CRITICAL: Always use 'flat design' or '2D vector style' - 3D effects, shadows, and lighting create artifacts when traced",
+        "Request 'solid colors only' or 'no gradients' - gradients vectorize poorly and create banding",
+        "Use 'pure white background' (#FFFFFF) or 'pure black background' (#000000) - easier to remove than gray",
+        "Add 'sharp clean edges' and 'no anti-aliasing artifacts' for crisp vector paths",
+        "Request 'no shadows', 'no drop shadows', 'no glow effects' - these cannot be cleanly vectorized",
+        "Use 'geometric shapes' and 'simple forms' - complex organic shapes lose detail when traced",
+        "Specify 'high contrast' between logo and background for clean separation",
+      ],
+      optimizedPromptModifiers: [
+        "flat 2D design",
+        "solid colors",
+        "no shadows",
+        "no gradients",
+        "no lighting effects",
+        "sharp clean edges",
+        "pure white background",
+        "vector style",
+        "geometric shapes",
+        "high contrast",
+        "minimalist",
+      ],
+      exampleOptimizedPrompt:
+        "Minimalist owl logo, flat 2D design, solid blue and white colors only, no shadows, no gradients, geometric shapes, sharp clean edges, pure white background, high contrast, vector style suitable for SVG conversion",
+    },
   },
   icon: {
     assetType: "icon",
@@ -114,6 +147,32 @@ const ASSET_GUIDELINES: Record<GeneratedAssetType, AssetGuideline> = {
       "Too many elements - icons should have one focal point",
       "Gradients on small icons - they don't scale well",
     ],
+    svgOptimization: {
+      recommended: true,
+      tips: [
+        "Use 'flat design' with uniform fills - avoid shading or lighting effects",
+        "Request 'monochrome' or '2-3 solid colors max' for clean vector output",
+        "Specify 'uniform stroke weight' - varying strokes create complex paths",
+        "Use 'pure white background' or 'pure black background' for easy removal",
+        "Add 'no anti-aliasing' for pixel-perfect edges that trace cleanly",
+        "Request 'filled shapes' or 'outlined only' - mixing both complicates vectorization",
+        "Keep icon simple - fewer than 5 distinct shapes traces best",
+      ],
+      optimizedPromptModifiers: [
+        "flat design",
+        "solid fill",
+        "uniform stroke",
+        "no shading",
+        "no shadows",
+        "monochrome",
+        "pure white background",
+        "simple shapes",
+        "clean edges",
+        "vector style",
+      ],
+      exampleOptimizedPrompt:
+        "Settings gear icon, flat design, solid dark gray fill, no shading, no shadows, uniform 2px stroke, simple geometric shapes, pure white background, clean crisp edges, vector style",
+    },
   },
   illustration: {
     assetType: "illustration",
@@ -263,6 +322,26 @@ const ASSET_GUIDELINES: Record<GeneratedAssetType, AssetGuideline> = {
       "Inconsistent pixel scale within the same sprite",
       "Anti-aliasing when crisp pixel edges are needed",
     ],
+    svgOptimization: {
+      recommended: false,
+      tips: [
+        "Sprites are typically better as raster images - pixel art intentionally uses discrete pixels",
+        "If SVG needed, use 'no anti-aliasing' and 'crisp pixel edges'",
+        "Request 'indexed color palette' with limited colors (4-16) for cleaner tracing",
+        "Use 'pure magenta background' (#FF00FF) or 'pure green' (#00FF00) as chroma key",
+        "Keep shapes blocky and geometric for pixel art style",
+      ],
+      optimizedPromptModifiers: [
+        "no anti-aliasing",
+        "crisp pixel edges",
+        "limited color palette",
+        "magenta background",
+        "blocky shapes",
+        "hard edges",
+      ],
+      exampleOptimizedPrompt:
+        "32x32 pixel art knight sprite, no anti-aliasing, crisp hard edges, 8 color palette only, pure magenta background #FF00FF, blocky geometric style, game sprite",
+    },
   },
   pattern: {
     assetType: "pattern",
@@ -313,6 +392,30 @@ const ASSET_GUIDELINES: Record<GeneratedAssetType, AssetGuideline> = {
       "Uneven element distribution creating visual holes",
       "Too many colors making the pattern chaotic",
     ],
+    svgOptimization: {
+      recommended: true,
+      tips: [
+        "Use 'flat geometric shapes' - organic shapes create complex vector paths",
+        "Request '3-5 solid colors max' - fewer colors means cleaner SVG output",
+        "Specify 'no gradients' and 'no shading' - use solid fills only",
+        "Add 'sharp edges' and 'clean lines' for crisp vector boundaries",
+        "Use 'pure white background' with high contrast pattern elements",
+        "Request 'simple repeating elements' - complex motifs don't trace well",
+      ],
+      optimizedPromptModifiers: [
+        "flat geometric",
+        "solid colors only",
+        "no gradients",
+        "no shading",
+        "sharp edges",
+        "clean lines",
+        "high contrast",
+        "pure white background",
+        "simple shapes",
+      ],
+      exampleOptimizedPrompt:
+        "Seamless geometric pattern, flat design, triangles and circles, 3 solid colors navy blue gold and white, no gradients, no shading, sharp clean edges, pure white background, high contrast, vector style",
+    },
   },
   photograph: {
     assetType: "photograph",
@@ -414,6 +517,32 @@ const ASSET_GUIDELINES: Record<GeneratedAssetType, AssetGuideline> = {
       "Poor contrast ratios failing accessibility",
       "Missing interaction states",
     ],
+    svgOptimization: {
+      recommended: true,
+      tips: [
+        "Use 'flat design' - neumorphism and glassmorphism effects don't vectorize",
+        "Request 'solid color fills' - no gradients, no transparency effects",
+        "Specify 'sharp corners' or 'exact border radius' for clean paths",
+        "Add 'no shadows' and 'no blur effects' - these create raster artifacts",
+        "Use 'pure white background' for easy background removal",
+        "Keep UI elements simple - complex states should be separate images",
+        "Request 'high contrast' between element and background",
+      ],
+      optimizedPromptModifiers: [
+        "flat design",
+        "solid colors",
+        "no shadows",
+        "no gradients",
+        "no blur effects",
+        "sharp edges",
+        "pure white background",
+        "high contrast",
+        "clean lines",
+        "simple shapes",
+      ],
+      exampleOptimizedPrompt:
+        "Primary button UI element, flat design, solid blue fill #007AFF, white text, rounded corners 8px, no shadows, no gradients, pure white background, clean sharp edges, vector style",
+    },
   },
 };
 
@@ -455,6 +584,28 @@ export function getGuidelinesForAssetType(
     `## Common Mistakes to Avoid`,
     ...guidelines.commonMistakes.map((mistake) => `- ${mistake}`),
   ];
+
+  if (guidelines.svgOptimization) {
+    const svg = guidelines.svgOptimization;
+    sections.push("");
+    sections.push(
+      `## SVG/Vector Output Optimization ${svg.recommended ? "(Recommended for this asset type)" : "(Use with caution)"}`,
+    );
+    sections.push("");
+    sections.push(
+      "If you need transparent PNG or SVG output (using remove-background → vectorize pipeline):",
+    );
+    sections.push("");
+    svg.tips.forEach((tip) => sections.push(`- ${tip}`));
+    sections.push("");
+    sections.push("**Optimized Prompt Modifiers for SVG:**");
+    sections.push(
+      svg.optimizedPromptModifiers.map((mod) => `\`${mod}\``).join(", "),
+    );
+    sections.push("");
+    sections.push("**Example SVG-Optimized Prompt:**");
+    sections.push(`> ${svg.exampleOptimizedPrompt}`);
+  }
 
   if (stylePreferences) {
     sections.push("");

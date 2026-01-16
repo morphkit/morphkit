@@ -90,4 +90,34 @@ describe("getGuidelinesForAssetType", () => {
     expect(guidelines).toContain("85mm lens");
     expect(guidelines).toContain("golden hour");
   });
+
+  it("should include SVG optimization section for logo", () => {
+    const guidelines = getGuidelinesForAssetType("logo");
+
+    expect(guidelines).toContain("## SVG/Vector Output Optimization");
+    expect(guidelines).toContain("Recommended for this asset type");
+    expect(guidelines).toContain("flat design");
+    expect(guidelines).toContain("no shadows");
+    expect(guidelines).toContain("Example SVG-Optimized Prompt");
+  });
+
+  it("should include SVG optimization section for icon", () => {
+    const guidelines = getGuidelinesForAssetType("icon");
+
+    expect(guidelines).toContain("## SVG/Vector Output Optimization");
+    expect(guidelines).toContain("Recommended for this asset type");
+  });
+
+  it("should not recommend SVG for sprite", () => {
+    const guidelines = getGuidelinesForAssetType("sprite");
+
+    expect(guidelines).toContain("## SVG/Vector Output Optimization");
+    expect(guidelines).toContain("Use with caution");
+  });
+
+  it("should not include SVG section for photograph", () => {
+    const guidelines = getGuidelinesForAssetType("photograph");
+
+    expect(guidelines).not.toContain("## SVG/Vector Output Optimization");
+  });
 });
