@@ -48,14 +48,9 @@ async function processImageRequest(
   model: Input["model"],
 ): Promise<GenerationResult> {
   try {
-    const referenceImages = request.images
-      ? request.images.map((base64) => Buffer.from(base64, "base64"))
-      : undefined;
-
     const { imageData } = await generateImageWithImagen({
       prompt: request.prompt,
       model,
-      referenceImages,
     });
 
     await mkdir(dirname(request.outputPath), { recursive: true });

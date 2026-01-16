@@ -1,10 +1,9 @@
-import { GoogleGenAI, type Modality } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import type { ImagenModel } from "../../types.js";
 
 interface ImagenGenerationOptions {
   prompt: string;
   model?: ImagenModel;
-  referenceImages?: Buffer[];
 }
 
 interface ImagenGenerationResult {
@@ -45,58 +44,28 @@ export async function generateImageWithImagen(
 
   const model = options.model || getDefaultModel();
 
-  const contents: Array<
-    { text: string } | { inlineData: { mimeType: string; data: string } }
-  > = [{ text: options.prompt }];
-
-  if (options.referenceImages && options.referenceImages.length > 0) {
-    for (const imageBuffer of options.referenceImages) {
-      contents.push({
-        inlineData: {
-          mimeType: "image/png",
-          data: imageBuffer.toString("base64"),
-        },
-      });
-    }
-  }
-
-  const response = await ai.models.generateContent({
+  const response = await ai.models.generateImages({
     model,
-    contents,
+    prompt: options.prompt,
     config: {
-      responseModalities: ["image" as Modality, "text" as Modality],
+      numberOfImages: 1,
     },
   });
 
-  const candidates = response.candidates;
-  if (!candidates || candidates.length === 0) {
-    throw new Error("No candidates returned from Imagen API");
+  const generatedImages = response.generatedImages;
+  if (!generatedImages || generatedImages.length === 0) {
+    throw new Error("No images returned from Imagen API");
   }
 
-  const firstCandidate = candidates[0];
-  if (!firstCandidate) {
-    throw new Error("No candidate found in Imagen API response");
+  const firstImage = generatedImages[0];
+  if (!firstImage?.image?.imageBytes) {
+    throw new Error("No image data found in Imagen API response");
   }
 
-  const parts = firstCandidate.content?.parts;
-  if (!parts || parts.length === 0) {
-    throw new Error("No parts returned from Imagen API");
-  }
-
-  for (const part of parts) {
-    if (part.inlineData) {
-      const { data, mimeType } = part.inlineData;
-      if (!data || !mimeType) {
-        continue;
-      }
-      return {
-        imageData: Buffer.from(data, "base64"),
-        mimeType,
-      };
-    }
-  }
-
-  throw new Error("No image data found in Imagen API response");
+  return {
+    imageData: Buffer.from(firstImage.image.imageBytes, "base64"),
+    mimeType: "image/png",
+  };
 }
 
 export function chunkArray<T>(array: T[], size: number): T[][] {
