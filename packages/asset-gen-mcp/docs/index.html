@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asset Gen MCP Server</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    }
+
+    if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.documentElement.classList.remove('dark')
+    } else {
+      document.documentElement.classList.add('dark')
+    }
+  </script>
+</head>
+<body class="bg-white dark:bg-black text-black dark:text-white font-mono min-h-screen transition-colors">
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-12 border-b border-black dark:border-white pb-8 flex justify-between items-start">
+      <div>
+        <h1 class="text-3xl font-bold mb-2">asset-gen-mcp</h1>
+        <p class="text-gray-600 dark:text-gray-400">AI-powered image asset generation with prompt engineering guidance and vectorization</p>
+      </div>
+      <button
+        onclick="toggleTheme()"
+        class="p-2 border border-black dark:border-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+        aria-label="Toggle theme"
+      >
+        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+      </button>
+    </header>
+
+    <main class="space-y-12">
+      <section id="api-key">
+        <h2 class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2">1. Get API Key</h2>
+        <p class="mb-4">Create a Google API key for Imagen access:</p>
+        <a href="https://aistudio.google.com/apikey"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-block bg-black dark:bg-white text-white dark:text-black px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">
+          Google AI Studio →
+        </a>
+      </section>
+
+      <section id="installation">
+        <h2 class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2">2. Install</h2>
+        <div class="bg-gray-100 dark:bg-gray-900 p-4 mb-4">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">npm</p>
+          <code class="text-sm">npm install -g @morph-ui/asset-gen-mcp</code>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-900 p-4 mb-4">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">yarn</p>
+          <code class="text-sm">yarn global add @morph-ui/asset-gen-mcp</code>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-900 p-4 mb-4">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">pnpm</p>
+          <code class="text-sm">pnpm add -g @morph-ui/asset-gen-mcp</code>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-900 p-4">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">bun</p>
+          <code class="text-sm">bun add -g @morph-ui/asset-gen-mcp</code>
+        </div>
+      </section>
+
+      <section id="mcp-setup">
+        <h2 class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2">3. MCP Client Setup</h2>
+
+        <article class="mb-8">
+          <h3 class="font-bold mb-2">Claude Desktop</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Add to ~/Library/Application Support/Claude/claude_desktop_config.json:</p>
+          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
+  "mcpServers": {
+    "asset-gen": {
+      "command": "asset-gen-mcp",
+      "env": {
+        "GOOGLE_API_KEY": "YOUR_API_KEY"
+      }
+    }
+  }
+}</pre>
+        </article>
+
+        <article class="mb-8">
+          <h3 class="font-bold mb-2">Claude Code</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Run the following command (replace YOUR_API_KEY with your actual key):</p>
+          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">claude mcp add -e GOOGLE_API_KEY=YOUR_API_KEY asset-gen -- asset-gen-mcp</pre>
+        </article>
+
+        <article class="mb-8">
+          <h3 class="font-bold mb-2">Cursor</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Add to .cursor/mcp.json:</p>
+          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
+  "mcpServers": {
+    "asset-gen": {
+      "command": "asset-gen-mcp",
+      "env": {
+        "GOOGLE_API_KEY": "YOUR_API_KEY"
+      }
+    }
+  }
+}</pre>
+        </article>
+
+        <article>
+          <h3 class="font-bold mb-2">Windsurf</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Add to ~/.windsurf/mcp.json:</p>
+          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
+  "mcpServers": {
+    "asset-gen": {
+      "command": "asset-gen-mcp",
+      "env": {
+        "GOOGLE_API_KEY": "YOUR_API_KEY"
+      }
+    }
+  }
+}</pre>
+        </article>
+      </section>
+
+      <section id="tools">
+        <h2 class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2">4. Tools</h2>
+
+        <article class="mb-8">
+          <h3 class="font-bold mb-2">get-image-generation-prompt-instructions</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Returns asset-type-specific prompt engineering best practices for Google Imagen.</p>
+          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
+  "assetType": "logo",
+  "query": "I need a tech startup logo",
+  "stylePreferences": {
+    "colorScheme": "blue and white",
+    "artStyle": "minimalist",
+    "mood": "professional"
+  }
+}</pre>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Asset types: logo, icon, illustration, character, sprite, pattern, photograph, ui-element</p>
+        </article>
+
+        <article class="mb-8">
+          <h3 class="font-bold mb-2">generate-images</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Generates images using Google Imagen with auto-vectorization for SVG outputs.</p>
+          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
+  "requests": [
+    {
+      "outputPath": "/path/to/logo.png",
+      "extension": "png",
+      "prompt": "Minimalist owl logo, geometric shapes, flat design"
+    },
+    {
+      "outputPath": "/path/to/icon.svg",
+      "extension": "svg",
+      "prompt": "Settings gear icon, outlined style, 2px stroke"
+    }
+  ],
+  "model": "imagen-3.0-generate-002"
+}</pre>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Models: imagen-4.0-ultra-generate-001 (highest quality), imagen-4.0-generate-001 (balanced), imagen-3.0-generate-002 (default), imagen-3.0-fast-generate-001 (fastest)</p>
+        </article>
+
+        <article>
+          <h3 class="font-bold mb-2">vectorize-image</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Converts raster images to SVG using configurable vectorization options.</p>
+          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
+  "inputPath": "/path/to/input.png",
+  "outputPath": "/path/to/output.svg",
+  "config": {
+    "colorMode": "color",
+    "hierarchical": "stacked",
+    "filterSpeckle": 4,
+    "mode": "spline"
+  }
+}</pre>
+        </article>
+      </section>
+
+      <section id="models">
+        <h2 class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2">5. Model Selection</h2>
+        <div class="space-y-4">
+          <div class="border-l-2 border-black dark:border-white pl-4">
+            <h3 class="font-bold">imagen-4.0-ultra-generate-001</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Highest quality. Best for final marketing assets and premium output.</p>
+          </div>
+          <div class="border-l-2 border-gray-500 pl-4">
+            <h3 class="font-bold">imagen-4.0-generate-001</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Balanced quality and speed. Good for production images.</p>
+          </div>
+          <div class="border-l-2 border-gray-400 pl-4">
+            <h3 class="font-bold">imagen-3.0-generate-002 (default)</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Best balance of quality, speed, and cost. Recommended for most use cases.</p>
+          </div>
+          <div class="border-l-2 border-gray-300 dark:border-gray-600 pl-4">
+            <h3 class="font-bold">imagen-3.0-fast-generate-001</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Speed-optimized. Best for rapid prototyping and iteration.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="docker">
+        <h2 class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2">6. Docker</h2>
+        <div class="bg-gray-100 dark:bg-gray-900 p-4 mb-4">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Build</p>
+          <code class="text-sm">docker build -t asset-gen-mcp .</code>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-900 p-4">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Run with Docker Compose</p>
+          <code class="text-sm">docker-compose up -d</code>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mt-12 pt-8 border-t border-black dark:border-white text-sm text-gray-500 dark:text-gray-400">
+      <p>MIT License</p>
+      <p class="mt-2">Part of the <a href="https://github.com/morph-ui" class="underline hover:text-black dark:hover:text-white">MorphUI</a> project</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark')
+        localStorage.theme = 'light'
+      } else {
+        document.documentElement.classList.add('dark')
+        localStorage.theme = 'dark'
+      }
+    }
+  </script>
+</body>
+</html>

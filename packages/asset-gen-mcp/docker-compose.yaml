@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  asset-gen-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: asset-gen-mcp
+    env_file:
+      - .env
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
