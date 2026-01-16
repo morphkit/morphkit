@@ -1,10 +1,14 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { writeFile, unlink, mkdir } from "node:fs/promises";
-import { dirname } from "node:path";
+import { writeFile, unlink, mkdir, readFile, access } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import sharp from "sharp";
 import { vectorize } from "@neplex/vectorizer";
-import { generateImageWithImagen, chunkArray } from "./imagen-client.js";
+import {
+  generateImageWithImagen,
+  chunkArray,
+  type ReferenceImage,
+} from "./imagen-client.js";
 
 const BATCH_SIZE = 10;
 
@@ -16,7 +20,12 @@ const requestSchema = z.object({
   outputPath: z.string(),
   extension: z.enum(["png", "svg", "webp", "jpeg"]),
   prompt: z.string().min(1).max(2000),
-  images: z.array(z.string()).optional(),
+  images: z
+    .array(z.string())
+    .optional()
+    .describe(
+      "Optional reference images as file paths or URLs. The tool handles base64 encoding internally.",
+    ),
 });
 
 const inputSchema = z.object({
@@ -43,14 +52,43 @@ interface GenerationResult {
   error?: string;
 }
 
+async function resolveImageToBase64(imageSource: string): Promise<string> {
+  if (imageSource.startsWith("http://") || imageSource.startsWith("https://")) {
+    const response = await fetch(imageSource);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image from URL: ${response.status}`);
+    }
+    const arrayBuffer = await response.arrayBuffer();
+    return Buffer.from(arrayBuffer).toString("base64");
+  }
+
+  const absolutePath = imageSource.startsWith("/")
+    ? imageSource
+    : join(process.cwd(), imageSource);
+
+  await access(absolutePath);
+  const fileBuffer = await readFile(absolutePath);
+  return fileBuffer.toString("base64");
+}
+
 async function processImageRequest(
   request: ImageRequest,
   model: Input["model"],
 ): Promise<GenerationResult> {
   try {
+    let referenceImages: ReferenceImage[] | undefined;
+    if (request.images && request.images.length > 0) {
+      referenceImages = await Promise.all(
+        request.images.map(async (src) => ({
+          imageBytes: await resolveImageToBase64(src),
+        })),
+      );
+    }
+
     const { imageData } = await generateImageWithImagen({
       prompt: request.prompt,
       model,
+      referenceImages,
     });
 
     await mkdir(dirname(request.outputPath), { recursive: true });

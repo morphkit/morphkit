@@ -1,9 +1,15 @@
 import { GoogleGenAI } from "@google/genai";
 import type { ImagenModel } from "../../types.js";
 
+export interface ReferenceImage {
+  imageBytes: string;
+  referenceType?: "REFERENCE_TYPE_STYLE" | "REFERENCE_TYPE_SUBJECT";
+}
+
 interface ImagenGenerationOptions {
   prompt: string;
   model?: ImagenModel;
+  referenceImages?: ReferenceImage[];
 }
 
 interface ImagenGenerationResult {
@@ -44,13 +50,32 @@ export async function generateImageWithImagen(
 
   const model = options.model || getDefaultModel();
 
-  const response = await ai.models.generateImages({
+  const baseParams = {
     model,
     prompt: options.prompt,
     config: {
       numberOfImages: 1,
     },
-  });
+  };
+
+  let response;
+  if (options.referenceImages && options.referenceImages.length > 0) {
+    const referenceImagesPayload = options.referenceImages.map(
+      (ref, index) => ({
+        referenceType: ref.referenceType || "REFERENCE_TYPE_STYLE",
+        referenceId: index + 1,
+        referenceImage: {
+          bytesBase64Encoded: ref.imageBytes,
+        },
+      }),
+    );
+    response = await ai.models.generateImages({
+      ...baseParams,
+      referenceImages: referenceImagesPayload,
+    } as Parameters<typeof ai.models.generateImages>[0]);
+  } else {
+    response = await ai.models.generateImages(baseParams);
+  }
 
   const generatedImages = response.generatedImages;
   if (!generatedImages || generatedImages.length === 0) {
