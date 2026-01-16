@@ -31,7 +31,7 @@ For MCP client configuration, use:
 For Claude Code:
 
 ```bash
-claude mcp add -e GOOGLE_API_KEY=YOUR_API_KEY asset-gen -- npx -y @morphkit/asset-gen-mcp@latest
+claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asset-gen-mcp@latest
 ```
 
 ## Features
