@@ -38,6 +38,14 @@
     class="bg-white dark:bg-black text-black dark:text-white font-mono min-h-screen transition-colors"
   >
     <div class="max-w-3xl mx-auto px-4 py-12">
+      <div class="-mt-32 -mb-12 flex justify-center">
+        <img
+          src="./assets/logo.png"
+          alt="Asset Gen MCP Logo"
+          class="w-4/5 object-contain"
+        />
+      </div>
+
       <header
         class="mb-12 border-b border-black dark:border-white pb-8 flex justify-between items-start"
       >
@@ -49,6 +57,12 @@
           </p>
         </div>
         <div class="flex gap-2">
+          <button
+            onclick="copyReadmeToClipboard()"
+            class="px-3 py-2 text-sm border border-black dark:border-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors whitespace-nowrap"
+          >
+            Copy this page
+          </button>
           <a
             href="https://github.com/morphkit/morphkit/tree/main/packages/asset-gen-mcp"
             target="_blank"
@@ -104,7 +118,7 @@
           <h2
             class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2"
           >
-            1. Get API Key
+            Get API Key
           </h2>
           <p class="mb-4">Create a Google API key for Imagen access:</p>
           <a
@@ -134,11 +148,65 @@
           </div>
         </section>
 
+        <section id="requirements">
+          <h2
+            class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2"
+          >
+            Requirements
+          </h2>
+          <div class="space-y-3 mb-4">
+            <div class="flex items-start gap-3">
+              <span class="text-green-600 dark:text-green-400">✓</span>
+              <div>
+                <span class="font-bold">Node.js</span>
+                <span class="text-gray-600 dark:text-gray-400"> >= 18</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-green-600 dark:text-green-400">✓</span>
+              <div>
+                <span class="font-bold">Python</span>
+                <span class="text-gray-600 dark:text-gray-400">
+                  (for background removal) - Pre-installed on macOS and most
+                  Linux distributions</span
+                >
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-green-600 dark:text-green-400">✓</span>
+              <div>
+                <span class="font-bold">Google API Key</span>
+                <span class="text-gray-600 dark:text-gray-400">
+                  - Get one at
+                  <a
+                    href="https://aistudio.google.com/apikey"
+                    class="underline hover:text-black dark:hover:text-white"
+                    >Google AI Studio</a
+                  ></span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="p-4 border border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20"
+          >
+            <p class="text-sm text-blue-800 dark:text-blue-200">
+              <strong>First Run Notice:</strong> The
+              <code class="bg-blue-100 dark:bg-blue-800 px-1"
+                >remove-background</code
+              >
+              tool downloads an ML model (~150MB) and creates a Python virtual
+              environment on first use. This takes approximately 3 minutes.
+              Subsequent runs are fast (~2-5 seconds).
+            </p>
+          </div>
+        </section>
+
         <section id="installation">
           <h2
             class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2"
           >
-            2. Install
+            Install
           </h2>
           <div
             class="bg-gray-100 dark:bg-gray-900 p-4 mb-4 border-l-4 border-black dark:border-white"
@@ -173,7 +241,7 @@
           <h2
             class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2"
           >
-            3. MCP Client Setup
+            MCP Client Setup
           </h2>
 
           <article class="mb-8">
@@ -261,7 +329,7 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
           <h2
             class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2"
           >
-            4. Tools
+            Tools
           </h2>
 
           <article class="mb-8">
@@ -276,26 +344,23 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
               class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre"
             >
 {
-  "assetType": "logo",
-  "query": "I need a tech startup logo",
-  "stylePreferences": {
+  "assetType": "logo",                   // required: logo | icon | illustration | character | sprite | pattern | photograph | ui-element
+  "query": "I need a tech startup logo", // optional: context for the guidelines
+  "stylePreferences": {                  // optional: style hints
     "colorScheme": "blue and white",
     "artStyle": "minimalist",
     "mood": "professional"
   }
 }</pre
             >
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              Asset types: logo, icon, illustration, character, sprite, pattern,
-              photograph, ui-element
-            </p>
           </article>
 
           <article class="mb-8">
             <h3 class="font-bold mb-2">generate-images</h3>
             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
               Generates images using Google Imagen with auto-vectorization for
-              SVG outputs.
+              SVG outputs. Supports batch processing with up to 10 parallel
+              requests.
             </p>
             <pre
               class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre"
@@ -303,44 +368,73 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
 {
   "requests": [
     {
-      "outputPath": "/path/to/logo.png",
-      "extension": "png",
-      "prompt": "Minimalist owl logo, geometric shapes, flat design"
+      "outputPath": "/path/to/logo.png",            // required: output file path
+      "extension": "png",                           // required: png | svg | webp | jpeg
+      "prompt": "Minimalist owl logo, flat design", // required: 1-2000 chars
+      "images": ["/path/to/reference.png"],         // optional: reference images (paths or URLs)
+      "removeBackground": true                      // optional: AI background removal (png only)
     },
     {
       "outputPath": "/path/to/icon.svg",
       "extension": "svg",
-      "prompt": "Settings gear icon, outlined style, 2px stroke"
+      "prompt": "Settings gear icon, outlined style"
     }
   ],
-  "model": "imagen-4.0-generate-001"
+  "model": "imagen-4.0-generate-001" // optional: imagen-4.0-ultra-generate-001 | imagen-4.0-generate-001 (default) | imagen-4.0-fast-generate-001
 }</pre
             >
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              Models: imagen-4.0-ultra-generate-001 (highest quality),
-              imagen-4.0-generate-001 (default, balanced),
-              imagen-4.0-fast-generate-001 (fastest)
-            </p>
           </article>
 
-          <article>
+          <article class="mb-8">
             <h3 class="font-bold mb-2">vectorize-image</h3>
             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Converts raster images to SVG using configurable vectorization
-              options.
+              Converts raster images (PNG, JPEG, WebP) to SVG using configurable
+              vectorization options.
             </p>
             <pre
               class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre"
             >
 {
-  "inputPath": "/path/to/input.png",
-  "outputPath": "/path/to/output.svg",
-  "config": {
-    "colorMode": "color",
-    "hierarchical": "stacked",
-    "filterSpeckle": 4,
-    "mode": "spline"
+  "inputPath": "/path/to/input.png",  // required: source image
+  "outputPath": "/path/to/output.svg", // required: output SVG path
+  "config": {                          // optional: all fields have defaults
+    "colorMode": "color",              // color | binary (default: color)
+    "hierarchical": "stacked",         // stacked | cutout (default: stacked)
+    "mode": "spline",                  // spline | polygon | none (default: spline)
+    "filterSpeckle": 4,                // 0-100: remove small artifacts (default: 4)
+    "colorPrecision": 6,               // 1-8: color clustering precision (default: 6)
+    "layerDifference": 16,             // 0-100: color layer threshold (default: 16)
+    "cornerThreshold": 60,             // 0-180: corner detection angle (default: 60)
+    "lengthThreshold": 4,              // 0-10: min path segment length (default: 4)
+    "spliceThreshold": 45,             // 0-180: curve splice angle (default: 45)
+    "maxIterations": 10,               // 1-20: curve fitting iterations (default: 10)
+    "pathPrecision": 3                 // 1-8: SVG path decimal precision (default: 3)
   }
+}</pre
+            >
+          </article>
+
+          <article>
+            <h3 class="font-bold mb-2">remove-background</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              AI-powered background removal using InSPyReNet model. Works with
+              complex backgrounds, shadows, and lighting effects. Outputs
+              transparent PNG. Powered by
+              <a
+                href="https://github.com/makinori/transparent-background-npm"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline hover:text-black dark:hover:text-white"
+                >transparent-background</a
+              >.
+            </p>
+            <pre
+              class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre"
+            >
+{
+  "inputPath": "/path/to/image.png",  // required: source image
+  "outputPath": "/path/to/output.png", // required: output PNG with transparency
+  "fast": false                        // optional: true = 384x384 (faster), false = 1024x1024 (default, higher quality)
 }</pre
             >
           </article>
@@ -350,7 +444,7 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
           <h2
             class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2"
           >
-            5. Model Selection
+            Model Selection
           </h2>
           <div class="space-y-4">
             <div class="border-l-2 border-black dark:border-white pl-4">
@@ -373,24 +467,6 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
                 Speed-optimized. Best for rapid prototyping and iteration.
               </p>
             </div>
-          </div>
-        </section>
-
-        <section id="docker">
-          <h2
-            class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2"
-          >
-            6. Docker
-          </h2>
-          <div class="bg-gray-100 dark:bg-gray-900 p-4 mb-4">
-            <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Build</p>
-            <code class="text-sm">docker build -t asset-gen-mcp .</code>
-          </div>
-          <div class="bg-gray-100 dark:bg-gray-900 p-4">
-            <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
-              Run with Docker Compose
-            </p>
-            <code class="text-sm">docker-compose up -d</code>
           </div>
         </section>
       </main>
@@ -419,6 +495,26 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
         } else {
           document.documentElement.classList.add("dark");
           localStorage.theme = "dark";
+        }
+      }
+
+      async function copyReadmeToClipboard() {
+        const button = event.currentTarget;
+        const originalText = button.textContent;
+        try {
+          const response = await fetch("./index.md");
+          const markdown = await response.text();
+          await navigator.clipboard.writeText(markdown);
+          button.textContent = "Copied!";
+          setTimeout(() => {
+            button.textContent = originalText;
+          }, 2000);
+        } catch (error) {
+          console.error("Failed to copy:", error);
+          button.textContent = "Failed";
+          setTimeout(() => {
+            button.textContent = originalText;
+          }, 2000);
         }
       }
     </script>
