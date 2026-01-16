@@ -26,7 +26,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-**morph-ui** is a production-ready component library monorepo, similar in spirit to shadcn/ui. The repository features a **fully-implemented React Native component library** (`@warp-ui/react-native`) with 27 components, multi-screen flow templates, CLI tooling, and comprehensive testing infrastructure.
+**morph-ui** is a production-ready component library monorepo, similar in spirit to shadcn/ui. The repository features a **fully-implemented React Native component library** (`@morph-ui/react-native`) with 27 components, multi-screen flow templates, CLI tooling, and comprehensive testing infrastructure.
 
 The repository includes a full-featured demo app for browsing components and flows, with MDX-based documentation, drawer navigation, and dynamic component showcases. All components follow the three-tier theme system and are backed by Jest tests.
 
@@ -85,7 +85,7 @@ The repository uses Turborepo workspaces defined in root `package.json`:
   - Implements authentication flows using Expo Router
   - Structure: `src/auth/(default)/` for default auth flow
   - Components: welcome, email, name, password screens
-- **@warp-ui/cli**: Command-line interface for Warp UI
+- **@morph-ui/cli**: Command-line interface for Morph UI
   - Version: 0.3.4
   - Published to GitHub Packages (npm.pkg.github.com)
   - Supports both CommonJS and ESM exports
@@ -93,7 +93,7 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 
 **`packages/react-native/`** - Production-Ready React Native Component Library
 
-- **Package name**: `@warp-ui/react-native` (v0.1.0)
+- **Package name**: `@morph-ui/react-native` (v0.1.0)
 - **27 fully-implemented components** following three-tier theme system
 - Components exported via wildcard pattern for tree-shaking: `"./src/*"`
 - Complete testing infrastructure with Jest
@@ -481,7 +481,7 @@ Multi-screen user journeys are managed through the flows package:
 The demo app at `apps/kitchen-sink-app` showcases all components and flows:
 
 1. **Component Documentation**: All components automatically appear in sidebar via registry
-2. **Adding Components**: New components in `@warp-ui/react-native` appear automatically
+2. **Adding Components**: New components in `@morph-ui/react-native` appear automatically
 3. **Adding Flows**: Register new flows in `@repo/react-native-flows/src/registry.ts`
 4. **Custom Theme**: Demo app uses Inter font family with theme overrides via `createTheme()`
 5. **Navigation**: Drawer navigation with routes:
@@ -580,18 +580,18 @@ These files are auto-generated and manual changes will be overwritten.
 
 ## CLI Usage
 
-The `@warp-ui/cli` package provides scaffolding and management commands:
+The `@morph-ui/cli` package provides scaffolding and management commands:
 
 ```bash
 # Install CLI globally (from GitHub Packages)
-npm install -g @warp-ui/cli
+npm install -g @morph-ui/cli
 
 # Component management
-warp-ui add [component]     # Add component to project
-warp-ui init                # Initialize Warp UI in project
+morph-ui add [component]     # Add component to project
+morph-ui init                # Initialize Morph UI in project
 
 # Configuration
-warp-ui config              # Manage CLI configuration
+morph-ui config              # Manage CLI configuration
 ```
 
 **Note**: CLI is published to GitHub Packages and requires authentication.
