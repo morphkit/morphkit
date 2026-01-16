@@ -2,6 +2,38 @@
 
 AI-powered image asset generation with prompt engineering guidance and vectorization
 
+**[Documentation](https://morphkit.github.io/morphkit/asset-gen-mcp/)**
+
+## Quick Start (npx)
+
+Run the MCP server directly without global installation:
+
+```bash
+npx -y @morphkit/asset-gen-mcp@latest
+```
+
+For MCP client configuration, use:
+
+```json
+{
+  "mcpServers": {
+    "asset-gen": {
+      "command": "npx",
+      "args": ["-y", "@morphkit/asset-gen-mcp@latest"],
+      "env": {
+        "GOOGLE_API_KEY": "YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+For Claude Code:
+
+```bash
+claude mcp add -e GOOGLE_API_KEY=YOUR_API_KEY asset-gen -- npx -y @morphkit/asset-gen-mcp@latest
+```
+
 ## Features
 
 - **get-image-generation-prompt-instructions**: Returns asset-type-specific prompt engineering best practices and examples for Google Imagen

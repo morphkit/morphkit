@@ -62,6 +62,11 @@
 
       <section id="installation">
         <h2 class="text-xl font-bold mb-4 border-b border-black dark:border-white pb-2">2. Install</h2>
+        <div class="bg-gray-100 dark:bg-gray-900 p-4 mb-4 border-l-4 border-black dark:border-white">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">npx (recommended - always latest)</p>
+          <code class="text-sm">npx -y @morphkit/asset-gen-mcp@latest</code>
+        </div>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Or install globally:</p>
         <div class="bg-gray-100 dark:bg-gray-900 p-4 mb-4">
           <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">npm</p>
           <code class="text-sm">npm install -g @morphkit/asset-gen-mcp</code>
@@ -89,7 +94,8 @@
           <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
   "mcpServers": {
     "asset-gen": {
-      "command": "asset-gen-mcp",
+      "command": "npx",
+      "args": ["-y", "@morphkit/asset-gen-mcp@latest"],
       "env": {
         "GOOGLE_API_KEY": "YOUR_API_KEY"
       }
@@ -101,7 +107,7 @@
         <article class="mb-8">
           <h3 class="font-bold mb-2">Claude Code</h3>
           <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Run the following command (replace YOUR_API_KEY with your actual key):</p>
-          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">claude mcp add -e GOOGLE_API_KEY=YOUR_API_KEY asset-gen -- asset-gen-mcp</pre>
+          <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">claude mcp add -e GOOGLE_API_KEY=YOUR_API_KEY asset-gen -- npx -y @morphkit/asset-gen-mcp@latest</pre>
         </article>
 
         <article class="mb-8">
@@ -110,7 +116,8 @@
           <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
   "mcpServers": {
     "asset-gen": {
-      "command": "asset-gen-mcp",
+      "command": "npx",
+      "args": ["-y", "@morphkit/asset-gen-mcp@latest"],
       "env": {
         "GOOGLE_API_KEY": "YOUR_API_KEY"
       }
@@ -125,7 +132,8 @@
           <pre class="bg-gray-100 dark:bg-gray-900 p-4 text-xs overflow-x-auto whitespace-pre">{
   "mcpServers": {
     "asset-gen": {
-      "command": "asset-gen-mcp",
+      "command": "npx",
+      "args": ["-y", "@morphkit/asset-gen-mcp@latest"],
       "env": {
         "GOOGLE_API_KEY": "YOUR_API_KEY"
       }

@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "packages/asset-gen-mcp/docs/**"
+      - "docs/**"
   workflow_dispatch:
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: packages/asset-gen-mcp/docs
+          path: docs
 
       - name: Deploy to GitHub Pages
         id: deployment
