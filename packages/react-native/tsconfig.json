@@ -1,5 +1,5 @@
 {
-  "extends": "@morphkit/typescript-config/react-native.json",
+  "extends": "../typescript-config/react-native.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src"
