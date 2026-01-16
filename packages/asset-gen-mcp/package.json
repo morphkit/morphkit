@@ -1,6 +1,6 @@
 {
   "name": "@morphkit/asset-gen-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AI-powered image asset generation MCP server with prompt engineering guidance and vectorization",
   "type": "module",
   "main": "./dist/index.js",
