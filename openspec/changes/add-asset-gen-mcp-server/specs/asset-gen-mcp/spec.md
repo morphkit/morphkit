@@ -2,7 +2,7 @@
 
 ### Requirement: Asset Generation MCP Server
 
-The system SHALL provide an MCP server (`@morph-ui/asset-gen-mcp`) that enables AI agents to generate production-ready image assets with prompt engineering guidance and vectorization capabilities.
+The system SHALL provide an MCP server (`@morphkit/asset-gen-mcp`) that enables AI agents to generate production-ready image assets with prompt engineering guidance and vectorization capabilities.
 
 #### Scenario: Server initialization
 

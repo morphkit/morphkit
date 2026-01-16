@@ -16,9 +16,9 @@ Design systems benefit from hierarchical component organization:
 4. **Templates** - Page-level layouts
 5. **Pages** - Specific instances
 
-**Application to morph-ui**:
+**Application to morphkit**:
 
-- morph-ui's 27 components are primarily atoms and molecules
+- morphkit's 27 components are primarily atoms and molecules
 - Flows represent organism/template level
 - Demo app shows page-level implementations
 
@@ -41,7 +41,7 @@ Industry standard for managing design values:
 - Theme-aware token resolution
 - Support for light/dark modes built-in
 
-**morph-ui Alignment**: ✅ Fully implements three-tier token system
+**morphkit Alignment**: ✅ Fully implements three-tier token system
 
 **Sources**:
 
@@ -59,14 +59,14 @@ Modern design systems favor copy-paste over npm packages:
 - No hidden dependencies
 - Source code is the documentation
 
-**Application to morph-ui**:
+**Application to morphkit**:
 
 - Wildcard exports allow selective imports
 - Components are self-contained with colocated themes
 - Theme tokens enable easy customization
 - Each component has full source in repo
 
-**morph-ui Alignment**: ✅ Follows shadcn/ui philosophy
+**morphkit Alignment**: ✅ Follows shadcn/ui philosophy
 
 **Source**: [shadcn/ui documentation](https://ui.shadcn.com/docs)
 
@@ -81,7 +81,7 @@ Modern design systems use context-aware theming:
 - Automatic light/dark mode switching
 - CSS variables or token objects for runtime theming
 
-**morph-ui Implementation**:
+**morphkit Implementation**:
 
 ```tsx
 // ✅ Correct pattern
@@ -114,7 +114,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
    - Version shared configs independently
    - Use `extends` in local configs
 
-**morph-ui Alignment**: ✅ Follows standard workspace structure
+**morphkit Alignment**: ✅ Follows standard workspace structure
 
 **Sources**:
 
@@ -179,7 +179,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
    - Enforce naming conventions
    - Require code reviews
 
-**morph-ui Alignment**: ✅ Implements strict quality enforcement
+**morphkit Alignment**: ✅ Implements strict quality enforcement
 
 **Sources**:
 
@@ -205,7 +205,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
 - Avoid abbreviations (`TextField` not `TxtFld`)
 - Use industry-standard names (`Button` not `CustomButton`)
 
-**morph-ui Alignment**: ✅ Follows naming conventions
+**morphkit Alignment**: ✅ Follows naming conventions
 
 **Sources**:
 
@@ -235,7 +235,7 @@ const colors = theme.component.button.variant[colorScheme][variant];
    - Provide sensible defaults
    - Make components work with minimal configuration
 
-**morph-ui Alignment**: ✅ Follows variant-based API design
+**morphkit Alignment**: ✅ Follows variant-based API design
 
 **Example**:
 
@@ -271,7 +271,7 @@ ComponentName/
 - Clear ownership boundaries
 - Facilitates code review
 
-**morph-ui Alignment**: ✅ Uses colocated pattern with `.theme.ts`
+**morphkit Alignment**: ✅ Uses colocated pattern with `.theme.ts`
 
 **Source**: [React Native File Organization](https://handsonreact.com/docs/code-organization-conventions)
 
@@ -302,7 +302,7 @@ ComponentName/
    - Respect platform conventions
    - Use platform-appropriate components
 
-**morph-ui Context**: Component library should be platform-agnostic where possible
+**morphkit Context**: Component library should be platform-agnostic where possible
 
 ---
 
@@ -330,7 +330,7 @@ ComponentName/
 
 ```json
 {
-  "name": "@morph-ui/react-native",
+  "name": "@morphkit/react-native",
   "version": "0.1.0",
   "private": false,
   "publishConfig": {
@@ -340,7 +340,7 @@ ComponentName/
 }
 ```
 
-**morph-ui Context**: Should standardize on single scope
+**morphkit Context**: Should standardize on single scope
 
 **Sources**:
 
@@ -363,7 +363,7 @@ ComponentName/
 - Hyphens
 - No spaces, underscores, or special chars
 
-**morph-ui Alignment**: ✅ Uses kebab-case descriptive names
+**morphkit Alignment**: ✅ Uses kebab-case descriptive names
 
 **Source**: [npm Package Name Guidelines](https://docs.npmjs.com/package-name-guidelines/)
 
@@ -389,7 +389,7 @@ Format: `MAJOR.MINOR.PATCH`
 - `1.0.0-beta.1` - Beta release
 - `1.0.0-rc.1` - Release candidate
 
-**morph-ui Context**: Currently at v0.x.x (pre-1.0 allows breaking changes in minor versions)
+**morphkit Context**: Currently at v0.x.x (pre-1.0 allows breaking changes in minor versions)
 
 **Source**: [Semantic Versioning 2.0.0](https://semver.org/)
 
@@ -399,7 +399,7 @@ Format: `MAJOR.MINOR.PATCH`
 
 ```json
 {
-  "name": "@morph-ui/react-native",
+  "name": "@morphkit/react-native",
   "version": "0.1.0",
   "description": "React Native component library",
   "main": "./src/index.ts",
@@ -505,7 +505,7 @@ Format: `MAJOR.MINOR.PATCH`
    });
    ```
 
-**morph-ui Context**: Uses React Native Testing Library
+**morphkit Context**: Uses React Native Testing Library
 
 **Source**: [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
 
@@ -535,7 +535,7 @@ Format: `MAJOR.MINOR.PATCH`
    - Update examples when API changes
    - Include migration guides for breaking changes
 
-**morph-ui Alignment**: ✅ Uses MDX for component docs
+**morphkit Alignment**: ✅ Uses MDX for component docs
 
 ### API Documentation
 
@@ -650,13 +650,13 @@ turbo run test --filter=[origin/main]
    - Implement progressive loading
    - Cache images properly
 
-**morph-ui Context**: Wildcard exports enable tree-shaking
+**morphkit Context**: Wildcard exports enable tree-shaking
 
 ---
 
 ## Summary
 
-morph-ui should align with these industry standards:
+morphkit should align with these industry standards:
 
 1. **Design Systems**: Token-based theming, atomic design, copy-paste philosophy ✅
 2. **Monorepo**: Clear workspace organization, build caching, quality gates ✅

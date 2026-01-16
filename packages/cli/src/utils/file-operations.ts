@@ -48,12 +48,12 @@ export async function copyComponent(
   const absoluteDestPath = resolve(process.cwd(), destPath);
 
   // GitHub API endpoint to get tarball
-  const apiUrl = `https://api.github.com/repos/warp-ui/warp-ui/tarball/main`;
+  const apiUrl = `https://api.github.com/repos/morphkit/morphkit/tarball/main`;
 
   const headers: HeadersInit = {
     Authorization: `token ${token}`,
     Accept: "application/vnd.github.v3+json",
-    "User-Agent": "@morph-ui/cli",
+    "User-Agent": "@morphkit/cli",
   };
 
   try {

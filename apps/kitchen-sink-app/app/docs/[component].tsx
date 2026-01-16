@@ -1,8 +1,8 @@
 import { View, ScrollView, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { Typography, useTheme } from "@morph-ui/react-native";
-import registry from "@morph-ui/react-native/src/registry.json";
-import { docsRegistry } from "@morph-ui/react-native/src/docs-registry";
+import { Typography, useTheme } from "@morphkit/react-native";
+import registry from "@morphkit/react-native/src/registry.json";
+import { docsRegistry } from "@morphkit/react-native/src/docs-registry";
 
 export default function ComponentDocPage() {
   const { theme } = useTheme();

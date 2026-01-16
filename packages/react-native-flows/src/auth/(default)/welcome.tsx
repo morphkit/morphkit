@@ -15,7 +15,7 @@ import {
   Box,
   Divider,
   useTheme,
-} from "@morph-ui/react-native";
+} from "@morphkit/react-native";
 
 type SocialProvider = "apple" | "google" | "facebook";
 

@@ -279,8 +279,8 @@ setting2: number; // {description}
 
 ### Development Dependencies
 
-- **@morph-ui/typescript-config**: Shared TypeScript configuration
-- **@morph-ui/eslint-config**: Shared ESLint rules
+- **@morphkit/typescript-config**: Shared TypeScript configuration
+- **@morphkit/eslint-config**: Shared ESLint rules
 - **typescript** (~5.9.2): TypeScript compiler
 - **tsx** (^4.0.0): TypeScript execution for development
 - **jest** (^30.2.0): Testing framework

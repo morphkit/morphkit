@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Performs comprehensive architectural code reviews for the morph-ui design system. Reviews package naming, component architecture, code duplication, and design patterns. Use when making architectural changes, refactoring, or when user requests "review code", "code health check", "architectural review", or "check codebase quality".
+description: Performs comprehensive architectural code reviews for the morphkit design system. Reviews package naming, component architecture, code duplication, and design patterns. Use when making architectural changes, refactoring, or when user requests "review code", "code health check", "architectural review", or "check codebase quality".
 allowed-tools: Read, Grep, Glob, WebSearch, WebFetch, Task
 ---
 
@@ -8,7 +8,7 @@ allowed-tools: Read, Grep, Glob, WebSearch, WebFetch, Task
 
 ## Overview
 
-This skill performs comprehensive architectural code reviews for the morph-ui design system monorepo. It focuses on catching code smells and architectural issues that static analysis tools miss, while ensuring consistency with industry best practices for design systems and React Native component libraries.
+This skill performs comprehensive architectural code reviews for the morphkit design system monorepo. It focuses on catching code smells and architectural issues that static analysis tools miss, while ensuring consistency with industry best practices for design systems and React Native component libraries.
 
 ## Purpose
 
@@ -57,7 +57,7 @@ Explicit activation phrases:
    - Flow `registry.json` for flow metadata
 
 3. **Build mental model**:
-   - Package scope usage (`@morph-ui/`, `@morph-ui/`, `@morph-ui/`)
+   - Package scope usage (`@morphkit/`, `@morphkit/`, `@morphkit/`)
    - Public vs private package classification
    - Component categories and organization
    - Flow variants and screen counts
@@ -120,7 +120,7 @@ Review each category systematically (see [review-categories.md](references/revie
    - Monorepo architecture guides
 
 3. **Compare against standards**:
-   - Check morph-ui patterns vs industry standards
+   - Check morphkit patterns vs industry standards
    - Identify gaps and opportunities
    - Validate architectural decisions
 
@@ -182,7 +182,7 @@ Structure the report as follows:
 Before suggesting changes:
 
 1. **Ask about naming decisions**:
-   - "Should we standardize on `@morph-ui/` or keep `@morph-ui/`?"
+   - "Should we standardize on `@morphkit/` or keep `@morphkit/`?"
    - "Should flows package be public or remain private?"
 
 2. **Confirm architectural choices**:
@@ -210,7 +210,7 @@ See [review-categories.md](references/review-categories.md) for comprehensive ch
 
 ## Project-Specific Standards
 
-See [morph-ui-standards.md](references/morph-ui-standards.md) for morph-ui conventions:
+See [morphkit-standards.md](references/morphkit-standards.md) for morphkit conventions:
 
 - Three-tier theme system
 - Component structure patterns
@@ -233,33 +233,33 @@ See [best-practices.md](references/best-practices.md) for external standards:
 ```markdown
 ### 🔴 Package Naming Inconsistency
 
-**Issue**: Mixed usage of `@morph-ui/` and `@morph-ui/` scopes across packages
+**Issue**: Mixed usage of `@morphkit/` and `@morphkit/` scopes across packages
 
 **Files**:
 
-- `packages/react-native/package.json` - Uses `@morph-ui/react-native`
-- `packages/react-native-flows/package.json` - Uses `@morph-ui/react-native-flows`
-- `packages/cli/package.json` - Uses `@morph-ui/cli`
+- `packages/react-native/package.json` - Uses `@morphkit/react-native`
+- `packages/react-native-flows/package.json` - Uses `@morphkit/react-native-flows`
+- `packages/cli/package.json` - Uses `@morphkit/cli`
 
 **Impact**:
 
 - Confusing for developers joining the project
 - Unclear which packages are intended for public consumption
-- Inconsistent with repository name "morph-ui"
+- Inconsistent with repository name "morphkit"
 
 **Recommendation**:
 Choose one primary scope and apply consistently:
 
-Option A: Standardize on `@morph-ui/` (matches repo name)
+Option A: Standardize on `@morphkit/` (matches repo name)
 
-- Rename `@morph-ui/react-native` → `@morph-ui/react-native`
-- Rename `@morph-ui/cli` → `@morph-ui/cli`
-- Rename `@morph-ui/react-native-flows` → `@morph-ui/react-native-flows`
+- Rename `@morphkit/react-native` → `@morphkit/react-native`
+- Rename `@morphkit/cli` → `@morphkit/cli`
+- Rename `@morphkit/react-native-flows` → `@morphkit/react-native-flows`
 
-Option B: Keep `@morph-ui/` (existing branding)
+Option B: Keep `@morphkit/` (existing branding)
 
-- Keep `@morph-ui/react-native` and `@morph-ui/cli`
-- Rename `@morph-ui/react-native-flows` → `@morph-ui/react-native-flows`
+- Keep `@morphkit/react-native` and `@morphkit/cli`
+- Rename `@morphkit/react-native-flows` → `@morphkit/react-native-flows`
 
 **Research**:
 
@@ -301,7 +301,7 @@ Option B: Keep `@morph-ui/` (existing branding)
 - Doesn't follow component library philosophy
 
 **Recommendation**:
-Create `PasswordInput` component in `@morph-ui/react-native`:
+Create `PasswordInput` component in `@morphkit/react-native`:
 
 ```tsx
 // packages/react-native/src/password-input/PasswordInput.tsx
@@ -446,7 +446,7 @@ Total estimated time: 35-45 minutes for full codebase scan
 
 5. **Be specific and actionable**:
    - Not: "Naming could be better"
-   - Yes: "Rename `@morph-ui/react-native-flows` to `@morph-ui/react-native-flows` for consistency"
+   - Yes: "Rename `@morphkit/react-native-flows` to `@morphkit/react-native-flows` for consistency"
 
 ## Principles
 

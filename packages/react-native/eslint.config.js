@@ -1,4 +1,4 @@
-import { config } from "@morph-ui/eslint-config/react-native";
+import { config } from "@morphkit/eslint-config/react-native";
 
 export default [
   ...config,

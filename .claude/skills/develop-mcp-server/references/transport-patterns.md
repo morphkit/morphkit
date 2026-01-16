@@ -90,7 +90,7 @@ server.registerTool(
 
 ```json
 {
-  "name": "@morph-ui/example-mcp",
+  "name": "@morphkit/example-mcp",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -105,7 +105,7 @@ server.registerTool(
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "@morph-ui/typescript-config": "*",
+    "@morphkit/typescript-config": "*",
     "@types/node": "^20.0.0",
     "typescript": "~5.9.2",
     "tsx": "^4.0.0"
@@ -226,7 +226,7 @@ server.registerTool(
 
 ```json
 {
-  "name": "@morph-ui/example-mcp",
+  "name": "@morphkit/example-mcp",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -243,7 +243,7 @@ server.registerTool(
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "@morph-ui/typescript-config": "*",
+    "@morphkit/typescript-config": "*",
     "@types/node": "^20.0.0",
     "@types/express": "^4.17.21",
     "@types/cors": "^2.8.17",

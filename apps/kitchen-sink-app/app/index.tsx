@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import { Typography, useTheme } from "@morph-ui/react-native";
+import { Typography, useTheme } from "@morphkit/react-native";
 
 export default function HomeScreen() {
   const { theme } = useTheme();

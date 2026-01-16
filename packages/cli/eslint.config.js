@@ -1,4 +1,4 @@
-import { config as baseConfig } from "@morph-ui/eslint-config/base";
+import { config as baseConfig } from "@morphkit/eslint-config/base";
 
 export default [
   ...baseConfig,

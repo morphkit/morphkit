@@ -1,5 +1,5 @@
 {
-  "name": "@morph-ui/jest-config",
+  "name": "@morphkit/jest-config",
   "version": "0.0.0",
   "private": true
 }

@@ -13,7 +13,7 @@ import {
   Container,
   Stack,
   useTheme,
-} from "@morph-ui/react-native";
+} from "@morphkit/react-native";
 
 export default function Name() {
   const router = useRouter();

@@ -4,7 +4,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ComponentSidebar } from "../components/ComponentSidebar";
 import { MDXProvider } from "../components/MDXProvider";
 import type { DrawerContentComponentProps } from "@react-navigation/drawer";
-import { ThemeProvider, createTheme, useTheme } from "@morph-ui/react-native";
+import { ThemeProvider, createTheme, useTheme } from "@morphkit/react-native";
 
 import {
   Inter_400Regular,

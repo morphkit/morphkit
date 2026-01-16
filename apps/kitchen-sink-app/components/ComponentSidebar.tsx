@@ -1,10 +1,10 @@
 import { View, Pressable, StyleSheet, ScrollView } from "react-native";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useRouter, usePathname } from "expo-router";
-import { Typography, useTheme } from "@morph-ui/react-native";
-import registry from "@morph-ui/react-native/src/registry.json";
-import flowsRegistry from "@morph-ui/react-native-flows/src/registry.json";
-import type { FlowRegistryEntry } from "@morph-ui/react-native-flows";
+import { Typography, useTheme } from "@morphkit/react-native";
+import registry from "@morphkit/react-native/src/registry.json";
+import flowsRegistry from "@morphkit/react-native-flows/src/registry.json";
+import type { FlowRegistryEntry } from "@morphkit/react-native-flows";
 
 export const ComponentSidebar = (props: DrawerContentComponentProps) => {
   const { theme } = useTheme();

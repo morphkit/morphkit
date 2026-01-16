@@ -52,7 +52,7 @@
 
 - **Test Framework**: Jest 30.2.0
 - **Testing Library**: React Native Testing Library
-- **Shared Config**: @morph-ui/jest-config
+- **Shared Config**: @morphkit/jest-config
 
 **Documentation:**
 
@@ -63,12 +63,12 @@
 
 - **Linter**: ESLint v9 (flat config, zero warnings policy)
 - **Formatter**: Prettier
-- **TypeScript Config**: Shared via @morph-ui/typescript-config
+- **TypeScript Config**: Shared via @morphkit/typescript-config
 
 **Publishing:**
 
-- **@morph-ui/cli**: GitHub Packages (v0.3.4)
-- **@morph-ui/react-native**: npm registry (planned)
+- **@morphkit/cli**: GitHub Packages (v0.3.4)
+- **@morphkit/react-native**: npm registry (planned)
 
 ## Project Conventions
 
@@ -122,7 +122,7 @@
   - **CRITICAL**: Even if failing tests are unrelated to your current change, ALL tests must pass before marking work as complete
   - Never ignore or skip failing tests
   - Fix all test failures before proceeding
-- **Shared config**: Use `@morph-ui/jest-config` for consistent setup across packages
+- **Shared config**: Use `@morphkit/jest-config` for consistent setup across packages
 
 **Test Coverage:**
 
@@ -317,8 +317,8 @@ Registry files are auto-generated to ensure consistency and eliminate manual mai
 
 ### Publishing & Distribution
 
-- **GitHub Packages**: Hosts @morph-ui/cli (v0.3.4)
-- **npm registry** (planned): Future home for @morph-ui/react-native
+- **GitHub Packages**: Hosts @morphkit/cli (v0.3.4)
+- **npm registry** (planned): Future home for @morphkit/react-native
 
 ### UI & Theming
 

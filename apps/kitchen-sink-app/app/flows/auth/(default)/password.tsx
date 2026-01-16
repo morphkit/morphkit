@@ -1,3 +1,3 @@
-import { Password } from "@morph-ui/react-native-flows/auth/default";
+import { Password } from "@morphkit/react-native-flows/auth/default";
 
 export default Password;

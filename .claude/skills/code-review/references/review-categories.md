@@ -1,6 +1,6 @@
 # Review Categories - Detailed Checklists
 
-This document provides comprehensive checklists for each review category. Use these as systematic guides when performing code reviews on the morph-ui monorepo.
+This document provides comprehensive checklists for each review category. Use these as systematic guides when performing code reviews on the morphkit monorepo.
 
 ## 1. Package Naming & Scoping
 
@@ -8,8 +8,8 @@ This document provides comprehensive checklists for each review category. Use th
 
 **Check for**:
 
-- [ ] All public packages use the same npm scope (`@morph-ui/` or `@morph-ui/`)
-- [ ] Internal-only packages use `@morph-ui/` prefix
+- [ ] All public packages use the same npm scope (`@morphkit/` or `@morphkit/`)
+- [ ] Internal-only packages use `@morphkit/` prefix
 - [ ] Scope matches the primary branding (repo name or product name)
 - [ ] No mixing of scopes for similar packages (e.g., components vs flows)
 
@@ -20,8 +20,8 @@ This document provides comprehensive checklists for each review category. Use th
 
 **Common Issues**:
 
-- Mixed `@morph-ui/` and `@morph-ui/` usage
-- Public packages using `@morph-ui/` prefix
+- Mixed `@morphkit/` and `@morphkit/` usage
+- Public packages using `@morphkit/` prefix
 - Inconsistent scope for related packages (components, flows, CLI)
 
 **Best Practice**:
@@ -29,13 +29,13 @@ This document provides comprehensive checklists for each review category. Use th
 ```json
 // Public package
 {
-  "name": "@morph-ui/react-native",
+  "name": "@morphkit/react-native",
   "private": false
 }
 
 // Internal tooling
 {
-  "name": "@morph-ui/eslint-config",
+  "name": "@morphkit/eslint-config",
   "private": true
 }
 ```
@@ -60,7 +60,7 @@ This document provides comprehensive checklists for each review category. Use th
 ```json
 // Public scoped package
 {
-  "name": "@morph-ui/react-native",
+  "name": "@morphkit/react-native",
   "private": false,
   "publishConfig": {
     "access": "public",
@@ -86,15 +86,15 @@ This document provides comprehensive checklists for each review category. Use th
 
 **Good Examples**:
 
-- `@morph-ui/react-native` ✅
-- `@morph-ui/react-native-flows` ✅
-- `@morph-ui/cli` ✅
+- `@morphkit/react-native` ✅
+- `@morphkit/react-native-flows` ✅
+- `@morphkit/cli` ✅
 
 **Bad Examples**:
 
-- `@morph-ui/rnComponents` ❌ (camelCase)
-- `@morph-ui/utils` ❌ (too generic)
-- `@morph-ui/rn-lib` ❌ (abbreviation)
+- `@morphkit/rnComponents` ❌ (camelCase)
+- `@morphkit/utils` ❌ (too generic)
+- `@morphkit/rn-lib` ❌ (abbreviation)
 
 ---
 

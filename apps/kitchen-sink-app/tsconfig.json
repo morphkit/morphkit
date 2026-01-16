@@ -1,5 +1,5 @@
 {
-  "extends": "@morph-ui/typescript-config/react-native.json",
+  "extends": "@morphkit/typescript-config/react-native.json",
   "compilerOptions": {
     "strict": true,
     "paths": {

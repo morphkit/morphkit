@@ -1,10 +1,10 @@
-# morph-ui Standards
+# morphkit Standards
 
-This document defines project-specific standards for the morph-ui design system monorepo. These standards are derived from CLAUDE.md, openspec documentation, and established patterns in the codebase.
+This document defines project-specific standards for the morphkit design system monorepo. These standards are derived from CLAUDE.md, openspec documentation, and established patterns in the codebase.
 
 ## Three-Tier Theme System
 
-The cornerstone of morph-ui's styling architecture.
+The cornerstone of morphkit's styling architecture.
 
 ### Tier 1: Primitive Tokens
 
@@ -368,7 +368,7 @@ Variants use Expo Router group syntax with parentheses:
 
 - Each screen is a separate file
 - Use Expo Router for navigation
-- Leverage existing components from `@morph-ui/react-native`
+- Leverage existing components from `@morphkit/react-native`
 - Follow theme system for consistency
 - No custom components in flows (extract to library instead)
 - Type-safe navigation with `useRouter()` and `useLocalSearchParams()`
@@ -381,10 +381,10 @@ Variants use Expo Router group syntax with parentheses:
 
 **Active scopes**:
 
-- `@morph-ui/` - Published packages (react-native, cli)
-- `@morph-ui/` - Internal packages (configs, flows)
+- `@morphkit/` - Published packages (react-native, cli)
+- `@morphkit/` - Internal packages (configs, flows)
 
-**Decision Pending**: Standardize on `@morph-ui/` or keep `@morph-ui/`
+**Decision Pending**: Standardize on `@morphkit/` or keep `@morphkit/`
 
 ### Package Naming Rules
 
@@ -396,10 +396,10 @@ Variants use Expo Router group syntax with parentheses:
 
 **Good Examples**:
 
-- `@morph-ui/react-native`
-- `@morph-ui/react-native-flows`
-- `@morph-ui/cli`
-- `@morph-ui/eslint-config` (internal)
+- `@morphkit/react-native`
+- `@morphkit/react-native-flows`
+- `@morphkit/cli`
+- `@morphkit/eslint-config` (internal)
 
 ---
 
@@ -555,7 +555,7 @@ Wildcard pattern for tree-shaking:
 This allows:
 
 ```ts
-import { Button } from "@morph-ui/react-native/src/button";
+import { Button } from "@morphkit/react-native/src/button";
 ```
 
 ### Component Exports
@@ -653,7 +653,7 @@ A themeable button component following the three-tier theme system.
 ## Import
 
 \`\`\`tsx
-import { Button } from "@morph-ui/react-native/src/button";
+import { Button } from "@morphkit/react-native/src/button";
 \`\`\`
 
 ## Usage
@@ -697,14 +697,14 @@ Defined in `turbo.json`:
 ### ESLint Configuration
 
 - ESLint v9 with flat config
-- Shared configs in `@morph-ui/eslint-config`
+- Shared configs in `@morphkit/eslint-config`
 - Zero warnings enforced: `--max-warnings 0`
 - React Native config includes `__DEV__` global
 
 ### TypeScript Configuration
 
 - Strict mode enabled
-- Shared configs in `@morph-ui/typescript-config`
+- Shared configs in `@morphkit/typescript-config`
 - React Native config uses `jsx: "react-native"`
 - No `any` type allowed
 

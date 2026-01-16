@@ -3,7 +3,7 @@ import {
   atomOneDark,
   atomOneLight,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { useTheme } from "@morph-ui/react-native";
+import { useTheme } from "@morphkit/react-native";
 import type { ReactNode } from "react";
 import { isValidElement } from "react";
 

@@ -1,5 +1,5 @@
 module.exports = {
-  preset: '@morph-ui/jest-config',
+  preset: '@morphkit/jest-config',
   testEnvironment: 'node',
   roots: ['<rootDir>/src'],
   testMatch: ['**/*.test.ts'],

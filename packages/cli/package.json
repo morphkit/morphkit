@@ -1,5 +1,5 @@
 {
-  "name": "@morph-ui/cli",
+  "name": "@morphkit/cli",
   "version": "0.3.4",
   "description": "CLI for morph-ui component library",
   "type": "module",
@@ -38,9 +38,9 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@morph-ui/eslint-config": "*",
-    "@morph-ui/jest-config": "*",
-    "@morph-ui/typescript-config": "*",
+    "@morphkit/eslint-config": "*",
+    "@morphkit/jest-config": "*",
+    "@morphkit/typescript-config": "*",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.16.0",
     "@types/tar": "^6.1.13",
@@ -50,7 +50,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jaksamalisic/morph-ui.git",
+    "url": "git+https://github.com/morph-kit/morphkit.git",
     "directory": "packages/cli"
   },
   "publishConfig": {

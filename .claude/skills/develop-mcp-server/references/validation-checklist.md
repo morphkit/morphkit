@@ -228,7 +228,7 @@ For each tool, tests cover:
 
 ### Package.json
 
-- [ ] **Name** follows pattern: `@morph-ui/{name}-mcp`
+- [ ] **Name** follows pattern: `@morphkit/{name}-mcp`
 - [ ] **Version** starts at `0.1.0`
 - [ ] **Type** is `"module"` (ESM)
 - [ ] **Main** points to `"./dist/index.js"`
@@ -245,15 +245,15 @@ For each tool, tests cover:
   - [ ] (For HTTP) `express`: ^4.19.2
   - [ ] (For HTTP) `cors`: ^2.8.5
 - [ ] **DevDependencies** include:
-  - [ ] `@morph-ui/typescript-config`
-  - [ ] `@morph-ui/eslint-config`
+  - [ ] `@morphkit/typescript-config`
+  - [ ] `@morphkit/eslint-config`
   - [ ] `typescript`: ~5.9.2
   - [ ] `tsx`: ^4.0.0
   - [ ] `jest`: ^30.2.0
 
 ### TypeScript Configuration
 
-- [ ] **Extends** `@morph-ui/typescript-config/base.json`
+- [ ] **Extends** `@morphkit/typescript-config/base.json`
 - [ ] **Include** covers `src/**/*`
 - [ ] **OutDir** is `dist`
 - [ ] **Module** is `ESNext` or `NodeNext`

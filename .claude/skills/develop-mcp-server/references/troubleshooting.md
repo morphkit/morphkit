@@ -134,7 +134,7 @@ questions:
 
 ```json
 {
-  "extends": "@morph-ui/typescript-config/base.json",
+  "extends": "@morphkit/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "dist"
   },

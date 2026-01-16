@@ -1,5 +1,5 @@
 {
-  "name": "@morph-ui/asset-gen-mcp",
+  "name": "@morphkit/asset-gen-mcp",
   "version": "0.1.0",
   "description": "AI-powered image asset generation MCP server with prompt engineering guidance and vectorization",
   "type": "module",
@@ -29,8 +29,8 @@
     "sharp": "latest"
   },
   "devDependencies": {
-    "@morph-ui/typescript-config": "*",
-    "@morph-ui/eslint-config": "*",
+    "@morphkit/typescript-config": "*",
+    "@morphkit/eslint-config": "*",
     "@types/node": "^20.0.0",
     "typescript": "~5.9.2",
     "tsx": "^4.0.0",
@@ -40,7 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/morph-ui/morph-ui.git",
+    "url": "git+https://github.com/morph-kit/morphkit.git",
     "directory": "packages/asset-gen-mcp"
   },
   "publishConfig": {

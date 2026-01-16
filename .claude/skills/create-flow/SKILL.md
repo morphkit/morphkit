@@ -1,6 +1,6 @@
 ---
 name: create-flow
-description: Creates multi-screen user flows using morph-ui components from Figma designs. Use when user asks to "create a flow", "build a flow", "make a user flow", "create screens from Figma", or mentions multi-screen features like "auth flow", "onboarding flow", "signup flow". Integrates Figma MCP for design extraction and only uses existing morph-ui components.
+description: Creates multi-screen user flows using morphkit components from Figma designs. Use when user asks to "create a flow", "build a flow", "make a user flow", "create screens from Figma", or mentions multi-screen features like "auth flow", "onboarding flow", "signup flow". Integrates Figma MCP for design extraction and only uses existing morphkit components.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, mcp__figma-desktop__get_design_context, mcp__figma-desktop__get_screenshot, mcp__expo-mcp__search_documentation, mcp__expo-mcp__learn
 ---
 
@@ -8,9 +8,9 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash, mcp__figma-desktop__get_desi
 
 ## Overview
 
-The **create-flow** skill helps developers build multi-screen user flows (authentication, onboarding, checkout, etc.) from Figma designs using only morph-ui components. It enforces a strict component-only architecture where all UI must come from the morph-ui library, ensuring consistency across flows.
+The **create-flow** skill helps developers build multi-screen user flows (authentication, onboarding, checkout, etc.) from Figma designs using only morphkit components. It enforces a strict component-only architecture where all UI must come from the morphkit library, ensuring consistency across flows.
 
-This skill integrates Figma MCP for design extraction, validates components against the morph-ui registry, and generates complete flow templates in `packages/react-native-flows/` that developers can copy into their apps.
+This skill integrates Figma MCP for design extraction, validates components against the morphkit registry, and generates complete flow templates in `packages/react-native-flows/` that developers can copy into their apps.
 
 Flows are organized using Expo Router route groups, allowing multiple variants of the same flow (e.g., `/auth/default`, `/auth/with-phone-number`) with empty handler functions that developers implement according to their business logic.
 
@@ -120,12 +120,12 @@ const screenshot =
 }
 ```
 
-### Step 4: Map UI Elements to morph-ui Components
+### Step 4: Map UI Elements to morphkit Components
 
 **Actions**:
 
 - Read `packages/react-native/src/registry.json` to get available components
-- For each UI element, determine the corresponding morph-ui component using the decision tree
+- For each UI element, determine the corresponding morphkit component using the decision tree
 - Determine component props based on visual design (size, variant, disabled state)
 - Build a component mapping for each screen
 
@@ -228,18 +228,18 @@ Create `packages/react-native-flows/package.json`:
 
 ```json
 {
-  "name": "@morph-ui/react-native-flows",
+  "name": "@morphkit/react-native-flows",
   "version": "0.1.0",
   "private": true,
   "main": "src/index.ts",
   "dependencies": {
-    "@morph-ui/react-native": "workspace:*",
+    "@morphkit/react-native": "workspace:*",
     "expo-router": "~6.0.21",
     "react": "^18.3.1",
     "react-native": "^0.76.6"
   },
   "devDependencies": {
-    "@morph-ui/typescript-config": "workspace:*"
+    "@morphkit/typescript-config": "workspace:*"
   }
 }
 ```
@@ -248,7 +248,7 @@ Create `packages/react-native-flows/tsconfig.json`:
 
 ```json
 {
-  "extends": "@morph-ui/typescript-config/react-native.json",
+  "extends": "@morphkit/typescript-config/react-native.json",
   "compilerOptions": {
     "outDir": "dist"
   },
@@ -262,7 +262,7 @@ Create `packages/react-native-flows/README.md`:
 ```markdown
 # React Native Flows
 
-Multi-screen user flow templates using morph-ui components.
+Multi-screen user flow templates using morphkit components.
 
 ## Available Flows
 
@@ -313,7 +313,7 @@ import {
   Container,
   Stack,
   useTheme,
-} from "@morph-ui/react-native";
+} from "@morphkit/react-native";
 import { handleLogin, LoginCredentials } from "../handlers/auth-handlers";
 
 export default function Login() {
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
 ```typescript
 import { Stack, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Button, useTheme } from "@morph-ui/react-native";
+import { Button, useTheme } from "@morphkit/react-native";
 
 export default function AuthLayout() {
   const router = useRouter();
@@ -496,11 +496,11 @@ import {
 } from "react-native";
 ```
 
-**Why**: All UI must come from morph-ui for consistency.
+**Why**: All UI must come from morphkit for consistency.
 
-### ✅ Required morph-ui Imports
+### ✅ Required morphkit Imports
 
-All UI components must come from morph-ui:
+All UI components must come from morphkit:
 
 ```typescript
 import {
@@ -510,7 +510,7 @@ import {
   Container, // Page wrapper
   Stack, // Layout helper
   // ... other components from registry
-} from "@morph-ui/react-native";
+} from "@morphkit/react-native";
 ```
 
 ### StyleSheet Rules
@@ -567,7 +567,7 @@ All generated flow code must follow these strict quality standards:
 
 **✅ DO:**
 
-- Import `useTheme` from @morph-ui/react-native in every screen file
+- Import `useTheme` from @morphkit/react-native in every screen file
 - Use `theme.primitive.spacing[n]` for all spacing values
 - Use theme tokens for colors (iconColor, text colors)
 - Apply padding/margins via inline styles with theme tokens
@@ -589,7 +589,7 @@ All generated flow code must follow these strict quality standards:
 **Example:**
 
 ```typescript
-import { useTheme } from "@morph-ui/react-native";
+import { useTheme } from "@morphkit/react-native";
 
 const { theme } = useTheme();
 
@@ -696,7 +696,7 @@ const styles = StyleSheet.create({
 ```typescript
 import { Stack, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Button, useTheme } from "@morph-ui/react-native";
+import { Button, useTheme } from "@morphkit/react-native";
 
 const { theme, colorScheme } = useTheme();
 const iconColor = theme.component.button.variant[colorScheme].tonal.text;
@@ -762,7 +762,7 @@ import {
   Container,
   Stack,
   useTheme,
-} from "@morph-ui/react-native";
+} from "@morphkit/react-native";
 import { handleLogin, LoginCredentials } from "../handlers/auth-handlers";
 
 export default function Login() {
@@ -910,7 +910,7 @@ Adjust component props for different styling:
 
 ## Dependencies
 
-- @morph-ui/react-native
+- @morphkit/react-native
 - expo-router ~6.0.0
 - react-native
 ```
@@ -932,7 +932,7 @@ Before marking the flow creation as complete, verify:
 ### Code Quality
 
 - [ ] NO React Native UI imports (Text, Button, TextInput, Pressable)
-- [ ] ALL UI components from `@morph-ui/react-native`
+- [ ] ALL UI components from `@morphkit/react-native`
 - [ ] Typography component used for all text
 - [ ] useRouter() for navigation
 - [ ] useTheme() hook imported and used in every screen file
@@ -987,7 +987,7 @@ For detailed guidance, see these reference files:
 
 **Component not found**: Check `packages/react-native/src/registry.json` and create missing component first
 
-**Type errors**: Ensure all imports are from `@morph-ui/react-native`, not `react-native`
+**Type errors**: Ensure all imports are from `@morphkit/react-native`, not `react-native`
 
 **Navigation not working**: Verify route group syntax `(variant)` and screen names match navigation calls
 

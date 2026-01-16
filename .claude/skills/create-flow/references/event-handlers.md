@@ -1,6 +1,6 @@
 # Event Handlers Guide
 
-Complete guide for structuring inline event handlers in flow templates.
+Complete guide for structuring inline event handlers in flow templates. These patterns apply to flows built with morphkit components.
 
 ## Overview
 
@@ -122,7 +122,7 @@ Handlers are defined within screen components:
 ```typescript
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { Typography, Input, Button, Container, Stack } from "@morph-ui/react-native";
+import { Typography, Input, Button, Container, Stack } from "@morphkit/react-native";
 
 export default function LoginScreen() {
   const router = useRouter();

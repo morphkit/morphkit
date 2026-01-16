@@ -1,4 +1,4 @@
-import { config as reactNativeConfig } from "@morph-ui/eslint-config/react-native";
+import { config as reactNativeConfig } from "@morphkit/eslint-config/react-native";
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [

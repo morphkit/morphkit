@@ -6,4 +6,4 @@ export {
   type TypographyStyle,
   type ShadowStyle,
   type SpringConfig,
-} from "@morph-ui/react-native";
+} from "@morphkit/react-native";

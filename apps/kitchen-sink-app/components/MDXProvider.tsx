@@ -5,7 +5,7 @@ import {
   useTheme,
   Accordion,
   AccordionItem,
-} from "@morph-ui/react-native";
+} from "@morphkit/react-native";
 import { CodeHighlighter } from "./CodeHighlighter";
 import type { ReactNode } from "react";
 import {

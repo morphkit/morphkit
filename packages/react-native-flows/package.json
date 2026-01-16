@@ -1,5 +1,5 @@
 {
-  "name": "@morph-ui/react-native-flows",
+  "name": "@morphkit/react-native-flows",
   "version": "0.1.0",
   "private": true,
   "description": "Multi-screen user flow templates using morph-ui components",
@@ -27,15 +27,15 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "peerDependencies": {
-    "@morph-ui/react-native": "workspace:*",
+    "@morphkit/react-native": "workspace:*",
     "expo-router": "~6.0.21",
     "react": "^19.1.0",
     "react-native": "^0.76.6",
     "react-native-safe-area-context": "~5.6.0"
   },
   "devDependencies": {
-    "@morph-ui/eslint-config": "workspace:*",
-    "@morph-ui/typescript-config": "workspace:*",
+    "@morphkit/eslint-config": "workspace:*",
+    "@morphkit/typescript-config": "workspace:*",
     "@types/react": "~19.1.0",
     "eslint": "^9.18.0",
     "prettier": "^3.4.2",

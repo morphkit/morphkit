@@ -24,7 +24,7 @@ questions:
 
 ```json
 {
-  "name": "@morph-ui/{{ inputs.name }}-mcp",
+  "name": "@morphkit/{{ inputs.name }}-mcp",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -45,8 +45,8 @@ questions:
     "{{ dep }}": "latest"{{ end }}
   },
   "devDependencies": {
-    "@morph-ui/typescript-config": "*",
-    "@morph-ui/eslint-config": "*",
+    "@morphkit/typescript-config": "*",
+    "@morphkit/eslint-config": "*",
     "@types/node": "^20.0.0",{{ if inputs.transportType == "streamable-http" }}
     "@types/express": "^4.17.21",
     "@types/cors": "^2.8.17",{{ end }}
@@ -62,7 +62,7 @@ questions:
 # `{{ inputs.name }}-mcp/eslint.config.js`
 
 ```javascript
-import { config } from "@morph-ui/eslint-config/base";
+import { config } from "@morphkit/eslint-config/base";
 
 export default [
   ...config,
@@ -151,7 +151,7 @@ app.listen(PORT, () => {
 
 ```json
 {
-  "extends": "@morph-ui/typescript-config/base.json",
+  "extends": "@morphkit/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
