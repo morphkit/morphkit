@@ -57,7 +57,7 @@
     },
     "packages/asset-gen-mcp": {
       "name": "@morphkit/asset-gen-mcp",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "bin": {
         "asset-gen-mcp": "./dist/index.js"
       },
@@ -65,6 +65,7 @@
         "@google/genai": "latest",
         "@modelcontextprotocol/sdk": "^1.0.0",
         "@neplex/vectorizer": "latest",
+        "ajv": "^8.17.1",
         "dotenv": "^16.4.5",
         "sharp": "latest",
         "zod": "^3.23.8",
