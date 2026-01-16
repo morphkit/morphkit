@@ -25,13 +25,12 @@ const inputSchema = z.object({
     .enum([
       "imagen-4.0-ultra-generate-001",
       "imagen-4.0-generate-001",
-      "imagen-3.0-generate-002",
-      "imagen-3.0-fast-generate-001",
+      "imagen-4.0-fast-generate-001",
     ])
     .optional()
-    .default("imagen-3.0-generate-002")
+    .default("imagen-4.0-generate-001")
     .describe(
-      "Model selection: imagen-4.0-ultra (highest quality, slowest), imagen-4.0 (balanced), imagen-3.0 (default, best quality/speed/cost balance), imagen-3.0-fast (fastest, for prototyping)",
+      "Model selection: imagen-4.0-ultra (highest quality, slowest), imagen-4.0 (default, balanced quality/speed/cost), imagen-4.0-fast (fastest, for prototyping)",
     ),
 });
 

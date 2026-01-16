@@ -29,13 +29,12 @@ function getDefaultModel(): ImagenModel {
     [
       "imagen-4.0-ultra-generate-001",
       "imagen-4.0-generate-001",
-      "imagen-3.0-generate-002",
-      "imagen-3.0-fast-generate-001",
+      "imagen-4.0-fast-generate-001",
     ].includes(envModel)
   ) {
     return envModel as ImagenModel;
   }
-  return "imagen-3.0-generate-002";
+  return "imagen-4.0-generate-001";
 }
 
 export async function generateImageWithImagen(

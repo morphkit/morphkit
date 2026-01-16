@@ -25,8 +25,7 @@ export type GeneratedImageExtension =
 export const ImagenModel = {
   IMAGEN_4_ULTRA: "imagen-4.0-ultra-generate-001",
   IMAGEN_4: "imagen-4.0-generate-001",
-  IMAGEN_3: "imagen-3.0-generate-002",
-  IMAGEN_3_FAST: "imagen-3.0-fast-generate-001",
+  IMAGEN_4_FAST: "imagen-4.0-fast-generate-001",
 } as const;
 
 export type ImagenModel = (typeof ImagenModel)[keyof typeof ImagenModel];
