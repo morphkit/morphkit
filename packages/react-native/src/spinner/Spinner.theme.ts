@@ -13,6 +13,7 @@ export const spinner = {
     lg: 4,
   },
   duration: primitive.duration.slow,
+  borderTopColor: "transparent",
   variant: {
     light: {
       color: light.action.primary,

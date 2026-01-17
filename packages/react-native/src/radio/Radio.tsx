@@ -144,15 +144,12 @@ export const RadioButton = forwardRef<View, RadioButtonProps>(
         >
           {isSelected && (
             <View
-              style={[
-                baseStyles.innerCircle,
-                {
-                  width: innerSize,
-                  height: innerSize,
-                  borderRadius: innerSize / 2,
-                  backgroundColor: variantColors.dot,
-                },
-              ]}
+              style={{
+                width: innerSize,
+                height: innerSize,
+                borderRadius: innerSize / 2,
+                backgroundColor: variantColors.dot,
+              }}
             />
           )}
         </View>
@@ -173,5 +170,4 @@ const baseStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  innerCircle: {},
 });

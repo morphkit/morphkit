@@ -109,7 +109,7 @@
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "radio",
       "description": "Single-selection radio button control with group management for choosing one option from a set",
       "dependencies": []
@@ -127,7 +127,7 @@
       "dependencies": []
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "slider",
       "description": "Range slider control for selecting numeric values with single or dual thumb support",
       "dependencies": [
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "type": "react-native",
+      "type": "components:ui",
       "name": "spinner",
       "description": "Animated loading indicator with continuous rotation, size presets (sm, md, lg) or custom pixel size, and color customization",
       "dependencies": []

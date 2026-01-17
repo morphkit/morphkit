@@ -58,7 +58,7 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 - Dynamic component documentation viewer using MDX
 - Multi-screen flow demonstrations (auth flow with 4 screens)
 - Fully integrated with monorepo shared configs
-- Uses `@repo/eslint-config/react-native` and `@repo/typescript-config/react-native`
+- Uses `@morphkit/eslint-config/react-native` and `@morphkit/typescript-config/react-native`
 - File-based routing with Expo Router in `app/` directory
 - Component sidebar for browsing 27 documented components
 - Entry point: `expo-router/entry`
@@ -66,20 +66,20 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 
 **`packages/*`** - Shared Tooling
 
-- **@repo/eslint-config**: Shared ESLint configurations
+- **@morphkit/eslint-config**: Shared ESLint configurations
   - `base.js` - Core ESLint config
   - `next.js` - Next.js specific config
   - `react-internal.js` - React library config
   - `react-native.js` - React Native config (includes `__DEV__` global, style-prop-object rule disabled)
-- **@repo/typescript-config**: Shared TypeScript configurations
+- **@morphkit/typescript-config**: Shared TypeScript configurations
   - `base.json` - Core strict TypeScript settings
   - `nextjs.json` - Next.js specific config
   - `react-library.json` - React library config
   - `react-native.json` - React Native config (jsx: "react-native", module: "ESNext")
-- **@repo/jest-config**: Shared Jest testing configuration
+- **@morphkit/jest-config**: Shared Jest testing configuration
   - Used across all packages for consistent test setup
   - Integrated with React Native testing library
-- **@repo/react-native-flows**: Multi-screen user flow templates
+- **@morphkit/react-native-flows**: Multi-screen user flow templates
   - Version: 0.1.0
   - Flow registry system for managing user journeys
   - Implements authentication flows using Expo Router
@@ -431,7 +431,7 @@ BREAKING CHANGE: API responses now return paginated data structure
 The monorepo uses ESLint v9 with flat config format:
 
 - All configs enforce zero warnings: `--max-warnings 0`
-- Shared configs available in `@repo/eslint-config`:
+- Shared configs available in `@morphkit/eslint-config`:
   - `base.js` - Core config with TypeScript ESLint
   - `next.js` - Next.js specific rules
   - `react-internal.js` - React library rules
@@ -439,7 +439,7 @@ The monorepo uses ESLint v9 with flat config format:
 
 ### TypeScript Setup
 
-- Shared configs in `@repo/typescript-config` provide base settings
+- Shared configs in `@morphkit/typescript-config` provide base settings
 - Each package has its own `tsconfig.json` extending the shared configs
 - Type checking runs with `tsc --noEmit`
 
@@ -447,7 +447,7 @@ The monorepo uses ESLint v9 with flat config format:
 
 The monorepo has comprehensive testing setup:
 
-- **Shared Config**: `@repo/jest-config` package provides base Jest configuration
+- **Shared Config**: `@morphkit/jest-config` package provides base Jest configuration
 - **Test Utilities**: Custom render utilities in `packages/react-native/src/test-utils.tsx`
   - Wraps components with ThemeProvider and SafeAreaProvider
   - Provides type-safe testing helpers
@@ -469,7 +469,7 @@ Components use MDX for rich documentation:
 
 Multi-screen user journeys are managed through the flows package:
 
-- **Package**: `@repo/react-native-flows`
+- **Package**: `@morphkit/react-native-flows`
 - **Registry**: Flow metadata for discovery and navigation
 - **Integration**: Uses Expo Router for screen navigation
 - **Current Flows**: Authentication (default variant) with 4 screens
@@ -482,7 +482,7 @@ The demo app at `apps/kitchen-sink-app` showcases all components and flows:
 
 1. **Component Documentation**: All components automatically appear in sidebar via registry
 2. **Adding Components**: New components in `@morphkit/react-native` appear automatically
-3. **Adding Flows**: Register new flows in `@repo/react-native-flows/src/registry.ts`
+3. **Adding Flows**: Register new flows in `@morphkit/react-native-flows/src/registry.ts`
 4. **Custom Theme**: Demo app uses Inter font family with theme overrides via `createTheme()`
 5. **Navigation**: Drawer navigation with routes:
    - `/` - Home

@@ -56,18 +56,15 @@ export const Spinner = ({
       {...props}
     >
       <Animated.View
-        style={[
-          baseStyles.spinner,
-          {
-            width: spinnerSize,
-            height: spinnerSize,
-            borderWidth: strokeWidth,
-            borderColor: spinnerColor,
-            borderTopColor: "transparent",
-            borderRadius: spinnerSize / 2,
-            transform: [{ rotate: spin }],
-          },
-        ]}
+        style={{
+          width: spinnerSize,
+          height: spinnerSize,
+          borderWidth: strokeWidth,
+          borderColor: spinnerColor,
+          borderTopColor: theme.component.spinner.borderTopColor,
+          borderRadius: spinnerSize / 2,
+          transform: [{ rotate: spin }],
+        }}
       />
     </View>
   );
@@ -80,5 +77,4 @@ const baseStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  spinner: {},
 });

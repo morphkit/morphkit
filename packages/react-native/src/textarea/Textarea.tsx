@@ -3,12 +3,12 @@ import {
   View,
   TextInput,
   TextInputProps,
-  Text,
   StyleSheet,
   StyleProp,
   ViewStyle,
 } from "react-native";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 export interface TextareaProps extends Omit<
   TextInputProps,
@@ -90,19 +90,15 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
     return (
       <View style={style}>
         {label && (
-          <Text
-            style={[
-              baseStyles.label,
-              {
-                color: variantTokens.label.text,
-                fontSize: theme.component.label.fontSize.md,
-                fontWeight: theme.component.label.fontWeight,
-                marginBottom: theme.component.label.marginBottom,
-              },
-            ]}
+          <Typography
+            variant="subhead"
+            style={{
+              color: variantTokens.label.text,
+              marginBottom: theme.component.label.marginBottom,
+            }}
           >
             {label}
-          </Text>
+          </Typography>
         )}
         <View
           style={[
@@ -153,33 +149,27 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
           ]}
         >
           {error && (
-            <Text
-              style={[
-                baseStyles.error,
-                {
-                  color: variantTokens.error.text,
-                  fontSize: theme.component.textarea.errorText.fontSize,
-                },
-              ]}
+            <Typography
+              variant="footnote"
+              style={{
+                flex: 1,
+                color: variantTokens.error.text,
+              }}
               accessibilityLiveRegion="polite"
             >
               {error}
-            </Text>
+            </Typography>
           )}
           {showCount && (
-            <Text
-              style={[
-                baseStyles.count,
-                {
-                  color: variantTokens.count.text,
-                  fontSize: theme.component.textarea.characterCount.fontSize,
-                  marginLeft:
-                    theme.component.textarea.characterCount.marginLeft,
-                },
-              ]}
+            <Typography
+              variant="caption-2"
+              style={{
+                color: variantTokens.count.text,
+                marginLeft: theme.component.textarea.characterCount.marginLeft,
+              }}
             >
               {countText}
-            </Text>
+            </Typography>
           )}
         </View>
       </View>
@@ -190,7 +180,6 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
 Textarea.displayName = "Textarea";
 
 const baseStyles = StyleSheet.create({
-  label: {},
   textareaContainer: {},
   textInput: {
     padding: 0,
@@ -201,8 +190,4 @@ const baseStyles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  error: {
-    flex: 1,
-  },
-  count: {},
 });

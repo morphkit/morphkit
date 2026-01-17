@@ -3,13 +3,13 @@ import {
   View,
   ViewProps,
   Pressable,
-  Text,
   StyleSheet,
   StyleProp,
   ViewStyle,
   Animated,
 } from "react-native";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 export interface SwitchProps extends Omit<ViewProps, "children"> {
   checked: boolean;
@@ -109,31 +109,25 @@ export const Switch = forwardRef<View, SwitchProps>(
           ]}
         >
           <Animated.View
-            style={[
-              baseStyles.thumb,
-              {
-                width: thumbSize,
-                height: thumbSize,
-                borderRadius: thumbSize / 2,
-                backgroundColor: thumbColor,
-                ...theme.primitive.shadowPresets.sm,
-                transform: [{ translateX: thumbTranslateX }],
-              },
-            ]}
+            style={{
+              width: thumbSize,
+              height: thumbSize,
+              borderRadius: thumbSize / 2,
+              backgroundColor: thumbColor,
+              ...theme.primitive.shadowPresets.sm,
+              transform: [{ translateX: thumbTranslateX }],
+            }}
           />
         </View>
         {label && (
-          <Text
-            style={[
-              baseStyles.label,
-              {
-                fontSize: theme.primitive.fontSize.lg,
-                color: theme.semantic.colors.text.primary,
-              },
-            ]}
+          <Typography
+            variant="body"
+            style={{
+              color: theme.semantic.colors.text.primary,
+            }}
           >
             {label}
-          </Text>
+          </Typography>
         )}
       </Pressable>
     );
@@ -150,6 +144,4 @@ const baseStyles = StyleSheet.create({
   track: {
     justifyContent: "center",
   },
-  thumb: {},
-  label: {},
 });
