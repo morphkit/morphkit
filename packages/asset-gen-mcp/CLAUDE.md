@@ -37,6 +37,7 @@ McpServer → Tool registration (factory functions) → StdioServerTransport
 ### Tool Structure
 
 Each tool follows this pattern:
+
 - Located in `src/tools/{category}/{tool-name}.ts`
 - Exports a factory function receiving `McpServer` instance
 - Uses Zod schemas for input validation
@@ -45,12 +46,12 @@ Each tool follows this pattern:
 
 ### Tools
 
-| Tool | Purpose | Key Dependencies |
-|------|---------|------------------|
-| `get-image-generation-prompt-instructions` | Asset-type-specific prompt guidance | None |
-| `generate-images` | Google Imagen generation with batch support | `@google/genai`, `sharp`, `@neplex/vectorizer` |
-| `vectorize-image` | Raster to SVG conversion | `@neplex/vectorizer`, `sharp` |
-| `remove-background` | AI background removal | `transparent-background` (requires Python) |
+| Tool                                       | Purpose                                     | Key Dependencies                               |
+| ------------------------------------------ | ------------------------------------------- | ---------------------------------------------- |
+| `get-image-generation-prompt-instructions` | Asset-type-specific prompt guidance         | None                                           |
+| `generate-images`                          | Google Imagen generation with batch support | `@google/genai`, `sharp`, `@neplex/vectorizer` |
+| `vectorize-image`                          | Raster to SVG conversion                    | `@neplex/vectorizer`, `sharp`                  |
+| `remove-background`                        | AI background removal                       | `transparent-background` (requires Python)     |
 
 ### Key Implementation Details
 
@@ -64,6 +65,7 @@ Each tool follows this pattern:
 Tests are colocated with source files (`*.test.ts`). Jest uses ts-jest with ESM support.
 
 Run a single test file:
+
 ```bash
 bun run test -- src/tools/image-generation/generate-images.test.ts
 ```

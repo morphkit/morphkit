@@ -17,6 +17,8 @@ interface RegistryEntry {
   type: string;
   name: string;
   description: string;
+  category: string;
+  tags: string[];
   dependencies: string[];
 }
 
@@ -50,6 +52,8 @@ function generateRegistry(): void {
         type: meta.type,
         name: meta.name,
         description: meta.description,
+        category: meta.category,
+        tags: meta.tags,
         dependencies: meta.dependencies,
       });
     } catch (error) {

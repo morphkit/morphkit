@@ -54,7 +54,9 @@ export function removeBackgroundTool(server: McpServer) {
                 success: true,
                 inputPath: validated.inputPath,
                 outputPath: validated.outputPath,
-                model: validated.fast ? "384x384 (fast)" : "1024x1024 (default)",
+                model: validated.fast
+                  ? "384x384 (fast)"
+                  : "1024x1024 (default)",
               }),
             },
           ],

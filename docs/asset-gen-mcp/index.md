@@ -7,11 +7,13 @@ AI-powered image asset generation MCP server with prompt engineering guidance an
 Add this MCP server to your coding assistant:
 
 **Claude Code:**
+
 ```bash
 claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asset-gen-mcp@latest
 ```
 
 **Claude Desktop** (~/Library/Application Support/Claude/claude_desktop_config.json):
+
 ```json
 {
   "mcpServers": {
@@ -27,6 +29,7 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
 ```
 
 **Cursor** (.cursor/mcp.json):
+
 ```json
 {
   "mcpServers": {
@@ -42,6 +45,7 @@ claude mcp add asset-gen -e GOOGLE_API_KEY=YOUR_API_KEY -- npx -y @morphkit/asse
 ```
 
 **Windsurf** (~/.windsurf/mcp.json):
+
 ```json
 {
   "mcpServers": {
@@ -156,11 +160,11 @@ AI-powered background removal using InSPyReNet model. Works with complex backgro
 
 ## Model Selection
 
-| Model | Use Case |
-|-------|----------|
-| imagen-4.0-ultra-generate-001 | Highest quality. Best for final marketing assets and premium output. |
-| imagen-4.0-generate-001 (default) | Balanced quality, speed, and cost. Recommended for most use cases. |
-| imagen-4.0-fast-generate-001 | Speed-optimized. Best for rapid prototyping and iteration. |
+| Model                             | Use Case                                                             |
+| --------------------------------- | -------------------------------------------------------------------- |
+| imagen-4.0-ultra-generate-001     | Highest quality. Best for final marketing assets and premium output. |
+| imagen-4.0-generate-001 (default) | Balanced quality, speed, and cost. Recommended for most use cases.   |
+| imagen-4.0-fast-generate-001      | Speed-optimized. Best for rapid prototyping and iteration.           |
 
 ## Links
 

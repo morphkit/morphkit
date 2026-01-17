@@ -5,6 +5,12 @@
       "type": "components:ui",
       "name": "accordion",
       "description": "Collapsible content sections with expand/collapse animations supporting both single and multiple expansion modes for organizing complex information",
+      "category": "interactive",
+      "tags": [
+        "collapse",
+        "expandable",
+        "disclosure"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -13,6 +19,12 @@
       "type": "components:ui",
       "name": "alert",
       "description": "Inline notification component with 4 variants (info, success, warning, error), optional dismiss button, and customizable icons",
+      "category": "feedback",
+      "tags": [
+        "notification",
+        "message",
+        "banner"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -21,12 +33,24 @@
       "type": "components:ui",
       "name": "avatar",
       "description": "Circular avatar component with image support and fallback text for initials",
+      "category": "display",
+      "tags": [
+        "profile",
+        "image",
+        "user"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "badge",
       "description": "Notification count overlay component that displays indicators on top of children with automatic visibility management and color variants",
+      "category": "display",
+      "tags": [
+        "indicator",
+        "notification",
+        "count"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -35,12 +59,24 @@
       "type": "components:ui",
       "name": "box",
       "description": "Flexible layout container with declarative spacing, sizing, and flexbox properties",
+      "category": "layout",
+      "tags": [
+        "container",
+        "layout",
+        "wrapper"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "button",
       "description": "Pressable action trigger with multiple visual variants, size options, icon support, and loading states for primary user interactions",
+      "category": "interactive",
+      "tags": [
+        "action",
+        "pressable",
+        "cta"
+      ],
       "dependencies": [
         "typography",
         "spinner"
@@ -50,30 +86,61 @@
       "type": "components:ui",
       "name": "card",
       "description": "Content container with elevation, borders, and padding for grouping related information into visually distinct sections",
+      "category": "surfaces",
+      "tags": [
+        "container",
+        "content",
+        "elevation"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "checkbox",
       "description": "Selectable checkbox control for boolean inputs with support for checked, unchecked, and indeterminate states",
+      "category": "input",
+      "tags": [
+        "form",
+        "selection",
+        "toggle",
+        "boolean"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "container",
       "description": "Centered max-width wrapper for page content with responsive width constraints",
+      "category": "layout",
+      "tags": [
+        "layout",
+        "responsive",
+        "max-width"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "divider",
       "description": "Visual separator line with horizontal or vertical orientation for creating clear boundaries between content sections",
+      "category": "layout",
+      "tags": [
+        "separator",
+        "line",
+        "visual-hierarchy"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "fab",
       "description": "Floating action button with placement options and extended variant for primary screen-level actions",
+      "category": "navigation",
+      "tags": [
+        "action",
+        "floating",
+        "primary-action"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -82,6 +149,12 @@
       "type": "components:ui",
       "name": "input",
       "description": "Single-line text input field with label, error state, and prefix/suffix icon support for collecting user text input in forms and interfaces",
+      "category": "input",
+      "tags": [
+        "form",
+        "text-field",
+        "user-input"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -90,6 +163,12 @@
       "type": "components:ui",
       "name": "label",
       "description": "Form label component with optional required indicator and error state for describing input fields",
+      "category": "input",
+      "tags": [
+        "form",
+        "text",
+        "accessibility"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -98,6 +177,12 @@
       "type": "components:ui",
       "name": "otp-input",
       "description": "One-time password input with multiple fields for verification codes",
+      "category": "input",
+      "tags": [
+        "form",
+        "verification",
+        "security"
+      ],
       "dependencies": [
         "input"
       ]
@@ -106,30 +191,61 @@
       "type": "components:ui",
       "name": "progress",
       "description": "Visual progress indicator with bar and circle variants, determinate and indeterminate modes, and optional value display",
+      "category": "display",
+      "tags": [
+        "loading",
+        "indicator",
+        "status"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "radio",
       "description": "Single-selection radio button control with group management for choosing one option from a set",
+      "category": "input",
+      "tags": [
+        "form",
+        "selection",
+        "choice"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "select",
       "description": "Flexible inline selection component for choosing one or more options with custom styling",
+      "category": "input",
+      "tags": [
+        "form",
+        "dropdown",
+        "picker",
+        "selection"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "skeleton",
       "description": "Placeholder loading component with shimmer animation, supports rectangle, circle, and text line shapes with customizable dimensions",
+      "category": "display",
+      "tags": [
+        "loading",
+        "placeholder",
+        "shimmer"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "slider",
       "description": "Range slider control for selecting numeric values with single or dual thumb support",
+      "category": "input",
+      "tags": [
+        "form",
+        "range",
+        "adjustment"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -138,24 +254,48 @@
       "type": "components:ui",
       "name": "spinner",
       "description": "Animated loading indicator with continuous rotation, size presets (sm, md, lg) or custom pixel size, and color customization",
+      "category": "display",
+      "tags": [
+        "loading",
+        "indicator",
+        "animated"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "stack",
       "description": "Layout component for arranging children with consistent spacing and alignment",
+      "category": "layout",
+      "tags": [
+        "layout",
+        "flexbox",
+        "spacing"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "switch",
       "description": "Toggle switch for binary on/off states with animated transitions",
+      "category": "input",
+      "tags": [
+        "form",
+        "toggle",
+        "binary"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "tabs",
       "description": "Tabbed navigation with multiple variants and orientations for organizing content into selectable sections",
+      "category": "interactive",
+      "tags": [
+        "navigation",
+        "segmented-control",
+        "panels"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -164,6 +304,12 @@
       "type": "components:ui",
       "name": "tag",
       "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
+      "category": "display",
+      "tags": [
+        "chip",
+        "label",
+        "removable"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -172,12 +318,24 @@
       "type": "components:ui",
       "name": "textarea",
       "description": "Multi-line text input field with auto-resize capability and character count display",
+      "category": "input",
+      "tags": [
+        "form",
+        "multiline",
+        "text-input"
+      ],
       "dependencies": []
     },
     {
       "type": "components:ui",
       "name": "toast",
       "description": "Temporary notification component with slide-in animation, 4 variants, top or bottom positioning, and auto-dismiss capability",
+      "category": "feedback",
+      "tags": [
+        "notification",
+        "snackbar",
+        "temporary"
+      ],
       "dependencies": [
         "typography"
       ]
@@ -186,6 +344,12 @@
       "type": "components:ui",
       "name": "typography",
       "description": "Text component with 11 iOS-inspired typography variants using StyleSheet",
+      "category": "display",
+      "tags": [
+        "text",
+        "font",
+        "type-scale"
+      ],
       "dependencies": []
     }
   ]

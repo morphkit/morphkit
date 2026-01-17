@@ -7,6 +7,8 @@ export interface ComponentMeta {
   type: string;
   name: string;
   description: string;
+  category: string;
+  tags: string[];
   dependencies: string[];
 }
 
