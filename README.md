@@ -71,9 +71,9 @@ morph-ui/
 ├── apps/
 │   └── kitchen-sink-app/    # Component library browser & flow showcase
 ├── packages/
-│   ├── react-native/              # @warp-ui/react-native - 27 component library
+│   ├── react-native/              # @morphkit/react-native - 27 component library
 │   ├── react-native-flows/        # Multi-screen flow templates
-│   ├── cli/                       # @warp-ui/cli - Component scaffolding tool
+│   ├── cli/                       # @morphkit/cli - Component scaffolding tool
 │   ├── eslint-config/             # Shared ESLint configurations
 │   ├── typescript-config/         # Shared TypeScript configurations
 │   └── jest-config/               # Shared Jest testing configuration
@@ -81,7 +81,7 @@ morph-ui/
 
 ### Primary Workspaces
 
-- **`packages/react-native/`**: The core component library (`@warp-ui/react-native`)
+- **`packages/react-native/`**: The core component library (`@morphkit/react-native`)
   - 27 components with `.theme.ts` files for token-based styling
   - Component registry and MDX documentation
   - Comprehensive test coverage
@@ -159,7 +159,7 @@ turbo lint --filter=kitchen-sink-app
 turbo check-types --filter=kitchen-sink-app
 
 # Component library
-turbo test --filter=@warp-ui/react-native
+turbo test --filter=@morphkit/react-native
 ```
 
 ### Development Workflow
@@ -222,20 +222,20 @@ See the [component registry](./packages/react-native/src/registry.json) for comp
 
 ### CLI Usage
 
-The `@warp-ui/cli` package provides scaffolding and management commands:
+The `@morphkit/cli` package provides scaffolding and management commands:
 
 ```bash
 # Install CLI globally (from GitHub Packages)
-npm install -g @warp-ui/cli
+npm install -g @morphkit/cli
 
-# Initialize Warp UI in project
-warp-ui init
+# Initialize Morph UI in project
+morphkit init
 
 # Add component to project
-warp-ui add [component]
+morphkit add [component]
 
 # Manage CLI configuration
-warp-ui config
+morphkit config
 ```
 
 **Note**: CLI is published to GitHub Packages and requires authentication.
