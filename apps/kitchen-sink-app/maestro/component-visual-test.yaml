@@ -1,0 +1,962 @@
+appId: host.exp.Exponent
+---
+- extendedWaitUntil:
+    visible: "Show navigation menu"
+    timeout: 15000
+
+# ============================================================
+# ACCORDION
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Accordion"
+    timeout: 3000
+- tapOn:
+    text: "Accordion"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/accordion-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/accordion-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/accordion-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/accordion-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/accordion-5
+
+# ============================================================
+# ALERT
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Alert"
+    timeout: 3000
+- tapOn:
+    text: "Alert"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/alert-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/alert-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/alert-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/alert-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/alert-5
+
+# ============================================================
+# AVATAR
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Avatar"
+    timeout: 3000
+- tapOn:
+    text: "Avatar"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/avatar-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/avatar-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/avatar-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/avatar-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/avatar-5
+
+# ============================================================
+# BADGE
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Badge"
+    timeout: 3000
+- tapOn:
+    text: "Badge"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/badge-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/badge-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/badge-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/badge-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/badge-5
+
+# ============================================================
+# BOX
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Box"
+    timeout: 3000
+- tapOn:
+    text: "Box"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/box-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/box-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/box-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/box-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/box-5
+
+# ============================================================
+# BUTTON
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Button"
+    timeout: 3000
+- tapOn:
+    text: "Button"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/button-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/button-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/button-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/button-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/button-5
+
+# ============================================================
+# CARD
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Card"
+    timeout: 3000
+- tapOn:
+    text: "Card"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/card-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/card-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/card-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/card-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/card-5
+
+# ============================================================
+# CHECKBOX
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Checkbox"
+    timeout: 3000
+- tapOn:
+    text: "Checkbox"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/checkbox-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/checkbox-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/checkbox-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/checkbox-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/checkbox-5
+
+# ============================================================
+# CONTAINER
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Container"
+    timeout: 3000
+- tapOn:
+    text: "Container"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/container-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/container-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/container-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/container-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/container-5
+
+# ============================================================
+# DIVIDER
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Divider"
+    timeout: 3000
+- tapOn:
+    text: "Divider"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/divider-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/divider-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/divider-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/divider-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/divider-5
+
+# ============================================================
+# FAB
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Fab"
+    timeout: 3000
+- tapOn:
+    text: "Fab"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/fab-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/fab-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/fab-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/fab-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/fab-5
+
+# ============================================================
+# INPUT
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Input"
+    timeout: 3000
+- tapOn:
+    text: "Input"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/input-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/input-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/input-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/input-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/input-5
+
+# ============================================================
+# LABEL
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- tapOn:
+    text: "Label"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/label-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/label-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/label-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/label-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/label-5
+
+# ============================================================
+# OTP-INPUT (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Otp-input"
+    timeout: 3000
+- tapOn:
+    text: "Otp-input"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/otp-input-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/otp-input-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/otp-input-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/otp-input-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/otp-input-5
+
+# ============================================================
+# PROGRESS (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Progress"
+    timeout: 3000
+- tapOn:
+    text: "Progress"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/progress-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/progress-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/progress-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/progress-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/progress-5
+
+# ============================================================
+# RADIO (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Radio"
+    timeout: 3000
+- tapOn:
+    text: "Radio"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/radio-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/radio-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/radio-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/radio-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/radio-5
+
+# ============================================================
+# SELECT (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Select"
+    timeout: 3000
+- tapOn:
+    text: "Select"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/select-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/select-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/select-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/select-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/select-5
+
+# ============================================================
+# SKELETON (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Skeleton"
+    timeout: 3000
+- tapOn:
+    text: "Skeleton"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/skeleton-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/skeleton-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/skeleton-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/skeleton-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/skeleton-5
+
+# ============================================================
+# SLIDER (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Slider"
+    timeout: 3000
+- tapOn:
+    text: "Slider"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/slider-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/slider-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/slider-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/slider-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/slider-5
+
+# ============================================================
+# SPINNER (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Spinner"
+    timeout: 3000
+- tapOn:
+    text: "Spinner"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/spinner-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/spinner-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/spinner-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/spinner-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/spinner-5
+
+# ============================================================
+# STACK (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Stack"
+    timeout: 3000
+- tapOn:
+    text: "Stack"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/stack-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/stack-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/stack-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/stack-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/stack-5
+
+# ============================================================
+# SWITCH (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Switch"
+    timeout: 3000
+- tapOn:
+    text: "Switch"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/switch-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/switch-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/switch-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/switch-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/switch-5
+
+# ============================================================
+# TABS (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Tabs"
+    timeout: 3000
+- tapOn:
+    text: "Tabs"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/tabs-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/tabs-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/tabs-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/tabs-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/tabs-5
+
+# ============================================================
+# TAG (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Tag"
+    timeout: 3000
+- tapOn:
+    text: "Tag"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/tag-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/tag-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/tag-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/tag-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/tag-5
+
+# ============================================================
+# TEXTAREA (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Textarea"
+    timeout: 3000
+- tapOn:
+    text: "Textarea"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/textarea-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/textarea-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/textarea-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/textarea-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/textarea-5
+
+# ============================================================
+# TOAST (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Toast"
+    timeout: 3000
+- tapOn:
+    text: "Toast"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/toast-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/toast-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/toast-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/toast-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/toast-5
+
+# ============================================================
+# TYPOGRAPHY (requires drawer scroll)
+# ============================================================
+- tapOn:
+    text: "Show navigation menu"
+- extendedWaitUntil:
+    visible: "Label"
+    timeout: 3000
+- swipe:
+    direction: UP
+    duration: 300
+- swipe:
+    direction: UP
+    duration: 300
+- extendedWaitUntil:
+    visible: "Typography"
+    timeout: 3000
+- tapOn:
+    text: "Typography"
+- extendedWaitUntil:
+    visible: "Basic Usage"
+    timeout: 5000
+- assertVisible: "Basic Usage"
+- takeScreenshot: screenshots/typography-1
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/typography-2
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/typography-3
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/typography-4
+- swipe:
+    direction: UP
+    duration: 400
+- takeScreenshot: screenshots/typography-5
