@@ -11,6 +11,7 @@ module.exports = defineConfig([
     ignores: ['dist/*'],
     rules: {
       'react/no-unescaped-entities': 'off',
+      'import/no-named-as-default-member': 'off',
     },
   },
 ]);

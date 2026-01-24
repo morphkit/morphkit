@@ -1,15 +1,21 @@
 import { Slot } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import '../../global.css';
-import { AuthProvider } from '../contexts/AuthContext';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider, useTheme } from '@morphkit/react-native';
 import '../i18n';
+
+function ThemedStatusBar() {
+  const { colorScheme } = useTheme();
+  return <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />;
+}
 
 export default function RootLayout() {
   return (
-    <AuthProvider>
-      <StatusBar style="auto" />
-      <Slot />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <ThemedStatusBar />
+        <Slot />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
