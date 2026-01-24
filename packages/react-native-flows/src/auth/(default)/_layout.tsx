@@ -1,21 +1,10 @@
-import { Stack } from "expo-router";
-import { useTheme, Typography } from "@morphkit/react-native";
+import { Stack, Typography } from "@morphkit/react-native";
 
 export default function AuthLayout() {
-  const { theme, colorScheme } = useTheme();
-
-  const iconColor = theme.component.button.variant[colorScheme].tonal.text;
-
   return (
     <Stack
       screenOptions={{
-        headerShadowVisible: false,
-        headerTintColor: iconColor,
         headerTitle: "",
-        headerBackButtonDisplayMode: "minimal",
-        headerStyle: {
-          backgroundColor: theme.semantic.colors.surface.primary,
-        },
       }}
     >
       <Stack.Screen name="welcome" options={{ headerShown: false }} />

@@ -11,7 +11,7 @@ import {
   type InputRef,
   Button,
   Container,
-  Stack,
+  Flex,
   useTheme,
 } from "@morphkit/react-native";
 
@@ -37,11 +37,11 @@ export default function Name() {
 
   return (
     <Container insets={["bottom"]}>
-      <Stack
+      <Flex
         gap="lg"
         style={[styles.container, { paddingTop: theme.primitive.spacing[6] }]}
       >
-        <Stack gap="md">
+        <Flex gap="md">
           <Input
             size="lg"
             label="First name"
@@ -66,12 +66,12 @@ export default function Name() {
             autoComplete="family-name"
             onSubmitEditing={handleFinish}
           />
-        </Stack>
+        </Flex>
         <View style={styles.spacer} />
         <Button size="lg" loading={loading} onPress={handleFinish}>
           Finish
         </Button>
-      </Stack>
+      </Flex>
     </Container>
   );
 }

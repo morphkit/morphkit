@@ -10,7 +10,7 @@ import {
   Input,
   Button,
   Container,
-  Stack,
+  Flex,
   useTheme,
 } from "@morphkit/react-native";
 
@@ -28,11 +28,11 @@ export default function Password() {
 
   return (
     <Container insets={["bottom"]}>
-      <Stack
+      <Flex
         gap="lg"
         style={[styles.container, { paddingTop: theme.primitive.spacing[6] }]}
       >
-        <Stack gap="md">
+        <Flex gap="md">
           <Input
             size="lg"
             label="Password"
@@ -45,18 +45,18 @@ export default function Password() {
             autoFocus
             onSubmitEditing={handleContinue}
           />
-          <Stack gap="xs">
+          <Flex gap="xs">
             <Typography variant="body">Password must contain:</Typography>
             <Typography variant="caption-2">• At least 8 characters</Typography>
             <Typography variant="caption-2">• One uppercase letter</Typography>
             <Typography variant="caption-2">• One number</Typography>
-          </Stack>
-        </Stack>
+          </Flex>
+        </Flex>
         <View style={styles.spacer} />
         <Button size="lg" loading={loading} onPress={handleContinue}>
           Continue
         </Button>
-      </Stack>
+      </Flex>
     </Container>
   );
 }

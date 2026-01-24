@@ -10,7 +10,7 @@ import {
   Input,
   Button,
   Container,
-  Stack,
+  Flex,
   useTheme,
 } from "@morphkit/react-native";
 
@@ -27,11 +27,11 @@ export default function Email() {
 
   return (
     <Container insets={["bottom"]}>
-      <Stack
+      <Flex
         gap="lg"
         style={[styles.container, { paddingTop: theme.primitive.spacing[6] }]}
       >
-        <Stack gap="md">
+        <Flex gap="md">
           <Input
             size="lg"
             label="Email address"
@@ -46,12 +46,12 @@ export default function Email() {
             autoFocus
             onSubmitEditing={handleContinue}
           />
-        </Stack>
+        </Flex>
         <View style={styles.spacer} />
         <Button size="lg" loading={loading} onPress={handleContinue}>
           Continue
         </Button>
-      </Stack>
+      </Flex>
     </Container>
   );
 }

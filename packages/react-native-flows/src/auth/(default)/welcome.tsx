@@ -11,7 +11,7 @@ import {
   Typography,
   Button,
   Container,
-  Stack,
+  Flex,
   Box,
   Divider,
   useTheme,
@@ -34,9 +34,9 @@ export default function Welcome() {
 
   return (
     <Container insets={["bottom"]}>
-      <Stack gap="lg" style={styles.container}>
+      <Flex gap="lg" style={styles.container}>
         <Box style={styles.centeredContent}>
-          <Stack gap="lg" align="center">
+          <Flex gap="lg" align="center">
             <Image
               source={require("../../../assets/default-logo.png")}
               style={styles.logo}
@@ -45,7 +45,7 @@ export default function Welcome() {
             <Typography variant="title-2" style={styles.centeredText}>
               Sign up or log in to start exploring
             </Typography>
-            <Stack
+            <Flex
               gap="md"
               style={[
                 styles.fullWidth,
@@ -79,21 +79,21 @@ export default function Welcome() {
               >
                 Continue with Facebook
               </Button>
-            </Stack>
-          </Stack>
+            </Flex>
+          </Flex>
         </Box>
-        <Stack direction="horizontal" gap="md" align="center">
+        <Flex direction="horizontal" gap="md" align="center">
           <Divider style={styles.divider} />
           <Typography variant="footnote">or</Typography>
           <Divider style={styles.divider} />
-        </Stack>
+        </Flex>
         <Button size="lg" onPress={handleContinueWithEmail}>
           Continue with email
         </Button>
         <Typography variant="caption-1" style={styles.centeredText}>
           By continuing, you agree to our Terms & Privacy Policy
         </Typography>
-      </Stack>
+      </Flex>
     </Container>
   );
 }
