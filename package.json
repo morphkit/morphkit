@@ -40,8 +40,5 @@
   "resolutions": {
     "react": "19.1.0",
     "@types/react": "~19.1.0"
-  },
-  "trustedDependencies": [
-    "transparent-background"
-  ]
+  }
 }

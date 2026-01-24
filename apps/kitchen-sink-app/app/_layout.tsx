@@ -1,6 +1,4 @@
-import "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ComponentSidebar } from "../components/ComponentSidebar";
 import { MDXProvider } from "../components/MDXProvider";
 import type { DrawerContentComponentProps } from "@react-navigation/drawer";
@@ -109,11 +107,9 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <MDXProvider>
-          <ThemedDrawer />
-        </MDXProvider>
-      </GestureHandlerRootView>
+      <MDXProvider>
+        <ThemedDrawer />
+      </MDXProvider>
     </ThemeProvider>
   );
 }
