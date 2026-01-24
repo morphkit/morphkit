@@ -1,206 +1,165 @@
-# stack Specification
+# Stack Component Specification (Navigation)
 
-## Purpose
+A themed wrapper around expo-router's Stack navigator that automatically applies morphkit theme tokens to navigation header styling.
 
-The Stack component provides a layout container for arranging children with consistent spacing and alignment, simplifying vertical or horizontal layouts without manual flexbox configuration.
-
-## Requirements
+## ADDED Requirements
 
 ### Requirement: Component Structure
 
-Stack SHALL be implemented as a View-based layout component that arranges children using flexbox.
+Stack SHALL be implemented as a wrapper around expo-router's Stack navigator that automatically applies theme tokens.
 
 #### Scenario: Default rendering
 
-- **WHEN** Stack is rendered with children
-- **THEN** children are displayed in a flex container
-- **AND** flexDirection is set to column (vertical) by default
-- **AND** children render in document order
+- **WHEN** Stack is rendered
+- **THEN** expo-router's Stack is rendered internally
+- **AND** themed screenOptions are applied automatically
+- **AND** children (Stack.Screen) are passed through
 
 #### Scenario: Empty stack
 
 - **WHEN** Stack is rendered without children
-- **THEN** component renders without error
-- **AND** returns an empty View element
+- **THEN** component renders expo-router Stack without error
+- **AND** themed defaults are still applied
 
-### Requirement: Direction Variants
+### Requirement: Theme-Based Header Styling
 
-Stack SHALL support horizontal and vertical direction variants to control the main axis of child arrangement.
+Stack SHALL automatically apply morphkit theme tokens to navigation header styling based on current color scheme.
 
-#### Scenario: Vertical direction (default)
+#### Scenario: Header background color
 
-- **WHEN** direction prop is omitted or set to "vertical"
-- **THEN** flexDirection is set to "column"
-- **AND** children are arranged top to bottom
+- **WHEN** Stack navigator renders header
+- **THEN** headerStyle.backgroundColor uses theme.semantic.colors.surface.primary
+- **AND** color updates when colorScheme changes (light/dark)
 
-#### Scenario: Horizontal direction
+#### Scenario: Header tint color
 
-- **WHEN** direction prop is set to "horizontal"
-- **THEN** flexDirection is set to "row"
-- **AND** children are arranged left to right
+- **WHEN** Stack navigator renders header
+- **THEN** headerTintColor uses themed icon/button color
+- **AND** back button and header buttons use this color
 
-### Requirement: Gap Spacing Options
+#### Scenario: Header shadow
 
-Stack SHALL support 6 gap spacing options mapped to primitive spacing tokens for consistent spacing between children.
+- **WHEN** Stack navigator renders header
+- **THEN** headerShadowVisible is false by default
+- **AND** provides clean, flat header appearance
 
-#### Scenario: None gap
+#### Scenario: Header title styling
 
-- **WHEN** gap prop is set to "none"
-- **THEN** gap value is 0
-- **AND** children have no spacing between them
+- **WHEN** Stack navigator renders header title
+- **THEN** headerTitleStyle uses theme typography tokens
+- **AND** fontFamily matches app typography system
+- **AND** fontSize aligns with heading variants
 
-#### Scenario: Extra small gap
+### Requirement: Screen Options Override
 
-- **WHEN** gap prop is set to "xs"
-- **THEN** gap value is primitive.spacing[1] (4px)
+Stack SHALL allow partial screenOptions overrides while preserving themed defaults.
 
-#### Scenario: Small gap (default)
+#### Scenario: Partial override
 
-- **WHEN** gap prop is omitted or set to "sm"
-- **THEN** gap value is primitive.spacing[2] (8px)
-- **AND** this is the default gap value
+- **WHEN** screenOptions prop is provided with partial options
+- **THEN** provided options override themed defaults
+- **AND** unspecified options retain themed values
+- **AND** deep merge applies to nested objects (headerStyle)
 
-#### Scenario: Medium gap
+#### Scenario: Full override
 
-- **WHEN** gap prop is set to "md"
-- **THEN** gap value is primitive.spacing[4] (16px)
+- **WHEN** screenOptions prop provides all header options
+- **THEN** user options take full precedence
+- **AND** themed defaults are fully replaced for specified keys
 
-#### Scenario: Large gap
+#### Scenario: Function-based screenOptions
 
-- **WHEN** gap prop is set to "lg"
-- **THEN** gap value is primitive.spacing[6] (24px)
+- **WHEN** screenOptions is a function receiving navigation context
+- **THEN** function is called with navigation, route, and theme context
+- **AND** theme argument provides access to theme tokens and colorScheme
+- **AND** returned options are merged with themed defaults
+- **AND** function options take precedence over defaults
 
-#### Scenario: Extra large gap
+### Requirement: Stack.Screen Support
 
-- **WHEN** gap prop is set to "xl"
-- **THEN** gap value is primitive.spacing[8] (32px)
+Stack SHALL expose Stack.Screen as a static property for screen configuration.
 
-### Requirement: Cross-Axis Alignment
+#### Scenario: Screen configuration
 
-Stack SHALL support 4 alignment options for controlling how children are positioned on the cross axis.
+- **WHEN** Stack.Screen is used inside Stack
+- **THEN** screen is registered with expo-router
+- **AND** screen-specific options override stack defaults
+- **AND** themed header is applied to screen
 
-#### Scenario: Start alignment
+#### Scenario: Screen options override
 
-- **WHEN** align prop is set to "start"
-- **THEN** alignItems is set to "flex-start"
-- **AND** children align to the start of the cross axis
+- **WHEN** Stack.Screen has its own options prop
+- **THEN** screen options take highest precedence
+- **AND** stack-level screenOptions are base defaults
+- **AND** themed options are lowest priority
 
-#### Scenario: Center alignment
+### Requirement: Props Pass-Through
 
-- **WHEN** align prop is set to "center"
-- **THEN** alignItems is set to "center"
-- **AND** children are centered on the cross axis
+Stack SHALL forward all expo-router Stack props to the underlying navigator.
 
-#### Scenario: End alignment
+#### Scenario: Navigation props forwarding
 
-- **WHEN** align prop is set to "end"
-- **THEN** alignItems is set to "flex-end"
-- **AND** children align to the end of the cross axis
+- **WHEN** initialRouteName is provided
+- **THEN** prop is forwarded to expo-router Stack
+- **AND** specified route loads first
 
-#### Scenario: Stretch alignment (default)
+#### Scenario: Screen listeners
 
-- **WHEN** align prop is omitted or set to "stretch"
-- **THEN** alignItems is set to "stretch"
-- **AND** children stretch to fill the cross axis
-- **AND** this is the default alignment
+- **WHEN** screenListeners prop is provided
+- **THEN** listeners are forwarded to expo-router Stack
+- **AND** navigation events trigger callbacks
 
-### Requirement: Main-Axis Justification
+#### Scenario: Other navigation props
 
-Stack SHALL support 4 justification options for controlling how children are distributed along the main axis.
-
-#### Scenario: Start justification (default)
-
-- **WHEN** justify prop is omitted or set to "start"
-- **THEN** justifyContent is set to "flex-start"
-- **AND** children pack toward the start of the main axis
-- **AND** this is the default justification
-
-#### Scenario: Center justification
-
-- **WHEN** justify prop is set to "center"
-- **THEN** justifyContent is set to "center"
-- **AND** children are centered along the main axis
-
-#### Scenario: End justification
-
-- **WHEN** justify prop is set to "end"
-- **THEN** justifyContent is set to "flex-end"
-- **AND** children pack toward the end of the main axis
-
-#### Scenario: Space-between justification
-
-- **WHEN** justify prop is set to "space-between"
-- **THEN** justifyContent is set to "space-between"
-- **AND** children are evenly distributed with first at start and last at end
-
-### Requirement: Flex Wrapping
-
-Stack SHALL support flex wrapping to allow children to flow to multiple lines when space is limited.
-
-#### Scenario: No wrap (default)
-
-- **WHEN** wrap prop is omitted or set to false
-- **THEN** flexWrap is set to "nowrap"
-- **AND** children remain on a single line
-- **AND** children may overflow or compress
-
-#### Scenario: Wrap enabled
-
-- **WHEN** wrap prop is set to true
-- **THEN** flexWrap is set to "wrap"
-- **AND** children flow to the next line when they exceed available space
-- **AND** gap applies between wrapped rows/columns
+- **WHEN** id or other navigation props are provided
+- **THEN** props are forwarded to expo-router Stack
+- **AND** navigation behavior matches expo-router documentation
 
 ### Requirement: Three-Tier Theme Integration
 
-Stack SHALL use the three-tier theme token system for all spacing values.
+Stack SHALL use the three-tier theme token system for all styling values, scoped under `theme.navigation.stack`.
 
 #### Scenario: Theme token usage
 
 - **WHEN** Stack component is rendered
-- **THEN** gap values are retrieved from theme.component.stack.gap
-- **AND** gap tokens map to primitive spacing tokens
+- **THEN** header colors are accessed via theme.navigation.stack
+- **AND** typography uses semantic text style tokens
 - **AND** useTheme hook provides access to theme context
 
 #### Scenario: Theme token structure
 
-- **WHEN** Stack.theme.ts defines component tokens
-- **THEN** gap.none equals 0
-- **AND** gap.xs equals primitive.spacing[1]
-- **AND** gap.sm equals primitive.spacing[2]
-- **AND** gap.md equals primitive.spacing[4]
-- **AND** gap.lg equals primitive.spacing[6]
-- **AND** gap.xl equals primitive.spacing[8]
+- **WHEN** Stack.theme.ts defines navigation tokens
+- **THEN** tokens are exported under `stack` for `theme.navigation` namespace
+- **AND** header.background uses semantic.colors.surface.primary
+- **AND** header.tint uses appropriate action color
+- **AND** header.title uses text primary color
+- **AND** contentBackgroundColor uses semantic.colors.surface.primary
+- **AND** tokens support light and dark color schemes
 
-### Requirement: Style Merging
+#### Scenario: Content background styling
 
-Stack SHALL follow the standard style merge pattern allowing user style overrides.
+- **WHEN** Stack navigator renders screen content
+- **THEN** contentStyle.backgroundColor uses theme.navigation.stack.contentBackgroundColor
+- **AND** color updates when colorScheme changes (light/dark)
+- **AND** provides consistent background across all screens
 
-#### Scenario: Custom style application
+### Requirement: Color Scheme Reactivity
 
-- **WHEN** style prop is provided
-- **THEN** custom styles are merged last in the style array
-- **AND** user styles have highest priority
-- **AND** can override any computed style
+Stack SHALL automatically update styling when color scheme changes.
 
-#### Scenario: Style merge order
+#### Scenario: Light to dark transition
 
-- **WHEN** Stack computes final styles
-- **THEN** base styles are applied first (display: flex)
-- **AND** direction styles are applied second (flexDirection)
-- **AND** dynamic styles are applied third (gap, alignItems, justifyContent, flexWrap)
-- **AND** user custom styles are applied last
+- **WHEN** app color scheme changes from light to dark
+- **THEN** header background updates to dark surface color
+- **AND** header tint updates to dark text color
+- **AND** transition happens without remounting
 
-### Requirement: ViewProps Forwarding
+#### Scenario: Theme context subscription
 
-Stack SHALL forward all standard ViewProps to the underlying View component.
-
-#### Scenario: Props forwarding
-
-- **WHEN** additional ViewProps are provided (testID, accessibilityLabel, etc.)
-- **THEN** props are forwarded to the underlying View
-- **AND** Stack-specific props are handled separately
-- **AND** spread operator passes remaining props
+- **WHEN** Stack is mounted
+- **THEN** component subscribes to theme context
+- **AND** re-renders when colorScheme changes
+- **AND** applies appropriate color scheme tokens
 
 ### Requirement: TypeScript Type Safety
 
@@ -209,69 +168,38 @@ Stack SHALL export TypeScript interfaces for all props and types.
 #### Scenario: Props interface export
 
 - **WHEN** StackProps interface is defined
-- **THEN** it extends Omit of ViewProps excluding children
-- **AND** children is typed as ReactNode
-- **AND** direction is typed as "horizontal" | "vertical"
-- **AND** gap is typed as "none" | "xs" | "sm" | "md" | "lg" | "xl"
-- **AND** align is typed as "start" | "center" | "end" | "stretch"
-- **AND** justify is typed as "start" | "center" | "end" | "space-between"
-- **AND** wrap is typed as boolean
-- **AND** style is typed as StyleProp of ViewStyle
+- **THEN** it extends expo-router NativeStackNavigationOptions
+- **AND** screenOptions allows partial overrides
+- **AND** all expo-router Stack props are typed
+
+#### Scenario: Screen type export
+
+- **WHEN** Stack.Screen is used
+- **THEN** TypeScript recognizes Screen as valid static property
+- **AND** Screen props are properly typed from expo-router
 
 ### Requirement: Testing Coverage
 
-Stack SHALL have comprehensive test coverage for all props and behaviors.
+Stack SHALL have comprehensive test coverage for themed navigation behavior.
 
 #### Scenario: Render tests
 
 - **WHEN** test suite runs
-- **THEN** basic rendering with children is tested
-- **AND** rendering without children is tested
-- **AND** testID and ViewProps forwarding is tested
+- **THEN** basic rendering is tested
+- **AND** themed header options are verified
+- **AND** Stack.Screen rendering is tested
 
-#### Scenario: Direction tests
+#### Scenario: Theme integration tests
 
-- **WHEN** direction prop is tested
-- **THEN** vertical (default) applies flexDirection column
-- **AND** horizontal applies flexDirection row
+- **WHEN** theme context changes
+- **THEN** header colors update appropriately
+- **AND** light and dark schemes are both tested
 
-#### Scenario: Gap tests
+#### Scenario: Override tests
 
-- **WHEN** gap prop is tested
-- **THEN** default gap of 8px (sm) is verified
-- **AND** custom gap values are verified (md = 16px)
-
-#### Scenario: Alignment tests
-
-- **WHEN** align prop is tested
-- **THEN** stretch (default) applies alignItems stretch
-- **AND** start applies alignItems flex-start
-- **AND** center applies alignItems center
-- **AND** end applies alignItems flex-end
-
-#### Scenario: Justification tests
-
-- **WHEN** justify prop is tested
-- **THEN** start (default) applies justifyContent flex-start
-- **AND** center applies justifyContent center
-- **AND** end applies justifyContent flex-end
-- **AND** space-between applies justifyContent space-between
-
-#### Scenario: Wrap tests
-
-- **WHEN** wrap prop is tested
-- **THEN** false (default) applies flexWrap nowrap
-- **AND** true applies flexWrap wrap
-
-#### Scenario: Combined props test
-
-- **WHEN** all props are combined
-- **THEN** all styles are correctly applied together
-
-#### Scenario: Style merge test
-
-- **WHEN** custom style prop is provided
-- **THEN** custom styles are merged into final style
+- **WHEN** screenOptions prop is provided
+- **THEN** override merging is tested
+- **AND** deep merge for headerStyle is verified
 
 ### Requirement: Documentation
 
@@ -280,24 +208,15 @@ Stack SHALL have comprehensive MDX documentation with usage examples.
 #### Scenario: Documentation structure
 
 - **WHEN** README.mdx is viewed
-- **THEN** component description is provided
-- **AND** basic usage example is shown
-- **AND** direction variants are demonstrated
-- **AND** gap spacing options are demonstrated
-- **AND** alignment options are demonstrated
-- **AND** justification options are demonstrated
-- **AND** wrap behavior is demonstrated
-- **AND** complex layout example is provided
+- **THEN** component description explains navigation theming
+- **AND** basic usage with Stack.Screen is shown
+- **AND** screenOptions override examples are provided
+- **AND** migration from manual theming is documented
 - **AND** props table documents all props
 
-#### Scenario: Props documentation
+#### Scenario: Migration guide
 
-- **WHEN** props table is viewed
-- **THEN** children prop is documented with ReactNode type
-- **AND** direction prop documents horizontal and vertical options
-- **AND** gap prop documents all 6 size options
-- **AND** align prop documents all 4 alignment options
-- **AND** justify prop documents all 4 justification options
-- **AND** wrap prop documents boolean behavior
-- **AND** style prop documents StyleProp type
-- **AND** ViewProps spread is documented
+- **WHEN** developers read documentation
+- **THEN** before/after code comparison is provided
+- **AND** explains how to replace manual screenOptions
+- **AND** shows how to preserve custom options with overrides
