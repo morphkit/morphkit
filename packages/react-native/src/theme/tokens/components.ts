@@ -20,7 +20,6 @@ export * from "../../slider/Slider.theme";
 export * from "../../spinner/Spinner.theme";
 export * from "../../flex/Flex.theme";
 export * from "../../switch/Switch.theme";
-export * from "../../tabs/Tabs.theme";
 export * from "../../tag/Tag.theme";
 export * from "../../textarea/Textarea.theme";
 export * from "../../toast/Toast.theme";

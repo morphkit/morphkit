@@ -302,20 +302,6 @@
     },
     {
       "type": "components:ui",
-      "name": "tabs",
-      "description": "Tabbed navigation with multiple variants and orientations for organizing content into selectable sections",
-      "category": "interactive",
-      "tags": [
-        "navigation",
-        "segmented-control",
-        "panels"
-      ],
-      "dependencies": [
-        "typography"
-      ]
-    },
-    {
-      "type": "components:ui",
       "name": "tag",
       "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
       "category": "display",
