@@ -1,23 +1,27 @@
 import { writeFile, access } from "fs/promises";
-import { join } from "path";
+import { join, resolve } from "path";
 import { pathToFileURL } from "url";
 import { Config, ConfigSchema } from "../types/index.js";
-import { createInitialConfigContent } from "./warpui-config-manager.js";
+import { createInitialConfigContent } from "./morphkit-config-manager.js";
 
-const CONFIG_FILE = "warpui.config.mjs";
+const CONFIG_FILE = "morphkit.config.mjs";
 
-export async function configExists(): Promise<boolean> {
+export function getConfigPath(cwd?: string): string {
+  return join(cwd || process.cwd(), CONFIG_FILE);
+}
+
+export async function configExists(cwd?: string): Promise<boolean> {
   try {
-    await access(join(process.cwd(), CONFIG_FILE));
+    await access(getConfigPath(cwd));
     return true;
   } catch {
     return false;
   }
 }
 
-export async function readConfig(): Promise<Config | null> {
+export async function readConfig(cwd?: string): Promise<Config | null> {
   try {
-    const configPath = join(process.cwd(), CONFIG_FILE);
+    const configPath = resolve(cwd || process.cwd(), CONFIG_FILE);
     const fileUrl = pathToFileURL(configPath).href;
     const module = await import(fileUrl);
     const configData = module.config;
@@ -30,8 +34,12 @@ export async function readConfig(): Promise<Config | null> {
   }
 }
 
-export async function writeConfig(config: Config): Promise<void> {
-  const configPath = join(process.cwd(), CONFIG_FILE);
-  const content = createInitialConfigContent(config.type, config.paths.ui);
+export async function writeConfig(config: Config, cwd?: string): Promise<void> {
+  const configPath = getConfigPath(cwd);
+  const content = createInitialConfigContent(
+    config.type,
+    config.paths.components,
+    config.paths.flows,
+  );
   await writeFile(configPath, content, "utf-8");
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
-  "globalEnv": ["DEBUG", "GITHUB_TOKEN", "GH_TOKEN"],
+  "globalEnv": ["DEBUG", "GITHUB_TOKEN", "GH_TOKEN", "CI", "TERM"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

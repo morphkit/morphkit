@@ -9,15 +9,13 @@ const RegistrySchema = z.object({
 });
 
 export async function fetchComponents(): Promise<ComponentMeta[]> {
-  // Get GitHub token for authentication
   const token = getGitHubToken();
   if (!token) {
     throw new GitHubAuthError();
   }
 
-  // Fetch registry from GitHub raw URL
   const registryUrl =
-    "https://raw.githubusercontent.com/warp-ui/warp-ui/main/packages/nativewind/src/registry.json";
+    "https://raw.githubusercontent.com/morphkit/morphkit/main/packages/react-native/src/registry.json";
 
   const headers: HeadersInit = {
     Authorization: `token ${token}`,

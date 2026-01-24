@@ -3,19 +3,19 @@ import { join } from "path";
 import { pathToFileURL } from "url";
 import type { ComponentVariables } from "../types/index.js";
 
-const WARPUI_CONFIG_FILENAME = "warpui.config.mjs";
+const MORPHKIT_CONFIG_FILENAME = "morphkit.config.mjs";
 
-export async function readWarpuiConfig(
+export async function readMorphkitConfig(
   projectRoot: string,
 ): Promise<Record<string, unknown>> {
   try {
-    const configPath = join(projectRoot, WARPUI_CONFIG_FILENAME);
+    const configPath = join(projectRoot, MORPHKIT_CONFIG_FILENAME);
     const fileUrl = pathToFileURL(configPath).href;
     const config = await import(fileUrl);
     return config.default || config;
   } catch (error) {
     throw new Error(
-      `Could not load ${WARPUI_CONFIG_FILENAME}: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `Could not load ${MORPHKIT_CONFIG_FILENAME}: ${error instanceof Error ? error.message : "Unknown error"}`,
     );
   }
 }
@@ -24,7 +24,7 @@ export async function addComponentVariablesToConfig(
   projectRoot: string,
   componentVariables: Map<string, ComponentVariables>,
 ): Promise<void> {
-  const configPath = join(projectRoot, WARPUI_CONFIG_FILENAME);
+  const configPath = join(projectRoot, MORPHKIT_CONFIG_FILENAME);
 
   try {
     const content = await readFile(configPath, "utf-8");
@@ -35,7 +35,7 @@ export async function addComponentVariablesToConfig(
     await writeFile(configPath, updatedContent, "utf-8");
   } catch (error) {
     throw new Error(
-      `Could not update ${WARPUI_CONFIG_FILENAME}: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `Could not update ${MORPHKIT_CONFIG_FILENAME}: ${error instanceof Error ? error.message : "Unknown error"}`,
     );
   }
 }
@@ -146,22 +146,20 @@ function getDarkModeValue(lightValue: string): string {
 
 export function createInitialConfigContent(
   type: "react-native" | "react",
-  uiPath: string,
+  componentsPath: string,
+  flowsPath: string,
 ): string {
-  return `export const theme = {
-  light: {
-    // Component variables will be added here
-  },
-  dark: {
-    // Component variables will be added here
-  }
-}
-
-export const config = {
+  return `export const config = {
   type: '${type}',
   paths: {
-    ui: '${uiPath}'
-  }
-}
+    components: '${componentsPath}',
+    flows: '${flowsPath}',
+  },
+};
+
+export const theme = {
+  light: {},
+  dark: {},
+};
 `;
 }
