@@ -66,7 +66,7 @@ yarn start
 ### Available Scripts
 
 - `yarn start` - Start the Expo development server
- 
+
 OR/THEN
 
 - `yarn android` - Run on Android device/emulator
@@ -94,6 +94,7 @@ yarn check
 ## Authentication Flow
 
 The app uses Supabase Auth with:
+
 - Secure session storage (SecureStore on native, localStorage on web)
 - Automatic session refresh
 - Route protection (guests → login, authenticated → home)
@@ -105,7 +106,7 @@ The app uses Supabase Auth with:
 - Modify the design in component files
 - Add more protected routes in `src/app/(app)`
 - Extend user metadata in Supabase dashboard
-  
+
 ## Todo
 
 - [x] Add ToS and Privacy Policy
@@ -119,7 +120,7 @@ The app uses Supabase Auth with:
 - [ ] Implement seamless Supabase MCP integration + EXPO Login + GitHub setup (basically `fork => prompt LLM to create a new project => add project info to .env => run init script`)
 - [ ] Setup Supabase project essetials? (master/staging etc. investigate more)
 - [ ] Do security audit after all
-- [ ] Implement ideation plan: 
+- [ ] Implement ideation plan:
   - [ ] Configure database and endpoints based on Supabase architecture
   - [ ] Configure back-office
   - [ ] Implement brand guidelines
