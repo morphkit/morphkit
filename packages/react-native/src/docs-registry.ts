@@ -23,6 +23,7 @@ import SliderDocs from "./slider/README.mdx";
 import SpinnerDocs from "./spinner/README.mdx";
 import StackDocs from "./stack/README.mdx";
 import SwitchDocs from "./switch/README.mdx";
+import TabsDocs from "./tabs/README.mdx";
 import TagDocs from "./tag/README.mdx";
 import TextareaDocs from "./textarea/README.mdx";
 import ToastDocs from "./toast/README.mdx";
@@ -52,6 +53,7 @@ export const docsRegistry: Record<string, React.FC> = {
   spinner: SpinnerDocs,
   stack: StackDocs,
   switch: SwitchDocs,
+  tabs: TabsDocs,
   tag: TagDocs,
   textarea: TextareaDocs,
   toast: ToastDocs,

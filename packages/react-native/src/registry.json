@@ -302,6 +302,21 @@
     },
     {
       "type": "components:ui",
+      "name": "tabs",
+      "description": "Themed tab navigation wrapper for expo-router with automatic tab bar and header styling",
+      "category": "navigation",
+      "tags": [
+        "navigation",
+        "routing",
+        "expo-router",
+        "tabs"
+      ],
+      "dependencies": [
+        "expo-router"
+      ]
+    },
+    {
+      "type": "components:ui",
       "name": "tag",
       "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
       "category": "display",

@@ -2,295 +2,329 @@
 
 ## Purpose
 
-The Tabs component provides tabbed navigation with multiple variants and orientations for organizing content into selectable sections, enabling efficient content switching within a single view.
+The Tabs component provides a themed wrapper around expo-router's Tabs navigator that automatically applies morphkit theme tokens to tab bar and header styling, eliminating repetitive configuration while preserving full customization capability.
 
 ## Requirements
 
-### Requirement: Compound Component Architecture
+### Requirement: Component Structure
 
-Tabs SHALL provide a compound component system with four sub-components that work together via React Context.
+Tabs SHALL be implemented as a wrapper around expo-router's Tabs component that injects themed screen options.
 
-#### Scenario: TabsContainer provides context to children
+#### Scenario: Default rendering
 
-- **WHEN** TabsContainer wraps TabsList and TabsContent components
-- **THEN** value and onValueChange are accessible via context
-- **AND** orientation and variant settings propagate to all children
-- **AND** disabled state propagates to all TabsTrigger components
+- **WHEN** Tabs is rendered with Tabs.Screen children
+- **THEN** expo-router Tabs component is rendered internally
+- **AND** themed screenOptions are applied automatically
+- **AND** children are passed through to expo-router Tabs
 
-#### Scenario: Context error when used outside container
+#### Scenario: Empty tabs
 
-- **WHEN** TabsList, TabsTrigger, or TabsContent is rendered outside TabsContainer
-- **THEN** component throws error "Tabs components must be used within TabsContainer"
+- **WHEN** Tabs is rendered without children
+- **THEN** component renders without error
+- **AND** expo-router Tabs is rendered with themed options
 
-### Requirement: Controlled State Management
+#### Scenario: Static Screen property
 
-Tabs SHALL implement controlled state pattern where parent manages active tab value.
+- **WHEN** Tabs.Screen is accessed
+- **THEN** it returns expo-router's Tabs.Screen component
+- **AND** screen configuration works identically to expo-router
 
-#### Scenario: Parent controls active tab
+### Requirement: Tab Bar Theming
 
-- **WHEN** value prop is set to "tab2"
-- **THEN** TabsTrigger with value="tab2" displays selected state
-- **AND** TabsContent with value="tab2" is rendered
-- **AND** TabsContent with other values returns null
+Tabs SHALL automatically apply themed styling to the tab bar using theme tokens.
 
-#### Scenario: Tab selection triggers callback
+#### Scenario: Active tab color
 
-- **WHEN** user presses an enabled TabsTrigger
-- **THEN** onValueChange is called with the trigger's value
-- **AND** parent can update state to reflect new selection
+- **WHEN** Tabs is rendered
+- **THEN** tabBarActiveTintColor is set from theme.navigation.tabs.tabBar[colorScheme].activeTint
+- **AND** active tab icon and label display this color
 
-### Requirement: Three Visual Variants
+#### Scenario: Inactive tab color
 
-Tabs SHALL support line, filled, and pills visual variants with distinct styling.
+- **WHEN** Tabs is rendered
+- **THEN** tabBarInactiveTintColor is set from theme.navigation.tabs.tabBar[colorScheme].inactiveTint
+- **AND** inactive tab icons and labels display this color
 
-#### Scenario: Line variant with underline indicator
+#### Scenario: Tab bar background
 
-- **WHEN** variant="line" (default) with horizontal orientation
-- **THEN** active tab displays borderBottomWidth of 2px
-- **AND** active tab displays borderBottomColor from theme.component.tabs.variant[colorScheme].tab.active.border
-- **AND** inactive tabs have no border indicator
+- **WHEN** Tabs is rendered
+- **THEN** tabBarStyle.backgroundColor is set from theme.navigation.tabs.tabBar[colorScheme].background
+- **AND** tab bar displays themed background color
 
-#### Scenario: Line variant with vertical orientation
+#### Scenario: Tab bar label styling
 
-- **WHEN** variant="line" with orientation="vertical"
-- **THEN** active tab displays borderLeftWidth of 3px
-- **AND** active tab displays borderLeftColor from theme tokens
+- **WHEN** Tabs is rendered
+- **THEN** tabBarLabelStyle uses theme.navigation.tabs.tabBarLabel for fontSize and fontWeight
+- **AND** labels render with consistent typography
 
-#### Scenario: Filled variant with background
+### Requirement: Header Theming
 
-- **WHEN** variant="filled"
-- **THEN** active tab displays backgroundColor from theme.component.tabs.variant[colorScheme].tab.active.background
-- **AND** inactive tabs have transparent background
-- **AND** active tab text uses theme.component.tabs.variant[colorScheme].filled.text
+Tabs SHALL apply themed header styling consistent with Stack component.
 
-#### Scenario: Pills variant with rounded backgrounds
+#### Scenario: Header background
 
-- **WHEN** variant="pills"
-- **THEN** all tabs display borderRadius from theme.component.tabs.borderRadius
-- **AND** all tabs display paddingHorizontal from theme.component.tabs.pill.paddingHorizontal
-- **AND** all tabs display paddingVertical from theme.component.tabs.pill.paddingVertical
-- **AND** active tab uses theme.component.tabs.variant[colorScheme].tab.active.background
-- **AND** inactive tabs use theme.component.tabs.variant[colorScheme].tab.inactive.background
+- **WHEN** Tabs is rendered
+- **THEN** headerStyle.backgroundColor is set from theme.navigation.tabs.header[colorScheme].background
 
-### Requirement: Horizontal and Vertical Orientations
+#### Scenario: Header tint color
 
-Tabs SHALL support both horizontal and vertical layout directions.
+- **WHEN** Tabs is rendered
+- **THEN** headerTintColor is set from theme.navigation.tabs.header[colorScheme].tint
+- **AND** header buttons and icons use this color
 
-#### Scenario: Horizontal orientation (default)
+#### Scenario: Header title styling
 
-- **WHEN** orientation="horizontal" or not specified
-- **THEN** TabsList displays with flexDirection="row"
-- **AND** tabs are arranged side by side
-- **AND** gap between tabs is theme.component.tabs.horizontal.gap
-- **AND** swipe gestures are enabled for tab navigation
+- **WHEN** Tabs is rendered
+- **THEN** headerTitleStyle.color is set from theme.navigation.tabs.header[colorScheme].title
+- **AND** headerTitleStyle.fontSize is set from theme.navigation.tabs.headerTitle.fontSize
+- **AND** headerTitleStyle.fontWeight is set from theme.navigation.tabs.headerTitle.fontWeight
 
-#### Scenario: Vertical orientation
+#### Scenario: Header shadow
 
-- **WHEN** orientation="vertical"
-- **THEN** TabsList displays with flexDirection="column"
-- **AND** TabsList width is set to theme.component.tabs.width.vertical (200px)
-- **AND** gap between tabs is theme.component.tabs.gap
-- **AND** swipe gestures are disabled
-- **AND** container displays with flexDirection="row" for side-by-side layout
+- **WHEN** Tabs is rendered
+- **THEN** headerShadowVisible is set from theme.navigation.tabs.shadowVisible
+- **AND** defaults to false for clean appearance
 
-### Requirement: Swipe Gesture Support
+### Requirement: Badge Theming
 
-Horizontal tabs SHALL support swipe gestures for navigation using PanResponder.
+Tabs SHALL provide themed badge styling for tab bar badges.
 
-#### Scenario: Swipe left to next tab
+#### Scenario: Badge background color
 
-- **WHEN** orientation is horizontal and user swipes left more than 50px
-- **THEN** onValueChange is called with next tab value
-- **AND** tab index increases by 1
+- **WHEN** a tab has tabBarBadge set
+- **THEN** badge background uses theme.navigation.tabs.badge[colorScheme].background
 
-#### Scenario: Swipe right to previous tab
+#### Scenario: Badge text color
 
-- **WHEN** orientation is horizontal and user swipes right more than 50px
-- **THEN** onValueChange is called with previous tab value
-- **AND** tab index decreases by 1
+- **WHEN** a tab has tabBarBadge set
+- **THEN** badge text uses theme.navigation.tabs.badge[colorScheme].text
 
-#### Scenario: Swipe disabled when disabled or vertical
+### Requirement: Theme Context in Icon Callback
 
-- **WHEN** disabled={true} or orientation="vertical"
-- **THEN** swipe gestures do not trigger tab changes
+Tabs SHALL extend the tabBarIcon callback to provide theme context for theme-aware icon rendering.
 
-### Requirement: Icon Support in Triggers
+#### Scenario: Extended icon callback props
 
-TabsTrigger SHALL support optional leading icons alongside labels.
+- **WHEN** screenOptions includes tabBarIcon as a function
+- **THEN** callback receives { color, focused, size, themeContext }
+- **AND** themeContext contains { theme, colorScheme }
+- **AND** icons can access full theme for dynamic styling
 
-#### Scenario: Trigger with icon and label
+#### Scenario: Per-screen icon with theme
 
-- **WHEN** icon prop is provided to TabsTrigger
-- **THEN** icon renders before label text
-- **AND** icon has marginRight of theme.component.tabs.iconMargin
-- **AND** icon and label are aligned horizontally with alignItems="center"
+- **WHEN** Tabs.Screen options includes tabBarIcon function
+- **THEN** that function also receives extended props with themeContext
+- **AND** per-screen icons can use theme tokens
 
-#### Scenario: Trigger without icon
+### Requirement: Screen Options Override
 
-- **WHEN** icon prop is not provided
-- **THEN** only label text is rendered
-- **AND** no extra margin is applied
+Tabs SHALL allow partial override of screenOptions while preserving themed defaults.
 
-### Requirement: Disabled State
+#### Scenario: Object screenOptions merge
 
-Tabs SHALL support disabled state at both container and individual trigger levels.
+- **WHEN** screenOptions prop is an object
+- **THEN** user options are merged with themed defaults
+- **AND** user options take precedence over themed defaults
+- **AND** unspecified options use themed values
 
-#### Scenario: Container-level disabled
+#### Scenario: Function screenOptions with theme context
 
-- **WHEN** TabsContainer has disabled={true}
-- **THEN** all TabsTrigger components are disabled
-- **AND** all triggers display opacity from theme.component.tabs.variant[colorScheme].disabled.opacity
-- **AND** onValueChange is not called when any trigger is pressed
-- **AND** swipe gestures are disabled
+- **WHEN** screenOptions prop is a function
+- **THEN** function receives { route, navigation, theme, themeContext }
+- **AND** themeContext contains { theme, colorScheme }
+- **AND** returned options are merged with themed defaults
 
-#### Scenario: Individual trigger disabled
+#### Scenario: Deep merge tabBarStyle
 
-- **WHEN** TabsTrigger has disabled={true}
-- **THEN** that trigger is non-interactive
-- **AND** that trigger displays reduced opacity
-- **AND** accessibilityState.disabled is true for that trigger
-- **AND** other triggers remain interactive
+- **WHEN** user provides partial tabBarStyle
+- **THEN** user styles are merged with themed tabBarStyle
+- **AND** user can override backgroundColor while keeping other themed styles
+
+#### Scenario: Deep merge headerStyle
+
+- **WHEN** user provides partial headerStyle
+- **THEN** user styles are merged with themed headerStyle
+- **AND** user can add borderBottomWidth while keeping themed backgroundColor
+
+### Requirement: Color Scheme Adaptation
+
+Tabs SHALL automatically adapt colors based on the current color scheme.
+
+#### Scenario: Light mode colors
+
+- **WHEN** colorScheme is "light"
+- **THEN** all colors use theme.navigation.tabs.*[light].* tokens
+- **AND** tab bar and header display light theme colors
+
+#### Scenario: Dark mode colors
+
+- **WHEN** colorScheme is "dark"
+- **THEN** all colors use theme.navigation.tabs.*[dark].* tokens
+- **AND** tab bar and header display dark theme colors
+
+#### Scenario: Different colors in each mode
+
+- **WHEN** comparing light and dark mode renders
+- **THEN** tabBarStyle.backgroundColor differs between modes
+- **AND** headerStyle.backgroundColor differs between modes
+- **AND** tint colors differ between modes
 
 ### Requirement: Three-Tier Theme Integration
 
-Tabs SHALL use the three-tier theme token system exclusively with no hardcoded values.
+Tabs SHALL use the three-tier theme token system for all styling values.
 
-#### Scenario: Primitive tokens for spacing and typography
+#### Scenario: Theme token usage
 
-- **WHEN** component renders
-- **THEN** padding uses primitive.spacing[N] tokens
-- **AND** gap uses primitive.spacing[N] tokens
-- **AND** borderRadius uses primitive.borderRadius.md
-- **AND** fontSize uses primitive.fontSize.base
-- **AND** fontWeight uses primitive.fontWeight.medium
+- **WHEN** Tabs component is rendered
+- **THEN** tab bar values are retrieved from theme.navigation.tabs
+- **AND** tokens map to primitive and semantic tokens
+- **AND** useTheme hook provides access to theme context
 
-#### Scenario: Semantic tokens for colors
+#### Scenario: Theme token structure
 
-- **WHEN** component renders in light mode
-- **THEN** colors use light.surface._, light.text._, light.border.\* semantic tokens
-- **AND** theme.component.tabs.variant.light is accessed for variant colors
+- **WHEN** Tabs.theme.ts defines navigation tokens
+- **THEN** tabBar.light/dark contains activeTint, inactiveTint, background
+- **AND** header.light/dark contains background, tint, title
+- **AND** headerTitle contains fontSize, fontWeight
+- **AND** tabBarLabel contains fontSize, fontWeight
+- **AND** badge.light/dark contains background, text
+- **AND** all values derive from primitive or semantic tokens
 
-#### Scenario: Dark mode color adaptation
+### Requirement: Props Forwarding
 
-- **WHEN** colorScheme is "dark"
-- **THEN** colors use dark.surface._, dark.text._, dark.border.\* semantic tokens
-- **AND** theme.component.tabs.variant.dark is accessed for variant colors
+Tabs SHALL forward all standard expo-router Tabs props to the underlying component.
 
-### Requirement: Typography Integration
+#### Scenario: Navigation props forwarding
 
-TabsTrigger labels SHALL use the Typography component for text rendering.
+- **WHEN** initialRouteName, id, or other navigation props are provided
+- **THEN** props are forwarded to expo-router Tabs
+- **AND** navigation behavior works as expected
 
-#### Scenario: Label uses Typography component
+#### Scenario: Tab bar configuration props
 
-- **WHEN** TabsTrigger renders with label prop
-- **THEN** label is rendered using Typography component with variant="body"
-- **AND** fontWeight is set to theme.component.tabs.label.fontWeight
-- **AND** color is dynamically set based on active state and variant
+- **WHEN** tabBarHideOnKeyboard, tabBarPosition, or other tab config props are provided
+- **THEN** props are forwarded to expo-router Tabs
+- **AND** Tabs-specific props are handled separately from screenOptions
 
-### Requirement: Style Customization
+### Requirement: TypeScript Type Safety
 
-All Tabs sub-components SHALL support style prop for custom overrides.
+Tabs SHALL export TypeScript interfaces for all props and types.
 
-#### Scenario: Custom styles on TabsContainer
+#### Scenario: Props interface export
 
-- **WHEN** style prop is passed to TabsContainer
-- **THEN** custom styles are merged with base styles
-- **AND** custom styles take precedence over theme defaults
+- **WHEN** TabsProps interface is defined
+- **THEN** it extends Omit of ExpoRouterTabsProps excluding screenOptions
+- **AND** screenOptions is typed as ScreenOptionsWithTheme
 
-#### Scenario: Custom styles on TabsList
+#### Scenario: Theme context type export
 
-- **WHEN** style prop is passed to TabsList
-- **THEN** custom styles are merged after layout styles
-- **AND** flexDirection from context orientation is preserved unless overridden
+- **WHEN** ThemeContext interface is defined
+- **THEN** it contains theme: Theme and colorScheme: ColorScheme
+- **AND** type is exported for consumer use
 
-#### Scenario: Custom styles on TabsTrigger
+#### Scenario: Screen options callback type
 
-- **WHEN** style prop is passed to TabsTrigger
-- **THEN** custom styles are merged after variant and state styles
-- **AND** user styles have highest priority
+- **WHEN** ScreenOptionsCallbackProps is defined
+- **THEN** it includes route, navigation, theme, and themeContext
+- **AND** enables type-safe function screenOptions
 
-#### Scenario: Custom styles on TabsContent
+#### Scenario: Icon callback type
 
-- **WHEN** style prop is passed to TabsContent
-- **THEN** custom styles are merged with flex: 1 and paddingTop
-- **AND** content styling is fully customizable
-
-### Requirement: ViewProps Forwarding
-
-All Tabs sub-components SHALL forward standard React Native ViewProps.
-
-#### Scenario: ViewProps on container components
-
-- **WHEN** testID, accessibilityLabel, or other ViewProps are passed
-- **THEN** props are forwarded to underlying View/Pressable components
-- **AND** custom props do not interfere with component functionality
-
-### Requirement: Accessibility
-
-Tabs SHALL implement proper accessibility attributes following WCAG AA guidelines.
-
-#### Scenario: TabsList has tablist role
-
-- **WHEN** TabsList renders
-- **THEN** accessibilityRole is "tablist"
-
-#### Scenario: TabsTrigger has tab role with state
-
-- **WHEN** TabsTrigger renders
-- **THEN** accessibilityRole is "tab"
-- **AND** accessibilityState.selected reflects active state
-- **AND** accessibilityState.disabled reflects disabled state
+- **WHEN** TabBarIconProps is defined
+- **THEN** it extends default { color, focused, size } with themeContext
+- **AND** enables type-safe tabBarIcon functions
 
 ### Requirement: Testing Coverage
 
-Tabs SHALL have comprehensive test coverage for all functionality.
+Tabs SHALL have comprehensive test coverage for all props and behaviors.
 
-#### Scenario: Component rendering tests
-
-- **WHEN** test suite runs
-- **THEN** tests verify all sub-components render correctly
-- **AND** tests verify context propagation
-- **AND** tests verify context error handling
-
-#### Scenario: Variant and orientation tests
+#### Scenario: Render tests
 
 - **WHEN** test suite runs
-- **THEN** tests verify all 3 variants apply correct styles
-- **AND** tests verify both orientations set correct flexDirection
-- **AND** tests verify vertical line variant uses borderLeft
+- **THEN** basic rendering is tested
+- **AND** rendering with Tabs.Screen children is tested
+- **AND** Tabs.Screen static property is verified
 
-#### Scenario: Interaction tests
+#### Scenario: Tab bar theming tests
 
-- **WHEN** test suite runs
-- **THEN** tests verify onValueChange is called on trigger press
-- **AND** tests verify disabled state prevents interaction
-- **AND** tests verify content switching on value change
+- **WHEN** tab bar styling is tested
+- **THEN** tabBarActiveTintColor is verified
+- **AND** tabBarInactiveTintColor is verified
+- **AND** tabBarStyle.backgroundColor is verified
+- **AND** tabBarLabelStyle is verified
 
-#### Scenario: Style and props tests
+#### Scenario: Header theming tests
 
-- **WHEN** test suite runs
-- **THEN** tests verify custom styles are merged correctly
-- **AND** tests verify ViewProps are forwarded
-- **AND** tests verify accessibility props are set
+- **WHEN** header styling is tested
+- **THEN** headerStyle.backgroundColor is verified
+- **AND** headerTintColor is verified
+- **AND** headerTitleStyle is verified
+- **AND** headerShadowVisible is verified
+
+#### Scenario: Color scheme tests
+
+- **WHEN** color scheme adaptation is tested
+- **THEN** light mode applies correct colors
+- **AND** dark mode applies correct colors
+- **AND** colors differ between modes
+
+#### Scenario: Screen options override tests
+
+- **WHEN** screenOptions override is tested
+- **THEN** object options merge correctly
+- **AND** function options receive themeContext
+- **AND** deep merge for tabBarStyle works
+- **AND** deep merge for headerStyle works
+
+#### Scenario: Icon callback tests
+
+- **WHEN** tabBarIcon callback is tested
+- **THEN** callback receives themeContext in props
+- **AND** theme and colorScheme are accessible
+- **AND** icons can use theme tokens
+
+#### Scenario: Props forwarding tests
+
+- **WHEN** props forwarding is tested
+- **THEN** initialRouteName is forwarded
+- **AND** id prop is forwarded
+- **AND** children are passed through
 
 ### Requirement: Documentation
 
-Tabs SHALL have comprehensive MDX documentation with examples.
+Tabs SHALL have comprehensive MDX documentation with usage examples.
 
 #### Scenario: Documentation structure
 
-- **WHEN** README.mdx is rendered
-- **THEN** documentation includes component description
-- **AND** documentation shows basic usage example
-- **AND** documentation demonstrates all variants
-- **AND** documentation demonstrates both orientations
-- **AND** documentation shows icon usage
-- **AND** documentation shows disabled states
-- **AND** documentation includes props tables for all sub-components
+- **WHEN** README.mdx is viewed
+- **THEN** component description explains the wrapper purpose
+- **AND** basic usage example shows minimal setup
+- **AND** custom tab bar styling is demonstrated
+- **AND** theme-aware icons example is provided
+- **AND** function screenOptions example shows themeContext usage
+- **AND** props table documents all props
+- **AND** theme tokens table lists all available tokens
 
-#### Scenario: Live examples
+#### Scenario: Migration guide
 
-- **WHEN** documentation is viewed in demo app
-- **THEN** BasicExample demonstrates controlled tabs with content switching
-- **AND** SwipeExample demonstrates pills variant with swipe navigation
-- **AND** AdvancedExample demonstrates vertical orientation with icons
+- **WHEN** documentation is viewed
+- **THEN** before/after code comparison is shown
+- **AND** demonstrates elimination of boilerplate
+- **AND** shows how to access theme in icons
+
+### Requirement: Accessibility
+
+Tabs SHALL preserve and enhance expo-router's accessibility features.
+
+#### Scenario: Tab accessibility
+
+- **WHEN** Tabs renders
+- **THEN** tab buttons have appropriate accessibility roles
+- **AND** active tab state is announced
+- **AND** tab labels are announced by screen readers
+
+#### Scenario: Color contrast
+
+- **WHEN** themed colors are applied
+- **THEN** active/inactive contrast meets WCAG AA requirements
+- **AND** tab labels are readable in both color schemes

@@ -1,0 +1,141 @@
+# Tabs
+
+**Category**: navigation | **Tags**: navigation, routing, expo-router, tabs
+
+A themed wrapper around expo-router's Tabs navigator that automatically applies morphkit theme tokens to tab bar and header styling. Tabs eliminates repetitive boilerplate by providing consistent, theme-aware navigation that automatically adapts to light and dark color schemes.
+
+## Why Tabs?
+
+When using expo-router, developers must manually configure `screenOptions` with theme tokens in every tab layout file. This creates repetitive code and inconsistency when theme values change. Tabs solves this by automatically applying themed styling while still allowing full customization.
+
+## Basic Usage
+
+The default configuration provides themed tab bar and headers with no additional setup.
+
+<BasicExample />
+
+## Custom Tab Bar
+
+Override specific options while preserving themed defaults.
+
+<CustomStylingExample />
+
+## Theme-Aware Icons
+
+Access theme context in the extended tabBarIcon callback for dynamic icon styling.
+
+<ThemeAwareIconsExample />
+
+## Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+### Tab Bar Color Tokens
+
+| Token Path | Purpose | Light Mode Value | Dark Mode Value |
+|------------|---------|------------------|-----------------|
+| theme.navigation.tabs.tabBar[colorScheme].activeTint | Active tab icon and label color | light.action.primary | dark.action.primary |
+| theme.navigation.tabs.tabBar[colorScheme].inactiveTint | Inactive tab icon and label color | light.text.tertiary | dark.text.tertiary |
+| theme.navigation.tabs.tabBar[colorScheme].background | Tab bar background color | light.surface.primary | dark.surface.primary |
+
+### Header Color Tokens
+
+| Token Path | Purpose | Light Mode Value | Dark Mode Value |
+|------------|---------|------------------|-----------------|
+| theme.navigation.tabs.header[colorScheme].background | Header background | light.surface.primary | dark.surface.primary |
+| theme.navigation.tabs.header[colorScheme].tint | Header button color | light.action.primary | dark.action.primary |
+| theme.navigation.tabs.header[colorScheme].title | Header title text color | light.text.primary | dark.text.primary |
+
+### Badge Color Tokens
+
+| Token Path | Purpose | Light Mode Value | Dark Mode Value |
+|------------|---------|------------------|-----------------|
+| theme.navigation.tabs.badge[colorScheme].background | Badge background color | light.status.error.main | dark.status.error.main |
+| theme.navigation.tabs.badge[colorScheme].text | Badge text color | light.text.inverse | dark.text.inverse |
+
+### Typography Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+|------------|---------|-------|------------------|
+| theme.navigation.tabs.headerTitle.fontSize | Header title font size | 20 | textStyles.heading.fontSize |
+| theme.navigation.tabs.headerTitle.fontWeight | Header title font weight | 600 | textStyles.heading.fontWeight |
+| theme.navigation.tabs.tabBarLabel.fontSize | Tab label font size | 12 | textStyles.caption1.fontSize |
+| theme.navigation.tabs.tabBarLabel.fontWeight | Tab label font weight | 400 | textStyles.caption1.fontWeight |
+
+### Other Tokens
+
+| Token Path | Purpose | Value |
+|------------|---------|-------|
+| theme.navigation.tabs.shadowVisible | Show header shadow | false |
+
+## Props
+
+### Navigation Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| screenOptions | ScreenOptionsWithTheme | undefined | Screen options object or function that receives theme context |
+| initialRouteName | string | undefined | Initial route to display |
+| id | string | undefined | Unique identifier for the navigator |
+| children | ReactNode | undefined | Tabs.Screen children |
+
+### ScreenOptionsWithTheme
+
+The `screenOptions` prop accepts either an object or a function. When using a function, it receives an extended props object that includes `themeContext`:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| navigation | NavigationProp | Navigation object from expo-router |
+| route | RouteProp | Current route object |
+| themeContext | ThemeContext | Object containing theme and colorScheme |
+
+### ThemeContext
+
+| Property | Type | Description |
+|----------|------|-------------|
+| theme | Theme | Full theme object with primitive, semantic, and component tokens |
+| colorScheme | ColorScheme | Current color scheme (light or dark) |
+
+### TabBarIconProps
+
+The extended tabBarIcon callback receives additional theme context:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| color | string | Default color from tab bar tint settings |
+| focused | boolean | Whether the tab is currently focused |
+| size | number | Suggested icon size |
+| themeContext | ThemeContext | Object containing theme and colorScheme |
+
+## Static Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Tabs.Screen | Component | expo-router's Tabs.Screen for screen configuration |
+
+## Migration Guide
+
+Replace manual screenOptions configuration with Tabs:
+
+### Before
+
+Tab layout files require manual theme token application for each style property.
+
+### After
+
+Tabs applies themed styling automatically. Custom options are merged with defaults, and function-based options receive theme context for dynamic styling. The extended tabBarIcon callback provides direct access to theme tokens.
+
+## Accessibility
+
+**Screen Reader Support:**
+
+- Tab buttons have appropriate accessibility roles
+- Active tab state is announced when navigating
+- Tab labels are announced by screen readers
+- Badge values are announced when present
+
+**Visual Requirements:**
+
+- Tab bar colors meet WCAG AA contrast requirements
+- Focus indicators visible on interactive elements
+- Touch targets meet minimum 44pt requirement

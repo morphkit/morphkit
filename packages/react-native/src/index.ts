@@ -21,6 +21,7 @@ export * from "./slider";
 export * from "./spinner";
 export * from "./stack";
 export * from "./switch";
+export * from "./tabs";
 export * from "./tag";
 export * from "./textarea";
 export * from "./theme";
