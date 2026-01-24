@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Textarea } from "../Textarea";
 
@@ -8,8 +8,8 @@ export const CharacterCountExample = () => {
   const [withLimit, setWithLimit] = useState("");
 
   return (
-    <Stack gap="md">
-      <Stack gap="xs">
+    <Flex gap="md">
+      <Flex gap="xs">
         <Typography variant="caption-1">Without max length</Typography>
         <Textarea
           placeholder="Type anything..."
@@ -17,8 +17,8 @@ export const CharacterCountExample = () => {
           onChange={setWithoutLimit}
           showCount
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">With max length (100)</Typography>
         <Textarea
           placeholder="Limited to 100 characters..."
@@ -27,7 +27,7 @@ export const CharacterCountExample = () => {
           showCount
           maxLength={100}
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { TabsContainer, TabsList, TabsTrigger, TabsContent } from "../Tabs";
 
@@ -8,8 +8,8 @@ export const OrientationsExample = () => {
   const [verticalTab, setVerticalTab] = useState("profile");
 
   return (
-    <Stack gap="xl">
-      <Stack gap="sm">
+    <Flex gap="xl">
+      <Flex gap="sm">
         <Typography variant="subhead">
           Horizontal Orientation (Default)
         </Typography>
@@ -35,9 +35,9 @@ export const OrientationsExample = () => {
             <Typography variant="body">Library tab content.</Typography>
           </TabsContent>
         </TabsContainer>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Vertical Orientation</Typography>
         <TabsContainer
           value={verticalTab}
@@ -61,7 +61,7 @@ export const OrientationsExample = () => {
             <Typography variant="body">Privacy settings content.</Typography>
           </TabsContent>
         </TabsContainer>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

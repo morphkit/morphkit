@@ -1,22 +1,22 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Divider } from "../Divider";
 
 export const ThicknessExample = () => {
   return (
-    <Stack gap="md">
-      <Stack gap="sm">
+    <Flex gap="md">
+      <Flex gap="sm">
         <Typography variant="caption-1">Hairline (default)</Typography>
         <Divider />
-      </Stack>
-      <Stack gap="sm">
+      </Flex>
+      <Flex gap="sm">
         <Typography variant="caption-1">2px thickness</Typography>
         <Divider thickness={2} />
-      </Stack>
-      <Stack gap="sm">
+      </Flex>
+      <Flex gap="sm">
         <Typography variant="caption-1">4px thickness</Typography>
         <Divider thickness={4} />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

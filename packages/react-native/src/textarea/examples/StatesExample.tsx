@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Textarea } from "../Textarea";
 
@@ -8,8 +8,8 @@ export const StatesExample = () => {
   const [disabledValue] = useState("This content cannot be edited");
 
   return (
-    <Stack gap="md">
-      <Stack gap="xs">
+    <Flex gap="md">
+      <Flex gap="xs">
         <Typography variant="caption-1">Error state</Typography>
         <Textarea
           label="Bio"
@@ -18,8 +18,8 @@ export const StatesExample = () => {
           onChange={setErrorValue}
           error="Bio is required"
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">Disabled state</Typography>
         <Textarea
           label="Read-only content"
@@ -27,7 +27,7 @@ export const StatesExample = () => {
           onChange={() => {}}
           disabled
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

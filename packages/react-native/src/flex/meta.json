@@ -1,0 +1,8 @@
+{
+  "type": "components:ui",
+  "name": "flex",
+  "description": "Flexbox layout component for arranging children with consistent spacing and alignment",
+  "category": "layout",
+  "tags": ["layout", "flexbox", "spacing"],
+  "dependencies": []
+}

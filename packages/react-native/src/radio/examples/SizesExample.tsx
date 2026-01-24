@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { RadioGroup, RadioButton } from "../Radio";
 
@@ -9,8 +9,8 @@ export const SizesExample = () => {
   const [largeValue, setLargeValue] = useState("lg1");
 
   return (
-    <Stack gap="lg">
-      <Stack gap="sm">
+    <Flex gap="lg">
+      <Flex gap="sm">
         <Typography variant="subhead">Small (sm)</Typography>
         <RadioGroup value={smallValue} onChange={setSmallValue}>
           <RadioButton value="sm1" size="sm">
@@ -20,9 +20,9 @@ export const SizesExample = () => {
             <Typography variant="body">Small option 2</Typography>
           </RadioButton>
         </RadioGroup>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Medium (md) - Default</Typography>
         <RadioGroup value={mediumValue} onChange={setMediumValue}>
           <RadioButton value="md1" size="md">
@@ -32,9 +32,9 @@ export const SizesExample = () => {
             <Typography variant="body">Medium option 2</Typography>
           </RadioButton>
         </RadioGroup>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Large (lg)</Typography>
         <RadioGroup value={largeValue} onChange={setLargeValue}>
           <RadioButton value="lg1" size="lg">
@@ -44,7 +44,7 @@ export const SizesExample = () => {
             <Typography variant="body">Large option 2</Typography>
           </RadioButton>
         </RadioGroup>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack, Typography } from "../..";
+import { Flex, Typography } from "../..";
 import { Checkbox } from "../Checkbox";
 
 export const StatesExample = () => {
@@ -8,7 +8,7 @@ export const StatesExample = () => {
   const [indeterminate, setIndeterminate] = useState(false);
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Checkbox checked={unchecked} onChange={setUnchecked}>
         <Typography variant="body">Unchecked state</Typography>
       </Checkbox>
@@ -24,6 +24,6 @@ export const StatesExample = () => {
       >
         <Typography variant="body">Indeterminate state</Typography>
       </Checkbox>
-    </Stack>
+    </Flex>
   );
 };

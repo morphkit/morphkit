@@ -1,11 +1,11 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Box } from "../../box";
 import { Typography } from "../../typography";
 import { FAB } from "../FAB";
 
 export const SizesExample = () => {
   return (
-    <Stack gap="lg">
+    <Flex gap="lg">
       <Box style={{ height: 60, position: "relative" }}>
         <Typography variant="caption-1">Small (40px)</Typography>
         <FAB
@@ -30,6 +30,6 @@ export const SizesExample = () => {
           onPress={() => {}}
         />
       </Box>
-    </Stack>
+    </Flex>
   );
 };

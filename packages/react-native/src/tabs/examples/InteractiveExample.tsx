@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { TabsContainer, TabsList, TabsTrigger, TabsContent } from "../Tabs";
 
@@ -8,8 +8,8 @@ export const InteractiveExample = () => {
   const [containerDisabledTab, setContainerDisabledTab] = useState("first");
 
   return (
-    <Stack gap="xl">
-      <Stack gap="sm">
+    <Flex gap="xl">
+      <Flex gap="sm">
         <Typography variant="subhead">Individual Disabled Tab</Typography>
         <TabsContainer value={disabledTab} onValueChange={setDisabledTab}>
           <TabsList>
@@ -29,9 +29,9 @@ export const InteractiveExample = () => {
             <Typography variant="body">Another active tab content.</Typography>
           </TabsContent>
         </TabsContainer>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Container-Level Disabled</Typography>
         <TabsContainer
           value={containerDisabledTab}
@@ -55,7 +55,7 @@ export const InteractiveExample = () => {
             <Typography variant="body">Third tab content.</Typography>
           </TabsContent>
         </TabsContainer>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

@@ -1,11 +1,11 @@
 import { Box } from "../../box";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Container } from "../Container";
 
 export const MaxWidthPresetsExample = () => {
   return (
-    <Stack gap="lg">
+    <Flex gap="lg">
       <Container maxWidth="sm">
         <Box backgroundColor="#FEE2E2" padding={12} borderRadius={8}>
           <Typography variant="subhead">Small (640px)</Typography>
@@ -41,6 +41,6 @@ export const MaxWidthPresetsExample = () => {
           </Typography>
         </Box>
       </Container>
-    </Stack>
+    </Flex>
   );
 };

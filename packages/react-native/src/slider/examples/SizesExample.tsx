@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Slider } from "../Slider";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 
 export const SizesExample = () => {
@@ -14,31 +14,31 @@ export const SizesExample = () => {
     };
 
   return (
-    <Stack gap="lg">
-      <Stack gap="xs">
+    <Flex gap="lg">
+      <Flex gap="xs">
         <Typography variant="footnote">Small (sm)</Typography>
         <Slider
           value={smallValue}
           onChange={createHandler(setSmallValue)}
           size="sm"
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="footnote">Medium (md) - Default</Typography>
         <Slider
           value={mediumValue}
           onChange={createHandler(setMediumValue)}
           size="md"
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="footnote">Large (lg)</Typography>
         <Slider
           value={largeValue}
           onChange={createHandler(setLargeValue)}
           size="lg"
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

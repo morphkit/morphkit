@@ -1,10 +1,10 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Card } from "../Card";
 
 export const SizesExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Card size="sm">
         <Typography variant="subhead">Small</Typography>
         <Typography variant="body">Compact padding</Typography>
@@ -17,6 +17,6 @@ export const SizesExample = () => {
         <Typography variant="subhead">Large</Typography>
         <Typography variant="body">Spacious padding</Typography>
       </Card>
-    </Stack>
+    </Flex>
   );
 };

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Button } from "../../button";
 import { Typography } from "../../typography";
 import { Toast } from "../Toast";
@@ -9,9 +9,9 @@ export const InteractiveExample = () => {
   const [duration, setDuration] = useState(3000);
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Typography variant="subhead">Auto-dismiss in {duration}ms</Typography>
-      <Stack gap="sm" direction="horizontal">
+      <Flex gap="sm" direction="horizontal">
         <Button variant="tonal" size="sm" onPress={() => setDuration(1000)}>
           1s
         </Button>
@@ -24,7 +24,7 @@ export const InteractiveExample = () => {
         <Button variant="tonal" size="sm" onPress={() => setDuration(0)}>
           Manual
         </Button>
-      </Stack>
+      </Flex>
       <Button onPress={() => setVisible(true)}>Show Toast</Button>
       <Toast
         visible={visible}
@@ -36,6 +36,6 @@ export const InteractiveExample = () => {
         duration={duration}
         onDismiss={() => setVisible(false)}
       />
-    </Stack>
+    </Flex>
   );
 };

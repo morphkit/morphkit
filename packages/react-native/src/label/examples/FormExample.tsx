@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Label } from "../Label";
 import { Input } from "../../input";
 
@@ -8,7 +8,7 @@ export const FormExample = () => {
   const [phone, setPhone] = useState("");
 
   return (
-    <Stack gap="sm">
+    <Flex gap="sm">
       <Label required>Email address</Label>
       <Input
         value={email}
@@ -23,6 +23,6 @@ export const FormExample = () => {
         placeholder="Enter your phone"
         type="number"
       />
-    </Stack>
+    </Flex>
   );
 };

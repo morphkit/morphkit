@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Switch } from "../Switch";
 
 export const SizesExample = () => {
@@ -8,7 +8,7 @@ export const SizesExample = () => {
   const [largeEnabled, setLargeEnabled] = useState(true);
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Switch
         checked={smallEnabled}
         onChange={setSmallEnabled}
@@ -27,6 +27,6 @@ export const SizesExample = () => {
         size="lg"
         label="Large size"
       />
-    </Stack>
+    </Flex>
   );
 };

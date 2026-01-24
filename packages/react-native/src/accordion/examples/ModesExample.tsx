@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Accordion, AccordionItem } from "../Accordion";
 
@@ -11,8 +11,8 @@ export const ModesExample = () => {
   ]);
 
   return (
-    <Stack gap="lg">
-      <Stack gap="sm">
+    <Flex gap="lg">
+      <Flex gap="sm">
         <Typography variant="subhead">Single Mode (default)</Typography>
         <Accordion
           type="single"
@@ -30,9 +30,9 @@ export const ModesExample = () => {
             </Typography>
           </AccordionItem>
         </Accordion>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Multiple Mode</Typography>
         <Accordion
           type="multiple"
@@ -50,7 +50,7 @@ export const ModesExample = () => {
             </Typography>
           </AccordionItem>
         </Accordion>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

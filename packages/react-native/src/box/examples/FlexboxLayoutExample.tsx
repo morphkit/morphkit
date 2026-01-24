@@ -1,5 +1,5 @@
 import { useTheme } from "../../theme";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Box } from "../Box";
 
@@ -13,8 +13,8 @@ export const FlexboxLayoutExample = () => {
   };
 
   return (
-    <Stack gap="lg">
-      <Stack gap="xs">
+    <Flex gap="lg">
+      <Flex gap="xs">
         <Typography variant="caption-1">flexDirection="row"</Typography>
         <Box
           flexDirection="row"
@@ -33,9 +33,9 @@ export const FlexboxLayoutExample = () => {
             <Typography variant="footnote">Third</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">
           justifyContent="space-between"
         </Typography>
@@ -56,9 +56,9 @@ export const FlexboxLayoutExample = () => {
             <Typography variant="footnote">End</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">alignItems="center"</Typography>
         <Box
           flexDirection="row"
@@ -78,9 +78,9 @@ export const FlexboxLayoutExample = () => {
             <Typography variant="footnote">Medium</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">
           Centered content (justify + align center)
         </Typography>
@@ -95,7 +95,7 @@ export const FlexboxLayoutExample = () => {
             <Typography variant="footnote">Centered</Typography>
           </Box>
         </Box>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

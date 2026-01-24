@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Textarea } from "../Textarea";
 
 export const CombinedExample = () => {
   const [value, setValue] = useState("");
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Textarea
         label="Feedback"
         placeholder="Share your thoughts (max 500 characters)..."
@@ -18,6 +18,6 @@ export const CombinedExample = () => {
         showCount
         autoResize
       />
-    </Stack>
+    </Flex>
   );
 };

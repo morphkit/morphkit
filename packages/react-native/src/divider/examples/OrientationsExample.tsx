@@ -1,15 +1,15 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Divider } from "../Divider";
 
 export const OrientationsExample = () => {
   return (
-    <Stack gap="md">
-      <Stack gap="sm">
+    <Flex gap="md">
+      <Flex gap="sm">
         <Typography variant="caption-1">Horizontal (default)</Typography>
         <Divider />
-      </Stack>
-      <Stack
+      </Flex>
+      <Flex
         gap="sm"
         direction="horizontal"
         align="center"
@@ -17,7 +17,7 @@ export const OrientationsExample = () => {
       >
         <Typography variant="caption-1">Vertical</Typography>
         <Divider orientation="vertical" />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

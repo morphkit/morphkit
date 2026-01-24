@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Select, SelectOption } from "../Select";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Card } from "../../card";
 import { Typography } from "../../typography";
 import { useTheme } from "../../theme";
@@ -13,10 +13,10 @@ export const BasicExample = () => {
   const tokens = theme.component.select.variant[colorScheme];
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Typography variant="subhead">Choose a framework:</Typography>
       <Select value={selected} onChange={(val) => setSelected(val as string)}>
-        <Stack gap="sm">
+        <Flex gap="sm">
           <SelectOption value="react-native">
             <Card
               variant="outline"
@@ -52,10 +52,10 @@ export const BasicExample = () => {
               <Typography variant="body">Swift UI</Typography>
             </Card>
           </SelectOption>
-        </Stack>
+        </Flex>
       </Select>
       <Typography variant="caption-1">Selected: {selected}</Typography>
-    </Stack>
+    </Flex>
   );
 };
 

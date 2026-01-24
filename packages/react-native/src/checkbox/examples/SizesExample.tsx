@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack, Typography } from "../..";
+import { Flex, Typography } from "../..";
 import { Checkbox } from "../Checkbox";
 
 export const SizesExample = () => {
@@ -8,7 +8,7 @@ export const SizesExample = () => {
   const [large, setLarge] = useState(true);
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Checkbox checked={small} onChange={setSmall} size="sm">
         <Typography variant="body">Small (16px)</Typography>
       </Checkbox>
@@ -20,6 +20,6 @@ export const SizesExample = () => {
       <Checkbox checked={large} onChange={setLarge} size="lg">
         <Typography variant="body">Large (24px)</Typography>
       </Checkbox>
-    </Stack>
+    </Flex>
   );
 };

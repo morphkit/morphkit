@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { RadioGroup, RadioButton } from "../Radio";
 
@@ -8,8 +8,8 @@ export const DisabledExample = () => {
   const [groupValue, setGroupValue] = useState("group1");
 
   return (
-    <Stack gap="lg">
-      <Stack gap="sm">
+    <Flex gap="lg">
+      <Flex gap="sm">
         <Typography variant="subhead">Individual Disabled</Typography>
         <RadioGroup value={individualValue} onChange={setIndividualValue}>
           <RadioButton value="enabled1">
@@ -22,9 +22,9 @@ export const DisabledExample = () => {
             <Typography variant="body">Another enabled option</Typography>
           </RadioButton>
         </RadioGroup>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Group Disabled</Typography>
         <RadioGroup value={groupValue} onChange={setGroupValue} disabled>
           <RadioButton value="group1">
@@ -37,7 +37,7 @@ export const DisabledExample = () => {
             <Typography variant="body">Option 3</Typography>
           </RadioButton>
         </RadioGroup>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Input } from "../Input";
 
 export const VariantsExample = () => {
@@ -7,7 +7,7 @@ export const VariantsExample = () => {
   const [filledValue, setFilledValue] = useState("");
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Input
         variant="outline"
         value={outlineValue}
@@ -22,6 +22,6 @@ export const VariantsExample = () => {
         label="Filled Variant"
         placeholder="Filled background style"
       />
-    </Stack>
+    </Flex>
   );
 };

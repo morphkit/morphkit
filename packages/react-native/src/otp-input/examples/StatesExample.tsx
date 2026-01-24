@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { OTPInput } from "../OTPInput";
 
@@ -9,8 +9,8 @@ export const StatesExample = () => {
   const [successValue] = useState("123456");
 
   return (
-    <Stack gap="lg">
-      <Stack gap="xs">
+    <Flex gap="lg">
+      <Flex gap="xs">
         <Typography variant="caption-1">Error State</Typography>
         <OTPInput
           error
@@ -18,8 +18,8 @@ export const StatesExample = () => {
           onChange={setErrorValue}
           autoFocus={false}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">Disabled State</Typography>
         <OTPInput
           disabled
@@ -27,11 +27,11 @@ export const StatesExample = () => {
           onChange={() => {}}
           autoFocus={false}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">Success State (All Filled)</Typography>
         <OTPInput value={successValue} onChange={() => {}} autoFocus={false} />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

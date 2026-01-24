@@ -1,9 +1,9 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Alert } from "../Alert";
 
 export const DismissibleExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Alert
         variant="info"
         title="Dismissible Alert"
@@ -16,6 +16,6 @@ export const DismissibleExample = () => {
         description="Your changes have been saved successfully."
         dismissible
       />
-    </Stack>
+    </Flex>
   );
 };

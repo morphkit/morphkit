@@ -1,5 +1,5 @@
 import { useTheme } from "../../theme";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Box } from "../Box";
 
@@ -7,8 +7,8 @@ export const SpacingExample = () => {
   const { theme } = useTheme();
 
   return (
-    <Stack gap="lg">
-      <Stack gap="xs">
+    <Flex gap="lg">
+      <Flex gap="xs">
         <Typography variant="caption-1">Uniform padding (16px)</Typography>
         <Box
           padding={16}
@@ -23,9 +23,9 @@ export const SpacingExample = () => {
             <Typography variant="footnote">Inner content</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">Per-side padding</Typography>
         <Box
           padding={{ top: 8, right: 24, bottom: 8, left: 24 }}
@@ -42,9 +42,9 @@ export const SpacingExample = () => {
             </Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">Margin demonstration</Typography>
         <Box
           backgroundColor={theme.semantic.colors.surface.secondary}
@@ -62,9 +62,9 @@ export const SpacingExample = () => {
             </Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">Border styling</Typography>
         <Box
           padding={16}
@@ -74,7 +74,7 @@ export const SpacingExample = () => {
         >
           <Typography variant="footnote">Box with border</Typography>
         </Box>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

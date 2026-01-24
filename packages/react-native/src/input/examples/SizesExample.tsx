@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Input } from "../Input";
 
 export const SizesExample = () => {
@@ -8,7 +8,7 @@ export const SizesExample = () => {
   const [lgValue, setLgValue] = useState("");
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Input
         size="sm"
         value={smValue}
@@ -30,6 +30,6 @@ export const SizesExample = () => {
         label="Large"
         placeholder="Height: 52px"
       />
-    </Stack>
+    </Flex>
   );
 };

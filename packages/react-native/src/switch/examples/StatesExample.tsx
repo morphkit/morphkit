@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Switch } from "../Switch";
 
 export const StatesExample = () => {
@@ -7,7 +7,7 @@ export const StatesExample = () => {
   const [uncheckedState, setUncheckedState] = useState(false);
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Switch
         checked={uncheckedState}
         onChange={setUncheckedState}
@@ -18,6 +18,6 @@ export const StatesExample = () => {
         onChange={setCheckedState}
         label="On state"
       />
-    </Stack>
+    </Flex>
   );
 };

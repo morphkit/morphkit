@@ -1,7 +1,7 @@
 import { useTheme } from "../../theme";
 import { Box } from "../../box";
 import { Typography } from "../../typography";
-import { Stack } from "../Stack";
+import { Flex } from "../Flex";
 
 export const AlignmentExample = () => {
   const { theme } = useTheme();
@@ -9,8 +9,8 @@ export const AlignmentExample = () => {
   const containerColor = theme.semantic.colors.surface.tertiary;
 
   return (
-    <Stack gap="lg">
-      <Stack gap="sm">
+    <Flex gap="lg">
+      <Flex gap="sm">
         <Typography variant="subhead">align: start</Typography>
         <Box
           padding={8}
@@ -18,7 +18,7 @@ export const AlignmentExample = () => {
           backgroundColor={containerColor}
           style={{ height: 80 }}
         >
-          <Stack direction="horizontal" gap="sm" align="start">
+          <Flex direction="horizontal" gap="sm" align="start">
             <Box padding={8} borderRadius={4} backgroundColor={boxColor}>
               <Typography variant="caption-1">A</Typography>
             </Box>
@@ -28,10 +28,10 @@ export const AlignmentExample = () => {
             <Box padding={8} borderRadius={4} backgroundColor={boxColor}>
               <Typography variant="caption-1">C</Typography>
             </Box>
-          </Stack>
+          </Flex>
         </Box>
-      </Stack>
-      <Stack gap="sm">
+      </Flex>
+      <Flex gap="sm">
         <Typography variant="subhead">align: center</Typography>
         <Box
           padding={8}
@@ -39,7 +39,7 @@ export const AlignmentExample = () => {
           backgroundColor={containerColor}
           style={{ height: 80 }}
         >
-          <Stack direction="horizontal" gap="sm" align="center">
+          <Flex direction="horizontal" gap="sm" align="center">
             <Box padding={8} borderRadius={4} backgroundColor={boxColor}>
               <Typography variant="caption-1">A</Typography>
             </Box>
@@ -49,10 +49,10 @@ export const AlignmentExample = () => {
             <Box padding={8} borderRadius={4} backgroundColor={boxColor}>
               <Typography variant="caption-1">C</Typography>
             </Box>
-          </Stack>
+          </Flex>
         </Box>
-      </Stack>
-      <Stack gap="sm">
+      </Flex>
+      <Flex gap="sm">
         <Typography variant="subhead">align: end</Typography>
         <Box
           padding={8}
@@ -60,7 +60,7 @@ export const AlignmentExample = () => {
           backgroundColor={containerColor}
           style={{ height: 80 }}
         >
-          <Stack direction="horizontal" gap="sm" align="end">
+          <Flex direction="horizontal" gap="sm" align="end">
             <Box padding={8} borderRadius={4} backgroundColor={boxColor}>
               <Typography variant="caption-1">A</Typography>
             </Box>
@@ -70,10 +70,10 @@ export const AlignmentExample = () => {
             <Box padding={8} borderRadius={4} backgroundColor={boxColor}>
               <Typography variant="caption-1">C</Typography>
             </Box>
-          </Stack>
+          </Flex>
         </Box>
-      </Stack>
-      <Stack gap="sm">
+      </Flex>
+      <Flex gap="sm">
         <Typography variant="subhead">align: stretch (default)</Typography>
         <Box
           padding={8}
@@ -81,7 +81,7 @@ export const AlignmentExample = () => {
           backgroundColor={containerColor}
           style={{ height: 80 }}
         >
-          <Stack
+          <Flex
             direction="horizontal"
             gap="sm"
             align="stretch"
@@ -96,9 +96,9 @@ export const AlignmentExample = () => {
             <Box padding={8} borderRadius={4} backgroundColor={boxColor}>
               <Typography variant="caption-1">C</Typography>
             </Box>
-          </Stack>
+          </Flex>
         </Box>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

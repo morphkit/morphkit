@@ -11,8 +11,10 @@ import CheckboxDocs from "./checkbox/README.mdx";
 import ContainerDocs from "./container/README.mdx";
 import DividerDocs from "./divider/README.mdx";
 import FabDocs from "./fab/README.mdx";
+import FlexDocs from "./flex/README.mdx";
 import InputDocs from "./input/README.mdx";
 import LabelDocs from "./label/README.mdx";
+import NavigationStackDocs from "./navigation-stack/README.mdx";
 import OtpInputDocs from "./otp-input/README.mdx";
 import ProgressDocs from "./progress/README.mdx";
 import RadioDocs from "./radio/README.mdx";
@@ -20,7 +22,6 @@ import SelectDocs from "./select/README.mdx";
 import SkeletonDocs from "./skeleton/README.mdx";
 import SliderDocs from "./slider/README.mdx";
 import SpinnerDocs from "./spinner/README.mdx";
-import StackDocs from "./stack/README.mdx";
 import SwitchDocs from "./switch/README.mdx";
 import TabsDocs from "./tabs/README.mdx";
 import TagDocs from "./tag/README.mdx";
@@ -40,8 +41,10 @@ export const docsRegistry: Record<string, React.FC> = {
   container: ContainerDocs,
   divider: DividerDocs,
   fab: FabDocs,
+  flex: FlexDocs,
   input: InputDocs,
   label: LabelDocs,
+  "navigation-stack": NavigationStackDocs,
   "otp-input": OtpInputDocs,
   progress: ProgressDocs,
   radio: RadioDocs,
@@ -49,7 +52,6 @@ export const docsRegistry: Record<string, React.FC> = {
   skeleton: SkeletonDocs,
   slider: SliderDocs,
   spinner: SpinnerDocs,
-  stack: StackDocs,
   switch: SwitchDocs,
   tabs: TabsDocs,
   tag: TagDocs,

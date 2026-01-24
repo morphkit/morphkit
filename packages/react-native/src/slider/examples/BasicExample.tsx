@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Slider } from "../Slider";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 
 export const BasicExample = () => {
@@ -13,9 +13,9 @@ export const BasicExample = () => {
   };
 
   return (
-    <Stack gap="sm">
+    <Flex gap="sm">
       <Typography variant="body">Volume: {value}</Typography>
       <Slider value={value} onChange={handleChange} />
-    </Stack>
+    </Flex>
   );
 };

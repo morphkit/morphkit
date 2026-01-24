@@ -1,10 +1,10 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Card } from "../Card";
 
 export const VariantsExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Card variant="elevated">
         <Typography variant="subhead">Elevated</Typography>
         <Typography variant="body">Default with prominent shadow</Typography>
@@ -21,6 +21,6 @@ export const VariantsExample = () => {
         <Typography variant="subhead">Filled</Typography>
         <Typography variant="body">Tertiary surface background</Typography>
       </Card>
-    </Stack>
+    </Flex>
   );
 };

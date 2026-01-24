@@ -1,8 +1,0 @@
-{
-  "type": "components:ui",
-  "name": "stack",
-  "description": "Layout component for arranging children with consistent spacing and alignment",
-  "category": "layout",
-  "tags": ["layout", "flexbox", "spacing"],
-  "dependencies": []
-}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { OTPInput } from "../OTPInput";
 
@@ -8,8 +8,8 @@ export const CustomLengthExample = () => {
   const [sixDigitValue, setSixDigitValue] = useState("123");
 
   return (
-    <Stack gap="lg">
-      <Stack gap="xs">
+    <Flex gap="lg">
+      <Flex gap="xs">
         <Typography variant="caption-1">4-Digit Code</Typography>
         <OTPInput
           length={4}
@@ -17,8 +17,8 @@ export const CustomLengthExample = () => {
           onChange={setFourDigitValue}
           autoFocus={false}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">6-Digit Code (Default)</Typography>
         <OTPInput
           length={6}
@@ -26,7 +26,7 @@ export const CustomLengthExample = () => {
           onChange={setSixDigitValue}
           autoFocus={false}
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

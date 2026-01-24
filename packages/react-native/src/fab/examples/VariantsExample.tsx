@@ -1,11 +1,11 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Box } from "../../box";
 import { Typography } from "../../typography";
 import { FAB } from "../FAB";
 
 export const VariantsExample = () => {
   return (
-    <Stack gap="lg">
+    <Flex gap="lg">
       <Box style={{ height: 80, position: "relative" }}>
         <Typography variant="caption-1">Primary (default)</Typography>
         <FAB
@@ -22,6 +22,6 @@ export const VariantsExample = () => {
           onPress={() => {}}
         />
       </Box>
-    </Stack>
+    </Flex>
   );
 };

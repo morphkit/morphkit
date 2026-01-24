@@ -1,5 +1,5 @@
 import { useTheme } from "../../theme";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Box } from "../../box";
 import { Typography } from "../../typography";
 import { Badge } from "../Badge";
@@ -8,8 +8,8 @@ export const VariantsExample = () => {
   const { theme } = useTheme();
 
   return (
-    <Stack gap="lg" direction="horizontal">
-      <Stack gap="xs" align="center">
+    <Flex gap="lg" direction="horizontal">
+      <Flex gap="xs" align="center">
         <Badge count={3} color="red">
           <Box
             style={{
@@ -22,8 +22,8 @@ export const VariantsExample = () => {
           />
         </Badge>
         <Typography variant="caption-1">Red</Typography>
-      </Stack>
-      <Stack gap="xs" align="center">
+      </Flex>
+      <Flex gap="xs" align="center">
         <Badge count={7} color="blue">
           <Box
             style={{
@@ -36,7 +36,7 @@ export const VariantsExample = () => {
           />
         </Badge>
         <Typography variant="caption-1">Blue</Typography>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

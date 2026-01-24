@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack, Typography } from "../..";
+import { Flex, Typography } from "../..";
 import { Checkbox } from "../Checkbox";
 import { useTheme } from "../../theme";
 
@@ -9,7 +9,7 @@ export const InteractiveExample = () => {
   const { theme } = useTheme();
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Checkbox checked={disabled} onChange={setDisabled} disabled>
         <Typography variant="body">Disabled checkbox</Typography>
       </Checkbox>
@@ -21,6 +21,6 @@ export const InteractiveExample = () => {
       >
         <Typography variant="body">Custom color (success)</Typography>
       </Checkbox>
-    </Stack>
+    </Flex>
   );
 };

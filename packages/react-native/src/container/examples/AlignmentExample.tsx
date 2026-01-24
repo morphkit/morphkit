@@ -1,11 +1,11 @@
 import { Box } from "../../box";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Container } from "../Container";
 
 export const AlignmentExample = () => {
   return (
-    <Stack gap="lg">
+    <Flex gap="lg">
       <Container centered maxWidth="sm">
         <Box backgroundColor="#DBEAFE" padding={12} borderRadius={8}>
           <Typography variant="subhead">Centered (default)</Typography>
@@ -23,6 +23,6 @@ export const AlignmentExample = () => {
           </Typography>
         </Box>
       </Container>
-    </Stack>
+    </Flex>
   );
 };

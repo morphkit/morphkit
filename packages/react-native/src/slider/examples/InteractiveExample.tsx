@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Slider } from "../Slider";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 
 export const InteractiveExample = () => {
@@ -16,23 +16,23 @@ export const InteractiveExample = () => {
   };
 
   return (
-    <Stack gap="xl">
-      <Stack gap="sm">
+    <Flex gap="xl">
+      <Flex gap="sm">
         <Typography variant="footnote">Disabled</Typography>
         <Slider value={50} onChange={() => {}} disabled />
-      </Stack>
-      <Stack gap="sm">
+      </Flex>
+      <Flex gap="sm">
         <Typography variant="footnote">With Value Display</Typography>
         <Slider
           value={valueWithDisplay}
           onChange={handleDisplayChange}
           showValue
         />
-      </Stack>
-      <Stack gap="sm">
+      </Flex>
+      <Flex gap="sm">
         <Typography variant="footnote">Normal</Typography>
         <Slider value={value} onChange={handleChange} />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

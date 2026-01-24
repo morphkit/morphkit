@@ -1,5 +1,5 @@
 import { useTheme } from "../../theme";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Box } from "../Box";
 
@@ -13,8 +13,8 @@ export const GapSizesExample = () => {
   };
 
   return (
-    <Stack gap="lg">
-      <Stack gap="xs">
+    <Flex gap="lg">
+      <Flex gap="xs">
         <Typography variant="caption-1">gap="none" (0px)</Typography>
         <Box
           gap="none"
@@ -33,9 +33,9 @@ export const GapSizesExample = () => {
             <Typography variant="footnote">C</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">gap="xs" (4px)</Typography>
         <Box
           gap="xs"
@@ -54,9 +54,9 @@ export const GapSizesExample = () => {
             <Typography variant="footnote">C</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">gap="sm" (8px)</Typography>
         <Box
           gap="sm"
@@ -75,9 +75,9 @@ export const GapSizesExample = () => {
             <Typography variant="footnote">C</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">gap="md" (16px)</Typography>
         <Box
           gap="md"
@@ -96,9 +96,9 @@ export const GapSizesExample = () => {
             <Typography variant="footnote">C</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">gap="lg" (24px)</Typography>
         <Box
           gap="lg"
@@ -117,9 +117,9 @@ export const GapSizesExample = () => {
             <Typography variant="footnote">C</Typography>
           </Box>
         </Box>
-      </Stack>
+      </Flex>
 
-      <Stack gap="xs">
+      <Flex gap="xs">
         <Typography variant="caption-1">gap="xl" (32px)</Typography>
         <Box
           gap="xl"
@@ -138,7 +138,7 @@ export const GapSizesExample = () => {
             <Typography variant="footnote">C</Typography>
           </Box>
         </Box>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

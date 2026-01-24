@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Textarea } from "../Textarea";
 
@@ -8,8 +8,8 @@ export const RowsExample = () => {
   const [sixRows, setSixRows] = useState("");
 
   return (
-    <Stack gap="md">
-      <Stack gap="xs">
+    <Flex gap="md">
+      <Flex gap="xs">
         <Typography variant="caption-1">2 rows</Typography>
         <Textarea
           placeholder="2 visible rows..."
@@ -17,8 +17,8 @@ export const RowsExample = () => {
           onChange={setTwoRows}
           rows={2}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">6 rows</Typography>
         <Textarea
           placeholder="6 visible rows..."
@@ -26,7 +26,7 @@ export const RowsExample = () => {
           onChange={setSixRows}
           rows={6}
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

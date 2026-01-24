@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Button } from "../../button";
 import { Toast } from "../Toast";
 
@@ -20,7 +20,7 @@ export const VariantsExample = () => {
   };
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Button variant="tonal" onPress={() => showToast("info")}>
         Info Toast
       </Button>
@@ -41,6 +41,6 @@ export const VariantsExample = () => {
           onDismiss={() => setActiveVariant(null)}
         />
       )}
-    </Stack>
+    </Flex>
   );
 };

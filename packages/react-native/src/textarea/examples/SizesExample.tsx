@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Textarea } from "../Textarea";
 
@@ -9,8 +9,8 @@ export const SizesExample = () => {
   const [largeValue, setLargeValue] = useState("");
 
   return (
-    <Stack gap="md">
-      <Stack gap="xs">
+    <Flex gap="md">
+      <Flex gap="xs">
         <Typography variant="caption-1">Small</Typography>
         <Textarea
           size="sm"
@@ -18,8 +18,8 @@ export const SizesExample = () => {
           value={smallValue}
           onChange={setSmallValue}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">Medium (default)</Typography>
         <Textarea
           size="md"
@@ -27,8 +27,8 @@ export const SizesExample = () => {
           value={mediumValue}
           onChange={setMediumValue}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">Large</Typography>
         <Textarea
           size="lg"
@@ -36,7 +36,7 @@ export const SizesExample = () => {
           value={largeValue}
           onChange={setLargeValue}
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

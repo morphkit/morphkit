@@ -1,13 +1,13 @@
 import { useTheme } from "../../theme";
 import { Box } from "../../box";
 import { Typography } from "../../typography";
-import { Stack } from "../Stack";
+import { Flex } from "../Flex";
 
 export const BasicExample = () => {
   const { theme } = useTheme();
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Box
         padding={16}
         borderRadius={8}
@@ -29,6 +29,6 @@ export const BasicExample = () => {
       >
         <Typography variant="body">Third Item</Typography>
       </Box>
-    </Stack>
+    </Flex>
   );
 };

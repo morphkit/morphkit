@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { OTPInput } from "../OTPInput";
 
@@ -9,8 +9,8 @@ export const SizesExample = () => {
   const [lgValue, setLgValue] = useState("56");
 
   return (
-    <Stack gap="lg">
-      <Stack gap="xs">
+    <Flex gap="lg">
+      <Flex gap="xs">
         <Typography variant="caption-1">Small (sm)</Typography>
         <OTPInput
           size="sm"
@@ -18,8 +18,8 @@ export const SizesExample = () => {
           onChange={setSmValue}
           autoFocus={false}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">Medium (md)</Typography>
         <OTPInput
           size="md"
@@ -27,8 +27,8 @@ export const SizesExample = () => {
           onChange={setMdValue}
           autoFocus={false}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">Large (lg)</Typography>
         <OTPInput
           size="lg"
@@ -36,7 +36,7 @@ export const SizesExample = () => {
           onChange={setLgValue}
           autoFocus={false}
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

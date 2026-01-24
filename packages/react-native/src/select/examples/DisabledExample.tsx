@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Select, SelectOption } from "../Select";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Card } from "../../card";
 import { Typography } from "../../typography";
 import { useTheme } from "../../theme";
@@ -13,15 +13,15 @@ export const DisabledExample = () => {
   const tokens = theme.component.select.variant[colorScheme];
 
   return (
-    <Stack gap="lg">
-      <Stack gap="md">
+    <Flex gap="lg">
+      <Flex gap="md">
         <Typography variant="subhead">Select-level disabled:</Typography>
         <Select
           value={selected}
           onChange={(val) => setSelected(val as string)}
           disabled
         >
-          <Stack gap="sm">
+          <Flex gap="sm">
             <SelectOption value="option-1">
               <Card
                 variant="outline"
@@ -60,14 +60,14 @@ export const DisabledExample = () => {
                 </Typography>
               </Card>
             </SelectOption>
-          </Stack>
+          </Flex>
         </Select>
-      </Stack>
+      </Flex>
 
-      <Stack gap="md">
+      <Flex gap="md">
         <Typography variant="subhead">Option-level disabled:</Typography>
         <Select value={selected} onChange={(val) => setSelected(val as string)}>
-          <Stack gap="sm">
+          <Flex gap="sm">
             <SelectOption value="option-1">
               <Card
                 variant="outline"
@@ -107,10 +107,10 @@ export const DisabledExample = () => {
                 <Typography variant="body">Another enabled option</Typography>
               </Card>
             </SelectOption>
-          </Stack>
+          </Flex>
         </Select>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };
 

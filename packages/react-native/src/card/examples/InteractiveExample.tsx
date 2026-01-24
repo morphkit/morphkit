@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { Avatar } from "../../avatar";
 import { Box } from "../../box";
 import { Button } from "../../button";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Switch } from "../../switch";
 import { Typography } from "../../typography";
 import { Card } from "../Card";
@@ -65,10 +65,10 @@ const SettingsCard = () => {
 
 export const InteractiveExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <UserProfileCard />
       <SettingsCard />
-    </Stack>
+    </Flex>
   );
 };
 

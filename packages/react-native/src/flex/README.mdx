@@ -5,7 +5,7 @@ import {
   AlignmentExample,
 } from "./examples";
 
-The Stack component provides a layout container for arranging children with consistent spacing and alignment. It simplifies vertical or horizontal layouts without manual flexbox configuration, making it ideal for creating evenly-spaced content sections.
+The Flex component provides a layout container for arranging children with consistent spacing and alignment. It simplifies vertical or horizontal layouts without manual flexbox configuration, making it ideal for creating evenly-spaced content sections.
 
 ## Basic Usage
 
@@ -15,7 +15,7 @@ The default configuration arranges children vertically with medium spacing.
 
 ## Directions
 
-Stack supports two direction variants for arranging children along different axes.
+Flex supports two direction variants for arranging children along different axes.
 
 <DirectionsExample />
 
@@ -39,12 +39,12 @@ This component uses the following design tokens from the three-tier theme system
 
 | Token Path | Purpose | Value | Primitive Source |
 | --- | --- | --- | --- |
-| theme.component.stack.gap.none | No spacing | 0 | - |
-| theme.component.stack.gap.xs | Extra small gap | 4 | primitive.spacing[1] |
-| theme.component.stack.gap.sm | Small gap (default) | 8 | primitive.spacing[2] |
-| theme.component.stack.gap.md | Medium gap | 16 | primitive.spacing[4] |
-| theme.component.stack.gap.lg | Large gap | 24 | primitive.spacing[6] |
-| theme.component.stack.gap.xl | Extra large gap | 32 | primitive.spacing[8] |
+| theme.component.flex.gap.none | No spacing | 0 | - |
+| theme.component.flex.gap.xs | Extra small gap | 4 | primitive.spacing[1] |
+| theme.component.flex.gap.sm | Small gap (default) | 8 | primitive.spacing[2] |
+| theme.component.flex.gap.md | Medium gap | 16 | primitive.spacing[4] |
+| theme.component.flex.gap.lg | Large gap | 24 | primitive.spacing[6] |
+| theme.component.flex.gap.xl | Extra large gap | 32 | primitive.spacing[8] |
 
 ## Props
 
@@ -72,15 +72,15 @@ This component uses the following design tokens from the three-tier theme system
 
 ### ViewProps
 
-Stack extends ViewProps, so all standard View properties are supported including testID, accessibilityLabel, and other React Native View props.
+Flex extends ViewProps, so all standard View properties are supported including testID, accessibilityLabel, and other React Native View props.
 
 ## Accessibility
 
 **Screen Reader:**
 
-- Stack is a layout component without inherent accessibility semantics
+- Flex is a layout component without inherent accessibility semantics
 - Child components maintain their own accessibility properties
-- Use accessibilityLabel when the stack represents a logical grouping
+- Use accessibilityLabel when the flex represents a logical grouping
 
 **Visual Requirements:**
 

@@ -1,11 +1,11 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Button } from "../Button";
 
 export const InteractiveExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Button disabled>Disabled</Button>
       <Button loading>Loading</Button>
-    </Stack>
+    </Flex>
   );
 };

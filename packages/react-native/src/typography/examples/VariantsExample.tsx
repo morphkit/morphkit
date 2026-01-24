@@ -1,9 +1,9 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../Typography";
 
 export const VariantsExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Typography variant="large-title">Large Title (34pt)</Typography>
       <Typography variant="title-1">Title 1 (28pt)</Typography>
       <Typography variant="title-2">Title 2 (22pt)</Typography>
@@ -15,6 +15,6 @@ export const VariantsExample = () => {
       <Typography variant="footnote">Footnote (13pt)</Typography>
       <Typography variant="caption-1">Caption 1 (12pt)</Typography>
       <Typography variant="caption-2">Caption 2 (11pt)</Typography>
-    </Stack>
+    </Flex>
   );
 };

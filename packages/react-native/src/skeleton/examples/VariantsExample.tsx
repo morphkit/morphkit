@@ -1,12 +1,12 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Skeleton } from "../Skeleton";
 
 export const VariantsExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Skeleton variant="rect" />
       <Skeleton variant="circle" />
       <Skeleton variant="text" />
-    </Stack>
+    </Flex>
   );
 };

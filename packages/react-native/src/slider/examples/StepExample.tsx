@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Slider } from "../Slider";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 
 export const StepExample = () => {
@@ -16,8 +16,8 @@ export const StepExample = () => {
   };
 
   return (
-    <Stack gap="xl">
-      <Stack gap="sm">
+    <Flex gap="xl">
+      <Flex gap="sm">
         <Typography variant="footnote">Step: 10</Typography>
         <Typography variant="body">Value: {stepValue}</Typography>
         <Slider
@@ -26,8 +26,8 @@ export const StepExample = () => {
           step={10}
           showValue
         />
-      </Stack>
-      <Stack gap="sm">
+      </Flex>
+      <Flex gap="sm">
         <Typography variant="footnote">Continuous (step: 0)</Typography>
         <Typography variant="body">
           Value: {continuousValue.toFixed(1)}
@@ -37,7 +37,7 @@ export const StepExample = () => {
           onChange={handleContinuousChange}
           step={0}
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

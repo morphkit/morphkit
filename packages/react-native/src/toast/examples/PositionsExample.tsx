@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Button } from "../../button";
 import { Toast } from "../Toast";
 
@@ -11,7 +11,7 @@ export const PositionsExample = () => {
   );
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Button variant="secondary" onPress={() => setActivePosition("top")}>
         Show at Top
       </Button>
@@ -26,6 +26,6 @@ export const PositionsExample = () => {
           onDismiss={() => setActivePosition(null)}
         />
       )}
-    </Stack>
+    </Flex>
   );
 };

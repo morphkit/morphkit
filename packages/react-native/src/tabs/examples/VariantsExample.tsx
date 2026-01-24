@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { TabsContainer, TabsList, TabsTrigger, TabsContent } from "../Tabs";
 
@@ -9,8 +9,8 @@ export const VariantsExample = () => {
   const [pillsTab, setPillsTab] = useState("tab1");
 
   return (
-    <Stack gap="lg">
-      <Stack gap="sm">
+    <Flex gap="lg">
+      <Flex gap="sm">
         <Typography variant="subhead">Line Variant (Default)</Typography>
         <TabsContainer
           value={lineTab}
@@ -34,9 +34,9 @@ export const VariantsExample = () => {
             <Typography variant="body">Third tab content.</Typography>
           </TabsContent>
         </TabsContainer>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Filled Variant</Typography>
         <TabsContainer
           value={filledTab}
@@ -60,9 +60,9 @@ export const VariantsExample = () => {
             <Typography variant="body">Third tab content.</Typography>
           </TabsContent>
         </TabsContainer>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Pills Variant</Typography>
         <TabsContainer
           value={pillsTab}
@@ -86,7 +86,7 @@ export const VariantsExample = () => {
             <Typography variant="body">Third tab content.</Typography>
           </TabsContent>
         </TabsContainer>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

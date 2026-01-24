@@ -147,6 +147,18 @@
     },
     {
       "type": "components:ui",
+      "name": "flex",
+      "description": "Flexbox layout component for arranging children with consistent spacing and alignment",
+      "category": "layout",
+      "tags": [
+        "layout",
+        "flexbox",
+        "spacing"
+      ],
+      "dependencies": []
+    },
+    {
+      "type": "components:ui",
       "name": "input",
       "description": "Single-line text input field with label, error state, and prefix/suffix icon support for collecting user text input in forms and interfaces",
       "category": "input",
@@ -171,6 +183,20 @@
       ],
       "dependencies": [
         "typography"
+      ]
+    },
+    {
+      "type": "components:ui",
+      "name": "navigation-stack",
+      "description": "Themed navigation stack wrapper for expo-router with automatic header styling",
+      "category": "navigation",
+      "tags": [
+        "navigation",
+        "routing",
+        "expo-router"
+      ],
+      "dependencies": [
+        "expo-router"
       ]
     },
     {
@@ -259,18 +285,6 @@
         "loading",
         "indicator",
         "animated"
-      ],
-      "dependencies": []
-    },
-    {
-      "type": "components:ui",
-      "name": "stack",
-      "description": "Layout component for arranging children with consistent spacing and alignment",
-      "category": "layout",
-      "tags": [
-        "layout",
-        "flexbox",
-        "spacing"
       ],
       "dependencies": []
     },

@@ -1,9 +1,9 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Alert } from "../Alert";
 
 export const VariantsExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Alert variant="info" title="Info" description="Informational message" />
       <Alert
         variant="success"
@@ -16,6 +16,6 @@ export const VariantsExample = () => {
         description="Please be careful"
       />
       <Alert variant="error" title="Error" description="Something went wrong" />
-    </Stack>
+    </Flex>
   );
 };

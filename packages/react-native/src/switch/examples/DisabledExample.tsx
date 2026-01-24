@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Switch } from "../Switch";
 
 export const DisabledExample = () => {
@@ -7,7 +7,7 @@ export const DisabledExample = () => {
   const [disabledOn, setDisabledOn] = useState(true);
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Switch
         checked={disabledOff}
         onChange={setDisabledOff}
@@ -20,6 +20,6 @@ export const DisabledExample = () => {
         disabled
         label="Disabled (on)"
       />
-    </Stack>
+    </Flex>
   );
 };

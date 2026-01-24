@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Tag } from "../Tag";
 
 export const InteractiveExample = () => {
@@ -10,12 +10,12 @@ export const InteractiveExample = () => {
   };
 
   return (
-    <Stack gap="sm" direction="horizontal" wrap>
+    <Flex gap="sm" direction="horizontal" wrap>
       {tags.map((tag) => (
         <Tag key={tag} dismissible onDismiss={() => handleDismiss(tag)}>
           {tag}
         </Tag>
       ))}
-    </Stack>
+    </Flex>
   );
 };

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { OTPInput } from "../OTPInput";
 
@@ -8,8 +8,8 @@ export const VariantsExample = () => {
   const [filledValue, setFilledValue] = useState("456");
 
   return (
-    <Stack gap="lg">
-      <Stack gap="xs">
+    <Flex gap="lg">
+      <Flex gap="xs">
         <Typography variant="caption-1">Outline</Typography>
         <OTPInput
           variant="outline"
@@ -17,8 +17,8 @@ export const VariantsExample = () => {
           onChange={setOutlineValue}
           autoFocus={false}
         />
-      </Stack>
-      <Stack gap="xs">
+      </Flex>
+      <Flex gap="xs">
         <Typography variant="caption-1">Filled</Typography>
         <OTPInput
           variant="filled"
@@ -26,7 +26,7 @@ export const VariantsExample = () => {
           onChange={setFilledValue}
           autoFocus={false}
         />
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };

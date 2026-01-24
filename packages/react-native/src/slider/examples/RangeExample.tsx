@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Slider } from "../Slider";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 
 export const RangeExample = () => {
@@ -13,11 +13,11 @@ export const RangeExample = () => {
   };
 
   return (
-    <Stack gap="sm">
+    <Flex gap="sm">
       <Typography variant="body">
         Price Range: ${range[0]} - ${range[1]}
       </Typography>
       <Slider value={range} onChange={handleChange} showValue />
-    </Stack>
+    </Flex>
   );
 };

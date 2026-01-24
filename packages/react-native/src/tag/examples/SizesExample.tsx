@@ -1,12 +1,12 @@
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Tag } from "../Tag";
 
 export const SizesExample = () => {
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Tag size="sm">Small</Tag>
       <Tag size="md">Medium</Tag>
       <Tag size="lg">Large</Tag>
-    </Stack>
+    </Flex>
   );
 };

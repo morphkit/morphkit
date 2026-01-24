@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Input } from "../Input";
 
 export const InteractiveExample = () => {
@@ -11,7 +11,7 @@ export const InteractiveExample = () => {
   const [disabledValue] = useState("Cannot edit");
 
   return (
-    <Stack gap="md">
+    <Flex gap="md">
       <Input
         type="text"
         value={textValue}
@@ -52,6 +52,6 @@ export const InteractiveExample = () => {
         onChange={() => {}}
         label="Disabled Input"
       />
-    </Stack>
+    </Flex>
   );
 };

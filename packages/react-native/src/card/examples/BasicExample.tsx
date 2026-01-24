@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Box } from "../../box";
 import { Button } from "../../button";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Tag } from "../../tag";
 import { Typography } from "../../typography";
 import { Card } from "../Card";
@@ -12,7 +12,7 @@ export const BasicExample = () => {
 
   return (
     <Card>
-      <Stack gap="md">
+      <Flex gap="md">
         <Box
           backgroundColor="#E0F2FE"
           borderRadius={8}
@@ -45,7 +45,7 @@ export const BasicExample = () => {
         >
           {addedToCart ? "Added to Cart ✓" : "Add to Cart"}
         </Button>
-      </Stack>
+      </Flex>
     </Card>
   );
 };

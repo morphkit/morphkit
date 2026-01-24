@@ -1,6 +1,6 @@
 import * as primitive from "../theme/tokens/primitive";
 
-export const stack = {
+export const flex = {
   gap: {
     none: 0,
     xs: primitive.spacing[1],

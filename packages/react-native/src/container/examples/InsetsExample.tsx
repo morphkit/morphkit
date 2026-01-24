@@ -1,11 +1,11 @@
 import { Box } from "../../box";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Container } from "../Container";
 
 export const InsetsExample = () => {
   return (
-    <Stack gap="lg">
+    <Flex gap="lg">
       <Container insets={["top"]}>
         <Box backgroundColor="#ECFDF5" padding={12} borderRadius={8}>
           <Typography variant="subhead">Top Inset</Typography>
@@ -32,6 +32,6 @@ export const InsetsExample = () => {
           </Typography>
         </Box>
       </Container>
-    </Stack>
+    </Flex>
   );
 };

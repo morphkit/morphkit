@@ -8,22 +8,22 @@ import {
 import { ReactNode } from "react";
 import { useTheme } from "../theme";
 
-type StackDirection = "horizontal" | "vertical";
-type StackAlign = "start" | "center" | "end" | "stretch";
-type StackJustify = "start" | "center" | "end" | "space-between";
-type StackGap = "none" | "xs" | "sm" | "md" | "lg" | "xl";
+type FlexDirection = "horizontal" | "vertical";
+type FlexAlign = "start" | "center" | "end" | "stretch";
+type FlexJustify = "start" | "center" | "end" | "space-between";
+type FlexGap = "none" | "xs" | "sm" | "md" | "lg" | "xl";
 
-export interface StackProps extends Omit<ViewProps, "children"> {
+export interface FlexProps extends Omit<ViewProps, "children"> {
   children?: ReactNode;
-  direction?: StackDirection;
-  gap?: StackGap;
-  align?: StackAlign;
-  justify?: StackJustify;
+  direction?: FlexDirection;
+  gap?: FlexGap;
+  align?: FlexAlign;
+  justify?: FlexJustify;
   wrap?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
-export const Stack = ({
+export const Flex = ({
   children,
   direction = "vertical",
   gap = "sm",
@@ -32,12 +32,12 @@ export const Stack = ({
   wrap = false,
   style,
   ...props
-}: StackProps) => {
+}: FlexProps) => {
   const { theme } = useTheme();
-  const gapValue = theme.component.stack.gap[gap];
+  const gapValue = theme.component.flex.gap[gap];
 
-  const stackStyles = [
-    baseStyles.stack,
+  const flexStyles = [
+    baseStyles.flex,
     directionStyles[direction],
     {
       gap: gapValue,
@@ -49,14 +49,14 @@ export const Stack = ({
   ];
 
   return (
-    <View style={stackStyles} {...props}>
+    <View style={flexStyles} {...props}>
       {children}
     </View>
   );
 };
 
 const baseStyles = StyleSheet.create({
-  stack: {
+  flex: {
     display: "flex",
   },
 });

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "../../stack";
+import { Flex } from "../../flex";
 import { Typography } from "../../typography";
 import { Accordion, AccordionItem } from "../Accordion";
 
@@ -8,8 +8,8 @@ export const InteractiveExample = () => {
   const [nonCollapsibleValue, setNonCollapsibleValue] = useState("always-1");
 
   return (
-    <Stack gap="lg">
-      <Stack gap="sm">
+    <Flex gap="lg">
+      <Flex gap="sm">
         <Typography variant="subhead">Disabled States</Typography>
         <Accordion value={value} onValueChange={(v) => setValue(v as string)}>
           <AccordionItem value="enabled-1" title="Enabled Item">
@@ -23,9 +23,9 @@ export const InteractiveExample = () => {
             </Typography>
           </AccordionItem>
         </Accordion>
-      </Stack>
+      </Flex>
 
-      <Stack gap="sm">
+      <Flex gap="sm">
         <Typography variant="subhead">Non-Collapsible</Typography>
         <Accordion
           value={nonCollapsibleValue}
@@ -43,7 +43,7 @@ export const InteractiveExample = () => {
             </Typography>
           </AccordionItem>
         </Accordion>
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 };
