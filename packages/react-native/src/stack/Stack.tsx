@@ -77,6 +77,9 @@ export const Stack = ({ screenOptions, children, ...props }: StackProps) => {
     contentStyle: {
       backgroundColor: stackTokens.contentBackgroundColor[colorScheme],
     },
+    sheetCornerRadius: stackTokens.modal.sheetCornerRadius,
+    sheetElevation: stackTokens.modal.sheetElevation,
+    sheetGrabberVisible: stackTokens.modal.sheetGrabberVisible,
   };
 
   const resolveScreenOptions = (): ExpoRouterStackProps["screenOptions"] => {

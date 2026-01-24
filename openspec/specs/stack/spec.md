@@ -143,6 +143,34 @@ Stack SHALL use the three-tier theme token system for all styling values, scoped
 - **AND** color updates when colorScheme changes (light/dark)
 - **AND** provides consistent background across all screens
 
+### Requirement: Modal Presentation Styling
+
+Stack SHALL apply themed styling to modal/sheet presentations.
+
+#### Scenario: Sheet corner radius
+
+- **WHEN** screen uses formSheet or pageSheet presentation
+- **THEN** sheetCornerRadius uses theme.navigation.stack.modal.sheetCornerRadius
+- **AND** defaults to primitive.borderRadius["3xl"] (24px)
+
+#### Scenario: Sheet elevation
+
+- **WHEN** screen uses formSheet presentation on Android
+- **THEN** sheetElevation uses theme.navigation.stack.modal.sheetElevation
+- **AND** defaults to 24 for consistent shadow appearance
+
+#### Scenario: Sheet grabber
+
+- **WHEN** screen uses formSheet presentation
+- **THEN** sheetGrabberVisible uses theme.navigation.stack.modal.sheetGrabberVisible
+- **AND** defaults to true for discoverability
+
+#### Scenario: Modal option override
+
+- **WHEN** screenOptions provides modal options
+- **THEN** provided options override themed modal defaults
+- **AND** unspecified modal options retain themed values
+
 ### Requirement: Color Scheme Reactivity
 
 Stack SHALL automatically update styling when color scheme changes.

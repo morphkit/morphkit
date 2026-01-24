@@ -52,6 +52,16 @@ This component uses the following design tokens from the three-tier theme system
 | theme.navigation.stack.shadowVisible | Show header shadow | false |
 | theme.navigation.stack.backButtonDisplayMode | Back button display style | minimal |
 
+### Modal Presentation Tokens
+
+These tokens apply when screens use `presentation: "formSheet"` or `presentation: "pageSheet"`:
+
+| Token Path | Purpose | Value | Platform |
+|------------|---------|-------|----------|
+| theme.navigation.stack.modal.sheetCornerRadius | Corner radius for modal sheets | 24 (primitive.borderRadius["3xl"]) | iOS |
+| theme.navigation.stack.modal.sheetElevation | Shadow elevation for modal sheets | 24 | Android |
+| theme.navigation.stack.modal.sheetGrabberVisible | Show grabber handle at top | true | iOS |
+
 ## Props
 
 ### Navigation Props

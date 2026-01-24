@@ -279,4 +279,54 @@ describe("Stack", () => {
       expect(typeof options).toBe("function");
     });
   });
+
+  describe("Modal presentation styling", () => {
+    it("applies themed sheetCornerRadius", () => {
+      const container = renderStack();
+      const options = getScreenOptions(container);
+      expect(options.sheetCornerRadius).toBe(24);
+    });
+
+    it("applies themed sheetElevation", () => {
+      const container = renderStack();
+      const options = getScreenOptions(container);
+      expect(options.sheetElevation).toBe(24);
+    });
+
+    it("applies themed sheetGrabberVisible", () => {
+      const container = renderStack();
+      const options = getScreenOptions(container);
+      expect(options.sheetGrabberVisible).toBe(true);
+    });
+
+    it("allows override of sheetCornerRadius", () => {
+      const container = render(
+        <Stack screenOptions={{ sheetCornerRadius: 16 }} />,
+      );
+      const options = getScreenOptions(container);
+      expect(options.sheetCornerRadius).toBe(16);
+    });
+
+    it("allows override of sheetElevation", () => {
+      const container = render(<Stack screenOptions={{ sheetElevation: 8 }} />);
+      const options = getScreenOptions(container);
+      expect(options.sheetElevation).toBe(8);
+    });
+
+    it("allows override of sheetGrabberVisible", () => {
+      const container = render(
+        <Stack screenOptions={{ sheetGrabberVisible: false }} />,
+      );
+      const options = getScreenOptions(container);
+      expect(options.sheetGrabberVisible).toBe(false);
+    });
+
+    it("allows function-based override of modal options", () => {
+      const container = render(
+        <Stack screenOptions={() => ({ sheetCornerRadius: 12 })} />,
+      );
+      const options = getScreenOptions(container);
+      expect(options.sheetCornerRadius).toBe(12);
+    });
+  });
 });

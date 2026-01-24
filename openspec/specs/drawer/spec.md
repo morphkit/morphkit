@@ -1,8 +1,11 @@
 # drawer Specification
 
 ## Purpose
+
 TBD - created by archiving change add-drawer-component. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: Component Structure
 
 Drawer SHALL wrap expo-router's Drawer layout component with theme-aware screenOptions.
@@ -328,4 +331,3 @@ Drawer SHALL support accessible navigation patterns.
 - **WHEN** user swipes from edge
 - **THEN** drawer opens with gesture
 - **AND** swipe gesture is discoverable
-

@@ -1,5 +1,6 @@
 import { light, dark } from "../theme/tokens/semantic/colors";
 import { textStyles } from "../theme/tokens/semantic/typography";
+import { borderRadius } from "../theme/tokens/primitive/radii";
 
 export const stack = {
   header: {
@@ -24,4 +25,9 @@ export const stack = {
   },
   shadowVisible: false,
   backButtonDisplayMode: "minimal" as const,
+  modal: {
+    sheetCornerRadius: borderRadius["3xl"],
+    sheetElevation: 24,
+    sheetGrabberVisible: true,
+  },
 } as const;
