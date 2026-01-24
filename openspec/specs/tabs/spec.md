@@ -153,13 +153,13 @@ Tabs SHALL automatically adapt colors based on the current color scheme.
 #### Scenario: Light mode colors
 
 - **WHEN** colorScheme is "light"
-- **THEN** all colors use theme.navigation.tabs.*[light].* tokens
+- **THEN** all colors use theme.navigation.tabs._[light]._ tokens
 - **AND** tab bar and header display light theme colors
 
 #### Scenario: Dark mode colors
 
 - **WHEN** colorScheme is "dark"
-- **THEN** all colors use theme.navigation.tabs.*[dark].* tokens
+- **THEN** all colors use theme.navigation.tabs._[dark]._ tokens
 - **AND** tab bar and header display dark theme colors
 
 #### Scenario: Different colors in each mode

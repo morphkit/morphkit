@@ -8,6 +8,7 @@ export * from "./card";
 export * from "./checkbox";
 export * from "./container";
 export * from "./divider";
+export * from "./drawer";
 export * from "./fab";
 export * from "./flex";
 export * from "./input";

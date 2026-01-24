@@ -133,6 +133,23 @@
     },
     {
       "type": "components:ui",
+      "name": "drawer",
+      "description": "Themed navigation drawer wrapper for expo-router with automatic styling",
+      "category": "navigation",
+      "tags": [
+        "navigation",
+        "routing",
+        "expo-router",
+        "drawer",
+        "sidebar"
+      ],
+      "dependencies": [
+        "expo-router",
+        "@react-navigation/drawer"
+      ]
+    },
+    {
+      "type": "components:ui",
       "name": "fab",
       "description": "Floating action button with placement options and extended variant for primary screen-level actions",
       "category": "navigation",

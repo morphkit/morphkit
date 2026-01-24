@@ -10,6 +10,7 @@ import CardDocs from "./card/README.mdx";
 import CheckboxDocs from "./checkbox/README.mdx";
 import ContainerDocs from "./container/README.mdx";
 import DividerDocs from "./divider/README.mdx";
+import DrawerDocs from "./drawer/README.mdx";
 import FabDocs from "./fab/README.mdx";
 import FlexDocs from "./flex/README.mdx";
 import InputDocs from "./input/README.mdx";
@@ -40,6 +41,7 @@ export const docsRegistry: Record<string, React.FC> = {
   checkbox: CheckboxDocs,
   container: ContainerDocs,
   divider: DividerDocs,
+  drawer: DrawerDocs,
   fab: FabDocs,
   flex: FlexDocs,
   input: InputDocs,

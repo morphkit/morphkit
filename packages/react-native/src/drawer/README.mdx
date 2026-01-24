@@ -1,0 +1,134 @@
+# Drawer
+
+**Category**: navigation | **Tags**: navigation, routing, expo-router, drawer, sidebar
+
+A themed wrapper around expo-router's Drawer navigator that automatically applies morphkit theme tokens to navigation header and drawer panel styling. Drawer eliminates repetitive boilerplate by providing consistent, theme-aware navigation that automatically adapts to light and dark color schemes.
+
+## Why Drawer?
+
+When using expo-router, developers must manually configure `screenOptions` with theme tokens in every layout file. This creates repetitive code and inconsistency when theme values change. Drawer solves this by automatically applying themed header and drawer styling while still allowing full customization.
+
+## Basic Usage
+
+The default configuration provides themed headers and drawer panel with no additional setup.
+
+<BasicExample />
+
+## Custom Header
+
+Override specific header options while preserving themed defaults.
+
+<CustomHeaderExample />
+
+## Theme-Aware Options
+
+Access theme context in function-based screenOptions for dynamic styling.
+
+<ThemeAwareExample />
+
+## Custom Drawer Content
+
+Provide custom drawer content with a header section.
+
+<DrawerContentExample />
+
+## Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+### Color Tokens
+
+| Token Path | Purpose | Light Mode Value | Dark Mode Value |
+|------------|---------|------------------|-----------------|
+| theme.navigation.drawer.header[colorScheme].background | Header background | light.surface.primary | dark.surface.primary |
+| theme.navigation.drawer.header[colorScheme].tint | Menu button and header button color | light.action.primary | dark.action.primary |
+| theme.navigation.drawer.header[colorScheme].title | Header title text color | light.text.primary | dark.text.primary |
+| theme.navigation.drawer.drawer[colorScheme].background | Drawer panel background | light.surface.primary | dark.surface.primary |
+| theme.navigation.drawer.drawer[colorScheme].overlay | Overlay color when drawer is open | rgba(0,0,0,0.5) | rgba(0,0,0,0.5) |
+| theme.navigation.drawer.drawerItem[colorScheme].activeTint | Active item text color | light.action.primary | dark.action.primary |
+| theme.navigation.drawer.drawerItem[colorScheme].inactiveTint | Inactive item text color | light.text.tertiary | dark.text.tertiary |
+| theme.navigation.drawer.drawerItem[colorScheme].activeBackground | Active item background | light.surface.secondary | dark.surface.secondary |
+| theme.navigation.drawer.drawerItem[colorScheme].inactiveBackground | Inactive item background | transparent | transparent |
+
+### Typography Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+|------------|---------|-------|------------------|
+| theme.navigation.drawer.headerTitle.fontSize | Header title font size | 20 | textStyles.heading.fontSize |
+| theme.navigation.drawer.headerTitle.fontWeight | Header title font weight | 600 | textStyles.heading.fontWeight |
+| theme.navigation.drawer.drawerLabel.fontSize | Drawer item label font size | 16 | textStyles.body.fontSize |
+| theme.navigation.drawer.drawerLabel.fontWeight | Drawer item label font weight | 400 | textStyles.body.fontWeight |
+
+### Other Tokens
+
+| Token Path | Purpose | Value |
+|------------|---------|-------|
+| theme.navigation.drawer.shadowVisible | Show header shadow | false |
+
+## Props
+
+### Navigation Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| screenOptions | DrawerScreenOptionsWithTheme | undefined | Screen options object or function that receives theme context |
+| initialRouteName | string | undefined | Initial route to display |
+| id | string | undefined | Unique identifier for the navigator |
+| drawerContent | function | undefined | Custom drawer content component |
+| children | ReactNode | undefined | Drawer.Screen children |
+
+### DrawerScreenOptionsWithTheme
+
+The `screenOptions` prop accepts either an object or a function. When using a function, it receives an extended props object that includes `themeContext`:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| navigation | NavigationProp | Navigation object from expo-router |
+| route | RouteProp | Current route object |
+| themeContext | DrawerThemeContext | Object containing theme and colorScheme |
+
+### DrawerThemeContext
+
+| Property | Type | Description |
+|----------|------|-------------|
+| theme | Theme | Full theme object with primitive, semantic, and component tokens |
+| colorScheme | ColorScheme | Current color scheme (light or dark) |
+
+## Static Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Drawer.Screen | Component | expo-router's Drawer.Screen for screen configuration |
+
+## Migration Guide
+
+Replace manual screenOptions configuration with Drawer:
+
+### Before
+
+Layout files require manual theme token application for header and drawer styling.
+
+### After
+
+Drawer applies themed styling automatically. Custom options are merged with defaults, and function-based options receive theme context for dynamic styling.
+
+## Accessibility
+
+**Screen Reader Support:**
+
+- Drawer state changes (open/close) are announced to screen readers
+- Drawer items have appropriate accessibility labels
+- Navigation state changes are announced
+- Focus moves appropriately when drawer opens/closes
+
+**Gesture Navigation:**
+
+- Swipe from edge to open drawer
+- Swipe to close drawer
+- Tap overlay to close drawer
+
+**Visual Requirements:**
+
+- Header colors meet WCAG AA contrast requirements
+- Active/inactive item states clearly distinguishable
+- Touch targets meet minimum 44pt requirement
