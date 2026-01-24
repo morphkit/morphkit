@@ -1,0 +1,148 @@
+{
+  "auth": {
+    "login": {
+      "title": "Bienvenido de Nuevo",
+      "subtitle": "Inicia sesión para continuar",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Ingresa tu contraseña",
+      "signInButton": "Iniciar Sesión",
+      "signingIn": "Iniciando sesión...",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate",
+      "errors": {
+        "emailInvalid": "Por favor ingresa un correo electrónico válido",
+        "passwordTooShort": "La contraseña debe tener al menos 6 caracteres",
+        "loginFailed": "Error al iniciar sesión. Por favor intenta de nuevo."
+      }
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "subtitle": "Regístrate para comenzar",
+      "fullName": "Nombre Completo",
+      "fullNamePlaceholder": "Ingresa tu nombre completo",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Crea una contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "confirmPasswordPlaceholder": "Confirma tu contraseña",
+      "signUpButton": "Registrarse",
+      "signingUp": "Registrando...",
+      "haveAccount": "¿Ya tienes una cuenta?",
+      "signIn": "Iniciar Sesión",
+      "errors": {
+        "fullNameRequired": "El nombre completo es obligatorio",
+        "emailInvalid": "Por favor ingresa un correo electrónico válido",
+        "passwordTooShort": "La contraseña debe tener al menos 6 caracteres",
+        "passwordsDoNotMatch": "Las contraseñas no coinciden",
+        "registerFailed": "Error al crear la cuenta. Por favor intenta de nuevo.",
+        "tosRequired": "Debes aceptar los Términos de Servicio y la Política de Privacidad"
+      },
+      "tosAgreement": "Acepto los {termsLink} y la {privacyLink}",
+      "termsOfService": "Términos de Servicio",
+      "privacyPolicy": "Política de Privacidad"
+    }
+  },
+  "legal": {
+    "termsOfService": {
+      "title": "Términos de Servicio",
+      "lastUpdated": "Última actualización: [Marcador de posición de fecha]",
+      "backButton": "Volver al Registro",
+      "sections": {
+        "acceptance": {
+          "title": "1. Aceptación de los Términos",
+          "content": "Al acceder y utilizar esta aplicación, aceptas y te comprometes a cumplir con los términos y disposiciones de este acuerdo. Si no estás de acuerdo con estos términos, por favor no utilices este servicio."
+        },
+        "useOfService": {
+          "title": "2. Uso del Servicio",
+          "content": "Aceptas utilizar este servicio solo para fines legales y de acuerdo con estos Términos. Eres responsable de mantener la confidencialidad de tu cuenta y contraseña y de restringir el acceso a tu dispositivo."
+        },
+        "userAccounts": {
+          "title": "3. Cuentas de Usuario",
+          "content": "Cuando creas una cuenta con nosotros, debes proporcionar información precisa, completa y actualizada. No hacerlo constituye una violación de los Términos, lo que puede resultar en la terminación inmediata de tu cuenta."
+        },
+        "termination": {
+          "title": "4. Terminación",
+          "content": "Podemos terminar o suspender tu cuenta inmediatamente, sin previo aviso o responsabilidad, por cualquier motivo, incluyendo sin limitación si incumples los Términos. Al terminar, tu derecho a usar el servicio cesará de inmediato."
+        },
+        "limitationOfLiability": {
+          "title": "5. Limitación de Responsabilidad",
+          "content": "En ningún caso la empresa, ni sus directores, empleados, socios, agentes, proveedores o afiliados, serán responsables de ningún daño indirecto, incidental, especial, consecuente o punitivo, incluyendo sin limitación, pérdida de beneficios, datos, uso, buena voluntad u otras pérdidas intangibles."
+        },
+        "changes": {
+          "title": "6. Cambios a los Términos",
+          "content": "Nos reservamos el derecho de modificar o reemplazar estos Términos en cualquier momento. Si una revisión es material, proporcionaremos al menos 30 días de aviso antes de que entren en vigor los nuevos términos. Lo que constituye un cambio material se determinará a nuestra sola discreción."
+        },
+        "contact": {
+          "title": "7. Contáctanos",
+          "content": "Si tienes alguna pregunta sobre estos Términos, por favor contáctanos en [contact@example.com]."
+        }
+      }
+    },
+    "privacyPolicy": {
+      "title": "Política de Privacidad",
+      "lastUpdated": "Última actualización: [Marcador de posición de fecha]",
+      "backButton": "Volver al Registro",
+      "sections": {
+        "informationCollection": {
+          "title": "1. Información que Recopilamos",
+          "content": "Recopilamos información que nos proporcionas directamente, incluyendo tu nombre, dirección de correo electrónico y cualquier otra información que elijas proporcionar. También recopilamos automáticamente cierta información sobre tu dispositivo cuando usas nuestro servicio."
+        },
+        "useOfInformation": {
+          "title": "2. Cómo Usamos tu Información",
+          "content": "Utilizamos la información que recopilamos para proporcionar, mantener y mejorar nuestros servicios, para comunicarnos contigo, para monitorear y analizar tendencias y uso, y para personalizar y mejorar el servicio y tu experiencia."
+        },
+        "dataSecurity": {
+          "title": "3. Seguridad de Datos",
+          "content": "Tomamos medidas razonables para ayudar a proteger la información sobre ti contra pérdida, robo, uso indebido y acceso, divulgación, alteración y destrucción no autorizados. Sin embargo, ningún sistema de seguridad es impenetrable y no podemos garantizar la seguridad de nuestros sistemas."
+        },
+        "dataSharing": {
+          "title": "4. Compartir Información",
+          "content": "No compartimos, vendemos, alquilamos ni intercambiamos tu información personal con terceros para sus fines comerciales. Podemos compartir tu información con proveedores de servicios externos que realizan servicios en nuestro nombre, sujetos a obligaciones de confidencialidad."
+        },
+        "cookies": {
+          "title": "5. Cookies y Seguimiento",
+          "content": "Utilizamos cookies y tecnologías de seguimiento similares para rastrear la actividad en nuestro servicio y mantener cierta información. Las cookies son archivos con pequeñas cantidades de datos que pueden incluir un identificador único anónimo."
+        },
+        "yourRights": {
+          "title": "6. Tus Derechos",
+          "content": "Tienes derecho a acceder, actualizar o eliminar tu información personal en cualquier momento. También puedes tener el derecho de restringir u objetar cierto procesamiento de tus datos. Para ejercer estos derechos, por favor contáctanos."
+        },
+        "children": {
+          "title": "7. Privacidad de los Niños",
+          "content": "Nuestro servicio no está destinado a niños menores de 13 años. No recopilamos conscientemente información personal de niños menores de 13 años. Si eres padre o tutor y crees que tu hijo nos ha proporcionado información personal, por favor contáctanos."
+        },
+        "changes": {
+          "title": "8. Cambios a esta Política",
+          "content": "Podemos actualizar nuestra Política de Privacidad de vez en cuando. Te notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página y actualizando la fecha de 'Última actualización'. Se te aconseja revisar esta Política de Privacidad periódicamente para cualquier cambio."
+        },
+        "contact": {
+          "title": "9. Contáctanos",
+          "content": "Si tienes alguna pregunta sobre esta Política de Privacidad, por favor contáctanos en [privacy@example.com]."
+        }
+      }
+    }
+  },
+  "home": {
+    "welcomeBack": "¡Bienvenido de Nuevo!",
+    "accountInfo": "Información de la Cuenta",
+    "name": "Nombre:",
+    "email": "Correo:",
+    "notAvailable": "N/D",
+    "gettingStarted": "Comenzando",
+    "description": "Esta es tu pantalla principal. Ahora estás conectado y puedes acceder al contenido protegido. Esta plantilla inicial incluye:",
+    "features": {
+      "auth": "Autenticación de Supabase con persistencia de sesión",
+      "routing": "Flujo de autenticación con protección de rutas",
+      "validation": "Validación de formularios con React Hook Form y Zod",
+      "styling": "Estilización con Tailwind CSS usando NativeWind",
+      "navigation": "Navegación con Expo Router"
+    },
+    "signOutButton": "Cerrar Sesión"
+  },
+  "common": {
+    "user": "Usuario"
+  }
+}
