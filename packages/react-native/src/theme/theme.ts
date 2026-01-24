@@ -1,6 +1,7 @@
 import * as primitive from "./tokens/primitive";
 import * as semantic from "./tokens/semantic";
 import * as component from "./tokens/components";
+import * as navigation from "./tokens/navigation";
 import * as fonts from "./tokens/primitive/fonts";
 
 export interface FontFamilies {
@@ -20,6 +21,7 @@ export interface Theme {
     state: typeof semantic.state;
   };
   component: typeof component;
+  navigation: typeof navigation;
 }
 
 export const themes = {
@@ -35,6 +37,7 @@ export const themes = {
       state: semantic.state,
     },
     component,
+    navigation,
   } as Theme,
   dark: {
     primitive: {
@@ -48,6 +51,7 @@ export const themes = {
       state: semantic.state,
     },
     component,
+    navigation,
   } as Theme,
 };
 

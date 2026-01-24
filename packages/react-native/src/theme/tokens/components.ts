@@ -11,7 +11,6 @@ export * from "../../divider/Divider.theme";
 export * from "../../fab/FAB.theme";
 export * from "../../input/Input.theme";
 export * from "../../label/Label.theme";
-export * from "../../navigation-stack/NavigationStack.theme";
 export * from "../../otp-input/OTPInput.theme";
 export * from "../../progress/Progress.theme";
 export * from "../../radio/Radio.theme";

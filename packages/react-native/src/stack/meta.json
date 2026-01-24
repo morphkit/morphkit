@@ -1,0 +1,8 @@
+{
+  "type": "components:ui",
+  "name": "stack",
+  "description": "Themed navigation stack wrapper for expo-router with automatic header styling",
+  "category": "navigation",
+  "tags": ["navigation", "routing", "expo-router"],
+  "dependencies": ["expo-router"]
+}

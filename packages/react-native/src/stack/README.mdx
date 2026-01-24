@@ -1,0 +1,113 @@
+# Stack
+
+**Category**: navigation | **Tags**: navigation, routing, expo-router
+
+A themed wrapper around expo-router's Stack navigator that automatically applies morphkit theme tokens to navigation header styling. Stack eliminates repetitive boilerplate by providing consistent, theme-aware headers that automatically adapt to light and dark color schemes.
+
+## Why Stack?
+
+When using expo-router, developers must manually configure `screenOptions` with theme tokens in every layout file. This creates repetitive code and inconsistency when theme values change. Stack solves this by automatically applying themed header styling while still allowing full customization.
+
+## Basic Usage
+
+The default configuration provides themed headers with no additional setup.
+
+<BasicExample />
+
+## Custom Header
+
+Override specific header options while preserving themed defaults.
+
+<CustomHeaderExample />
+
+## Theme-Aware Options
+
+Access theme context in function-based screenOptions for dynamic styling.
+
+<ThemeAwareExample />
+
+## Theme Tokens
+
+This component uses the following design tokens from the three-tier theme system:
+
+### Color Tokens
+
+| Token Path | Purpose | Light Mode Value | Dark Mode Value |
+|------------|---------|------------------|-----------------|
+| theme.navigation.stack.header[colorScheme].background | Header background | light.surface.primary | dark.surface.primary |
+| theme.navigation.stack.header[colorScheme].tint | Back button and header button color | light.action.primary | dark.action.primary |
+| theme.navigation.stack.header[colorScheme].title | Header title text color | light.text.primary | dark.text.primary |
+
+### Typography Tokens
+
+| Token Path | Purpose | Value | Primitive Source |
+|------------|---------|-------|------------------|
+| theme.navigation.stack.headerTitle.fontSize | Header title font size | 20 | primitive.fontSize.xl |
+| theme.navigation.stack.headerTitle.fontWeight | Header title font weight | 600 | primitive.fontWeight.semibold |
+
+### Other Tokens
+
+| Token Path | Purpose | Value |
+|------------|---------|-------|
+| theme.navigation.stack.shadowVisible | Show header shadow | false |
+| theme.navigation.stack.backButtonDisplayMode | Back button display style | minimal |
+
+## Props
+
+### Navigation Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| screenOptions | ScreenOptionsWithTheme | undefined | Screen options object or function that receives theme context |
+| initialRouteName | string | undefined | Initial route to display |
+| id | string | undefined | Unique identifier for the navigator |
+| children | ReactNode | undefined | Stack.Screen children |
+
+### ScreenOptionsWithTheme
+
+The `screenOptions` prop accepts either an object or a function. When using a function, it receives an extended props object that includes `themeContext`:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| navigation | NavigationProp | Navigation object from expo-router |
+| route | RouteProp | Current route object |
+| themeContext | ThemeContext | Object containing theme and colorScheme |
+
+### ThemeContext
+
+| Property | Type | Description |
+|----------|------|-------------|
+| theme | Theme | Full theme object with primitive, semantic, and component tokens |
+| colorScheme | ColorScheme | Current color scheme (light or dark) |
+
+## Static Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Stack.Screen | Component | expo-router's Stack.Screen for screen configuration |
+
+## Migration Guide
+
+Replace manual screenOptions configuration with Stack:
+
+### Before
+
+Layout files require manual theme token application.
+
+### After
+
+Stack applies themed styling automatically. Custom options are merged with defaults, and function-based options receive theme context for dynamic styling.
+
+## Accessibility
+
+**Screen Reader Support:**
+
+- Header titles are announced when navigating between screens
+- Back button has appropriate accessibility labels
+- Navigation state changes are announced
+
+**Visual Requirements:**
+
+- Header colors meet WCAG AA contrast requirements
+- Focus indicators visible on interactive elements
+- Touch targets meet minimum 44pt requirement

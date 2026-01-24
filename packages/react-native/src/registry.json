@@ -187,20 +187,6 @@
     },
     {
       "type": "components:ui",
-      "name": "navigation-stack",
-      "description": "Themed navigation stack wrapper for expo-router with automatic header styling",
-      "category": "navigation",
-      "tags": [
-        "navigation",
-        "routing",
-        "expo-router"
-      ],
-      "dependencies": [
-        "expo-router"
-      ]
-    },
-    {
-      "type": "components:ui",
       "name": "otp-input",
       "description": "One-time password input with multiple fields for verification codes",
       "category": "input",
@@ -287,6 +273,20 @@
         "animated"
       ],
       "dependencies": []
+    },
+    {
+      "type": "components:ui",
+      "name": "stack",
+      "description": "Themed navigation stack wrapper for expo-router with automatic header styling",
+      "category": "navigation",
+      "tags": [
+        "navigation",
+        "routing",
+        "expo-router"
+      ],
+      "dependencies": [
+        "expo-router"
+      ]
     },
     {
       "type": "components:ui",
