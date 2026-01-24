@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import { getImageGenerationPromptInstructionsTool } from "./tools/prompt-instructions/get-image-generation-prompt-instructions.js";
 import { generateImagesTool } from "./tools/image-generation/generate-images.js";
 import { vectorizeImageTool } from "./tools/vectorization/vectorize-image.js";
-import { removeBackgroundTool } from "./tools/background-removal/remove-background.js";
+// import { removeBackgroundTool } from "./tools/background-removal/remove-background.js";
 
 dotenv.config();
 
@@ -18,7 +18,7 @@ const server = new McpServer({
 getImageGenerationPromptInstructionsTool(server);
 generateImagesTool(server);
 vectorizeImageTool(server);
-removeBackgroundTool(server);
+// removeBackgroundTool(server);
 
 async function main() {
   const transport = new StdioServerTransport();

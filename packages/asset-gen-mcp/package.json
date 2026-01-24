@@ -27,8 +27,7 @@
     "dotenv": "^16.4.5",
     "@google/genai": "latest",
     "@neplex/vectorizer": "latest",
-    "sharp": "latest",
-    "transparent-background": "^1.0.0"
+    "sharp": "latest"
   },
   "devDependencies": {
     "@morphkit/typescript-config": "*",

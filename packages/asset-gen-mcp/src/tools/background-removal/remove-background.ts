@@ -2,7 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { readFile, writeFile, mkdir, access } from "node:fs/promises";
 import { dirname } from "node:path";
-import { transparentBackground } from "transparent-background";
+// import { transparentBackground } from "transparent-background";
 
 const inputSchema = z.object({
   inputPath: z.string().describe("Path to input image"),
@@ -21,7 +21,8 @@ export async function removeBackgroundFromImage(
   options: { fast?: boolean } = {},
 ): Promise<Buffer> {
   const { fast = false } = options;
-  return transparentBackground(imageBuffer, "png", { fast });
+  return Buffer.from("");
+  // return transparentBackground(imageBuffer, "png", { fast });
 }
 
 export function removeBackgroundTool(server: McpServer) {
