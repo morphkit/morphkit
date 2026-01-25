@@ -5,7 +5,6 @@ import type { FlowMeta, Config } from "../types/index.js";
 
 const FlowRegistrySchema = z.object({
   version: z.string(),
-  generatedAt: z.string(),
   flows: z.array(FlowMetaSchema),
 });
 

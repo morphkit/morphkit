@@ -4,7 +4,6 @@ import { fetchPackageFile } from "./npm-registry.js";
 
 const RegistrySchema = z.object({
   version: z.string(),
-  generatedAt: z.string(),
   components: z.array(ComponentMetaSchema),
 });
 

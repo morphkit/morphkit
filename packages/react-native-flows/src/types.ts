@@ -34,6 +34,5 @@ export interface FlowRegistryEntry {
 
 export interface FlowRegistry {
   version: string;
-  generatedAt: string;
   flows: FlowRegistryEntry[];
 }
