@@ -1,6 +1,8 @@
 {
   "name": "@morphkit/react-native",
   "version": "0.1.0",
+  "description": "Production-ready React Native component library with theming",
+  "license": "MIT",
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -9,6 +11,24 @@
     "./src/docs-registry": "./src/docs-registry.ts",
     "./src/*": "./src/*"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morphkit/morphkit.git",
+    "directory": "packages/react-native"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/registry.json",
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx",
+    "!src/**/examples/**",
+    "!src/**/*.mdx"
+  ],
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc --noEmit",

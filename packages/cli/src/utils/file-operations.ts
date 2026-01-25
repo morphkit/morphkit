@@ -1,10 +1,7 @@
 import { access, mkdir, rm, rename, readdir } from "fs/promises";
 import { join, resolve } from "path";
 import { tmpdir } from "os";
-import { createWriteStream } from "fs";
-import { pipeline } from "stream/promises";
-import * as tar from "tar";
-import { getGitHubToken, GitHubAuthError } from "./github-auth.js";
+import { downloadAndExtractPackage } from "./npm-registry.js";
 
 export interface CopyOptions {
   withTests?: boolean;
@@ -50,54 +47,6 @@ export async function createDirectory(path: string): Promise<void> {
   }
 }
 
-async function downloadAndExtractTarball(
-  tempDir: string,
-  filterFn: (path: string) => boolean,
-  stripCount: number,
-): Promise<void> {
-  const token = getGitHubToken();
-  if (!token) {
-    throw new GitHubAuthError();
-  }
-
-  const apiUrl = `https://api.github.com/repos/morphkit/morphkit/tarball/main`;
-
-  const headers: HeadersInit = {
-    Authorization: `token ${token}`,
-    Accept: "application/vnd.github.v3+json",
-    "User-Agent": "@morphkit/cli",
-  };
-
-  const response = await fetch(apiUrl, { headers });
-
-  if (response.status === 401 || response.status === 403) {
-    throw new GitHubAuthError();
-  }
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to download: ${response.status} ${response.statusText}`,
-    );
-  }
-
-  if (!response.body) {
-    throw new Error("Response body is null");
-  }
-
-  const tarballPath = join(tempDir, "repo.tar.gz");
-  const fileStream = createWriteStream(tarballPath);
-
-  // @ts-expect-error - Node.js stream types compatibility
-  await pipeline(response.body, fileStream);
-
-  await tar.extract({
-    file: tarballPath,
-    cwd: tempDir,
-    filter: filterFn,
-    strip: stripCount,
-  });
-}
-
 const COMPONENT_FILES_TO_COPY = [".tsx", ".theme.ts", "/index.ts", ".ts"];
 
 const COMPONENT_TEST_FILES = [".test.tsx", ".test.ts"];
@@ -134,20 +83,20 @@ export async function copyComponent(
   await mkdir(tempDir, { recursive: true });
 
   try {
-    await downloadAndExtractTarball(
+    await downloadAndExtractPackage(
+      "@morphkit/react-native",
       tempDir,
       (path: string) => {
-        if (!path.includes(`packages/react-native/src/${name}/`)) {
+        if (!path.startsWith(`src/${name}/`)) {
           return false;
         }
-        const filename = path.split(`packages/react-native/src/${name}/`)[1];
+        const filename = path.replace(`src/${name}/`, "");
         if (!filename) return true;
         return shouldCopyComponentFile(filename, withTests);
       },
-      4,
     );
 
-    const extractedPath = join(tempDir, name);
+    const extractedPath = join(tempDir, "src", name);
     const finalPath = join(absoluteDestPath, name);
 
     const copiedFiles: string[] = [];
@@ -201,23 +150,23 @@ export async function copyFlow(
   await mkdir(tempDir, { recursive: true });
 
   const flowPath = variant === "default" ? `(${variant})` : variant;
-  const sourcePath = `packages/react-native-flows/src/${flowType}/${flowPath}/`;
+  const sourcePath = `src/${flowType}/${flowPath}/`;
 
   try {
-    await downloadAndExtractTarball(
+    await downloadAndExtractPackage(
+      "@morphkit/react-native-flows",
       tempDir,
       (path: string) => {
-        if (!path.includes(sourcePath)) {
+        if (!path.startsWith(sourcePath)) {
           return false;
         }
-        const filename = path.split(sourcePath)[1];
+        const filename = path.replace(sourcePath, "");
         if (!filename) return true;
         return shouldCopyFlowFile(filename);
       },
-      5,
     );
 
-    const extractedPath = join(tempDir, flowPath);
+    const extractedPath = join(tempDir, "src", flowType, flowPath);
     const finalPath = join(absoluteDestPath, flowType, variant);
 
     const copiedFiles: string[] = [];

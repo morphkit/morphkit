@@ -29,8 +29,6 @@ export {
   ValidationError,
 } from "./utils/errors.js";
 
-export { GitHubAuthError } from "./utils/github-auth.js";
-
 export {
   configExists,
   readConfig,

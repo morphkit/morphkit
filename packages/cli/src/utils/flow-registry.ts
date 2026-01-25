@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { FlowMetaSchema } from "../types/index.js";
-import { getGitHubToken, GitHubAuthError } from "./github-auth.js";
+import { fetchPackageFile } from "./npm-registry.js";
 import type { FlowMeta, Config } from "../types/index.js";
 
 const FlowRegistrySchema = z.object({
@@ -9,41 +9,18 @@ const FlowRegistrySchema = z.object({
   flows: z.array(FlowMetaSchema),
 });
 
+type FlowRegistryData = z.infer<typeof FlowRegistrySchema>;
+
 export async function fetchFlows(): Promise<FlowMeta[]> {
-  const token = getGitHubToken();
-  if (!token) {
-    throw new GitHubAuthError();
-  }
-
-  const registryUrl =
-    "https://raw.githubusercontent.com/morphkit/morphkit/main/packages/react-native-flows/src/registry.json";
-
-  const headers: HeadersInit = {
-    Authorization: `token ${token}`,
-    Accept: "application/vnd.github.v3.raw",
-  };
-
   try {
-    const response = await fetch(registryUrl, { headers });
+    const data = await fetchPackageFile<FlowRegistryData>(
+      "@morphkit/react-native-flows",
+      "src/registry.json",
+    );
 
-    if (response.status === 401 || response.status === 403) {
-      throw new GitHubAuthError();
-    }
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to fetch flow registry: ${response.status} ${response.statusText}`,
-      );
-    }
-
-    const data = await response.json();
     const registry = FlowRegistrySchema.parse(data);
-
     return registry.flows;
   } catch (error) {
-    if (error instanceof GitHubAuthError) {
-      throw error;
-    }
     if (error instanceof Error) {
       throw new Error(`Failed to fetch flow registry: ${error.message}`);
     }

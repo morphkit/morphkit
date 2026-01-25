@@ -1,8 +1,8 @@
 {
   "name": "@morphkit/react-native-flows",
   "version": "0.1.0",
-  "private": true,
   "description": "Multi-screen user flow templates using morph-ui components",
+  "license": "MIT",
   "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -21,13 +21,29 @@
     },
     "./src/registry.json": "./src/registry.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morphkit/morphkit.git",
+    "directory": "packages/react-native-flows"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/registry.json",
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx"
+  ],
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "peerDependencies": {
-    "@morphkit/react-native": "workspace:*",
+    "@morphkit/react-native": "^0.1.0",
     "expo-router": "~6.0.21",
     "react": "^19.1.0",
     "react-native": "^0.76.6",
