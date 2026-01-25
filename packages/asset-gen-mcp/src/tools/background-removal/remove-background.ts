@@ -17,12 +17,11 @@ const inputSchema = z.object({
 });
 
 export async function removeBackgroundFromImage(
-  imageBuffer: Buffer,
-  options: { fast?: boolean } = {},
+  _imageBuffer: Buffer,
+  _options: { fast?: boolean } = {},
 ): Promise<Buffer> {
-  const { fast = false } = options;
   return Buffer.from("");
-  // return transparentBackground(imageBuffer, "png", { fast });
+  // return transparentBackground(_imageBuffer, "png", { fast: _options.fast });
 }
 
 export function removeBackgroundTool(server: McpServer) {

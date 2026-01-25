@@ -8,6 +8,10 @@ export default [
   {
     rules: {
       "turbo/no-undeclared-env-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
     },
   },
 ];
