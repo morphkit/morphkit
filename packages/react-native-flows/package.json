@@ -1,6 +1,6 @@
 {
   "name": "@morphkit/react-native-flows",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Multi-screen user flow templates using morph-ui components",
   "license": "MIT",
   "type": "module",

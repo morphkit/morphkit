@@ -1,6 +1,6 @@
 {
   "name": "@morphkit/cli",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "CLI for morphkit component library",
   "license": "MIT",
   "type": "module",

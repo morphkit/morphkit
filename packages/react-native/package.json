@@ -1,6 +1,6 @@
 {
   "name": "@morphkit/react-native",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Production-ready React Native component library with theming",
   "license": "MIT",
   "type": "module",
