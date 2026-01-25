@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "tabs",
   "description": "Themed tab navigation wrapper for expo-router with automatic tab bar and header styling",
   "category": "navigation",

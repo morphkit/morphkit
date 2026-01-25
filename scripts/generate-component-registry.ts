@@ -24,6 +24,7 @@ interface RegistryEntry {
 
 interface Registry {
   version: string;
+  generatedAt: string;
   components: RegistryEntry[];
 }
 
@@ -72,6 +73,7 @@ function generateRegistry(): void {
 
   const registry: Registry = {
     version: "1.0.0",
+    generatedAt: formatDate(),
     components,
   };
 

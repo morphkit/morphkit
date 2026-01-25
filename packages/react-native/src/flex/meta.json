@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "flex",
   "description": "Flexbox layout component for arranging children with consistent spacing and alignment",
   "category": "layout",

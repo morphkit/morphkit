@@ -1,8 +1,9 @@
 {
   "version": "1.0.0",
+  "generatedAt": "2026-01-25T00:07:39.770Z",
   "components": [
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "accordion",
       "description": "Collapsible content sections with expand/collapse animations supporting both single and multiple expansion modes for organizing complex information",
       "category": "interactive",
@@ -16,7 +17,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "alert",
       "description": "Inline notification component with 4 variants (info, success, warning, error), optional dismiss button, and customizable icons",
       "category": "feedback",
@@ -30,7 +31,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "avatar",
       "description": "Circular avatar component with image support and fallback text for initials",
       "category": "display",
@@ -42,7 +43,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "badge",
       "description": "Notification count overlay component that displays indicators on top of children with automatic visibility management and color variants",
       "category": "display",
@@ -56,7 +57,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "box",
       "description": "Flexible layout container with declarative spacing, sizing, and flexbox properties",
       "category": "layout",
@@ -68,7 +69,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "button",
       "description": "Pressable action trigger with multiple visual variants, size options, icon support, and loading states for primary user interactions",
       "category": "interactive",
@@ -83,7 +84,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "card",
       "description": "Content container with elevation, borders, and padding for grouping related information into visually distinct sections",
       "category": "surfaces",
@@ -95,7 +96,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "checkbox",
       "description": "Selectable checkbox control for boolean inputs with support for checked, unchecked, and indeterminate states",
       "category": "input",
@@ -108,7 +109,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "container",
       "description": "Centered max-width wrapper for page content with responsive width constraints",
       "category": "layout",
@@ -120,7 +121,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "divider",
       "description": "Visual separator line with horizontal or vertical orientation for creating clear boundaries between content sections",
       "category": "layout",
@@ -132,7 +133,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "drawer",
       "description": "Themed navigation drawer wrapper for expo-router with automatic styling",
       "category": "navigation",
@@ -149,7 +150,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "fab",
       "description": "Floating action button with placement options and extended variant for primary screen-level actions",
       "category": "navigation",
@@ -163,7 +164,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "flex",
       "description": "Flexbox layout component for arranging children with consistent spacing and alignment",
       "category": "layout",
@@ -175,7 +176,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "input",
       "description": "Single-line text input field with label, error state, and prefix/suffix icon support for collecting user text input in forms and interfaces",
       "category": "input",
@@ -189,7 +190,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "label",
       "description": "Form label component with optional required indicator and error state for describing input fields",
       "category": "input",
@@ -203,7 +204,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "otp-input",
       "description": "One-time password input with multiple fields for verification codes",
       "category": "input",
@@ -217,7 +218,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "progress",
       "description": "Visual progress indicator with bar and circle variants, determinate and indeterminate modes, and optional value display",
       "category": "display",
@@ -229,7 +230,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "radio",
       "description": "Single-selection radio button control with group management for choosing one option from a set",
       "category": "input",
@@ -241,7 +242,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "select",
       "description": "Flexible inline selection component for choosing one or more options with custom styling",
       "category": "input",
@@ -254,7 +255,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "skeleton",
       "description": "Placeholder loading component with shimmer animation, supports rectangle, circle, and text line shapes with customizable dimensions",
       "category": "display",
@@ -266,7 +267,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "slider",
       "description": "Range slider control for selecting numeric values with single or dual thumb support",
       "category": "input",
@@ -280,7 +281,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "spinner",
       "description": "Animated loading indicator with continuous rotation, size presets (sm, md, lg) or custom pixel size, and color customization",
       "category": "display",
@@ -292,7 +293,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "stack",
       "description": "Themed navigation stack wrapper for expo-router with automatic header styling",
       "category": "navigation",
@@ -306,7 +307,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "switch",
       "description": "Toggle switch for binary on/off states with animated transitions",
       "category": "input",
@@ -318,7 +319,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "tabs",
       "description": "Themed tab navigation wrapper for expo-router with automatic tab bar and header styling",
       "category": "navigation",
@@ -333,7 +334,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "tag",
       "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
       "category": "display",
@@ -347,7 +348,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "textarea",
       "description": "Multi-line text input field with auto-resize capability and character count display",
       "category": "input",
@@ -359,7 +360,7 @@
       "dependencies": []
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "toast",
       "description": "Temporary notification component with slide-in animation, 4 variants, top or bottom positioning, and auto-dismiss capability",
       "category": "feedback",
@@ -373,7 +374,7 @@
       ]
     },
     {
-      "type": "components:ui",
+      "type": "react-native",
       "name": "typography",
       "description": "Text component with 11 iOS-inspired typography variants using StyleSheet",
       "category": "display",

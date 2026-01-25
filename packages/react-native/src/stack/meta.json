@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "stack",
   "description": "Themed navigation stack wrapper for expo-router with automatic header styling",
   "category": "navigation",

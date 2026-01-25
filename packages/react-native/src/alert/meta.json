@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "alert",
   "description": "Inline notification component with 4 variants (info, success, warning, error), optional dismiss button, and customizable icons",
   "category": "feedback",

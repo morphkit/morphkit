@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "tag",
   "description": "Small pill-shaped label for categorization with 5 color variants, 3 sizes, and optional dismiss functionality",
   "category": "display",

@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "container",
   "description": "Centered max-width wrapper for page content with responsive width constraints",
   "category": "layout",

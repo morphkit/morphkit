@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "button",
   "description": "Pressable action trigger with multiple visual variants, size options, icon support, and loading states for primary user interactions",
   "category": "interactive",

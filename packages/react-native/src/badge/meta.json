@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "badge",
   "description": "Notification count overlay component that displays indicators on top of children with automatic visibility management and color variants",
   "category": "display",

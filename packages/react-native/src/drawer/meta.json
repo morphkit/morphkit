@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "drawer",
   "description": "Themed navigation drawer wrapper for expo-router with automatic styling",
   "category": "navigation",

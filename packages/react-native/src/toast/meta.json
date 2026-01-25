@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "toast",
   "description": "Temporary notification component with slide-in animation, 4 variants, top or bottom positioning, and auto-dismiss capability",
   "category": "feedback",

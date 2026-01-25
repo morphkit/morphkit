@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "skeleton",
   "description": "Placeholder loading component with shimmer animation, supports rectangle, circle, and text line shapes with customizable dimensions",
   "category": "display",

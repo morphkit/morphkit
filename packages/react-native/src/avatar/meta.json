@@ -1,5 +1,5 @@
 {
-  "type": "components:ui",
+  "type": "react-native",
   "name": "avatar",
   "description": "Circular avatar component with image support and fallback text for initials",
   "category": "display",
