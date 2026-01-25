@@ -26,7 +26,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-**morphkit** is a production-ready component library monorepo, similar in spirit to shadcn/ui. The repository features a **fully-implemented React Native component library** (`@morphkit/react-native`) with 27 components, multi-screen flow templates, CLI tooling, and comprehensive testing infrastructure.
+**morphkit** is a production-ready component library monorepo, similar in spirit to shadcn/ui. The repository features a **fully-implemented React Native component library** (`@morphkit/react-native`) with 29 components, multi-screen flow templates, CLI tooling, and comprehensive testing infrastructure.
 
 The repository includes a full-featured demo app for browsing components and flows, with MDX-based documentation, drawer navigation, and dynamic component showcases. All components follow the three-tier theme system and are backed by Jest tests.
 
@@ -60,7 +60,7 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 - Fully integrated with monorepo shared configs
 - Uses `@morphkit/eslint-config/react-native` and `@morphkit/typescript-config/react-native`
 - File-based routing with Expo Router in `app/` directory
-- Component sidebar for browsing 27 documented components
+- Component sidebar for browsing 29 documented components
 - Entry point: `expo-router/entry`
 - Theme customization with Inter font family
 
@@ -90,11 +90,20 @@ The repository uses Turborepo workspaces defined in root `package.json`:
   - Published to GitHub Packages (npm.pkg.github.com)
   - Supports both CommonJS and ESM exports
   - Features: GitHub auth, component registry management, config management
+- **@morphkit/asset-gen-mcp**: AI-powered image asset generation MCP server
+  - Version: 0.1.6
+  - 4 tools: prompt instructions, image generation, vectorization, background removal
+  - Google Imagen integration with batch processing
+  - Auto-vectorization for SVG outputs
+- **expo-app-template**: Minimal Expo starter template
+  - Pre-configured with @morphkit/react-native
+  - Includes Supabase, i18n, react-hook-form setup
+  - morphkit CLI configuration included
 
 **`packages/react-native/`** - Production-Ready React Native Component Library
 
 - **Package name**: `@morphkit/react-native` (v0.1.0)
-- **27 fully-implemented components** following three-tier theme system
+- **29 fully-implemented components** following three-tier theme system
 - Components exported via wildcard pattern for tree-shaking: `"./src/*"`
 - Complete testing infrastructure with Jest
 - MDX documentation system with component registry
@@ -102,12 +111,12 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 
 **Component Categories**:
 
-- Layout: box, container, stack, divider
+- Layout: box, container, divider, flex
 - Input: input, textarea, checkbox, radio, select, switch, slider, otp-input, label
 - Display: typography, badge, tag, avatar, progress, skeleton, spinner
-- Interactive: button, accordion, tabs
+- Interactive: button, accordion
 - Feedback: alert, toast
-- Navigation: fab
+- Navigation: drawer, fab, stack, tabs
 - Surfaces: card
 
 ## Development Commands

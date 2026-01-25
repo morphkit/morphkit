@@ -2,9 +2,9 @@
 
 Complete decision tree for mapping Figma UI elements to morphkit components.
 
-## Available Components (27 total)
+## Available Components (29 total)
 
-accordion, alert, avatar, badge, box, button, card, checkbox, container, divider, fab, input, label, otp-input, progress, radio, select, skeleton, slider, spinner, stack, switch, tag, tabs, textarea, toast, typography
+accordion, alert, avatar, badge, box, button, card, checkbox, container, divider, drawer, fab, flex, input, label, otp-input, progress, radio, select, skeleton, slider, spinner, stack, switch, tabs, tag, textarea, toast, typography
 
 ## Decision Tree
 

@@ -229,7 +229,7 @@ fi
 ```bash
 # Search for component count mentions
 echo "Component count references in documentation:"
-grep -n "26" CLAUDE.md openspec/project.md README.md
+grep -n "29" CLAUDE.md openspec/project.md README.md
 
 # More specific search
 grep -n "[0-9]\+ components" CLAUDE.md openspec/project.md README.md
@@ -239,8 +239,8 @@ grep -n "[0-9]\+ Production-Ready Components" openspec/project.md
 
 **Expected locations:**
 
-- `openspec/project.md` line 9: `- **26 Production-Ready Components**`
-- `CLAUDE.md` line 93: `- **26 fully-implemented components**`
+- `openspec/project.md` line 9: `- **29 Production-Ready Components**`
+- `CLAUDE.md` line 93: `- **29 fully-implemented components**`
 - `CLAUDE.md` line 102: Intro to component categories list
 
 ### Component List Verification
@@ -260,12 +260,12 @@ sed -n '100,108p' CLAUDE.md
 
 **Expected categories in CLAUDE.md (lines 100-108):**
 
-- Layout: box, container, stack, divider
+- Layout: box, container, divider, flex
 - Input: input, textarea, checkbox, radio, select, switch, slider, otp-input, label
 - Display: typography, badge, tag, avatar, progress, skeleton, spinner
-- Interactive: button, accordion, tabs
+- Interactive: button, accordion
 - Feedback: alert, toast
-- Navigation: fab
+- Navigation: drawer, fab, stack, tabs
 - Surfaces: card
 
 ### Automated Detection Script
@@ -389,16 +389,16 @@ Skill documentation in `.claude/skills/` may contain outdated component counts, 
 ```bash
 # Search for component count mentions in skills
 echo "=== Component count in skills ==="
-grep -rn "27 components" .claude/skills/
-grep -rn "27 total" .claude/skills/
-grep -rn "27 fully" .claude/skills/
+grep -rn "29 components" .claude/skills/
+grep -rn "29 total" .claude/skills/
+grep -rn "29 fully" .claude/skills/
 
 # Count actual components
 actualCount=$(find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l | tr -d ' ')
 echo "Actual component count: $actualCount"
 
 # Check for mismatches
-if grep -q "27 components" .claude/skills/ && [ "$actualCount" -ne 27 ]; then
+if grep -q "29 components" .claude/skills/ && [ "$actualCount" -ne 29 ]; then
   echo "❌ Skills reference outdated component count (27 vs $actualCount)"
 fi
 ```
@@ -406,9 +406,9 @@ fi
 **Expected locations:**
 
 - `.claude/skills/code-review/SKILL.md` - May mention component count
-- `.claude/skills/code-review/references/morph-ui-standards.md` - Line ~93 ("27 components")
+- `.claude/skills/code-review/references/morph-ui-standards.md` - Line ~93 ("29 components")
 - `.claude/skills/create-component/SKILL.md` - May mention component count
-- `.claude/skills/create-flow/SKILL.md` - May mention "27 total"
+- `.claude/skills/create-flow/SKILL.md` - May mention "29 total"
 - `.claude/skills/create-flow/references/component-detection.md` - Component list
 
 #### Check Tech Stack Versions in Skills
@@ -454,7 +454,7 @@ find packages/react-native/src -maxdepth 1 -type d -not -name "src" -exec basena
 # Check component lists in skills
 echo "=== Component lists in skills ==="
 echo "Checking create-flow component-detection.md..."
-# This file should list all 27 components with their props
+# This file should list all 29 components with their props
 
 echo "Checking code-review morph-ui-standards.md..."
 # Should list component categories
@@ -494,7 +494,7 @@ errors=0
 actualCount=$(find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l | tr -d ' ')
 echo "Actual component count: $actualCount"
 
-skillComponentRefs=$(grep -r "27 components\|27 total\|27 fully" .claude/skills/ | wc -l)
+skillComponentRefs=$(grep -r "29 components\|29 total\|29 fully" .claude/skills/ | wc -l)
 if [ "$skillComponentRefs" -gt 0 ] && [ "$actualCount" -ne 27 ]; then
   echo "❌ Skills contain outdated component count (found 27, actual is $actualCount)"
   ((errors++))
@@ -732,9 +732,9 @@ grep -q "$actualCount fully-implemented components" CLAUDE.md || { echo "❌ CLA
 # Skills Documentation
 echo ""
 echo "[3/6] Skills Documentation"
-skillComponentRefs=$(grep -r "27 components\|27 total" .claude/skills/ 2>/dev/null | wc -l)
-if [ "$skillComponentRefs" -gt 0 ] && [ "$actualCount" -ne 27 ]; then
-  echo "❌ Skills: Component count may be outdated (found 27, actual is $actualCount)"
+skillComponentRefs=$(grep -r "29 components\|29 total" .claude/skills/ 2>/dev/null | wc -l)
+if [ "$skillComponentRefs" -gt 0 ] && [ "$actualCount" -ne 29 ]; then
+  echo "❌ Skills: Component count may be outdated (found 29, actual is $actualCount)"
   ((errors++))
 fi
 test -f .claude/skills/code-review/references/morph-ui-standards.md || { echo "❌ code-review skill files missing"; ((errors++)); }

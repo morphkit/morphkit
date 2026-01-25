@@ -18,7 +18,7 @@ Design systems benefit from hierarchical component organization:
 
 **Application to morphkit**:
 
-- morphkit's 27 components are primarily atoms and molecules
+- morphkit's 29 components are primarily atoms and molecules
 - Flows represent organism/template level
 - Demo app shows page-level implementations
 

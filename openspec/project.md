@@ -6,7 +6,7 @@
 
 ### Core Features
 
-- **27 Production-Ready Components** (many more planned): Layout, input, display, interactive, feedback, navigation, and surface components
+- **29 Production-Ready Components** (many more planned): Layout, input, display, interactive, feedback, navigation, and surface components
 - **Multi-Screen Flows**: Pre-built user journeys (auth flow currently, more planned) that can be copied to consumer projects with routing
 - **Three-Tier Customization Model**:
   1. Global theme customization (primitive & semantic token layers)

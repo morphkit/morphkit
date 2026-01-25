@@ -18,11 +18,11 @@ MorphUI is a next-generation React Native UI library optimized for AI agents. At
 
 ## Overview
 
-MorphUI provides 27 production-ready components, multi-screen flow templates, and a sophisticated three-tier theme system for building beautiful React Native applications. Inspired by shadcn/ui, components are designed to be copied to your project for full customization.
+MorphUI provides 29 production-ready components, multi-screen flow templates, and a sophisticated three-tier theme system for building beautiful React Native applications. Inspired by shadcn/ui, components are designed to be copied to your project for full customization.
 
 ### Key Features
 
-- **27 Production-Ready Components**: Layout, input, display, interactive, feedback, navigation, and surface components
+- **29 Production-Ready Components**: Layout, input, display, interactive, feedback, navigation, and surface components
 - **Three-Tier Theme System**: Hierarchical token system (primitive → semantic → component) for consistent, customizable styling
 - **Multi-Screen Flows**: Pre-built user journeys (authentication flow with 4 screens, more planned)
 - **Comprehensive Testing**: Jest with React Native Testing Library for all components
@@ -69,11 +69,13 @@ MorphUI is organized as a Turborepo monorepo with the following structure:
 ```
 morph-ui/
 ├── apps/
-│   └── kitchen-sink-app/    # Component library browser & flow showcase
+│   └── kitchen-sink-app/          # Component library browser & flow showcase
 ├── packages/
-│   ├── react-native/              # @morphkit/react-native - 27 component library
+│   ├── react-native/              # @morphkit/react-native - 29 component library
 │   ├── react-native-flows/        # Multi-screen flow templates
 │   ├── cli/                       # @morphkit/cli - Component scaffolding tool
+│   ├── asset-gen-mcp/             # @morphkit/asset-gen-mcp - AI image generation
+│   ├── expo-app-template/         # Minimal Expo starter template
 │   ├── eslint-config/             # Shared ESLint configurations
 │   ├── typescript-config/         # Shared TypeScript configurations
 │   └── jest-config/               # Shared Jest testing configuration
@@ -82,7 +84,7 @@ morph-ui/
 ### Primary Workspaces
 
 - **`packages/react-native/`**: The core component library (`@morphkit/react-native`)
-  - 27 components with `.theme.ts` files for token-based styling
+  - 29 components with `.theme.ts` files for token-based styling
   - Component registry and MDX documentation
   - Comprehensive test coverage
 - **`apps/kitchen-sink-app/`**: Full-featured demo application
@@ -193,19 +195,19 @@ MorphUI uses a hierarchical token system for consistent, theme-aware styling:
 2. **Semantic Tokens**: Context-aware tokens mapped to light/dark themes
 3. **Component Tokens**: Component-specific styling in colocated `.theme.ts` files
 
-### Available Components (27)
+### Available Components (29)
 
-**Layout**: box, container, stack, divider
+**Layout**: box, container, divider, flex
 
 **Input**: input, textarea, checkbox, radio, select, switch, slider, otp-input, label
 
 **Display**: typography, badge, tag, avatar, progress, skeleton, spinner
 
-**Interactive**: button, accordion, tabs
+**Interactive**: button, accordion
 
 **Feedback**: alert, toast
 
-**Navigation**: fab
+**Navigation**: drawer, fab, stack, tabs
 
 **Surfaces**: card
 

@@ -105,13 +105,13 @@ If adding a new "Tooltip" component in the "Feedback" category:
 3. Update `openspec/project.md` line 9:
 
    ```markdown
-   - **27 Production-Ready Components** (many more planned)
+   - **29 Production-Ready Components** (many more planned)
    ```
 
 4. Update `CLAUDE.md` line 93:
 
    ```markdown
-   - **27 fully-implemented components** following three-tier theme system
+   - **29 fully-implemented components** following three-tier theme system
    ```
 
 5. Update `CLAUDE.md` line 102:
@@ -128,10 +128,10 @@ If adding a new "Tooltip" component in the "Feedback" category:
 
 7. Verify:
    ```bash
-   find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l  # Should show 28
-   grep "28" openspec/project.md CLAUDE.md
-   grep -r "28 components" .claude/skills/
-   grep -r "28 total" .claude/skills/
+   find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l  # Should show 30
+   grep "30" openspec/project.md CLAUDE.md
+   grep -r "30 components" .claude/skills/
+   grep -r "30 total" .claude/skills/
    ```
 
 ## Skills Documentation Sync
@@ -165,14 +165,14 @@ If adding a new "Tooltip" component (28th component):
 1. Update all main docs first (openspec/project.md, CLAUDE.md, etc.)
 
 2. Update `.claude/skills/code-review/references/morph-ui-standards.md`:
-   - Line ~93: Change "27 components" to "28 components"
+   - Line ~93: Change "29 components" to "30 components"
    - Update Feedback category to include tooltip
 
 3. Update `.claude/skills/create-component/SKILL.md`:
-   - Update any "27 components" references to "28 components"
+   - Update any "29 components" references to "30 components"
 
 4. Update `.claude/skills/create-flow/SKILL.md`:
-   - Update "27 total" to "28 total"
+   - Update "29 total" to "30 total"
 
 5. Update `.claude/skills/create-flow/references/component-detection.md`:
    - Add Tooltip component with its props and usage examples

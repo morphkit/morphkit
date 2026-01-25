@@ -251,8 +251,8 @@ bun run generate
 git diff packages/react-native/src/registry.json
 
 # Grep for old count in all documentation and skills
-grep -r "27 components" CLAUDE.md openspec/project.md .claude/skills/
-grep -r "27 total" .claude/skills/
+grep -r "29 components" CLAUDE.md openspec/project.md .claude/skills/
+grep -r "29 total" .claude/skills/
 ```
 
 **Sync workflow:**

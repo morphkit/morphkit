@@ -510,7 +510,7 @@ Components are organized into seven categories:
 
 ### Layout (4 components)
 
-Box, Container, Stack, Divider
+Box, Container, Divider, Flex
 
 ### Input (9 components)
 
@@ -520,17 +520,17 @@ Input, Textarea, Checkbox, Radio, Select, Switch, Slider, OtpInput, Label
 
 Typography, Badge, Tag, Avatar, Progress, Skeleton, Spinner
 
-### Interactive (3 components)
+### Interactive (2 components)
 
-Button, Accordion, Tabs
+Button, Accordion
 
 ### Feedback (2 components)
 
 Alert, Toast
 
-### Navigation (1 component)
+### Navigation (4 components)
 
-Fab
+Drawer, Fab, Stack, Tabs
 
 ### Surfaces (1 component)
 

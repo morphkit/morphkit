@@ -385,9 +385,9 @@ grep -n "TypeScript" package.json openspec/project.md CLAUDE.md README.md
 find packages/react-native/src -maxdepth 1 -type d -not -name "src" | wc -l
 
 # Check mentions in docs and skills
-grep -n "27 components" openspec/project.md CLAUDE.md README.md
-grep -r "27 components" .claude/skills/
-grep -r "27 total" .claude/skills/
+grep -n "29 components" openspec/project.md CLAUDE.md README.md
+grep -r "29 components" .claude/skills/
+grep -r "29 total" .claude/skills/
 ```
 
 ### Monorepo Structure Change

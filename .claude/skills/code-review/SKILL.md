@@ -376,7 +376,7 @@ Always review these files in every comprehensive code review:
 
 **Component Files** (architecture patterns):
 
-- `packages/react-native/src/*/` (all 27 components)
+- `packages/react-native/src/*/` (all 29 components)
 - Component `.theme.ts` files (theme system compliance)
 - Component `.test.tsx` files (test coverage)
 
