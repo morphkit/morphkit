@@ -1,0 +1,24 @@
+{
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "mcp__asset-gen__get-image-generation-prompt-instructions",
+      "WebSearch"
+    ]
+  },
+  "outputStyle": "default",
+  "spinnerTipsEnabled": false,
+  "gitAttribution": false,
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/skill-activation-prompt.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
