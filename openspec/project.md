@@ -67,7 +67,7 @@
 
 **Publishing:**
 
-- **@morphkit/cli**: GitHub Packages (v0.3.4)
+- **@morphkit/cli**: GitHub Packages (v0.5.1)
 - **@morphkit/react-native**: npm registry (planned)
 
 ## Project Conventions
@@ -317,7 +317,7 @@ Registry files are auto-generated to ensure consistency and eliminate manual mai
 
 ### Publishing & Distribution
 
-- **GitHub Packages**: Hosts @morphkit/cli (v0.3.4)
+- **GitHub Packages**: Hosts @morphkit/cli (v0.5.1)
 - **npm registry** (planned): Future home for @morphkit/react-native
 
 ### UI & Theming

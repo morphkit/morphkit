@@ -80,13 +80,13 @@ The repository uses Turborepo workspaces defined in root `package.json`:
   - Used across all packages for consistent test setup
   - Integrated with React Native testing library
 - **@morphkit/react-native-flows**: Multi-screen user flow templates
-  - Version: 0.1.0
+  - Version: 0.1.1
   - Flow registry system for managing user journeys
   - Implements authentication flows using Expo Router
   - Structure: `src/auth/(default)/` for default auth flow
   - Components: welcome, email, name, password screens
 - **@morphkit/cli**: Command-line interface for Morph UI
-  - Version: 0.3.4
+  - Version: 0.5.1
   - Published to GitHub Packages (npm.pkg.github.com)
   - Supports both CommonJS and ESM exports
   - Features: GitHub auth, component registry management, config management
@@ -102,7 +102,7 @@ The repository uses Turborepo workspaces defined in root `package.json`:
 
 **`packages/react-native/`** - Production-Ready React Native Component Library
 
-- **Package name**: `@morphkit/react-native` (v0.1.0)
+- **Package name**: `@morphkit/react-native` (v0.1.1)
 - **29 fully-implemented components** following three-tier theme system
 - Components exported via wildcard pattern for tree-shaking: `"./src/*"`
 - Complete testing infrastructure with Jest
