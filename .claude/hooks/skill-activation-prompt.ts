@@ -95,21 +95,18 @@ async function querySkillIndex(prompt: string): Promise<RelevantSkill[]> {
 }
 
 function formatOutput(skills: RelevantSkill[]): string {
-  let output = "\n";
-  output += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-  output += "SKILL ACTIVATION (Semantic Match)\n";
-  output += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+  let output = "\n<skill-activation>\n";
+  output +=
+    "MANDATORY: Load the following skills using the Skill tool BEFORE responding to the user.\n\n";
 
-  output += "RECOMMENDED SKILLS:\n";
+  output += "Skills to load:\n";
   for (const skill of skills) {
-    output += `  -> ${skill.name} (similarity: ${skill.similarity})\n`;
-    if (skill.references.length > 0) {
-      output += `     references: ${skill.references.join(", ")}\n`;
-    }
+    output += `- ${skill.name}\n`;
   }
 
-  output += "\nACTION: Use Skill tool BEFORE responding\n";
-  output += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+  output +=
+    "\nDo NOT skip this step. Use the Skill tool for each skill listed above.\n";
+  output += "</skill-activation>\n";
 
   return output;
 }

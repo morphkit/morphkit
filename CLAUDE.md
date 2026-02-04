@@ -678,3 +678,32 @@ Both proposal creation tools support Figma MCP integration via `figma-desktop`. 
 **Important:** Never implement components without an approved OpenSpec proposal. This ensures architectural consistency and creates a documentation trail.
 
 See `.claude/skills/spec-component/SKILL.md`, `.claude/skills/develop-component/SKILL.md`, and `.claude/agents/README.md` for complete details, templates, and usage examples.
+
+## Skill Activation Hook
+
+This project uses a semantic skill activation system. When you see a `<skill-activation>` block in your context, you MUST:
+
+1. **Immediately** use the Skill tool for each skill listed
+2. Do this BEFORE generating any other response
+3. The skills contain specialized knowledge and workflows for this codebase
+
+Example:
+
+```
+<skill-activation>
+MANDATORY: Load the following skills using the Skill tool BEFORE responding to the user.
+
+Skills to load:
+- develop-component
+- design-system-patterns
+
+Do NOT skip this step. Use the Skill tool for each skill listed above.
+</skill-activation>
+```
+
+When you see this, call:
+
+- `Skill tool with skill="develop-component"`
+- `Skill tool with skill="design-system-patterns"`
+
+Then proceed with the user's request using the loaded skill knowledge.
