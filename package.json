@@ -14,7 +14,8 @@
     "generate:exports": "bun run scripts/generate-barrel-exports.ts",
     "scaffold": "scaffdog generate component",
     "scaffold:component": "bun run scripts/scaffold-component.ts",
-    "scaffold:mcp-server": "bun run scripts/scaffold-mcp-server.ts"
+    "scaffold:mcp-server": "bun run scripts/scaffold-mcp-server.ts",
+    "embed:skills": "tsx .claude/hooks/embed-skills.ts"
   },
   "devDependencies": {
     "@scaffdog/config": "^3.0.0",
@@ -40,5 +41,15 @@
   "resolutions": {
     "react": "19.1.0",
     "@types/react": "~19.1.0"
-  }
+  },
+  "dependencies": {
+    "@langchain/community": "^1.1.11",
+    "@langchain/core": "^1.1.19",
+    "@langchain/openai": "^1.2.4",
+    "dotenv": "^17.2.3",
+    "faiss-node": "^0.5.1"
+  },
+  "trustedDependencies": [
+    "faiss-node"
+  ]
 }
