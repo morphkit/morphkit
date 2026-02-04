@@ -2,7 +2,6 @@ import {
   Pressable,
   PressableProps,
   View,
-  Text,
   Image,
   ImageSourcePropType,
   StyleSheet,
@@ -10,6 +9,7 @@ import {
   StyleProp,
 } from "react-native";
 import { useTheme } from "../theme";
+import { Typography } from "../typography";
 
 type AvatarSize = "sm" | "md" | "lg" | "xl";
 
@@ -57,18 +57,16 @@ export const Avatar = ({
         {source ? (
           <Image source={source} style={baseStyles.image} />
         ) : (
-          <Text
-            style={[
-              baseStyles.text,
-              {
-                fontSize: textSizeMap[size],
-                fontWeight: theme.primitive.fontWeight.semibold,
-                color: theme.component.avatar.variant[colorScheme].text,
-              },
-            ]}
+          <Typography
+            variant="body"
+            style={{
+              fontSize: textSizeMap[size],
+              fontWeight: theme.primitive.fontWeight.semibold,
+              color: theme.component.avatar.variant[colorScheme].text,
+            }}
           >
             {fallback}
-          </Text>
+          </Typography>
         )}
       </View>
     );
@@ -91,5 +89,4 @@ const baseStyles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  text: {},
 });

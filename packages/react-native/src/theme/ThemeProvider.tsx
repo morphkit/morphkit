@@ -22,7 +22,7 @@ export interface ThemeProviderProps {
   children: ReactNode;
   theme?: { light: Theme; dark: Theme };
   initialColorScheme?: ColorScheme;
-  fonts?: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  fonts?: Record<string, number | string>;
   fontsLoadingFallback?: ReactNode;
 }
 

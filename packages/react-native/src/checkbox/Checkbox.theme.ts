@@ -7,6 +7,7 @@ export const checkbox = {
     md: 20,
     lg: 24,
   },
+  iconScale: 0.7,
   borderRadius: primitive.borderRadius.sm,
   borderWidth: 2,
   variant: {

@@ -48,7 +48,7 @@ export const Checkbox = forwardRef<View, CheckboxProps>(
     };
 
     const boxSize = theme.component.checkbox.size[size];
-    const iconSize = Math.round(boxSize * 0.7);
+    const iconSize = Math.round(boxSize * theme.component.checkbox.iconScale);
 
     const isCheckedOrIndeterminate = checked || indeterminate;
 

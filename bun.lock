@@ -82,9 +82,9 @@
     },
     "packages/cli": {
       "name": "@morphkit/cli",
-      "version": "0.3.4",
+      "version": "0.5.1",
       "bin": {
-        "morph-ui": "./dist/cli.cjs"
+        "morphkit": "./dist/cli.cjs"
       },
       "dependencies": {
         "@clack/prompts": "^0.7.0",
@@ -167,7 +167,7 @@
     },
     "packages/react-native": {
       "name": "@morphkit/react-native",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "devDependencies": {
         "@babel/core": "^7.28.5",
         "@babel/plugin-transform-export-namespace-from": "^7.27.1",
@@ -194,7 +194,7 @@
     },
     "packages/react-native-flows": {
       "name": "@morphkit/react-native-flows",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "devDependencies": {
         "@morphkit/eslint-config": "workspace:*",
         "@morphkit/typescript-config": "workspace:*",
@@ -204,7 +204,7 @@
         "typescript": "^5.9.2",
       },
       "peerDependencies": {
-        "@morphkit/react-native": "workspace:*",
+        "@morphkit/react-native": "^0.1.0",
         "expo-router": "~6.0.21",
         "react": "^19.1.0",
         "react-native": "^0.76.6",
@@ -559,7 +559,7 @@
 
     "@expo/xcpretty": ["@expo/xcpretty@4.3.2", "", { "dependencies": { "@babel/code-frame": "7.10.4", "chalk": "^4.1.0", "find-up": "^5.0.0", "js-yaml": "^4.1.0" }, "bin": { "excpretty": "build/cli.js" } }, "sha512-ReZxZ8pdnoI3tP/dNnJdnmAk7uLT4FjsKDGW7YeDdvdOMz2XCQSmSCM9IWlrXuWtMF9zeSB6WJtEhCQ41gQOfw=="],
 
-    "@google/genai": ["@google/genai@1.38.0", "", { "dependencies": { "google-auth-library": "^10.3.0", "protobufjs": "^7.5.4", "ws": "^8.18.0" }, "peerDependencies": { "@modelcontextprotocol/sdk": "^1.25.2" }, "optionalPeers": ["@modelcontextprotocol/sdk"] }, "sha512-V/4CQVQGovvGHuS73lwJwHKR9x33kCij3zz/ReEQ4A7RJaV0U7m4k1mvYhFk55cGZdF5JLKu2S9BTaFuEs5xTA=="],
+    "@google/genai": ["@google/genai@1.39.0", "", { "dependencies": { "google-auth-library": "^10.3.0", "protobufjs": "^7.5.4", "ws": "^8.18.0" }, "peerDependencies": { "@modelcontextprotocol/sdk": "^1.25.2" }, "optionalPeers": ["@modelcontextprotocol/sdk"] }, "sha512-Vz7AQsOdBeiIcxmXIQNy/hzDvyAOE1lSpWA10itUQza7h3aQFF6QSGaQ7o1GYsjMD3XslK4Ee/Ol0eLhRXb7gA=="],
 
     "@hono/node-server": ["@hono/node-server@1.19.9", "", { "peerDependencies": { "hono": "^4" } }, "sha512-vHL6w3ecZsky+8P5MD+eFfaGTyCeOHUIFYMGpQGbrBTSmNNoxv0if69rEZ5giu36weC5saFuznL411gRX7bJDw=="],
 

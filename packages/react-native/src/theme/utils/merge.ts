@@ -1,25 +1,22 @@
 import type { DeepPartial } from "./types";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const merge = <T extends Record<string, any>>(
+type UnknownRecord = Record<string, unknown>;
+
+const isPlainObject = (value: unknown): value is UnknownRecord => {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+};
+
+export const merge = <T extends UnknownRecord>(
   ...sources: Array<DeepPartial<T> | Partial<T>>
 ): T => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result: Record<string, any> = {};
+  const result: UnknownRecord = {};
 
   for (const source of sources) {
     for (const key in source) {
       const sourceValue = source[key];
       const resultValue = result[key];
 
-      if (
-        sourceValue &&
-        typeof sourceValue === "object" &&
-        !Array.isArray(sourceValue) &&
-        resultValue &&
-        typeof resultValue === "object" &&
-        !Array.isArray(resultValue)
-      ) {
+      if (isPlainObject(sourceValue) && isPlainObject(resultValue)) {
         result[key] = merge(resultValue, sourceValue);
       } else if (sourceValue !== undefined) {
         result[key] = sourceValue;
