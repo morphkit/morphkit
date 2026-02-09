@@ -29,10 +29,9 @@ describe("ThemeProvider", () => {
   });
 
   it("provides dark theme when initialColorScheme is dark", () => {
-    const { getByText } = render(
-      <Typography variant="body">Dark</Typography>,
-      { initialColorScheme: "dark" },
-    );
+    const { getByText } = render(<Typography variant="body">Dark</Typography>, {
+      initialColorScheme: "dark",
+    });
     expect(getByText("Dark")).toBeTruthy();
   });
 
