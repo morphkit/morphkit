@@ -11,12 +11,8 @@ describe("createTheme", () => {
 
   it("returns themes matching base themes when no overrides provided", () => {
     const result = createTheme({});
-    expect(result.light.semantic.colors).toEqual(
-      themes.light.semantic.colors,
-    );
-    expect(result.dark.semantic.colors).toEqual(
-      themes.dark.semantic.colors,
-    );
+    expect(result.light.semantic.colors).toEqual(themes.light.semantic.colors);
+    expect(result.dark.semantic.colors).toEqual(themes.dark.semantic.colors);
   });
 
   it("preserves primitive tokens in both themes", () => {
@@ -40,12 +36,8 @@ describe("createTheme", () => {
       const result = createTheme({
         fonts: { largeTitle: "CustomDisplay" },
       });
-      expect(result.light.semantic.fontFamilies.display).toBe(
-        "CustomDisplay",
-      );
-      expect(result.dark.semantic.fontFamilies.display).toBe(
-        "CustomDisplay",
-      );
+      expect(result.light.semantic.fontFamilies.display).toBe("CustomDisplay");
+      expect(result.dark.semantic.fontFamilies.display).toBe("CustomDisplay");
     });
 
     it("applies body font family override", () => {
@@ -107,9 +99,7 @@ describe("createTheme", () => {
       expect(result.light.semantic.textStyles.heading.fontFamily).toBe(
         "HeadingFont",
       );
-      expect(result.light.semantic.textStyles.body.fontFamily).toBe(
-        "BodyFont",
-      );
+      expect(result.light.semantic.textStyles.body.fontFamily).toBe("BodyFont");
       expect(result.light.semantic.textStyles.callout.fontFamily).toBe(
         "CalloutFont",
       );
@@ -180,9 +170,7 @@ describe("createTheme", () => {
           },
         },
       });
-      expect(result.dark.semantic.colors).toEqual(
-        themes.dark.semantic.colors,
-      );
+      expect(result.dark.semantic.colors).toEqual(themes.dark.semantic.colors);
     });
   });
 

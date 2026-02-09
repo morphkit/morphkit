@@ -9,7 +9,7 @@ describe("getThemeColor", () => {
   });
 
   it("retrieves a nested color path", () => {
-    const result = getThemeColor(themes.light, "border", "default");
+    const result = getThemeColor(themes.light, "border", "primary");
     expect(typeof result).toBe("string");
   });
 
