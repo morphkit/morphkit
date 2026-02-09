@@ -283,3 +283,4 @@ See [LICENSE](./LICENSE) for license information.
 ---
 
 **Documentation**: [CLAUDE.md](./CLAUDE.md) | **OpenSpec**: [openspec/AGENTS.md](./openspec/AGENTS.md) | **Component Registry**: [registry.json](./packages/react-native/src/registry.json)
+
