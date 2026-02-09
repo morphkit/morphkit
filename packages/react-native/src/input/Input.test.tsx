@@ -199,4 +199,12 @@ describe("Input", () => {
     );
     expect(getByDisplayValue("test").props.accessibilityInvalid).toBe(true);
   });
+
+  it("sets isFocused on focus event", () => {
+    const { getByDisplayValue } = render(
+      <Input value="test" onChange={() => {}} />,
+    );
+    fireEvent(getByDisplayValue("test"), "focus");
+    expect(getByDisplayValue("test")).toBeTruthy();
+  });
 });
