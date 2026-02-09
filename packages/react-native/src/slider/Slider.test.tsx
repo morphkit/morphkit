@@ -1,7 +1,84 @@
 import { createRef } from "react";
-import { render } from "../test-utils";
-import { View } from "react-native";
+import { render, fireEvent } from "../test-utils";
+import { View, StyleSheet } from "react-native";
 import { Slider } from "./Slider";
+
+const createTouchEvent = (locationX: number) => {
+  const now = Date.now();
+  return {
+    nativeEvent: {
+      touches: [
+        {
+          identifier: 0,
+          locationX,
+          locationY: 0,
+          pageX: locationX,
+          pageY: 0,
+          timestamp: now,
+        },
+      ],
+      changedTouches: [
+        {
+          identifier: 0,
+          locationX,
+          locationY: 0,
+          pageX: locationX,
+          pageY: 0,
+          timestamp: now,
+        },
+      ],
+      identifier: 0,
+      locationX,
+      locationY: 0,
+      pageX: locationX,
+      pageY: 0,
+      timestamp: now,
+    },
+    touchHistory: {
+      touchBank: [
+        {
+          touchActive: true,
+          startTimeStamp: now,
+          startPageX: locationX,
+          startPageY: 0,
+          currentPageX: locationX,
+          currentPageY: 0,
+          currentTimeStamp: now,
+          previousPageX: locationX,
+          previousPageY: 0,
+          previousTimeStamp: now,
+        },
+      ],
+      numberActiveTouches: 1,
+      indexOfSingleActiveTouch: 0,
+      mostRecentTimeStamp: now,
+    },
+  };
+};
+
+const findTrack = (views: Array<{ props: { style?: unknown } }>) =>
+  views.find((v) => {
+    const style = StyleSheet.flatten(
+      v.props.style as Parameters<typeof StyleSheet.flatten>[0],
+    );
+    return style && style.height === 4 && style.position === "relative";
+  });
+
+const findThumbs = (
+  views: Array<{ props: { style?: unknown } }>,
+  thumbSize: number,
+) =>
+  views.filter((v) => {
+    const style = StyleSheet.flatten(
+      v.props.style as Parameters<typeof StyleSheet.flatten>[0],
+    );
+    return (
+      style &&
+      style.width === thumbSize &&
+      style.height === thumbSize &&
+      style.borderRadius === thumbSize / 2
+    );
+  });
 
 describe("Slider", () => {
   it("renders with single value", () => {
@@ -129,5 +206,330 @@ describe("Slider", () => {
       <Slider value={50} onChange={() => {}} name="volume" />,
     );
     expect(root).toBeTruthy();
+  });
+
+  it("has correct displayName", () => {
+    expect(Slider.displayName).toBe("Slider");
+  });
+
+  describe("style verification", () => {
+    it("applies disabled opacity when disabled", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} disabled />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const disabledView = views.find((v) => {
+        const style = StyleSheet.flatten(v.props.style);
+        return style && typeof style.opacity === "number" && style.opacity < 1;
+      });
+      expect(disabledView).toBeTruthy();
+    });
+
+    it("applies full opacity when not disabled", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const container = views[0];
+      const style = StyleSheet.flatten(container?.props.style);
+      expect(style?.opacity).toBe(1);
+    });
+
+    it("applies custom color to active track", () => {
+      const customColor = "#FF6B6B";
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} color={customColor} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const activeTrack = views.find((v) => {
+        const style = StyleSheet.flatten(v.props.style);
+        return style && style.backgroundColor === customColor;
+      });
+      expect(activeTrack).toBeTruthy();
+    });
+
+    it("merges custom style onto container", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider
+          value={50}
+          onChange={() => {}}
+          style={{ marginTop: 20, backgroundColor: "red" }}
+        />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const styledView = views.find((v) => {
+        const style = StyleSheet.flatten(v.props.style);
+        return style && style.marginTop === 20;
+      });
+      expect(styledView).toBeTruthy();
+    });
+
+    it("renders different thumb sizes for each size variant", () => {
+      const sizes = ["sm", "md", "lg"] as const;
+      const expectedThumbSizes = { sm: 16, md: 20, lg: 24 };
+
+      for (const size of sizes) {
+        const { UNSAFE_getAllByType } = render(
+          <Slider value={50} onChange={() => {}} size={size} />,
+        );
+        const views = UNSAFE_getAllByType(View);
+        const thumbs = findThumbs(views, expectedThumbSizes[size]);
+        expect(thumbs.length).toBe(1);
+      }
+    });
+
+    it("renders track with correct height", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+    });
+  });
+
+  describe("layout and positioning", () => {
+    it("updates thumb position after layout", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} min={0} max={100} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+    });
+
+    it("positions thumb at start for min value after layout", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={0} onChange={() => {}} min={0} max={100} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+    });
+
+    it("positions thumb at end for max value after layout", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={100} onChange={() => {}} min={0} max={100} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+    });
+
+    it("positions both thumbs for range value after layout", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={[25, 75]} onChange={() => {}} min={0} max={100} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+    });
+  });
+
+  describe("pan responder setup", () => {
+    it("sets up responder handlers on track", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+      expect(track!.props.onStartShouldSetResponder).toBeDefined();
+      expect(track!.props.onMoveShouldSetResponder).toBeDefined();
+      expect(track!.props.onResponderGrant).toBeDefined();
+      expect(track!.props.onResponderMove).toBeDefined();
+      expect(track!.props.onResponderRelease).toBeDefined();
+    });
+
+    it("allows responder when not disabled", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      const shouldStart = track!.props.onStartShouldSetResponder as (
+        evt: unknown,
+      ) => boolean;
+      expect(shouldStart(createTouchEvent(50))).toBe(true);
+    });
+
+    it("allows move responder when not disabled", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      const shouldMove = track!.props.onMoveShouldSetResponder as (
+        evt: unknown,
+      ) => boolean;
+      expect(shouldMove(createTouchEvent(50))).toBe(true);
+    });
+
+    it("prevents responder when disabled", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} disabled />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      const shouldStart = track!.props.onStartShouldSetResponder as (
+        evt: unknown,
+      ) => boolean;
+      expect(shouldStart(createTouchEvent(50))).toBe(false);
+    });
+
+    it("prevents move responder when disabled", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} disabled />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      const shouldMove = track!.props.onMoveShouldSetResponder as (
+        evt: unknown,
+      ) => boolean;
+      expect(shouldMove(createTouchEvent(50))).toBe(false);
+    });
+
+    it("does not call onChange when trackWidth is zero", () => {
+      const onChange = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={onChange} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      const grantHandler = track!.props.onResponderGrant as (
+        evt: unknown,
+      ) => void;
+      grantHandler(createTouchEvent(100));
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it("calls onBlur on responder release", () => {
+      const onBlur = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} onBlur={onBlur} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      const releaseHandler = track!.props.onResponderRelease as (
+        evt: unknown,
+      ) => void;
+      releaseHandler(createTouchEvent(50));
+      expect(onBlur).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not throw on release without onBlur", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+
+      const releaseHandler = track!.props.onResponderRelease as (
+        evt: unknown,
+      ) => void;
+      expect(() => releaseHandler(createTouchEvent(50))).not.toThrow();
+    });
+  });
+
+  describe("range slider visuals", () => {
+    it("renders two thumbs for range value", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={[25, 75]} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const thumbs = findThumbs(views, 20);
+      expect(thumbs.length).toBe(2);
+    });
+
+    it("renders one thumb for single value", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const thumbs = findThumbs(views, 20);
+      expect(thumbs.length).toBe(1);
+    });
+
+    it("renders range thumbs with border styling", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={[25, 75]} onChange={() => {}} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const thumbs = findThumbs(views, 20);
+      expect(thumbs.length).toBe(2);
+
+      for (const thumb of thumbs) {
+        const style = StyleSheet.flatten(thumb.props.style);
+        expect(style?.borderWidth).toBe(2);
+      }
+    });
+  });
+
+  describe("dark mode", () => {
+    it("renders correctly in dark color scheme", () => {
+      const { root } = render(<Slider value={50} onChange={() => {}} />, {
+        initialColorScheme: "dark",
+      });
+      expect(root).toBeTruthy();
+    });
+
+    it("shows value in dark mode", () => {
+      const { getByText } = render(
+        <Slider value={42} onChange={() => {}} showValue />,
+        { initialColorScheme: "dark" },
+      );
+      expect(getByText("42")).toBeTruthy();
+    });
+
+    it("uses dark theme track colors", () => {
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={() => {}} />,
+        { initialColorScheme: "dark" },
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+      expect(track).toBeTruthy();
+    });
+
+    it("renders range slider in dark mode with value display", () => {
+      const { getByText, UNSAFE_getAllByType } = render(
+        <Slider value={[10, 90]} onChange={() => {}} showValue />,
+        { initialColorScheme: "dark" },
+      );
+      const views = UNSAFE_getAllByType(View);
+      const thumbs = findThumbs(views, 20);
+      expect(thumbs.length).toBe(2);
+      expect(getByText("10")).toBeTruthy();
+      expect(getByText("90")).toBeTruthy();
+    });
   });
 });

@@ -6,6 +6,7 @@ module.exports = {
     "src/**/*.{ts,tsx}",
     "!src/**/*.test.{ts,tsx}",
     "!src/**/test-utils.tsx",
+    "!src/**/examples/**",
     "!**/coverage/**",
     "!**/node_modules/**",
   ],
