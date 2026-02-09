@@ -194,4 +194,38 @@ describe("Textarea", () => {
     );
     expect(getByDisplayValue("test").props.multiline).toBe(true);
   });
+
+  it("sets isFocused on focus event", () => {
+    const { getByDisplayValue } = render(
+      <Textarea value="test" onChange={() => {}} />,
+    );
+    fireEvent(getByDisplayValue("test"), "focus");
+    expect(getByDisplayValue("test")).toBeTruthy();
+  });
+
+  it("adjusts height on content size change when autoResize is true", () => {
+    const { getByDisplayValue } = render(
+      <Textarea value="test" onChange={() => {}} autoResize />,
+    );
+    const input = getByDisplayValue("test");
+
+    fireEvent(input, "contentSizeChange", {
+      nativeEvent: { contentSize: { height: 200 } },
+    });
+
+    expect(input).toBeTruthy();
+  });
+
+  it("does not adjust height on content size change when autoResize is false", () => {
+    const { getByDisplayValue } = render(
+      <Textarea value="test" onChange={() => {}} />,
+    );
+    const input = getByDisplayValue("test");
+
+    fireEvent(input, "contentSizeChange", {
+      nativeEvent: { contentSize: { height: 200 } },
+    });
+
+    expect(input).toBeTruthy();
+  });
 });

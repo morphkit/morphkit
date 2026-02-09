@@ -1,4 +1,4 @@
-import { render } from "../test-utils";
+import { render, fireEvent } from "../test-utils";
 import { Skeleton } from "./Skeleton";
 
 describe("<Skeleton />", () => {
@@ -56,5 +56,16 @@ describe("<Skeleton />", () => {
   it("forwards ViewProps", () => {
     const { getByTestId } = render(<Skeleton testID="skeleton-test" />);
     expect(getByTestId("skeleton-test")).toBeTruthy();
+  });
+
+  it("handles onLayout event for shimmer animation", () => {
+    const { getByTestId } = render(<Skeleton testID="skeleton-layout" />);
+    const skeleton = getByTestId("skeleton-layout");
+
+    fireEvent(skeleton, "layout", {
+      nativeEvent: { layout: { width: 200, height: 40 } },
+    });
+
+    expect(skeleton).toBeTruthy();
   });
 });

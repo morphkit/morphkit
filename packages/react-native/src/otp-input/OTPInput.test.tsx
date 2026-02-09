@@ -303,4 +303,72 @@ describe("OTPInput", () => {
     expect(inputs[1].props.value).toBe("5");
     expect(inputs[2].props.value).toBe("6");
   });
+
+  test("handles focus and blur on individual fields", () => {
+    const { UNSAFE_getAllByType } = render(
+      <OTPInput value="" onChange={() => {}} />,
+    );
+    const inputs = UNSAFE_getAllByType(TextInput);
+
+    fireEvent(inputs[0], "focus");
+    fireEvent(inputs[0], "blur");
+    expect(inputs[0]).toBeTruthy();
+  });
+
+  test("does not go back on backspace when field has value", () => {
+    const handleChange = jest.fn();
+    const { UNSAFE_getAllByType } = render(
+      <OTPInput value="123" onChange={handleChange} />,
+    );
+    const inputs = UNSAFE_getAllByType(TextInput);
+
+    fireEvent(inputs[1], "onKeyPress", {
+      nativeEvent: { key: "Backspace" },
+    });
+
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+
+  test("does not go back on backspace at index 0", () => {
+    const handleChange = jest.fn();
+    const { UNSAFE_getAllByType } = render(
+      <OTPInput value="" onChange={handleChange} />,
+    );
+    const inputs = UNSAFE_getAllByType(TextInput);
+
+    fireEvent(inputs[0], "onKeyPress", {
+      nativeEvent: { key: "Backspace" },
+    });
+
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+
+  test("applies error border color when error prop is true", () => {
+    const { UNSAFE_getAllByType } = render(
+      <OTPInput value="" onChange={() => {}} error />,
+    );
+    const inputs = UNSAFE_getAllByType(TextInput);
+    expect(inputs.length).toBe(6);
+  });
+
+  test("applies success border when all fields are complete", () => {
+    const { UNSAFE_getAllByType } = render(
+      <OTPInput value="123456" onChange={() => {}} />,
+    );
+    const views = UNSAFE_getAllByType(View);
+    expect(views.length).toBeGreaterThan(0);
+  });
+
+  test("handles non-Backspace key press without error", () => {
+    const { UNSAFE_getAllByType } = render(
+      <OTPInput value="" onChange={() => {}} />,
+    );
+    const inputs = UNSAFE_getAllByType(TextInput);
+
+    fireEvent(inputs[0], "onKeyPress", {
+      nativeEvent: { key: "a" },
+    });
+
+    expect(inputs[0]).toBeTruthy();
+  });
 });

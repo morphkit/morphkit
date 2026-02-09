@@ -494,6 +494,154 @@ describe("Slider", () => {
     });
   });
 
+  describe("pan interaction", () => {
+    it("calls onChange with single value after layout and grant", () => {
+      const onChange = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={onChange} min={0} max={100} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+
+      const grantHandler = track!.props.onResponderGrant as (
+        evt: unknown,
+      ) => void;
+      grantHandler(createTouchEvent(100));
+
+      expect(onChange).toHaveBeenCalledWith(expect.any(Number));
+    });
+
+    it("calls onChange with range value closer to start thumb", () => {
+      const onChange = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={[20, 80]} onChange={onChange} min={0} max={100} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+
+      const grantHandler = track!.props.onResponderGrant as (
+        evt: unknown,
+      ) => void;
+      grantHandler(createTouchEvent(10));
+
+      expect(onChange).toHaveBeenCalledWith(expect.any(Array));
+      const result = onChange.mock.calls[0][0] as [number, number];
+      expect(result[1]).toBe(80);
+    });
+
+    it("calls onChange with range value closer to end thumb", () => {
+      const onChange = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={[20, 80]} onChange={onChange} min={0} max={100} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+
+      const grantHandler = track!.props.onResponderGrant as (
+        evt: unknown,
+      ) => void;
+      grantHandler(createTouchEvent(190));
+
+      expect(onChange).toHaveBeenCalledWith(expect.any(Array));
+      const result = onChange.mock.calls[0][0] as [number, number];
+      expect(result[0]).toBe(20);
+    });
+
+    it("handles move event after layout", () => {
+      const onChange = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={onChange} min={0} max={100} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+
+      const moveHandler = track!.props.onResponderMove as (
+        evt: unknown,
+      ) => void;
+      moveHandler(createTouchEvent(50));
+
+      expect(onChange).toHaveBeenCalled();
+    });
+
+    it("does not call onChange when disabled even after layout", () => {
+      const onChange = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={onChange} disabled />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+
+      const grantHandler = track!.props.onResponderGrant as (
+        evt: unknown,
+      ) => void;
+      grantHandler(createTouchEvent(100));
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it("normalizes value with step", () => {
+      const onChange = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={onChange} min={0} max={100} step={10} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+
+      const grantHandler = track!.props.onResponderGrant as (
+        evt: unknown,
+      ) => void;
+      grantHandler(createTouchEvent(47));
+
+      expect(onChange).toHaveBeenCalled();
+      const result = onChange.mock.calls[0][0] as number;
+      expect(result % 10).toBe(0);
+    });
+
+    it("handles step=0 for continuous values", () => {
+      const onChange = jest.fn();
+      const { UNSAFE_getAllByType } = render(
+        <Slider value={50} onChange={onChange} min={0} max={100} step={0} />,
+      );
+      const views = UNSAFE_getAllByType(View);
+      const track = findTrack(views);
+
+      fireEvent(track as unknown as React.ReactElement, "layout", {
+        nativeEvent: { layout: { width: 200, height: 4 } },
+      });
+
+      const grantHandler = track!.props.onResponderGrant as (
+        evt: unknown,
+      ) => void;
+      grantHandler(createTouchEvent(47));
+
+      expect(onChange).toHaveBeenCalled();
+    });
+  });
+
   describe("dark mode", () => {
     it("renders correctly in dark color scheme", () => {
       const { root } = render(<Slider value={50} onChange={() => {}} />, {
